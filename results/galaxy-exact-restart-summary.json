@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "description": "Galaxy Tab S11 Ultra exact TS restart offset B-F-F-B summary",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "source": "local NVMe MPEG-2 TS",
+    "material": "乃木坂工事中録画の600秒台・900秒台（CM区間かは未判定）",
+    "order": [
+      "baseline",
+      "exactRestart",
+      "exactRestart",
+      "baseline"
+    ],
+    "warmupsPerBlockExcluded": 2,
+    "excludedRuns": [
+      {
+        "file": "galaxy-exact-restart-b2-excluded-user-touch.json",
+        "reason": "端末操作が入ったため、同条件で取り直して集計から除外"
+      }
+    ]
+  },
+  "variants": {
+    "baseline": {
+      "assets": [
+        "PlayerController-4_vrPcVa.js",
+        "PlayerController-4_vrPcVa.js"
+      ],
+      "sourceHashes": [
+        "b7d6b29009fe7a3e5c8420d44973e4c4140d85a69a3c1465790afaf5a5b8706a",
+        "b7d6b29009fe7a3e5c8420d44973e4c4140d85a69a3c1465790afaf5a5b8706a"
+      ],
+      "cleanupVerified": true,
+      "measuredSeeks": 40,
+      "probeRequests": 40,
+      "canvasMs": {
+        "count": 40,
+        "mean": 227.54998168945312,
+        "median": 226.4500732421875,
+        "p95": 278.39990234375,
+        "max": 298.2001953125,
+        "atOrBelow250": 28,
+        "over250": 12
+      },
+      "firstFragmentMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.40219444444445,
+        "median": -0.49914444444448236,
+        "p95": -0.19864444444442597,
+        "max": -0.006144444444430519
+      },
+      "presentedMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.008468399999995314,
+        "median": -0.00429500000001326,
+        "p95": 0.02892199999996592,
+        "max": 0.0332220000000234
+      },
+      "appendedToPresentedMs": {
+        "count": 40,
+        "mean": 85.0425048828125,
+        "median": 98.39990234375,
+        "p95": 131,
+        "max": 171.800048828125
+      },
+      "appendedToCanvasMs": {
+        "count": 40,
+        "mean": 82.57999877929687,
+        "median": 95.7999267578125,
+        "p95": 128.599853515625,
+        "max": 166.099853515625
+      },
+      "marksMs": {
+        "request": {
+          "count": 40,
+          "mean": 32.517449951171876,
+          "median": 31.199951171875,
+          "p95": 47.800048828125,
+          "max": 53.999755859375
+        },
+        "response": {
+          "count": 40,
+          "mean": 52.04996337890625,
+          "median": 53.14990234375,
+          "p95": 69.800048828125,
+          "max": 73.300048828125
+        },
+        "first-byte": {
+          "count": 40,
+          "mean": 53.0099609375,
+          "median": 54.0499267578125,
+          "p95": 70.800048828125,
+          "max": 73.60009765625
+        },
+        "first-picture-jobs": {
+          "count": 40,
+          "mean": 88.269970703125,
+          "median": 85.8499755859375,
+          "p95": 122.2001953125,
+          "max": 126.800048828125
+        },
+        "first-picture-output": {
+          "count": 40,
+          "mean": 94.29749145507813,
+          "median": 91.35009765625,
+          "p95": 131.199951171875,
+          "max": 133
+        },
+        "first-access-unit": {
+          "count": 40,
+          "mean": 125.66249389648438,
+          "median": 123.0999755859375,
+          "p95": 161.400146484375,
+          "max": 168.500244140625
+        },
+        "first-fragment": {
+          "count": 40,
+          "mean": 134.03497314453125,
+          "median": 133.0499267578125,
+          "p95": 172.500244140625,
+          "max": 181.39990234375
+        },
+        "append": {
+          "count": 40,
+          "mean": 135.107470703125,
+          "median": 134.2000732421875,
+          "p95": 173.10009765625,
+          "max": 182.199951171875
+        },
+        "appended": {
+          "count": 40,
+          "mean": 144.96998291015626,
+          "median": 142.5999755859375,
+          "p95": 182.60009765625,
+          "max": 191.199951171875
+        },
+        "presented": {
+          "count": 40,
+          "mean": 230.01248779296876,
+          "median": 228.9000244140625,
+          "p95": 281.699951171875,
+          "max": 300.5
+        }
+      }
+    },
+    "exactRestart": {
+      "assets": [
+        "PlayerController-DTXJ8mBR.js",
+        "PlayerController-DTXJ8mBR.js"
+      ],
+      "sourceHashes": [
+        "1308a39f6934cafce01740496c242adc20d3d23aa0d5531596195939b1af8abd",
+        "1308a39f6934cafce01740496c242adc20d3d23aa0d5531596195939b1af8abd"
+      ],
+      "cleanupVerified": true,
+      "measuredSeeks": 40,
+      "probeRequests": 0,
+      "canvasMs": {
+        "count": 40,
+        "mean": 168.10499877929686,
+        "median": 161.5,
+        "p95": 220.5,
+        "max": 243.099853515625,
+        "atOrBelow250": 40,
+        "over250": 0
+      },
+      "firstFragmentMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.17696944444444399,
+        "median": -0.20014444444444734,
+        "p95": -0.0011444444444350665,
+        "max": -0.0001444444444587134
+      },
+      "presentedMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.010136749999998074,
+        "median": -0.004795000000001437,
+        "p95": -0.0001449999999749707,
+        "max": 0.030922000000032313
+      },
+      "appendedToPresentedMs": {
+        "count": 40,
+        "mean": 52.2849609375,
+        "median": 43.3499755859375,
+        "p95": 117.5,
+        "max": 131.699951171875
+      },
+      "appendedToCanvasMs": {
+        "count": 40,
+        "mean": 49.967462158203126,
+        "median": 40.949951171875,
+        "p95": 115.599853515625,
+        "max": 126.199951171875
+      },
+      "marksMs": {
+        "request": {
+          "count": 40,
+          "mean": 1.507537841796875,
+          "median": 1.099853515625,
+          "p95": 3.7001953125,
+          "max": 6.300048828125
+        },
+        "response": {
+          "count": 40,
+          "mean": 28.260052490234376,
+          "median": 25.550048828125,
+          "p95": 41.89990234375,
+          "max": 44.5
+        },
+        "first-byte": {
+          "count": 40,
+          "mean": 29.185064697265624,
+          "median": 26.60009765625,
+          "p95": 42.60009765625,
+          "max": 44.800048828125
+        },
+        "first-picture-jobs": {
+          "count": 40,
+          "mean": 56.68007202148438,
+          "median": 56.8001708984375,
+          "p95": 72.500244140625,
+          "max": 82.500244140625
+        },
+        "first-picture-output": {
+          "count": 40,
+          "mean": 63.20003662109375,
+          "median": 64.800048828125,
+          "p95": 79.400146484375,
+          "max": 89.2001953125
+        },
+        "first-access-unit": {
+          "count": 40,
+          "mean": 96.91255493164063,
+          "median": 96.0501708984375,
+          "p95": 113.300048828125,
+          "max": 127.7001953125
+        },
+        "first-fragment": {
+          "count": 40,
+          "mean": 105.9900390625,
+          "median": 107.75,
+          "p95": 126.7001953125,
+          "max": 136.500244140625
+        },
+        "append": {
+          "count": 40,
+          "mean": 107.23255004882813,
+          "median": 108.6500244140625,
+          "p95": 127.400146484375,
+          "max": 136.900146484375
+        },
+        "appended": {
+          "count": 40,
+          "mean": 118.13753662109374,
+          "median": 118.8499755859375,
+          "p95": 141.300048828125,
+          "max": 145.500244140625
+        },
+        "presented": {
+          "count": 40,
+          "mean": 170.42249755859376,
+          "median": 164.4500732421875,
+          "p95": 222.199951171875,
+          "max": 248.599853515625
+        }
+      }
+    }
+  },
+  "followups": {
+    "minimumRestartLead500ms": {
+      "files": [
+        "galaxy-exact-restart-preroll-g1.json"
+      ],
+      "cleanupVerified": true,
+      "measuredSeeks": 20,
+      "probeRequests": 3,
+      "canvasMs": {
+        "count": 20,
+        "mean": 234.2350341796875,
+        "median": 228.75,
+        "p95": 307.900146484375,
+        "max": 359.300048828125,
+        "atOrBelow250": 16,
+        "over250": 4
+      },
+      "firstFragmentMinusTargetSeconds": {
+        "count": 20,
+        "mean": -0.6274194444444448,
+        "median": -0.6996444444444023,
+        "p95": -0.20664444444446417,
+        "max": -0.006144444444430519
+      },
+      "presentedMinusTargetSeconds": {
+        "count": 20,
+        "mean": -0.006800049999998237,
+        "median": -0.00429500000001326,
+        "p95": 0.0332220000000234,
+        "max": 0.03622199999995246
+      },
+      "appendedToPresentedMs": {
+        "count": 20,
+        "mean": 116.9098876953125,
+        "median": 116.9498291015625,
+        "p95": 188.599853515625,
+        "max": 206.999755859375
+      },
+      "appendedToCanvasMs": {
+        "count": 20,
+        "mean": 114.29989013671874,
+        "median": 114.4498291015625,
+        "p95": 186.7998046875,
+        "max": 204.39990234375
+      },
+      "marksMs": {
+        "request": {
+          "count": 20,
+          "mean": 9.31014404296875,
+          "median": 0.9501953125,
+          "p95": 47.7001953125,
+          "max": 76.2001953125
+        },
+        "response": {
+          "count": 20,
+          "mean": 32.6401123046875,
+          "median": 25.5001220703125,
+          "p95": 65.7001953125,
+          "max": 92.400146484375
+        },
+        "first-byte": {
+          "count": 20,
+          "mean": 33.47012939453125,
+          "median": 26.550048828125,
+          "p95": 66.80029296875,
+          "max": 92.800048828125
+        },
+        "first-picture-jobs": {
+          "count": 20,
+          "mean": 63.5851318359375,
+          "median": 58.400146484375,
+          "p95": 97.10009765625,
+          "max": 125.800048828125
+        },
+        "first-picture-output": {
+          "count": 20,
+          "mean": 69.535107421875,
+          "median": 64.2000732421875,
+          "p95": 101.10009765625,
+          "max": 129.800048828125
+        },
+        "first-access-unit": {
+          "count": 20,
+          "mean": 98.16009521484375,
+          "median": 95.199951171875,
+          "p95": 128.400146484375,
+          "max": 159.900146484375
+        },
+        "first-fragment": {
+          "count": 20,
+          "mean": 108.49512939453125,
+          "median": 102.8001708984375,
+          "p95": 141.60009765625,
+          "max": 165.900146484375
+        },
+        "append": {
+          "count": 20,
+          "mean": 109.47012939453126,
+          "median": 103.650146484375,
+          "p95": 142.800048828125,
+          "max": 166.300048828125
+        },
+        "appended": {
+          "count": 20,
+          "mean": 119.93514404296874,
+          "median": 113.400146484375,
+          "p95": 154.300048828125,
+          "max": 172.500244140625
+        },
+        "presented": {
+          "count": 20,
+          "mean": 236.84503173828125,
+          "median": 230.7501220703125,
+          "p95": 310.5,
+          "max": 361.10009765625
+        }
+      }
+    },
+    "minimumRestartLead100ms": {
+      "files": [
+        "galaxy-exact-restart-preroll100-g1.json",
+        "galaxy-exact-restart-preroll100-g2.json"
+      ],
+      "cleanupVerified": true,
+      "measuredSeeks": 40,
+      "probeRequests": 2,
+      "canvasMs": {
+        "count": 40,
+        "mean": 184.7400146484375,
+        "median": 175.0999755859375,
+        "p95": 245.599853515625,
+        "max": 281,
+        "atOrBelow250": 39,
+        "over250": 1
+      },
+      "firstFragmentMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.32711944444444613,
+        "median": -0.206144444444476,
+        "p95": -0.19764444444444962,
+        "max": -0.006144444444430519
+      },
+      "presentedMinusTargetSeconds": {
+        "count": 40,
+        "mean": -0.008468399999998155,
+        "median": -0.004795000000001437,
+        "p95": 0.031922000000008666,
+        "max": 0.0332220000000234
+      },
+      "appendedToPresentedMs": {
+        "count": 40,
+        "mean": 69.28506469726562,
+        "median": 47.0501708984375,
+        "p95": 121.60009765625,
+        "max": 124.89990234375
+      },
+      "appendedToCanvasMs": {
+        "count": 40,
+        "mean": 66.69756469726562,
+        "median": 44.650146484375,
+        "p95": 120.300048828125,
+        "max": 120.699951171875
+      },
+      "marksMs": {
+        "request": {
+          "count": 40,
+          "mean": 3.4449462890625,
+          "median": 1.10009765625,
+          "p95": 8.699951171875,
+          "max": 38.89990234375
+        },
+        "response": {
+          "count": 40,
+          "mean": 30.439947509765624,
+          "median": 26.8499755859375,
+          "p95": 45.400146484375,
+          "max": 84
+        },
+        "first-byte": {
+          "count": 40,
+          "mean": 31.032452392578126,
+          "median": 27.449951171875,
+          "p95": 45.60009765625,
+          "max": 84.89990234375
+        },
+        "first-picture-jobs": {
+          "count": 40,
+          "mean": 60.334954833984376,
+          "median": 56.4000244140625,
+          "p95": 92.5,
+          "max": 118.699951171875
+        },
+        "first-picture-output": {
+          "count": 40,
+          "mean": 66.21494750976562,
+          "median": 62.9000244140625,
+          "p95": 99.10009765625,
+          "max": 125.39990234375
+        },
+        "first-access-unit": {
+          "count": 40,
+          "mean": 97.11995239257813,
+          "median": 92.4000244140625,
+          "p95": 127.5,
+          "max": 161.800048828125
+        },
+        "first-fragment": {
+          "count": 40,
+          "mean": 107.2924560546875,
+          "median": 104.699951171875,
+          "p95": 153.7998046875,
+          "max": 172.300048828125
+        },
+        "append": {
+          "count": 40,
+          "mean": 108.21246337890625,
+          "median": 105.5,
+          "p95": 154.599853515625,
+          "max": 173.199951171875
+        },
+        "appended": {
+          "count": 40,
+          "mean": 118.04244995117188,
+          "median": 115.0499267578125,
+          "p95": 166.300048828125,
+          "max": 183.5
+        },
+        "presented": {
+          "count": 40,
+          "mean": 187.3275146484375,
+          "median": 177.25,
+          "p95": 249.39990234375,
+          "max": 282.300048828125
+        }
+      }
+    }
+  },
+  "comparison": {
+    "medianReductionMs": 64.9500732421875,
+    "medianReductionPercent": 28.68185128503961,
+    "p95ReductionMs": 57.89990234375,
+    "p95ReductionPercent": 20.797386010667125
+  }
+}

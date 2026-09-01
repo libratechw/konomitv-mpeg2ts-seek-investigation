@@ -1,0 +1,240 @@
+{
+  "schema": 1,
+  "description": "Keep a destination canvas frame that Chromium delivers immediately before seeked",
+  "revisions": {
+    "konomiTV": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "tsukumijimaBase": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+    "otyaUpstream": "d5df08b5f6215c2ed4994034d4a5855ad9bc3d69",
+    "sourceCommit": "2d072f31b10a38a2acee251c65bf37a3da860d8f",
+    "distCommit": "f3ba99d6147c31c554d44a06d11384af8e107181",
+    "integratedValidationCommit": "627c091"
+  },
+  "conditions": {
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "source": "local NVMe MPEG-2 TS",
+    "material": "乃木坂工事中録画の600秒台・900秒台（CM区間かは未判定）",
+    "warmupsPerBlockExcluded": 2,
+    "previousMetric": "first target canvas draw after video.seeking became false",
+    "fixedMetric": "first target canvas draw that remains visible across seeked",
+    "comparisonNote": "Without the fix, a target frame drawn while seeking is hidden by seeked, so the previous post-seeking draw is also its first durable draw."
+  },
+  "platforms": {
+    "linux": {
+      "previous": {
+        "files": [
+          "linux-exact-restart-f1.json",
+          "linux-exact-restart-f2.json"
+        ],
+        "assets": [
+          "PlayerController-DTXJ8mBR.js",
+          "PlayerController-DTXJ8mBR.js"
+        ],
+        "sourceHashes": [],
+        "displayHz": [
+          60,
+          60
+        ],
+        "cleanupVerified": true,
+        "probeRequests": 0,
+        "acceptedWhileSeeking": 0,
+        "canvasMs": {
+          "count": 40,
+          "mean": 117.90252685546875,
+          "median": 104.7000732421875,
+          "p95": 246.5,
+          "p99": 280,
+          "max": 280,
+          "atOrBelow250": 38,
+          "over250": 2
+        }
+      },
+      "fixed": {
+        "files": [
+          "linux-exact-restart-seek-frame-durable-l1.json",
+          "linux-exact-restart-seek-frame-durable-l2.json"
+        ],
+        "assets": [
+          "PlayerController-CT6c8CLX.js",
+          "PlayerController-CT6c8CLX.js"
+        ],
+        "sourceHashes": [],
+        "displayHz": [
+          60,
+          60
+        ],
+        "cleanupVerified": true,
+        "probeRequests": 0,
+        "acceptedWhileSeeking": 1,
+        "canvasMs": {
+          "count": 40,
+          "mean": 105.04251098632812,
+          "median": 97.1500244140625,
+          "p95": 178.89990234375,
+          "p99": 180.39990234375,
+          "max": 180.39990234375,
+          "atOrBelow250": 40,
+          "over250": 0
+        }
+      },
+      "comparison": {
+        "meanReductionMs": 12.860015869140625,
+        "medianReductionMs": 7.550048828125,
+        "p95ReductionMs": 67.60009765625,
+        "maxReductionMs": 99.60009765625
+      }
+    },
+    "galaxy": {
+      "previous": {
+        "files": [
+          "galaxy-exact-restart-f1.json",
+          "galaxy-exact-restart-f2.json"
+        ],
+        "assets": [
+          "PlayerController-DTXJ8mBR.js",
+          "PlayerController-DTXJ8mBR.js"
+        ],
+        "sourceHashes": [
+          "1308a39f6934cafce01740496c242adc20d3d23aa0d5531596195939b1af8abd",
+          "1308a39f6934cafce01740496c242adc20d3d23aa0d5531596195939b1af8abd"
+        ],
+        "displayHz": [
+          60,
+          60
+        ],
+        "cleanupVerified": true,
+        "probeRequests": 0,
+        "acceptedWhileSeeking": 0,
+        "canvasMs": {
+          "count": 40,
+          "mean": 168.10499877929686,
+          "median": 161.5,
+          "p95": 220.5,
+          "p99": 243.099853515625,
+          "max": 243.099853515625,
+          "atOrBelow250": 40,
+          "over250": 0
+        }
+      },
+      "fixed": {
+        "files": [
+          "galaxy-exact-restart-seek-frame-durable-g1.json",
+          "galaxy-exact-restart-seek-frame-durable-g2.json"
+        ],
+        "assets": [
+          "PlayerController-CT6c8CLX.js",
+          "PlayerController-CT6c8CLX.js"
+        ],
+        "sourceHashes": [
+          "bd451abd29a1fdaf75effa8b9e614295137ac897b1e56d77fa2a2737aac76521",
+          "bd451abd29a1fdaf75effa8b9e614295137ac897b1e56d77fa2a2737aac76521"
+        ],
+        "displayHz": [
+          59.88023952095874,
+          59.88023952095874
+        ],
+        "cleanupVerified": true,
+        "probeRequests": 0,
+        "acceptedWhileSeeking": 0,
+        "canvasMs": {
+          "count": 40,
+          "mean": 157.65748291015626,
+          "median": 155.9998779296875,
+          "p95": 193.199951171875,
+          "p99": 212.800048828125,
+          "max": 212.800048828125,
+          "atOrBelow250": 40,
+          "over250": 0
+        }
+      },
+      "comparison": {
+        "meanReductionMs": 10.447515869140602,
+        "medianReductionMs": 5.5001220703125,
+        "p95ReductionMs": 27.300048828125,
+        "maxReductionMs": 30.2998046875
+      }
+    }
+  },
+  "causalTimeline": {
+    "before": {
+      "file": "linux-exact-restart-presentation-timeline.json",
+      "earlyCases": 2,
+      "hiddenBySeeked": 2,
+      "runs": [
+        {
+          "target": 601,
+          "earlyCanvasMs": 65.7001953125,
+          "seekedMs": 67.400146484375,
+          "seekedVisibility": "hidden",
+          "playerPresentedMs": 215.300048828125,
+          "markerLagAfterEarlyCanvasMs": 149.599853515625
+        },
+        {
+          "target": 601,
+          "earlyCanvasMs": 64.89990234375,
+          "seekedMs": 68.7998046875,
+          "seekedVisibility": "hidden",
+          "playerPresentedMs": 214.099853515625,
+          "markerLagAfterEarlyCanvasMs": 149.199951171875
+        }
+      ]
+    },
+    "fixed": {
+      "file": "linux-exact-restart-seek-frame-timeline.json",
+      "earlyCases": 5,
+      "retainedAcrossSeeked": 5,
+      "markerLagAfterEarlyCanvasMs": {
+        "count": 5,
+        "mean": 156.2000585913658,
+        "median": 149.70004883408546,
+        "p95": 166.30019530653954,
+        "p99": 166.30019530653954,
+        "max": 166.30019530653954,
+        "atOrBelow250": 5,
+        "over250": 0
+      },
+      "runs": [
+        {
+          "target": 601,
+          "earlyCanvasMs": 79.2000000178814,
+          "seekedMs": 82.5,
+          "seekedVisibility": "visible",
+          "playerPresentedMs": 228.5,
+          "markerLagAfterEarlyCanvasMs": 149.2999999821186
+        },
+        {
+          "target": 601,
+          "earlyCanvasMs": 74.90000000596046,
+          "seekedMs": 80.5,
+          "seekedVisibility": "visible",
+          "playerPresentedMs": 241.2001953125,
+          "markerLagAfterEarlyCanvasMs": 166.30019530653954
+        },
+        {
+          "target": 601,
+          "earlyCanvasMs": 73.59999999403954,
+          "seekedMs": 76.5,
+          "seekedVisibility": "visible",
+          "playerPresentedMs": 223.300048828125,
+          "markerLagAfterEarlyCanvasMs": 149.70004883408546
+        },
+        {
+          "target": 601,
+          "earlyCanvasMs": 72.2999999821186,
+          "seekedMs": 75.19999998807907,
+          "seekedVisibility": "visible",
+          "playerPresentedMs": 221.800048828125,
+          "markerLagAfterEarlyCanvasMs": 149.5000488460064
+        },
+        {
+          "target": 601,
+          "earlyCanvasMs": 68.80000001192093,
+          "seekedMs": 71,
+          "seekedVisibility": "visible",
+          "playerPresentedMs": 235,
+          "markerLagAfterEarlyCanvasMs": 166.19999998807907
+        }
+      ]
+    }
+  }
+}

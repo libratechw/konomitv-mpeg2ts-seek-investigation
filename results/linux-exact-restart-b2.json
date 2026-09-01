@@ -1,0 +1,2439 @@
+{
+  "variant": "linux-exact-restart-b2",
+  "asset": "PlayerController-4_vrPcVa.js",
+  "device": "Linux desktop",
+  "browser": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "fullscreen": true,
+    "measuredCount": 20,
+    "paused": false,
+    "runs": [
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 600.194055,
+        "firstPostSeekCanvasMs": 215.5,
+        "index": 0,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.2998046875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1017421888,
+            "ms": 0.39990234375,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1017421888,
+            "ms": 8.199951171875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1017421888,
+            "ms": 8.699951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1017421888,
+            "mediaTime": 598.336,
+            "ms": 8.699951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1018523654,
+            "ms": 8.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1018523654,
+            "ms": 12.39990234375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1018523654,
+            "ms": 12.599853515625,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1018523654,
+            "mediaTime": 598.9333333333333,
+            "ms": 12.699951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 12.699951171875,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 17.099853515625,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 17.599853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 29.2998046875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 36.199951171875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1018523654,
+            "ms": 58.39990234375,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1018523654,
+            "mediaTime": 599.4933555555556,
+            "ms": 70.999755859375,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 75.89990234375,
+            "name": "append"
+          },
+          {
+            "ms": 79.2998046875,
+            "name": "appended"
+          },
+          {
+            "ms": 200.7998046875,
+            "name": "canplay"
+          },
+          {
+            "ms": 201.099853515625,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 599.993855,
+            "ms": 217.199951171875,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 2,
+        "seekId": 2,
+        "target": 600,
+        "warmup": true
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 900.193755,
+        "firstPostSeekCanvasMs": 213,
+        "index": 1,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.5,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1523449521,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1523449521,
+            "ms": 9.89990234375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1523449521,
+            "ms": 10.2998046875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1523449521,
+            "mediaTime": 896.5901555555556,
+            "ms": 10.2998046875,
+            "name": "probe-timestamp"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1527496819,
+            "ms": 10.2998046875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1527496819,
+            "ms": 12.2998046875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1527496819,
+            "ms": 15.7998046875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 1,
+            "byteLength": 131072,
+            "byteOffset": 1527496819,
+            "mediaTime": 899.0259222222222,
+            "ms": 15.7998046875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 15.89990234375,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 20.199951171875,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 20.89990234375,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 34.2998046875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 39.7998046875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1527496819,
+            "ms": 68.099853515625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1527496819,
+            "mediaTime": 899.2928555555555,
+            "ms": 80.7998046875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 81,
+            "name": "append"
+          },
+          {
+            "ms": 84,
+            "name": "appended"
+          },
+          {
+            "ms": 205.300048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 205.5,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 899.993555,
+            "ms": 215,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 2,
+        "seekId": 3,
+        "target": 900,
+        "warmup": true
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 600.194055,
+        "firstPostSeekCanvasMs": 111.5,
+        "index": 2,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.300048828125,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1018634011,
+            "ms": 0.39990234375,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1018634011,
+            "ms": 5.800048828125,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1018634011,
+            "ms": 11.89990234375,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1018634011,
+            "mediaTime": 598.9973333333334,
+            "ms": 12.10009765625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 12.10009765625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 17.10009765625,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 17.39990234375,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 27.699951171875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 34,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1018634011,
+            "ms": 58.60009765625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1018634011,
+            "mediaTime": 599.9938555555556,
+            "ms": 68.699951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 70.199951171875,
+            "name": "append"
+          },
+          {
+            "ms": 87.5,
+            "name": "appended"
+          },
+          {
+            "ms": 97.10009765625,
+            "name": "canplay"
+          },
+          {
+            "ms": 97.300048828125,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 599.993855,
+            "ms": 113.199951171875,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 4,
+        "target": 600,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 900.193755,
+        "firstPostSeekCanvasMs": 196.39990234375,
+        "index": 3,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.599853515625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1527453746,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1527453746,
+            "ms": 4.300048828125,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1527453746,
+            "ms": 4.699951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1527453746,
+            "mediaTime": 898.7306666666667,
+            "ms": 4.699951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 4.800048828125,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 11.300048828125,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 11.699951171875,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 21,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 26.39990234375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1527453746,
+            "ms": 49.099853515625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1527453746,
+            "mediaTime": 899.2928555555555,
+            "ms": 57.699951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 58.599853515625,
+            "name": "append"
+          },
+          {
+            "ms": 64.099853515625,
+            "name": "appended"
+          },
+          {
+            "ms": 192.89990234375,
+            "name": "canplay"
+          },
+          {
+            "ms": 193.199951171875,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 899.993555,
+            "ms": 197.89990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 5,
+        "target": 900,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 601.161688,
+        "firstPostSeekCanvasMs": 179,
+        "index": 4,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.199951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1020293623,
+            "ms": 0.2998046875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1020293623,
+            "ms": 4.7998046875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1020293623,
+            "ms": 9.2998046875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1020293623,
+            "mediaTime": 600.3608888888889,
+            "ms": 9.2998046875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 9.2998046875,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 14.499755859375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 14.7998046875,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 23.599853515625,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 29.89990234375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1020293623,
+            "ms": 52.7998046875,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1020293623,
+            "mediaTime": 600.4943555555556,
+            "ms": 63.2998046875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 64.199951171875,
+            "name": "append"
+          },
+          {
+            "ms": 69.099853515625,
+            "name": "appended"
+          },
+          {
+            "ms": 176.199951171875,
+            "name": "canplay"
+          },
+          {
+            "ms": 176.39990234375,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 600.994855,
+            "ms": 180.89990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 6,
+        "target": 601,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 901.194755,
+        "firstPostSeekCanvasMs": 213.7998046875,
+        "index": 5,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.499755859375,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1529132814,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1529132814,
+            "ms": 10.499755859375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1529132814,
+            "ms": 10.89990234375,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1529132814,
+            "mediaTime": 899.9601888888889,
+            "ms": 10.89990234375,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 10.999755859375,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 16.39990234375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 16.599853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 27.499755859375,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 32.099853515625,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1529132814,
+            "ms": 54.89990234375,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1529132814,
+            "mediaTime": 900.2938555555555,
+            "ms": 63.099853515625,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 63.7998046875,
+            "name": "append"
+          },
+          {
+            "ms": 69.499755859375,
+            "name": "appended"
+          },
+          {
+            "ms": 202.5,
+            "name": "canplay"
+          },
+          {
+            "ms": 202.7998046875,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 900.994555,
+            "ms": 215.5,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 7,
+        "target": 901,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 602.196055,
+        "firstPostSeekCanvasMs": 279.60009765625,
+        "index": 6,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.5,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1021365771,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1021365771,
+            "ms": 8.099853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1021365771,
+            "ms": 8.599853515625,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1021365771,
+            "mediaTime": 600.5333333333333,
+            "ms": 8.599853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 8.599853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 14.300048828125,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 14.599853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 22.5,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 29.099853515625,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1021365771,
+            "ms": 48.300048828125,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1021365771,
+            "mediaTime": 600.9948555555555,
+            "ms": 55.800048828125,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 56.5,
+            "name": "append"
+          },
+          {
+            "ms": 64,
+            "name": "appended"
+          },
+          {
+            "ms": 273.300048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 273.60009765625,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 601.995855,
+            "ms": 281.39990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 8,
+        "target": 602,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 902.195755,
+        "firstPostSeekCanvasMs": 213,
+        "index": 7,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.89990234375,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1530879135,
+            "ms": 1,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1530879135,
+            "ms": 10.800048828125,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1530879135,
+            "ms": 11.199951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1530879135,
+            "mediaTime": 900.6506666666667,
+            "ms": 11.199951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 11.300048828125,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 17.5,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 18,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 27.199951171875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 33.099853515625,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1530879135,
+            "ms": 53.699951171875,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1530879135,
+            "mediaTime": 901.2948555555556,
+            "ms": 63.89990234375,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 64.800048828125,
+            "name": "append"
+          },
+          {
+            "ms": 69.39990234375,
+            "name": "appended"
+          },
+          {
+            "ms": 202.800048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 203.10009765625,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 901.995555,
+            "ms": 215.10009765625,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 9,
+        "target": 902,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 603.197055,
+        "firstPostSeekCanvasMs": 177.599853515625,
+        "index": 8,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.499755859375,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1023782928,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1023782928,
+            "ms": 9.39990234375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1023782928,
+            "ms": 9.7998046875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1023782928,
+            "mediaTime": 602.2294222222222,
+            "ms": 9.7998046875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 9.7998046875,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 14.89990234375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 15.099853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 23.499755859375,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 28.7998046875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1023782928,
+            "ms": 55.099853515625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1023782928,
+            "mediaTime": 602.4963555555555,
+            "ms": 57.199951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 57.699951171875,
+            "name": "append"
+          },
+          {
+            "ms": 62.7998046875,
+            "name": "appended"
+          },
+          {
+            "ms": 163.2998046875,
+            "name": "canplay"
+          },
+          {
+            "ms": 163.5,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 602.996855,
+            "ms": 179.39990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 10,
+        "target": 603,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 903.163388,
+        "firstPostSeekCanvasMs": 196.5,
+        "index": 9,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.5,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1533144420,
+            "ms": 0.60009765625,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1533144420,
+            "ms": 9.400146484375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1533144420,
+            "ms": 9.699951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1533144420,
+            "mediaTime": 902.1290222222224,
+            "ms": 9.900146484375,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 9.900146484375,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 15.5,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 15.800048828125,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 24.60009765625,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 28.699951171875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1533144420,
+            "ms": 54.10009765625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1533144420,
+            "mediaTime": 902.2958555555556,
+            "ms": 59.10009765625,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 59.699951171875,
+            "name": "append"
+          },
+          {
+            "ms": 64.800048828125,
+            "name": "appended"
+          },
+          {
+            "ms": 194.900146484375,
+            "name": "canplay"
+          },
+          {
+            "ms": 195.2001953125,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 902.996555,
+            "ms": 198,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 11,
+        "target": 903,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 604.198055,
+        "firstPostSeekCanvasMs": 180.300048828125,
+        "index": 10,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.699951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1025064616,
+            "ms": 0.7998046875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1025064616,
+            "ms": 11.099853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1025064616,
+            "ms": 11.5,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1025064616,
+            "mediaTime": 602.688,
+            "ms": 11.5,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 11.599853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 19.39990234375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 19.599853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 32.199951171875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 38.39990234375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1025064616,
+            "ms": 61,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1025064616,
+            "mediaTime": 603.4973555555556,
+            "ms": 64,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 64.39990234375,
+            "name": "append"
+          },
+          {
+            "ms": 69.699951171875,
+            "name": "appended"
+          },
+          {
+            "ms": 169.800048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 170,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 603.997855,
+            "ms": 182,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 12,
+        "target": 604,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 904.197755,
+        "firstPostSeekCanvasMs": 212.5,
+        "index": 11,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 1.699951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1534606840,
+            "ms": 1.7998046875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1534606840,
+            "ms": 11.599853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1534606840,
+            "ms": 11.89990234375,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1534606840,
+            "mediaTime": 902.6986666666668,
+            "ms": 11.89990234375,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 11.89990234375,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 19.699951171875,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 19.89990234375,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 32.89990234375,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 37.7998046875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1534606840,
+            "ms": 61.2998046875,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1534606840,
+            "mediaTime": 903.2968555555556,
+            "ms": 69.7998046875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 70.099853515625,
+            "name": "append"
+          },
+          {
+            "ms": 74.999755859375,
+            "name": "appended"
+          },
+          {
+            "ms": 201.199951171875,
+            "name": "canplay"
+          },
+          {
+            "ms": 201.599853515625,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 903.997555,
+            "ms": 215.099853515625,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 13,
+        "target": 904,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 605.199055,
+        "firstPostSeekCanvasMs": 177.2998046875,
+        "index": 12,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.699951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1027218920,
+            "ms": 0.7998046875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1027218920,
+            "ms": 11.7998046875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1027218920,
+            "ms": 12.099853515625,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1027218920,
+            "mediaTime": 604.2314222222222,
+            "ms": 12.099853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 12.099853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 18.499755859375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 18.599853515625,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 31.2998046875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 37.099853515625,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1027218920,
+            "ms": 58.39990234375,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1027218920,
+            "mediaTime": 604.4983555555556,
+            "ms": 65.39990234375,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 65.89990234375,
+            "name": "append"
+          },
+          {
+            "ms": 70.599853515625,
+            "name": "appended"
+          },
+          {
+            "ms": 171,
+            "name": "canplay"
+          },
+          {
+            "ms": 171.2998046875,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 604.998855,
+            "ms": 178.89990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 14,
+        "target": 605,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 905.198755,
+        "firstPostSeekCanvasMs": 196.699951171875,
+        "index": 13,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.599853515625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1536791129,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1536791129,
+            "ms": 3.999755859375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1536791129,
+            "ms": 10.7998046875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1536791129,
+            "mediaTime": 904.0976555555555,
+            "ms": 10.7998046875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 10.89990234375,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 20.39990234375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 20.499755859375,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 30.699951171875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 33.7998046875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1536791129,
+            "ms": 51.499755859375,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1536791129,
+            "mediaTime": 904.2978555555557,
+            "ms": 52.699951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 52.999755859375,
+            "name": "append"
+          },
+          {
+            "ms": 55.599853515625,
+            "name": "appended"
+          },
+          {
+            "ms": 192.89990234375,
+            "name": "canplay"
+          },
+          {
+            "ms": 193.2998046875,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 904.998555,
+            "ms": 198.699951171875,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 15,
+        "target": 905,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 606.166688,
+        "firstPostSeekCanvasMs": 179.2001953125,
+        "index": 14,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.60009765625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1028493711,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1028493711,
+            "ms": 13.300048828125,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1028493711,
+            "ms": 13.699951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1028493711,
+            "mediaTime": 604.6933333333334,
+            "ms": 13.699951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 13.800048828125,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 22.300048828125,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 22.400146484375,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 37.60009765625,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 41.800048828125,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1028493711,
+            "ms": 66.10009765625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1028493711,
+            "mediaTime": 605.4993555555556,
+            "ms": 69.800048828125,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 70.199951171875,
+            "name": "append"
+          },
+          {
+            "ms": 75,
+            "name": "appended"
+          },
+          {
+            "ms": 170.800048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 171.2001953125,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 605.999855,
+            "ms": 180.400146484375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 16,
+        "target": 606,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 906.166388,
+        "firstPostSeekCanvasMs": 111.199951171875,
+        "index": 15,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.599853515625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1538305877,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1538305877,
+            "ms": 3.699951171875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1538305877,
+            "ms": 11,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1538305877,
+            "mediaTime": 905.024,
+            "ms": 11.099853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 11.099853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 18.800048828125,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 19,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 35.800048828125,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 40.699951171875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1538305877,
+            "ms": 64.800048828125,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1538305877,
+            "mediaTime": 905.7993555555556,
+            "ms": 75.5,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 76.099853515625,
+            "name": "append"
+          },
+          {
+            "ms": 81.699951171875,
+            "name": "appended"
+          },
+          {
+            "ms": 108.10009765625,
+            "name": "canplay"
+          },
+          {
+            "ms": 108.5,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 905.999555,
+            "ms": 112.699951171875,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 17,
+        "target": 906,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 607.167688,
+        "firstPostSeekCanvasMs": 96.400146484375,
+        "index": 16,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.699951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1030631297,
+            "ms": 0.800048828125,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1030631297,
+            "ms": 13,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1030631297,
+            "ms": 13.5,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1030631297,
+            "mediaTime": 606.144,
+            "ms": 13.5,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 13.5,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 21.5,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 21.800048828125,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 37.5,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 41.89990234375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1030631297,
+            "ms": 66,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1030631297,
+            "mediaTime": 607.0008555555555,
+            "ms": 72,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 72.89990234375,
+            "name": "append"
+          },
+          {
+            "ms": 78.300048828125,
+            "name": "appended"
+          },
+          {
+            "ms": 86.699951171875,
+            "name": "canplay"
+          },
+          {
+            "ms": 87,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 607.000855,
+            "ms": 98,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 18,
+        "target": 607,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 907.167388,
+        "firstPostSeekCanvasMs": 129.39990234375,
+        "index": 17,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.599853515625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1539944313,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1539944313,
+            "ms": 4.599853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1539944313,
+            "ms": 15,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1539944313,
+            "mediaTime": 905.9626666666668,
+            "ms": 15.099853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 15.099853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 24.099853515625,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 24.300048828125,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 46.5,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 51.800048828125,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1539944313,
+            "ms": 74.199951171875,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1539944313,
+            "mediaTime": 906.8003555555556,
+            "ms": 82.099853515625,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 82.599853515625,
+            "name": "append"
+          },
+          {
+            "ms": 87.89990234375,
+            "name": "appended"
+          },
+          {
+            "ms": 114.699951171875,
+            "name": "canplay"
+          },
+          {
+            "ms": 115,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 906.967188,
+            "ms": 131.10009765625,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 19,
+        "target": 907,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 608.168688,
+        "firstPostSeekCanvasMs": 195.89990234375,
+        "index": 18,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.599853515625,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1032041269,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1032041269,
+            "ms": 14.099853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1032041269,
+            "ms": 14.5,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1032041269,
+            "mediaTime": 606.976,
+            "ms": 14.599853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 14.599853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 24.599853515625,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 24.699951171875,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 38.39990234375,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 43.099853515625,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1032041269,
+            "ms": 64.800048828125,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1032041269,
+            "mediaTime": 607.5013555555555,
+            "ms": 71.599853515625,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 71.800048828125,
+            "name": "append"
+          },
+          {
+            "ms": 76.89990234375,
+            "name": "appended"
+          },
+          {
+            "ms": 185.800048828125,
+            "name": "canplay"
+          },
+          {
+            "ms": 186.300048828125,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 607.968488,
+            "ms": 197.800048828125,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 20,
+        "target": 608,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 908.168388,
+        "firstPostSeekCanvasMs": 128.900146484375,
+        "index": 19,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.800048828125,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1541685639,
+            "ms": 0.900146484375,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1541685639,
+            "ms": 5.400146484375,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1541685639,
+            "ms": 14.199951171875,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1541685639,
+            "mediaTime": 906.9226666666668,
+            "ms": 14.199951171875,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 14.199951171875,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 23.900146484375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 24.199951171875,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 47.699951171875,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 52.900146484375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1541685639,
+            "ms": 75,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1541685639,
+            "mediaTime": 907.8013555555556,
+            "ms": 82.699951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 84.10009765625,
+            "name": "append"
+          },
+          {
+            "ms": 96.300048828125,
+            "name": "appended"
+          },
+          {
+            "ms": 121.400146484375,
+            "name": "canplay"
+          },
+          {
+            "ms": 121.800048828125,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 907.968188,
+            "ms": 130.5,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 21,
+        "target": 908,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 609.169688,
+        "firstPostSeekCanvasMs": 129.39990234375,
+        "index": 20,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 0.699951171875,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1033725950,
+            "ms": 0.699951171875,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1033725950,
+            "ms": 15.599853515625,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1033725950,
+            "ms": 16.099853515625,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1033725950,
+            "mediaTime": 608.3355222222223,
+            "ms": 16.099853515625,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 16.099853515625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 26.39990234375,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 26.5,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 37.5,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 40.39990234375,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1033725950,
+            "ms": 60.89990234375,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1033725950,
+            "mediaTime": 608.5023555555556,
+            "ms": 63.099853515625,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 63.599853515625,
+            "name": "append"
+          },
+          {
+            "ms": 68.39990234375,
+            "name": "appended"
+          },
+          {
+            "ms": 120.099853515625,
+            "name": "canplay"
+          },
+          {
+            "ms": 120.39990234375,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 608.969488,
+            "ms": 130.89990234375,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 22,
+        "target": 609,
+        "warmup": false
+      },
+      {
+        "canvasOpacity": "1",
+        "canvasVisibility": "visible",
+        "firstPostSeekCanvasMediaTime": 909.169388,
+        "firstPostSeekCanvasMs": 213.10009765625,
+        "index": 21,
+        "marks": [
+          {
+            "ms": 0,
+            "name": "seek-requested"
+          },
+          {
+            "ms": 1.800048828125,
+            "name": "seek"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1543493957,
+            "ms": 2,
+            "name": "probe-request"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1543493957,
+            "ms": 4.699951171875,
+            "name": "probe-response"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1543493957,
+            "ms": 5,
+            "name": "probe-complete"
+          },
+          {
+            "attempt": 0,
+            "byteLength": 131072,
+            "byteOffset": 1543493957,
+            "mediaTime": 907.904,
+            "ms": 5,
+            "name": "probe-timestamp"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 5.10009765625,
+            "name": "request"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 17.10009765625,
+            "name": "response"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 17.300048828125,
+            "name": "first-byte"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 35.60009765625,
+            "name": "first-picture-jobs"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 38.699951171875,
+            "name": "first-picture-output"
+          },
+          {
+            "byteOffset": 1543493957,
+            "ms": 59.60009765625,
+            "name": "first-access-unit"
+          },
+          {
+            "byteOffset": 1543493957,
+            "mediaTime": 908.3018555555556,
+            "ms": 63.199951171875,
+            "name": "first-fragment"
+          },
+          {
+            "ms": 64.300048828125,
+            "name": "append"
+          },
+          {
+            "ms": 73.89990234375,
+            "name": "appended"
+          },
+          {
+            "ms": 210.699951171875,
+            "name": "canplay"
+          },
+          {
+            "ms": 211.199951171875,
+            "name": "playing"
+          },
+          {
+            "mediaTime": 908.969188,
+            "ms": 214.800048828125,
+            "name": "presented"
+          }
+        ],
+        "probeRequests": 1,
+        "seekId": 23,
+        "target": 909,
+        "warmup": false
+      }
+    ],
+    "visibilityState": "visible",
+    "warmupCount": 2
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPageClosed": true,
+    "containerStopped": true,
+    "testPagesClosed": true,
+    "unrelatedTabCount": 1
+  }
+}
