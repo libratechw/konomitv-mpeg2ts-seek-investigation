@@ -5,8 +5,9 @@
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束し、T0からresponseまで97〜115ms、初回fragmentまで272〜320ms、frame提示まで345〜390msだった。
 今回の条件ではindex探索より初回fragment生成が大きい。
 
-シークとは別に、GalaxyでYADIF出力が約30fpsへ落ちる走行を確認した。
-canvasのopacity変更後に約60fpsへ戻ったが、cleanな不透明版も約60fpsだったため、opacityを原因または修正とは判定しない。
+シークとは別に、GalaxyでYADIF出力がほぼ停止する走行を反復再現した。
+canvasのopacity変更は原因または修正ではなかった。
+停止時もrAFとfilterは動作したが、fieldの表示予定が未来へ連鎖してqueueが飽和していた。
 また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を再現し、別branchで修正した。
 
 ## 対象と証拠の範囲
@@ -334,6 +335,26 @@ opacity変更後の遅延した30fps遷移は残るため、位相、queue deadl
 クリーンな変更前対照で問題を再現できない以上、表示合成を常時変更する修正は採用できない。
 原因に近い対策はYADIFのfield schedulingとvisibility遷移の再現試験であり、Chromiumへの変更案を出す根拠は現時点でない。
 
+### Android seek後のYADIF queue飽和
+
+最新KonomiTV `e92fba8`と依存`52a3db5`、Galaxy Chrome 151、表示60Hz、乃木坂工事中の540秒と900秒を交互にseekする条件で、1.8秒後もYADIF出力が10fps未満、または`late`が30超増えた走行を30回中8回確認した。
+540秒は7/15、900秒は1/15だったが、素材全体のカデンス差とは断定しない。
+
+停止時もYADIFのrAF callbackは1.8秒に77〜110回呼ばれ、`startLoop`は既存loopを認識し、`stopLoop`は呼ばれていなかった。
+したがってloop消失ではない。
+filter済みfieldの表示予定は正常時に先頭約18ms、末尾約35〜52ms先だったが、停止時は末尾が最大351.9ms先へ伸びた。
+表示可能になる前に6枚のoutput poolが埋まり、`#nextOutputSlot()`と`#filter()`が最古のfieldを`late`として交換する一方、次の時刻はqueue末尾からさらに未来へ連鎖するため、canvasへ出すfieldがほぼなくなっていた。
+
+`otya128/main`の現行実装には、queueが5枚に達した時点でqueueを空にし、次のrVFC時刻へ再アンカーする処理がある。
+フォーク版にも以前は同じ処理があったが、個別のlate破棄へ変更した際に`queueResetted`が互換用の常時0カウンターとなった。
+Android seek後の先行callbackでは、個別破棄だけでは未来へ進んだ時刻列を戻せない。
+
+飽和時に5枚をlateとして破棄し、次のfieldを現在へ再アンカーする試作では、同じ30回で停止判定は8/30から0/30になった。
+ただしqueue resetは計23回発生し、影響した走行の最終`outputFps`は31.9〜45.5fpsだった。
+長時間停止を短い表示欠落へ変えたことは確認できるが、約60fpsを保つ最終修正ではない。
+次はrVFCの`expectedDisplayTime`を基準に時刻列を制限し、通常のcallback jitterを吸収しながら未来への累積だけを解消する。
+集計値と各走行は[計測データ](results/yadif-seek-queue.json)に保存した。
+
 `autoFilm`は区間依存である。
 MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`のまま、1500秒では`video`から`film`への切替過渡を観測した。
 番組全体を24fpsと扱わず、初画、mode lock、定常cadenceを別々に評価する。
@@ -493,7 +514,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
-| 6. YADIF/IVTCの過剰な初画待ち | 通常は数ms〜十数msで再表示し、3枚/film lockを全面待ちしない。一部seekとmode遷移では100〜200ms級の過渡あり。約30fps状態は観測したが、cleanなopaque対照2走行は約60fpsで、canvas完全被覆を原因と断定できない |
+| 6. YADIF/IVTCの過剰な初画待ち | YADIF queueの未来時刻累積を30回中8回再現。rAF停止やcanvas完全被覆ではなく、飽和後も末尾時刻を連鎖するscheduleが原因。queue reset試作は停止0/30だが最低31.9fpsで、時刻基準の修正が必要。IVTC固有待ちとは未判定 |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
@@ -520,7 +541,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P1 | YADIFのvisibility遷移とrVFC/rAF位相を記録し、30fps状態を自動再現する | 2倍レートの片field落ちを再現できた場合に約30→60fps | 中 | ○ | mpeg2toh264 YADIF。既存`d4ccb98`の境界条件を検証。opacity試作は採用しない |
+| P0 | YADIFのfield時刻をrVFCの表示予定へ再同期し、未来時刻の累積を止める | 長時間停止を解消。queue reset試作は停止8/30→0/30だが最低31.9fps | 中 | ○ | tsukumijimaフォークYADIF。`expectedDisplayTime`基準の修正を同条件で再測定。opacity試作は採用しない |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。`244da74`で実装済み。MSE operation、decode、描画は次段 |
 | P1 | byteとPTSの対応を正しく保ち、選択service/PIDでprobeする | cold seekの約0.1秒と誤推定を削減する可能性 | 中 | ◎ | mpeg2toh264 source/worker/core |
