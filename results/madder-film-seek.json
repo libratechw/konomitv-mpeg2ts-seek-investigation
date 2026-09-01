@@ -9,6 +9,11 @@
   "validation_build": {
     "base": "tsukumijima/mpeg2toh264 52a3db5e8fb9833e6cade2167097849c668bdb1f",
     "yadif_queue_reset": "f62bd9d",
+    "published_tree_identical_replacement": {
+      "source": "f7b89eb",
+      "dist": "4c75a02",
+      "reason": "split generated dist from source as required by the fork repository"
+    },
     "early_fragment_source_tree": "0ae3966"
   },
   "material": "MADDER recording; tested sections only, not assumed film throughout",
