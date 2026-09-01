@@ -1,690 +1,1752 @@
 {
-  "schema": 1,
+  "schema": 2,
   "device": "Galaxy Tab S11 Ultra SM-X930",
   "browser": "Google Chrome 151.0.7922.174",
   "display_hz": 60,
   "material": "Nogizaka Koji-chu recording; only sampled points, cadence of whole recording not assumed",
-  "settle_ms": 1800,
   "bad_run_criterion": "last outputFps < 10 or lateDelta > 30",
-  "variants": {
-    "baseline_with_instrumentation": {
-      "runs": [
-        {
-          "target_s": 540,
-          "output_fps": 1.933,
-          "late_delta": 59,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 4,
-          "oldest_lead_ms": 134.848,
-          "newest_lead_ms": 201.581,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 58.912,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 107,
-          "shown_delta": 99,
-          "oldest_lead_ms": 18.285,
-          "newest_lead_ms": 51.651,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.886,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.18,
-          "newest_lead_ms": 51.547,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.928,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 90,
-          "oldest_lead_ms": 18.235,
-          "newest_lead_ms": 34.918,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0.955,
-          "late_delta": 46,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 84,
-          "shown_delta": 13,
-          "oldest_lead_ms": 9.855,
-          "newest_lead_ms": 59.909,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.174,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.097,
-          "newest_lead_ms": 34.78,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.989,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.114,
-          "newest_lead_ms": 51.48,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.989,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.168,
-          "newest_lead_ms": 34.851,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 1.968,
-          "late_delta": 47,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 86,
-          "shown_delta": 21,
-          "oldest_lead_ms": 16.964,
-          "newest_lead_ms": 50.331,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.981,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.001,
-          "newest_lead_ms": 34.685,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.784,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.18,
-          "newest_lead_ms": 51.547,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.065,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0.97,
-          "late_delta": 46,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 78,
-          "shown_delta": 3,
-          "oldest_lead_ms": 53.17,
-          "newest_lead_ms": 119.909,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.254,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.118,
-          "newest_lead_ms": 51.485,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.113,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.065,
-          "newest_lead_ms": 34.749,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.036,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.201,
-          "newest_lead_ms": 34.885,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0.969,
-          "late_delta": 46,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 79,
-          "shown_delta": 5,
-          "oldest_lead_ms": 103.24,
-          "newest_lead_ms": 169.977,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.163,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 90,
-          "oldest_lead_ms": 18.117,
-          "newest_lead_ms": 51.484,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.053,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.034,
-          "newest_lead_ms": 34.717,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.119,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.285,
-          "newest_lead_ms": 51.651,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.977,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.097,
-          "newest_lead_ms": 34.78,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.869,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.068,
-          "newest_lead_ms": 34.751,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0.954,
-          "late_delta": 46,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 79,
-          "shown_delta": 2,
-          "oldest_lead_ms": 53.271,
-          "newest_lead_ms": 120.01,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.047,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 9.917,
-          "newest_lead_ms": 43.284,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0.983,
-          "late_delta": 54,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 110,
-          "shown_delta": 3,
-          "oldest_lead_ms": 285.148,
-          "newest_lead_ms": 351.882,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.338,
-          "late_delta": 1,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 110,
-          "shown_delta": 88,
-          "oldest_lead_ms": 9.885,
-          "newest_lead_ms": 76.618,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 0,
-          "late_delta": 46,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 77,
-          "shown_delta": 4,
-          "oldest_lead_ms": 3.113,
-          "newest_lead_ms": 86.54,
-          "bad": true
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.02,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 95,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 57.099,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 90,
-          "oldest_lead_ms": 18.101,
-          "newest_lead_ms": 34.785,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 58.054,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 94,
-          "oldest_lead_ms": 18.251,
-          "newest_lead_ms": 51.618,
-          "bad": false
+  "short_window": {
+    "settle_ms": 1800,
+    "variants": {
+      "baseline_with_instrumentation": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              44.743,
+              1.933
+            ],
+            "late_delta": 59,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 109,
+            "shown_delta": 4,
+            "oldest_lead_ms": 134.848,
+            "newest_lead_ms": 201.581
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              3.936,
+              58.912
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 107,
+            "shown_delta": 99,
+            "oldest_lead_ms": 18.285,
+            "newest_lead_ms": 51.651
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              50.374,
+              56.886
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.18,
+            "newest_lead_ms": 51.547
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              47.066,
+              57.928
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 90,
+            "oldest_lead_ms": 18.235,
+            "newest_lead_ms": 34.918
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.121,
+              0.955
+            ],
+            "late_delta": 46,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 84,
+            "shown_delta": 13,
+            "oldest_lead_ms": 9.855,
+            "newest_lead_ms": 59.909
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              31.904,
+              56.174
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.097,
+            "newest_lead_ms": 34.78
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.835,
+              56.989
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.114,
+            "newest_lead_ms": 51.48
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.431,
+              56.989
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.168,
+            "newest_lead_ms": 34.851
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              49.094,
+              1.968
+            ],
+            "late_delta": 47,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 86,
+            "shown_delta": 21,
+            "oldest_lead_ms": 16.964,
+            "newest_lead_ms": 50.331
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              36.784,
+              55.981
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.001,
+            "newest_lead_ms": 34.685
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.056,
+              56.784
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.18,
+            "newest_lead_ms": 51.547
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.79,
+              57.065
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.098,
+              0.97
+            ],
+            "late_delta": 46,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 78,
+            "shown_delta": 3,
+            "oldest_lead_ms": 53.17,
+            "newest_lead_ms": 119.909
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              18.893,
+              55.254
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.118,
+            "newest_lead_ms": 51.485
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.632,
+              56.113
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.065,
+            "newest_lead_ms": 34.749
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.747,
+              56.036
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.201,
+            "newest_lead_ms": 34.885
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              50.47,
+              0.969
+            ],
+            "late_delta": 46,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 79,
+            "shown_delta": 5,
+            "oldest_lead_ms": 103.24,
+            "newest_lead_ms": 169.977
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              7.81,
+              56.163
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 90,
+            "oldest_lead_ms": 18.117,
+            "newest_lead_ms": 51.484
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.539,
+              56.053
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.034,
+            "newest_lead_ms": 34.717
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.088,
+              56.119
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.285,
+            "newest_lead_ms": 51.651
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.325,
+              56.977
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.097,
+            "newest_lead_ms": 34.78
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.331,
+              56.869
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.068,
+            "newest_lead_ms": 34.751
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.776,
+              0.954
+            ],
+            "late_delta": 46,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 79,
+            "shown_delta": 2,
+            "oldest_lead_ms": 53.271,
+            "newest_lead_ms": 120.01
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              15.448,
+              57.047
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 9.917,
+            "newest_lead_ms": 43.284
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.225,
+              0.983
+            ],
+            "late_delta": 54,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 110,
+            "shown_delta": 3,
+            "oldest_lead_ms": 285.148,
+            "newest_lead_ms": 351.882
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              0.886,
+              56.338
+            ],
+            "late_delta": 1,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 110,
+            "shown_delta": 88,
+            "oldest_lead_ms": 9.885,
+            "newest_lead_ms": 76.618
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              49.214,
+              0
+            ],
+            "late_delta": 46,
+            "queue_reset_delta": 0,
+            "bad": true,
+            "loop_calls_delta": 77,
+            "shown_delta": 4,
+            "oldest_lead_ms": 3.113,
+            "newest_lead_ms": 86.54
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              18.009,
+              56.02
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 95,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.281,
+              57.099
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 90,
+            "oldest_lead_ms": 18.101,
+            "newest_lead_ms": 34.785
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.157,
+              58.054
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 94,
+            "oldest_lead_ms": 18.251,
+            "newest_lead_ms": 51.618
+          }
+        ],
+        "summary": {
+          "runs": 30,
+          "bad_runs": 8,
+          "min_final_output_fps": 0,
+          "queue_resets": 0
         }
-      ],
-      "summary": {
-        "runs": 30,
-        "bad_runs": 8,
-        "min_output_fps": 0,
-        "queue_resets": 0
+      },
+      "full_queue_clear_prototype": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.519,
+              31.888
+            ],
+            "late_delta": 23,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 50,
+            "oldest_lead_ms": 12.437,
+            "newest_lead_ms": 62.488
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              38.276,
+              55.944
+            ],
+            "late_delta": 1,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 93,
+            "oldest_lead_ms": 16.667,
+            "newest_lead_ms": 33.35
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.309,
+              41.651
+            ],
+            "late_delta": 11,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 72,
+            "oldest_lead_ms": 17.802,
+            "newest_lead_ms": 67.853
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.551,
+              57.104
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 94,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.832,
+              36.761
+            ],
+            "late_delta": 18,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 63,
+            "oldest_lead_ms": 12.521,
+            "newest_lead_ms": 79.255
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              39.042,
+              55.888
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 95,
+            "oldest_lead_ms": 18.117,
+            "newest_lead_ms": 51.484
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              49.158,
+              56.943
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.097,
+            "newest_lead_ms": 34.78
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.357,
+              56.422
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 91,
+            "oldest_lead_ms": 18.285,
+            "newest_lead_ms": 51.651
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.321,
+              36.97
+            ],
+            "late_delta": 19,
+            "queue_reset_delta": 3,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 70,
+            "oldest_lead_ms": 17.517,
+            "newest_lead_ms": 34.2
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.305,
+              55.978
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              49.865,
+              43.969
+            ],
+            "late_delta": 13,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 80,
+            "oldest_lead_ms": 21.78,
+            "newest_lead_ms": 55.147
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.704,
+              55.19
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 90,
+            "oldest_lead_ms": 18.017,
+            "newest_lead_ms": 51.384
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.687,
+              56.909
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.18,
+            "newest_lead_ms": 51.547
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.747,
+              56.892
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.414,
+              37.398
+            ],
+            "late_delta": 17,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 67,
+            "oldest_lead_ms": 12.321,
+            "newest_lead_ms": 79.055
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              43.21,
+              54.781
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 92,
+            "oldest_lead_ms": 9.918,
+            "newest_lead_ms": 43.285
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.023,
+              54.967
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 88,
+            "oldest_lead_ms": 18.047,
+            "newest_lead_ms": 51.414
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.405,
+              55.539
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 110,
+            "shown_delta": 89,
+            "oldest_lead_ms": 16.883,
+            "newest_lead_ms": 50.25
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.514,
+              40.658
+            ],
+            "late_delta": 13,
+            "queue_reset_delta": 1,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 67,
+            "oldest_lead_ms": 20.769,
+            "newest_lead_ms": 87.503
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              39.679,
+              45.529
+            ],
+            "late_delta": 10,
+            "queue_reset_delta": 1,
+            "bad": false,
+            "loop_calls_delta": 111,
+            "shown_delta": 78,
+            "oldest_lead_ms": 20.887,
+            "newest_lead_ms": 70.937
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              41.102,
+              57.077
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.114,
+            "newest_lead_ms": 51.48
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.798,
+              57.94
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 96,
+            "oldest_lead_ms": 18.251,
+            "newest_lead_ms": 51.618
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              49.078,
+              39.428
+            ],
+            "late_delta": 13,
+            "queue_reset_delta": 2,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 74,
+            "oldest_lead_ms": 15.124,
+            "newest_lead_ms": 65.175
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.347,
+              39.397
+            ],
+            "late_delta": 17,
+            "queue_reset_delta": 1,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 70,
+            "oldest_lead_ms": 20.736,
+            "newest_lead_ms": 54.103
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.685,
+              39.992
+            ],
+            "late_delta": 15,
+            "queue_reset_delta": 1,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 69,
+            "oldest_lead_ms": 20.736,
+            "newest_lead_ms": 87.47
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              42.594,
+              57.965
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 96,
+            "oldest_lead_ms": 18.151,
+            "newest_lead_ms": 51.518
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              50.148,
+              43.277
+            ],
+            "late_delta": 13,
+            "queue_reset_delta": 1,
+            "bad": false,
+            "loop_calls_delta": 108,
+            "shown_delta": 72,
+            "oldest_lead_ms": 20.853,
+            "newest_lead_ms": 70.903
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              41.505,
+              56.053
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 110,
+            "shown_delta": 96,
+            "oldest_lead_ms": 18.184,
+            "newest_lead_ms": 51.551
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.634,
+              37.376
+            ],
+            "late_delta": 20,
+            "queue_reset_delta": 3,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 71,
+            "oldest_lead_ms": 17.834,
+            "newest_lead_ms": 67.884
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.48,
+              56.142
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false,
+            "loop_calls_delta": 109,
+            "shown_delta": 93,
+            "oldest_lead_ms": 18.185,
+            "newest_lead_ms": 51.551
+          }
+        ],
+        "summary": {
+          "runs": 30,
+          "bad_runs": 0,
+          "min_final_output_fps": 31.888,
+          "queue_resets": 23
+        }
+      },
+      "independent_expected_display_anchor": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              39.683
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.251,
+              56.875
+            ],
+            "late_delta": 2,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.617,
+              55.069
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.332,
+              59.97
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.044,
+              56.892
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              52.285,
+              58.818
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.732,
+              55.989
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.391,
+              55.152
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.929,
+              53.207
+            ],
+            "late_delta": 4,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.242,
+              60.122
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.189,
+              55.961
+            ],
+            "late_delta": 2,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              52.181,
+              59.933
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.168,
+              57.075
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.898,
+              57.209
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.3,
+              48.247
+            ],
+            "late_delta": 7,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.9,
+              59.097
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.575,
+              51.141
+            ],
+            "late_delta": 5,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.349,
+              59.916
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.37,
+              57.059
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              52.989,
+              57.997
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.102,
+              49.188
+            ],
+            "late_delta": 7,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.519,
+              59.996
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.986,
+              56.966
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              53.076,
+              60.081
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.933,
+              55.048
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.964,
+              59.043
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.342,
+              51.141
+            ],
+            "late_delta": 6,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.049,
+              58.976
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.957,
+              54.999
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.287,
+              59.916
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          }
+        ],
+        "summary": {
+          "runs": 30,
+          "bad_runs": 0,
+          "min_final_output_fps": 39.683,
+          "queue_resets": 0
+        }
+      },
+      "upstream_queue_reset_adaptation": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              25
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.813,
+              57.505
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.086,
+              41.322
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              43.82,
+              56.96
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              44.574,
+              57.193
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.159,
+              56.069
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.228,
+              56.875
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.863,
+              56.892
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.948,
+              57.226
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.037,
+              58.008
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.44,
+              56.972
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              47.286,
+              56.943
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              44.818,
+              41.622
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.515,
+              56.058
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.803,
+              38.337
+            ],
+            "late_delta": 13,
+            "queue_reset_delta": 1,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              42.607,
+              56.983
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              47.371,
+              40.623
+            ],
+            "late_delta": 4,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.419,
+              56.196
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.24,
+              56.069
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.685,
+              58.037
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.185,
+              49.428
+            ],
+            "late_delta": 2,
+            "queue_reset_delta": 1,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              50.481,
+              56.047
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.381,
+              41.343
+            ],
+            "late_delta": 2,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.01,
+              57.071
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.951,
+              57.209
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              48.726,
+              46.26
+            ],
+            "late_delta": 3,
+            "queue_reset_delta": 1,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.27,
+              42.694
+            ],
+            "late_delta": 8,
+            "queue_reset_delta": 1,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              42.206,
+              44.265
+            ],
+            "late_delta": 6,
+            "queue_reset_delta": 1,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.541,
+              42.89
+            ],
+            "late_delta": 2,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.063,
+              55.147
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          }
+        ],
+        "summary": {
+          "runs": 30,
+          "bad_runs": 0,
+          "min_final_output_fps": 25,
+          "queue_resets": 15
+        }
       }
-    },
-    "saturated_queue_reset_prototype": {
-      "runs": [
-        {
-          "target_s": 540,
-          "output_fps": 31.888,
-          "late_delta": 23,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 108,
-          "shown_delta": 50,
-          "oldest_lead_ms": 12.437,
-          "newest_lead_ms": 62.488,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.944,
-          "late_delta": 1,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 93,
-          "oldest_lead_ms": 16.667,
-          "newest_lead_ms": 33.35,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 41.651,
-          "late_delta": 11,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 109,
-          "shown_delta": 72,
-          "oldest_lead_ms": 17.802,
-          "newest_lead_ms": 67.853,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.104,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 94,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 36.761,
-          "late_delta": 18,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 109,
-          "shown_delta": 63,
-          "oldest_lead_ms": 12.521,
-          "newest_lead_ms": 79.255,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.888,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 95,
-          "oldest_lead_ms": 18.117,
-          "newest_lead_ms": 51.484,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.943,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.097,
-          "newest_lead_ms": 34.78,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.422,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 91,
-          "oldest_lead_ms": 18.285,
-          "newest_lead_ms": 51.651,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 36.97,
-          "late_delta": 19,
-          "queue_reset_delta": 3,
-          "loop_calls_delta": 109,
-          "shown_delta": 70,
-          "oldest_lead_ms": 17.517,
-          "newest_lead_ms": 34.2,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.978,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 43.969,
-          "late_delta": 13,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 109,
-          "shown_delta": 80,
-          "oldest_lead_ms": 21.78,
-          "newest_lead_ms": 55.147,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.19,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 90,
-          "oldest_lead_ms": 18.017,
-          "newest_lead_ms": 51.384,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 56.909,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.18,
-          "newest_lead_ms": 51.547,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.892,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 37.398,
-          "late_delta": 17,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 109,
-          "shown_delta": 67,
-          "oldest_lead_ms": 12.321,
-          "newest_lead_ms": 79.055,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 54.781,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 92,
-          "oldest_lead_ms": 9.918,
-          "newest_lead_ms": 43.285,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 54.967,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 88,
-          "oldest_lead_ms": 18.047,
-          "newest_lead_ms": 51.414,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 55.539,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 110,
-          "shown_delta": 89,
-          "oldest_lead_ms": 16.883,
-          "newest_lead_ms": 50.25,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 40.658,
-          "late_delta": 13,
-          "queue_reset_delta": 1,
-          "loop_calls_delta": 108,
-          "shown_delta": 67,
-          "oldest_lead_ms": 20.769,
-          "newest_lead_ms": 87.503,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 45.529,
-          "late_delta": 10,
-          "queue_reset_delta": 1,
-          "loop_calls_delta": 111,
-          "shown_delta": 78,
-          "oldest_lead_ms": 20.887,
-          "newest_lead_ms": 70.937,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 57.077,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.114,
-          "newest_lead_ms": 51.48,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.94,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 96,
-          "oldest_lead_ms": 18.251,
-          "newest_lead_ms": 51.618,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 39.428,
-          "late_delta": 13,
-          "queue_reset_delta": 2,
-          "loop_calls_delta": 109,
-          "shown_delta": 74,
-          "oldest_lead_ms": 15.124,
-          "newest_lead_ms": 65.175,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 39.397,
-          "late_delta": 17,
-          "queue_reset_delta": 1,
-          "loop_calls_delta": 108,
-          "shown_delta": 70,
-          "oldest_lead_ms": 20.736,
-          "newest_lead_ms": 54.103,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 39.992,
-          "late_delta": 15,
-          "queue_reset_delta": 1,
-          "loop_calls_delta": 109,
-          "shown_delta": 69,
-          "oldest_lead_ms": 20.736,
-          "newest_lead_ms": 87.47,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 57.965,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 108,
-          "shown_delta": 96,
-          "oldest_lead_ms": 18.151,
-          "newest_lead_ms": 51.518,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 43.277,
-          "late_delta": 13,
-          "queue_reset_delta": 1,
-          "loop_calls_delta": 108,
-          "shown_delta": 72,
-          "oldest_lead_ms": 20.853,
-          "newest_lead_ms": 70.903,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.053,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 110,
-          "shown_delta": 96,
-          "oldest_lead_ms": 18.184,
-          "newest_lead_ms": 51.551,
-          "bad": false
-        },
-        {
-          "target_s": 540,
-          "output_fps": 37.376,
-          "late_delta": 20,
-          "queue_reset_delta": 3,
-          "loop_calls_delta": 109,
-          "shown_delta": 71,
-          "oldest_lead_ms": 17.834,
-          "newest_lead_ms": 67.884,
-          "bad": false
-        },
-        {
-          "target_s": 900,
-          "output_fps": 56.142,
-          "late_delta": 0,
-          "queue_reset_delta": 0,
-          "loop_calls_delta": 109,
-          "shown_delta": 93,
-          "oldest_lead_ms": 18.185,
-          "newest_lead_ms": 51.551,
-          "bad": false
+    }
+  },
+  "long_window": {
+    "settle_ms": 4000,
+    "variants": {
+      "independent_expected_display_anchor": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              41.274,
+              60.01,
+              59.994,
+              59.992
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              47.651,
+              59.979,
+              59.974,
+              60
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              50.063,
+              57.002,
+              60.008,
+              59.973
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              51.161,
+              59.967,
+              60.016
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              45.396,
+              59.973,
+              60,
+              59.996
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              49.371,
+              57.994,
+              59.982,
+              59.927
+            ],
+            "late_delta": 1,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              40.777,
+              59.982,
+              58.055
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              52.446,
+              59.956,
+              60.025,
+              59.97
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              42.344,
+              55.976,
+              58.117,
+              59.816
+            ],
+            "late_delta": 4,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              54.67,
+              56.966,
+              60.075,
+              59.97
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          }
+        ],
+        "summary": {
+          "runs": 10,
+          "bad_runs": 0,
+          "min_final_output_fps": 58.055,
+          "queue_resets": 0
         }
-      ],
-      "summary": {
-        "runs": 30,
-        "bad_runs": 0,
-        "min_output_fps": 31.888,
-        "queue_resets": 23
+      },
+      "upstream_queue_reset_adaptation": {
+        "runs": [
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              38.846,
+              59.856,
+              48.337,
+              43.393
+            ],
+            "late_delta": 28,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              46.252,
+              58.26,
+              59.939,
+              60.115
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              48.272,
+              39.763,
+              60,
+              59
+            ],
+            "late_delta": 5,
+            "queue_reset_delta": 2,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              46.476,
+              59.85,
+              60.112,
+              58.111
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              44.278,
+              60,
+              59.785,
+              60.101
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              47.43,
+              58.941,
+              59.99,
+              60.06
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              43.66,
+              59.976,
+              59.892
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              46.164,
+              59.946,
+              59.946,
+              59.946
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 540,
+            "output_fps_samples": [
+              46.62,
+              58.971,
+              59.934,
+              60
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          },
+          {
+            "target_s": 900,
+            "output_fps_samples": [
+              47.444,
+              59.928,
+              59.99,
+              60.083
+            ],
+            "late_delta": 0,
+            "queue_reset_delta": 0,
+            "bad": false
+          }
+        ],
+        "summary": {
+          "runs": 10,
+          "bad_runs": 0,
+          "min_final_output_fps": 43.393,
+          "queue_resets": 2
+        }
       }
     }
   }

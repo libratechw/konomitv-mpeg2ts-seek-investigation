@@ -349,10 +349,13 @@ filter済みfieldの表示予定は正常時に先頭約18ms、末尾約35〜52m
 フォーク版にも以前は同じ処理があったが、個別のlate破棄へ変更した際に`queueResetted`が互換用の常時0カウンターとなった。
 Android seek後の先行callbackでは、個別破棄だけでは未来へ進んだ時刻列を戻せない。
 
-飽和時に5枚をlateとして破棄し、次のfieldを現在へ再アンカーする試作では、同じ30回で停止判定は8/30から0/30になった。
-ただしqueue resetは計23回発生し、影響した走行の最終`outputFps`は31.9〜45.5fpsだった。
-長時間停止を短い表示欠落へ変えたことは確認できるが、約60fpsを保つ最終修正ではない。
-次はrVFCの`expectedDisplayTime`を基準に時刻列を制限し、通常のcallback jitterを吸収しながら未来への累積だけを解消する。
+upstream実装と同様に、飽和時にqueueを消してcallback時刻へ戻す処理をフォークへ適合した正式候補では、同じ30回の停止判定は8/30から0/30になった。
+1.8秒窓の最終`outputFps`は中央値56.1fps、最低25.0fpsで、4秒窓10回の最終値は中央値60.0fps、最低43.4fpsだった。
+長時間停止は防いだが、最初の短い過渡と540秒の1走行には低下が残る。
+
+比較用に、各rVFCの`expectedDisplayTime`へfield時刻を再アンカーする独自案も測定した。
+停止0/30、1.8秒窓の中央値57.0fps・最低39.7fps、4秒窓の最終値は中央値60.0fps・最低58.1fpsだった。
+数値は良いがupstreamのqueue設計と異なるため、まずupstream再同期の復元を優先し、独自案は過渡低下を解消する追加変更として優先度を下げる。
 集計値と各走行は[計測データ](results/yadif-seek-queue.json)に保存した。
 
 `autoFilm`は区間依存である。
@@ -514,7 +517,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
-| 6. YADIF/IVTCの過剰な初画待ち | YADIF queueの未来時刻累積を30回中8回再現。rAF停止やcanvas完全被覆ではなく、飽和後も末尾時刻を連鎖するscheduleが原因。queue reset試作は停止0/30だが最低31.9fpsで、時刻基準の修正が必要。IVTC固有待ちとは未判定 |
+| 6. YADIF/IVTCの過剰な初画待ち | YADIF queueの未来時刻累積を30回中8回再現。rAF停止やcanvas完全被覆ではなく、飽和後も末尾時刻を連鎖するscheduleが原因。upstream再同期の復元で停止0/30。短い過渡低下は残り、IVTC固有待ちとは未判定 |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
@@ -541,7 +544,8 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | YADIFのfield時刻をrVFCの表示予定へ再同期し、未来時刻の累積を止める | 長時間停止を解消。queue reset試作は停止8/30→0/30だが最低31.9fps | 中 | ○ | tsukumijimaフォークYADIF。`expectedDisplayTime`基準の修正を同条件で再測定。opacity試作は採用しない |
+| P0 | upstreamのYADIF queue再同期をフォーク拡張へ復元する | 長時間停止8/30→0/30。1.8秒窓中央値56.1fps、4秒窓最終中央値60.0fps | 小 | ◎ | tsukumijimaフォークYADIF。upstream既存挙動との統合 |
+| P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | queue復元版より過渡の最低値を改善したが、upstreamのscheduleと異なる | 中 | △ | 比較実験。upstream復元後も過渡低下が問題になる場合だけ再検討 |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。`244da74`で実装済み。MSE operation、decode、描画は次段 |
 | P1 | byteとPTSの対応を正しく保ち、選択service/PIDでprobeする | cold seekの約0.1秒と誤推定を削減する可能性 | 中 | ◎ | mpeg2toh264 source/worker/core |
