@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "browser": "Google Chrome 151.0.0.0 on Linux",
+  "serverStorage": "same-host local NVMe",
+  "material": {
+    "label": "乃木坂工事中",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "order": ["B1", "F1", "F2", "B2"],
+  "baseline": "all priority changes except completed-fragment early delivery",
+  "candidate": "baseline plus completed-fragment early delivery",
+  "targetsSeconds": [300, 450],
+  "measurements": [
+    {"block":"B1","variant":"baseline","target":300,"probeCount":2,"probeLastMs":16.2,"firstByteMs":20.7,"firstAccessUnitMs":64.4,"firstFragmentMs":83.7,"appendedMs":87.4,"canplayMs":134.8,"presentedMs":964.2,"fragmentMediaTime":299.693856},
+    {"block":"B1","variant":"baseline","target":450,"probeCount":2,"probeLastMs":17.2,"firstByteMs":20.8,"firstAccessUnitMs":66.3,"firstFragmentMs":69.0,"appendedMs":73.3,"canplayMs":92.6,"presentedMs":960.9,"fragmentMediaTime":449.843856},
+    {"block":"F1","variant":"candidate","target":300,"probeCount":2,"probeLastMs":14.8,"firstByteMs":18.6,"firstAccessUnitMs":57.5,"firstFragmentMs":76.2,"appendedMs":81.0,"canplayMs":124.3,"presentedMs":957.2,"fragmentMediaTime":299.693856},
+    {"block":"F1","variant":"candidate","target":450,"probeCount":1,"probeLastMs":11.6,"firstByteMs":16.0,"firstAccessUnitMs":57.5,"firstFragmentMs":65.3,"appendedMs":69.7,"canplayMs":177.9,"presentedMs":961.9,"fragmentMediaTime":449.343356},
+    {"block":"F2","variant":"candidate","target":300,"probeCount":1,"probeLastMs":11.2,"firstByteMs":16.7,"firstAccessUnitMs":61.5,"firstFragmentMs":78.6,"appendedMs":82.7,"canplayMs":122.4,"presentedMs":956.5,"fragmentMediaTime":299.693856},
+    {"block":"F2","variant":"candidate","target":450,"probeCount":1,"probeLastMs":10.2,"firstByteMs":14.0,"firstAccessUnitMs":68.6,"firstFragmentMs":75.8,"appendedMs":79.2,"canplayMs":178.6,"presentedMs":961.3,"fragmentMediaTime":449.343356},
+    {"block":"B2","variant":"baseline","target":300,"probeCount":2,"probeLastMs":7.9,"firstByteMs":15.7,"firstAccessUnitMs":61.5,"firstFragmentMs":81.3,"appendedMs":85.2,"canplayMs":130.5,"presentedMs":958.3,"fragmentMediaTime":299.693856},
+    {"block":"B2","variant":"baseline","target":450,"probeCount":1,"probeLastMs":10.6,"firstByteMs":14.5,"firstAccessUnitMs":60.0,"firstFragmentMs":62.4,"appendedMs":66.4,"canplayMs":164.1,"presentedMs":960.6,"fragmentMediaTime":449.343356}
+  ],
+  "averages": {
+    "300": {
+      "baseline": {"firstFragmentMs":82.5,"presentedMs":961.25},
+      "candidate": {"firstFragmentMs":77.4,"presentedMs":956.85},
+      "candidateMinusBaseline": {"firstFragmentMs":-5.1,"presentedMs":-4.4}
+    },
+    "450": {
+      "baseline": {"firstFragmentMs":65.7,"presentedMs":960.75},
+      "candidate": {"firstFragmentMs":70.55,"presentedMs":961.6},
+      "candidateMinusBaseline": {"firstFragmentMs":4.85,"presentedMs":0.85}
+    }
+  },
+  "notes": [
+    "Each block used one Chrome tab; the tab was closed before switching blocks.",
+    "The loaded bundle exposed and verified an explicit baseline or candidate marker.",
+    "A disposable test hook called the normal DPlayer seek API once with an exact target.",
+    "The first 600-second seek did not emit presented within 10 seconds in F1 and B2. It was cancelled by the following seek and was not used in the averages.",
+    "presented is the existing mpeg2toh264 timing event and is not equivalent to the first visible deinterlaced canvas draw."
+  ]
+}

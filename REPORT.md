@@ -431,6 +431,27 @@ MADDERでは目的位置のframeがcanvasへ描画済みでもこの条件で約
 MADDERの各seek後には`video`と`film`の両方が現れ、定常7標本も`film` 6回の後に`video`へ遷移したため、420秒台と900秒台を含め録画全体を24fpsとは扱わない。
 従来のtiming eventは[Galaxy LAN単一タブ再測定](results/galaxy-lan-single-tab-seek.json)、raw rVFC・canvas draw・可視状態を加えた全イベントは[可視初画再測定](results/galaxy-lan-single-tab-visible-frame.json)に保存した。
 
+KonomiTVと録画TSが同じPCにある利用条件を再現するため、乃木坂工事中をサーバー側ローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認した。
+この素材を使い、完成fragment早期受け渡しだけを除いた基準版と追加した候補版を、Chromeのタブを各blockで閉じるB-F-F-B順で比較した。
+計測専用hookからDPlayerの通常`seek()`を300秒と450秒へ1回だけ呼び、UIバーの座標誤差と再生中の時刻進行を除いた。
+
+| target | 指標 | 基準 B1/B2 | 候補 F1/F2 | 候補平均−基準平均 |
+| ---: | --- | ---: | ---: | ---: |
+| 300秒 | first fragment | 83.7 / 81.3 ms | 76.2 / 78.6 ms | −5.1 ms |
+| 300秒 | `presented` | 964.2 / 958.3 ms | 957.2 / 956.5 ms | −4.4 ms |
+| 450秒 | first fragment | 69.0 / 62.4 ms | 65.3 / 75.8 ms | +4.9 ms |
+| 450秒 | `presented` | 960.9 / 960.6 ms | 961.9 / 961.3 ms | +0.9 ms |
+
+ローカルSSDでは最後のprobe完了が7.9〜17.2ms、本体first byteが14.0〜20.8ms、first fragmentが62.4〜83.7msだった。
+したがって、以前のCIFS 128KiB probeが0.27〜0.59秒だった結果は、KonomiTVと録画が同じPCにある主条件の性能値として使わない。
+候補版は300秒でfirst fragmentを平均5.1ms早めたが、450秒では平均4.9ms遅く、一貫した効果を示さなかった。
+両版とも`presented`が約0.96秒に揃い、この変更は当該待ちを解消しない。
+ただし`presented`は可視YADIF canvas初描画ではないため、この約0.9秒をそのまま利用者が見る初画待ちとは扱わない。
+段階別データは[ローカルSSD early-fragment A/B](results/chrome-local-ssd-early-fragment-ab.json)に保存した。
+
+各blockの最初に行った600秒seekはF1とB2で10秒以内に`presented`が出ず、次のseekで解消した。
+variantの一方だけには偏らなかったため、完成fragment早期受け渡しの回帰とは断定せず、初回seekの独立したstall候補として残す。
+
 以下の古い単発・連続UI測定は、UI入力からplayer受理までの経路と要求キャンセルの観察には使うが、タブ数を記録していないため現在のGalaxy絶対レイテンシ代表値には使わない。
 
 Galaxyの「乃木坂工事中」1200秒への単発seekでは、実画面の`touchend`から`seeking`まで15.9ms、最初に観測したvideo frameまで270.1ms、`seeked`まで311.6ms、`playing`まで319.4msだった。
@@ -610,7 +631,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
 | probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | 学習後の追加probeは直接デモ4/10→0/10、実KonomiTV desktop 2/10→0/10、単一タブGalaxy 7/20→0/20。Galaxyのfirst fragment中央値141.0→144.3msで速度改善は未確認 | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
-| 完成fragmentの早期受け渡し | 完成済みfragmentと後続picture処理を直列化しないため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点ではfirst fragmentが約9〜10ms短縮したが、単一タブGalaxy各40 seekでは133.5→140.2ms、95%区間−2.0〜12.4msで短縮なし。一時markでは最初の通知がfirst fragment後10/10だった | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508`。後続throughput候補 |
+| 完成fragmentの早期受け渡し | 完成済みfragmentと後続picture処理を直列化しないため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | 単一タブGalaxy各40 seekでは短縮なし。一時markでは最初の通知がfirst fragment後10/10だった。ローカルSSD Chrome B-F-F-Bでも300秒はfirst fragment平均−5.1ms、450秒は+4.9ms、`presented`差は−4.4/+0.9msで一貫しなかった | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508`。後続throughput候補 |
 
 公開中のupstream向け4ブランチは、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
 各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。
@@ -628,7 +649,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
 | P2 | probeを選択service/video PID優先にする | 複数service TSで誤ったPTSを採る可能性を下げる | 中 | ○ | mpeg2toh264 source/core。標本上書き修正とは分離 |
-| P2 | 完成済みfragmentを入力chunk内の後続処理と重ねる | 後続fragmentのthroughput候補。単一タブGalaxyでは初回fragment・初画の短縮なし | 中 | ○ | mpeg2toh264 Transcoder/Worker。`30ad508`で実装済み。初回media fragmentを早める設計ではない |
+| P2 | 完成済みfragmentを入力chunk内の後続処理と重ねる | 後続fragmentのthroughput候補。単一タブGalaxyとローカルSSD Chromeで初回fragment・初画の一貫した短縮なし | 中 | ○ | mpeg2toh264 Transcoder/Worker。`30ad508`で実装済み。初回media fragmentを早める設計ではない |
 | P2 | 初回IDRを独立slice/jobへ安全に分割してpicture poolで並列化する | 現在33〜40msの単一critical jobを短縮する余地。画質・bitstreamは変わり得る | 大 | △ | mpeg2toh264 core/job protocol。slice境界、intra予測、Safari/VideoToolbox検証が必要 |
 | P2 | 有効probeを本体へ再利用、PTS検出後にprobe読取を止める | 重複128 KiBと待ちを削減。RTT自体は残る | 中 | ○ | mpeg2toh264 source/worker |
 | P2 | 入力queueの32/8 MiB high/low waterを小さくする | seek後の不要な先読みと連続seek時のI/O競合を削減。初画短縮は未確認 | 小 | ◎ | mpeg2toh264 Worker。8/2 MiB試作は未採用 |
