@@ -10,6 +10,7 @@
   "baseline": "all priority changes except completed-fragment early delivery",
   "candidate": "baseline plus completed-fragment early delivery",
   "targetsSeconds": [300, 450],
+  "playbackState": "No playing event was observed before or during the measured seeks; treat this as a paused-player pipeline comparison.",
   "measurements": [
     {"block":"B1","variant":"baseline","target":300,"probeCount":2,"probeLastMs":16.2,"firstByteMs":20.7,"firstAccessUnitMs":64.4,"firstFragmentMs":83.7,"appendedMs":87.4,"canplayMs":134.8,"presentedMs":964.2,"fragmentMediaTime":299.693856},
     {"block":"B1","variant":"baseline","target":450,"probeCount":2,"probeLastMs":17.2,"firstByteMs":20.8,"firstAccessUnitMs":66.3,"firstFragmentMs":69.0,"appendedMs":73.3,"canplayMs":92.6,"presentedMs":960.9,"fragmentMediaTime":449.843856},
@@ -36,6 +37,7 @@
     "Each block used one Chrome tab; the tab was closed before switching blocks.",
     "The loaded bundle exposed and verified an explicit baseline or candidate marker.",
     "A disposable test hook called the normal DPlayer seek API once with an exact target.",
+    "These runs were not a foreground playing-seek latency test. presented values must not be used as visible-frame latency.",
     "The first 600-second seek did not emit presented within 10 seconds in F1 and B2. It was cancelled by the following seek and was not used in the averages.",
     "presented is the existing mpeg2toh264 timing event and is not equivalent to the first visible deinterlaced canvas draw."
   ]

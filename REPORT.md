@@ -433,7 +433,8 @@ MADDERの各seek後には`video`と`film`の両方が現れ、定常7標本も`f
 
 KonomiTVと録画TSが同じPCにある利用条件を再現するため、乃木坂工事中をサーバー側ローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認した。
 この素材を使い、完成fragment早期受け渡しだけを除いた基準版と追加した候補版を、Chromeのタブを各blockで閉じるB-F-F-B順で比較した。
-計測専用hookからDPlayerの通常`seek()`を300秒と450秒へ1回だけ呼び、UIバーの座標誤差と再生中の時刻進行を除いた。
+計測専用hookからDPlayerの通常`seek()`を300秒と450秒へ1回だけ呼び、UIバーの座標誤差と時刻進行を除いた。
+この走行では`playing`が出ておらず、停止状態のplayer内部比較である。
 
 | target | 指標 | 基準 B1/B2 | 候補 F1/F2 | 候補平均−基準平均 |
 | ---: | --- | ---: | ---: | ---: |
@@ -445,8 +446,8 @@ KonomiTVと録画TSが同じPCにある利用条件を再現するため、乃�
 ローカルSSDでは最後のprobe完了が7.9〜17.2ms、本体first byteが14.0〜20.8ms、first fragmentが62.4〜83.7msだった。
 したがって、以前のCIFS 128KiB probeが0.27〜0.59秒だった結果は、KonomiTVと録画が同じPCにある主条件の性能値として使わない。
 候補版は300秒でfirst fragmentを平均5.1ms早めたが、450秒では平均4.9ms遅く、一貫した効果を示さなかった。
-両版とも`presented`が約0.96秒に揃い、この変更は当該待ちを解消しない。
-ただし`presented`は可視YADIF canvas初描画ではないため、この約0.9秒をそのまま利用者が見る初画待ちとは扱わない。
+両版とも`presented`が約0.96秒に揃ったが、停止状態かつ前景性を確定していないため、この値を利用者が見る初画待ちとは扱わない。
+完成fragment早期受け渡しの評価には、変換までのfirst fragmentと既存の前景Galaxy可視canvas測定を使う。
 段階別データは[ローカルSSD early-fragment A/B](results/chrome-local-ssd-early-fragment-ab.json)に保存した。
 
 各blockの最初に行った600秒seekはF1とB2で10秒以内に`presented`が出ず、次のseekで解消した。
