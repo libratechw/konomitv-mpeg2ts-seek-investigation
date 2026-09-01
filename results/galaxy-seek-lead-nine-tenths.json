@@ -1,0 +1,29 @@
+{
+  "purpose": "Check whether a small fixed seek-lead reduction can select a later non-forward keyframe",
+  "device": "Galaxy Tab S11 Ultra",
+  "browser_family": "Android Chromium",
+  "playback_mode": "Original (MPEG-2)",
+  "tab_count": 1,
+  "order": ["lead-1.0", "lead-0.9", "lead-0.9", "lead-1.0"],
+  "builds": {
+    "lead-1.0": "PlayerController-dJIYxx3W.js",
+    "lead-0.9": "PlayerController-DGd5C1u0.js"
+  },
+  "selected_keyframe_offset_from_target_seconds": {
+    "900": {"lead-1.0": [-0.206645, -0.206645], "lead-0.9": [-0.206645, -0.206645]},
+    "300": {"lead-1.0": [-0.306145, -0.306145], "lead-0.9": [-0.306145, -0.306145]},
+    "1200": {"lead-1.0": [-0.407145, -0.407145], "lead-0.9": [-0.407145, -0.407145]},
+    "450": {"lead-1.0": [-0.656645, -0.656645], "lead-0.9": [-0.656645]}
+  },
+  "incomplete_capture": {
+    "target_seconds": 450,
+    "variant": "lead-0.9",
+    "last_probe_media_time_seconds": 449.343355,
+    "note": "No first fragment was emitted within the 1.8 second capture window."
+  },
+  "probe_request_count": {"lead-1.0": 14, "lead-0.9": 15},
+  "absolute_latency_usable_for_comparison": false,
+  "absolute_latency_exclusion_reason": "The NAS 128 KiB random Range responses varied around 0.27 to 0.59 seconds per probe and dominated the run.",
+  "result": "At these targets, reducing the fixed lead by 0.1 seconds selected the same keyframes and provided no mechanism-based speedup.",
+  "design_implication": "A no-forward optimization must identify RAP times and choose the latest RAP at or before the original target. Passing a fixed negatively biased target through the current seek path does not guarantee that result."
+}
