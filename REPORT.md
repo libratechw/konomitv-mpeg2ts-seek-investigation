@@ -28,6 +28,9 @@ canvasのopacity変更は原因または修正ではなかった。
 | 稼働 YADIF | 公開 `CaptureManager-C0PFUpsj.js` に新しい `seeked` 処理、`filmCombThreshold`、`queueResetted` を確認。bundle 全体とソースの同一性までは主張しない |
 | サーバー配信依存 | ローカル公式コンテナのStarlette 1.6.0実体を確認。`FileResponse.chunk_size`は64KiB |
 
+検証後の節目でremoteを再取得した結果、`otya128/main`は`d5df08b`、`tsukumijima/main`は`52a3db5`、KonomiTV `origin/master`は`e92fba8`のままで、関連する新しい修正はなかった。
+このためqueue再同期はupstreamの既存挙動をフォーク拡張へ戻す変更として維持し、独自の`expectedDisplayTime`アンカーは優先度を下げたままとする。
+
 Worker の SHA-256 は `d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7`。
 固定依存のsource mapに含まれるplayer、worker、source、mse、pool、transcoderのTypeScriptは、今回参照した`52a3db5e`のソースと一致する。
 MSE修正、seek計測、完成fragment早期受け渡しは、いずれも`otya128/mpeg2toh264`の`upstream/main` `d5df08b`から分けた独立branchとしてGitHubフォークへpush済みである。
@@ -505,6 +508,12 @@ Galaxyで540秒と900秒を交互に30回seekした順次比較では、YADIF再
 YADIF停止はいずれも0/30だった。
 build順をランダム化していないため、約28msすべてを早期受け渡しの効果とは断定せず、MSE追加の数msは速度効果と判定しない。
 各走行は[Galaxy優先修正比較](results/galaxy-priority-fixes.json)に保存した。
+
+同じqueue再同期版と完成fragment早期受け渡しを組み合わせ、MADDERの420秒と900秒をfilm候補として交互に10回seekした。
+全走行で初画が返り、中央値280.5ms、最大310.0msだった。
+最後の1走行ではqueue resetが発生したが271.7msで初画が返った。
+120秒と1500秒ではvideo/filmが切り替わったため、番組全体を24fpsとみなす根拠にはしない。
+各走行は[MADDER film候補の計測](results/madder-film-seek.json)に保存した。
 
 ## 仮説の評価と優先順位
 

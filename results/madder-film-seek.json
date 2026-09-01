@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "device": "Galaxy Tab S11 Ultra SM-X930",
+  "os": "Android 16",
+  "browser": "Google Chrome 151.0.7922.174",
+  "display_hz": 60,
+  "transport": "ADB reverse to isolated KonomiTV backend; not a LAN latency measurement",
+  "konomitv_commit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "validation_build": {
+    "base": "tsukumijima/mpeg2toh264 52a3db5e8fb9833e6cade2167097849c668bdb1f",
+    "yadif_queue_reset": "f62bd9d",
+    "early_fragment_source_tree": "0ae3966"
+  },
+  "material": "MADDER recording; tested sections only, not assumed film throughout",
+  "auto_film": true,
+  "segment_observations": {
+    "settle_ms": 6000,
+    "runs": [
+      {
+        "target_s": 120,
+        "seeked_ms": 172.6,
+        "playing_ms": 172.9,
+        "presented_ms": 186.8,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "video",
+        "final_output_fps": 37.905,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 420,
+        "seeked_ms": 229.5,
+        "playing_ms": 230.1,
+        "presented_ms": 186.1,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 23.954,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 263.4,
+        "playing_ms": 263.9,
+        "presented_ms": 276.8,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 23.871,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 1500,
+        "seeked_ms": 304.1,
+        "playing_ms": 304.5,
+        "presented_ms": 310.9,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "video",
+        "final_output_fps": 49.13,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      }
+    ]
+  },
+  "alternating_film_candidates": {
+    "targets_s": [
+      420,
+      900
+    ],
+    "settle_ms": 4000,
+    "summary": {
+      "runs": 10,
+      "presented_ms_median": 280.5,
+      "presented_ms_max": 310,
+      "playing_ms_median": 270.85,
+      "missing_presented": 0,
+      "queue_reset_counter_start": 2,
+      "queue_reset_counter_end": 3
+    },
+    "runs": [
+      {
+        "target_s": 420,
+        "seeked_ms": 292.6,
+        "playing_ms": 293,
+        "presented_ms": 299.7,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 30.033,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 274.6,
+        "playing_ms": 274.8,
+        "presented_ms": 288.1,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 22.618,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 420,
+        "seeked_ms": 282.5,
+        "playing_ms": 283,
+        "presented_ms": 284.2,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 29.513,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 257.9,
+        "playing_ms": 258.2,
+        "presented_ms": 260.9,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 22.984,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 420,
+        "seeked_ms": 303.6,
+        "playing_ms": 303.9,
+        "presented_ms": 310,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 31.815,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 283.6,
+        "playing_ms": 284.1,
+        "presented_ms": 286.6,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 22.624,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 420,
+        "seeked_ms": 266.3,
+        "playing_ms": 266.9,
+        "presented_ms": 270.4,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 30.991,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 264.7,
+        "playing_ms": 265,
+        "presented_ms": 274.5,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 21.875,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 420,
+        "seeked_ms": 263.6,
+        "playing_ms": 264,
+        "presented_ms": 276.8,
+        "modes": [
+          "film",
+          "video"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 31.57,
+        "queue_reset_first": 2,
+        "queue_reset_last": 2
+      },
+      {
+        "target_s": 900,
+        "seeked_ms": 263,
+        "playing_ms": 263.4,
+        "presented_ms": 271.7,
+        "modes": [
+          "film"
+        ],
+        "final_mode": "film",
+        "final_output_fps": 24.589,
+        "queue_reset_first": 3,
+        "queue_reset_last": 3
+      }
+    ]
+  },
+  "limitations": [
+    "420 s and 900 s are candidate film sections; program and commercial boundaries were not identified.",
+    "The queue-reset counter is cumulative for the deinterlacer lifetime.",
+    "The build combines two source changes, so this run does not attribute latency to one change."
+  ]
+}

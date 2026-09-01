@@ -241,6 +241,26 @@ upstreamにあるqueue再同期をフォークへ適合した正式候補では�
 MSE世代修正の追加差は数msなので速度改善とは判定せず、到達可能なinit喪失競合を防ぐ正しさの修正として扱う。
 各走行は[galaxy-priority-fixes.json](galaxy-priority-fixes.json)に保存した。
 
+## queue再同期修正後のMADDER film候補区間
+
+upstreamのqueue再同期をフォークへ復元した版に完成fragment早期受け渡しを加え、`autoFilm: true`で120、420、900、1500秒を各6秒観測した。
+これはYADIFのfilm経路がqueue再同期後も復帰するかを見る結合試験であり、2変更の速度寄与を分離する比較ではない。
+
+| target | 初画 | playing | 観測したmode | 6秒後 |
+| ---: | ---: | ---: | --- | --- |
+| 120 s | 186.8 ms | 172.9 ms | video / film | video、37.9fps |
+| 420 s | 186.1 ms | 230.1 ms | film | film、24.0fps |
+| 900 s | 276.8 ms | 263.9 ms | video / film | film、23.9fps |
+| 1500 s | 310.9 ms | 304.5 ms | video / film | video、49.1fps |
+
+420秒と900秒を交互に10回seekして各4秒観測すると、10/10で目的時刻のframeが提示された。
+初画は中央値280.5ms、最大310.0ms、playingは中央値270.9msだった。
+最後の走行でqueue reset counterが2から3へ増えたが、その走行も初画271.7msで復帰し、4秒後はfilm判定だった。
+
+120秒と1500秒ではmodeが切り替わり、420秒と900秒でも一部の走行は過渡的にvideoを経由した。
+したがってMADDER全区間を24fpsとは扱わず、420秒と900秒も今回観測した短いfilm候補区間としてだけ使う。
+各走行は[madder-film-seek.json](madder-film-seek.json)に保存した。
+
 ## 長時間TSの遠距離シーク
 
 時間からbyte位置を求める処理が長時間録画で悪化するか確認するため、42,955,071,712 B、duration 24,014.62秒の「ミュージックステーション SUPER LIVE 2025」で3600、12000、22000秒へシークした。
