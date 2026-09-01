@@ -277,6 +277,31 @@ YADIFは無効にし、player、Rangeサーバー、Galaxy Chromeは上と同じ
 22000秒では先読み停止後の継続Rangeが1本追加されたが、初画後のrequestであり初画遅延には含めない。
 この素材では永続indexで省けるのは主にT0からresponseまでの約0.1秒で、first fragmentまでの残り約0.16〜0.22秒とdecoder提示までの待ちは残る。
 
+## seek probe標本の上書き修正
+
+Workerは128KiB probeで得た`{Range開始byte, 最初のPTS}`をメモリ内indexへ保存する。
+現行コードは本体変換の最初のfragmentができた時にも、同じRange開始byteへfragment開始時刻を記録していた。
+Range開始からPAT/PMT、PES、GOPまでの読み捨てがあるため、12 seekでfragment時刻は同じbyteのprobe PTSより0.17〜0.86秒後だった。
+
+後者の5行を削除し、測定したprobe標本を保持する版を、乃木坂工事中の600秒台と900秒台を交互に動かして比較した。
+最初の遠距離2 seekはindex学習用として集計から除いた。
+
+| 経路 | 現行の追加probe | 修正後の追加probe | 現行first fragment中央値 | 修正後first fragment中央値 |
+| --- | ---: | ---: | ---: | ---: |
+| 直接デモ、現行→修正 | 4/10 | 0/10 | 55.7〜81.2ms | 56.3ms |
+| 直接デモ、修正→現行の逆順 | 4/10 | 0/10 | 55.7ms | 53.6ms |
+| 実KonomiTV / desktop Chrome | 2/10 | 0/10 | 78.5ms | 83.1ms |
+| 実KonomiTV / Galaxy Chrome | 4/10 | 0/10 | 122.1ms | 98.1ms |
+
+直接デモではbuild順とtarget順を反転しても追加probeの差が再現した。
+したがって「補間の誤学習による余分なRange requestを除く」効果は修正へ帰属できる。
+実KonomiTVの初画中央値はdesktop 304.7→229.6ms、Galaxy 320.8→195.9msだったが、buildを交互実行しておらずdecoderとYADIFの状態差を含む。
+初画差の全量はこの修正の効果とは扱わない。
+
+修正は`otya128/mpeg2toh264`向けの公開branch `fix/preserve-seek-probe-sample`、commit `a10253e`に分離した。
+計測用のprobe byte、PTS、first fragment時刻は`feat/seek-timing-context`、commit `ffe2893`に分離した。
+全走行は[seek-index-sample.json](seek-index-sample.json)に保存した。
+
 ## 試作して保留した小改善
 
 AAC付きsessionの一律1 GOP保留を外し、完成GOPの時間範囲に必要なAAC frameがすでに揃った場合だけ早く出す試作を行った。

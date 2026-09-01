@@ -10,6 +10,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 - 最新版の実DPlayerでシークを反復すると、YADIFの表示がほぼ停止する状態を30回中8回再現しました。rAFは動作していましたが、未来のfield時刻が最大約350ms先まで連鎖し、満杯のqueueで古いtextureを交換し続けていました。upstreamにあるqueue再同期をフォークへ戻す試作では停止は0/30になりましたが、短い過渡には25fpsまでの低下が残りました。
 - MSE queueの世代管理修正は模擬競合を防ぎますが、実Chromeの通常シークは平均251.4msから250.1msで、有意な短縮を確認できませんでした。実利用でのstall削減量も未立証です。
 - 完成fragmentを早く渡す試作は、デスクトップの同じ3地点で初回fragmentを約9〜10ms短縮しました。Galaxyの順次30回測定では、YADIF修正版に加えたときの初画中央値が305.5msから277.4msになりましたが、build順をランダム化した比較ではありません。
+- probeで測ったRange開始byteとPTSの対応を、後続のfirst fragment時刻で上書きしていました。この上書きをやめると、学習後10 seekの追加probeは直接デモで4回から0回、実KonomiTVではdesktopで2回から0回、Galaxyで4回から0回になりました。
 - queue再同期版でMADDERのfilm候補2区間を交互に10回seekすると、全回で初画が返り、中央値280.5ms、最大310.0msでした。区間によってvideo/film判定が切り替わるため、録画全体を24fpsとは扱っていません。
 
 詳しいデータフロー、仮説評価、改善候補は [REPORT.md](REPORT.md) にあります。実機条件と素材ごとの結果は [results/device-results.md](results/device-results.md)、機械可読な集計値は [results](results/) に置いています。

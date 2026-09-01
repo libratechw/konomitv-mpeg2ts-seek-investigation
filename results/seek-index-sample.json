@@ -1,0 +1,917 @@
+{
+  "schema_version": 1,
+  "measured_at": "2026-09-01",
+  "hypothesis": "The measured byte-to-PTS sample is overwritten with the later first-fragment timestamp for the same Range start byte, causing avoidable follow-up probes.",
+  "builds": {
+    "current": {
+      "base": "otya128/mpeg2toh264 d5df08b",
+      "behavior": "records the first-fragment timestamp at source.offset"
+    },
+    "preserve_probe_sample": {
+      "commit": "libratechw/mpeg2toh264 a10253e",
+      "branch": "fix/preserve-seek-probe-sample",
+      "change": "does not overwrite the measured probe sample"
+    },
+    "timing_instrumentation": {
+      "commit": "libratechw/mpeg2toh264 ffe2893",
+      "branch": "feat/seek-timing-context"
+    },
+    "konomitv": "tsukumijima/KonomiTV e92fba8"
+  },
+  "material": {
+    "label": "乃木坂工事中（区間の映像カデンスは未分類）",
+    "size_bytes": 3066534364,
+    "duration_seconds": 1815.493,
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "conditions": {
+    "desktop": "Linux Google Chrome, local read-only Range server / isolated KonomiTV backend",
+    "galaxy": "Galaxy Tab S11 Ultra SM-X930, Android 16, Google Chrome 151, isolated KonomiTV backend through adb reverse",
+    "targets": "Two distant positions followed by ten alternating nearby seeks; the first pair is excluded from warm-index summaries.",
+    "limitation": "Build order was not randomized. Probe-count reduction is repeated in reverse order in the direct demo; full first-frame latency differences are not assigned wholly to this change."
+  },
+  "direct_demo": {
+    "current_then_fix": {
+      "current": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 14,
+          "runs_with_extra_probe": 4,
+          "probe_complete_median_ms": 4.0,
+          "first_fragment_median_ms": 67.1,
+          "appended_median_ms": null,
+          "presented_median_ms": 245.9
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 2,
+            "probe_complete_ms": 19,
+            "first_fragment_ms": 89.9,
+            "appended_ms": null,
+            "presented_ms": 188.5
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 2,
+            "probe_complete_ms": 46.8,
+            "first_fragment_ms": 110.2,
+            "appended_ms": null,
+            "presented_ms": 150.5
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 3,
+            "first_fragment_ms": 50.9,
+            "appended_ms": null,
+            "presented_ms": 273.1
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 1,
+            "probe_complete_ms": 4.6,
+            "first_fragment_ms": 48.6,
+            "appended_ms": null,
+            "presented_ms": 407.5
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 2,
+            "probe_complete_ms": 6.8,
+            "first_fragment_ms": 92.6,
+            "appended_ms": null,
+            "presented_ms": 165.2
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 2,
+            "probe_complete_ms": 6.1,
+            "first_fragment_ms": 54.4,
+            "appended_ms": null,
+            "presented_ms": 100.5
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 1,
+            "probe_complete_ms": 2.6,
+            "first_fragment_ms": 83.2,
+            "appended_ms": null,
+            "presented_ms": 246.2
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 1,
+            "probe_complete_ms": 3.5,
+            "first_fragment_ms": 52.3,
+            "appended_ms": null,
+            "presented_ms": 385.2
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 2,
+            "probe_complete_ms": 5.6,
+            "first_fragment_ms": 92.5,
+            "appended_ms": null,
+            "presented_ms": 160.9
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 2,
+            "probe_complete_ms": 3.7,
+            "first_fragment_ms": 50.4,
+            "appended_ms": null,
+            "presented_ms": 196.5
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 2.9,
+            "first_fragment_ms": 82.6,
+            "appended_ms": null,
+            "presented_ms": 245.6
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 1,
+            "probe_complete_ms": 4.3,
+            "first_fragment_ms": 79.8,
+            "appended_ms": null,
+            "presented_ms": 314.6
+          }
+        ]
+      },
+      "preserve_probe_sample": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 10,
+          "runs_with_extra_probe": 0,
+          "probe_complete_median_ms": 3.85,
+          "first_fragment_median_ms": 54.45,
+          "appended_median_ms": null,
+          "presented_median_ms": 164.7
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 2,
+            "probe_complete_ms": 17.8,
+            "first_fragment_ms": 85.1,
+            "appended_ms": null,
+            "presented_ms": 193.9
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 2,
+            "probe_complete_ms": 49.9,
+            "first_fragment_ms": 112.9,
+            "appended_ms": null,
+            "presented_ms": 275.3
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 3.4,
+            "first_fragment_ms": 53.8,
+            "appended_ms": null,
+            "presented_ms": 209.1
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 1,
+            "probe_complete_ms": 6.3,
+            "first_fragment_ms": 57.4,
+            "appended_ms": null,
+            "presented_ms": 105.6
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 1,
+            "probe_complete_ms": 4,
+            "first_fragment_ms": 52.7,
+            "appended_ms": null,
+            "presented_ms": 166.7
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 1,
+            "probe_complete_ms": 4.1,
+            "first_fragment_ms": 53.3,
+            "appended_ms": null,
+            "presented_ms": 217.6
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 1,
+            "probe_complete_ms": 4.8,
+            "first_fragment_ms": 50.6,
+            "appended_ms": null,
+            "presented_ms": 160.7
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 1,
+            "probe_complete_ms": 7,
+            "first_fragment_ms": 55.1,
+            "appended_ms": null,
+            "presented_ms": 197.3
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 1,
+            "probe_complete_ms": 3.5,
+            "first_fragment_ms": 86.5,
+            "appended_ms": null,
+            "presented_ms": 161.1
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 1,
+            "probe_complete_ms": 3.7,
+            "first_fragment_ms": 91.8,
+            "appended_ms": null,
+            "presented_ms": 180.6
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 3.3,
+            "first_fragment_ms": 84.8,
+            "appended_ms": null,
+            "presented_ms": 162.7
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 1,
+            "probe_complete_ms": 3.1,
+            "first_fragment_ms": 35.7,
+            "appended_ms": null,
+            "presented_ms": 131.4
+          }
+        ]
+      }
+    },
+    "fix_then_current_reverse_targets": {
+      "preserve_probe_sample": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 10,
+          "runs_with_extra_probe": 0,
+          "probe_complete_median_ms": 3.5,
+          "first_fragment_median_ms": 53.4,
+          "appended_median_ms": null,
+          "presented_median_ms": 199.2
+        },
+        "runs": [
+          {
+            "target_seconds": 700,
+            "probe_count": 2,
+            "probe_complete_ms": 17.9,
+            "first_fragment_ms": 84.9,
+            "appended_ms": null,
+            "presented_ms": 235.4
+          },
+          {
+            "target_seconds": 1000,
+            "probe_count": 2,
+            "probe_complete_ms": 30.1,
+            "first_fragment_ms": 98.0,
+            "appended_ms": null,
+            "presented_ms": 213.6
+          },
+          {
+            "target_seconds": 701,
+            "probe_count": 1,
+            "probe_complete_ms": 3.0,
+            "first_fragment_ms": 53.9,
+            "appended_ms": null,
+            "presented_ms": 255.3
+          },
+          {
+            "target_seconds": 1001,
+            "probe_count": 1,
+            "probe_complete_ms": 4.1,
+            "first_fragment_ms": 57.1,
+            "appended_ms": null,
+            "presented_ms": 174.7
+          },
+          {
+            "target_seconds": 702,
+            "probe_count": 1,
+            "probe_complete_ms": 7.2,
+            "first_fragment_ms": 53.4,
+            "appended_ms": null,
+            "presented_ms": 227
+          },
+          {
+            "target_seconds": 1002,
+            "probe_count": 1,
+            "probe_complete_ms": 3.3,
+            "first_fragment_ms": 82.6,
+            "appended_ms": null,
+            "presented_ms": 150.5
+          },
+          {
+            "target_seconds": 703,
+            "probe_count": 1,
+            "probe_complete_ms": 4.0,
+            "first_fragment_ms": 53.4,
+            "appended_ms": null,
+            "presented_ms": 205.8
+          },
+          {
+            "target_seconds": 1003,
+            "probe_count": 1,
+            "probe_complete_ms": 3.3,
+            "first_fragment_ms": 50.0,
+            "appended_ms": null,
+            "presented_ms": 164.8
+          },
+          {
+            "target_seconds": 704,
+            "probe_count": 1,
+            "probe_complete_ms": 3.2,
+            "first_fragment_ms": 48.3,
+            "appended_ms": null,
+            "presented_ms": 233.4
+          },
+          {
+            "target_seconds": 1004,
+            "probe_count": 1,
+            "probe_complete_ms": 4.7,
+            "first_fragment_ms": 50.5,
+            "appended_ms": null,
+            "presented_ms": 174.3
+          },
+          {
+            "target_seconds": 705,
+            "probe_count": 1,
+            "probe_complete_ms": 2.9,
+            "first_fragment_ms": 85.9,
+            "appended_ms": null,
+            "presented_ms": 192.6
+          },
+          {
+            "target_seconds": 1005,
+            "probe_count": 1,
+            "probe_complete_ms": 3.7,
+            "first_fragment_ms": 48.3,
+            "appended_ms": null,
+            "presented_ms": 207.6
+          }
+        ]
+      },
+      "current": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 14,
+          "runs_with_extra_probe": 4,
+          "probe_complete_median_ms": 5.35,
+          "first_fragment_median_ms": 54.6,
+          "appended_median_ms": null,
+          "presented_median_ms": 210.55
+        },
+        "runs": [
+          {
+            "target_seconds": 700,
+            "probe_count": 2,
+            "probe_complete_ms": 17.0,
+            "first_fragment_ms": 82.7,
+            "appended_ms": null,
+            "presented_ms": 343.2
+          },
+          {
+            "target_seconds": 1000,
+            "probe_count": 2,
+            "probe_complete_ms": 14.0,
+            "first_fragment_ms": 122.8,
+            "appended_ms": null,
+            "presented_ms": 298.6
+          },
+          {
+            "target_seconds": 701,
+            "probe_count": 2,
+            "probe_complete_ms": 6.3,
+            "first_fragment_ms": 54.6,
+            "appended_ms": null,
+            "presented_ms": 211.6
+          },
+          {
+            "target_seconds": 1001,
+            "probe_count": 1,
+            "probe_complete_ms": 3.3,
+            "first_fragment_ms": 56.8,
+            "appended_ms": null,
+            "presented_ms": 190
+          },
+          {
+            "target_seconds": 702,
+            "probe_count": 1,
+            "probe_complete_ms": 2.7,
+            "first_fragment_ms": 89.5,
+            "appended_ms": null,
+            "presented_ms": 287.7
+          },
+          {
+            "target_seconds": 1002,
+            "probe_count": 1,
+            "probe_complete_ms": 4.2,
+            "first_fragment_ms": 49.5,
+            "appended_ms": null,
+            "presented_ms": 236.8
+          },
+          {
+            "target_seconds": 703,
+            "probe_count": 1,
+            "probe_complete_ms": 6.5,
+            "first_fragment_ms": 57.2,
+            "appended_ms": null,
+            "presented_ms": 209.5
+          },
+          {
+            "target_seconds": 1003,
+            "probe_count": 2,
+            "probe_complete_ms": 6.9,
+            "first_fragment_ms": 54.6,
+            "appended_ms": null,
+            "presented_ms": 104
+          },
+          {
+            "target_seconds": 704,
+            "probe_count": 2,
+            "probe_complete_ms": 6.3,
+            "first_fragment_ms": 52.1,
+            "appended_ms": null,
+            "presented_ms": 266.2
+          },
+          {
+            "target_seconds": 1004,
+            "probe_count": 1,
+            "probe_complete_ms": 8.9,
+            "first_fragment_ms": 60.7,
+            "appended_ms": null,
+            "presented_ms": 316.4
+          },
+          {
+            "target_seconds": 705,
+            "probe_count": 1,
+            "probe_complete_ms": 4.4,
+            "first_fragment_ms": 47.9,
+            "appended_ms": null,
+            "presented_ms": 192
+          },
+          {
+            "target_seconds": 1005,
+            "probe_count": 2,
+            "probe_complete_ms": 4.0,
+            "first_fragment_ms": 47.7,
+            "appended_ms": null,
+            "presented_ms": 206.8
+          }
+        ]
+      }
+    }
+  },
+  "konomitv_dplayer": {
+    "desktop": {
+      "current": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 12,
+          "runs_with_extra_probe": 2,
+          "probe_complete_median_ms": 10.1,
+          "first_fragment_median_ms": 78.5,
+          "appended_median_ms": 86.45,
+          "presented_median_ms": 304.7
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 1,
+            "probe_complete_ms": 12.5,
+            "first_fragment_ms": 95.8,
+            "appended_ms": 101.2,
+            "presented_ms": null
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 2,
+            "probe_complete_ms": 26.7,
+            "first_fragment_ms": 95.1,
+            "appended_ms": 98.6,
+            "presented_ms": 272.6
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 11.3,
+            "first_fragment_ms": 73.1,
+            "appended_ms": 78.7,
+            "presented_ms": 315.5
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 1,
+            "probe_complete_ms": 10,
+            "first_fragment_ms": 81.7,
+            "appended_ms": 86.8,
+            "presented_ms": 328.4
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 2,
+            "probe_complete_ms": 14.5,
+            "first_fragment_ms": 77.7,
+            "appended_ms": 81.3,
+            "presented_ms": 211.2
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 1,
+            "probe_complete_ms": 9.4,
+            "first_fragment_ms": 79.3,
+            "appended_ms": 86.1,
+            "presented_ms": 362
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 1,
+            "probe_complete_ms": 13.9,
+            "first_fragment_ms": 99.9,
+            "appended_ms": 101.2,
+            "presented_ms": 266.9
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 1,
+            "probe_complete_ms": 7.3,
+            "first_fragment_ms": 67.5,
+            "appended_ms": 71,
+            "presented_ms": 208.3
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 2,
+            "probe_complete_ms": 17.1,
+            "first_fragment_ms": 87.2,
+            "appended_ms": 97.1,
+            "presented_ms": 213.7
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 1,
+            "probe_complete_ms": 10.2,
+            "first_fragment_ms": 86.1,
+            "appended_ms": 90.6,
+            "presented_ms": 380.2
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 7.8,
+            "first_fragment_ms": 64.4,
+            "appended_ms": 76.6,
+            "presented_ms": 295.3
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 1,
+            "probe_complete_ms": 10,
+            "first_fragment_ms": 73.6,
+            "appended_ms": 89.7,
+            "presented_ms": 314.1
+          }
+        ]
+      },
+      "preserve_probe_sample": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 10,
+          "runs_with_extra_probe": 0,
+          "probe_complete_median_ms": 11.0,
+          "first_fragment_median_ms": 83.1,
+          "appended_median_ms": 91.35,
+          "presented_median_ms": 229.6
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 2,
+            "probe_complete_ms": 15.4,
+            "first_fragment_ms": 67.2,
+            "appended_ms": 72.2,
+            "presented_ms": 231.1
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 2,
+            "probe_complete_ms": 12.5,
+            "first_fragment_ms": 85.8,
+            "appended_ms": 91.5,
+            "presented_ms": 242.5
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 9.2,
+            "first_fragment_ms": 72.8,
+            "appended_ms": 78.1,
+            "presented_ms": 190.7
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 1,
+            "probe_complete_ms": 9.8,
+            "first_fragment_ms": 77.0,
+            "appended_ms": 83.3,
+            "presented_ms": 249.6
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 1,
+            "probe_complete_ms": 10.8,
+            "first_fragment_ms": 83.3,
+            "appended_ms": 92.3,
+            "presented_ms": 213.9
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 1,
+            "probe_complete_ms": 11.3,
+            "first_fragment_ms": 90.3,
+            "appended_ms": 102.5,
+            "presented_ms": 242.1
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 1,
+            "probe_complete_ms": 9.6,
+            "first_fragment_ms": 93.0,
+            "appended_ms": 98.7,
+            "presented_ms": 228.7
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 1,
+            "probe_complete_ms": 10.0,
+            "first_fragment_ms": 80.0,
+            "appended_ms": 90.4,
+            "presented_ms": 242.7
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 1,
+            "probe_complete_ms": 12.3,
+            "first_fragment_ms": 82.9,
+            "appended_ms": 89.5,
+            "presented_ms": 212.5
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 1,
+            "probe_complete_ms": 18.6,
+            "first_fragment_ms": 96.9,
+            "appended_ms": 103.6,
+            "presented_ms": 256.7
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 11.2,
+            "first_fragment_ms": 91.8,
+            "appended_ms": 97.9,
+            "presented_ms": 230.5
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 1,
+            "probe_complete_ms": 15.3,
+            "first_fragment_ms": 76.4,
+            "appended_ms": 81.6,
+            "presented_ms": 194.1
+          }
+        ]
+      }
+    },
+    "galaxy": {
+      "current": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 14,
+          "runs_with_extra_probe": 4,
+          "probe_complete_median_ms": 21.25,
+          "first_fragment_median_ms": 122.1,
+          "appended_median_ms": 131.7,
+          "presented_median_ms": 320.75
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 1,
+            "probe_complete_ms": 24.7,
+            "first_fragment_ms": 116.3,
+            "appended_ms": 128.3,
+            "presented_ms": 241.8
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 1,
+            "probe_complete_ms": 13.3,
+            "first_fragment_ms": 92.3,
+            "appended_ms": 99.1,
+            "presented_ms": 217.4
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 16.7,
+            "first_fragment_ms": 114.2,
+            "appended_ms": 124.3,
+            "presented_ms": 324.3
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 2,
+            "probe_complete_ms": 29.2,
+            "first_fragment_ms": 124.7,
+            "appended_ms": 140.6,
+            "presented_ms": 173.4
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 1,
+            "probe_complete_ms": 16.1,
+            "first_fragment_ms": 109.9,
+            "appended_ms": 120.1,
+            "presented_ms": 366.2
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 1,
+            "probe_complete_ms": 15.7,
+            "first_fragment_ms": 109.6,
+            "appended_ms": 124.1,
+            "presented_ms": 317.2
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 2,
+            "probe_complete_ms": 34.2,
+            "first_fragment_ms": 119.5,
+            "appended_ms": 126.4,
+            "presented_ms": 232.9
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 2,
+            "probe_complete_ms": 37.7,
+            "first_fragment_ms": 138.7,
+            "appended_ms": 149.3,
+            "presented_ms": 190.3
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 1,
+            "probe_complete_ms": 20.4,
+            "first_fragment_ms": 116.3,
+            "appended_ms": 127.1,
+            "presented_ms": 345.1
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 1,
+            "probe_complete_ms": 22.1,
+            "first_fragment_ms": 132.7,
+            "appended_ms": 143.2,
+            "presented_ms": 383.1
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 20.1,
+            "first_fragment_ms": 176.6,
+            "appended_ms": 180.3,
+            "presented_ms": 331.9
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 2,
+            "probe_complete_ms": 40.9,
+            "first_fragment_ms": 129.8,
+            "appended_ms": 136.3,
+            "presented_ms": 266
+          }
+        ]
+      },
+      "preserve_probe_sample": {
+        "summary_after_first_pair": {
+          "runs": 10,
+          "probe_count_total": 10,
+          "runs_with_extra_probe": 0,
+          "probe_complete_median_ms": 16.7,
+          "first_fragment_median_ms": 98.05,
+          "appended_median_ms": 107.9,
+          "presented_median_ms": 195.85
+        },
+        "runs": [
+          {
+            "target_seconds": 600,
+            "probe_count": 2,
+            "probe_complete_ms": 262.3,
+            "first_fragment_ms": 490,
+            "appended_ms": 495.3,
+            "presented_ms": 769.9
+          },
+          {
+            "target_seconds": 900,
+            "probe_count": 2,
+            "probe_complete_ms": 274.5,
+            "first_fragment_ms": 858.1,
+            "appended_ms": 861.2,
+            "presented_ms": 907.3
+          },
+          {
+            "target_seconds": 601,
+            "probe_count": 1,
+            "probe_complete_ms": 37.7,
+            "first_fragment_ms": 130.0,
+            "appended_ms": 142.3,
+            "presented_ms": 285
+          },
+          {
+            "target_seconds": 901,
+            "probe_count": 1,
+            "probe_complete_ms": 16.7,
+            "first_fragment_ms": 99.1,
+            "appended_ms": 109.2,
+            "presented_ms": 145
+          },
+          {
+            "target_seconds": 602,
+            "probe_count": 1,
+            "probe_complete_ms": 16.4,
+            "first_fragment_ms": 96.5,
+            "appended_ms": 102.3,
+            "presented_ms": 205
+          },
+          {
+            "target_seconds": 902,
+            "probe_count": 1,
+            "probe_complete_ms": 16.9,
+            "first_fragment_ms": 98.2,
+            "appended_ms": 112.9,
+            "presented_ms": 145.8
+          },
+          {
+            "target_seconds": 603,
+            "probe_count": 1,
+            "probe_complete_ms": 18.2,
+            "first_fragment_ms": 105.2,
+            "appended_ms": 114.9,
+            "presented_ms": 214.1
+          },
+          {
+            "target_seconds": 903,
+            "probe_count": 1,
+            "probe_complete_ms": 13.9,
+            "first_fragment_ms": 96.3,
+            "appended_ms": 104.9,
+            "presented_ms": 135.6
+          },
+          {
+            "target_seconds": 604,
+            "probe_count": 1,
+            "probe_complete_ms": 17,
+            "first_fragment_ms": 97.9,
+            "appended_ms": 106.6,
+            "presented_ms": 208.9
+          },
+          {
+            "target_seconds": 904,
+            "probe_count": 1,
+            "probe_complete_ms": 15.4,
+            "first_fragment_ms": 101.6,
+            "appended_ms": 115.4,
+            "presented_ms": 160.9
+          },
+          {
+            "target_seconds": 605,
+            "probe_count": 1,
+            "probe_complete_ms": 16.7,
+            "first_fragment_ms": 94.8,
+            "appended_ms": 102.7,
+            "presented_ms": 247.5
+          },
+          {
+            "target_seconds": 905,
+            "probe_count": 1,
+            "probe_complete_ms": 16.1,
+            "first_fragment_ms": 73.1,
+            "appended_ms": 81.1,
+            "presented_ms": 186.7
+          }
+        ]
+      }
+    }
+  }
+}
