@@ -16,7 +16,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | --- | --- |
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
-| YADIF opacity実験 | 公開`fix/yadif-android-occlusion`、`upstream/main`基点の`6b825e8`。PR対象外 |
+| YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
 | YADIF queue再同期 | 公開`fix/restore-yadif-queue-reset`、`konomi/main`基点の`f62bd9d`。フォーク固有統合候補 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、基本mark `0ce89d7`、picture段階と提示frame `244da74` |
@@ -30,8 +30,8 @@ canvasのopacity変更は原因または修正ではなかった。
 
 Worker の SHA-256 は `d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7`。
 固定依存のsource mapに含まれるplayer、worker、source、mse、pool、transcoderのTypeScriptは、今回参照した`52a3db5e`のソースと一致する。
-YADIF opacity実験、MSE修正、seek計測、完成fragment早期受け渡しは、いずれも`otya128/mpeg2toh264`の`upstream/main` `d5df08b`から分けた独立branchとしてGitHubフォークへpush済みである。
-YADIF opacity実験は追加計測で根拠を失ったためPRにせず、ほかの3件もPRはまだ作成していない。
+MSE修正、seek計測、完成fragment早期受け渡しは、いずれも`otya128/mpeg2toh264`の`upstream/main` `d5df08b`から分けた独立branchとしてGitHubフォークへpush済みである。
+YADIF opacity実験は追加計測で根拠を失ったため公開branchを削除し、ほかの3件もPRはまだ作成していない。
 Galaxy実測時はKonomiTV依存`52a3db5e`へ同じsource変更を載せた一時buildを使用したが、誤ってtsukumijimaフォークへ取り込まれないよう、その基点の公開branchは削除した。
 
 共有環境から取得したものは版情報、HTML、公開JavaScriptだけで、録画API、録画データ、設定、プロセスにはアクセスしていない。
@@ -331,7 +331,7 @@ DOM canvasの完全被覆からMediaCodecを15Hzへ抑制する因果経路は�
 フォーク側には、rVFCとrAFの位相がずれた起動時にも最初のfieldを保持する修正`d4ccb98`がすでにあり、クリーンな不透明版2走行はこの修正を含んでいた。
 opacity変更後の遅延した30fps遷移は残るため、位相、queue deadline、表示状態遷移を直接記録する回帰試験は追加できる。
 
-公開branch`fix/yadif-android-occlusion`の`opacity: 0.999`は実験結果を保存するため残すが、PRにはしない。
+`opacity: 0.999`の実験結果は本調査リポジトリに保存し、コードbranchは誤取り込み防止のため削除した。
 `0.999`という値に固有の意味はなく、Chromiumの`opacity < 1`分岐へ入れるために選んだだけである。
 クリーンな変更前対照で問題を再現できない以上、表示合成を常時変更する修正は採用できない。
 原因に近い対策はYADIFのfield schedulingとvisibility遷移の再現試験であり、Chromiumへの変更案を出す根拠は現時点でない。
@@ -525,18 +525,18 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 upstream向けに分離した4件に加え、フォーク固有YADIFへupstreamのqueue再同期を戻す変更を別branchにした。
 YADIF opacity変更は棄却した実験である。
-4 branchとも`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開したが、適用可能であることは採用理由を意味しない。
+upstream向け3 branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
 | 変更 | なぜ・目的 | 何を修正したか | 実測または確認できた効果 | 本来の提出先 |
 | --- | --- | --- | --- | --- |
-| YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | 公開実験branch`6b825e8`として残すが、PRにしない。YADIF schedulingの計測へ戻す |
+| YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | branchは削除。結果だけを本調査リポジトリに保存 |
 | YADIF queue再同期の復元 | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 停止8/30→0/30。4秒窓の最終中央値60.0fps。短い過渡は最低25.0fps、4秒後43.4fpsの走行が残る | `tsukumijima/mpeg2toh264` fork。公開commit `f62bd9d` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことを分離 | `otya128/mpeg2toh264` player。公開commit `244da74` |
 | 完成fragmentの早期受け渡し | 完成済み初回fragmentが、同じ入力chunk内の後続picture処理の完了までworkerに留まっていたため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点でfirst fragmentを約9〜10ms、appendを約10〜11ms短縮。位置による変動は残る | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508` |
 
-公開済み4ブランチは、棄却したYADIF実験を含め、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
+公開中のupstream向け3ブランチは、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
 各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。
 upstreamは生成済み`dist`を追跡していないため、公開branchにはsource、README、必要な回帰試験だけを含める。
 tsukumijimaフォークには、upstream採用前のbackport、またはフォーク固有API・YADIF拡張との接続だけを別branchで残す。
