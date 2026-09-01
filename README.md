@@ -1,6 +1,25 @@
-# KonomiTV 録画 TS シーク調査
+# KonomiTV 録画 MPEG-2 TS 直接再生調査
 
-KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」について、シーク後に映像が戻るまでの処理をコードと実機で調べた記録です。
+KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」について、シーク後の復帰時間、定常再生のFPS、コマ落ち、短いカクつき、長時間stallをコードと実機で調べた記録です。
+
+リポジトリ名には調査開始時の `seek-investigation` が残っていますが、対象はシークだけではありません。素材本来のcadenceを維持し、コマ落ちせず、負荷やシークの後も安定した表示へ戻るまでを扱います。
+
+## PR候補の優先順位
+
+優先順位は、確認できた効果、正しさへの影響、差分の理解しやすさ、レビュー負荷、将来の保守コストから決めています。`軽`は局所的で契約変更がない変更、`中`は状態管理または小さなAPI追加、`重`は複数層を横断する変更です。生成済み`dist`を追跡するtsukumijimaフォーク向けbranchでは、sourceとdistを別コミットにしています。
+
+| 順位 | Priority | PR候補branch | 提出先 | 目的 | 修正内容 | 確認できた効果 | 変更の重さ |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 1 | P0 | `fix/preserve-seek-probe-sample` (`a10253e`) | otya128 | 実測したbyte→PTS標本を壊さない | first fragment時刻でprobe標本を上書きする5行を削除 | 追加probe 14/40→0/40。可視初画のtarget対応中央値−71.3ms、中央値296.3→244.3ms | **軽**。1ファイル・5行削除、保守負荷小 |
+| 2 | P0 | `feat/report-ts-restart-offsets` (`bfefdf8`) | otya128 | 再開可能なTS位置をcoreから安全に報告する | fragmentへ直近PAT/PMTを含む`restartOffset`を付与し、別Sessionで同じGOPと音声を再開できる試験を追加 | core単体の再開同値性試験と全Rust testが成功。速度効果は次のplayer PRとの組み合わせで測る | **重**。TS demux、GOP、Session、WASM APIを横断。公開値は`restartOffset`だけに限定 |
+| 3 | P0 | `perf/reuse-observed-ts-restarts` (`295b692`) | otya128 | 一度確認した位置への後続seekでprobeと余分な復号を省く | 観測済みGOPと安全位置をplayer内だけに保持し、要求時刻以前1秒以内の最新位置を再利用 | 同等試作ではGalaxyのprobe 40→0、canvas中央値226.5→161.5ms、p95 278.4→220.5ms、40/40が250ms以下。正式branchを組み込んだ再測定は進行中 | **中**。worker 1ファイル、core PRに依存。永続形式は増やさない |
+| 4 | P0 | `fix/separate-yadif-queue-recovery` (source `26484fd`、dist `27b327e`) | tsukumijima | queue満杯と時刻同期破綻を分け、カクつきと長時間stallを防ぐ | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全reset | seek後停止7/90→0/90を維持。注入試験の全reset 14〜15→0、最大lateness 83.3→32.6ms。通常30秒59.768fps | **中**。YADIF 1ファイルのqueue policy。fork固有機能として保守 |
+| 5 | P0 | `fix/preserve-destination-frame-on-seek` (source `2d072f3`、dist `f3ba99d`) | tsukumijima | seeked直前に描画済みの目的frameを消さない | playhead近傍の描画済みframeを記録し、同じseekの`seeked`でcanvasを再消去しない | Linux 40回のp95 246.5→178.9ms、最大280.0→180.4ms。Galaxyはp95 193.2ms、最大212.8msで退行なし | **中**。YADIF 1ファイルだがseeking/history状態のレビューが必要 |
+| 6 | P1 | `fix/mse-reset-inflight-append` (`f8ab9c7`) | otya128 | 古いappend完了が新seekのinit segmentを失わせる競合を防ぐ | SourceBuffer操作とseek世代を対応付け、旧`updateend`を新queueへ適用しない | 修正前に失敗する競合試験が成功。通常seek平均251.4→250.1msで速度差はなく、実利用のstall削減量は未立証 | **中**。MSE状態管理と回帰試験。将来保守負荷は小〜中 |
+| 7 | P1 | `feat/seek-timing-context` (`58a9920`) | otya128 | Rangeからdecoder提示までを同じseek IDで分解する | player、worker、transcoder、picture pool、MSEへtiming contextを伝播 | 直接の速度改善なし。probe標本の誤上書き、先頭IDR job 33〜40ms、append後変動を分離できた | **重**。10ファイル・複数層を横断し、公開イベント契約の保守が必要 |
+| 8 | P3 | `fix/deliver-completed-fragments-early` (`30ad508`) | otya128 | 完成fragmentと後続変換を重ねる | transcoderから完成fragmentを逐次通知する | GalaxyとローカルSSD Chromeで初回fragment・初画の一貫した短縮なし。後続throughput候補としてのみ残す | **中〜重**。transcoder/workerの順序、cancel、backpressureのレビューが必要 |
+
+順位2と3は別PRです。coreの再開位置契約を先にレビューし、その祖先上でplayerの利用policyを提案します。順位4と5はtsukumijimaフォーク固有YADIFの独立PRで、upstream向け変更へ混ぜません。順位8は効果が立証できるまで提出を急ぎません。
 
 主な結果は次のとおりです。
 
