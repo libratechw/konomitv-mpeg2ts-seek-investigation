@@ -1,0 +1,37 @@
+{
+  "scope": "Galaxy Tab S11 Ultra, Chrome 151, isolated KonomiTV, Original MPEG-2, Nogizaka, autoFilm false, doubleRate true",
+  "conclusion": "opacity 0.999 is not justified as a production fix; clean opaque startup did not reproduce the 30 fps state",
+  "clean_opaque_runs": [
+    {
+      "duration_ms": 30000.4,
+      "rvfc_hz": 29.9663,
+      "raf_hz": 59.9992,
+      "output_fps_samples": [60.0136, 59.8265, 60.3113, 59.8862, 59.9401, 60.1300, 59.9341, 59.9341, 60.0426, 60.0019, 57.8554, 60.1241, 59.9880, 60.1358, 59.9401, 59.9961, 59.9580, 59.9207, 60.1300, 59.9940, 59.9580, 59.9613, 60.0077, 59.9880, 60.0892, 59.9042, 57.0876, 60.1416, 59.9820, 59.9161],
+      "late_delta": 3,
+      "decoder_drop_delta": 10
+    },
+    {
+      "duration_ms": 12002.4,
+      "rvfc_hz": 29.9940,
+      "raf_hz": 59.9880,
+      "output_fps_samples": [59.9580, 59.9940, 59.9555, 60.0659, 60.0077, 60.0484, 59.9401, 59.8683, 59.9101, 59.9700, 60.1125, 59.9520],
+      "late_delta": 0,
+      "decoder_drop_delta": 4
+    }
+  ],
+  "clean_fractional_opacity_probe": {
+    "opacity": 0.999999,
+    "observed_after_seconds": 18,
+    "output_fps": 60.0950,
+    "late_total": 3,
+    "decoder_drop_total": 6
+  },
+  "runtime_transition_observation": {
+    "note": "Changing opacity during one playback sometimes changed output from about 60 to about 30 fps several seconds later. rVFC remained about 30 Hz and document rAF about 60 Hz. The delayed transition makes immediate labels non-causal and this observation is not a valid before/after benchmark.",
+    "opaque_30fps_samples": [30.0329, 29.9730, 29.9760, 30.0562, 29.9778],
+    "late_growth_over_five_samples": 122
+  },
+  "discarded_run": {
+    "reason": "The page was hidden before foreground activation and YADIF output stats remained zero; it was not used for comparison."
+  }
+}

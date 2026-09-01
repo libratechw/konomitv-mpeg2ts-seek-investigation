@@ -5,8 +5,8 @@
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束し、T0からresponseまで97〜115ms、初回fragmentまで272〜320ms、frame提示まで345〜390msだった。
 今回の条件ではindex探索より初回fragment生成が大きい。
 
-シークとは別に、Android ChromiumでYADIF canvasがvideoを完全に覆うと、video frame callbackが約15fpsへ抑制される問題を確認した。
-canvasを8-bit 1段階未満だけ透過させると、YADIF 2倍レートは約60fpsを維持した。
+シークとは別に、GalaxyでYADIF出力が約30fpsへ落ちる走行を確認した。
+canvasのopacity変更後に約60fpsへ戻ったが、cleanな不透明版も約60fpsだったため、opacityを原因または修正とは判定しない。
 また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を再現し、別branchで修正した。
 
 ## 対象と証拠の範囲
@@ -15,7 +15,7 @@ canvasを8-bit 1段階未満だけ透過させると、YADIF 2倍レートは約
 | --- | --- |
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
-| YADIF修正 | 公開`fix/yadif-android-occlusion`、`upstream/main`基点の`6b825e8` |
+| YADIF opacity実験 | 公開`fix/yadif-android-occlusion`、`upstream/main`基点の`6b825e8`。PR対象外 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、基本mark `0ce89d7`、picture段階と提示frame `244da74` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -28,7 +28,8 @@ canvasを8-bit 1段階未満だけ透過させると、YADIF 2倍レートは約
 
 Worker の SHA-256 は `d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7`。
 固定依存のsource mapに含まれるplayer、worker、source、mse、pool、transcoderのTypeScriptは、今回参照した`52a3db5e`のソースと一致する。
-YADIF修正、MSE修正、seek計測、完成fragment早期受け渡しは、いずれも`otya128/mpeg2toh264`の`upstream/main` `d5df08b`から分けた独立branchとしてGitHubフォークへpush済みで、PRはまだ作成していない。
+YADIF opacity実験、MSE修正、seek計測、完成fragment早期受け渡しは、いずれも`otya128/mpeg2toh264`の`upstream/main` `d5df08b`から分けた独立branchとしてGitHubフォークへpush済みである。
+YADIF opacity実験は追加計測で根拠を失ったためPRにせず、ほかの3件もPRはまだ作成していない。
 Galaxy実測時はKonomiTV依存`52a3db5e`へ同じsource変更を載せた一時buildを使用したが、誤ってtsukumijimaフォークへ取り込まれないよう、その基点の公開branchは削除した。
 
 共有環境から取得したものは版情報、HTML、公開JavaScriptだけで、録画API、録画データ、設定、プロセスにはアクセスしていない。
@@ -301,23 +302,37 @@ PCよりAndroidで増え得る区間は、WASM変換と初期IDR生成、MediaCo
 PTS probe回数やAACのGOP保持条件自体は同じコードである。
 Wi-FiのRTTとサーバー側I/Oは、decoderやGPU待ちと分けて記録する。
 
-### Android Chromiumの完全被覆によるframe callback抑制
+### Android Chromiumとcanvas opacity
 
-Galaxyで不透明なYADIF canvasがvideo全体を覆うと、`requestAnimationFrame`は60Hzのまま、videoの`requestVideoFrameCallback`だけが約15Hzになった。
-YADIFの定常出力も約30fpsに留まり、decoder dropが増えた。
-canvasへ`opacity: 0.999`を設定するとvideo callbackは約29.2Hzへ戻り、`doubleRate: true`のYADIF出力は約60fpsになった。
-これはWASM変換やLAN帯域では説明できず、Chromiumが完全に隠れたvideoを抑制する最適化と整合する。
-[Chromiumのoffscreen rVFC対応CL](https://chromium.googlesource.com/chromium/src/+/4e43ae23f2cdd1fcb81c5da5984fc4cf0b674544)にも、不可視videoのframe rateを資源節約のため抑制し、canvas/WebGL用途では通常rateのBeginFrameを強制する説明がある。
-完全被覆と`opacity: 0.999`の境界、Galaxyでの15→約30fpsという値自体は、このCLからの引用ではなく今回の実測に基づく推定である。
-Chromiumのcc occlusion trackerは描画opacityが1未満のsurfaceを外側のocclusionへ寄与させないが、DOM canvasからvideo compositor、`requestVideoFrameCallback`、Android MediaCodecまで同じ判定が伝わる完全な呼び出し経路はまだ確定していない。
+GalaxyでYADIF出力が約30fpsへ落ち、canvasへ`opacity: 0.999`を設定した後に約60fpsへ戻る走行を観測した。
+この走行だけから「不透明なcanvasがvideo callbackを約15Hzへ抑制した」と説明していたが、追加計測はその説明を支持しなかった。
 
-`fix/yadif-android-occlusion`はcanvas生成時に`opacity: 0.999`を設定する。
-`0.999`という数値自体に必然性はなく、狙いはcompositorへ完全不透明ではないと伝えることにある。
-1.0との差は8-bitの1階調未満なので、表示差を抑えて`opacity < 1`の分岐へ入れる安価な回避策として選んだ。
-Galaxyで59.95〜60.06fpsを維持し、late/dropは定常区間で増えなかった。
-この問題はseek後の初画を大きく止める主因ではなく、復帰後の継続再生を不滑らかにする主因だった。
-ただし原因層の確定前に汎用的な修正としてupstreamへ提出する根拠は不足している。
-`1`、`0.999999`、`0.999`とcanvasの被覆範囲を比較し、Chromium内部のvisibility/occlusion経路を特定してから、より原因に近い対策を選ぶ。
+生成時から不透明な変更前bundleを前景タブでクリーン起動すると、30秒走行はvideo rVFC 29.966Hz、document rAF 59.999Hz、YADIF出力57.09〜60.31fps、`late`増分3だった。
+別の12秒走行もrVFC 29.994Hz、rAF 59.988Hz、YADIF出力59.87〜60.11fps、`late`増分0だった。
+生成時から`opacity: 0.999999`にした走行は18秒後に60.095fpsだったが、不透明版も同じ水準なので改善効果を示さない。
+実行中にopacityを切り替えると数秒遅れて約60fpsと約30fpsが入れ替わることがあったが、rVFCは約30Hz、rAFは約60Hzのままだった。
+この遅延した状態遷移を即時の変更効果として扱うことはできない。
+数値は[追加計測データ](results/galaxy-canvas-opacity.json)に保存した。
+
+Chromiumコードには完全被覆を扱う経路がある。
+[OcclusionTracker](https://chromium.googlesource.com/chromium/src/+/HEAD/cc/trees/occlusion_tracker.cc)は描画opacityが1未満のlayerを外側のocclusionへ加えず、[LayerImpl](https://chromium.googlesource.com/chromium/src/+/HEAD/cc/layers/layer_impl.cc)は表示領域が完全にoccludeされると`WillDraw()`をfalseにする。
+[SurfaceLayerImpl](https://chromium.googlesource.com/chromium/src/+/HEAD/cc/layers/surface_layer_impl.cc)はこの状態をvideo surfaceのsubmission callbackへ渡し、[VideoFrameSubmitter](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/graphics/video_frame_submitter.cc)は不可視surfaceのframe提出を止める。
+
+しかし、この経路はrVFC抑制までを意味しない。
+[offscreen rVFC対応CL](https://chromium.googlesource.com/chromium/src/+/4e43ae23f2cdd1fcb81c5da5984fc4cf0b674544)はcanvasやWebGLの利用者向けにBeginFrameを強制する処理を追加しており、現在の`VideoFrameSubmitter::IsDrivingFrameUpdates()`も`force_begin_frames`なら不可視surfaceで更新を続ける。
+[VideoFrameCompositor](https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/renderer/platform/media/video_frame_compositor.cc)はWebGLなどの外部consumerがframeを取得した場合、そのframeをrender済みとして扱う。
+YADIFは各rVFCでvideoをWebGL textureへ取り込むため、今回の実測どおりrVFCは不透明条件でも約30Hzを維持できる。
+DOM canvasの完全被覆からMediaCodecを15Hzへ抑制する因果経路は確定できず、現在のChromiumコードと追加実測はむしろその説明を否定する。
+
+約30fps状態ではYADIFの`late`が毎秒約30増えた。
+これはvideo callback数の半減ではなく、2つのfieldの片方をpresentation queueが捨てたことを示す。
+フォーク側には、rVFCとrAFの位相がずれた起動時にも最初のfieldを保持する修正`d4ccb98`がすでにあり、クリーンな不透明版2走行はこの修正を含んでいた。
+opacity変更後の遅延した30fps遷移は残るため、位相、queue deadline、表示状態遷移を直接記録する回帰試験は追加できる。
+
+公開branch`fix/yadif-android-occlusion`の`opacity: 0.999`は実験結果を保存するため残すが、PRにはしない。
+`0.999`という値に固有の意味はなく、Chromiumの`opacity < 1`分岐へ入れるために選んだだけである。
+クリーンな変更前対照で問題を再現できない以上、表示合成を常時変更する修正は採用できない。
+原因に近い対策はYADIFのfield schedulingとvisibility遷移の再現試験であり、Chromiumへの変更案を出す根拠は現時点でない。
 
 `autoFilm`は区間依存である。
 MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`のまま、1500秒では`video`から`film`への切替過渡を観測した。
@@ -342,7 +357,8 @@ poolなしの同期WASM処理中は、そもそもseekメッセージの処理�
 
 公式コンテナへ最新checkoutからbuildしたclientをread-only mountし、録画DB、`VideoDownloadAPI`、Starlette `FileResponse`、mpeg2toh264、MSE、Chrome decoderを通した。
 詳細なイベント列は[device-results.md](results/device-results.md)に記録した。
-実backendの該当Range応答は[full-konomi-access.log](results/full-konomi-access.log)に保存した。
+実backendの該当Range応答はローカルaccess logで確認した。
+生ログはLAN内情報を含むため公開せず、必要なstatusとRangeの結果だけを本報告へ転記した。
 KonomiTVの保存済み画質設定では初期選択が`1080p` HLSだったため、DPlayerの画質UIから`Original (MPEG-2)`を明示的に選び、access logが`/api/streams/video/...`ではなく`/api/videos/2/download`の`206`になったことを確認してから測定した。
 
 Galaxyの「乃木坂工事中」1200秒への単発seekでは、実画面の`touchend`から`seeking`まで15.9ms、最初に観測したvideo frameまで270.1ms、`seeked`まで311.6ms、`playing`まで319.4msだった。
@@ -467,7 +483,7 @@ clear開始/完了、probe開始/headers/body完了、最初の有効video時刻
 Galaxyの3地点ではjobsからstream先頭AUまで33〜40ms、appendedからplayingまで27.3〜149.2msだった。
 デスクトップの追加走行でもfragmentからappendは1.5ms、appendからcanplayは227.3msだった。
 通常のMSE append自体より、初期IDR変換とdecoder準備の変動が大きい。
-Androidの継続的な不滑らかさは別問題で、opaque canvasによるvideo callback抑制が最上位だった。
+Androidの継続的な不滑らかさは別問題だが、opaque canvasによるvideo callback抑制という当初説明は追加計測で否定した。
 MSE queue競合も通常時の平均ランキングとは別の、再現できたstall要因として扱う。
 
 | 仮説 | 評価 |
@@ -477,23 +493,24 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
-| 6. YADIF/IVTCの過剰な初画待ち | 通常は数ms〜十数msで再表示し、3枚/film lockを全面待ちしない。一部seekとmode遷移では100〜200ms級の過渡あり。opaque canvasは定常fpsを半減させる別の実測済み問題 |
+| 6. YADIF/IVTCの過剰な初画待ち | 通常は数ms〜十数msで再表示し、3枚/film lockを全面待ちしない。一部seekとmode遷移では100〜200ms級の過渡あり。約30fps状態は観測したが、cleanなopaque対照2走行は約60fpsで、canvas完全被覆を原因と断定できない |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
 
-今回の調査で実装した4件は、いずれもKonomiTV固有処理ではなく、`otya128/mpeg2toh264`が所有する汎用player、transcoder、YADIFの問題または計測機能である。
-修正本体を`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ[適用確認](results/upstream-apply-check.txt)したところ、4件とも対象のTypeScript、README、回帰試験ファイルはそのまま適用できた。
+今回の調査で実装した4件は、KonomiTV固有処理ではなく、`otya128/mpeg2toh264`が所有する汎用player、transcoder、YADIFの変更として分離した。
+このうちYADIF opacity変更は棄却した実験であり、提出候補はMSE修正、seek計測、完成fragment早期受け渡しの3件である。
+4 branchとも`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開したが、適用可能であることは採用理由を意味しない。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
 | 変更 | なぜ・目的 | 何を修正したか | 実測または確認できた効果 | 本来の提出先 |
 | --- | --- | --- | --- | --- |
-| YADIF canvasのAndroid Chromium回避 | canvasがvideoを完全に覆うとGalaxyのvideo callbackが約15Hzへ抑制され、2倍レート出力が約30fpsに落ちたため | 暫定的に`opacity: 0.999`で完全不透明判定を外した | GalaxyでYADIF出力が約30fpsから約60fpsへ回復。数値自体の必然性とChromium内部の完全な因果経路は未確定で、upstream提出前に原因層を追う | `otya128/mpeg2toh264` YADIFの実験branch `6b825e8`。根本原因がChromiumならIssue側 |
+| YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | 公開実験branch`6b825e8`として残すが、PRにしない。YADIF schedulingの計測へ戻す |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことを分離 | `otya128/mpeg2toh264` player。公開commit `244da74` |
 | 完成fragmentの早期受け渡し | 完成済み初回fragmentが、同じ入力chunk内の後続picture処理の完了までworkerに留まっていたため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点でfirst fragmentを約9〜10ms、appendを約10〜11ms短縮。位置による変動は残る | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508` |
 
-公開済み4ブランチは、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
+公開済み4ブランチは、棄却したYADIF実験を含め、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
 各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。
 upstreamは生成済み`dist`を追跡していないため、公開branchにはsource、README、必要な回帰試験だけを含める。
 tsukumijimaフォークには、upstream採用前のbackport、またはフォーク固有API・YADIF拡張との接続だけを別branchで残す。
@@ -503,7 +520,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | Android Chromiumの完全被覆でvideo callbackが半減する原因層を確定し、最も近い層で回避する | Androidの約30fps出力を約60fpsへ回復 | 中 | △ | 調査中。`6b825e8`のopacity変更は実験的回避策 |
+| P1 | YADIFのvisibility遷移とrVFC/rAF位相を記録し、30fps状態を自動再現する | 2倍レートの片field落ちを再現できた場合に約30→60fps | 中 | ○ | mpeg2toh264 YADIF。既存`d4ccb98`の境界条件を検証。opacity試作は採用しない |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。`244da74`で実装済み。MSE operation、decode、描画は次段 |
 | P1 | byteとPTSの対応を正しく保ち、選択service/PIDでprobeする | cold seekの約0.1秒と誤推定を削減する可能性 | 中 | ◎ | mpeg2toh264 source/worker/core |
@@ -583,11 +600,11 @@ I-pictureの途中byteだけを返さない。
 
 ### `otya128/mpeg2toh264`へ直接出すもの
 
-1. **YADIF: Android Chromiumのopaque canvas抑制回避**。Galaxyの変更前後fpsを添付する。
-2. **player: reset中のSourceBuffer operationとqueueの世代整合性**。修正前に失敗する回帰試験を添付し、速度改善とは分離する。
-3. **player: seek単位の基本timing**。seek ID、target、probe、本体Range、fragment、appendまでを1 PRにする。
-4. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。基本timingと分けるかはAPIレビューで決める。
-5. **player/transcoder: 完成fragmentの早期受け渡し**。出力順序、cancel、backpressureを回帰試験で固定する。
+1. **player: reset中のSourceBuffer operationとqueueの世代整合性**。修正前に失敗する回帰試験を添付し、速度改善とは分離する。
+2. **player: seek単位の基本timing**。seek ID、target、probe、本体Range、fragment、appendまでを1 PRにする。
+3. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。基本timingと分けるかはAPIレビューで決める。
+4. **player/transcoder: 完成fragmentの早期受け渡し**。出力順序、cancel、backpressureを回帰試験で固定する。
+5. **YADIF: visibility遷移とfield schedulingの再現試験**。約30fps状態を自動再現できた場合に、既存`d4ccb98`で不足する境界条件をIssue化する。opacity変更は含めない。
 6. **source/worker: PTS probeの対応付けとservice選択**。再現素材を得てから、GOP時刻をRange先頭byteへ対応付ける問題と全PID probeを扱う。
 7. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性の追加試験が通った場合だけ独立PRにする。
 8. **Worker: seek入力queueの先読み上限**。連続seekの中止済みRange量とp95で効果を確認してから独立PRにする。
@@ -597,7 +614,7 @@ I-pictureの途中byteだけを返さない。
 
 1. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
 2. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
-3. 現在公開済み4ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。4件自体をフォーク固有問題とは説明しない。
+3. 現在公開済みの提出候補3ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchは取り込まない。
 
 ### `KonomiTV`へ出すもの
 
@@ -611,6 +628,6 @@ I-pictureの途中byteだけを返さない。
 - AAC早期GOP、8/2 MiB入力queue、sidecar index。候補と試作結果は残すが、採用条件を満たしていない。
 
 設計レビューの8項目は、今回実装した2修正についてすべてYesとする。
-YADIF修正は描画ownerに置き、変更前後の実出力fpsをGalaxyで比較した。
+YADIF opacity実験は描画ownerに置いてGalaxyで比較したが、cleanな変更前対照が約60fpsだったため採用しない。
 MSE修正は`MseSink`に置き、修正前に失敗する外部動作の回帰試験とGalaxyの通常seekを確認した。
 KonomiTV側のretryや設定fallbackで原因を隠していない。

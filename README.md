@@ -6,7 +6,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 
 - シーク位置は、永続 GOP index ではなく、小さな HTTP Range で PTS を探すメモリ内 index から求めます。
 - 6時間40分、約43GBのTSでも探索は各地点2 probe、約0.1秒で収束しました。この条件では、初回fragment生成とdecoder再開の方が長い待ちでした。
-- Galaxy Tab S11 Ultra では、不透明なYADIF canvasがvideoを覆うとvideo callbackが約15Hzへ落ち、2倍レート出力が約30fpsになりました。`opacity: 0.999`で約60fpsへ戻りましたが、これは原因調査中の暫定回避策です。
+- Galaxy Tab S11 Ultra でYADIF出力が約30fpsへ落ち、`opacity: 0.999`の試作後に約60fpsへ戻る走行がありました。しかし、生成時から不透明な対照を再試験すると30秒と12秒の両方で約60fpsを維持しました。`opacity`変更は再現性のある修正ではないため、PR候補から外しています。
 - MSE queueの世代管理修正は模擬競合を防ぎますが、実Chromeの通常シークは平均251.4msから250.1msで、有意な短縮を確認できませんでした。実利用でのstall削減量も未立証です。
 - 完成fragmentを早く渡す試作は、デスクトップの同じ3地点で初回fragmentを約9〜10ms短縮しました。
 

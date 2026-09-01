@@ -150,7 +150,7 @@ ChatGPT Chrome拡張で開いた通常タブでもresponse、fragment、append�
 
 - KonomiTV: `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`
 - player dependency: `52a3db5e8fb9833e6cade2167097849c668bdb1f`
-- YADIF: source `4efff3f`。opaque canvas による Chromium の動画抑制を避ける修正を含む
+- YADIF: source `4efff3f`。`opacity: 0.999`の実験変更を含む。この変更は後のclean対照で効果を立証できず、PR候補から外した
 - 端末: Galaxy Tab S11 Ultra `SM-X930`、Android 16
 - ブラウザー: Google Chrome 151.0.7922.174
 - 表示: 計測時の `renderFrameRate` は 60Hz
@@ -210,7 +210,7 @@ CM、本編、テロップ、カット境界のどれに当たるかは別途画
 
 ## 読み取れること
 
-- opaque canvas回避後は、選んだ乃木坂区間で60fps出力を維持できた
+- `opacity: 0.999`版は選んだ乃木坂区間で60fps出力を維持したが、後のcleanなopaque版も30秒と12秒の両方で約60fpsだったため、opacityの効果とは判定しない
 - YADIF描画自体は多くのseekで`playing`から数ms〜十数ms後に再開したが、1200秒とMADDER 420秒には100〜200ms級の過渡があった
 - HTTP responseまではwarm seekで約43〜62ms、初回fragmentまでは約138〜258msだった
 - MSE append完了から`playing`までは約22〜98msで、通常のSourceBuffer clearだけが全区間を支配した形ではない
@@ -254,7 +254,8 @@ branch `fix/mse-reset-inflight-append`、source commit `b1ffef4`では、進行�
 公式KonomiTV backendと実DPlayer UIへ3修正を合成した確認でも、乃木坂1200秒とMADDER900秒のreset後にinit/media append、rVFC、playingまで完了し、player errorはなかった。
 
 この修正は通常seekの平均時間を短縮するものではない。
-resetと古いappend完了が競合した場合のinit喪失と長いstallを防ぐ信頼性修正として、YADIFのfps修正とは別PRにする。
+resetと古いappend完了が競合した場合のinit喪失を防ぐ信頼性修正として扱う。
+実利用の長いstall削減量は未立証であり、採用しないYADIF opacity試作とも分離する。
 
 ## 完成fragmentの早期受け渡し
 
