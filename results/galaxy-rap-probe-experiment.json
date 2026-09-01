@@ -1,0 +1,1413 @@
+{
+  "schemaVersion": 1,
+  "decision": "reject-eager-per-seek-rap-scan",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "playback": "recorded MPEG-2 TS Original, YADIF double-rate, true fullscreen",
+    "transport": "LAN direct to isolated local KonomiTV",
+    "recording": "Nogizaka Koujichuu local-SSD fixture",
+    "fixtureBytes": 3066534364,
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "tabRule": "one page during measurement; playback stopped and page closed after every run"
+  },
+  "implementationUnderTest": {
+    "sourceBase": "otya128/mpeg2toh264 d5df08b5f6215c2ed4994034d4a5855ad9bc3d69",
+    "timingBase": "58a9920dc852403b5e6160297c9045e5860f8dd8",
+    "probeBytes": "4-8 MiB",
+    "selection": "latest MPEG-2 sequence+GOP at or before target, only when a later point brackets it",
+    "safeStart": "preceding PAT after PMT/video PID discovery",
+    "fallback": "existing 128 KiB timestamp probes",
+    "status": "uncommitted diagnostic worktrees; never published as a candidate branch"
+  },
+  "offlineScanner": {
+    "result": "linear scanner found the same video GOP byte positions as ffprobe while retaining a preceding PAT/PMT-safe start",
+    "exampleAbsoluteVideoOffsets": [
+      507544916,
+      508182048,
+      509119792,
+      510102656
+    ],
+    "tests": "cargo test -p mpeg2toh264 --test mpegts: 22 passed, 0 failed",
+    "scannerTimeMsOnFiveMiBSlice": 5.1
+  },
+  "comparisons": {
+    "target300": {
+      "baselinePresentedMs": 221.4,
+      "candidatePresentedMs": 240.3,
+      "candidateMinusBaselineMs": 18.9,
+      "sameFirstFragmentMediaTime": true,
+      "interpretation": "the eager RAP probe selected a safe point but reached the same output fragment as the existing probes"
+    },
+    "target900": {
+      "baselinePresentedMs": 191.1,
+      "candidatePresentedMs": 238.9,
+      "candidateMinusBaselineMs": 47.8,
+      "rapSelected": false,
+      "sameFirstFragmentMediaTime": true,
+      "interpretation": "the coarse estimate started about 7.4 seconds early, the 4-8 MiB slice did not bracket the target, and the implementation fell back to the existing probes"
+    }
+  },
+  "conclusion": {
+    "scanner": "the linear PAT/PMT-aware MPEG-2 GOP scanner is technically viable",
+    "seekPath": "fetching a multi-MiB RAP window on every seek adds more transfer latency than it removes in the measured path",
+    "currentProbes": "the existing small timestamp probes already corrected the bitrate estimate and opened the target-containing fragment at both measured positions",
+    "futureCondition": "reconsider RAP selection only when points are learned without an eager multi-MiB seek-time scan, for example from an opportunistic or persistent index, and when the index-owning interval is measured as dominant",
+    "scope": "single runs at two targets establish rejection of this mechanism, not a population estimate for all recordings"
+  },
+  "runs": {
+    "baseline300": {
+      "sourceFile": "galaxy-rap-baseline-300-b1.json",
+      "variant": "rap-baseline-b1",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-B4h6PpYK.js",
+      "seekTargetSeconds": 300,
+      "firstFragmentMs": 160.3,
+      "firstFragmentMediaTime": 299.69385555555556,
+      "presentedMs": 221.4,
+      "presentedMediaTime": 299.994155,
+      "draw": {
+        "count": 180,
+        "fps": 60.03890789609963,
+        "min": 2.799999952316284,
+        "p50": 16.399999976158142,
+        "p95": 20.799999952316284,
+        "p99": 23,
+        "max": 31.100000023841858,
+        "under12": 5,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          31.100000023841858,
+          23,
+          22.40000009536743,
+          21.399999976158142,
+          21.100000023841858,
+          21.100000023841858,
+          21,
+          21,
+          20.799999952316284,
+          20.200000047683716
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.995618617264284,
+        "min": 20.700000047683716,
+        "p50": 33.39999997615814,
+        "p95": 35,
+        "p99": 42.39999997615814,
+        "max": 42.39999997615814,
+        "under12": 0,
+        "over40": 1,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          42.39999997615814,
+          38.5,
+          36.200000047683716,
+          35.60000002384186,
+          35,
+          34.800000071525574,
+          34.700000047683716,
+          34.699999928474426,
+          34.60000002384186,
+          34.60000002384186
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.970023241921194,
+        "min": 33.36599999997998,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 1.9
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 2.1,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 21.2,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 22.9,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 23.0,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072,
+          "mediaTime": 297.6213333333333
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 23.0,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 40.2,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 40.8,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 40.8,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072,
+          "mediaTime": 298.90133333333335
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 41.0,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 71.1,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 71.7,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 103.6,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 110.2,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 138.0,
+          "byteOffset": 505726371
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 160.3,
+          "byteOffset": 505726371,
+          "mediaTime": 299.69385555555556
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 161.5
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 174.7
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 206.2
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 206.3
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 221.4,
+          "mediaTime": 299.994155
+        }
+      ]
+    },
+    "candidate300": {
+      "sourceFile": "galaxy-rap-probe-single-300-1.json",
+      "variant": "rap-probe-single",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-DS7EFcuY.js",
+      "seekTargetSeconds": 300,
+      "firstFragmentMs": 178.8,
+      "firstFragmentMediaTime": 299.69385555555556,
+      "presentedMs": 240.3,
+      "presentedMediaTime": 299.994155,
+      "draw": {
+        "count": 180,
+        "fps": 60.0147522291186,
+        "min": 8.5,
+        "p50": 16.399999976158142,
+        "p95": 21.40000009536743,
+        "p99": 23.399999976158142,
+        "max": 23.800000071525574,
+        "under12": 11,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          23.800000071525574,
+          23.399999976158142,
+          22.700000047683716,
+          22.700000047683716,
+          22.600000023841858,
+          21.600000023841858,
+          21.59999990463257,
+          21.40000009536743,
+          21.40000009536743,
+          21.299999952316284
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.976423038059956,
+        "min": 27.300000071525574,
+        "p50": 33.39999997615814,
+        "p95": 35.700000047683716,
+        "p99": 38.60000002384186,
+        "max": 38.60000002384186,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          38.60000002384186,
+          37.699999928474426,
+          36.5,
+          35.700000047683716,
+          35.700000047683716,
+          35.199999928474426,
+          35.199999928474426,
+          35.09999990463257,
+          35,
+          35
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.97003333408567,
+        "min": 33.36599999997998,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 1.0
+        },
+        {
+          "name": "rap-probe-request",
+          "msFromSeekRequest": 1.3,
+          "byteOffset": 503398120,
+          "byteLength": 5070916
+        },
+        {
+          "name": "rap-probe-response",
+          "msFromSeekRequest": 22.0,
+          "byteOffset": 503398120,
+          "byteLength": 5070916
+        },
+        {
+          "name": "rap-probe-complete",
+          "msFromSeekRequest": 69.4,
+          "byteOffset": 503398120,
+          "byteLength": 5070916
+        },
+        {
+          "name": "rap-selected",
+          "msFromSeekRequest": 74.5,
+          "byteOffset": 506436844,
+          "mediaTime": 299.7605888888889
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 74.6,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 101.5,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 102.1,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 126.0,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 130.0,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 158.4,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 178.8,
+          "byteOffset": 506436844,
+          "mediaTime": 299.69385555555556
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 179.6
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 186.7
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 224.4
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 226.3
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 240.3,
+          "mediaTime": 299.994155
+        }
+      ]
+    },
+    "baseline900": {
+      "sourceFile": "galaxy-rap-baseline-900-b1.json",
+      "variant": "rap-baseline-900-b1",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-B4h6PpYK.js",
+      "seekTargetSeconds": 900,
+      "firstFragmentMs": 142.9,
+      "firstFragmentMediaTime": 899.7933555555555,
+      "presentedMs": 191.1,
+      "presentedMediaTime": 899.993555,
+      "draw": {
+        "count": 180,
+        "fps": 60.07114571303557,
+        "min": 5.900000095367432,
+        "p50": 16.699999928474426,
+        "p95": 22.200000047683716,
+        "p99": 25.299999952316284,
+        "max": 25.600000023841858,
+        "under12": 24,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          25.600000023841858,
+          25.299999952316284,
+          24.600000023841858,
+          24,
+          23.40000009536743,
+          22.699999928474426,
+          22.600000023841858,
+          22.399999976158142,
+          22.200000047683716,
+          22.09999990463257
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.997640635247297,
+        "min": 24.800000071525574,
+        "p50": 33.300000071525574,
+        "p95": 37,
+        "p99": 39,
+        "max": 39,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          39,
+          37.60000002384186,
+          37.5,
+          37.10000002384186,
+          37,
+          36.699999928474426,
+          36.39999997615814,
+          36.300000071525574,
+          36.199999928474426,
+          36
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.970023241920604,
+        "min": 33.36599999992177,
+        "p50": 33.366999999969266,
+        "p95": 33.36700000008568,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 2.7
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 2.9,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 25.9,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 28.7,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 28.7,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072,
+          "mediaTime": 892.5866666666667
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 28.8,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 55.0,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 57.7,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 57.8,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072,
+          "mediaTime": 899.2426666666667
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 58.0,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 74.3,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 74.8,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 104.2,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 108.7,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 139.9,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 142.9,
+          "byteOffset": 1528346479,
+          "mediaTime": 899.7933555555555
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 143.6
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 152.1
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 180.3
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 180.6
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 191.1,
+          "mediaTime": 899.993555
+        }
+      ]
+    },
+    "candidate900": {
+      "sourceFile": "galaxy-rap-candidate-900-c1.json",
+      "variant": "rap-candidate-900-c1",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-DS7EFcuY.js",
+      "seekTargetSeconds": 900,
+      "firstFragmentMs": 189.2,
+      "firstFragmentMediaTime": 899.7933555555555,
+      "presentedMs": 238.9,
+      "presentedMediaTime": 899.993555,
+      "draw": {
+        "count": 180,
+        "fps": 59.924341333926314,
+        "min": 9.799999952316284,
+        "p50": 16.700000047683716,
+        "p95": 22.100000023841858,
+        "p99": 22.899999976158142,
+        "max": 23.5,
+        "under12": 19,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          23.5,
+          22.899999976158142,
+          22.800000071525574,
+          22.800000071525574,
+          22.399999976158142,
+          22.199999928474426,
+          22.199999928474426,
+          22.100000023841858,
+          22.100000023841858,
+          22
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.97945228623448,
+        "min": 30.100000023841858,
+        "p50": 33.300000071525574,
+        "p95": 36.09999990463257,
+        "p99": 37.799999952316284,
+        "max": 37.799999952316284,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          37.799999952316284,
+          37.199999928474426,
+          36.60000002384186,
+          36.59999990463257,
+          36.09999990463257,
+          36,
+          35.699999928474426,
+          35.59999990463257,
+          35.39999997615814,
+          35.200000047683716
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.970023241920604,
+        "min": 33.36599999992177,
+        "p50": 33.366999999969266,
+        "p95": 33.36700000008568,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568,
+          33.36700000008568
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 1.2
+        },
+        {
+          "name": "rap-probe-request",
+          "msFromSeekRequest": 1.5,
+          "byteOffset": 1517581328,
+          "byteLength": 5070916
+        },
+        {
+          "name": "rap-probe-response",
+          "msFromSeekRequest": 20.9,
+          "byteOffset": 1517581328,
+          "byteLength": 5070916
+        },
+        {
+          "name": "rap-probe-complete",
+          "msFromSeekRequest": 71.1,
+          "byteOffset": 1517581328,
+          "byteLength": 5070916
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 77.6,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 79.6,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 80.2,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 80.2,
+          "attempt": 0,
+          "byteOffset": 1517581328,
+          "byteLength": 131072,
+          "mediaTime": 892.5866666666667
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 80.4,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 94.4,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 98.7,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 98.8,
+          "attempt": 1,
+          "byteOffset": 1528346479,
+          "byteLength": 131072,
+          "mediaTime": 899.2426666666667
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 99.0,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 114.0,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 115.1,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 151.6,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 155.7,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 185.9,
+          "byteOffset": 1528346479
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 189.2,
+          "byteOffset": 1528346479,
+          "mediaTime": 899.7933555555555
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 189.7
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 196.4
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 225.2
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 225.4
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 238.9,
+          "mediaTime": 899.993555
+        }
+      ]
+    },
+    "linearAfterSmallProbes300": {
+      "sourceFile": "galaxy-rap-probe-linear-300-1.json",
+      "variant": "rap-probe-linear",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-BRKVdgoy.js",
+      "seekTargetSeconds": 300,
+      "firstFragmentMs": 219.9,
+      "firstFragmentMediaTime": 299.69385555555556,
+      "presentedMs": 265.3,
+      "presentedMediaTime": 299.994155,
+      "draw": {
+        "count": 179,
+        "fps": 59.535754900942834,
+        "min": 10.199999928474426,
+        "p50": 16.700000047683716,
+        "p95": 22.100000023841858,
+        "p99": 24,
+        "max": 36.799999952316284,
+        "under12": 12,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          36.799999952316284,
+          24,
+          23.90000009536743,
+          22.700000047683716,
+          22.700000047683716,
+          22.40000009536743,
+          22.399999976158142,
+          22.200000047683716,
+          22.100000023841858,
+          22
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.966329966329965,
+        "min": 14.5,
+        "p50": 33.39999997615814,
+        "p95": 36.5,
+        "p99": 51.10000002384186,
+        "max": 51.10000002384186,
+        "under12": 0,
+        "over40": 1,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          51.10000002384186,
+          37.299999952316284,
+          37,
+          36.699999928474426,
+          36.5,
+          36.199999928474426,
+          35.89999997615814,
+          35.700000047683716,
+          35.39999997615814,
+          35.200000047683716
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.97002324192178,
+        "min": 33.36599999997998,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 1.1
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 1.5,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 23.5,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 26.0,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 26.1,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072,
+          "mediaTime": 297.6213333333333
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 26.2,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 55.9,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 61.1,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 61.2,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072,
+          "mediaTime": 298.90133333333335
+        },
+        {
+          "name": "rap-probe-request",
+          "msFromSeekRequest": 61.3,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-probe-response",
+          "msFromSeekRequest": 65.1,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-probe-complete",
+          "msFromSeekRequest": 119.7,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-selected",
+          "msFromSeekRequest": 123.6,
+          "byteOffset": 506436844,
+          "mediaTime": 299.7605888888889
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 123.8,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 139.2,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 139.5,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 164.3,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 169.1,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 201.0,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 219.9,
+          "byteOffset": 506436844,
+          "mediaTime": 299.69385555555556
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 220.8
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 229.9
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 262.9
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 263.2
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 265.3,
+          "mediaTime": 299.994155
+        }
+      ]
+    },
+    "quadraticAfterSmallProbes300": {
+      "sourceFile": "galaxy-rap-probe-timing-300-1.json",
+      "variant": "rap-probe-timing",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-D-0NCHD3.js",
+      "seekTargetSeconds": 300,
+      "firstFragmentMs": 514.1,
+      "firstFragmentMediaTime": 299.69385555555556,
+      "presentedMs": 571.2,
+      "presentedMediaTime": 299.994155,
+      "draw": {
+        "count": 180,
+        "fps": 60.024814729795914,
+        "min": 4.399999976158142,
+        "p50": 16.799999952316284,
+        "p95": 20.5,
+        "p99": 23.200000047683716,
+        "max": 29.199999928474426,
+        "under12": 3,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          29.199999928474426,
+          23.200000047683716,
+          23,
+          21.899999976158142,
+          20.899999976158142,
+          20.899999976158142,
+          20.799999952316284,
+          20.600000023841858,
+          20.5,
+          20.5
+        ]
+      },
+      "rvfc": {
+        "count": 90,
+        "fps": 29.846742010366413,
+        "min": 14.600000023841858,
+        "p50": 33.200000047683716,
+        "p95": 50.10000002384186,
+        "p99": 52.10000002384186,
+        "max": 52.10000002384186,
+        "under12": 0,
+        "over40": 11,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          52.10000002384186,
+          52,
+          50.39999997615814,
+          50.299999952316284,
+          50.10000002384186,
+          50,
+          49.700000047683716,
+          49.700000047683716,
+          49.39999997615814,
+          46.299999952316284
+        ]
+      },
+      "media": {
+        "count": 90,
+        "fps": 29.97003333408567,
+        "min": 33.36599999997998,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "under12": 0,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0,
+        "longest": [
+          33.36700000008568,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474,
+          33.367000000027474
+        ]
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "marks": [
+        {
+          "name": "seek-requested",
+          "msFromSeekRequest": 0.0
+        },
+        {
+          "name": "seek",
+          "msFromSeekRequest": 0.7
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 1.0,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 31.7,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 36.7,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 36.9,
+          "attempt": 0,
+          "byteOffset": 503398120,
+          "byteLength": 131072,
+          "mediaTime": 297.6213333333333
+        },
+        {
+          "name": "probe-request",
+          "msFromSeekRequest": 37.0,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-response",
+          "msFromSeekRequest": 56.6,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-complete",
+          "msFromSeekRequest": 58.4,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072
+        },
+        {
+          "name": "probe-timestamp",
+          "msFromSeekRequest": 58.6,
+          "attempt": 1,
+          "byteOffset": 505726371,
+          "byteLength": 131072,
+          "mediaTime": 298.90133333333335
+        },
+        {
+          "name": "rap-probe-request",
+          "msFromSeekRequest": 58.8,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-probe-response",
+          "msFromSeekRequest": 61.2,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-probe-complete",
+          "msFromSeekRequest": 110.5,
+          "byteOffset": 505726371,
+          "byteLength": 3543935
+        },
+        {
+          "name": "rap-selected",
+          "msFromSeekRequest": 408.8,
+          "byteOffset": 506436844,
+          "mediaTime": 299.7605888888889
+        },
+        {
+          "name": "request",
+          "msFromSeekRequest": 409.0,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "response",
+          "msFromSeekRequest": 437.5,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-byte",
+          "msFromSeekRequest": 437.9,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-jobs",
+          "msFromSeekRequest": 463.1,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-picture-output",
+          "msFromSeekRequest": 468.9,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-access-unit",
+          "msFromSeekRequest": 498.5,
+          "byteOffset": 506436844
+        },
+        {
+          "name": "first-fragment",
+          "msFromSeekRequest": 514.1,
+          "byteOffset": 506436844,
+          "mediaTime": 299.69385555555556
+        },
+        {
+          "name": "append",
+          "msFromSeekRequest": 514.8
+        },
+        {
+          "name": "appended",
+          "msFromSeekRequest": 524.2
+        },
+        {
+          "name": "canplay",
+          "msFromSeekRequest": 560.4
+        },
+        {
+          "name": "playing",
+          "msFromSeekRequest": 560.6
+        },
+        {
+          "name": "presented",
+          "msFromSeekRequest": 571.2,
+          "mediaTime": 299.994155
+        }
+      ]
+    }
+  }
+}

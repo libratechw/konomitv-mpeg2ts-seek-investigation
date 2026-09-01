@@ -263,6 +263,14 @@ CM、本編、テロップ、カット境界のどれに当たるかは別途画
 - MSE append完了から`playing`までは約22〜98msで、通常のSourceBuffer clearだけが全区間を支配した形ではない
 - `autoFilm`のモード確定や切替は区間依存であり、24fps素材のシーク評価では初画と定常cadenceを分けて測る必要がある
 
+### seek時の直前RAP scan
+
+PAT/PMTを含む安全な開始点とMPEG-2 sequence/GOPを探す線形scannerは、約5MiBのsliceを5.1msで処理した。
+しかし、seekごとに4〜8MiBを取得して目的時刻以前の最新RAPを選ぶ試作は、300秒で現行と同じfirst fragmentへ着地し、可視初画が221.4msから240.3msへ遅くなった。
+900秒では概算位置が約7.4秒手前でslice内に目的時刻後のRAPがなく、既存の128KiB probeへfallbackして191.1msから238.9msへ遅くなった。
+このためseekごとの広域scanは採用せず、RAPが再生中の学習または永続indexから追加取得なしで得られ、対応区間が支配的だと計測できた場合だけ再評価する。
+生値は[galaxy-rap-probe-experiment.json](galaxy-rap-probe-experiment.json)に保存した。
+
 ## YADIF queueの反復seek試験
 
 タブ数未記録の旧30回試験では、YADIF出力10fps未満または`late`増分30超の走行が8/30だった。
