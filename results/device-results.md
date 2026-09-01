@@ -227,6 +227,20 @@ upstreamにあるqueue再同期をフォークへ適合した正式候補では�
 比較した`expectedDisplayTime`への独自アンカーは停止0/30、4秒窓の最終値が中央値60.0fps・最低58.1fpsだったが、upstreamと異なる変更なので優先度を下げた。
 各走行の値は[yadif-seek-queue.json](yadif-seek-queue.json)に保存した。
 
+## 優先修正のGalaxy合成確認
+
+540秒と900秒を交互に30回seekし、YADIF queue再同期だけ、完成fragment早期受け渡しを追加、MSE世代修正も追加、の3 buildを順番に測定した。
+
+| build | 初画 median | 初画 p95 | playing median | playing p95 | YADIF停止 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| YADIF再同期 | 305.5 ms | 372.2 ms | 297.4 ms | 358.7 ms | 0/30 |
+| + 完成fragment早期受け渡し | 277.4 ms | 301.6 ms | 269.5 ms | 300.9 ms | 0/30 |
+| + MSE世代修正 | 273.6 ms | 297.6 ms | 267.0 ms | 288.4 ms | 0/30 |
+
+各buildを順番に測定しており、順序はランダム化していない。
+MSE世代修正の追加差は数msなので速度改善とは判定せず、到達可能なinit喪失競合を防ぐ正しさの修正として扱う。
+各走行は[galaxy-priority-fixes.json](galaxy-priority-fixes.json)に保存した。
+
 ## 長時間TSの遠距離シーク
 
 時間からbyte位置を求める処理が長時間録画で悪化するか確認するため、42,955,071,712 B、duration 24,014.62秒の「ミュージックステーション SUPER LIVE 2025」で3600、12000、22000秒へシークした。

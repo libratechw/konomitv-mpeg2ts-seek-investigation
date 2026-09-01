@@ -9,7 +9,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 - Galaxy Tab S11 Ultra でYADIF出力が約30fpsへ落ち、`opacity: 0.999`の試作後に約60fpsへ戻る走行がありました。しかし、生成時から不透明な対照を再試験すると30秒と12秒の両方で約60fpsを維持しました。`opacity`変更は再現性のある修正ではないため、PR候補から外しています。
 - 最新版の実DPlayerでシークを反復すると、YADIFの表示がほぼ停止する状態を30回中8回再現しました。rAFは動作していましたが、未来のfield時刻が最大約350ms先まで連鎖し、満杯のqueueで古いtextureを交換し続けていました。upstreamにあるqueue再同期をフォークへ戻す試作では停止は0/30になりましたが、短い過渡には25fpsまでの低下が残りました。
 - MSE queueの世代管理修正は模擬競合を防ぎますが、実Chromeの通常シークは平均251.4msから250.1msで、有意な短縮を確認できませんでした。実利用でのstall削減量も未立証です。
-- 完成fragmentを早く渡す試作は、デスクトップの同じ3地点で初回fragmentを約9〜10ms短縮しました。
+- 完成fragmentを早く渡す試作は、デスクトップの同じ3地点で初回fragmentを約9〜10ms短縮しました。Galaxyの順次30回測定では、YADIF修正版に加えたときの初画中央値が305.5msから277.4msになりましたが、build順をランダム化した比較ではありません。
 
 詳しいデータフロー、仮説評価、改善候補は [REPORT.md](REPORT.md) にあります。実機条件と素材ごとの結果は [results/device-results.md](results/device-results.md)、機械可読な集計値は [results](results/) に置いています。
 

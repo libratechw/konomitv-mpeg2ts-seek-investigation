@@ -501,6 +501,11 @@ clear開始/完了、probe開始/headers/body完了、最初の有効video時刻
 全seekは `T9−T0`、`T10−T0`、音声の確認可能なproxy、連続再生へ安定するまでを別々に集計する。
 1回だけの最短値でなく、buffer内/外、同じ場所の再seek、前後方向、連続確定を分けてmedian/p95を見る。
 
+Galaxyで540秒と900秒を交互に30回seekした順次比較では、YADIF再同期だけの初画中央値305.5ms・playing中央値297.4msに対し、完成fragment早期受け渡しを加えた版は277.4ms・269.5ms、MSE世代修正も加えた版は273.6ms・267.0msだった。
+YADIF停止はいずれも0/30だった。
+build順をランダム化していないため、約28msすべてを早期受け渡しの効果とは断定せず、MSE追加の数msは速度効果と判定しない。
+各走行は[Galaxy優先修正比較](results/galaxy-priority-fixes.json)に保存した。
+
 ## 仮説の評価と優先順位
 
 実測を含む通常seekの候補順位は、(1) append後のdecoder提示、(2) GOP/AAC収集と最初のIDR jobを含む初期H.264/fMP4生成、(3) PTS probeとrequest往復、(4) PAT/PMTとheader再取得、(5) `autoFilm`のmode遷移、(6)連続操作の残余計算である。
@@ -534,7 +539,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | YADIF queue再同期の復元 | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 停止8/30→0/30。4秒窓の最終中央値60.0fps。短い過渡は最低25.0fps、4秒後43.4fpsの走行が残る | `tsukumijima/mpeg2toh264` fork。公開commit `f62bd9d` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことを分離 | `otya128/mpeg2toh264` player。公開commit `244da74` |
-| 完成fragmentの早期受け渡し | 完成済み初回fragmentが、同じ入力chunk内の後続picture処理の完了までworkerに留まっていたため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点でfirst fragmentを約9〜10ms、appendを約10〜11ms短縮。位置による変動は残る | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508` |
+| 完成fragmentの早期受け渡し | 完成済み初回fragmentが、同じ入力chunk内の後続picture処理の完了までworkerに留まっていたため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点でfirst fragmentを約9〜10ms短縮。Galaxy順次比較は初画中央値305.5→277.4msだが順序差を含む | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508` |
 
 公開中のupstream向け3ブランチは、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
 各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。

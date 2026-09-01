@@ -1,0 +1,800 @@
+{
+  "schema": 1,
+  "device": "Galaxy Tab S11 Ultra SM-X930",
+  "browser": "Google Chrome 151.0.7922.174",
+  "display_hz": 60,
+  "material": "Nogizaka Koji-chu recording; 540 s and 900 s alternated",
+  "settle_ms": 1800,
+  "note": "Variants were measured sequentially, not randomized; differences include run-order and decoder-state variance.",
+  "variants": {
+    "yadif_reset_only": {
+      "summary": {
+        "runs": 30,
+        "seeked_ms": {
+          "mean": 298.753,
+          "median": 296.9,
+          "p95_nearest_rank": 358.2
+        },
+        "playing_ms": {
+          "mean": 299.38,
+          "median": 297.35,
+          "p95_nearest_rank": 358.7
+        },
+        "presented_ms": {
+          "mean": 307.937,
+          "median": 305.55,
+          "p95_nearest_rank": 372.2
+        },
+        "min_final_output_fps": 25
+      },
+      "runs": [
+        {
+          "target_s": 540,
+          "seeked_ms": 260.3,
+          "playing_ms": 262.2,
+          "presented_ms": 278.3,
+          "final_output_fps": 25,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 187,
+          "playing_ms": 187.4,
+          "presented_ms": 200.6,
+          "final_output_fps": 57.505,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 385.7,
+          "playing_ms": 386.5,
+          "presented_ms": 387.4,
+          "final_output_fps": 41.322,
+          "late_delta": 3
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 344,
+          "playing_ms": 344.4,
+          "presented_ms": 357.2,
+          "final_output_fps": 56.96,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 349.9,
+          "playing_ms": 350.5,
+          "presented_ms": 358.8,
+          "final_output_fps": 57.193,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 234.7,
+          "playing_ms": 235.4,
+          "presented_ms": 239.9,
+          "final_output_fps": 56.069,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 362.9,
+          "playing_ms": 363.5,
+          "presented_ms": 372.5,
+          "final_output_fps": 56.875,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 259.3,
+          "playing_ms": 259.7,
+          "presented_ms": 265.1,
+          "final_output_fps": 56.892,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 327.3,
+          "playing_ms": 327.7,
+          "presented_ms": 332.8,
+          "final_output_fps": 57.226,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 266.5,
+          "playing_ms": 266.9,
+          "presented_ms": 277.1,
+          "final_output_fps": 58.008,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 344.6,
+          "playing_ms": 345,
+          "presented_ms": 347.8,
+          "final_output_fps": 56.972,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 266.3,
+          "playing_ms": 267,
+          "presented_ms": 278.1,
+          "final_output_fps": 56.943,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 347.4,
+          "playing_ms": 348,
+          "presented_ms": 356.7,
+          "final_output_fps": 41.622,
+          "late_delta": 3
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 253.3,
+          "playing_ms": 253.6,
+          "presented_ms": 270.3,
+          "final_output_fps": 56.058,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 358.2,
+          "playing_ms": 358.7,
+          "presented_ms": 372.2,
+          "final_output_fps": 38.337,
+          "late_delta": 13
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 247.2,
+          "playing_ms": 247.6,
+          "presented_ms": 251.8,
+          "final_output_fps": 56.983,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 333.4,
+          "playing_ms": 334,
+          "presented_ms": 342.5,
+          "final_output_fps": 40.623,
+          "late_delta": 4
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 240,
+          "playing_ms": 240.5,
+          "presented_ms": 255.5,
+          "final_output_fps": 56.196,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 335.2,
+          "playing_ms": 335.8,
+          "presented_ms": 343.4,
+          "final_output_fps": 56.069,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 240.9,
+          "playing_ms": 241.3,
+          "presented_ms": 255.2,
+          "final_output_fps": 58.037,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 349.9,
+          "playing_ms": 350.6,
+          "presented_ms": 358.9,
+          "final_output_fps": 49.428,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 253,
+          "playing_ms": 253.4,
+          "presented_ms": 264,
+          "final_output_fps": 56.047,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 354.8,
+          "playing_ms": 355.2,
+          "presented_ms": 356.8,
+          "final_output_fps": 41.343,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 261.6,
+          "playing_ms": 262,
+          "presented_ms": 275.4,
+          "final_output_fps": 57.071,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 350.9,
+          "playing_ms": 351.6,
+          "presented_ms": 347.3,
+          "final_output_fps": 57.209,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 258.3,
+          "playing_ms": 258.6,
+          "presented_ms": 268.1,
+          "final_output_fps": 46.26,
+          "late_delta": 3
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 353.4,
+          "playing_ms": 353.7,
+          "presented_ms": 356.3,
+          "final_output_fps": 42.694,
+          "late_delta": 8
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 249.6,
+          "playing_ms": 252.4,
+          "presented_ms": 262.3,
+          "final_output_fps": 44.265,
+          "late_delta": 6
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 345.2,
+          "playing_ms": 345.8,
+          "presented_ms": 359.6,
+          "final_output_fps": 42.89,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 241.8,
+          "playing_ms": 242.4,
+          "presented_ms": 246.2,
+          "final_output_fps": 55.147,
+          "late_delta": 0
+        }
+      ]
+    },
+    "plus_early_fragment": {
+      "summary": {
+        "runs": 30,
+        "seeked_ms": {
+          "mean": 270.227,
+          "median": 269.0,
+          "p95_nearest_rank": 300.5
+        },
+        "playing_ms": {
+          "mean": 270.667,
+          "median": 269.55,
+          "p95_nearest_rank": 300.9
+        },
+        "presented_ms": {
+          "mean": 278.203,
+          "median": 277.35,
+          "p95_nearest_rank": 301.6
+        },
+        "min_final_output_fps": 40.095
+      },
+      "runs": [
+        {
+          "target_s": 540,
+          "seeked_ms": 266.4,
+          "playing_ms": 267.7,
+          "presented_ms": 287,
+          "final_output_fps": 44.191,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 337.1,
+          "playing_ms": 337.6,
+          "presented_ms": 342.2,
+          "final_output_fps": 54.554,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 309.5,
+          "playing_ms": 310.1,
+          "presented_ms": 318.2,
+          "final_output_fps": 56.852,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 235.9,
+          "playing_ms": 236.2,
+          "presented_ms": 255.1,
+          "final_output_fps": 55.292,
+          "late_delta": 1
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 300.5,
+          "playing_ms": 300.9,
+          "presented_ms": 301.6,
+          "final_output_fps": 40.662,
+          "late_delta": 3
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 250.6,
+          "playing_ms": 251,
+          "presented_ms": 253.1,
+          "final_output_fps": 55.158,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 275.9,
+          "playing_ms": 276.3,
+          "presented_ms": 289.8,
+          "final_output_fps": 41.265,
+          "late_delta": 6
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 269.9,
+          "playing_ms": 270.3,
+          "presented_ms": 286.1,
+          "final_output_fps": 56.943,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 276.9,
+          "playing_ms": 277.3,
+          "presented_ms": 280.2,
+          "final_output_fps": 56.949,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 238.9,
+          "playing_ms": 239.3,
+          "presented_ms": 247.6,
+          "final_output_fps": 57.154,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 275.7,
+          "playing_ms": 276.1,
+          "presented_ms": 276.8,
+          "final_output_fps": 40.095,
+          "late_delta": 4
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 250.1,
+          "playing_ms": 250.4,
+          "presented_ms": 262.3,
+          "final_output_fps": 57.132,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 270.7,
+          "playing_ms": 271.2,
+          "presented_ms": 273.1,
+          "final_output_fps": 42.876,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 259.3,
+          "playing_ms": 259.7,
+          "presented_ms": 260.3,
+          "final_output_fps": 55.938,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 276,
+          "playing_ms": 276.3,
+          "presented_ms": 279,
+          "final_output_fps": 40.378,
+          "late_delta": 4
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 257.8,
+          "playing_ms": 258.1,
+          "presented_ms": 268.9,
+          "final_output_fps": 55.131,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 273.9,
+          "playing_ms": 274.3,
+          "presented_ms": 274.7,
+          "final_output_fps": 56.097,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 261.8,
+          "playing_ms": 262.2,
+          "presented_ms": 274.3,
+          "final_output_fps": 56.943,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 282.7,
+          "playing_ms": 283,
+          "presented_ms": 294.3,
+          "final_output_fps": 42.319,
+          "late_delta": 3
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 254.5,
+          "playing_ms": 254.9,
+          "presented_ms": 257,
+          "final_output_fps": 56.102,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 268.4,
+          "playing_ms": 268.8,
+          "presented_ms": 279.5,
+          "final_output_fps": 56.075,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 265.3,
+          "playing_ms": 265.7,
+          "presented_ms": 273.4,
+          "final_output_fps": 56.224,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 283.1,
+          "playing_ms": 283.4,
+          "presented_ms": 286.5,
+          "final_output_fps": 57.093,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 261.2,
+          "playing_ms": 261.8,
+          "presented_ms": 277.9,
+          "final_output_fps": 55.183,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 261.8,
+          "playing_ms": 262.2,
+          "presented_ms": 262.9,
+          "final_output_fps": 40.627,
+          "late_delta": 3
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 269.6,
+          "playing_ms": 270.3,
+          "presented_ms": 279.1,
+          "final_output_fps": 55.966,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 292.2,
+          "playing_ms": 292.8,
+          "presented_ms": 297.9,
+          "final_output_fps": 41.371,
+          "late_delta": 4
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 251.4,
+          "playing_ms": 251.7,
+          "presented_ms": 259.1,
+          "final_output_fps": 55.091,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 281.2,
+          "playing_ms": 281.5,
+          "presented_ms": 292.1,
+          "final_output_fps": 57.071,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 248.5,
+          "playing_ms": 248.9,
+          "presented_ms": 256.1,
+          "final_output_fps": 55.259,
+          "late_delta": 0
+        }
+      ]
+    },
+    "plus_early_fragment_and_mse_epoch": {
+      "summary": {
+        "runs": 30,
+        "seeked_ms": {
+          "mean": 265.983,
+          "median": 266.55,
+          "p95_nearest_rank": 287.7
+        },
+        "playing_ms": {
+          "mean": 266.443,
+          "median": 267.05,
+          "p95_nearest_rank": 288.4
+        },
+        "presented_ms": {
+          "mean": 276.223,
+          "median": 273.65,
+          "p95_nearest_rank": 297.6
+        },
+        "min_final_output_fps": 38.224
+      },
+      "runs": [
+        {
+          "target_s": 540,
+          "seeked_ms": 255,
+          "playing_ms": 256.1,
+          "presented_ms": 272.1,
+          "final_output_fps": 43.664,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 198,
+          "playing_ms": 198.5,
+          "presented_ms": 201.8,
+          "final_output_fps": 56.091,
+          "late_delta": 1
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 273.7,
+          "playing_ms": 274.2,
+          "presented_ms": 286,
+          "final_output_fps": 56.926,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 342.7,
+          "playing_ms": 343.5,
+          "presented_ms": 349.8,
+          "final_output_fps": 58.031,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 283.3,
+          "playing_ms": 283.6,
+          "presented_ms": 297.3,
+          "final_output_fps": 56.058,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 249,
+          "playing_ms": 249.3,
+          "presented_ms": 261.3,
+          "final_output_fps": 55.966,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 265.1,
+          "playing_ms": 265.4,
+          "presented_ms": 277.3,
+          "final_output_fps": 55.965,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 280.9,
+          "playing_ms": 281.3,
+          "presented_ms": 292.5,
+          "final_output_fps": 56.96,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 266.4,
+          "playing_ms": 266.8,
+          "presented_ms": 272.2,
+          "final_output_fps": 38.224,
+          "late_delta": 5
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 251.8,
+          "playing_ms": 252.2,
+          "presented_ms": 255.2,
+          "final_output_fps": 55,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 283,
+          "playing_ms": 283.3,
+          "presented_ms": 291.3,
+          "final_output_fps": 41.282,
+          "late_delta": 6
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 241,
+          "playing_ms": 241.5,
+          "presented_ms": 256.1,
+          "final_output_fps": 38.741,
+          "late_delta": 10
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 267.3,
+          "playing_ms": 267.8,
+          "presented_ms": 269.2,
+          "final_output_fps": 41.465,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 266.7,
+          "playing_ms": 267.3,
+          "presented_ms": 273.2,
+          "final_output_fps": 55.113,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 270.2,
+          "playing_ms": 270.5,
+          "presented_ms": 278.9,
+          "final_output_fps": 55.994,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 243.5,
+          "playing_ms": 243.8,
+          "presented_ms": 256.7,
+          "final_output_fps": 57.075,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 287.1,
+          "playing_ms": 287.7,
+          "presented_ms": 294.7,
+          "final_output_fps": 41.566,
+          "late_delta": 4
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 245.2,
+          "playing_ms": 245.9,
+          "presented_ms": 248.7,
+          "final_output_fps": 56.977,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 290.9,
+          "playing_ms": 291.1,
+          "presented_ms": 308.6,
+          "final_output_fps": 56.943,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 249.5,
+          "playing_ms": 249.9,
+          "presented_ms": 259.8,
+          "final_output_fps": 56.972,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 253.6,
+          "playing_ms": 253.8,
+          "presented_ms": 267.5,
+          "final_output_fps": 56.96,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 273,
+          "playing_ms": 273.3,
+          "presented_ms": 275.2,
+          "final_output_fps": 56.136,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 281.5,
+          "playing_ms": 281.9,
+          "presented_ms": 297.6,
+          "final_output_fps": 49,
+          "late_delta": 2
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 243.6,
+          "playing_ms": 244,
+          "presented_ms": 260.8,
+          "final_output_fps": 56.919,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 286.8,
+          "playing_ms": 287.2,
+          "presented_ms": 293,
+          "final_output_fps": 58.037,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 255,
+          "playing_ms": 255.3,
+          "presented_ms": 271.2,
+          "final_output_fps": 58.037,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 287.7,
+          "playing_ms": 288.4,
+          "presented_ms": 295.1,
+          "final_output_fps": 42.402,
+          "late_delta": 1
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 263.7,
+          "playing_ms": 264.8,
+          "presented_ms": 274.1,
+          "final_output_fps": 56.886,
+          "late_delta": 0
+        },
+        {
+          "target_s": 540,
+          "seeked_ms": 272.8,
+          "playing_ms": 273,
+          "presented_ms": 284.4,
+          "final_output_fps": 56.932,
+          "late_delta": 0
+        },
+        {
+          "target_s": 900,
+          "seeked_ms": 251.5,
+          "playing_ms": 251.9,
+          "presented_ms": 265.1,
+          "final_output_fps": 55.972,
+          "late_delta": 0
+        }
+      ]
+    }
+  }
+}
