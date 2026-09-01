@@ -3,7 +3,7 @@
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束した。
-当時の絶対時間はタブ数を記録していなかったため主結果から外すが、単一タブで取り直した短い録画でもresponse中央値59〜67msに対し、初画中央値252〜450msで、index探索以外の待ちが残った。
+当時の絶対時間はタブ数を記録していなかったため主結果から外すが、単一タブで取り直した短い録画でもresponse中央値50〜52msに対し、可視YADIF canvas初描画中央値215〜267msで、index探索以外の待ちが残った。
 
 シークとは別に、タブ数を固定していない旧条件でGalaxyのYADIF出力がほぼ停止する走行を反復再現した。
 canvasのopacity変更は原因または修正ではなかった。
@@ -398,16 +398,23 @@ KonomiTVの保存済み画質設定では初期選択が`1080p` HLSだったた�
 古いPinia状態の再保存だけでなく、Worker、MSE、decoder、canvas処理の残留も除外できない。
 このため、Galaxyのend-to-end絶対時間は、開始前のCDP page targetが0件、測定中は対象の視聴タブ1枚だけであることを確認して取り直した次の値へ更新する。
 
-| 素材と条件 | response中央値 | first AU中央値 | first fragment中央値 | appended中央値 | canplay中央値 | 初画中央値 / p90 |
+| 素材と条件 | n | response中央値 | first AU中央値 | first fragment中央値 | appended中央値 | 可視canvas初描画中央値 / p90 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 乃木坂工事中、600/900秒台、`autoFilm:false` | 58.7 ms | 135.5 ms | 142.2 ms | 156.0 ms | 244.2 ms | 252.4 / 272.8 ms |
-| MADDER #08、420/900秒台、`autoFilm:true` | 66.6 ms | 141.8 ms | 170.9 ms | 181.4 ms | 277.2 ms | 449.8 / 546.5 ms |
+| 乃木坂工事中、600/900秒台、`autoFilm:false` | 10 | 50.3 ms | 115.8 ms | 128.6 ms | 138.1 ms | 215.2 / 261.3 ms |
+| MADDER #08、420/900秒台、`autoFilm:false` | 8 | 52.3 ms | 119.4 ms | 144.8 ms | 163.2 ms | 267.4 / 311.4 ms |
 
-乃木坂の旧10回値は初画中央値245.8ms、新値は252.4msで、差は6.6msだった。
-MADDERの旧10回値は488.9ms、新値は449.8msで39.1ms短かったが、1バッチ同士なので差をタブ競合の効果量とは断定しない。
-旧値は主結果から外し、新しい単一タブ値を採用する。
+ここで初画は、YADIFのWebGL2 contextがdefault framebufferへ最初に`drawArrays()`した時刻である。
+その時点で`.dplayer-video-wrap-aspect`のopacityは全走行`1`、`watch-player--loading`はなく、DPlayer spinnerは`display:none`だったため、canvasは隠されていなかった。
+MADDERでは中央のbuffering表示が重なったが、canvas自体は表示され、初描画中央値267.4msに対して`playing`中央値は284.1msだった。
+
+既存timing eventの`presented`は、append後のrVFCであっても`video.seeking`中のcallbackを捨てる。
+MADDERでは目的位置のframeがcanvasへ描画済みでもこの条件で約200ms待ち、旧表の449.8msは画面初描画ではなく「seeking解除後に受理したrVFC」の中央値だったため、初画指標から外した。
+同じ単一タブ内で`autoFilm:false/true`を6回ずつ交互にしたcanvas初描画中央値は269.4 / 251.1msで分布も重なり、今回の約200ms差をIVTC待ちで説明する仮説は支持されなかった。
+
+既存`presented` event同士では、乃木坂の旧10回値245.8msに対して単一タブ値252.4ms、MADDERの旧10回値488.9msに対して単一タブ値449.8msだった。
+1バッチ同士なので差をタブ競合の効果量とは断定せず、旧値を主結果から外す。
 MADDERの各seek後には`video`と`film`の両方が現れ、定常7標本も`film` 6回の後に`video`へ遷移したため、420秒台と900秒台を含め録画全体を24fpsとは扱わない。
-匿名化した全イベントは[Galaxy LAN単一タブ再測定](results/galaxy-lan-single-tab-seek.json)に保存した。
+従来のtiming eventは[Galaxy LAN単一タブ再測定](results/galaxy-lan-single-tab-seek.json)、raw rVFC・canvas draw・可視状態を加えた全イベントは[可視初画再測定](results/galaxy-lan-single-tab-visible-frame.json)に保存した。
 
 以下の古い単発・連続UI測定は、UI入力からplayer受理までの経路と要求キャンセルの観察には使うが、タブ数を記録していないため現在のGalaxy絶対レイテンシ代表値には使わない。
 
@@ -489,7 +496,7 @@ native変換時間もAndroid / WASM / poolの時間へ換算できない。
 
 デスクトップChromeの「ばけばけ」4点は安定判定102〜202msだった。
 Galaxyの旧素材別測定はタブ数を記録していなかったため、絶対時間の代表値から外す。
-単一タブで取り直した最新KonomiTV実DPlayerの初画中央値 / p90は、乃木坂工事中252.4 / 272.8ms、MADDER 449.8 / 546.5msだった。
+単一タブで取り直した最新KonomiTV実DPlayerの可視canvas初描画中央値 / p90は、乃木坂工事中215.2 / 261.3ms、MADDER 267.4 / 311.4msだった。
 旧長時間TS 3点の360〜423msは、永続index仮説に対するprobe数と段階比率の参考には使うが、現在の端末絶対値には使わない。
 
 長時間TSでは全点が2本の128KiB probeで収束した。
@@ -543,10 +550,11 @@ MSE追加の数msも速度効果と判定しない。
 
 ## 仮説の評価と優先順位
 
-実測を含む通常seekの候補順位は、(1) append後のdecoder提示、(2) GOP/AAC収集と最初のIDR jobを含む初期H.264/fMP4生成、(3) PTS probeとrequest往復、(4) PAT/PMTとheader再取得、(5) `autoFilm`のmode遷移、(6)連続操作の残余計算である。
+実測を含む通常seekの候補順位は、(1) append後のdecoder提示、(2) GOP/AAC収集と最初のIDR jobを含む初期H.264/fMP4生成、(3) PTS probeとrequest往復、(4) PAT/PMTとheader再取得、(5)連続操作の残余計算である。
 上位二つは位置と端末で順序が入れ替わる。
 単一タブ再測定の中央値では、最初のpicture jobsからstream先頭AUまで乃木坂38.8ms、MADDER39.9msだった。
-appendedから初画までは乃木坂96.4ms、MADDER268.5msで、24fps判定を含む後段の差が大きかった。
+appendedから可視canvas初描画までは乃木坂77.1ms、MADDER104.2msだった。
+MADDERの既存`presented`が示した約268.5msは`video.seeking`解除を待つ計測条件の差で、decoder・IVTCがその時間だけ初画を止めていた証拠ではない。
 デスクトップの追加走行でもfragmentからappendは1.5ms、appendからcanplayは227.3msだった。
 通常のMSE append自体より、初期IDR変換とdecoder準備の変動が大きい。
 Androidの継続的な不滑らかさは別問題だが、opaque canvasによるvideo callback抑制という当初説明は追加計測で否定した。
@@ -559,7 +567,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
-| 6. YADIF/IVTCの過剰な初画待ち | YADIF queueの未来時刻累積を30回中8回再現。rAF停止やcanvas完全被覆ではなく、飽和後も末尾時刻を連鎖するscheduleが原因。upstream再同期の復元で停止0/30。短い過渡低下は残り、IVTC固有待ちとは未判定 |
+| 6. YADIF/IVTCの過剰な初画待ち | タブ数未固定の旧条件でYADIF queueの未来時刻累積を30回中8回再現し、upstream再同期の復元で停止0/30。単一タブのMADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
@@ -629,7 +637,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
-| `autoFilm`のseek後lock/hysteresisを調整する | 24fps区間の過渡を短縮する可能性 | MADDERで区間差と切替を確認。誤lockとCM境界を含む素材別評価が必要 |
+| `autoFilm`のseek後lock/hysteresisを調整する | 24fps区間のモード安定を早める可能性 | 単一タブ初画A/Bでは改善余地を確認できず優先度を下げる。定常cadence、誤lock、CM境界の評価候補として残す |
 | seek直後だけ簡易deinterlaceにする | 初画数msの可能性 | 1〜2frame不足時の複製/直接描画は既に実装済み。通常は追加変更不要 |
 | 実行中picture jobを細粒度cancelする | 連続確定時の残余計算削減 | 通常のドラッグは指を離すまでseekしない。連打再現とjob時間の計測が先 |
 | IDR用`ReconstructedPicture`生成直後の重複`clear()`を除く | 理論上はplaneのzero fillを1回減らす | 80回交互測定で28.224→28.357ms、best 27.702→27.692ms、出力hash一致。効果なしと確認したため性能変更にはしない |

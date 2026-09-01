@@ -6,18 +6,26 @@
 古い設定タブのinputと新規視聴タブの`localStorage`が食い違う状態を実際に確認し、Worker、MSE、decoder、canvas処理の残留も除外できなかった。
 このため、開始前のCDP page target 0件、測定中は対象の視聴タブ1枚だけ、再生中、LANから隔離KonomiTVへ直接接続、実DPlayer Originalという条件で取り直した。
 
-| 素材 | seek系列 | autoFilm | response中央値 | first fragment中央値 | appended中央値 | canplay中央値 | 初画中央値 | 初画p90 |
+| 素材 | seek系列 | autoFilm | n | response中央値 | first fragment中央値 | appended中央値 | 可視canvas初描画中央値 | p90 |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 乃木坂工事中 | 600/900秒台を交互に10回 | false | 58.7 ms | 142.2 ms | 156.0 ms | 244.2 ms | 252.4 ms | 272.8 ms |
-| MADDER #08 | 420/900秒台を交互に10回 | true | 66.6 ms | 170.9 ms | 181.4 ms | 277.2 ms | 449.8 ms | 546.5 ms |
+| 乃木坂工事中 | 600/900秒台を交互 | false | 10 | 50.3 ms | 128.6 ms | 138.1 ms | 215.2 ms | 261.3 ms |
+| MADDER #08 | 420/900秒台を交互 | false | 8 | 52.3 ms | 144.8 ms | 163.2 ms | 267.4 ms | 311.4 ms |
+
+初画は、YADIFのWebGL2 contextがdefault framebufferへ最初に`drawArrays()`した時刻とした。
+全走行で親要素opacityは`1`、`watch-player--loading`はなく、DPlayer spinnerは`display:none`だった。
+MADDERではKonomiTVの中央buffering表示が重なったがcanvasは隠れず、canvas初描画中央値267.4ms、`playing`中央値284.1msだった。
+
+既存`presented` eventは`video.seeking`中のrVFCを捨てるため、MADDERで目的frameのcanvas描画後も約200ms遅れる走行があった。
+旧表のMADDER 449.8 / 546.5msは可視初画ではなく、この受理条件を満たしたrVFCの中央値 / p90だったので初画指標から外した。
+同じ単一タブで`autoFilm:false/true`を6回ずつ交互にしたcanvas初描画中央値は269.4 / 251.1msで分布も重なり、IVTCが約200ms差の原因という仮説は支持されなかった。
 
 乃木坂の定常標本は約60fpsの`video`だった。
 MADDERは各seek後に`video`と`film`が混在し、定常7標本も約24fpsの`film` 6回の後に`video`へ遷移した。
 番組全区間やCM区間のcadenceへ一般化しない。
 
-旧10回値と比べると、初画中央値は乃木坂245.8→252.4ms、MADDER488.9→449.8msだった。
-1バッチ同士なので差をタブ競合の効果量とは断定せず、旧値を主結果から外して新値へ置き換える。
-全イベントと集計は[galaxy-lan-single-tab-seek.json](galaxy-lan-single-tab-seek.json)に保存した。
+既存`presented` event同士では、旧10回値から単一タブ値への変化は乃木坂245.8→252.4ms、MADDER488.9→449.8msだった。
+1バッチ同士なので差をタブ競合の効果量とは断定せず、旧値を主結果から外す。
+従来のtiming eventは[galaxy-lan-single-tab-seek.json](galaxy-lan-single-tab-seek.json)、raw rVFC・canvas draw・可視状態を含む再測定は[galaxy-lan-single-tab-visible-frame.json](galaxy-lan-single-tab-visible-frame.json)に保存した。
 
 以下の旧Galaxy測定は、タブ数を記録していない限り、機能再現、同一走行内の段階比率、同一タブ内A/Bの参考として扱う。
 現在の端末end-to-end絶対時間には上の単一タブ再測定を使う。

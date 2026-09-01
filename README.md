@@ -12,7 +12,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 - 完成fragmentを早く渡す試作は、デスクトップの同じ3地点で初回fragmentを約9〜10ms短縮しました。Galaxyの旧順次比較はbuild順をランダム化せずタブ数も記録していないため、約28msの差を効果量には使いません。
 - probeで測ったRange開始byteとPTSの対応を、後続のfirst fragment時刻で上書きしていました。この上書きをやめると、学習後10 seekの追加probeは直接デモで4回から0回、実KonomiTVではdesktopで2回から0回、Galaxyで4回から0回になりました。
 - queue再同期版の旧MADDER試験はfilm候補2区間への10回seekすべてで初画が返りましたが、絶対時間はタブ状態を固定した新測定へ置き換えました。区間によってvideo/film判定が切り替わるため、録画全体を24fpsとは扱っていません。
-- 古い検証タブが設定と再生資源を残し得ることが分かったため、Galaxyの絶対時間を対象タブ1枚だけで再測定しました。初画中央値 / p90は乃木坂工事中252.4 / 272.8ms、MADDER #08 449.8 / 546.5msです。以前の絶対値は主結果から外しました。
+- 古い検証タブが設定と再生資源を残し得ることが分かったため、Galaxyの絶対時間を対象タブ1枚だけで再測定しました。可視YADIF canvas初描画の中央値 / p90は乃木坂工事中215.2 / 261.3ms、MADDER #08 267.4 / 311.4msです。既存`presented` eventは`video.seeking`解除を待ってMADDERを約200ms過大評価していたため、画面初画の指標から外しました。以前の絶対値も主結果から外しています。
 
 詳しいデータフロー、仮説評価、改善候補は [REPORT.md](REPORT.md) にあります。実機条件と素材ごとの結果は [results/device-results.md](results/device-results.md)、機械可読な集計値は [results](results/) に置いています。
 
