@@ -1,0 +1,49 @@
+{
+  "environment": {
+    "browser": "Linux Headless Chrome 152",
+    "recording": "Nogizaka Under Construction, selected seek points; programme and commercial cadence not classified",
+    "konomitv": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "timing_branch": "244da74",
+    "fix_branch": "f8ab9c785b1c9daa03d5b5f1e0ddb7b41a560a04"
+  },
+  "normal_seek": {
+    "targets_seconds": [180, 720, 1320, 360, 1080, 1500, 540, 900],
+    "before": {
+      "presented": "8/8",
+      "mean_seek_to_first_fragment_ms": 76.95,
+      "mean_seek_to_append_ms": 78.86,
+      "mean_seek_to_updateend_ms": 86.95,
+      "mean_seek_to_playing_ms": 237.64,
+      "mean_seek_to_presented_ms": 251.38
+    },
+    "after_clean_run": {
+      "presented": "8/8",
+      "mean_seek_to_first_fragment_ms": 75.35,
+      "mean_seek_to_append_ms": 78.62,
+      "mean_seek_to_updateend_ms": 91.45,
+      "mean_seek_to_playing_ms": 233.24,
+      "mean_seek_to_presented_ms": 250.14
+    },
+    "paired_presented_delta_ms": {
+      "mean": -1.24,
+      "median": 14.25,
+      "min": -104.50,
+      "max": 123.00
+    },
+    "interpretation": "No measurable average seek improvement. Presentation variance dominates the 1.24 ms mean difference. An earlier after run had one 18 s presentation stall after successful append; it did not recur in the clean run."
+  },
+  "forced_consecutive_seek": {
+    "method": "Set a second out-of-buffer currentTime when the first seek reports its first media append call.",
+    "before": {
+      "pairs": 8,
+      "second_seek_accepted": 4,
+      "presented_after_accepted": "4/4"
+    },
+    "after": {
+      "pairs": 8,
+      "second_seek_accepted": 6,
+      "presented_after_accepted": "5/6"
+    },
+    "interpretation": "Some resets began before the old media updateend, but the new init/media was not ready before that updateend. The browser run therefore did not reach the queue-corruption order reproduced by the deterministic SourceBuffer test. The after-only timeout occurred after the new media updateend and did not recur, so it is not evidence for or against the queue-generation fix."
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "recording": {
+    "name": "乃木坂工事中",
+    "service_id": 41008,
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "galaxy": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "route": "ADB reverse to the isolated local KonomiTV backend",
+    "marks_are_ms_since_seek_requested": true,
+    "runs": [
+      {
+        "target_seconds": 600,
+        "probe_count": 1,
+        "probe_complete": 60.9,
+        "first_byte": 75.1,
+        "first_picture_jobs": 113.8,
+        "first_picture_output": 121.0,
+        "first_access_unit": 148.4,
+        "first_picture_batch": 157.5,
+        "first_fragment": 160.7,
+        "appended": 180.9,
+        "playing": 276.7
+      },
+      {
+        "target_seconds": 900,
+        "probe_count": 1,
+        "probe_complete": 13.0,
+        "first_byte": 19.0,
+        "first_picture_jobs": 41.3,
+        "first_picture_output": 45.7,
+        "first_access_unit": 74.3,
+        "first_picture_batch": 75.0,
+        "first_fragment": 78.8,
+        "appended": 85.8,
+        "playing": 113.1
+      },
+      {
+        "target_seconds": 1200,
+        "probe_count": 3,
+        "probe_complete": 48.7,
+        "first_byte": 60.0,
+        "first_picture_jobs": 96.4,
+        "first_picture_output": 103.4,
+        "first_access_unit": 136.3,
+        "first_picture_batch": 150.0,
+        "first_fragment": 155.5,
+        "appended": 168.4,
+        "playing": 317.6
+      }
+    ]
+  },
+  "galaxy_lan_wifi": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "route": "Wi-Fi direct to 一時LAN relay, relayed only to the isolated local KonomiTV backend",
+    "marks_are_ms_since_seek_requested": true,
+    "notes": [
+      "The real DPlayer Original path was playing before the series.",
+      "The three seeks were issued through video.currentTime so UI pointer latency is excluded."
+    ],
+    "runs": [
+      {
+        "target_seconds": 600,
+        "probe_count": 2,
+        "probe_complete": 119.9,
+        "first_byte": 137.5,
+        "first_picture_jobs": 174.4,
+        "first_picture_output": 181.2,
+        "first_access_unit": 212.0,
+        "first_picture_batch": 221.6,
+        "first_fragment": 225.0,
+        "appended": 237.4,
+        "rvfc": 339.0,
+        "playing": 334.8
+      },
+      {
+        "target_seconds": 900,
+        "probe_count": 2,
+        "probe_complete": 60.0,
+        "first_byte": 74.1,
+        "first_picture_jobs": 108.0,
+        "first_picture_output": 126.1,
+        "first_access_unit": 142.7,
+        "first_picture_batch": 152.4,
+        "first_fragment": 154.9,
+        "appended": 166.7,
+        "rvfc": 208.2,
+        "playing": 197.3
+      },
+      {
+        "target_seconds": 1200,
+        "probe_count": 2,
+        "probe_complete": 74.2,
+        "first_byte": 91.6,
+        "first_picture_jobs": 127.0,
+        "first_picture_output": 132.3,
+        "first_access_unit": 164.2,
+        "first_picture_batch": 181.6,
+        "first_fragment": 185.7,
+        "appended": 195.4,
+        "rvfc": 254.6,
+        "playing": 265.9
+      }
+    ]
+  },
+  "desktop_chrome_extension": {
+    "browser": "Google Chrome 152.0.7977.64",
+    "visibility_state": "visible",
+    "route": "isolated local KonomiTV backend",
+    "target_seconds": 600,
+    "probe_count": 2,
+    "marks_ms_since_seek_requested": {
+      "probe_complete": 28.4,
+      "first_byte": 32.6,
+      "first_picture_jobs": 48.0,
+      "first_picture_output": 54.2,
+      "first_access_unit": 77.6,
+      "first_picture_batch": 85.6,
+      "first_fragment": 92.3,
+      "appended": 93.8,
+      "canplay": 321.1
+    },
+    "notes": [
+      "The seek was issued through video.currentTime after the real DPlayer Original path had loaded.",
+      "play() was not accepted as a user gesture, so playing and the later paused rVFC are not used for device comparison."
+    ]
+  },
+  "node_wasm_first_batch": {
+    "source_offset": 1018026310,
+    "bytes_read_before_jobs": 3145728,
+    "job_count": 13,
+    "job_0": {
+      "job_bytes": 310026,
+      "output_bytes": 541501,
+      "single_run_ms": 33.26,
+      "warm_80_run_mean_ms": 29.014,
+      "warm_80_run_best_ms": 28.552
+    },
+    "other_job_ms_range": [3.241, 14.856],
+    "session_complete_ms": 6.219,
+    "first_media_fragment": {
+      "bytes": 1868301,
+      "video_samples": 14,
+      "audio_samples": 57,
+      "random_access": true
+    },
+    "cpu_profile": {
+      "job_0_samples": 2275,
+      "observed_idr_specific_functions": [
+        "IntraState::store_luma",
+        "residual_8x8",
+        "luma_8x8_dc",
+        "IntraState::store_chroma",
+        "chroma_residual_4x4"
+      ]
+    }
+  },
+  "redundant_clear_trial": {
+    "change": "Remove ReconstructedPicture::clear immediately after zero-initialized allocation",
+    "rounds_per_build": 80,
+    "baseline_mean_ms": 28.224,
+    "trial_mean_ms": 28.357,
+    "baseline_best_ms": 27.702,
+    "trial_best_ms": 27.692,
+    "output_sha256": "abdbf1dcfa0e361abc68a49219e2824931ccf713456fc9af4b955593f2bbd398",
+    "conclusion": "No measurable speedup; do not adopt as a performance change."
+  },
+  "probe_prefix_pts": {
+    "sample_count": 6,
+    "probe_bytes": 131072,
+    "pts_found_within_32768_bytes": 5,
+    "pts_found_within_65536_bytes": 6,
+    "notes": [
+      "Offsets are the six probes used by the Galaxy LAN 600, 900, and 1200 second runs.",
+      "Streaming the probe and cancelling after firstTimestamp succeeds could avoid the second 64 KiB response chunk in these samples; RTT and the next dependent probe remain."
+    ]
+  }
+}

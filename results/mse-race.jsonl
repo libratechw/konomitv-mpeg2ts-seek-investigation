@@ -1,0 +1,2 @@
+{"case":"reset-after-append","calls":[["append",1],["append",2],["remove"],["append",3],["append",4]],"newInitAppended":true}
+{"case":"reset-during-append","calls":[["append",1],["append",2],["remove"],["append",4]],"newInitAppended":false}

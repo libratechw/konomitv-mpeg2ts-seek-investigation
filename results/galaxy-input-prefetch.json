@@ -1,0 +1,97 @@
+{
+  "transport": "adb reverse tcp:7012",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "recording": "Nogizaka Koujichuu",
+  "player_change": "fix/deliver-completed-fragments-early plus timing, MSE reset, and YADIF fixes",
+  "runs": [
+    {
+      "input_queue_mib": {"high": 32, "low": 8},
+      "target_seconds": 599.701385,
+      "playing_before_seek": true,
+      "probe_count": 2,
+      "pointerup_to_seeking_ms": 16.3,
+      "since_seek_requested_ms": {
+        "request": 61.5,
+        "response": 74.4,
+        "first_byte": 79.1,
+        "first_fragment": 139.7,
+        "appended": 151.5,
+        "canplay": 272.5,
+        "playing": 272.7
+      },
+      "body_bytes": {
+        "at_first_fragment": 12607461,
+        "at_appended": 15777738,
+        "at_playing": 38362155
+      }
+    },
+    {
+      "input_queue_mib": {"high": 8, "low": 2},
+      "target_seconds": 599.734443,
+      "playing_before_seek": false,
+      "probe_count": 1,
+      "pointerup_to_seeking_ms": 16.1,
+      "since_seek_requested_ms": {
+        "request": 28.8,
+        "response": 35.4,
+        "first_byte": 37.4,
+        "first_fragment": 134.5,
+        "appended": 144.8,
+        "canplay": 213.4,
+        "playing": null
+      },
+      "body_bytes": {
+        "at_first_fragment": 11933642,
+        "at_appended": 11933642,
+        "at_canplay": 11933642
+      }
+    },
+    {
+      "input_queue_mib": {"high": 8, "low": 2},
+      "target_seconds": 901.072119,
+      "playing_before_seek": true,
+      "probe_count": 2,
+      "pointerup_to_seeking_ms": 19.8,
+      "since_seek_requested_ms": {
+        "request": 48.8,
+        "response": 55.4,
+        "first_byte": 64.0,
+        "first_fragment": 142.5,
+        "appended": 149.1,
+        "canplay": 272.4,
+        "playing": 272.5
+      },
+      "body_bytes": {
+        "at_first_fragment": 11577136,
+        "at_appended": 11577136,
+        "at_playing": 11577136
+      }
+    },
+    {
+      "input_queue_mib": {"high": 32, "low": 8},
+      "target_seconds": 901.072119,
+      "playing_before_seek": true,
+      "probe_count": 1,
+      "pointerup_to_seeking_ms": 25.6,
+      "since_seek_requested_ms": {
+        "request": 30.7,
+        "response": 40.4,
+        "first_byte": 41.2,
+        "first_fragment": 116.3,
+        "appended": 135.4,
+        "canplay": 153.2,
+        "playing": 153.3
+      },
+      "body_bytes": {
+        "at_first_fragment": 13607631,
+        "at_appended": 16748271,
+        "at_playing": 20409798
+      }
+    }
+  ],
+  "limitations": [
+    "This is not a LAN or Wi-Fi measurement.",
+    "The in-memory seek index, probe count, source offset, and decoder state differed between runs.",
+    "The 8/2 MiB variant reduced read-ahead but did not demonstrate a latency improvement."
+  ]
+}

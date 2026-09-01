@@ -1,0 +1,12 @@
+position fraction=0 offset=0 size=132655620 input_bytes=8388608 read_8mib_ms=173.635 service=Some(43008) first_video_at=Some(327680) first_complete_gop_at=Some(1638400) second_complete_gop_at=Some(2490368)
+fragment repeat=0 bytes_in=2490368 native_first_fragment_ms=134.764 start=0.473200 random_access=true video_samples=14 audio_samples=46 fragment_bytes=2007448
+fragment repeat=1 bytes_in=2490368 native_first_fragment_ms=133.087 start=0.473200 random_access=true video_samples=14 audio_samples=46 fragment_bytes=2007448
+fragment repeat=2 bytes_in=2490368 native_first_fragment_ms=131.021 start=0.473200 random_access=true video_samples=14 audio_samples=46 fragment_bytes=2007448
+position fraction=0.5 offset=66327810 size=132655620 input_bytes=8388608 read_8mib_ms=127.520 service=Some(43008) first_video_at=Some(262144) first_complete_gop_at=Some(1572864) second_complete_gop_at=Some(2293760)
+fragment repeat=0 bytes_in=2293760 native_first_fragment_ms=139.756 start=0.528033 random_access=true video_samples=14 audio_samples=48 fragment_bytes=2192871
+fragment repeat=1 bytes_in=2293760 native_first_fragment_ms=139.369 start=0.528033 random_access=true video_samples=14 audio_samples=48 fragment_bytes=2192871
+fragment repeat=2 bytes_in=2293760 native_first_fragment_ms=139.727 start=0.528033 random_access=true video_samples=14 audio_samples=48 fragment_bytes=2192871
+position fraction=0.8 offset=106124496 size=132655620 input_bytes=8388608 read_8mib_ms=116.878 service=Some(43008) first_video_at=Some(458752) first_complete_gop_at=Some(2228224) second_complete_gop_at=Some(3080192)
+fragment repeat=0 bytes_in=3080192 native_first_fragment_ms=121.420 start=0.831033 random_access=true video_samples=14 audio_samples=62 fragment_bytes=1927699
+fragment repeat=1 bytes_in=3080192 native_first_fragment_ms=120.996 start=0.831033 random_access=true video_samples=14 audio_samples=62 fragment_bytes=1927699
+fragment repeat=2 bytes_in=3080192 native_first_fragment_ms=121.352 start=0.831033 random_access=true video_samples=14 audio_samples=62 fragment_bytes=1927699
