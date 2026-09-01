@@ -293,6 +293,16 @@ true fullscreen、60Hz、単一タブで、2秒間だけpresentationを1/2 rAF�
 したがってpresentation policyの変更は未確定とし、容量不足時の最小FIFO破棄と、queue時刻が表示可能範囲を越えた場合だけの全resetを独立した修正候補とする。
 生値と除外runは[galaxy-yadif-scheduler-ablation.json](galaxy-yadif-scheduler-ablation.json)に保存した。
 
+このqueue処理だけを`konomi/main`へ載せた正式候補はsource `26484fd`、dist `27b327e`である。
+540秒と900秒の交互seek 90回は停止0件、queue reset 44回、最低draw 36.09fpsで、前身`f7b89eb`のstall防止を維持した。
+通常30秒のdrawは前身59.758fps、正式候補59.768fpsで、両方とも採取中のreset増分0だった。
+正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
+
+50msと250msの単発main-thread stallでは両版とも次の1秒窓で約60fpsへ復帰した。
+rAFとrVFCを同時に止めるこの注入ではqueue容量差を単独で励起せず、速度差の根拠にはしない。
+また、正式buildにはpresentationを止めるglobal hookがないため、hook変数だけを設定した3走行はforced試験から除外した。
+正式候補の条件、全90 seek、通常・film・stall結果、除外理由は[galaxy-yadif-queue-recovery-successor.json](galaxy-yadif-queue-recovery-successor.json)に保存した。
+
 ## 優先修正のGalaxy合成確認
 
 540秒と900秒を交互に30回seekし、YADIF queue再同期だけ、完成fragment早期受け渡しを追加、MSE世代修正も追加、の3 buildを順番に測定した。

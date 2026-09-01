@@ -1,0 +1,1825 @@
+{
+  "schemaVersion": 1,
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151",
+    "displayHz": 60,
+    "transport": "LAN direct to isolated local KonomiTV",
+    "playback": "recorded MPEG-2 TS Original, true fullscreen, one page",
+    "material": "verified Nogizaka Koujichuu segment on local SSD; MADDER only for the separately verified film segment"
+  },
+  "upstreamCheckpoint": {
+    "otya128Main": "d5df08b",
+    "tsukumijimaMain": "52a3db5",
+    "KonomiTVMaster": "e92fba8"
+  },
+  "builds": {
+    "predecessorFullReset": {
+      "branch": "fix/restore-yadif-queue-reset",
+      "sourceCommit": "f7b89eb",
+      "distCommit": "4c75a02",
+      "sourceHash": "95b47a7a411f614505afacfb66197513574afa5d19c53bcf1c0b41022a52539a",
+      "branchStatus": "deleted after successor publication to prevent accidental merge"
+    },
+    "successorSeparatedRecovery": {
+      "branch": "fix/separate-yadif-queue-recovery",
+      "sourceCommit": "26484fd",
+      "distCommit": "27b327e",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "distHash": "3cc72212e684b27a02a8cdc4c3790f93429cd9c16042ec208b1b7660cf62f286",
+      "branchStatus": "published"
+    }
+  },
+  "successorSeekRegression": {
+    "runs": 90,
+    "stallCriterion": "drawFps < 10 or lateDelta > 30",
+    "stalls": 0,
+    "lateDeltaTotal": 164,
+    "queueResetDeltaTotal": 44,
+    "drawFpsMedian": 49.69181011737747,
+    "drawFpsMinimum": 36.087053077160306,
+    "runsByBlock": [
+      [
+        {
+          "index": 0,
+          "target": 540,
+          "elapsedMs": 1805.5999999046326,
+          "drawFps": 48.73726185459014,
+          "lateDelta": 1,
+          "queueResetDelta": 0,
+          "outputFps": 59.808612437348586,
+          "mode": "video",
+          "currentTime": 541.459861,
+          "readyState": 4
+        },
+        {
+          "index": 1,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 50.52467936194292,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 43.69780540113,
+          "mode": "video",
+          "currentTime": 901.512726,
+          "readyState": 4
+        },
+        {
+          "index": 2,
+          "target": 540,
+          "elapsedMs": 1801.2000000476837,
+          "drawFps": 39.97335109820893,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 38.72216844143272,
+          "mode": "video",
+          "currentTime": 541.521804,
+          "readyState": 4
+        },
+        {
+          "index": 3,
+          "target": 900,
+          "elapsedMs": 1801.0999999046326,
+          "drawFps": 44.97251679767304,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 57.10966992414907,
+          "mode": "video",
+          "currentTime": 901.488018,
+          "readyState": 4
+        },
+        {
+          "index": 4,
+          "target": 540,
+          "elapsedMs": 1802.2000000476837,
+          "drawFps": 51.603595604005854,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 45.41501594461569,
+          "mode": "video",
+          "currentTime": 541.498706,
+          "readyState": 4
+        },
+        {
+          "index": 5,
+          "target": 900,
+          "elapsedMs": 1802.1000000238419,
+          "drawFps": 46.61228566610548,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 49.18355302448408,
+          "mode": "video",
+          "currentTime": 901.551024,
+          "readyState": 4
+        },
+        {
+          "index": 6,
+          "target": 540,
+          "elapsedMs": 1805,
+          "drawFps": 51.523545706371195,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 60.030983729382505,
+          "mode": "video",
+          "currentTime": 541.478353,
+          "readyState": 4
+        },
+        {
+          "index": 7,
+          "target": 900,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 50.530290411019344,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.97871723352038,
+          "mode": "video",
+          "currentTime": 901.488263,
+          "readyState": 4
+        },
+        {
+          "index": 8,
+          "target": 540,
+          "elapsedMs": 1802.5,
+          "drawFps": 49.375866851595006,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 41.26142057273185,
+          "mode": "video",
+          "currentTime": 541.453579,
+          "readyState": 4
+        },
+        {
+          "index": 9,
+          "target": 900,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 50.530290411019344,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.11268575798249,
+          "mode": "video",
+          "currentTime": 901.508135,
+          "readyState": 4
+        },
+        {
+          "index": 10,
+          "target": 540,
+          "elapsedMs": 1800.9000000953674,
+          "drawFps": 40.53528790945319,
+          "lateDelta": 6,
+          "queueResetDelta": 2,
+          "outputFps": 48,
+          "mode": "video",
+          "currentTime": 541.474574,
+          "readyState": 4
+        },
+        {
+          "index": 11,
+          "target": 900,
+          "elapsedMs": 1802.1000000238419,
+          "drawFps": 50.4966428049476,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.91611743701669,
+          "mode": "video",
+          "currentTime": 901.483484,
+          "readyState": 4
+        },
+        {
+          "index": 12,
+          "target": 540,
+          "elapsedMs": 1800.7999999523163,
+          "drawFps": 50.53309640293736,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 43.83457213745483,
+          "mode": "video",
+          "currentTime": 541.493895,
+          "readyState": 4
+        },
+        {
+          "index": 13,
+          "target": 900,
+          "elapsedMs": 1800.6999999284744,
+          "drawFps": 51.09124229669258,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.036177746763684,
+          "mode": "video",
+          "currentTime": 901.501115,
+          "readyState": 4
+        },
+        {
+          "index": 14,
+          "target": 540,
+          "elapsedMs": 1802.0999999046326,
+          "drawFps": 49.38682648283108,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.97001499250375,
+          "mode": "video",
+          "currentTime": 541.470205,
+          "readyState": 4
+        },
+        {
+          "index": 15,
+          "target": 900,
+          "elapsedMs": 1807.2000000476837,
+          "drawFps": 52.014165558609875,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.88023952516243,
+          "mode": "video",
+          "currentTime": 901.526851,
+          "readyState": 4
+        },
+        {
+          "index": 16,
+          "target": 540,
+          "elapsedMs": 1800.9000000953674,
+          "drawFps": 49.41973457453882,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 41.36708361769053,
+          "mode": "video",
+          "currentTime": 541.451186,
+          "readyState": 4
+        },
+        {
+          "index": 17,
+          "target": 900,
+          "elapsedMs": 1800.8000000715256,
+          "drawFps": 51.088405151236046,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56,
+          "mode": "video",
+          "currentTime": 901.502278,
+          "readyState": 4
+        },
+        {
+          "index": 18,
+          "target": 540,
+          "elapsedMs": 1801.9000000953674,
+          "drawFps": 49.39230811659337,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 58.8235294117647,
+          "mode": "video",
+          "currentTime": 541.470831,
+          "readyState": 4
+        },
+        {
+          "index": 19,
+          "target": 900,
+          "elapsedMs": 1801.2000000476837,
+          "drawFps": 51.0770597366003,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.988002396660214,
+          "mode": "video",
+          "currentTime": 901.522686,
+          "readyState": 4
+        },
+        {
+          "index": 20,
+          "target": 540,
+          "elapsedMs": 1800.6999999284744,
+          "drawFps": 38.318431722519435,
+          "lateDelta": 9,
+          "queueResetDelta": 2,
+          "outputFps": 22.282503392359782,
+          "mode": "video",
+          "currentTime": 541.488878,
+          "readyState": 4
+        },
+        {
+          "index": 21,
+          "target": 900,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 50.519069562210035,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.06925044133701,
+          "mode": "video",
+          "currentTime": 901.54086,
+          "readyState": 4
+        },
+        {
+          "index": 22,
+          "target": 540,
+          "elapsedMs": 1804.5,
+          "drawFps": 40.45441950678858,
+          "lateDelta": 7,
+          "queueResetDelta": 2,
+          "outputFps": 47.99520048452872,
+          "mode": "video",
+          "currentTime": 541.466401,
+          "readyState": 4
+        },
+        {
+          "index": 23,
+          "target": 900,
+          "elapsedMs": 1802.2000000476837,
+          "drawFps": 50.49384085983369,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.94604855058757,
+          "mode": "video",
+          "currentTime": 901.478898,
+          "readyState": 4
+        },
+        {
+          "index": 24,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 49.416990560799555,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 41.912745286719904,
+          "mode": "video",
+          "currentTime": 541.444911,
+          "readyState": 4
+        },
+        {
+          "index": 25,
+          "target": 900,
+          "elapsedMs": 1801,
+          "drawFps": 50.52748473070517,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.04719764011799,
+          "mode": "video",
+          "currentTime": 901.496843,
+          "readyState": 4
+        },
+        {
+          "index": 26,
+          "target": 540,
+          "elapsedMs": 1802.2999999523163,
+          "drawFps": 38.83926094537646,
+          "lateDelta": 7,
+          "queueResetDelta": 2,
+          "outputFps": 47.2580486397363,
+          "mode": "video",
+          "currentTime": 541.464567,
+          "readyState": 4
+        },
+        {
+          "index": 27,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 52.19032813211686,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.8623166745031,
+          "mode": "video",
+          "currentTime": 901.516992,
+          "readyState": 4
+        },
+        {
+          "index": 28,
+          "target": 540,
+          "elapsedMs": 1803.5,
+          "drawFps": 50.45744385916274,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 43.634248038476336,
+          "mode": "video",
+          "currentTime": 541.484717,
+          "readyState": 4
+        },
+        {
+          "index": 29,
+          "target": 900,
+          "elapsedMs": 1801.3999999761581,
+          "drawFps": 51.62651271301814,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.03066942167674,
+          "mode": "video",
+          "currentTime": 901.538796,
+          "readyState": 4
+        }
+      ],
+      [
+        {
+          "index": 0,
+          "target": 540,
+          "elapsedMs": 1805,
+          "drawFps": 48.199445983379505,
+          "lateDelta": 1,
+          "queueResetDelta": 0,
+          "outputFps": 38.75593450157542,
+          "mode": "video",
+          "currentTime": 541.422993,
+          "readyState": 4
+        },
+        {
+          "index": 1,
+          "target": 900,
+          "elapsedMs": 1801.3999999761581,
+          "drawFps": 49.961141335178844,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 57.08661417322835,
+          "mode": "video",
+          "currentTime": 901.480057,
+          "readyState": 4
+        },
+        {
+          "index": 2,
+          "target": 540,
+          "elapsedMs": 1802.4000000953674,
+          "drawFps": 44.940079891097525,
+          "lateDelta": 4,
+          "queueResetDelta": 1,
+          "outputFps": 58.06638923434314,
+          "mode": "video",
+          "currentTime": 541.488516,
+          "readyState": 4
+        },
+        {
+          "index": 3,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 52.74554438884151,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.94604855772727,
+          "mode": "video",
+          "currentTime": 901.54116,
+          "readyState": 4
+        },
+        {
+          "index": 4,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 38.31204886174348,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 23.24905550550915,
+          "mode": "video",
+          "currentTime": 541.465421,
+          "readyState": 4
+        },
+        {
+          "index": 5,
+          "target": 900,
+          "elapsedMs": 1801.5,
+          "drawFps": 51.62364696086594,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.869200834014165,
+          "mode": "video",
+          "currentTime": 901.51697,
+          "readyState": 4
+        },
+        {
+          "index": 6,
+          "target": 540,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 48.85903059176898,
+          "lateDelta": 1,
+          "queueResetDelta": 0,
+          "outputFps": 59.045590938527,
+          "mode": "video",
+          "currentTime": 541.485093,
+          "readyState": 4
+        },
+        {
+          "index": 7,
+          "target": 900,
+          "elapsedMs": 1801.3000000715256,
+          "drawFps": 51.6293787799407,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.85634476685121,
+          "mode": "video",
+          "currentTime": 901.536699,
+          "readyState": 4
+        },
+        {
+          "index": 8,
+          "target": 540,
+          "elapsedMs": 1804.1000000238419,
+          "drawFps": 39.35480294831867,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 25.844740118549403,
+          "mode": "video",
+          "currentTime": 541.506103,
+          "readyState": 4
+        },
+        {
+          "index": 9,
+          "target": 900,
+          "elapsedMs": 1801.5,
+          "drawFps": 50.51346100471829,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 54.95603516793489,
+          "mode": "video",
+          "currentTime": 901.516549,
+          "readyState": 4
+        },
+        {
+          "index": 10,
+          "target": 540,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 39.98000999553179,
+          "lateDelta": 6,
+          "queueResetDelta": 2,
+          "outputFps": 47.30928445151958,
+          "mode": "video",
+          "currentTime": 541.483506,
+          "readyState": 4
+        },
+        {
+          "index": 11,
+          "target": 900,
+          "elapsedMs": 1800.7999999523163,
+          "drawFps": 51.088405154617995,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.99400060566091,
+          "mode": "video",
+          "currentTime": 901.49158,
+          "readyState": 4
+        },
+        {
+          "index": 12,
+          "target": 540,
+          "elapsedMs": 1801.1999999284744,
+          "drawFps": 49.41150344411181,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 41.28981517698697,
+          "mode": "video",
+          "currentTime": 541.457087,
+          "readyState": 4
+        },
+        {
+          "index": 13,
+          "target": 900,
+          "elapsedMs": 1800.7000000476837,
+          "drawFps": 50.535902703165576,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.94964532054545,
+          "mode": "video",
+          "currentTime": 901.509967,
+          "readyState": 4
+        },
+        {
+          "index": 14,
+          "target": 540,
+          "elapsedMs": 1800.7999999523163,
+          "drawFps": 49.422478899576106,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.719319196926804,
+          "mode": "video",
+          "currentTime": 541.474218,
+          "readyState": 4
+        },
+        {
+          "index": 15,
+          "target": 900,
+          "elapsedMs": 1801.0999999046326,
+          "drawFps": 49.414246851764204,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.83325159391859,
+          "mode": "video",
+          "currentTime": 901.506146,
+          "readyState": 4
+        },
+        {
+          "index": 16,
+          "target": 540,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 39.98000999553179,
+          "lateDelta": 5,
+          "queueResetDelta": 2,
+          "outputFps": 26.200873362445414,
+          "mode": "video",
+          "currentTime": 541.451445,
+          "readyState": 4
+        },
+        {
+          "index": 17,
+          "target": 900,
+          "elapsedMs": 1800.7000000476837,
+          "drawFps": 50.535902703165576,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.9800569813916,
+          "mode": "video",
+          "currentTime": 901.503758,
+          "readyState": 4
+        },
+        {
+          "index": 18,
+          "target": 540,
+          "elapsedMs": 1801.4000000953674,
+          "drawFps": 49.40601753929626,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.9273013080153,
+          "mode": "video",
+          "currentTime": 541.470134,
+          "readyState": 4
+        },
+        {
+          "index": 19,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 50.52467936194292,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.94604855772727,
+          "mode": "video",
+          "currentTime": 901.52032,
+          "readyState": 4
+        },
+        {
+          "index": 20,
+          "target": 540,
+          "elapsedMs": 1804.6999999284744,
+          "drawFps": 38.23350141449253,
+          "lateDelta": 9,
+          "queueResetDelta": 2,
+          "outputFps": 21.30956993462617,
+          "mode": "video",
+          "currentTime": 541.492001,
+          "readyState": 4
+        },
+        {
+          "index": 21,
+          "target": 900,
+          "elapsedMs": 1800.5,
+          "drawFps": 52.763121355179116,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 58.01376597836775,
+          "mode": "video",
+          "currentTime": 901.543553,
+          "readyState": 4
+        },
+        {
+          "index": 22,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 38.86729594669628,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 45.32912888919768,
+          "mode": "video",
+          "currentTime": 541.466681,
+          "readyState": 4
+        },
+        {
+          "index": 23,
+          "target": 900,
+          "elapsedMs": 1801,
+          "drawFps": 46.08550805108273,
+          "lateDelta": 4,
+          "queueResetDelta": 1,
+          "outputFps": 58.994100588534614,
+          "mode": "video",
+          "currentTime": 901.517671,
+          "readyState": 4
+        },
+        {
+          "index": 24,
+          "target": 540,
+          "elapsedMs": 1801.1999999284744,
+          "drawFps": 48.85631801215549,
+          "lateDelta": 1,
+          "queueResetDelta": 0,
+          "outputFps": 40.318615400689616,
+          "mode": "video",
+          "currentTime": 541.443593,
+          "readyState": 4
+        },
+        {
+          "index": 25,
+          "target": 900,
+          "elapsedMs": 1801.3000000715256,
+          "drawFps": 51.0742241694037,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.931681978910596,
+          "mode": "video",
+          "currentTime": 901.493768,
+          "readyState": 4
+        },
+        {
+          "index": 26,
+          "target": 540,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 44.422233328368655,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 55.98880224355592,
+          "mode": "video",
+          "currentTime": 541.46012,
+          "readyState": 4
+        },
+        {
+          "index": 27,
+          "target": 900,
+          "elapsedMs": 1800.8999999761581,
+          "drawFps": 52.19612416083317,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.97443712375391,
+          "mode": "video",
+          "currentTime": 901.512917,
+          "readyState": 4
+        },
+        {
+          "index": 28,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 49.972237645752365,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 41.9370943584623,
+          "mode": "video",
+          "currentTime": 541.477754,
+          "readyState": 4
+        },
+        {
+          "index": 29,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 50.52467936194292,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 57.126258710218835,
+          "mode": "video",
+          "currentTime": 901.48906,
+          "readyState": 4
+        }
+      ],
+      [
+        {
+          "index": 0,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 44.41976679622432,
+          "lateDelta": 3,
+          "queueResetDelta": 1,
+          "outputFps": 31.917015758267542,
+          "mode": "video",
+          "currentTime": 541.459148,
+          "readyState": 4
+        },
+        {
+          "index": 1,
+          "target": 900,
+          "elapsedMs": 1801,
+          "drawFps": 50.52748473070517,
+          "lateDelta": 2,
+          "queueResetDelta": 0,
+          "outputFps": 56.89190537436308,
+          "mode": "video",
+          "currentTime": 901.512037,
+          "readyState": 4
+        },
+        {
+          "index": 2,
+          "target": 540,
+          "elapsedMs": 1801.4000000953674,
+          "drawFps": 38.85866548034537,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 47.90419161676647,
+          "mode": "video",
+          "currentTime": 541.477254,
+          "readyState": 4
+        },
+        {
+          "index": 3,
+          "target": 900,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 51.07422417278377,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.952038372161006,
+          "mode": "video",
+          "currentTime": 901.489455,
+          "readyState": 4
+        },
+        {
+          "index": 4,
+          "target": 540,
+          "elapsedMs": 1804.1000000238419,
+          "drawFps": 44.89773294103961,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 32.968098517959895,
+          "mode": "video",
+          "currentTime": 541.458954,
+          "readyState": 4
+        },
+        {
+          "index": 5,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 51.63511187539221,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.931704443790096,
+          "mode": "video",
+          "currentTime": 901.509887,
+          "readyState": 4
+        },
+        {
+          "index": 6,
+          "target": 540,
+          "elapsedMs": 1801.4000000953674,
+          "drawFps": 37.748417895192645,
+          "lateDelta": 8,
+          "queueResetDelta": 2,
+          "outputFps": 46.80038204393505,
+          "mode": "video",
+          "currentTime": 541.477583,
+          "readyState": 4
+        },
+        {
+          "index": 7,
+          "target": 900,
+          "elapsedMs": 1801.2000000476837,
+          "drawFps": 50.52187430468073,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.880239520958085,
+          "mode": "video",
+          "currentTime": 901.529344,
+          "readyState": 4
+        },
+        {
+          "index": 8,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 48.86174347584675,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 40,
+          "mode": "video",
+          "currentTime": 541.496342,
+          "readyState": 4
+        },
+        {
+          "index": 9,
+          "target": 900,
+          "elapsedMs": 1801.6000000238419,
+          "drawFps": 50.51065719293724,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 56.93736889286036,
+          "mode": "video",
+          "currentTime": 901.506306,
+          "readyState": 4
+        },
+        {
+          "index": 10,
+          "target": 540,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 49.40876034106256,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 60.001935549076855,
+          "mode": "video",
+          "currentTime": 541.471763,
+          "readyState": 4
+        },
+        {
+          "index": 11,
+          "target": 900,
+          "elapsedMs": 1801.1000000238419,
+          "drawFps": 49.414246848493626,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.96402158561897,
+          "mode": "video",
+          "currentTime": 901.476273,
+          "readyState": 4
+        },
+        {
+          "index": 12,
+          "target": 540,
+          "elapsedMs": 1802.5,
+          "drawFps": 48.26629680998613,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 39.69022265246854,
+          "mode": "video",
+          "currentTime": 541.450667,
+          "readyState": 4
+        },
+        {
+          "index": 13,
+          "target": 900,
+          "elapsedMs": 1805.7000000476837,
+          "drawFps": 51.50357202057048,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.94964531388173,
+          "mode": "video",
+          "currentTime": 901.506309,
+          "readyState": 4
+        },
+        {
+          "index": 14,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 44.97501388117713,
+          "lateDelta": 3,
+          "queueResetDelta": 1,
+          "outputFps": 57.052921501711346,
+          "mode": "video",
+          "currentTime": 541.473185,
+          "readyState": 4
+        },
+        {
+          "index": 15,
+          "target": 900,
+          "elapsedMs": 1801.1999999284744,
+          "drawFps": 51.63224517193706,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 45.72299485823989,
+          "mode": "video",
+          "currentTime": 901.523402,
+          "readyState": 4
+        },
+        {
+          "index": 16,
+          "target": 540,
+          "elapsedMs": 1801.2000000476837,
+          "drawFps": 46.08039084932418,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 35.38083538083538,
+          "mode": "video",
+          "currentTime": 541.492089,
+          "readyState": 4
+        },
+        {
+          "index": 17,
+          "target": 900,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 51.07422417278377,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.96642014657771,
+          "mode": "video",
+          "currentTime": 901.50011,
+          "readyState": 4
+        },
+        {
+          "index": 18,
+          "target": 540,
+          "elapsedMs": 1801.1999999284744,
+          "drawFps": 36.087053077160306,
+          "lateDelta": 12,
+          "queueResetDelta": 2,
+          "outputFps": 42.995700434056985,
+          "mode": "video",
+          "currentTime": 541.467764,
+          "readyState": 4
+        },
+        {
+          "index": 19,
+          "target": 900,
+          "elapsedMs": 1802,
+          "drawFps": 52.16426193118757,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.982005401239796,
+          "mode": "video",
+          "currentTime": 901.521412,
+          "readyState": 4
+        },
+        {
+          "index": 20,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 39.422543031649084,
+          "lateDelta": 4,
+          "queueResetDelta": 2,
+          "outputFps": 25.196239943402556,
+          "mode": "video",
+          "currentTime": 541.443944,
+          "readyState": 4
+        },
+        {
+          "index": 21,
+          "target": 900,
+          "elapsedMs": 1804.1999999284744,
+          "drawFps": 51.54639175462082,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.916125811283074,
+          "mode": "video",
+          "currentTime": 901.498392,
+          "readyState": 4
+        },
+        {
+          "index": 22,
+          "target": 540,
+          "elapsedMs": 1800.7999999523163,
+          "drawFps": 49.422478899576106,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 60.06301693439148,
+          "mode": "video",
+          "currentTime": 541.464948,
+          "readyState": 4
+        },
+        {
+          "index": 23,
+          "target": 900,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 50.519069562210035,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.93907831103653,
+          "mode": "video",
+          "currentTime": 901.517271,
+          "readyState": 4
+        },
+        {
+          "index": 24,
+          "target": 540,
+          "elapsedMs": 1800.7999999523163,
+          "drawFps": 38.3163038659635,
+          "lateDelta": 10,
+          "queueResetDelta": 2,
+          "outputFps": 23.258067642750767,
+          "mode": "video",
+          "currentTime": 541.483494,
+          "readyState": 4
+        },
+        {
+          "index": 25,
+          "target": 900,
+          "elapsedMs": 1801.3999999761581,
+          "drawFps": 49.961141335178844,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 55.22185622686187,
+          "mode": "video",
+          "currentTime": 901.536321,
+          "readyState": 4
+        },
+        {
+          "index": 26,
+          "target": 540,
+          "elapsedMs": 1801,
+          "drawFps": 44.41976679622432,
+          "lateDelta": 2,
+          "queueResetDelta": 1,
+          "outputFps": 57.220444191113344,
+          "mode": "video",
+          "currentTime": 541.459675,
+          "readyState": 4
+        },
+        {
+          "index": 27,
+          "target": 900,
+          "elapsedMs": 1807.8999999761581,
+          "drawFps": 50.334642403451554,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 59.7609561752988,
+          "mode": "video",
+          "currentTime": 901.518655,
+          "readyState": 4
+        },
+        {
+          "index": 28,
+          "target": 540,
+          "elapsedMs": 1801.2999999523163,
+          "drawFps": 38.86082274016157,
+          "lateDelta": 9,
+          "queueResetDelta": 2,
+          "outputFps": 22.72502717069281,
+          "mode": "video",
+          "currentTime": 541.486213,
+          "readyState": 4
+        },
+        {
+          "index": 29,
+          "target": 900,
+          "elapsedMs": 1800.6999999284744,
+          "drawFps": 51.09124229669258,
+          "lateDelta": 0,
+          "queueResetDelta": 0,
+          "outputFps": 57.03609007902433,
+          "mode": "video",
+          "currentTime": 901.495497,
+          "readyState": 4
+        }
+      ]
+    ],
+    "cleanup": true
+  },
+  "steady30Seconds": {
+    "predecessor": {
+      "variant": "f7-queue-30s-warm10",
+      "sourceHash": "95b47a7a411f614505afacfb66197513574afa5d19c53bcf1c0b41022a52539a",
+      "asset": "PlayerController-BFGbf0oO.js",
+      "stallMs": 0,
+      "sample": "steady-30000ms-after-1000ms",
+      "draw": {
+        "count": 1793,
+        "fps": 59.75823259691538,
+        "p50": 16.700000047683716,
+        "p95": 22.09999990463257,
+        "p99": 23.899999976158142,
+        "max": 39.09999990463257,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "rvfc": {
+        "count": 899,
+        "fps": 29.963196652759166,
+        "p50": 33.39999997615814,
+        "p95": 36.39999997615814,
+        "p99": 41.200000047683716,
+        "max": 71.19999992847443,
+        "over40": 9,
+        "over80": 0,
+        "over160": 0
+      },
+      "media": {
+        "count": 899,
+        "fps": 29.97003063684707,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "presentedStepCounts": {
+        "1": 898
+      },
+      "droppedVideoFramesDelta": 10,
+      "statsFirst": {
+        "late": 54,
+        "queueResetted": 2,
+        "fps": 59.82650314231366,
+        "outputFps": 59.82650314231366,
+        "maxQueuedFields": 3,
+        "mode": "video"
+      },
+      "statsLast": {
+        "late": 57,
+        "queueResetted": 2,
+        "fps": 59.93407251880038,
+        "outputFps": 59.93407251880038,
+        "maxQueuedFields": 5,
+        "mode": "video"
+      },
+      "statsDelta": {
+        "late": 3,
+        "queueResetted": 0
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    "successor": {
+      "variant": "formal-queue-30s-warm10",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-CFkwEYl3.js",
+      "stallMs": 0,
+      "sample": "steady-30000ms-after-1000ms",
+      "draw": {
+        "count": 1793,
+        "fps": 59.76779943114779,
+        "p50": 16.799999952316284,
+        "p95": 22.399999976158142,
+        "p99": 23.600000023841858,
+        "max": 48.89999997615814,
+        "over40": 1,
+        "over80": 0,
+        "over160": 0
+      },
+      "rvfc": {
+        "count": 899,
+        "fps": 29.966296259218474,
+        "p50": 33.39999997615814,
+        "p95": 36.60000002384186,
+        "p99": 38.89999997615814,
+        "max": 66.79999995231628,
+        "over40": 7,
+        "over80": 0,
+        "over160": 0
+      },
+      "media": {
+        "count": 899,
+        "fps": 29.97003063684707,
+        "p50": 33.366999999969266,
+        "p95": 33.367000000027474,
+        "p99": 33.36700000008568,
+        "max": 33.36700000008568,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "presentedStepCounts": {
+        "1": 898
+      },
+      "droppedVideoFramesDelta": 10,
+      "statsFirst": {
+        "late": 2,
+        "queueResetted": 0,
+        "fps": 60.159130609098796,
+        "outputFps": 60.159130609098796,
+        "maxQueuedFields": 5,
+        "mode": "video"
+      },
+      "statsLast": {
+        "late": 8,
+        "queueResetted": 0,
+        "fps": 59.89817310286895,
+        "outputFps": 59.89817310286895,
+        "maxQueuedFields": 4,
+        "mode": "video"
+      },
+      "statsDelta": {
+        "late": 6,
+        "queueResetted": 0
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  },
+  "successorFilmEightSeconds": [
+    {
+      "variant": "formal-queue-recovery-madder",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-CFkwEYl3.js",
+      "stallMs": 0,
+      "sample": "steady-8000ms-after-1000ms",
+      "draw": {
+        "count": 189,
+        "fps": 23.761375126390295,
+        "p50": 37.800000071525574,
+        "p95": 67.89999997615814,
+        "p99": 87.40000009536743,
+        "max": 124.39999997615814,
+        "over40": 83,
+        "over80": 2,
+        "over160": 0
+      },
+      "rvfc": {
+        "count": 240,
+        "fps": 29.91950526399102,
+        "p50": 32.60000002384186,
+        "p95": 51.5,
+        "p99": 58.39999997615814,
+        "max": 58.60000002384186,
+        "over40": 39,
+        "over80": 0,
+        "over160": 0
+      },
+      "media": {
+        "count": 240,
+        "fps": 29.97002746458347,
+        "p50": 33.366999999969266,
+        "p95": 33.36700000008568,
+        "p99": 33.36700000008568,
+        "max": 33.3670000002021,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "presentedStepCounts": {
+        "1": 239
+      },
+      "droppedVideoFramesDelta": 2,
+      "statsFirst": {
+        "late": 5,
+        "queueResetted": 0,
+        "fps": 23,
+        "outputFps": 23,
+        "maxQueuedFields": 3,
+        "mode": "film"
+      },
+      "statsLast": {
+        "late": 5,
+        "queueResetted": 0,
+        "fps": 23.561751422970985,
+        "outputFps": 23.561751422970985,
+        "maxQueuedFields": 2,
+        "mode": "film"
+      },
+      "statsDelta": {
+        "late": 0,
+        "queueResetted": 0
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "variant": "formal-queue-recovery-madder",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-CFkwEYl3.js",
+      "stallMs": 0,
+      "sample": "steady-8000ms-after-1000ms",
+      "draw": {
+        "count": 189,
+        "fps": 23.699370958399424,
+        "p50": 36.700000047683716,
+        "p95": 73.60000002384186,
+        "p99": 95.80000007152557,
+        "max": 97.39999997615814,
+        "over40": 76,
+        "over80": 5,
+        "over160": 0
+      },
+      "rvfc": {
+        "count": 240,
+        "fps": 30.00288730723651,
+        "p50": 32.199999928474426,
+        "p95": 52.5,
+        "p99": 58.200000047683716,
+        "max": 64,
+        "over40": 44,
+        "over80": 0,
+        "over160": 0
+      },
+      "media": {
+        "count": 240,
+        "fps": 29.970031222753768,
+        "p50": 33.366999999969266,
+        "p95": 33.36700000008568,
+        "p99": 33.36700000008568,
+        "max": 33.3670000002021,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "presentedStepCounts": {
+        "1": 239
+      },
+      "droppedVideoFramesDelta": 2,
+      "statsFirst": {
+        "late": 2,
+        "queueResetted": 0,
+        "fps": 23.21532211098811,
+        "outputFps": 23.21532211098811,
+        "maxQueuedFields": 3,
+        "mode": "film"
+      },
+      "statsLast": {
+        "late": 4,
+        "queueResetted": 0,
+        "fps": 26.55128331264926,
+        "outputFps": 26.55128331264926,
+        "maxQueuedFields": 5,
+        "mode": "film"
+      },
+      "statsDelta": {
+        "late": 2,
+        "queueResetted": 0
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "variant": "formal-queue-recovery-madder",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "asset": "PlayerController-CFkwEYl3.js",
+      "stallMs": 0,
+      "sample": "steady-8000ms-after-1000ms",
+      "draw": {
+        "count": 191,
+        "fps": 23.898469239939455,
+        "p50": 37.60000002384186,
+        "p95": 68.5,
+        "p99": 89.60000002384186,
+        "max": 92.5,
+        "over40": 84,
+        "over80": 2,
+        "over160": 0
+      },
+      "rvfc": {
+        "count": 240,
+        "fps": 29.950625329134585,
+        "p50": 32.700000047683716,
+        "p95": 50.60000002384186,
+        "p99": 55.39999997615814,
+        "max": 62.5,
+        "over40": 45,
+        "over80": 0,
+        "over160": 0
+      },
+      "media": {
+        "count": 240,
+        "fps": 29.97003122275333,
+        "p50": 33.366999999969266,
+        "p95": 33.36700000008568,
+        "p99": 33.36700000008568,
+        "max": 33.3670000002021,
+        "over40": 0,
+        "over80": 0,
+        "over160": 0
+      },
+      "presentedStepCounts": {
+        "1": 239
+      },
+      "droppedVideoFramesDelta": 2,
+      "statsFirst": {
+        "late": 2,
+        "queueResetted": 0,
+        "fps": 23.20858717939594,
+        "outputFps": 23.20858717939594,
+        "maxQueuedFields": 3,
+        "mode": "film"
+      },
+      "statsLast": {
+        "late": 2,
+        "queueResetted": 0,
+        "fps": 30.962747943880018,
+        "outputFps": 30.962747943880018,
+        "maxQueuedFields": 4,
+        "mode": "film"
+      },
+      "statsDelta": {
+        "late": 0,
+        "queueResetted": 0
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  ],
+  "oneShotMainThreadStall": {
+    "interpretation": "A one-shot wall-clock busy loop blocks both rAF and rVFC. It tests recovery but did not isolate queue-capacity handling in these runs.",
+    "runs": [
+      {
+        "variant": "formal-stall50",
+        "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+        "asset": "PlayerController-DY6ly6Zr.js",
+        "stallMs": 50,
+        "sample": "steady-8000ms-after-1000ms",
+        "draw": {
+          "count": 479,
+          "fps": 59.86224170319348,
+          "p50": 16.399999976158142,
+          "p95": 22.100000023841858,
+          "p99": 23,
+          "max": 54.60000002384186,
+          "over40": 1,
+          "over80": 0,
+          "over160": 0
+        },
+        "rvfc": {
+          "count": 240,
+          "fps": 30.004393948904653,
+          "p50": 33.299999952316284,
+          "p95": 36.5,
+          "p99": 38.300000071525574,
+          "max": 54.60000002384186,
+          "over40": 2,
+          "over80": 0,
+          "over160": 0
+        },
+        "media": {
+          "count": 240,
+          "fps": 29.97003122275333,
+          "p50": 33.366999999969266,
+          "p95": 33.367000000027474,
+          "p99": 33.367000000027474,
+          "max": 33.36700000008568,
+          "over40": 0,
+          "over80": 0,
+          "over160": 0
+        },
+        "presentedStepCounts": {
+          "1": 239
+        },
+        "droppedVideoFramesDelta": 2,
+        "statsFirst": {
+          "late": 9,
+          "queueResetted": 2,
+          "fps": 60.060060055898646,
+          "outputFps": 60.060060055898646,
+          "maxQueuedFields": 4,
+          "mode": "video"
+        },
+        "statsLast": {
+          "late": 10,
+          "queueResetted": 2,
+          "fps": 60.08334141043948,
+          "outputFps": 60.08334141043948,
+          "maxQueuedFields": 4,
+          "mode": "video"
+        },
+        "statsDelta": {
+          "late": 1,
+          "queueResetted": 0
+        },
+        "cleanup": {
+          "videoPausedBeforeClose": true,
+          "fullscreenExitedBeforeClose": true,
+          "testPagesClosed": true,
+          "chromeStopped": true,
+          "webapkStopped": true,
+          "adbForwardRemoved": true,
+          "containerStopped": true
+        }
+      },
+      {
+        "variant": "f7-stall50",
+        "sourceHash": "95b47a7a411f614505afacfb66197513574afa5d19c53bcf1c0b41022a52539a",
+        "asset": "PlayerController-BFGbf0oO.js",
+        "stallMs": 50,
+        "sample": "steady-8000ms-after-1000ms",
+        "draw": {
+          "count": 477,
+          "fps": 59.612518628200085,
+          "p50": 16.600000023841858,
+          "p95": 22.100000023841858,
+          "p99": 24,
+          "max": 68.30000007152557,
+          "over40": 1,
+          "over80": 0,
+          "over160": 0
+        },
+        "rvfc": {
+          "count": 239,
+          "fps": 29.857112390880243,
+          "p50": 33.5,
+          "p95": 39.5,
+          "p99": 50.60000002384186,
+          "max": 68.29999995231628,
+          "over40": 11,
+          "over80": 0,
+          "over160": 0
+        },
+        "media": {
+          "count": 239,
+          "fps": 29.84463360257423,
+          "p50": 33.366999999969266,
+          "p95": 33.367000000027474,
+          "p99": 33.36700000008568,
+          "max": 66.73300000000745,
+          "over40": 1,
+          "over80": 0,
+          "over160": 0
+        },
+        "presentedStepCounts": {
+          "1": 237,
+          "2": 1
+        },
+        "droppedVideoFramesDelta": 2,
+        "statsFirst": {
+          "late": 2,
+          "queueResetted": 0,
+          "fps": 59.97001499250375,
+          "outputFps": 59.97001499250375,
+          "maxQueuedFields": 4,
+          "mode": "video"
+        },
+        "statsLast": {
+          "late": 4,
+          "queueResetted": 0,
+          "fps": 59.996129283365995,
+          "outputFps": 59.996129283365995,
+          "maxQueuedFields": 3,
+          "mode": "video"
+        },
+        "statsDelta": {
+          "late": 2,
+          "queueResetted": 0
+        },
+        "cleanup": {
+          "videoPausedBeforeClose": true,
+          "fullscreenExitedBeforeClose": true,
+          "testPagesClosed": true,
+          "chromeStopped": true,
+          "webapkStopped": true,
+          "adbForwardRemoved": true,
+          "containerStopped": true
+        }
+      },
+      {
+        "variant": "formal-stall250",
+        "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+        "asset": "PlayerController-DY6ly6Zr.js",
+        "stallMs": 250,
+        "sample": "steady-8000ms-after-1000ms",
+        "draw": {
+          "count": 464,
+          "fps": 57.99098196392786,
+          "p50": 17,
+          "p95": 21.899999976158142,
+          "p99": 24.700000047683716,
+          "max": 263.2000000476837,
+          "over40": 2,
+          "over80": 1,
+          "over160": 1
+        },
+        "rvfc": {
+          "count": 234,
+          "fps": 29.233896263406944,
+          "p50": 33.40000009536743,
+          "p95": 37,
+          "p99": 38.89999997615814,
+          "max": 263.2999999523163,
+          "over40": 2,
+          "over80": 1,
+          "over160": 1
+        },
+        "media": {
+          "count": 234,
+          "fps": 29.21764550168003,
+          "p50": 33.366999999969266,
+          "p95": 33.367000000027474,
+          "p99": 33.36700000008568,
+          "max": 233.5669999999809,
+          "over40": 1,
+          "over80": 1,
+          "over160": 1
+        },
+        "presentedStepCounts": {
+          "1": 232,
+          "7": 1
+        },
+        "droppedVideoFramesDelta": 2,
+        "statsFirst": {
+          "late": 10,
+          "queueResetted": 2,
+          "fps": 59.982005401239796,
+          "outputFps": 59.982005401239796,
+          "maxQueuedFields": 3,
+          "mode": "video"
+        },
+        "statsLast": {
+          "late": 14,
+          "queueResetted": 2,
+          "fps": 59.83246908940271,
+          "outputFps": 59.83246908940271,
+          "maxQueuedFields": 3,
+          "mode": "video"
+        },
+        "statsDelta": {
+          "late": 4,
+          "queueResetted": 0
+        },
+        "cleanup": {
+          "videoPausedBeforeClose": true,
+          "fullscreenExitedBeforeClose": true,
+          "testPagesClosed": true,
+          "chromeStopped": true,
+          "webapkStopped": true,
+          "adbForwardRemoved": true,
+          "containerStopped": true
+        }
+      },
+      {
+        "variant": "f7-stall250",
+        "sourceHash": "95b47a7a411f614505afacfb66197513574afa5d19c53bcf1c0b41022a52539a",
+        "asset": "PlayerController-BFGbf0oO.js",
+        "stallMs": 250,
+        "sample": "steady-8000ms-after-1000ms",
+        "draw": {
+          "count": 466,
+          "fps": 58.232730552041915,
+          "p50": 17.399999976158142,
+          "p95": 22.399999976158142,
+          "p99": 23.5,
+          "max": 255.5,
+          "over40": 1,
+          "over80": 1,
+          "over160": 1
+        },
+        "rvfc": {
+          "count": 234,
+          "fps": 29.2555529045751,
+          "p50": 33.40000009536743,
+          "p95": 36.39999997615814,
+          "p99": 38.09999990463257,
+          "max": 255.5,
+          "over40": 2,
+          "over80": 1,
+          "over160": 1
+        },
+        "media": {
+          "count": 234,
+          "fps": 29.21764550168003,
+          "p50": 33.366999999969266,
+          "p95": 33.367000000027474,
+          "p99": 33.36700000008568,
+          "max": 233.5669999999809,
+          "over40": 1,
+          "over80": 1,
+          "over160": 1
+        },
+        "presentedStepCounts": {
+          "1": 232,
+          "7": 1
+        },
+        "droppedVideoFramesDelta": 2,
+        "statsFirst": {
+          "late": 1,
+          "queueResetted": 0,
+          "fps": 60.025171847643634,
+          "outputFps": 60.025171847643634,
+          "maxQueuedFields": 3,
+          "mode": "video"
+        },
+        "statsLast": {
+          "late": 3,
+          "queueResetted": 0,
+          "fps": 60.0542425430374,
+          "outputFps": 60.0542425430374,
+          "maxQueuedFields": 3,
+          "mode": "video"
+        },
+        "statsDelta": {
+          "late": 2,
+          "queueResetted": 0
+        },
+        "cleanup": {
+          "videoPausedBeforeClose": true,
+          "fullscreenExitedBeforeClose": true,
+          "testPagesClosed": true,
+          "chromeStopped": true,
+          "webapkStopped": true,
+          "adbForwardRemoved": true,
+          "containerStopped": true
+        }
+      }
+    ]
+  },
+  "capacityPressureEvidence": {
+    "file": "galaxy-yadif-scheduler-ablation.json",
+    "scope": "Test-only one-field presentation policy plus every-other-rAF injection. The successor uses the same minimum-FIFO versus future-clock reset queue algorithm, but does not include the presentation-policy change or test hook.",
+    "minimumFifo": {
+      "runs": 3,
+      "fullResets": 0,
+      "maximumPresentationLatenessMs": 32.6
+    },
+    "fullReset": {
+      "runs": 3,
+      "fullResetsPerRun": "14-15",
+      "maximumPresentationLatenessMs": 83.3
+    }
+  },
+  "excludedRuns": [
+    {
+      "files": [
+        "galaxy-f7-forced-presentation-1.json",
+        "galaxy-formal-forced-presentation-1.json",
+        "galaxy-formal-forced-presentation-phased-1.json"
+      ],
+      "reason": "The production predecessor and successor builds did not contain the global test hook, so setting the flag injected no presentation throttling. These are ordinary-playback observations, not forced-presentation evidence."
+    }
+  ],
+  "conclusion": "The successor preserved the predecessor stall fix in 90 alternating seeks and normal/film cadence. Its capacity behavior is supported by the isolated diagnostic build; one-shot main-thread stalls recovered in both variants and did not independently demonstrate a speedup."
+}

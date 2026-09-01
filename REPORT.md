@@ -17,7 +17,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue再同期 | 公開`fix/restore-yadif-queue-reset`、`konomi/main`基点のsource `f7b89eb`、dist `4c75a02`。停止7/90→0/90を確認した現候補。容量不足まで全消去するため、最小FIFO破棄へ分ける後継候補を検証中 |
+| YADIF queue容量・時刻同期の分離 | 公開`fix/separate-yadif-queue-recovery`、`konomi/main`基点のsource `26484fd`、dist `27b327e`。前身`f7b89eb`の停止防止を0/90のまま維持し、容量不足は最小FIFO、表示不能な未来時刻列だけ全resetへ分離 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -397,6 +397,10 @@ presentation policyも同じbuildで分離した。
 この条件では1 field化の通常時改善を立証できず、容量FIFOだけでも能力不足後の遅延を4.4〜27.6msへ収束できた。
 このため1 field化と二段階catch-upはqueue整合性修正へ混ぜず、自然負荷で従来版の誤破棄を再現できるまで別候補とする。
 
+このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
+
+50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式buildには検証用global hookを含めていないため、hook変数だけを設定した3走行はpresentation不足の証拠から除外した。正式候補の全条件と除外理由は[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)に保存した。
+
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
 独立した効果としては未確定なので、これもqueue整合性修正へ混ぜず長窓A/Bを行う。
 全runと、端末操作が入ったため除外した1 runは[full-screen scheduler ablation](results/galaxy-yadif-scheduler-ablation.json)に保存した。
@@ -644,8 +648,9 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 ## 実装済み変更と提出先
 
-upstream向けに分離した4件に加え、フォーク固有YADIFへupstreamのqueue再同期を戻す変更を別branchにした。
-この公開YADIF branchはstall防止を立証した現候補だが、容量不足でもqueue全体を消すため、最小FIFO破棄と時刻同期破綻時の全resetへ分ける後継候補で置き換える予定である。
+upstream向けに分離した4件に加え、フォーク固有YADIFのqueue容量確保と時刻再同期を分ける変更を別branchにした。
+公開`fix/separate-yadif-queue-recovery`は、stall防止を立証した前身の全resetを、容量不足時の最小FIFO破棄と時刻同期破綻時の全resetへ分けた後継候補である。
+後継の公開後、前身`fix/restore-yadif-queue-reset`は誤取り込みを防ぐためremoteとlocalから削除し、commit IDと測定結果だけを本調査記録へ残した。
 YADIF opacity変更は棄却した実験である。
 upstream向け4 branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
@@ -654,7 +659,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | --- | --- | --- | --- | --- |
 | YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | branchは削除。結果だけを本調査リポジトリに保存 |
 | YADIF初回fieldの保持 | rVFCが同じcompositeのrAF直後に来ると、次のrAFまでに2 fieldとも期限切れになり得たため | 初回fieldの表示時刻へ1 field周期の余裕を追加した | cleanな不透明版は30秒と12秒で約60fpsを維持。ただし変更単独の同条件A/Bによる効果量は未確定 | `tsukumijima/mpeg2toh264`へ取り込み済み。source `d4ccb98`、KonomiTV固定依存`52a3db5`に含まれる |
-| YADIF queue再同期の復元（現公開候補） | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 単一タブA/Bで停止7/90→0/90、queue reset 29回。通常中央値はほぼ不変。容量不足注入では全消去が14〜15回発生したため、後継候補は最小FIFO破棄と時刻破綻resetを分離する | `tsukumijima/mpeg2toh264` fork。現branchはsource `f7b89eb`、専用dist `4c75a02`。後継の実機回帰後に置換 |
+| YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せず、前身の全resetは単なる容量不足でも4〜5 fieldをまとめて失ったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 前身の停止7/90→0/90を正式候補でも0/90のまま維持。注入試験では全reset 14〜15回→0回、最大lateness 83.3→32.6ms。通常30秒は前身59.758fps、後継59.768fpsでreset増分0 | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
 | probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | 学習後の追加probeは直接デモ4/10→0/10、実KonomiTV desktop 2/10→0/10、単一タブGalaxy 7/20→0/20。Galaxyのfirst fragment中央値141.0→144.3msで速度改善は未確認 | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
@@ -670,7 +675,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | stall防止7/90→0/90を保ちつつ、注入試験の全reset 14〜15回→0回、最大lateness 83.3→32.6ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。`f7b89eb`後継候補 |
+| P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | stall防止0/90を維持しつつ、注入試験の全reset 14〜15回→0回、最大lateness 83.3→32.6ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。公開source `26484fd`、dist `27b327e` |
 | P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 学習後の追加probeをdesktop 2/10→0/10、単一タブGalaxy 7/20→0/20。Galaxyの速度改善は未確認 | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
 | P2 | 通常は1 rAFにつき1 field、実遅延時だけcatch-upする | 通常時の誤破棄を防ぐ可能性。現在の全画面通常試験では従来版も59.98〜60.00fps・late 0で改善未立証 | 中 | △ | YADIF presentation policy。queue整合性修正へ混ぜない |
@@ -782,7 +787,7 @@ I-pictureの途中byteだけを返さない。
 
 ### `tsukumijima/mpeg2toh264`へ出すもの
 
-1. **YADIF: queue容量確保と時刻再同期の分離**。容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。`f7b89eb`のstall防止90 seekを維持できたことを確認してから、現公開branchを置き換える。source修正と生成済みdistは別commitにする。
+1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。`f7b89eb`のstall防止を90 seekで維持し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
 2. **YADIF: presentation policy**。1 rAFにつき1 fieldと遅延時catch-upは、自然負荷で従来版の誤破棄を再現し、queue制御だけでは直らない場合に限り別PRとする。
 3. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
 4. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
@@ -801,8 +806,7 @@ I-pictureの途中byteだけを返さない。
 - 初回field leadを2から1へ戻す変更。短窓では良い値が出たが、現行`d4ccb98`と競合し、独立A/Bで必然性を示せていない。
 
 設計レビューの8項目では、MSE世代修正はすべてYesとする。
-公開中のYADIF `f7b89eb`はstall原因のownerであるqueue時刻へ届いている一方、容量不足と時刻同期破綻を同じ全resetで扱うため、項目6のinteraction reductionはNoである。
-修正は新しいscheduler層を足さず、同じqueue ownerで容量確保を最小FIFO破棄、表示不能な未来時刻列を全resetとして分ける。
+YADIF後継`26484fd`はstall原因のownerであるqueue時刻へ届き、新しいscheduler層を足さず、同じqueue ownerで容量確保を最小FIFO破棄、表示不能な未来時刻列を全resetとして分ける。前身`f7b89eb`で不足していたinteraction reductionを満たす。
 presentation policyは別の判断なので、必要性を立証するまで混ぜない。
 YADIF opacity実験は描画ownerに置いてGalaxyで比較したが、cleanな変更前対照が約60fpsだったため採用しない。
 MSE修正は`MseSink`に置き、修正前に失敗する外部動作の回帰試験とGalaxyの通常seekを確認した。
