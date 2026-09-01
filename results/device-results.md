@@ -390,18 +390,19 @@ Range開始からPAT/PMT、PES、GOPまでの読み捨てがあるため、12 se
 最新KonomiTV `e92fba8`、Galaxy Tab S11 Ultra、Android 16、Chrome 151、60Hz、LAN直結、全画面、実DPlayer Original、YADIF、`autoFilm:false`で、可視初画を再検証した。
 公開YADIF後継`26484fd`と計測コードを共通基点にし、差分はfirst fragment時の誤ったindex書込み4行だけとした。
 各ブロックを新規タブから開始し、600/900秒の2 seekをwarm-upとして除外した後、600/900〜609/909秒の20 seekを基準・修正・修正・基準の順で測った。
-canvas初画は、新しいpost-seek rVFCの後に、computed visibilityが`visible`かつopacityが0でない状態で行われた最初のdrawだけを採用した。
+canvas初画は、rVFC callback中のmediaTimeをWebGLの直接描画へ関連付け、描画call stack後にcomputed visibilityが`visible`かつopacityが0である最初のdrawだけを採用した。
 
 | 指標 | 基準 n=40 | 修正版 n=40 | target対応の修正版−基準 |
 | --- | ---: | ---: | ---: |
 | 追加probeを含む走行 | 14/40 | 0/40 | Fisher両側`p=0.0000308` |
-| first fragment 中央値 / p90 | 143.2 / 170.1ms | 128.5 / 178.1ms | 中央値−7.2ms、95%区間−28.9〜5.1ms |
-| browser frame提示 中央値 / p90 | 310.8 / 396.5ms | 239.6 / 278.7ms | 中央値−63.7ms、95%区間−103.2〜−41.2ms |
-| 可視canvas初画 中央値 / p90 | 360.3 / 456.8ms | 304.5 / 369.1ms | 中央値−51.0ms、95%区間−100.1〜−38.7ms |
+| first fragment 中央値 / p90 | 136.4 / 163.7ms | 128.5 / 152.7ms | 中央値−11.7ms、95%区間−19.6〜2.3ms |
+| browser frame提示 中央値 / p90 | 300.5 / 376.4ms | 247.2 / 284.8ms | 中央値−71.3ms、95%区間−83.7〜−24.2ms |
+| 可視canvas初画 中央値 / p90 | 296.3 / 373.0ms | 244.3 / 280.7ms | 中央値−71.3ms、95%区間−83.8〜−24.5ms |
 
 修正版は20地点中12地点で基準より0.5005〜1.001秒後のGOPを選び、全40 seekで要求時刻を越えなかった。
 first fragmentまでの差だけではbrowser提示とcanvasの短縮を説明できず、誤った標本が一つ前のGOPを選ばせてChromeに余分な映像を復号・破棄させる経路が主因だった。
-修正版でもcanvas中央値304.5ms、p90 369.1msなので、250ms以下の安定達成にはdecoder提示とYADIF初画の残るtailを別に改善する必要がある。
+初回hookはvisibility変更とrVFC callback登録順のため最初の可視描画を飛ばすことがあり、callback中のmediaTimeを描画へ直接関連付けて全ブロックを再測定した。
+修正版のcanvas描画は既存`presented` eventより中央値3.5ms先で、YADIF固有の初画待ちは確認できなかった。canvas中央値244.3msは目標内だがp90 280.7msなので、安定250ms以下には主にdecoder提示までのtailを改善する必要がある。
 採用・除外した全走行とtarget対応bootstrapは[probe標本の再検証](galaxy-probe-sample-revalidation.json)に保存した。
 
 修正は`otya128/mpeg2toh264`向けの公開branch `fix/preserve-seek-probe-sample`、commit `a10253e`に分離した。

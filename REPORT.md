@@ -143,11 +143,13 @@ Range 開始から tables / GOP まで捨てた区間があれば、同じ byte 
 
 基準40 seekでは追加probeが14件、修正版40 seekでは0件だった（Fisherの正確確率検定、両側`p=0.0000308`）。
 修正版は20地点中12地点で0.5005〜1.001秒後のGOPを選び、40 seekすべてで要求時刻を越えなかった。
-first fragment到着のtarget対応効果は中央値−7.2ms、bootstrap 95%区間−28.9〜5.1msで、network/変換の短縮だけでは説明できない。
-一方、browser frame提示は中央値−63.7ms（−103.2〜−41.2ms）、新しいrVFC後に`visibility:visible`で行われた最初のYADIF canvas描画は−51.0ms（−100.1〜−38.7ms）だった。
-基準/修正版のcanvas中央値は360.3/304.5ms、p90は456.8/369.1msで、誤った標本が一つ前のGOPを選ばせ、Chromeに余分な映像を復号・破棄させることが体感遅延の原因だと確認した。
+first fragment到着のtarget対応効果は中央値−11.7ms、bootstrap 95%区間−19.6〜2.3msで、network/変換の短縮だけでは説明できない。
+一方、browser frame提示は中央値−71.3ms（−83.7〜−24.2ms）、実際にcanvasを可視化した最初のYADIF描画は−71.3ms（−83.8〜−24.5ms）だった。
+基準/修正版のcanvas中央値は296.3/244.3ms、p90は373.0/280.7msで、誤った標本が一つ前のGOPを選ばせ、Chromeに余分な映像を復号・破棄させることが体感遅延の原因だと確認した。
+初回の計測hookは`drawArrays()`から戻った後のvisibility変更とrVFC callback登録順を扱えず、最初の可視描画を飛ばすことがあったため、callback中のmediaTimeを描画へ直接関連付けて全ブロックを取り直した。
+修正版ではYADIF描画が既存`presented` eventより中央値3.5ms先で、初画を遅らせる独立したYADIF待ちは確認できなかった。
 生値と除外走行は[probe標本の再検証](results/galaxy-probe-sample-revalidation.json)に保存した。
-正しい byte / PTS の対応を保つ削除はsidecarより先に採用するが、修正版も可視初画250ms以下を安定達成していない。
+正しい byte / PTS の対応を保つ削除はsidecarより先に採用する。修正版は可視初画中央値で250msを下回ったが、p90は280.7msで安定250ms以下には未達である。
 
 ## HTTP Range とファイル I/O
 
@@ -648,7 +650,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 | 仮説 | 評価 |
 | --- | --- |
-| 1. indexなしの探索が最大要因 | 単独の最大要因ではない。永続GOP indexはないが、メモリ内PTS indexと最大4回の小Rangeがある。43GB素材でも2 probe、約0.1秒で収束した。ただしprobe標本を後のfragment時刻で上書きする欠陥は、最新のGalaxy B-F-F-Bで追加probe 14/40→0/40、browser提示のtarget対応中央値−63.7ms、可視canvas−51.0msとなった。正しい標本を保てば効果は大きいが、修正版canvas中央値304.5msなので探索後のdecoder/YADIFも残る |
+| 1. indexなしの探索が最大要因 | 単独の最大要因ではない。永続GOP indexはないが、メモリ内PTS indexと最大4回の小Rangeがある。43GB素材でも2 probe、約0.1秒で収束した。ただしprobe標本を後のfragment時刻で上書きする欠陥は、最新のGalaxy B-F-F-Bで追加probe 14/40→0/40、browser提示と可視canvasのtarget対応中央値−71.3msとなった。修正版canvas中央値244.3msは目標内だがp90 280.7msなので、探索後のdecoder tailも残る |
 | 2. RAP不一致の余分な読み込み | 確認。offsetはRAP未整列。本体Rangeは初画までに数十MiBを読み、tables/PES/GOP再取得とA/V条件を含む。RAP indexで短縮余地はあるが後段は消えない |
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
@@ -672,7 +674,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せず、前身の全resetは単なる容量不足でも4〜5 fieldをまとめて失ったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 前身の停止7/90→0/90を正式候補でも0/90のまま維持。注入試験では全reset 14〜15回→0回、最大lateness 83.3→32.6ms。通常30秒は前身59.758fps、後継59.768fpsでreset増分0 | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
-| probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | Galaxy B-F-F-B各40 seekで追加probe 14/40→0/40。20地点中12地点で0.5005〜1.001秒後かつ要求時刻以前のGOPを選び、target対応のbrowser提示を63.7ms、可視canvasを51.0ms短縮。canvas中央値360.3→304.5msで単独では250ms未達 | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
+| probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | Galaxy B-F-F-B各40 seekで追加probe 14/40→0/40。20地点中12地点で0.5005〜1.001秒後かつ要求時刻以前のGOPを選び、target対応のbrowser提示と可視canvasをともに71.3ms短縮。canvas中央値296.3→244.3ms、p90 373.0→280.7ms | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
 | 完成fragmentの早期受け渡し | 完成済みfragmentと後続picture処理を直列化しないため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | 単一タブGalaxy各40 seekでは短縮なし。一時markでは最初の通知がfirst fragment後10/10だった。ローカルSSD Chrome B-F-F-Bでも300秒はfirst fragment平均−5.1ms、450秒は+4.9ms、`presented`差は−4.4/+0.9msで一貫しなかった | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508`。後続throughput候補 |
 
 公開中のupstream向け4ブランチは、すべて`upstream/main`（`d5df08b`）を直接の土台として再構成した。
@@ -686,7 +688,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
 | P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | stall防止0/90を維持しつつ、注入試験の全reset 14〜15回→0回、最大lateness 83.3→32.6ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。公開source `26484fd`、dist `27b327e` |
-| P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−51.0ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
+| P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−71.3ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
 | P2 | 通常は1 rAFにつき1 field、実遅延時だけcatch-upする | 通常時の誤破棄を防ぐ可能性。現在の全画面通常試験では従来版も59.98〜60.00fps・late 0で改善未立証 | 中 | △ | YADIF presentation policy。queue整合性修正へ混ぜない |
 | P2 | 初回fieldのleadを2 fieldから1 fieldへ戻す | 短い3走行では59.64〜59.84→59.98〜60.00fpsだが、reset条件が混在 | 小 | △ | `d4ccb98`の効果を長窓A/Bで再評価。新規修正とは扱わない |
