@@ -1,0 +1,43 @@
+{
+  "status": "preliminary_rejected_for_default_behavior",
+  "purpose": "Estimate the benefit of allowing playback to land after the requested time",
+  "device": {
+    "model": "Galaxy Tab S11 Ultra (SM-X930)",
+    "os": "Android 16",
+    "browser": "Chrome 151.0.7922.174",
+    "refresh_rate_hz": 60
+  },
+  "conditions": {
+    "material": "乃木坂工事中 2026-08-31",
+    "targets_seconds": [600, 900, 300, 1200, 450],
+    "page_tabs_during_measurement": 1,
+    "sample_count_per_variant": 5,
+    "execution_order": ["lead_1_0", "lead_0_5"],
+    "warning": "This changes a fixed lead constant and is not an implementation that selects the nearest random access point. The order was not interleaved."
+  },
+  "lead_1_0": {
+    "first_visible_canvas_ms": [221.5, 172.5, 273.3, 179.7, 263.1],
+    "first_visible_canvas_mean_ms": 222.02,
+    "first_visible_canvas_median_ms": 221.5,
+    "seeked_ms": [224.4, 163.6, 266.9, 189.8, 253.8],
+    "seeked_mean_ms": 219.7,
+    "first_keyframe_offset_from_target_seconds": [-0.006145, -0.206645, -0.806645, -0.407145, -0.656645],
+    "second_fragment_wait_sites": 2
+  },
+  "lead_0_5": {
+    "first_visible_canvas_ms": [174.9, 158.4, 190.2, 151.7, 197.7],
+    "first_visible_canvas_mean_ms": 174.58,
+    "first_visible_canvas_median_ms": 174.9,
+    "seeked_ms": [161.1, 144.2, 176.9, 149.0, 181.1],
+    "seeked_mean_ms": 162.46,
+    "first_keyframe_offset_from_target_seconds": [-0.006145, -0.206645, -0.306145, 0.093355, 0.344355],
+    "second_fragment_wait_sites": 0
+  },
+  "paired_difference_lead_0_5_minus_1_0": {
+    "first_visible_canvas_ms": [-46.6, -14.1, -83.1, -28.0, -65.4],
+    "first_visible_canvas_mean_ms": -47.44,
+    "first_visible_canvas_median_ms": -46.6,
+    "seeked_mean_ms": -57.24
+  },
+  "decision": "Keep the upstream precise-seek contract. Do not adopt the 0.5 second lead experiment."
+}
