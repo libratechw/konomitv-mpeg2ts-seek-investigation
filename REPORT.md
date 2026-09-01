@@ -2,10 +2,10 @@
 
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
-42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束し、T0からresponseまで97〜115ms、初回fragmentまで272〜320ms、frame提示まで345〜390msだった。
-今回の条件ではindex探索より初回fragment生成が大きい。
+42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束した。
+当時の絶対時間はタブ数を記録していなかったため主結果から外すが、単一タブで取り直した短い録画でもresponse中央値59〜67msに対し、初画中央値252〜450msで、index探索以外の待ちが残った。
 
-シークとは別に、GalaxyでYADIF出力がほぼ停止する走行を反復再現した。
+シークとは別に、タブ数を固定していない旧条件でGalaxyのYADIF出力がほぼ停止する走行を反復再現した。
 canvasのopacity変更は原因または修正ではなかった。
 停止時もrAFとfilterは動作したが、fieldの表示予定が未来へ連鎖してqueueが飽和していた。
 また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を再現し、別branchで修正した。
@@ -393,6 +393,24 @@ poolなしの同期WASM処理中は、そもそもseekメッセージの処理�
 生ログはLAN内情報を含むため公開せず、必要なstatusとRangeの結果だけを本報告へ転記した。
 KonomiTVの保存済み画質設定では初期選択が`1080p` HLSだったため、DPlayerの画質UIから`Original (MPEG-2)`を明示的に選び、access logが`/api/streams/video/...`ではなく`/api/videos/2/download`の`206`になったことを確認してから測定した。
 
+過去のGalaxy測定を監査すると、検証用の設定・視聴タブを閉じずに次のタブを開いた走行があった。
+実際に古い設定タブのinputは有効なのに、新規視聴タブの`localStorage`は無効へ戻る不一致を確認した。
+古いPinia状態の再保存だけでなく、Worker、MSE、decoder、canvas処理の残留も除外できない。
+このため、Galaxyのend-to-end絶対時間は、開始前のCDP page targetが0件、測定中は対象の視聴タブ1枚だけであることを確認して取り直した次の値へ更新する。
+
+| 素材と条件 | response中央値 | first AU中央値 | first fragment中央値 | appended中央値 | canplay中央値 | 初画中央値 / p90 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 乃木坂工事中、600/900秒台、`autoFilm:false` | 58.7 ms | 135.5 ms | 142.2 ms | 156.0 ms | 244.2 ms | 252.4 / 272.8 ms |
+| MADDER #08、420/900秒台、`autoFilm:true` | 66.6 ms | 141.8 ms | 170.9 ms | 181.4 ms | 277.2 ms | 449.8 / 546.5 ms |
+
+乃木坂の旧10回値は初画中央値245.8ms、新値は252.4msで、差は6.6msだった。
+MADDERの旧10回値は488.9ms、新値は449.8msで39.1ms短かったが、1バッチ同士なので差をタブ競合の効果量とは断定しない。
+旧値は主結果から外し、新しい単一タブ値を採用する。
+MADDERの各seek後には`video`と`film`の両方が現れ、定常7標本も`film` 6回の後に`video`へ遷移したため、420秒台と900秒台を含め録画全体を24fpsとは扱わない。
+匿名化した全イベントは[Galaxy LAN単一タブ再測定](results/galaxy-lan-single-tab-seek.json)に保存した。
+
+以下の古い単発・連続UI測定は、UI入力からplayer受理までの経路と要求キャンセルの観察には使うが、タブ数を記録していないため現在のGalaxy絶対レイテンシ代表値には使わない。
+
 Galaxyの「乃木坂工事中」1200秒への単発seekでは、実画面の`touchend`から`seeking`まで15.9ms、最初に観測したvideo frameまで270.1ms、`seeked`まで311.6ms、`playing`まで319.4msだった。
 直後に4本の`206`完了を記録し、最初は`touchend`から126ms後だった。
 
@@ -411,8 +429,9 @@ player受理を0msとした内訳は、probe request 1.0ms、probe headers 47.7m
 `adb reverse`の同端末走行よりfirst byteが約30〜61ms長く、直列probeのRTTとbody待ちがLAN利用時には無視できない。
 それでもfirst byte後の変換に約81〜88ms、append後のdecoder提示に約30〜101msを要し、ネットワークだけが支配した結果ではない。
 
-3修正を合成したGalaxy実機確認では、乃木坂工事中1200秒が`touchend`からrVFC 311ms、playing 323.6msで復帰し、その後59.13〜60.13fpsを維持した。
+3修正を合成した旧Galaxy実機確認では、乃木坂工事中1200秒が`touchend`からrVFC 311ms、playing 323.6msで復帰し、その後59.13〜60.13fpsを維持した。
 MADDERは24fpsモードを一時的に有効化した900秒候補区間でrVFC 193ms、playing 219.4msとなり、以後のfilm標本は主に23.27〜24.58fpsだった。
+これらもタブ数を記録していないため、上の単一タブ再測定へ絶対時間を置き換える。
 乃木坂のCM/本編やMADDERの全区間へ、このカデンス判定を一般化しない。
 
 ### ローカル TS とネイティブ core の bounded 試験
@@ -469,8 +488,9 @@ native変換時間もAndroid / WASM / poolの時間へ換算できない。
 それとは別に、公式KonomiTV backendと実DPlayer UIを通したデスクトップ/Galaxy計測を追加し、指離しからのT0/T1も確認した。
 
 デスクトップChromeの「ばけばけ」4点は安定判定102〜202msだった。
-Galaxy ChromeでYADIFを有効にした「ばけばけ」は198〜382ms、乃木坂工事中は189〜384ms、MADDERは343〜463msだった。
-Galaxyの長時間TS 3点は360〜423msだった。
+Galaxyの旧素材別測定はタブ数を記録していなかったため、絶対時間の代表値から外す。
+単一タブで取り直した最新KonomiTV実DPlayerの初画中央値 / p90は、乃木坂工事中252.4 / 272.8ms、MADDER 449.8 / 546.5msだった。
+旧長時間TS 3点の360〜423msは、永続index仮説に対するprobe数と段階比率の参考には使うが、現在の端末絶対値には使わない。
 
 長時間TSでは全点が2本の128KiB probeで収束した。
 T0→responseは97〜115ms、response→first fragmentは155〜224ms、first fragment→frame提示は48〜118msだった。
@@ -510,7 +530,9 @@ clear開始/完了、probe開始/headers/body完了、最初の有効video時刻
 
 Galaxyで540秒と900秒を交互に30回seekした順次比較では、YADIF再同期だけの初画中央値305.5ms・playing中央値297.4msに対し、完成fragment早期受け渡しを加えた版は277.4ms・269.5ms、MSE世代修正も加えた版は273.6ms・267.0msだった。
 YADIF停止はいずれも0/30だった。
-build順をランダム化していないため、約28msすべてを早期受け渡しの効果とは断定せず、MSE追加の数msは速度効果と判定しない。
+build順をランダム化しておらず、当時のタブ数も記録していないため、約28msを早期受け渡しの効果量または現在の絶対時間として使わない。
+MSE追加の数msも速度効果と判定しない。
+停止が修正後0/30だった事実と、デスクトップ同一位置でfirst fragmentが約9〜10ms短縮した別測定は残す。
 各走行は[Galaxy優先修正比較](results/galaxy-priority-fixes.json)に保存した。
 
 同じqueue再同期版と完成fragment早期受け渡しを組み合わせ、MADDERの420秒と900秒をfilm候補として交互に10回seekした。
@@ -523,7 +545,8 @@ build順をランダム化していないため、約28msすべてを早期受�
 
 実測を含む通常seekの候補順位は、(1) append後のdecoder提示、(2) GOP/AAC収集と最初のIDR jobを含む初期H.264/fMP4生成、(3) PTS probeとrequest往復、(4) PAT/PMTとheader再取得、(5) `autoFilm`のmode遷移、(6)連続操作の残余計算である。
 上位二つは位置と端末で順序が入れ替わる。
-Galaxyの3地点ではjobsからstream先頭AUまで33〜40ms、appendedからplayingまで27.3〜149.2msだった。
+単一タブ再測定の中央値では、最初のpicture jobsからstream先頭AUまで乃木坂38.8ms、MADDER39.9msだった。
+appendedから初画までは乃木坂96.4ms、MADDER268.5msで、24fps判定を含む後段の差が大きかった。
 デスクトップの追加走行でもfragmentからappendは1.5ms、appendからcanplayは227.3msだった。
 通常のMSE append自体より、初期IDR変換とdecoder準備の変動が大きい。
 Androidの継続的な不滑らかさは別問題だが、opaque canvasによるvideo callback抑制という当初説明は追加計測で否定した。

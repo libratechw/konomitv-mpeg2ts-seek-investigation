@@ -1,5 +1,27 @@
 # Chrome と Galaxy のシーク・カデンス計測
 
+## タブ状態の監査とGalaxy単一タブ再測定
+
+過去の一部Galaxy測定では、検証用の設定・視聴タブを閉じずに次のタブを開いていた。
+古い設定タブのinputと新規視聴タブの`localStorage`が食い違う状態を実際に確認し、Worker、MSE、decoder、canvas処理の残留も除外できなかった。
+このため、開始前のCDP page target 0件、測定中は対象の視聴タブ1枚だけ、再生中、LANから隔離KonomiTVへ直接接続、実DPlayer Originalという条件で取り直した。
+
+| 素材 | seek系列 | autoFilm | response中央値 | first fragment中央値 | appended中央値 | canplay中央値 | 初画中央値 | 初画p90 |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 乃木坂工事中 | 600/900秒台を交互に10回 | false | 58.7 ms | 142.2 ms | 156.0 ms | 244.2 ms | 252.4 ms | 272.8 ms |
+| MADDER #08 | 420/900秒台を交互に10回 | true | 66.6 ms | 170.9 ms | 181.4 ms | 277.2 ms | 449.8 ms | 546.5 ms |
+
+乃木坂の定常標本は約60fpsの`video`だった。
+MADDERは各seek後に`video`と`film`が混在し、定常7標本も約24fpsの`film` 6回の後に`video`へ遷移した。
+番組全区間やCM区間のcadenceへ一般化しない。
+
+旧10回値と比べると、初画中央値は乃木坂245.8→252.4ms、MADDER488.9→449.8msだった。
+1バッチ同士なので差をタブ競合の効果量とは断定せず、旧値を主結果から外して新値へ置き換える。
+全イベントと集計は[galaxy-lan-single-tab-seek.json](galaxy-lan-single-tab-seek.json)に保存した。
+
+以下の旧Galaxy測定は、タブ数を記録していない限り、機能再現、同一走行内の段階比率、同一タブ内A/Bの参考として扱う。
+現在の端末end-to-end絶対時間には上の単一タブ再測定を使う。
+
 ## KonomiTV backendと実DPlayer UI
 
 公式`ghcr.io/tsukumijima/konomitv:latest`を`127.0.0.1:7012`だけへ公開し、新規DBと次の3ファイルだけを個別にread-only mountした。
