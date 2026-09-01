@@ -282,6 +282,17 @@ WebGL2 default framebufferへのdrawを直接数えた結果は次のとおり�
 独自の`expectedDisplayTime`アンカーは単一タブA/B未実施でupstreamと異なるため、候補を残したまま優先度を下げる。
 旧走行は[yadif-seek-queue.json](yadif-seek-queue.json)、単一タブA/Bは[galaxy-yadif-queue-single-tab-ab.json](galaxy-yadif-queue-single-tab-ab.json)に保存した。
 
+### queue容量不足と時刻同期破綻の分離
+
+true fullscreen、60Hz、単一タブで、2秒間だけpresentationを1/2 rAFへ制限する注入試験を行った。
+1 rAFにつき1 fieldを表示する同じpresentation policyで比較すると、queue満杯時の全消去は3走行すべてで14〜15回発生し、最大latenessは66.5〜83.3msだった。
+必要枚数だけFIFO破棄する版は3走行とも全reset 0回で、最大latenessは32.6ms、解除後は約60fpsへ復帰した。
+注入中を含む8秒平均は両版52.33〜52.51fpsであり、差は不足時間中の平均出力数ではなく、4 field前後をまとめて失う時刻ジャンプにある。
+
+通常8秒を各3回測った範囲では、1 rAFにつき1 field、遅延時だけcatch-upする二段階版、従来の複数field消費のいずれも59.88〜60.04fpsで`late`増分0だった。
+したがってpresentation policyの変更は未確定とし、容量不足時の最小FIFO破棄と、queue時刻が表示可能範囲を越えた場合だけの全resetを独立した修正候補とする。
+生値と除外runは[galaxy-yadif-scheduler-ablation.json](galaxy-yadif-scheduler-ablation.json)に保存した。
+
 ## 優先修正のGalaxy合成確認
 
 540秒と900秒を交互に30回seekし、YADIF queue再同期だけ、完成fragment早期受け渡しを追加、MSE世代修正も追加、の3 buildを順番に測定した。
