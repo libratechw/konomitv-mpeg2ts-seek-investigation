@@ -1722,29 +1722,29 @@
         }
       },
       {
-        "variant": "f7-stall250",
+        "variant": "f7-stall250-rerun",
         "sourceHash": "95b47a7a411f614505afacfb66197513574afa5d19c53bcf1c0b41022a52539a",
-        "asset": "PlayerController-BFGbf0oO.js",
+        "asset": "PlayerController-SvyYE68v.js",
         "stallMs": 250,
         "sample": "steady-8000ms-after-1000ms",
         "draw": {
-          "count": 466,
-          "fps": 58.232730552041915,
-          "p50": 17.399999976158142,
-          "p95": 22.399999976158142,
-          "p99": 23.5,
-          "max": 255.5,
+          "count": 465,
+          "fps": 58.15046432592342,
+          "p50": 16.700000047683716,
+          "p95": 22,
+          "p99": 24.100000023841858,
+          "max": 257.60000002384186,
           "over40": 1,
           "over80": 1,
           "over160": 1
         },
         "rvfc": {
           "count": 234,
-          "fps": 29.2555529045751,
-          "p50": 33.40000009536743,
-          "p95": 36.39999997615814,
-          "p99": 38.09999990463257,
-          "max": 255.5,
+          "fps": 29.25114556525014,
+          "p50": 33.300000071525574,
+          "p95": 36,
+          "p99": 37.799999952316284,
+          "max": 257.5,
           "over40": 2,
           "over80": 1,
           "over160": 1
@@ -1766,23 +1766,23 @@
         },
         "droppedVideoFramesDelta": 2,
         "statsFirst": {
-          "late": 1,
-          "queueResetted": 0,
-          "fps": 60.025171847643634,
-          "outputFps": 60.025171847643634,
+          "late": 4,
+          "queueResetted": 2,
+          "fps": 59.922101271204745,
+          "outputFps": 59.922101271204745,
           "maxQueuedFields": 3,
           "mode": "video"
         },
         "statsLast": {
-          "late": 3,
-          "queueResetted": 0,
-          "fps": 60.0542425430374,
-          "outputFps": 60.0542425430374,
+          "late": 7,
+          "queueResetted": 2,
+          "fps": 59.996129283365995,
+          "outputFps": 59.996129283365995,
           "maxQueuedFields": 3,
           "mode": "video"
         },
         "statsDelta": {
-          "late": 2,
+          "late": 3,
           "queueResetted": 0
         },
         "cleanup": {
@@ -1819,6 +1819,12 @@
         "galaxy-formal-forced-presentation-phased-1.json"
       ],
       "reason": "The production predecessor and successor builds did not contain the global test hook, so setting the flag injected no presentation throttling. These are ordinary-playback observations, not forced-presentation evidence."
+    },
+    {
+      "files": [
+        "galaxy-f7-stall250-1.json"
+      ],
+      "reason": "The user reported touching the device during this final run. It was excluded and replaced by f7-stall250-rerun under the same fullscreen LAN condition."
     }
   ],
   "conclusion": "The successor preserved the predecessor stall fix in 90 alternating seeks and normal/film cadence. Its capacity behavior is supported by the isolated diagnostic build; one-shot main-thread stalls recovered in both variants and did not independently demonstrate a speedup."
