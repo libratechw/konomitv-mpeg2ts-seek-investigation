@@ -329,7 +329,7 @@ Range開始からPAT/PMT、PES、GOPまでの読み捨てがあるため、12 se
 初画差の全量はこの修正の効果とは扱わない。
 
 修正は`otya128/mpeg2toh264`向けの公開branch `fix/preserve-seek-probe-sample`、commit `a10253e`に分離した。
-計測用のprobe byte、PTS、first fragment時刻は`feat/seek-timing-context`、commit `ffe2893`に分離した。
+計測用のprobe byte、PTS、first fragment時刻は`feat/seek-timing-context`の`ffe2893`に分離し、`presented`の意味を可視初画と区別する文書追補後のbranch HEADは`58a9920`である。
 全走行は[seek-index-sample.json](seek-index-sample.json)に保存した。
 
 ## 試作して保留した小改善
