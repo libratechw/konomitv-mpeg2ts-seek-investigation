@@ -5,7 +5,7 @@
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束した。
 当時の絶対時間はタブ数を記録していなかったため主結果から外すが、単一タブで取り直した短い録画でもresponse中央値50〜52msに対し、可視YADIF canvas初描画中央値215〜267msで、index探索以外の待ちが残った。
 
-シークとは別に、タブ数を固定していない旧条件でGalaxyのYADIF出力がほぼ停止する走行を反復再現した。
+シークとは別に、単一タブのGalaxy A/BでYADIF出力がほぼ停止する走行を基準版7/90、queue再同期版0/90で再現した。
 canvasのopacity変更は原因または修正ではなかった。
 停止時もrAFとfilterは動作したが、fieldの表示予定が未来へ連鎖してqueueが飽和していた。
 また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を再現し、別branchで修正した。
@@ -345,8 +345,8 @@ opacity変更後の遅延した30fps遷移は残るため、位相、queue deadl
 
 ### Android seek後のYADIF queue飽和
 
-最新KonomiTV `e92fba8`と依存`52a3db5`、Galaxy Chrome 151、表示60Hz、乃木坂工事中の540秒と900秒を交互にseekする条件で、1.8秒後もYADIF出力が10fps未満、または`late`が30超増えた走行を30回中8回確認した。
-540秒は7/15、900秒は1/15だったが、素材全体のカデンス差とは断定しない。
+最新KonomiTV `e92fba8`と依存`52a3db5`、Galaxy Chrome 151、表示60Hz、乃木坂工事中の540秒と900秒を交互にseekする条件でYADIF queue飽和を調べた。
+タブ数を記録していなかった旧測定では、1.8秒後もYADIF出力が10fps未満、または`late`が30超増えた走行を30回中8回確認したが、この発生率は主結果から外す。
 
 停止時もYADIFのrAF callbackは1.8秒に77〜110回呼ばれ、`startLoop`は既存loopを認識し、`stopLoop`は呼ばれていなかった。
 したがってloop消失ではない。
@@ -357,14 +357,28 @@ filter済みfieldの表示予定は正常時に先頭約18ms、末尾約35〜52m
 フォーク版にも以前は同じ処理があったが、個別のlate破棄へ変更した際に`queueResetted`が互換用の常時0カウンターとなった。
 Android seek後の先行callbackでは、個別破棄だけでは未来へ進んだ時刻列を戻せない。
 
-upstream実装と同様に、飽和時にqueueを消してcallback時刻へ戻す処理をフォークへ適合した正式候補では、同じ30回の停止判定は8/30から0/30になった。
-1.8秒窓の最終`outputFps`は中央値56.1fps、最低25.0fpsで、4秒窓10回の最終値は中央値60.0fps、最低43.4fpsだった。
-長時間停止は防いだが、最初の短い過渡と540秒の1走行には低下が残る。
+upstream実装と同様に、飽和時にqueueを消してcallback時刻へ戻す処理をフォークへ適合した正式候補を、単一タブ規則の下で再測定した。
+各ブロック開始前にCDP page targetを0件へ戻し、測定中は前景の視聴page 1枚だけとした。
+基準版と修正版の短窓ブロック順はB-F-F-B-B-F-F-Bとし、読み込まれた`PlayerController` assetも各走行で照合した。
+WebGL2のdefault framebufferへの`drawArrays()`を直接数え、`drawFps < 10`または`late`増分30超を停止とした結果は次のとおりだった。
 
-比較用に、各rVFCの`expectedDisplayTime`へfield時刻を再アンカーする独自案も測定した。
-停止0/30、1.8秒窓の中央値57.0fps・最低39.7fps、4秒窓の最終値は中央値60.0fps・最低58.1fpsだった。
-数値は良いがupstreamのqueue設計と異なるため、まずupstream再同期の復元を優先し、独自案は過渡低下を解消する追加変更として優先度を下げる。
-集計値と各走行は[計測データ](results/yadif-seek-queue.json)に保存した。
+| 条件 | n | 停止 | 1.8秒窓drawFps中央値 | p10 | 最低 | queue reset |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 基準 `52a3db5` | 90 | **7** | 44.94 | 43.23 | 1.67 | 0 |
+| queue再同期 `f7b89eb` | 90 | **0** | 44.97 | 40.53 | 14.98 | 29 |
+
+基準版の7件はすべて540秒台で、4件はdrawFps 10未満、残る3件は`late`増分30超だった。
+修正版のqueue再同期は29回作動し、停止を0件に抑えた。
+停止率のWilson 95%区間は基準3.82〜15.19%、修正版0〜4.09%で、7対0の条件付きFisher両側確率は約0.0138だった。
+一方、中央値差は0.03fpsでbootstrap 95%区間も-0.54〜0.59fpsだったため、通常走行の平均fpsを改善する変更とは扱わない。
+この1.8秒値にはseek応答中の無描画時間も含まれ、定常fpsそのものではなくseek直後の復帰窓である。
+
+4秒窓10回では基準版が中央値53.61fps・最低52.24fps、修正版が53.60fps・最低51.72fpsで、停止はどちらも0件だった。
+したがってqueue再同期は、通常の復帰時間や定常fpsを一律に短縮する変更ではなく、稀に未来時刻列が戻らなくなる長時間stallを防ぐ正しさの修正として維持する。
+
+比較用に、各rVFCの`expectedDisplayTime`へfield時刻を再アンカーする独自案も旧条件で測定した。
+当時は停止0/30だったがタブ数を固定していないため効果量には使わず、upstreamのqueue設計とも異なるので優先度を下げる。
+旧測定は[従来のqueue計測](results/yadif-seek-queue.json)、単一タブA/Bの全走行は[queue再同期A/B](results/galaxy-yadif-queue-single-tab-ab.json)に保存した。
 
 `autoFilm`は区間依存である。
 MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`のまま、1500秒では`video`から`film`への切替過渡を観測した。
@@ -567,7 +581,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
-| 6. YADIF/IVTCの過剰な初画待ち | タブ数未固定の旧条件でYADIF queueの未来時刻累積を30回中8回再現し、upstream再同期の復元で停止0/30。単一タブのMADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
+| 6. YADIF/IVTCの過剰な初画待ち | 単一タブの乃木坂A/BでYADIF停止7/90→0/90となり、queue再同期によるstall防止を確認。通常時中央値はほぼ不変。MADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
@@ -580,7 +594,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | 変更 | なぜ・目的 | 何を修正したか | 実測または確認できた効果 | 本来の提出先 |
 | --- | --- | --- | --- | --- |
 | YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | branchは削除。結果だけを本調査リポジトリに保存 |
-| YADIF queue再同期の復元 | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 停止8/30→0/30。4秒窓の最終中央値60.0fps。短い過渡は最低25.0fps、4秒後43.4fpsの走行が残る | `tsukumijima/mpeg2toh264` fork。source `f7b89eb`、専用dist `4c75a02` |
+| YADIF queue再同期の復元 | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 単一タブA/Bで停止7/90→0/90、queue reset 29回。1.8秒窓中央値44.94→44.97fps、4秒窓中央値53.61→53.60fpsなので、平均fps改善ではなくstall防止 | `tsukumijima/mpeg2toh264` fork。source `f7b89eb`、専用dist `4c75a02` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
 | probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | 学習後10 seekの追加probeは直接デモ4→0、実KonomiTV desktop 2→0、Galaxy 4→0。Galaxyのfirst fragment中央値122.1→98.1msだがbuild順非ランダムのため全差は帰属しない | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
@@ -596,9 +610,9 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | upstreamのYADIF queue再同期をフォーク拡張へ復元する | 長時間停止8/30→0/30。1.8秒窓中央値56.1fps、4秒窓最終中央値60.0fps | 小 | ◎ | tsukumijimaフォークYADIF。upstream既存挙動との統合 |
+| P0 | upstreamのYADIF queue再同期をフォーク拡張へ復元する | 単一タブA/Bで長時間停止7/90→0/90。通常時中央値はほぼ不変 | 小 | ◎ | tsukumijimaフォークYADIF。upstream既存挙動との統合 |
 | P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 学習後10 seekの追加probeをdesktop 2→0、Galaxy 4→0 | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
-| P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | queue復元版より過渡の最低値を改善したが、upstreamのscheduleと異なる | 中 | △ | 比較実験。upstream復元後も過渡低下が問題になる場合だけ再検討 |
+| P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
 | P2 | probeを選択service/video PID優先にする | 複数service TSで誤ったPTSを採る可能性を下げる | 中 | ○ | mpeg2toh264 source/core。標本上書き修正とは分離 |

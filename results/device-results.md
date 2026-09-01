@@ -248,14 +248,22 @@ CM、本編、テロップ、カット境界のどれに当たるかは別途画
 
 ## YADIF queueの反復seek試験
 
-最新KonomiTVの実DPlayerで、乃木坂工事中の540秒と900秒を交互に30回seekし、各1.8秒観測した。
-変更前はYADIF出力10fps未満または`late`増分30超の走行が8/30だった。
-停止時もrAFは動いていたが、field queue末尾の表示予定が最大351.9ms先まで伸びていた。
+タブ数未記録の旧30回試験では、YADIF出力10fps未満または`late`増分30超の走行が8/30だった。
+停止時もrAFは動いていたが、field queue末尾の表示予定が最大351.9ms先まで伸びていたため、原因分析は残し、発生率は主結果から外す。
 
-upstreamにあるqueue再同期をフォークへ適合した正式候補では、同じ判定は0/30になった。
-1.8秒窓の最終値は中央値56.1fps・最低25.0fps、4秒窓10回の最終値は中央値60.0fps・最低43.4fpsだった。
-比較した`expectedDisplayTime`への独自アンカーは停止0/30、4秒窓の最終値が中央値60.0fps・最低58.1fpsだったが、upstreamと異なる変更なので優先度を下げた。
-各走行の値は[yadif-seek-queue.json](yadif-seek-queue.json)に保存した。
+単一タブ再測定では、各ブロック開始前にpage targetを0件へ戻し、基準・修正の順序をB-F-F-B-B-F-F-Bとして各版90回測定した。
+WebGL2 default framebufferへのdrawを直接数えた結果は次のとおりだった。
+
+| 条件 | n | 停止 | 1.8秒窓drawFps中央値 | p10 | 最低 | queue reset |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 基準 `52a3db5` | 90 | **7** | 44.94 | 43.23 | 1.67 | 0 |
+| queue再同期 `f7b89eb` | 90 | **0** | 44.97 | 40.53 | 14.98 | 29 |
+
+停止7件はすべて540秒台で、条件付きFisher両側確率は約0.0138だった。
+通常時中央値はほぼ不変なので、平均fps改善ではなくstall防止効果と判定する。
+4秒窓10回も基準53.61fps、修正版53.60fpsで差はなかった。
+独自の`expectedDisplayTime`アンカーは単一タブA/B未実施でupstreamと異なるため、候補を残したまま優先度を下げる。
+旧走行は[yadif-seek-queue.json](yadif-seek-queue.json)、単一タブA/Bは[galaxy-yadif-queue-single-tab-ab.json](galaxy-yadif-queue-single-tab-ab.json)に保存した。
 
 ## 優先修正のGalaxy合成確認
 
