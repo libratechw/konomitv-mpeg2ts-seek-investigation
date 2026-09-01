@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "decision": "reject-worker-only-later-fragment-selection-with-default-recovery-interval",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "transport": "LAN direct to isolated local KonomiTV",
+    "playback": "recorded MPEG-2 TS Original, YADIF double-rate, true fullscreen",
+    "recording": "Nogizaka Koujichuu local-SSD fixture",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "tabRule": "one page during measurement; playback stopped and page closed after every run"
+  },
+  "implementation": {
+    "KonomiTV": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "mpeg2toh264Base": "065cdb97072a41b140c110af33c6e04d638b77ef",
+    "recoveryInterval": 24,
+    "configurationSource": "KonomiTV and DPlayer leave recoveryInterval unspecified, so the wasm default is used",
+    "instrumentation": "temporary media-fragment and randomAccess timing marks only; no playback policy change"
+  },
+  "generationTrace": {
+    "rawSha256": "a0b5256fc730a4cc38b13cd43c80d7486a42aea3bab1dccc0596f8aed095d5bc",
+    "measuredRuns": [
+      {
+        "targetSeconds": 600,
+        "firstVisibleCanvasMs": 162.6,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 124.6,
+            "startSeconds": 599.993856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 188.5,
+            "startSeconds": 600.494356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 235.5,
+            "startSeconds": 600.994856
+          }
+        ],
+        "fragmentCountObserved": 6
+      },
+      {
+        "targetSeconds": 900,
+        "firstVisibleCanvasMs": 173.6,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 126.0,
+            "startSeconds": 899.793356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 183.8,
+            "startSeconds": 900.293856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 240.1,
+            "startSeconds": 900.794356
+          }
+        ],
+        "fragmentCountObserved": 6
+      },
+      {
+        "targetSeconds": 601,
+        "firstVisibleCanvasMs": 247.6,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 129.5,
+            "startSeconds": 600.494356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 178.0,
+            "startSeconds": 600.994856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 230.9,
+            "startSeconds": 601.495356
+          }
+        ],
+        "fragmentCountObserved": 8
+      },
+      {
+        "targetSeconds": 901,
+        "firstVisibleCanvasMs": 193.4,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 140.4,
+            "startSeconds": 900.794356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 199.3,
+            "startSeconds": 901.294856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 257.5,
+            "startSeconds": 901.795356
+          }
+        ],
+        "fragmentCountObserved": 6
+      },
+      {
+        "targetSeconds": 602,
+        "firstVisibleCanvasMs": 260.0,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 143.6,
+            "startSeconds": 601.495356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 197.4,
+            "startSeconds": 601.995856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 251.4,
+            "startSeconds": 602.496356
+          }
+        ],
+        "fragmentCountObserved": 7
+      },
+      {
+        "targetSeconds": 902,
+        "firstVisibleCanvasMs": 250.3,
+        "fragments": [
+          {
+            "kind": "unclassified",
+            "generatedMs": 125.0,
+            "startSeconds": 901.294856
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 181.7,
+            "startSeconds": 901.795356
+          },
+          {
+            "kind": "unclassified",
+            "generatedMs": 243.5,
+            "startSeconds": 902.295856
+          }
+        ],
+        "fragmentCountObserved": 8
+      }
+    ]
+  },
+  "randomAccessTrace": {
+    "rawSha256": "8cbd649238edb09c67fb344976a04a52191f6b697908ec8c35bcb220fe089bd3",
+    "measuredRuns": [
+      {
+        "targetSeconds": 600,
+        "firstVisibleCanvasMs": 188.9,
+        "fragments": [
+          {
+            "kind": "random",
+            "generatedMs": 152.0,
+            "startSeconds": 599.993856
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 212.8,
+            "startSeconds": 600.494356
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 259.2,
+            "startSeconds": 600.994856
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 305.3,
+            "startSeconds": 601.495356
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 354.0,
+            "startSeconds": 601.995856
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 412.5,
+            "startSeconds": 602.496356
+          }
+        ],
+        "fragmentCountObserved": 6
+      },
+      {
+        "targetSeconds": 900,
+        "firstVisibleCanvasMs": 192.8,
+        "fragments": [
+          {
+            "kind": "random",
+            "generatedMs": 147.6,
+            "startSeconds": 899.793356
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 206.6,
+            "startSeconds": 900.293856
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 262.9,
+            "startSeconds": 900.794356
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 313.5,
+            "startSeconds": 901.294856
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 367.7,
+            "startSeconds": 901.795356
+          },
+          {
+            "kind": "dependent",
+            "generatedMs": 420.7,
+            "startSeconds": 902.295856
+          }
+        ],
+        "fragmentCountObserved": 6
+      }
+    ]
+  },
+  "codeEvidence": {
+    "default": "TranscodeOptions.recovery_interval is 24",
+    "schedule": "the opening fragment is random access; Session requests another recovery point after each 24 emitted GOPs",
+    "flag": "Fragment.randomAccess is starts_at_idr || recovery_point",
+    "test": "streaming::emits_a_recovery_point_every_twenty_fourth_group expects restart indexes [0, 24]",
+    "verification": "the interval-24 test and the interval-1 open-GOP test both passed on d5df08b"
+  },
+  "conclusion": {
+    "observed": "the first fragment after each measured seek was random access and every later approximately 0.5005-second fragment was dependent",
+    "safety": "discarding the first fragment and appending a later dependent fragment would start MediaCodec without required decoder state",
+    "workerOnly": "a Worker-only policy that chooses the latest already-generated fragment is not valid under the production default",
+    "nextConditions": "a later-fragment experiment must first provide a random access point at the selected GOP and must quantify extra conversion, samples, bytes, and decoder behavior"
+  },
+  "scope": "two randomAccess-classified measured seeks establish the dependency pattern for this fixture and implementation; they do not quantify every recording",
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

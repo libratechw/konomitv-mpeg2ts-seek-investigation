@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "decision": "reject-wait-for-later-recovery-fragment",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151",
+    "displayHz": 60,
+    "transport": "LAN direct to isolated local KonomiTV",
+    "playback": "recorded MPEG-2 TS Original, YADIF double-rate, autoFilm false, true fullscreen",
+    "recording": "Nogizaka Koujichuu local-SSD fixture",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "order": "baseline-candidate-candidate-baseline",
+    "block": "fresh Chrome page, two warm-up seeks excluded, ten measured seeks"
+  },
+  "implementation": {
+    "KonomiTV": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "mpeg2toh264Base": "065cdb97072a41b140c110af33c6e04d638b77ef",
+    "baseline": "production recoveryInterval 24 with temporary fragment classification marks",
+    "candidate": "recoveryInterval 1, openGopRecovery recovery-point, withhold the first post-seek media fragment and append the second",
+    "scope": "uncommitted diagnostic worktree; not a contribution candidate"
+  },
+  "offlineCost": {
+    "input": {
+      "bytes": 16777216,
+      "sha256": "a40962e894be20a6e2576d3c3d34c59746adc3a9302892fecda1db628bbdb89d",
+      "sourcePosition": "same local-SSD fixture near the 600-second seek range"
+    },
+    "command": "release CLI, four picture threads, identical input",
+    "defaultIdr": {
+      "recoveryInterval24": {
+        "elapsedMeanMs": 730,
+        "userMeanMs": 2200,
+        "outputBytes": 35965906,
+        "videoSamples": 292,
+        "keyFrames": 2
+      },
+      "recoveryInterval1": {
+        "elapsedMeanMs": 865,
+        "userMeanMs": 2735,
+        "outputBytes": 42518015,
+        "videoSamples": 328,
+        "keyFrames": 20
+      },
+      "interval1Increase": {
+        "elapsedPercent": 18.5,
+        "userPercent": 24.3,
+        "bytesPercent": 18.2,
+        "videoSamples": 36
+      }
+    },
+    "nonIdrRecoveryPointInterval1": {
+      "elapsedMeanMs": 720,
+      "userMeanMs": 2190,
+      "outputBytes": 33907475,
+      "videoSamples": 290,
+      "keyFrames": 20,
+      "note": "avoids the dense-IDR clone cost; device restart compatibility was then tested by omitting the first fragment"
+    }
+  },
+  "rawFiles": {
+    "baseline": [
+      {
+        "sha256": "f18b5fd4426882779e54926b9f89ef0c9ea64c019b948f1a7b89362f0647804b",
+        "asset": "PlayerController-Do2pa4WV.js"
+      },
+      {
+        "sha256": "029255039735f8efd38fa90416cb4337940722c0f1f91edebe95beb07b36c2d3",
+        "asset": "PlayerController-Do2pa4WV.js"
+      }
+    ],
+    "candidate": [
+      {
+        "sha256": "b7b3e91266a7f6ba6e2f0b5a3e0ea1cb2dd9349fff71d1a1f4dd5e0b80047b9e",
+        "asset": "PlayerController-CvAJ8j7l.js"
+      },
+      {
+        "sha256": "d4893befcd7f8c55d37bc2431e08a2e9036215bc511ade681cb545435013434d",
+        "asset": "PlayerController-CvAJ8j7l.js"
+      }
+    ]
+  },
+  "targetSelection": {
+    "validTargets": [
+      601,
+      602,
+      603,
+      604,
+      902
+    ],
+    "overshotTargets": [
+      {
+        "targetSeconds": 600,
+        "overshootSeconds": 0.494356
+      },
+      {
+        "targetSeconds": 900,
+        "overshootSeconds": 0.293856
+      },
+      {
+        "targetSeconds": 901,
+        "overshootSeconds": 0.294856
+      },
+      {
+        "targetSeconds": 903,
+        "overshootSeconds": 0.296856
+      },
+      {
+        "targetSeconds": 904,
+        "overshootSeconds": 0.297856
+      }
+    ],
+    "interpretation": "a fixed second-fragment choice crossed the requested time at five of ten measured targets and cannot be a production rule"
+  },
+  "validTargetResults": {
+    "targets": [
+      601,
+      602,
+      603,
+      604,
+      902
+    ],
+    "samplesPerVariant": 10,
+    "intervals": {
+      "baseline": {
+        "visibleCanvasMs": {
+          "n": 10,
+          "median": 244.9,
+          "mean": 243.9,
+          "p90": 260.6,
+          "max": 262.7
+        },
+        "appendedToCanplayMs": {
+          "n": 10,
+          "median": 101.4,
+          "mean": 101.2,
+          "p90": 111.9,
+          "max": 121.4
+        }
+      },
+      "candidate": {
+        "visibleCanvasMs": {
+          "n": 10,
+          "median": 241.6,
+          "mean": 245.2,
+          "p90": 271.5,
+          "max": 278.4
+        },
+        "appendedToCanplayMs": {
+          "n": 10,
+          "median": 33.3,
+          "mean": 34.5,
+          "p90": 43.5,
+          "max": 44.1
+        }
+      }
+    },
+    "paired": {
+      "appended": {
+        "candidateMinusBaselineMsByTarget": {
+          "601": 82.1,
+          "602": 71.2,
+          "603": 57.7,
+          "604": 69.8,
+          "902": 58.8
+        },
+        "summary": {
+          "n": 5,
+          "median": 69.8,
+          "mean": 67.9,
+          "p90": 82.1,
+          "max": 82.1
+        }
+      },
+      "canplay": {
+        "candidateMinusBaselineMsByTarget": {
+          "601": 24.2,
+          "602": 11.8,
+          "603": -9.9,
+          "604": 9.7,
+          "902": -29.9
+        },
+        "summary": {
+          "n": 5,
+          "median": 9.7,
+          "mean": 1.2,
+          "p90": 24.2,
+          "max": 24.2
+        }
+      },
+      "presented": {
+        "candidateMinusBaselineMsByTarget": {
+          "601": 65.3,
+          "602": 24.1,
+          "603": 3.8,
+          "604": 29.4,
+          "902": -28.6
+        },
+        "summary": {
+          "n": 5,
+          "median": 24.1,
+          "mean": 18.8,
+          "p90": 65.3,
+          "max": 65.3
+        }
+      },
+      "canvas": {
+        "candidateMinusBaselineMsByTarget": {
+          "601": 26.2,
+          "602": 5.7,
+          "603": -12.1,
+          "604": 15.1,
+          "902": -28.4
+        },
+        "summary": {
+          "n": 5,
+          "median": 5.7,
+          "mean": 1.3,
+          "p90": 26.2,
+          "max": 26.2
+        }
+      }
+    }
+  },
+  "conclusion": {
+    "decoder": "starting MediaCodec at the later non-IDR recovery fragment reduced appended-to-canplay median from 101.4 ms to 33.3 ms",
+    "conversion": "waiting until that fragment existed delayed append by a target-paired median 69.8 ms",
+    "visible": "visible canvas did not improve: target-paired median candidate-minus-baseline was +5.7 ms and mean was +1.3 ms",
+    "next": "obtain the chosen RAP byte before conversion so the target-near GOP is the session's first fragment; do not generate and discard an earlier GOP"
+  },
+  "limitations": [
+    "only five target positions retained exact no-overshoot behavior",
+    "the candidate was rejected before a long steady-cadence test",
+    "the experiment proves the decoder-discard component and the wait-for-next-fragment tradeoff for this fixture, not universal MediaCodec behavior"
+  ],
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

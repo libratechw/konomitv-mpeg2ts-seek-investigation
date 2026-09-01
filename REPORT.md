@@ -151,6 +151,31 @@ first fragment到着のtarget対応効果は中央値−11.7ms、bootstrap 95%�
 生値と除外走行は[probe標本の再検証](results/galaxy-probe-sample-revalidation.json)に保存した。
 正しい byte / PTS の対応を保つ削除はsidecarより先に採用する。修正版は可視初画中央値で250msを下回ったが、p90は280.7msで安定250ms以下には未達である。
 
+修正版40 seekでは、first fragmentが要求時刻より前へ開く量と`appended`→`canplay`の相関がPearson 0.943、Spearman 0.879だった。
+そこで、変換済みの後続fragmentから要求時刻以前で最も近いものだけをWorkerが渡せるか確認した。
+乃木坂の実出力は約0.5005秒ごとにfragmentを生成し、600秒seekでは599.9939秒の先頭fragmentを152.0ms、600.4944秒の次fragmentを212.8msに生成した。
+しかしproduction既定の`recoveryInterval=24`では、計測した600秒と900秒の両seekとも先頭だけが`randomAccess:true`で、後続fragmentはすべてdependentだった。
+
+これはコード上も仕様通りである。
+KonomiTVは`recoveryInterval`を指定せず、DPlayerも利用者optionをそのまま渡すため、WASMの既定24が使われる。
+Sessionは先頭と24 GOPごとだけにrecovery pointを要求し、`Fragment.randomAccess`をIDR開始またはrecovery pointの場合だけtrueにする。
+既定24とinterval 1のcore testは最新upstream `d5df08b`でどちらも成功した。
+したがって先頭fragmentを捨て、後続fragmentだけをappendするWorker-only変更は、MediaCodecへ必要なdecoder stateを渡さず正しさを壊すため採用しない。
+後続GOPを選ぶ実験は、選択GOP自体をrandom accessにする方法と、追加sample・byte量・変換時間・実decoderの復帰を先に評価する必要がある。
+計測値は[fragmentのrandom-access性](results/galaxy-fragment-random-access.json)に保存した。
+
+この上限を確かめるため、同じTSの16MiB区間でrecovery方式を比較した。
+既定のIDR方式をinterval 24から1にすると、wall timeは平均0.730→0.865秒（+18.5%）、CPU timeは2.200→2.735秒（+24.3%）、出力は35,965,906→42,518,015 bytes（+18.2%）、video sampleは292→328になった。
+一方、既存のnon-IDR recovery-point方式をinterval 1にすると追加cloneはなく、wall time 0.720秒、CPU time 2.190秒、33,907,475 bytes、290 samplesだった。
+
+non-IDR recovery-pointを毎GOPへ入れ、seek後の先頭fragmentを意図的に捨てて第2fragmentからMediaCodecを開始する診断版をGalaxyでB-F-F-B比較した。
+第2fragmentが要求時刻以前だった5地点10走行では、`appended`→`canplay`中央値が101.4→33.3msとなり、手前の約0.5秒をChromeが復号・破棄する時間を約68ms削減できることを確認した。
+しかし第2fragmentを生成するまでappendがtarget対応中央値69.8ms遅れ、可視canvasのtarget対応差は中央値+5.7ms、平均+1.3msで改善しなかった。
+さらに10地点中5地点は第2fragmentが要求時刻を0.294〜0.494秒越えた。
+したがって「先に古いGOPを変換し、後続recovery fragmentを待つ」方式は棄却する。
+この結果は、要求時刻以前で最も近いRAPのbyte位置を変換前に得て、そのGOPをSessionの先頭fragmentにする設計なら、同じdecoder discardを待ち時間なしで除ける可能性を示す。
+詳細は[recovery fragment選択実験](results/galaxy-recovery-fragment-selection.json)に保存した。
+
 ## HTTP Range とファイル I/O
 
 配信は [VideosRouter.py:706](https://github.com/tsukumijima/KonomiTV/blob/e92fba8bb219589c8e4ada9609ed4a9d91b33c00/server/app/routers/VideosRouter.py#L706) の `VideoDownloadAPI`。
@@ -702,7 +727,8 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P2 | 選択範囲のbufferを保持するseek、clearを必要範囲に限定 | 再seekの再変換削減。removeが支配的なら有効 | 中〜大 | ○ | mpeg2toh264 MSE。RAPとoverlapを再設計 |
 | P2 | download handlerのDB/stat/open、chunk sizeを計測して必要箇所だけ改善 | NAS/ASGI待ちが大きい環境で有効 | 小〜中 | ◎ | KonomiTV。Starlette一般問題は同upstream |
 | P2 | AAC必要量が揃った完成GOPを次GOP境界前に出す | 128〜256KiB、0〜約22msの改善候補 | 中 | ○ | mpeg2toh264 Session。試作済み・保留 |
-| P3 | 永続sidecarと有効なstream configを持つseek resolver | cold seekの約0.1秒とbootstrap読取を削減 | 大 | ○ | KonomiTV固有保存、playerの汎用API |
+| P1 | coreが実際のGOP/RAP byteを返し、再生中のin-memory indexへ学習する | 学習済み位置では約68msのdecoder discardを、後続fragment待ちなしで除ける可能性 | 中 | ○ | mpeg2toh264 core/player。byteをRange先頭へ誤対応しない契約が必要 |
+| P2 | 永続sidecarと有効なstream configを持つseek resolver | cold seekのprobeと、直前RAPより前からの復号を削減。今回のdecoder区間は約68ms | 大 | ○ | KonomiTV固有保存、playerの汎用API |
 | P3 | 初回のsub-GOP fragment、video/audioの段階投入 | 初画の理論的な下限を下げ得る | 大 | △ | mpeg2toh264 core/player |
 
 P2のAAC/GOP保留変更は、単に条件を消してよいという提案ではない。
@@ -723,6 +749,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | probeでPTSを得た時点で128KiB全体の到着待ちを止める | LAN走行の6 offset中5点は先頭32KiB、全点は64KiB以内でPTSを取得できた。2 probeなら後半64KiBを2回省ける可能性 | RTTと次の直列probeは残る。stream reader化後にcancelしたresponse量とprobe-completeを同条件で測る |
 | 最後のprobe byte列を本体変換へ再利用する | 128KiBの重複取得削減 | probe位置と採用offsetが一致する場合だけ有効。sessionへprefix入力する契約が要る |
 | 実際に採用したGOP/PES byteをcoreから返してindexへ追加する | probe標本に加えてRAP近傍の対応点を増やせる可能性 | `source.offset`への誤対応は`a10253e`で除去済み。追加APIはprobe標本だけで不足する素材を再現してから実装 |
+| seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
 | AAC必要量が揃った完成GOPを早く出す | 128〜256KiB、0〜約22ms候補 | 試作結果を[evidence](results/device-results.md)に保存。A/V同値性の追加試験待ち |
@@ -799,6 +826,7 @@ I-pictureの途中byteだけを返さない。
 8. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性の追加試験が通った場合だけ独立PRにする。
 9. **Worker: seek入力queueの先読み上限**。連続seekの中止済みRange量とp95で効果を確認してから独立PRにする。
 10. **core: 初回IDRの並列可能なslice/job設計**。bitstreamと複数decoderの互換性を確認する大規模変更として分離する。
+11. **core/player: 実際に採用したRAPのTS byte位置を返すAPIとin-memory index**。Range開始byteではなくdemuxerが確定したGOP/PES位置を返し、永続保存とは分ける。学習済み位置で直前RAPから開始できることを先に実証する。
 
 ### `tsukumijima/mpeg2toh264`へ出すもの
 
