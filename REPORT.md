@@ -17,6 +17,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | 公開`fix/yadif-android-occlusion`、`upstream/main`基点の`6b825e8`。PR対象外 |
+| YADIF queue再同期 | 公開`fix/restore-yadif-queue-reset`、`konomi/main`基点の`f62bd9d`。フォーク固有統合候補 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、基本mark `0ce89d7`、picture段階と提示frame `244da74` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -522,14 +523,15 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 ## 実装済み変更と提出先
 
-今回の調査で実装した4件は、KonomiTV固有処理ではなく、`otya128/mpeg2toh264`が所有する汎用player、transcoder、YADIFの変更として分離した。
-このうちYADIF opacity変更は棄却した実験であり、提出候補はMSE修正、seek計測、完成fragment早期受け渡しの3件である。
+upstream向けに分離した4件に加え、フォーク固有YADIFへupstreamのqueue再同期を戻す変更を別branchにした。
+YADIF opacity変更は棄却した実験である。
 4 branchとも`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開したが、適用可能であることは採用理由を意味しない。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
 | 変更 | なぜ・目的 | 何を修正したか | 実測または確認できた効果 | 本来の提出先 |
 | --- | --- | --- | --- | --- |
 | YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | 公開実験branch`6b825e8`として残すが、PRにしない。YADIF schedulingの計測へ戻す |
+| YADIF queue再同期の復元 | フォークの個別late破棄ではseek後の未来時刻を戻せず、表示が停止したため | upstreamにある飽和queueの再同期を、forkのstartup slackとfilm拡張を保って復元した | 停止8/30→0/30。4秒窓の最終中央値60.0fps。短い過渡は最低25.0fps、4秒後43.4fpsの走行が残る | `tsukumijima/mpeg2toh264` fork。公開commit `f62bd9d` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことを分離 | `otya128/mpeg2toh264` player。公開commit `244da74` |
 | 完成fragmentの早期受け渡し | 完成済み初回fragmentが、同じ入力chunk内の後続picture処理の完了までworkerに留まっていたため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | デスクトップ同一位置3点でfirst fragmentを約9〜10ms、appendを約10〜11ms短縮。位置による変動は残る | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508` |
