@@ -1,0 +1,1845 @@
+{
+  "schema": 1,
+  "purpose": "Controlled Galaxy A/B for completed-fragment early delivery after stale-tab audit",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra SM-X930",
+    "os": "Android 16",
+    "browser": "Google Chrome 151.0.7922.174",
+    "display_hz": 60,
+    "network": "Direct LAN connection to an isolated local KonomiTV backend",
+    "player": "Actual KonomiTV DPlayer Original (MPEG-2) playback",
+    "deinterlace": "YADIF enabled",
+    "auto_film": false,
+    "material": "Nogizaka Koji-chu recording; measured targets 601/901 through 605/905 seconds",
+    "tab_rule": "Zero page targets before each block, exactly one foreground watch tab while measuring, zero page targets after close",
+    "block_order": [
+      "baseline-b1",
+      "fixed-b1",
+      "fixed-b2",
+      "baseline-b2",
+      "fixed-b3",
+      "baseline-b3",
+      "baseline-b4",
+      "fixed-b4"
+    ],
+    "warmup": "Targets 600 and 900 at the start of every block; excluded"
+  },
+  "builds": {
+    "konomitv": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "baseline": "Validation build with timing, probe-sample, MSE-generation, and YADIF queue fixes; completed-fragment early delivery reverted",
+    "fixed": "Same validation build with upstream-source change 30ad508 adapted to the measured dependency"
+  },
+  "variants": {
+    "baseline": {
+      "summary": {
+        "runs": 40,
+        "all_probe_count": [
+          1
+        ],
+        "probe-complete_ms": {
+          "median": 19.9,
+          "p90": 46.94
+        },
+        "response_ms": {
+          "median": 50.65,
+          "p90": 61.36
+        },
+        "first-byte_ms": {
+          "median": 51.05,
+          "p90": 61.88
+        },
+        "first-picture-jobs_ms": {
+          "median": 84.65,
+          "p90": 99.55
+        },
+        "first-access-unit_ms": {
+          "median": 122.7,
+          "p90": 142.56
+        },
+        "first-picture-batch_ms": {
+          "median": 129.85,
+          "p90": 149.7
+        },
+        "first-fragment_ms": {
+          "median": 133.45,
+          "p90": 153.8
+        },
+        "append_ms": {
+          "median": 134.2,
+          "p90": 154.75
+        },
+        "appended_ms": {
+          "median": 144.1,
+          "p90": 169.87
+        },
+        "playing_ms": {
+          "median": 245.1,
+          "p90": 296.15
+        },
+        "presented_ms": {
+          "median": 256.75,
+          "p90": 304.06
+        },
+        "first_post_seek_canvas_ms": {
+          "median": 257.05,
+          "p90": 305.11
+        }
+      },
+      "blocks": [
+        {
+          "block": "baseline-b1",
+          "runs": 10,
+          "first_fragment_median_ms": 128.05,
+          "first_post_seek_canvas_median_ms": 234.6
+        },
+        {
+          "block": "baseline-b2",
+          "runs": 10,
+          "first_fragment_median_ms": 132.95,
+          "first_post_seek_canvas_median_ms": 242.2
+        },
+        {
+          "block": "baseline-b3",
+          "runs": 10,
+          "first_fragment_median_ms": 134.05,
+          "first_post_seek_canvas_median_ms": 279.9
+        },
+        {
+          "block": "baseline-b4",
+          "runs": 10,
+          "first_fragment_median_ms": 137.2,
+          "first_post_seek_canvas_median_ms": 271.0
+        }
+      ],
+      "runs": [
+        {
+          "block": "baseline-b1",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 20.9,
+            "response": 53.5,
+            "first-byte": 54.2,
+            "first-picture-jobs": 84.8,
+            "first-access-unit": 121,
+            "first-picture-batch": 130.4,
+            "first-fragment": 134.6,
+            "append": 135.4,
+            "appended": 143.4,
+            "playing": 236.3,
+            "presented": 240.7
+          },
+          "first_post_seek_canvas_ms": 241.2
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 12.9,
+            "response": 44.5,
+            "first-byte": 45.1,
+            "first-picture-jobs": 88.6,
+            "first-access-unit": 121.5,
+            "first-picture-batch": 131.4,
+            "first-fragment": 134.2,
+            "append": 134.8,
+            "appended": 141.7,
+            "playing": 175.3,
+            "presented": 190.3
+          },
+          "first_post_seek_canvas_ms": 190.9
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 42.7,
+            "response": 53.2,
+            "first-byte": 53.8,
+            "first-picture-jobs": 83.1,
+            "first-access-unit": 116.0,
+            "first-picture-batch": 118.3,
+            "first-fragment": 121.2,
+            "append": 121.4,
+            "appended": 128.4,
+            "playing": 313.5,
+            "presented": 322
+          },
+          "first_post_seek_canvas_ms": 322.6
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.7,
+            "response": 41.8,
+            "first-byte": 42.4,
+            "first-picture-jobs": 77.9,
+            "first-access-unit": 114.8,
+            "first-picture-batch": 120.1,
+            "first-fragment": 123.4,
+            "append": 124.4,
+            "appended": 133.3,
+            "playing": 169.8,
+            "presented": 187.2
+          },
+          "first_post_seek_canvas_ms": 188.6
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 38.4,
+            "response": 52.4,
+            "first-byte": 52.9,
+            "first-picture-jobs": 84.9,
+            "first-access-unit": 116.5,
+            "first-picture-batch": 125.6,
+            "first-fragment": 129.2,
+            "append": 129.6,
+            "appended": 137.7,
+            "playing": 230.7,
+            "presented": 235.3
+          },
+          "first_post_seek_canvas_ms": 237.4
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 41.8,
+            "response": 59.8,
+            "first-byte": 60.3,
+            "first-picture-jobs": 93,
+            "first-access-unit": 128.7,
+            "first-picture-batch": 132.1,
+            "first-fragment": 135.4,
+            "append": 135.7,
+            "appended": 145.1,
+            "playing": 285,
+            "presented": 287.1
+          },
+          "first_post_seek_canvas_ms": 288
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 13.4,
+            "response": 39.9,
+            "first-byte": 40.5,
+            "first-picture-jobs": 68.8,
+            "first-access-unit": 110.9,
+            "first-picture-batch": 117.2,
+            "first-fragment": 120.9,
+            "append": 121.8,
+            "appended": 135.0,
+            "playing": 227.4,
+            "presented": 231.5
+          },
+          "first_post_seek_canvas_ms": 231.8
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 17.0,
+            "response": 49.2,
+            "first-byte": 50.2,
+            "first-picture-jobs": 82.6,
+            "first-access-unit": 123.4,
+            "first-picture-batch": 132.7,
+            "first-fragment": 136.6,
+            "append": 137.6,
+            "appended": 147.5,
+            "playing": 178.4,
+            "presented": 196.9
+          },
+          "first_post_seek_canvas_ms": 197.6
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 41.0,
+            "response": 57.5,
+            "first-byte": 58.2,
+            "first-picture-jobs": 83.7,
+            "first-access-unit": 124.1,
+            "first-picture-batch": 124.2,
+            "first-fragment": 126.9,
+            "append": 127.5,
+            "appended": 134.3,
+            "playing": 251.8,
+            "presented": 263.4
+          },
+          "first_post_seek_canvas_ms": 263.7
+        },
+        {
+          "block": "baseline-b1",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 15.5,
+            "response": 38.8,
+            "first-byte": 39.5,
+            "first-picture-jobs": 66.8,
+            "first-access-unit": 98.3,
+            "first-picture-batch": 98.3,
+            "first-fragment": 100.3,
+            "append": 100.8,
+            "appended": 108.8,
+            "playing": 224.9,
+            "presented": 227.6
+          },
+          "first_post_seek_canvas_ms": 227.8
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 13.1,
+            "response": 53.4,
+            "first-byte": 53.8,
+            "first-picture-jobs": 77.8,
+            "first-access-unit": 110.2,
+            "first-picture-batch": 124.2,
+            "first-fragment": 128.5,
+            "append": 129.5,
+            "appended": 143.7,
+            "playing": 249.7,
+            "presented": 260.3
+          },
+          "first_post_seek_canvas_ms": 260.5
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.7,
+            "response": 49.1,
+            "first-byte": 49.7,
+            "first-picture-jobs": 87.3,
+            "first-access-unit": 123.9,
+            "first-picture-batch": 137.2,
+            "first-fragment": 140,
+            "append": 140.7,
+            "appended": 148,
+            "playing": 178.8,
+            "presented": 192.5
+          },
+          "first_post_seek_canvas_ms": 194
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 43.2,
+            "response": 54.1,
+            "first-byte": 54.4,
+            "first-picture-jobs": 92.6,
+            "first-access-unit": 127.4,
+            "first-picture-batch": 129.6,
+            "first-fragment": 132.8,
+            "append": 133.8,
+            "appended": 142,
+            "playing": 236.8,
+            "presented": 243.4
+          },
+          "first_post_seek_canvas_ms": 243.8
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 15.2,
+            "response": 42.6,
+            "first-byte": 43.6,
+            "first-picture-jobs": 79.2,
+            "first-access-unit": 119.3,
+            "first-picture-batch": 124.6,
+            "first-fragment": 129,
+            "append": 130.1,
+            "appended": 144.5,
+            "playing": 175.7,
+            "presented": 188.8
+          },
+          "first_post_seek_canvas_ms": 189.8
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 28.1,
+            "response": 41.8,
+            "first-byte": 42.5,
+            "first-picture-jobs": 77,
+            "first-access-unit": 124,
+            "first-picture-batch": 125.4,
+            "first-fragment": 130.6,
+            "append": 132.7,
+            "appended": 156.5,
+            "playing": 274.9,
+            "presented": 288.6
+          },
+          "first_post_seek_canvas_ms": 289.6
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 20.2,
+            "response": 51.3,
+            "first-byte": 53.1,
+            "first-picture-jobs": 95.4,
+            "first-access-unit": 135.5,
+            "first-picture-batch": 154,
+            "first-fragment": 158.5,
+            "append": 160,
+            "appended": 171.4,
+            "playing": 202.9,
+            "presented": 205.1
+          },
+          "first_post_seek_canvas_ms": 205.8
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.7,
+            "response": 52.4,
+            "first-byte": 53.7,
+            "first-picture-jobs": 84.5,
+            "first-access-unit": 120.2,
+            "first-picture-batch": 129.6,
+            "first-fragment": 133.1,
+            "append": 133.9,
+            "appended": 143.5,
+            "playing": 253.8,
+            "presented": 269.7
+          },
+          "first_post_seek_canvas_ms": 270.6
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 15.2,
+            "response": 54,
+            "first-byte": 54.4,
+            "first-picture-jobs": 99.4,
+            "first-access-unit": 147.2,
+            "first-picture-batch": 158.7,
+            "first-fragment": 163.4,
+            "append": 164.3,
+            "appended": 174.7,
+            "playing": 204.4,
+            "presented": 209.4
+          },
+          "first_post_seek_canvas_ms": 210
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 55.1,
+            "response": 73.7,
+            "first-byte": 75.1,
+            "first-picture-jobs": 109,
+            "first-access-unit": 155.4,
+            "first-picture-batch": 161,
+            "first-fragment": 164.9,
+            "append": 166.5,
+            "appended": 186.4,
+            "playing": 296.1,
+            "presented": 308.9
+          },
+          "first_post_seek_canvas_ms": 309.4
+        },
+        {
+          "block": "baseline-b2",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.8,
+            "response": 48,
+            "first-byte": 48.5,
+            "first-picture-jobs": 75.1,
+            "first-access-unit": 106.9,
+            "first-picture-batch": 107,
+            "first-fragment": 109.3,
+            "append": 110,
+            "appended": 119.1,
+            "playing": 229.6,
+            "presented": 240
+          },
+          "first_post_seek_canvas_ms": 240.6
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 6.2,
+            "response": 40.6,
+            "first-byte": 41,
+            "first-picture-jobs": 64.2,
+            "first-access-unit": 96,
+            "first-picture-batch": 113,
+            "first-fragment": 117.1,
+            "append": 117.9,
+            "appended": 126.4,
+            "playing": 218.9,
+            "presented": 237.4
+          },
+          "first_post_seek_canvas_ms": 237.8
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 34.2,
+            "response": 49.6,
+            "first-byte": 50.3,
+            "first-picture-jobs": 83.0,
+            "first-access-unit": 119.8,
+            "first-picture-batch": 130.1,
+            "first-fragment": 133.8,
+            "append": 134.5,
+            "appended": 143.3,
+            "playing": 255.3,
+            "presented": 262.1
+          },
+          "first_post_seek_canvas_ms": 267.7
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 10.4,
+            "response": 42.8,
+            "first-byte": 43.3,
+            "first-picture-jobs": 75.1,
+            "first-access-unit": 107.6,
+            "first-picture-batch": 114,
+            "first-fragment": 117,
+            "append": 117.5,
+            "appended": 125.5,
+            "playing": 226,
+            "presented": 232.7
+          },
+          "first_post_seek_canvas_ms": 233.2
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 10.8,
+            "response": 43.2,
+            "first-byte": 43.9,
+            "first-picture-jobs": 74.9,
+            "first-access-unit": 111.7,
+            "first-picture-batch": 124.1,
+            "first-fragment": 127.1,
+            "append": 127.7,
+            "appended": 136.2,
+            "playing": 273.2,
+            "presented": 283.6
+          },
+          "first_post_seek_canvas_ms": 284.3
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 19.6,
+            "response": 46.2,
+            "first-byte": 47.2,
+            "first-picture-jobs": 82.4,
+            "first-access-unit": 122.1,
+            "first-picture-batch": 131.6,
+            "first-fragment": 134.3,
+            "append": 135.2,
+            "appended": 143.5,
+            "playing": 239.8,
+            "presented": 245.9
+          },
+          "first_post_seek_canvas_ms": 247
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 36.6,
+            "response": 51.1,
+            "first-byte": 51.5,
+            "first-picture-jobs": 86.2,
+            "first-access-unit": 125.9,
+            "first-picture-batch": 140.9,
+            "first-fragment": 143.6,
+            "append": 144.1,
+            "appended": 152.6,
+            "playing": 279.8,
+            "presented": 297.2
+          },
+          "first_post_seek_canvas_ms": 298
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 21.5,
+            "response": 50.2,
+            "first-byte": 50.6,
+            "first-picture-jobs": 86.5,
+            "first-access-unit": 127,
+            "first-picture-batch": 135.9,
+            "first-fragment": 141.7,
+            "append": 145,
+            "appended": 169.7,
+            "playing": 292,
+            "presented": 294.5
+          },
+          "first_post_seek_canvas_ms": 295.5
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 49,
+            "response": 63.7,
+            "first-byte": 64.4,
+            "first-picture-jobs": 100.9,
+            "first-access-unit": 144,
+            "first-picture-batch": 149.7,
+            "first-fragment": 153.8,
+            "append": 154.7,
+            "appended": 165.1,
+            "playing": 289.2,
+            "presented": 295
+          },
+          "first_post_seek_canvas_ms": 296
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 47.3,
+            "response": 64.3,
+            "first-byte": 65,
+            "first-picture-jobs": 102.1,
+            "first-access-unit": 142.4,
+            "first-picture-batch": 149.7,
+            "first-fragment": 153.1,
+            "append": 153.7,
+            "appended": 163.3,
+            "playing": 267.9,
+            "presented": 274.3
+          },
+          "first_post_seek_canvas_ms": 275.5
+        },
+        {
+          "block": "baseline-b3",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 46.9,
+            "response": 61.1,
+            "first-byte": 61.6,
+            "first-picture-jobs": 93.6,
+            "first-access-unit": 127.1,
+            "first-picture-batch": 127.1,
+            "first-fragment": 130.9,
+            "append": 132.7,
+            "appended": 153.8,
+            "playing": 281.9,
+            "presented": 291.7
+          },
+          "first_post_seek_canvas_ms": 292.6
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 17.3,
+            "response": 46.6,
+            "first-byte": 47.1,
+            "first-picture-jobs": 86.0,
+            "first-access-unit": 117.4,
+            "first-picture-batch": 137.9,
+            "first-fragment": 140.9,
+            "append": 141.5,
+            "appended": 147.9,
+            "playing": 236.6,
+            "presented": 244.5
+          },
+          "first_post_seek_canvas_ms": 245.4
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 44.2,
+            "response": 59.8,
+            "first-byte": 60.3,
+            "first-picture-jobs": 88.7,
+            "first-access-unit": 128.2,
+            "first-picture-batch": 141.6,
+            "first-fragment": 145,
+            "append": 146.8,
+            "appended": 166.5,
+            "playing": 296.7,
+            "presented": 307.3
+          },
+          "first_post_seek_canvas_ms": 307.9
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 42.3,
+            "response": 58.1,
+            "first-byte": 58.7,
+            "first-picture-jobs": 87.3,
+            "first-access-unit": 123.3,
+            "first-picture-batch": 129.4,
+            "first-fragment": 132.2,
+            "append": 133.2,
+            "appended": 153.7,
+            "playing": 350.3,
+            "presented": 357.7
+          },
+          "first_post_seek_canvas_ms": 358.2
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 49.7,
+            "response": 66.5,
+            "first-byte": 67.7,
+            "first-picture-jobs": 102,
+            "first-access-unit": 146,
+            "first-picture-batch": 149.5,
+            "first-fragment": 153.8,
+            "append": 155.2,
+            "appended": 176.7,
+            "playing": 296.6,
+            "presented": 303.7
+          },
+          "first_post_seek_canvas_ms": 304.8
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 12.5,
+            "response": 28.9,
+            "first-byte": 29.4,
+            "first-picture-jobs": 57,
+            "first-access-unit": 99.4,
+            "first-picture-batch": 105.3,
+            "first-fragment": 109.2,
+            "append": 110.3,
+            "appended": 123.9,
+            "playing": 240.5,
+            "presented": 253.2
+          },
+          "first_post_seek_canvas_ms": 253.6
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 14.5,
+            "response": 43.4,
+            "first-byte": 44.1,
+            "first-picture-jobs": 78.7,
+            "first-access-unit": 125.6,
+            "first-picture-batch": 139.2,
+            "first-fragment": 142.8,
+            "append": 143.8,
+            "appended": 151.9,
+            "playing": 188.5,
+            "presented": 204.9
+          },
+          "first_post_seek_canvas_ms": 205.5
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 37.9,
+            "response": 51.1,
+            "first-byte": 51.5,
+            "first-picture-jobs": 85.4,
+            "first-access-unit": 130.9,
+            "first-picture-batch": 131,
+            "first-fragment": 134.6,
+            "append": 135.7,
+            "appended": 147.2,
+            "playing": 274.9,
+            "presented": 280.8
+          },
+          "first_post_seek_canvas_ms": 281.1
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.6,
+            "response": 44.8,
+            "first-byte": 45.6,
+            "first-picture-jobs": 79.4,
+            "first-access-unit": 132.2,
+            "first-picture-batch": 136,
+            "first-fragment": 139.8,
+            "append": 140.7,
+            "appended": 165.6,
+            "playing": 196.9,
+            "presented": 214.3
+          },
+          "first_post_seek_canvas_ms": 214.9
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 12.7,
+            "response": 34.3,
+            "first-byte": 34.8,
+            "first-picture-jobs": 66.4,
+            "first-access-unit": 109.3,
+            "first-picture-batch": 114.9,
+            "first-fragment": 118.6,
+            "append": 119.7,
+            "appended": 127.2,
+            "playing": 253.3,
+            "presented": 260.5
+          },
+          "first_post_seek_canvas_ms": 260.9
+        },
+        {
+          "block": "baseline-b4",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 42.7,
+            "response": 58.9,
+            "first-byte": 60.1,
+            "first-picture-jobs": 88.4,
+            "first-access-unit": 121.5,
+            "first-picture-batch": 121.6,
+            "first-fragment": 124.6,
+            "append": 125.2,
+            "appended": 132.9,
+            "playing": 273.1,
+            "presented": 280.6
+          },
+          "first_post_seek_canvas_ms": 281.4
+        }
+      ]
+    },
+    "fixed": {
+      "summary": {
+        "runs": 40,
+        "all_probe_count": [
+          1
+        ],
+        "probe-complete_ms": {
+          "median": 29.0,
+          "p90": 49.33
+        },
+        "response_ms": {
+          "median": 54.45,
+          "p90": 66.27
+        },
+        "first-byte_ms": {
+          "median": 55.0,
+          "p90": 67.44
+        },
+        "first-picture-jobs_ms": {
+          "median": 88.45,
+          "p90": 103.91
+        },
+        "first-access-unit_ms": {
+          "median": 127.25,
+          "p90": 146.04
+        },
+        "first-picture-batch_ms": {
+          "median": 136.2,
+          "p90": 153.45
+        },
+        "first-fragment_ms": {
+          "median": 140.15,
+          "p90": 159.51
+        },
+        "append_ms": {
+          "median": 140.95,
+          "p90": 160.86
+        },
+        "appended_ms": {
+          "median": 150.2,
+          "p90": 172.07
+        },
+        "playing_ms": {
+          "median": 261.25,
+          "p90": 297.21
+        },
+        "presented_ms": {
+          "median": 273.6,
+          "p90": 310.76
+        },
+        "first_post_seek_canvas_ms": {
+          "median": 274.45,
+          "p90": 311.49
+        }
+      },
+      "blocks": [
+        {
+          "block": "fixed-b1",
+          "runs": 10,
+          "first_fragment_median_ms": 143.8,
+          "first_post_seek_canvas_median_ms": 267.75
+        },
+        {
+          "block": "fixed-b2",
+          "runs": 10,
+          "first_fragment_median_ms": 146.25,
+          "first_post_seek_canvas_median_ms": 292.05
+        },
+        {
+          "block": "fixed-b3",
+          "runs": 10,
+          "first_fragment_median_ms": 128.35,
+          "first_post_seek_canvas_median_ms": 244.75
+        },
+        {
+          "block": "fixed-b4",
+          "runs": 10,
+          "first_fragment_median_ms": 138.1,
+          "first_post_seek_canvas_median_ms": 268.45
+        }
+      ],
+      "runs": [
+        {
+          "block": "fixed-b1",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 6.6,
+            "response": 21.4,
+            "first-byte": 21.8,
+            "first-picture-jobs": 45.0,
+            "first-access-unit": 79.2,
+            "first-picture-batch": 89.1,
+            "first-fragment": 93.4,
+            "append": 94.5,
+            "appended": 102.8,
+            "playing": 189.9,
+            "presented": 191.8
+          },
+          "first_post_seek_canvas_ms": 192.1
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 41.2,
+            "response": 54.6,
+            "first-byte": 55.1,
+            "first-picture-jobs": 83.5,
+            "first-access-unit": 123.1,
+            "first-picture-batch": 126.2,
+            "first-fragment": 129.4,
+            "append": 130.1,
+            "appended": 139.3,
+            "playing": 251.1,
+            "presented": 260.7
+          },
+          "first_post_seek_canvas_ms": 261.1
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 87.1,
+            "response": 98.8,
+            "first-byte": 99.5,
+            "first-picture-jobs": 132.9,
+            "first-access-unit": 165.4,
+            "first-picture-batch": 173.7,
+            "first-fragment": 177.1,
+            "append": 177.8,
+            "appended": 184.9,
+            "playing": 363.2,
+            "presented": 377.2
+          },
+          "first_post_seek_canvas_ms": 377.6
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 50.5,
+            "response": 66.9,
+            "first-byte": 69.4,
+            "first-picture-jobs": 99.6,
+            "first-access-unit": 143.4,
+            "first-picture-batch": 158.4,
+            "first-fragment": 161.4,
+            "append": 162.3,
+            "appended": 171.2,
+            "playing": 295.8,
+            "presented": 309.2
+          },
+          "first_post_seek_canvas_ms": 309.9
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 43.5,
+            "response": 60.2,
+            "first-byte": 60.8,
+            "first-picture-jobs": 95.5,
+            "first-access-unit": 136.3,
+            "first-picture-batch": 139.1,
+            "first-fragment": 143.0,
+            "append": 144.3,
+            "appended": 154.6,
+            "playing": 276.6,
+            "presented": 290.7
+          },
+          "first_post_seek_canvas_ms": 291.1
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 13.1,
+            "response": 42.6,
+            "first-byte": 43.1,
+            "first-picture-jobs": 83.7,
+            "first-access-unit": 125.5,
+            "first-picture-batch": 141.8,
+            "first-fragment": 145.1,
+            "append": 146.0,
+            "appended": 154.2,
+            "presented": 191.9,
+            "playing": 194.8
+          },
+          "first_post_seek_canvas_ms": 192.2
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 14.6,
+            "response": 55.7,
+            "first-byte": 56.7,
+            "first-picture-jobs": 110.2,
+            "first-access-unit": 151.1,
+            "first-picture-batch": 151.1,
+            "first-fragment": 159.3,
+            "append": 160.7,
+            "appended": 163.2,
+            "playing": 262.6,
+            "presented": 273.5
+          },
+          "first_post_seek_canvas_ms": 274.4
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 10.8,
+            "response": 34.8,
+            "first-byte": 35.8,
+            "first-picture-jobs": 72.0,
+            "first-access-unit": 111.5,
+            "first-picture-batch": 127.3,
+            "first-fragment": 131.0,
+            "append": 131.3,
+            "appended": 140.8,
+            "playing": 170.6,
+            "presented": 188.5
+          },
+          "first_post_seek_canvas_ms": 189.1
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 41.7,
+            "response": 56.3,
+            "first-byte": 57,
+            "first-picture-jobs": 93.2,
+            "first-access-unit": 138.6,
+            "first-picture-batch": 141,
+            "first-fragment": 144.6,
+            "append": 145.5,
+            "appended": 152.3,
+            "playing": 269.6,
+            "presented": 287.5
+          },
+          "first_post_seek_canvas_ms": 288.5
+        },
+        {
+          "block": "fixed-b1",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 37.6,
+            "response": 54.3,
+            "first-byte": 54.8,
+            "first-picture-jobs": 85.8,
+            "first-access-unit": 116.7,
+            "first-picture-batch": 116.8,
+            "first-fragment": 118.9,
+            "append": 119.4,
+            "appended": 125.3,
+            "playing": 238.9,
+            "presented": 254.2
+          },
+          "first_post_seek_canvas_ms": 255.2
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 39.5,
+            "response": 52.8,
+            "first-byte": 53.1,
+            "first-picture-jobs": 85.6,
+            "first-access-unit": 124.4,
+            "first-picture-batch": 133.9,
+            "first-fragment": 137.9,
+            "append": 138.9,
+            "appended": 147.9,
+            "playing": 235.8,
+            "presented": 250.3
+          },
+          "first_post_seek_canvas_ms": 250.5
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 48.2,
+            "response": 66.2,
+            "first-byte": 67.4,
+            "first-picture-jobs": 103.8,
+            "first-access-unit": 149.1,
+            "first-picture-batch": 159.3,
+            "first-fragment": 165.3,
+            "append": 167.1,
+            "appended": 189.7,
+            "playing": 313.7,
+            "presented": 329.2
+          },
+          "first_post_seek_canvas_ms": 330
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 15.5,
+            "response": 53.6,
+            "first-byte": 54.9,
+            "first-picture-jobs": 92.9,
+            "first-access-unit": 131.7,
+            "first-picture-batch": 141.1,
+            "first-fragment": 144.1,
+            "append": 144.5,
+            "appended": 152.4,
+            "playing": 265.7,
+            "presented": 277.7
+          },
+          "first_post_seek_canvas_ms": 278.4
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 45.2,
+            "response": 60.5,
+            "first-byte": 62.1,
+            "first-picture-jobs": 131.5,
+            "first-access-unit": 166.8,
+            "first-picture-batch": 182.8,
+            "first-fragment": 188.3,
+            "append": 189.4,
+            "appended": 198.0,
+            "playing": 313.3,
+            "presented": 330.5
+          },
+          "first_post_seek_canvas_ms": 331
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 15.5,
+            "response": 47.6,
+            "first-byte": 49.0,
+            "first-picture-jobs": 82.7,
+            "first-access-unit": 126.4,
+            "first-picture-batch": 132.2,
+            "first-fragment": 136.6,
+            "append": 137.5,
+            "appended": 146.7,
+            "playing": 260.9,
+            "presented": 280.5
+          },
+          "first_post_seek_canvas_ms": 281.1
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 51.1,
+            "response": 67.1,
+            "first-byte": 67.8,
+            "first-picture-jobs": 98.9,
+            "first-access-unit": 145.7,
+            "first-picture-batch": 152.9,
+            "first-fragment": 158.1,
+            "append": 159.7,
+            "appended": 179.9,
+            "playing": 309.9,
+            "presented": 324.8
+          },
+          "first_post_seek_canvas_ms": 325.8
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 41.0,
+            "response": 58.9,
+            "first-byte": 59.6,
+            "first-picture-jobs": 88.8,
+            "first-access-unit": 135.4,
+            "first-picture-batch": 138.0,
+            "first-fragment": 140.9,
+            "append": 141.4,
+            "appended": 151.2,
+            "playing": 279.8,
+            "presented": 292.3
+          },
+          "first_post_seek_canvas_ms": 292.6
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 44.9,
+            "response": 61,
+            "first-byte": 61.7,
+            "first-picture-jobs": 93.2,
+            "first-access-unit": 133.6,
+            "first-picture-batch": 143.9,
+            "first-fragment": 148.4,
+            "append": 149.1,
+            "appended": 157.4,
+            "playing": 280.3,
+            "presented": 291.8
+          },
+          "first_post_seek_canvas_ms": 292.2
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 49.2,
+            "response": 62.2,
+            "first-byte": 63.0,
+            "first-picture-jobs": 98.7,
+            "first-access-unit": 143.6,
+            "first-picture-batch": 147.7,
+            "first-fragment": 151.8,
+            "append": 153.1,
+            "appended": 162.7,
+            "playing": 273.3,
+            "presented": 291.3
+          },
+          "first_post_seek_canvas_ms": 291.9
+        },
+        {
+          "block": "fixed-b2",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 45.8,
+            "response": 59.3,
+            "first-byte": 59.9,
+            "first-picture-jobs": 89.6,
+            "first-access-unit": 124.3,
+            "first-picture-batch": 124.3,
+            "first-fragment": 126.4,
+            "append": 127.2,
+            "appended": 136.3,
+            "playing": 276.2,
+            "presented": 289.1
+          },
+          "first_post_seek_canvas_ms": 289.5
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 8.8,
+            "response": 39.8,
+            "first-byte": 40.7,
+            "first-picture-jobs": 61.7,
+            "first-access-unit": 93,
+            "first-picture-batch": 107,
+            "first-fragment": 111,
+            "append": 111.8,
+            "appended": 120.2,
+            "playing": 208,
+            "presented": 221.1
+          },
+          "first_post_seek_canvas_ms": 221
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 13,
+            "response": 31.5,
+            "first-byte": 32.1,
+            "first-picture-jobs": 67.6,
+            "first-access-unit": 106,
+            "first-picture-batch": 111.3,
+            "first-fragment": 114.9,
+            "append": 115.7,
+            "appended": 125.8,
+            "playing": 154.3,
+            "presented": 167
+          },
+          "first_post_seek_canvas_ms": 168.4
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 12,
+            "response": 43.9,
+            "first-byte": 44.5,
+            "first-picture-jobs": 82.4,
+            "first-access-unit": 118.6,
+            "first-picture-batch": 120.6,
+            "first-fragment": 124.6,
+            "append": 125.4,
+            "appended": 130.3,
+            "playing": 222.9,
+            "presented": 235
+          },
+          "first_post_seek_canvas_ms": 235.5
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 10.2,
+            "response": 50.7,
+            "first-byte": 51.5,
+            "first-picture-jobs": 92.7,
+            "first-access-unit": 128.9,
+            "first-picture-batch": 135.9,
+            "first-fragment": 140.4,
+            "append": 141.7,
+            "appended": 147.1,
+            "playing": 176.5,
+            "presented": 181.6
+          },
+          "first_post_seek_canvas_ms": 182
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 14.9,
+            "response": 33.3,
+            "first-byte": 35.2,
+            "first-picture-jobs": 58.8,
+            "first-access-unit": 95.6,
+            "first-picture-batch": 103.9,
+            "first-fragment": 107.1,
+            "append": 107.6,
+            "appended": 115.7,
+            "playing": 212.8,
+            "presented": 229.8
+          },
+          "first_post_seek_canvas_ms": 230.2
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 18.7,
+            "response": 47.4,
+            "first-byte": 48.1,
+            "first-picture-jobs": 80.1,
+            "first-access-unit": 117.8,
+            "first-picture-batch": 128.3,
+            "first-fragment": 132.1,
+            "append": 133.1,
+            "appended": 142.5,
+            "playing": 276.3,
+            "presented": 295.3
+          },
+          "first_post_seek_canvas_ms": 296.4
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.2,
+            "response": 47.8,
+            "first-byte": 48.5,
+            "first-picture-jobs": 86.7,
+            "first-access-unit": 130.5,
+            "first-picture-batch": 133.2,
+            "first-fragment": 136.8,
+            "append": 137.6,
+            "appended": 145.4,
+            "playing": 261.6,
+            "presented": 276.3
+          },
+          "first_post_seek_canvas_ms": 276.2
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 46.6,
+            "response": 62.5,
+            "first-byte": 63.3,
+            "first-picture-jobs": 96.8,
+            "first-access-unit": 131.9,
+            "first-picture-batch": 146.1,
+            "first-fragment": 149.4,
+            "append": 150.2,
+            "appended": 156.1,
+            "playing": 281.2,
+            "presented": 290.2
+          },
+          "first_post_seek_canvas_ms": 291.6
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 44,
+            "response": 57.9,
+            "first-byte": 58.6,
+            "first-picture-jobs": 91.4,
+            "first-access-unit": 128.1,
+            "first-picture-batch": 137.5,
+            "first-fragment": 141.6,
+            "append": 142.6,
+            "appended": 164.6,
+            "playing": 257.3,
+            "presented": 273.7
+          },
+          "first_post_seek_canvas_ms": 274.5
+        },
+        {
+          "block": "fixed-b3",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 45.8,
+            "response": 60.4,
+            "first-byte": 61,
+            "first-picture-jobs": 88.1,
+            "first-access-unit": 121.6,
+            "first-picture-batch": 121.6,
+            "first-fragment": 124.1,
+            "append": 125,
+            "appended": 130.5,
+            "playing": 247.4,
+            "presented": 253.3
+          },
+          "first_post_seek_canvas_ms": 254
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 601,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 59.7,
+            "response": 74.1,
+            "first-byte": 74.7,
+            "first-picture-jobs": 104.9,
+            "first-access-unit": 139.8,
+            "first-picture-batch": 151.3,
+            "first-fragment": 155.4,
+            "append": 156.3,
+            "appended": 164.3,
+            "playing": 268.4,
+            "presented": 273.2
+          },
+          "first_post_seek_canvas_ms": 273.7
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 901,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 10.5,
+            "response": 41.2,
+            "first-byte": 41.7,
+            "first-picture-jobs": 76.5,
+            "first-access-unit": 115.5,
+            "first-picture-batch": 130.9,
+            "first-fragment": 136.3,
+            "append": 138.2,
+            "appended": 161.8,
+            "playing": 193.5,
+            "presented": 205.7
+          },
+          "first_post_seek_canvas_ms": 206.2
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 602,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 16.6,
+            "response": 44.5,
+            "first-byte": 45.1,
+            "first-picture-jobs": 77.7,
+            "first-access-unit": 118.9,
+            "first-picture-batch": 123.3,
+            "first-fragment": 127.6,
+            "append": 129.0,
+            "appended": 138.4,
+            "playing": 257.6,
+            "presented": 274
+          },
+          "first_post_seek_canvas_ms": 274.6
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 902,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 13.7,
+            "response": 54.9,
+            "first-byte": 55.7,
+            "first-picture-jobs": 97.5,
+            "first-access-unit": 134.3,
+            "first-picture-batch": 143.3,
+            "first-fragment": 147.6,
+            "append": 148.6,
+            "appended": 160.1,
+            "playing": 194.5,
+            "presented": 204.4
+          },
+          "first_post_seek_canvas_ms": 205.2
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 603,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 14.3,
+            "response": 45,
+            "first-byte": 46.2,
+            "first-picture-jobs": 79.3,
+            "first-access-unit": 122.7,
+            "first-picture-batch": 123.6,
+            "first-fragment": 128,
+            "append": 129.3,
+            "appended": 139.4,
+            "playing": 257.2,
+            "presented": 262.9
+          },
+          "first_post_seek_canvas_ms": 263.2
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 903,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 11.8,
+            "response": 39.2,
+            "first-byte": 39.9,
+            "first-picture-jobs": 78.1,
+            "first-access-unit": 120.1,
+            "first-picture-batch": 136.5,
+            "first-fragment": 139.9,
+            "append": 140.5,
+            "appended": 149.2,
+            "playing": 179.4,
+            "presented": 193.6
+          },
+          "first_post_seek_canvas_ms": 194.4
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 604,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 14.2,
+            "response": 36.8,
+            "first-byte": 37.4,
+            "first-picture-jobs": 66.3,
+            "first-access-unit": 110.2,
+            "first-picture-batch": 119.0,
+            "first-fragment": 124.6,
+            "append": 126.7,
+            "appended": 148.3,
+            "playing": 268.4,
+            "presented": 277.1
+          },
+          "first_post_seek_canvas_ms": 277.6
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 904,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 48.7,
+            "response": 64.4,
+            "first-byte": 65.1,
+            "first-picture-jobs": 94.7,
+            "first-access-unit": 140.3,
+            "first-picture-batch": 147.4,
+            "first-fragment": 150.4,
+            "append": 150.9,
+            "appended": 157.6,
+            "playing": 281.6,
+            "presented": 291.3
+          },
+          "first_post_seek_canvas_ms": 292.1
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 605,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 20.4,
+            "response": 52.4,
+            "first-byte": 52.8,
+            "first-picture-jobs": 90.7,
+            "first-access-unit": 133.3,
+            "first-picture-batch": 139,
+            "first-fragment": 142.4,
+            "append": 143.1,
+            "appended": 151.6,
+            "playing": 266,
+            "presented": 273.3
+          },
+          "first_post_seek_canvas_ms": 273.9
+        },
+        {
+          "block": "fixed-b4",
+          "target_s": 905,
+          "probe_count": 1,
+          "timing_ms_from_seek": {
+            "probe-complete": 43.5,
+            "response": 55.2,
+            "first-byte": 56.1,
+            "first-picture-jobs": 80.1,
+            "first-access-unit": 109,
+            "first-picture-batch": 112.4,
+            "first-fragment": 114.4,
+            "append": 115.2,
+            "appended": 124,
+            "playing": 234.6,
+            "presented": 243.5
+          },
+          "first_post_seek_canvas_ms": 244.1
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "method": "Difference of unpaired overall medians; 30,000 deterministic bootstrap resamples, seed 20260901",
+    "response_fixed_minus_baseline_ms": {
+      "median_difference": 3.8,
+      "bootstrap_95pct_ci": [
+        -2.7,
+        9.0
+      ]
+    },
+    "first-fragment_fixed_minus_baseline_ms": {
+      "median_difference": 6.7,
+      "bootstrap_95pct_ci": [
+        -1.95,
+        12.4
+      ]
+    },
+    "appended_fixed_minus_baseline_ms": {
+      "median_difference": 6.1,
+      "bootstrap_95pct_ci": [
+        -2.5,
+        11.75
+      ]
+    },
+    "playing_fixed_minus_baseline_ms": {
+      "median_difference": 16.15,
+      "bootstrap_95pct_ci": [
+        -11.3,
+        32.6
+      ]
+    },
+    "first_post_seek_canvas_fixed_minus_baseline_ms": {
+      "median_difference": 17.4,
+      "bootstrap_95pct_ci": [
+        -9.0,
+        37.25
+      ]
+    },
+    "interpretation": "All reported 95% intervals include zero. This controlled Galaxy run does not show lower first-fragment, append-complete, playing, or visible-canvas latency."
+  },
+  "temporary_callback_instrumentation": {
+    "scope": "Temporary validation-only mark at the callback added by completed-fragment early delivery; not retained in the formal branch",
+    "measured_runs": 10,
+    "first_early_callback_after_first_fragment_runs": 10,
+    "first_early_callback_minus_first_fragment_ms": {
+      "median": 227.2,
+      "min": 5.5,
+      "max": 1084.8
+    },
+    "runs": [
+      {
+        "target_s": 601,
+        "first_fragment_ms": 136.2,
+        "first_early_callback_ms": 142.7,
+        "first_early_callback_minus_first_fragment_ms": 6.5,
+        "early_callback_count": 5
+      },
+      {
+        "target_s": 901,
+        "first_fragment_ms": 121.3,
+        "first_early_callback_ms": 476.1,
+        "first_early_callback_minus_first_fragment_ms": 354.8,
+        "early_callback_count": 2
+      },
+      {
+        "target_s": 602,
+        "first_fragment_ms": 124.2,
+        "first_early_callback_ms": 337.5,
+        "first_early_callback_minus_first_fragment_ms": 213.3,
+        "early_callback_count": 4
+      },
+      {
+        "target_s": 902,
+        "first_fragment_ms": 141.1,
+        "first_early_callback_ms": 147.5,
+        "first_early_callback_minus_first_fragment_ms": 6.4,
+        "early_callback_count": 2
+      },
+      {
+        "target_s": 603,
+        "first_fragment_ms": 132.1,
+        "first_early_callback_ms": 373.2,
+        "first_early_callback_minus_first_fragment_ms": 241.1,
+        "early_callback_count": 5
+      },
+      {
+        "target_s": 903,
+        "first_fragment_ms": 142.7,
+        "first_early_callback_ms": 703.3,
+        "first_early_callback_minus_first_fragment_ms": 560.6,
+        "early_callback_count": 2
+      },
+      {
+        "target_s": 604,
+        "first_fragment_ms": 141.2,
+        "first_early_callback_ms": 146.7,
+        "first_early_callback_minus_first_fragment_ms": 5.5,
+        "early_callback_count": 3
+      },
+      {
+        "target_s": 904,
+        "first_fragment_ms": 140.8,
+        "first_early_callback_ms": 992.5,
+        "first_early_callback_minus_first_fragment_ms": 851.7,
+        "early_callback_count": 1
+      },
+      {
+        "target_s": 605,
+        "first_fragment_ms": 131.8,
+        "first_early_callback_ms": 151.0,
+        "first_early_callback_minus_first_fragment_ms": 19.2,
+        "early_callback_count": 6
+      },
+      {
+        "target_s": 905,
+        "first_fragment_ms": 111.9,
+        "first_early_callback_ms": 1196.7,
+        "first_early_callback_minus_first_fragment_ms": 1084.8,
+        "early_callback_count": 1
+      }
+    ],
+    "interpretation": "The current callback overlaps second or later completed fragments with later work. It does not deliver the first media fragment needed for the initial post-seek frame earlier on these runs."
+  },
+  "supersedes": "The earlier sequential Galaxy comparison in galaxy-priority-fixes.json did not record tab count or randomize build order. Its approximately 28 ms difference remains historical evidence only and is not an effect estimate."
+}

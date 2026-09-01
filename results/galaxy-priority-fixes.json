@@ -6,6 +6,8 @@
   "material": "Nogizaka Koji-chu recording; 540 s and 900 s alternated",
   "settle_ms": 1800,
   "note": "Variants were measured sequentially, not randomized; differences include run-order and decoder-state variance.",
+  "effect_estimate_status": "Historical only. Tab count was not recorded, so the approximately 28 ms difference must not be used as an effect estimate.",
+  "superseded_by": "galaxy-early-fragment-single-tab-ab.json",
   "variants": {
     "yadif_reset_only": {
       "summary": {

@@ -27,6 +27,23 @@ MADDERは各seek後に`video`と`film`が混在し、定常7標本も約24fpsの
 1バッチ同士なので差をタブ競合の効果量とは断定せず、旧値を主結果から外す。
 従来のtiming eventは[galaxy-lan-single-tab-seek.json](galaxy-lan-single-tab-seek.json)、raw rVFC・canvas draw・可視状態を含む再測定は[galaxy-lan-single-tab-visible-frame.json](galaxy-lan-single-tab-visible-frame.json)に保存した。
 
+### 完成fragment早期受け渡しの単一タブA/B
+
+旧Galaxy順次比較はタブ数を記録しておらず、build順も固定だったため、早期受け渡しだけが異なる2 buildを8ブロックで測り直した。
+各ブロックの開始前後はpage target 0件、測定中は前景の視聴タブ1枚とし、600秒と900秒のwarmup後に601/901〜605/905秒を測った。
+
+| variant | n | response中央値 | first fragment中央値 | appended中央値 | playing中央値 | 可視canvas初描画中央値 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 基準 | 40 | 50.7 ms | 133.5 ms | 144.1 ms | 245.1 ms | 257.1 ms |
+| 早期受け渡し | 40 | 54.5 ms | 140.2 ms | 150.2 ms | 261.3 ms | 274.5 ms |
+
+修正版−基準版の中央値差に対する30,000回bootstrap 95%区間は、first fragmentが−2.0〜12.4ms、appendedが−2.5〜11.8ms、可視canvasが−9.0〜37.3msだった。
+すべて0を含み、この条件では短縮を確認できなかった。
+
+一時markを入れた別の10 seekでは、早期通知callbackの最初の発火はfirst fragmentより5.5〜1084.8ms後、中央値227.2ms後だった。
+最初のmedia fragmentより前に発火した走行はなく、現行変更は2個目以降のfragmentと後続処理を重ねるものだと分かった。
+匿名化した全走行は[galaxy-early-fragment-single-tab-ab.json](galaxy-early-fragment-single-tab-ab.json)に保存した。
+
 以下の旧Galaxy測定は、タブ数を記録していない限り、機能再現、同一走行内の段階比率、同一タブ内A/Bの参考として扱う。
 現在の端末end-to-end絶対時間には上の単一タブ再測定を使う。
 
