@@ -329,12 +329,18 @@ Range開始からPAT/PMT、PES、GOPまでの読み捨てがあるため、12 se
 | 直接デモ、現行→修正 | 4/10 | 0/10 | 55.7〜81.2ms | 56.3ms |
 | 直接デモ、修正→現行の逆順 | 4/10 | 0/10 | 55.7ms | 53.6ms |
 | 実KonomiTV / desktop Chrome | 2/10 | 0/10 | 78.5ms | 83.1ms |
-| 実KonomiTV / Galaxy Chrome | 4/10 | 0/10 | 122.1ms | 98.1ms |
+| 実KonomiTV / Galaxy Chrome、旧順次比較 | 4/10 | 0/10 | 122.1ms | 98.1ms |
+| 実KonomiTV / Galaxy Chrome、単一タブLAN A/B | 7/20 | 0/20 | 141.0ms | 144.3ms |
 
 直接デモではbuild順とtarget順を反転しても追加probeの差が再現した。
 したがって「補間の誤学習による余分なRange requestを除く」効果は修正へ帰属できる。
-実KonomiTVの初画中央値はdesktop 304.7→229.6ms、Galaxy 320.8→195.9msだったが、buildを交互実行しておらずdecoderとYADIFの状態差を含む。
-初画差の全量はこの修正の効果とは扱わない。
+旧実KonomiTV比較の初画中央値はdesktop 304.7→229.6ms、Galaxy 320.8→195.9msだったが、buildを交互実行しておらず、Galaxyはタブ状態も記録していなかったため効果量には使わない。
+
+Galaxyは各ブロックの開始前後をpage/worker target 0件、測定中を前景視聴タブ1枚に固定し、基準・修正・修正・基準の順で再測定した。
+最初の遠距離2 seekを各タブのindex学習として除いた20 seekでは、追加probeを含む走行が7/20から0/20になった（Fisherの正確確率検定、両側`p=0.0083`）。
+response中央値は62.4→59.5ms、first fragmentは141.0→144.3ms、append完了は153.4→157.0msだった。
+修正版のplayingとpost-seek canvas初描画は54〜56ms早かったが、first fragmentまでの短縮を伴わず、このindex更新が当該seekのdecoder復帰を直接変える経路もないため、修正効果とは扱わない。
+全イベントは[単一タブprobe標本A/B](galaxy-probe-sample-single-tab-ab.json)に保存した。
 
 修正は`otya128/mpeg2toh264`向けの公開branch `fix/preserve-seek-probe-sample`、commit `a10253e`に分離した。
 計測用のprobe byte、PTS、first fragment時刻は`feat/seek-timing-context`の`ffe2893`に分離し、`presented`の意味を可視初画と区別する文書追補後のbranch HEADは`58a9920`である。
