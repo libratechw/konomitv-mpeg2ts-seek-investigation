@@ -8,7 +8,8 @@
 シークとは別に、単一タブのGalaxy A/BでYADIF出力がほぼ停止する走行を基準版7/90、queue再同期版0/90で再現した。
 canvasのopacity変更は原因または修正ではなかった。
 停止時もrAFとfilterは動作したが、fieldの表示予定が未来へ連鎖してqueueが飽和していた。
-また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を再現し、別branchで修正した。
+また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を人工試験で再現し、別branchで修正した。
+修正前挙動の実機計460回ではappend中resetを67回観測したが、古い完了時のqueueはすべて空で、新しいinit segmentの誤破棄は0回だった。
 
 ## 対象と証拠の範囲
 
@@ -867,7 +868,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せず、前身の全resetは単なる容量不足でも4〜5 fieldをまとめて失ったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 前身の停止7/90→0/90を正式候補でも0/90のまま維持。注入試験では全reset 14〜15回→0回、最大lateness 83.3→32.6ms。通常30秒は前身59.758fps、後継59.768fpsでreset増分0 | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
 | seeked直前に届いた目的frameを保持 | Chromiumが目的frameを`seeking=true`のまま提示した直後、fork固有`seeked`処理が表示済みcanvasを隠し、次frameまで約149ms待ち直したため | 現在のbuffered範囲とplayhead近傍のframeをseek先として記憶し、そのframeを描画済みなら`seeked`でhistory/canvasを再消去しない | Linuxの早着2/2は修正前にhidden、修正版5/5はvisibleを維持。Linux 40回p95 246.5→178.9ms、最大280.0→180.4ms。Galaxy 40回p95 220.5→193.2ms、最大243.1→212.8msで退行なし | `tsukumijima/mpeg2toh264` fork。公開source `2d072f3`、dist `f3ba99d` |
 | 確認済みTS再開位置の再利用 | 一度変換したGOPでも後のseekがPTS probeと未整列byte推定を繰り返していたため | media fragmentへPAT/PMT安全位置を付け、同じplayer内の後続seekを安全位置から開始する。PTSとrestart位置は独立したmark列で保持する | 診断A/BはGalaxyでprobe 40→0、canvas中央値226.5→161.5ms、p95 278.4→220.5ms。正式branch組み込み版40回はprobe 0、中央値159.1ms、p95 212.4ms、最大229.0msで全走行250ms以下。PTSなしPESの回帰試験も成功 | `otya128/mpeg2toh264`。公開core `787c7ba`、そのbranchを祖先にしたplayer `ac4f879` |
-| MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。実Chrome通常seekは251.4→250.1msで有意な短縮なし。実利用のstall削減量も未立証 | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
+| MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。GalaxyとWindowsの計460回ではappend中reset 67回、新init誤破棄0回。実Chrome通常seekは251.4→250.1msで有意な短縮なし | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
 | seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
 | probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | Galaxy B-F-F-B各40 seekで追加probe 14/40→0/40。20地点中12地点で0.5005〜1.001秒後かつ要求時刻以前のGOPを選び、target対応のbrowser提示と可視canvasをともに71.3ms短縮。canvas中央値296.3→244.3ms、p90 373.0→280.7ms | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
 | 完成fragmentの早期受け渡し | 完成済みfragmentと後続picture処理を直列化しないため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | 単一タブGalaxy各40 seekでは短縮なし。一時markでは最初の通知がfirst fragment後10/10だった。ローカルSSD Chrome B-F-F-Bでも300秒はfirst fragment平均−5.1ms、450秒は+4.9ms、`presented`差は−4.4/+0.9msで一貫しなかった | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508`。後続throughput候補 |
@@ -889,7 +890,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P0 | 再生中に確認したPAT/PMT安全位置を後続seekへ再利用する | 診断A/BでGalaxyのprobe 40→0、canvas中央値−65.0ms、p95−57.9ms。正式branch組み込み版も中央値159.1ms、p95 212.4ms、最大229.0msで40/40を250ms以下に維持 | 中 | ○ | mpeg2toh264 core `787c7ba` + player `ac4f879`。位置報告と利用policyを別PRにする |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
 | P2 | 初回fieldのleadを2 fieldから1 fieldへ戻す | 短い3走行では59.64〜59.84→59.98〜60.00fpsだが、reset条件が混在 | 小 | △ | `d4ccb98`の効果を長窓A/Bで再評価。新規修正とは扱わない |
-| P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
+| P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。計460回ではappend中reset 67回、新init誤破棄0回。実利用のstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
 | P2 | probeを選択service/video PID優先にする | 複数service TSで誤ったPTSを採る可能性を下げる | 中 | ○ | mpeg2toh264 source/core。標本上書き修正とは分離 |
 | P2 | 完成済みfragmentを入力chunk内の後続処理と重ねる | 後続fragmentのthroughput候補。単一タブGalaxyとローカルSSD Chromeで初回fragment・初画の一貫した短縮なし | 中 | ○ | mpeg2toh264 Transcoder/Worker。`30ad508`で実装済み。初回media fragmentを早める設計ではない |

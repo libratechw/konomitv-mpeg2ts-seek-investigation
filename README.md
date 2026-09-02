@@ -61,7 +61,7 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 
 | 順位 | branch | 提出先 | 修正内容 | 効果 | 重さ |
 | ---: | --- | --- | --- | --- | --- |
-| 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) `f8ab9c7` | otya128 | SourceBuffer操作にseek世代を対応付け、旧`updateend`を新queueへ適用しない | 競合の再現試験が成功。速度差はなく、実利用の発生頻度を計測中 | **中**。MSE状態管理と回帰試験 |
+| 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) `f8ab9c7` | otya128 | SourceBuffer操作にseek世代を対応付け、旧`updateend`を新queueへ適用しない | 460回のseekでappend中resetを67回観測。新initの誤破棄は0回 | **中**。MSE状態管理と回帰試験 |
 
 tsukumijimaフォーク向けの順位4から6は、source と生成済み`dist`を別コミットにしています。
 dist側のcommitは順に `27b327e`、`ac2a2a9`、`f3ba99d` です。
@@ -95,7 +95,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - 順位4 [`26484fd`](https://github.com/libratechw/mpeg2toh264/commit/26484fd)：YADIFのqueue容量不足と時刻同期破綻を分ける修正は、seek後の表示停止を7/90から0/90へ減らしました。容量不足では必要数だけFIFO破棄し、表示不能な時刻列だけqueue全resetします。
 - 順位5 [`7ef6696`](https://github.com/libratechw/mpeg2toh264/commit/7ef6696)：FIFO破棄した時間だけ残りのdeadlineを詰める修正は、Galaxyの負荷注入でFIFO破棄を平均218.0→0.67 fieldへ減らしました。
 - 順位6 [`2d072f3`](https://github.com/libratechw/mpeg2toh264/commit/2d072f3)：seeked直前に描画済みの目的frameを保持する修正は、Linuxで起きた約149msの待ち直しを除きました。Galaxyでは同じ競合が起きず、退行がないことを確認しました。
-- 順位7 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。通常シークの短縮はなく、実利用で競合が起きる頻度を計測中です。
+- 順位7 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。GalaxyとWindowsの計460回ではappend中resetを67回観測しましたが、新initの誤破棄は0回でした。
 
 ## 試して採らなかった案
 

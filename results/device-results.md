@@ -567,7 +567,7 @@ CPU時間は123.1→127.0ms、152.5→155.8ms、112.6→90.9msで、改善は0�
 
 ## MSE reset競合の修正確認
 
-branch `fix/mse-reset-inflight-append`、source commit `b1ffef4`では、進行中appendにqueue entryとseek epochを保持する。
+branch `fix/mse-reset-inflight-append`、source commit `f8ab9c7`では、進行中appendにqueue entryとseek epochを保持する。
 旧appendの`updateend`がreset後に届いても、新しいqueueの先頭をshiftしない。
 
 回帰試験は修正前コードで失敗し、新initの代わりにnew mediaが先にappendされることを再現した。
@@ -575,6 +575,16 @@ branch `fix/mse-reset-inflight-append`、source commit `b1ffef4`では、進行�
 修正distをKonomiTVのpackageへ一時配置したGalaxy Chrome試験では、「ばけばけ」の60、600、120秒すべてでappendとframe提示まで完了し、player errorはなかった。
 安定判定は361.0、463.0、404.9msだった。
 公式KonomiTV backendと実DPlayer UIへ3修正を合成した確認でも、乃木坂1200秒とMADDER900秒のreset後にinit/media append、rVFC、playingまで完了し、player errorはなかった。
+
+修正前のqueue処理を保った計測buildで、Galaxy Chrome 320回と電源モード「最適な電力効率」のWindows Chrome 140回を測った。
+DPlayerはドラッグ中に`currentTime`を変更せず、`thumbUp`で1回だけ設定するため、各操作は同じ境界の`video.currentTime`設定として行った。
+1秒間隔、250ms間隔、100ms間隔、Galaxyの4倍CPU throttlingを分け、各走行は新規タブ、LAN直結、全画面、ローカルSSDの乃木坂fixtureを使った。
+
+計460回でappend中resetと、その後の古い`updateend`を67回観測した。
+67回とも古い完了時の新queueは空で、直後の修正前`queue.shift()`がinitまたはmedia segmentを捨てた回数は0回だった。
+競合の前半は通常操作に近い条件でも起きるが、人工試験で再現したinit喪失の実利用頻度は今回の条件では0/460である。
+異なるMSE実装、fragmentサイズ、task scheduleでの確率が0だとは結論しない。
+条件、計算方法、除外理由、全カウンターは[集計JSON](mse-reset-race-frequency.json)に保存した。
 
 この修正は通常seekの平均時間を短縮するものではない。
 resetと古いappend完了が競合した場合のinit喪失を防ぐ信頼性修正として扱う。
