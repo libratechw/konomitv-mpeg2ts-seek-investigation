@@ -1,0 +1,283 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-09-02",
+  "purpose": "Measure the rebuilt integration for 600 seconds with full callback traces; compare against a low-overhead rerun before attributing degradation to product code.",
+  "conditions": {
+    "candidateSourceCommit": "47cca299f182049f12f5e22529b37bbf491de411",
+    "konomiCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "asset": "PlayerController-CkQlTWYo.js",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "singlePage": true,
+    "sourceFixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "mediaTimeStart": 188.145234,
+    "instrumentation": "Per-callback rAF/rVFC timestamps and video quality, WebGL default-framebuffer draw timestamps, deinterlacer stats, long tasks."
+  },
+  "result": {
+    "durationMs": 600000.6000000238,
+    "mediaTimeDelta": 600.000141,
+    "intervals": {
+      "canvasDraw": {
+        "count": 33461,
+        "fps": 55.76827756505355,
+        "median": 17.299999952316284,
+        "p95": 24.200000047683716,
+        "p99": 63.041000009774784,
+        "max": 152.60000002384186,
+        "over25": 1585,
+        "over40": 815,
+        "over100": 39
+      },
+      "raf": {
+        "count": 33860,
+        "fps": 56.43327690005419,
+        "median": 16.699999999982538,
+        "p95": 16.800000000017462,
+        "p99": 66.59999999997672,
+        "max": 133.10000000009313,
+        "over25": 949,
+        "over40": 559,
+        "over100": 24
+      },
+      "videoCallback": {
+        "count": 17403,
+        "fps": 29.004970995027854,
+        "median": 33.40000009536743,
+        "p95": 43.09499990940101,
+        "p99": 77.89800009489092,
+        "max": 152.39999997615814,
+        "over25": 17027,
+        "over40": 1036,
+        "over100": 39
+      }
+    },
+    "quality": {
+      "start": {
+        "total": 256,
+        "dropped": 2
+      },
+      "end": {
+        "total": 18436,
+        "dropped": 200
+      },
+      "delta": {
+        "total": 18180,
+        "dropped": 198
+      }
+    },
+    "yadifDelta": {
+      "filtered": 34712,
+      "missed": 579,
+      "degraded": 0,
+      "discontinuities": 0,
+      "late": 1345,
+      "queueResetted": 0,
+      "dropped": 198
+    },
+    "longTaskCount": 0,
+    "perMinute": [
+      {
+        "minute": 1,
+        "raf": 3599,
+        "canvasDraw": 3595,
+        "videoCallback": 1798,
+        "yadifDelta": {
+          "filtered": 3540,
+          "missed": 0,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 0,
+          "queueResetted": 0,
+          "dropped": 20
+        },
+        "yadifFpsMedian": 59.98200539409152,
+        "outputFpsMedian": 59.98200539409152,
+        "videoDroppedDelta": 20
+      },
+      {
+        "minute": 2,
+        "raf": 3600,
+        "canvasDraw": 3597,
+        "videoCallback": 1798,
+        "yadifDelta": {
+          "filtered": 3484,
+          "missed": 0,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 0,
+          "queueResetted": 0,
+          "dropped": 18
+        },
+        "yadifFpsMedian": 59.98452012245536,
+        "outputFpsMedian": 59.98452012245536,
+        "videoDroppedDelta": 20
+      },
+      {
+        "minute": 3,
+        "raf": 3600,
+        "canvasDraw": 3595,
+        "videoCallback": 1799,
+        "yadifDelta": {
+          "filtered": 3540,
+          "missed": 0,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 1,
+          "queueResetted": 0,
+          "dropped": 18
+        },
+        "yadifFpsMedian": 59.976009590444065,
+        "outputFpsMedian": 59.976009590444065,
+        "videoDroppedDelta": 20
+      },
+      {
+        "minute": 4,
+        "raf": 3590,
+        "canvasDraw": 3585,
+        "videoCallback": 1797,
+        "yadifDelta": {
+          "filtered": 3538,
+          "missed": 1,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 10,
+          "queueResetted": 0,
+          "dropped": 18
+        },
+        "yadifFpsMedian": 59.976009590444065,
+        "outputFpsMedian": 59.976009590444065,
+        "videoDroppedDelta": 18
+      },
+      {
+        "minute": 5,
+        "raf": 3504,
+        "canvasDraw": 3493,
+        "videoCallback": 1795,
+        "yadifDelta": {
+          "filtered": 3532,
+          "missed": 3,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 94,
+          "queueResetted": 0,
+          "dropped": 20
+        },
+        "yadifFpsMedian": 58.935171310153706,
+        "outputFpsMedian": 58.935171310153706,
+        "videoDroppedDelta": 20
+      },
+      {
+        "minute": 6,
+        "raf": 3391,
+        "canvasDraw": 3368,
+        "videoCallback": 1780,
+        "yadifDelta": {
+          "filtered": 3504,
+          "missed": 18,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 187,
+          "queueResetted": 0,
+          "dropped": 22
+        },
+        "yadifFpsMedian": 56.158017043646225,
+        "outputFpsMedian": 56.158017043646225,
+        "videoDroppedDelta": 22
+      },
+      {
+        "minute": 7,
+        "raf": 3274,
+        "canvasDraw": 3210,
+        "videoCallback": 1724,
+        "yadifDelta": {
+          "filtered": 3396,
+          "missed": 73,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 236,
+          "queueResetted": 0,
+          "dropped": 18
+        },
+        "yadifFpsMedian": 53.299738347970504,
+        "outputFpsMedian": 53.299738347970504,
+        "videoDroppedDelta": 18
+      },
+      {
+        "minute": 8,
+        "raf": 3180,
+        "canvasDraw": 3097,
+        "videoCallback": 1686,
+        "yadifDelta": {
+          "filtered": 3320,
+          "missed": 112,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 273,
+          "queueResetted": 0,
+          "dropped": 20
+        },
+        "yadifFpsMedian": 51.401415962345546,
+        "outputFpsMedian": 51.401415962345546,
+        "videoDroppedDelta": 22
+      },
+      {
+        "minute": 9,
+        "raf": 3103,
+        "canvasDraw": 3006,
+        "videoCallback": 1626,
+        "yadifDelta": {
+          "filtered": 3212,
+          "missed": 168,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 242,
+          "queueResetted": 0,
+          "dropped": 18
+        },
+        "yadifFpsMedian": 49.95004995004995,
+        "outputFpsMedian": 49.95004995004995,
+        "videoDroppedDelta": 18
+      },
+      {
+        "minute": 10,
+        "raf": 3019,
+        "canvasDraw": 2915,
+        "videoCallback": 1600,
+        "yadifDelta": {
+          "filtered": 3106,
+          "missed": 195,
+          "degraded": 0,
+          "discontinuities": 0,
+          "late": 281,
+          "queueResetted": 0,
+          "dropped": 20
+        },
+        "yadifFpsMedian": 48.381634442626044,
+        "outputFpsMedian": 48.381634442626044,
+        "videoDroppedDelta": 20
+      }
+    ],
+    "cleanup": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  },
+  "interpretation": {
+    "status": "confirmed long-run regression of the with-rank-7 integration",
+    "observed": "The first three minutes stayed near 60 rAF/s with almost no YADIF misses; from minute four, rAF, input callback, and canvas presentation declined progressively. Queue full resets remained zero.",
+    "control": "A later low-overhead same-source A/B reproduced degradation with rank 7 and stayed stable when only rank 7 was removed. See galaxy-present-one-field-long-run-ab.json.",
+    "instrumentationLimit": "This run stored every callback and wrapped WebGL draw methods, so its absolute rates are corroborating evidence; the low-overhead A/B owns the causal comparison."
+  },
+  "evidence": {
+    "privateRawSha256": "34cad16fdc99431dfcb8d484cb837919b6dba17840f8099b4a611f3015406f72",
+    "privateRawBytes": 7286672
+  }
+}

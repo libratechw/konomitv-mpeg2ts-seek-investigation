@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-09-02",
+  "status": "invalid-incomplete-diagnostic",
+  "purpose": "Record a same-build low-overhead rerun that stopped making Range requests and whose in-page completion timer did not return. It is not a 600-second steady-state result.",
+  "conditions": {
+    "candidateSourceCommit": "47cca299f182049f12f5e22529b37bbf491de411",
+    "publishedIntegrationCommit": "0efe230e59cc025541401d78afee45dff2aa1816",
+    "codeDifferenceFromPublishedIntegration": "README.md only",
+    "asset": "PlayerController-CkQlTWYo.js",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "singlePage": true,
+    "instrumentation": "Per-second rAF/rVFC aggregation without WebGL method wrapping; result was not returned."
+  },
+  "observation": {
+    "rangeRequestCount": 46,
+    "firstRangeRequestAt": "2026-09-02T23:15:26.948000",
+    "lastRangeRequestAt": "2026-09-02T23:24:57.715000",
+    "requestSpanSeconds": 570.767,
+    "rangeIntervalSeconds": {
+      "median": 14.98,
+      "min": 0.023,
+      "max": 17.264
+    },
+    "afterLastRequest": "No further recorded-file Range request before manual interruption more than two minutes later. The active awaited Runtime.evaluate also did not return.",
+    "deviceChecksDuringStall": {
+      "wakefulness": "Awake",
+      "thermalStatus": 0,
+      "displayMode": "60 Hz",
+      "memoryPressureObserved": false
+    },
+    "excludedMetrics": "The collector result was never returned, so rAF, rVFC, YADIF, and canvas values are unavailable and must not be inferred."
+  },
+  "cleanup": {
+    "videoStopped": true,
+    "fullscreenEndedByChromeStop": true,
+    "testPageClosedByChromeStop": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  },
+  "interpretation": {
+    "conclusion": "This incomplete run alone could not distinguish build behavior, cumulative device state, or a browser/GPU stall. A later completed low-overhead A/B reproduced progressive degradation with rank 7 and stayed stable when only rank 7 was removed.",
+    "notAcceptedAsSteadyStateMeasurement": true,
+    "followup": "See galaxy-present-one-field-long-run-ab.json; no rAF/rVFC values are inferred from this incomplete run."
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-09-02/03",
+  "purpose": "A/B the rank-7 one-field-per-refresh presentation policy over 600 seconds after shorter runs suggested fewer normal-load retirements.",
+  "conditions": {
+    "baseSourceCommit": "47cca299f182049f12f5e22529b37bbf491de411",
+    "rank7SourceCommit": "fb2e6e4",
+    "controlConstruction": "The same integration source with only fb2e6e4 reverse-applied to packages/yadif/src/deinterlace.ts.",
+    "konomiCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "sourceFixture": "local SSD nogizaka.ts fixture",
+    "sourceFixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "mediaTimeStartS": "approximately 188.143",
+    "browser": "Google Chrome 151.0.7922.174",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "singlePage": true,
+    "instrumentation": "Per-second rAF/rVFC aggregation and deinterlacer stats; no WebGL method wrapping.",
+    "thermal": "Both runs began at thermal status 0 after cooldown. HAL AP/SKIN differed by about 1.2 C at start, so earlier same-build traces are retained as corroboration rather than pretending exact thermal identity.",
+    "order": [
+      "without_rank7",
+      "with_rank7"
+    ]
+  },
+  "results": {
+    "without_rank7": {
+      "asset": "PlayerController-Dwy3m7IJ.js",
+      "sourceHash": "6ee69cf2006180ca59662b4d87fce7e68788fdee7b9934e41f25dd06823e613b",
+      "durationMs": 600000.6000000238,
+      "mediaTimeDeltaS": 599.999912,
+      "raf": {
+        "count": 35999,
+        "perSecond": 59.998333333333335,
+        "over25ms": 1,
+        "maxGapMs": 33.300000000046566
+      },
+      "videoCallback": {
+        "count": 17982,
+        "perSecond": 29.97,
+        "over50ms": 33,
+        "maxGapMs": 81
+      },
+      "yadifStatsDelta": {
+        "filtered": 35906,
+        "missed": 0,
+        "degraded": 0,
+        "discontinuities": 0,
+        "late": 45,
+        "queueResetted": 0,
+        "dropped": 198
+      },
+      "yadifFilteredPerSecond": 59.93974641543303,
+      "videoQualityDelta": {
+        "total": 18180,
+        "dropped": 198
+      },
+      "perMinute": [
+        {
+          "minute": 1,
+          "raf": 3600,
+          "videoCallback": 1799,
+          "rafMaxGapMs": 16.899999999999636,
+          "videoCallbackMaxGapMs": 67
+        },
+        {
+          "minute": 2,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.80000000000291,
+          "videoCallbackMaxGapMs": 70.39999997615814
+        },
+        {
+          "minute": 3,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.89999999999418,
+          "videoCallbackMaxGapMs": 67.40000009536743
+        },
+        {
+          "minute": 4,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.800000000017462,
+          "videoCallbackMaxGapMs": 68
+        },
+        {
+          "minute": 5,
+          "raf": 3599,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 33.300000000046566,
+          "videoCallbackMaxGapMs": 71.70000004768372
+        },
+        {
+          "minute": 6,
+          "raf": 3600,
+          "videoCallback": 1799,
+          "rafMaxGapMs": 16.899999999965075,
+          "videoCallbackMaxGapMs": 64.69999992847443
+        },
+        {
+          "minute": 7,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.800000000046566,
+          "videoCallbackMaxGapMs": 81
+        },
+        {
+          "minute": 8,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.800000000046566,
+          "videoCallbackMaxGapMs": 69.60000002384186
+        },
+        {
+          "minute": 9,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.800000000046566,
+          "videoCallbackMaxGapMs": 68
+        },
+        {
+          "minute": 10,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.800000000046566,
+          "videoCallbackMaxGapMs": 67.30000007152557
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "privateRawSha256": "b7184a24d17be83ab06dfc4839dec6634657d27a650db5de7a5f4692bcac2e68",
+      "privateRawBytes": 473104
+    },
+    "with_rank7": {
+      "asset": "PlayerController-CkQlTWYo.js",
+      "sourceHash": "01b9ef4c4b378d1cd8ffac415f899dfdbeca1b403684feecc48e81b7b04b762f",
+      "durationMs": 600003.5999999046,
+      "mediaTimeDeltaS": 600.002987,
+      "raf": {
+        "count": 33997,
+        "perSecond": 56.66166666666667,
+        "over25ms": 909,
+        "maxGapMs": 116.70000000006985
+      },
+      "videoCallback": {
+        "count": 17442,
+        "perSecond": 29.07,
+        "over50ms": 610,
+        "maxGapMs": 110.89999997615814
+      },
+      "yadifStatsDelta": {
+        "filtered": 34878,
+        "missed": 541,
+        "degraded": 0,
+        "discontinuities": 0,
+        "late": 1290,
+        "queueResetted": 0,
+        "dropped": 198
+      },
+      "yadifFilteredPerSecond": 58.13759664595943,
+      "videoQualityDelta": {
+        "total": 18180,
+        "dropped": 198
+      },
+      "perMinute": [
+        {
+          "minute": 1,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.899999999999636,
+          "videoCallbackMaxGapMs": 68.69999992847443
+        },
+        {
+          "minute": 2,
+          "raf": 3600,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 16.80000000000291,
+          "videoCallbackMaxGapMs": 70.30000007152557
+        },
+        {
+          "minute": 3,
+          "raf": 3599,
+          "videoCallback": 1799,
+          "rafMaxGapMs": 33.29999999998836,
+          "videoCallbackMaxGapMs": 71.10000002384186
+        },
+        {
+          "minute": 4,
+          "raf": 3594,
+          "videoCallback": 1798,
+          "rafMaxGapMs": 33.39999999999418,
+          "videoCallbackMaxGapMs": 68.30000007152557
+        },
+        {
+          "minute": 5,
+          "raf": 3530,
+          "videoCallback": 1795,
+          "rafMaxGapMs": 50,
+          "videoCallbackMaxGapMs": 69.30000007152557
+        },
+        {
+          "minute": 6,
+          "raf": 3423,
+          "videoCallback": 1777,
+          "rafMaxGapMs": 66.80000000004657,
+          "videoCallbackMaxGapMs": 79.89999997615814
+        },
+        {
+          "minute": 7,
+          "raf": 3293,
+          "videoCallback": 1729,
+          "rafMaxGapMs": 83.40000000002328,
+          "videoCallbackMaxGapMs": 84.60000002384186
+        },
+        {
+          "minute": 8,
+          "raf": 3198,
+          "videoCallback": 1694,
+          "rafMaxGapMs": 100,
+          "videoCallbackMaxGapMs": 102.5
+        },
+        {
+          "minute": 9,
+          "raf": 3112,
+          "videoCallback": 1644,
+          "rafMaxGapMs": 116.69999999995343,
+          "videoCallbackMaxGapMs": 107.90000009536743
+        },
+        {
+          "minute": 10,
+          "raf": 3048,
+          "videoCallback": 1610,
+          "rafMaxGapMs": 116.70000000006985,
+          "videoCallbackMaxGapMs": 110.89999997615814
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "privateRawSha256": "92501881cc32f22277724c623a1199221c284db71cd5ce237d7e3c70f6e633c0",
+      "privateRawBytes": 473289
+    }
+  },
+  "fixedTraceReplay": {
+    "input": "The previously captured degraded with-rank7 callback trace replayed through both presentation policies.",
+    "withRank7": {
+      "shownFields": 33459,
+      "lateFields": 1345,
+      "queueResets": 0
+    },
+    "withoutRank7": {
+      "shownFields": 33296,
+      "lateFields": 1508
+    },
+    "interpretation": "On a fixed already-degraded callback trace rank 7 preserves 163 fields. The live A/B shows that sustaining the extra work feeds back into progressively fewer rAF and input callbacks, overwhelming that local benefit."
+  },
+  "corroboration": {
+    "withRank7FullTrace": "A separate 600-second full-trace run also degraded after about three minutes to 55.768 canvas draws/s and 56.433 rAF/s; private raw SHA-256 34cad16fdc99431dfcb8d484cb837919b6dba17840f8099b4a611f3015406f72.",
+    "withoutRank7OlderBuild": "The rank-5 overflow-compression build completed an earlier 600-second run at 59.942 canvas draws/s with no interval over 40 ms.",
+    "incompleteRun": "One earlier low-overhead with-rank7 run stopped producing Range requests at 570.767 seconds and returned no collector result; it is retained as an invalid diagnostic, not included in the A/B statistics."
+  },
+  "conclusion": {
+    "decision": "Do not ship rank 7 in its current form; remove it from the integration branch.",
+    "reason": "The live same-source A/B changed progressively degrading rAF/rVFC and 541 missed fields into stable callback rates and zero missed fields when rank 7 alone was removed.",
+    "scope": "This establishes a long-run regression of the current policy. It does not yet identify whether the positive feedback is CPU/GPU scheduling, callback delivery, or another browser interaction.",
+    "droppedVideoFrames": "Both variants increased droppedVideoFrames by 198, so that browser counter did not distinguish the severe canvas/callback degradation and is not used as the decision metric."
+  }
+}
