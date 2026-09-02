@@ -84,6 +84,10 @@ fork固有のYADIF変更はupstream向け変更へ混ぜず、順位9は効果�
 - PAT/PMTを含むRAPを毎seekで4〜8MiB先読みする案は、追加Rangeの費用を回収できず遅くなりました。再生中の学習やsidecarは、未知のpre-target RAPを取り逃す素材を再現できた場合に再評価します。
 - YADIFへ1 frame分の固定reserveを置く案は、短時間のカクつきを隠しましたが、600秒で最大11.15秒の停止を生じました。queue容量を増やす案もfuture leadを増やすため採用しません。
 
+## 追加確認が必要な案
+
+- 録画TSの`FileResponse` body chunkを64KiBから1MiBへ増やす案は、Galaxyの可視初画中央値を6.9〜13.0ms短縮しましたが、Windowsでは中立でした。より多い反復と中間chunk sizeの比較が必要なため、まだbranch化していません。
+
 ## 測定を読むときの前提
 
 - 主計測では録画TSをKonomiTVサーバー側のローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認しています。CIFS経由の絶対時間は主結果へ使いません。

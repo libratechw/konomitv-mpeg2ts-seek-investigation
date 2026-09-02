@@ -266,6 +266,13 @@ HTTP の Range 粒度は byte 単位であり、64 KiB は ASGI body の chunk s
 Range より前をアプリケーションが読み戻す処理や、TS 固有の prefetch はない。
 OS、Python buffered I/O、SMB client、NAS の読み込み粒度はこの値とは別である。
 
+録画TSだけ`FileResponse.chunk_size`を64 KiBから1 MiBへ変え、同じclientを使って全画面・LAN直結のB-F-F-B比較を行った。
+Galaxyの可視初画中央値は180秒群168.5→161.6ms、480秒群151.0→138.1ms、`first-byte`→`first-fragment`中央値は72.9→68.4ms、73.4→67.1msだった。
+Windowsは180秒群297.8→298.4ms、480秒群215.5→211.9msで、fragment生成区間も110.8→111.8ms、96.1→100.3msとなり中立だった。
+Galaxyだけの6.9〜13.0ms差は小変更として再確認する価値があるが、共通改善とはまだ判断しない。
+反復数を増やし、256 KiBと512 KiBを含むsweepで単調性、memory、連続seek時のabort済み受信量を確認してからbranch化する。
+[chunk size A/Bの集計](results/file-response-chunk-size-analysis.json)と生データを保存した。
+
 初期計測でread-only mountした録画領域はCIFS、`rsize=4 MiB`、`cache=strict`、`actimeo=1`だった。
 KonomiTVと録画TSが同じPCにある主ユースケースとは異なるため、このCIFS経由の絶対時間は主結果から外した。
 主条件では対象TSをサーバー側ローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認して使う。
@@ -862,8 +869,8 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P2 | 有効probeを本体へ再利用、PTS検出後にprobe読取を止める | 重複128 KiBと待ちを削減。RTT自体は残る | 中 | ○ | mpeg2toh264 source/worker |
 | P2 | 入力queueの32/8 MiB high/low waterを小さくする | seek後の不要な先読みと連続seek時のI/O競合を削減。初画短縮は未確認 | 小 | ◎ | mpeg2toh264 Worker。8/2 MiB試作は未採用 |
 | P2 | 選択範囲のbufferを保持するseek、clearを必要範囲に限定 | 再seekの再変換削減。removeが支配的なら有効 | 中〜大 | ○ | mpeg2toh264 MSE。RAPとoverlapを再設計 |
-| P2 | download handlerのDB/stat/open、chunk sizeを計測して必要箇所だけ改善 | NAS/ASGI待ちが大きい環境で有効 | 小〜中 | ◎ | KonomiTV。Starlette一般問題は同upstream |
-| P2 | AAC必要量が揃った完成GOPを次GOP境界前に出す | 128〜256KiB、0〜約22msの改善候補 | 中 | ○ | mpeg2toh264 Session。試作済み・保留 |
+| P2 | download handlerのDB/stat/open、chunk sizeを計測して必要箇所だけ改善 | 1MiB chunkはGalaxy中央値を6.9〜13.0ms短縮したがWindowsは中立。追加反復とsize sweep待ち | 小〜中 | ◎ | KonomiTV。Starlette一般問題は同upstream |
+| P3 | AAC必要量が揃った完成GOPを次GOP境界前に出す | 単体では入力を320〜512KiB削減したが、GalaxyとWindowsのfragment生成・可視初画を短縮しなかった | 中 | △ | mpeg2toh264 Session。実機B-F-F-Bで不採用 |
 | P1 | coreが実際のGOP/RAP byteを返し、再生中のin-memory indexへ学習する | 要求時刻以前に近いRAPが実在する地点ではdecoder discardを減らせる可能性。Windows 180秒地点は現行indexですでに最適で短縮不可 | 中 | ○ | mpeg2toh264 core/player。byteをRange先頭へ誤対応しない契約が必要 |
 | P2 | 永続sidecarと有効なstream configを持つseek resolver | cold seekのprobeと、近いpre-target RAPがある地点の復号を削減。GOP cadenceで次候補がtarget後になる地点は短縮しない | 大 | ○ | KonomiTV固有保存、playerの汎用API |
 | P3 | 初回のsub-GOP fragment、video/audioの段階投入 | 初画の理論的な下限を下げ得る | 大 | △ | mpeg2toh264 core/player |
@@ -889,7 +896,8 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
-| AAC必要量が揃った完成GOPを早く出す | 128〜256KiB、0〜約22ms候補 | 試作結果を[evidence](results/device-results.md)に保存。A/V同値性の追加試験待ち |
+| AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
+| 録画TSの`FileResponse` body chunkを64KiBから増やす | 1MiB版はGalaxyの可視初画中央値を6.9〜13.0ms短縮 | Windowsは中立。256/512KiBを含むsweep、反復数、memory、連続seekでのabort済み受信量を確認してからbranch化する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
