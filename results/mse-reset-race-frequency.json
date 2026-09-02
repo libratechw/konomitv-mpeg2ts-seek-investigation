@@ -1,0 +1,1096 @@
+{
+  "title": "Pre-fix MSE reset/in-flight append race frequency",
+  "measuredAt": "2026-09-03",
+  "code": {
+    "integrationBase": "1f4dc6d",
+    "formalFix": "f8ab9c785b1c9daa03d5b5f1e0ddb7b41a560a04",
+    "behavior": "The formal fix was reversed in mse.ts. Counters inspect the captured append epoch and pending entry, then the pre-fix queue.shift() continues unchanged.",
+    "diagnosticSourceSha256": "1094866453cf68444d92874e777137e643084041f595ae3349f230907615147e",
+    "playerAsset": "PlayerController-me5YHgcA.js",
+    "playerAssetSha256": "1cd63d4199519d3a7e225a3edb6888e9a9c5a570d0f3fa831820e8ecdcd9681c",
+    "workerAsset": "worker-B_cZGijc.C0njJJPM.js",
+    "workerAssetSha256": "b43bdc41523d5ef2c1b15721909c942d7f7e7067957c158ee3f4948fe9ace896"
+  },
+  "fixture": {
+    "label": "Nogizaka Koujichuu local-SSD fixture",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "method": {
+    "input": "Each operation sets HTMLVideoElement.currentTime once. DPlayer does the same once on thumbUp; drag motion itself only updates the bar and pauses playback.",
+    "targetFractions": [
+      0.12,
+      0.72,
+      0.22,
+      0.82,
+      0.32,
+      0.62
+    ],
+    "counters": {
+      "resetsDuringAppend": "reset() entered while the pre-fix #operation was append",
+      "staleAppendCompletions": "the completed append epoch or pending entry no longer matched the current queue",
+      "initSegmentsDiscarded": "a stale completion saw a new init segment at queue[0], which the immediately following pre-fix queue.shift() discarded",
+      "mediaSegmentsDiscarded": "a stale completion saw a new media segment at queue[0]",
+      "emptyQueueCompletions": "a stale completion saw no current queue entry, so the pre-fix queue.shift() discarded nothing"
+    },
+    "calculation": "All reported counts are after minus before within a newly opened single-page run. The one initial empty-queue stale completion seen while each page initialized is excluded from operation deltas.",
+    "stallDuration": "not measured"
+  },
+  "summary": {
+    "operations": 460,
+    "appendStarts": 2186,
+    "resetsDuringAppend": 67,
+    "staleAppendCompletions": 67,
+    "initSegmentsDiscarded": 0,
+    "mediaSegmentsDiscarded": 0,
+    "emptyQueueCompletions": 67,
+    "galaxy": {
+      "operations": 320,
+      "resetsDuringAppend": 40,
+      "initSegmentsDiscarded": 0
+    },
+    "windows": {
+      "operations": 140,
+      "resetsDuringAppend": 27,
+      "initSegmentsDiscarded": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "galaxy-release-equivalent",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "os": null,
+      "browser": "Google Chrome 151.0.7922.174",
+      "powerMode": null,
+      "displayHz": 60,
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": null,
+      "condition": {
+        "mode": "direct",
+        "count": 40,
+        "intervalMs": 1000,
+        "cpuRate": 1,
+        "geometry": {
+          "time": 14.446975,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 982.0000610351562,
+            "width": 1655.4285888671875,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 2,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 278.39999997615814,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 640,
+          "resetsDuringAppend": 11,
+          "staleAppendCompletions": 11,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 11,
+          "events": [
+            {
+              "at": 278.39999997615814,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            },
+            {
+              "at": 5925.699999928474,
+              "appendEpoch": 4,
+              "currentEpoch": 5,
+              "queueHead": "empty"
+            },
+            {
+              "at": 8939.199999928474,
+              "appendEpoch": 7,
+              "currentEpoch": 8,
+              "queueHead": "empty"
+            },
+            {
+              "at": 9942.299999952316,
+              "appendEpoch": 8,
+              "currentEpoch": 9,
+              "queueHead": "empty"
+            },
+            {
+              "at": 10948.799999952316,
+              "appendEpoch": 9,
+              "currentEpoch": 10,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11953.899999976158,
+              "appendEpoch": 10,
+              "currentEpoch": 11,
+              "queueHead": "empty"
+            },
+            {
+              "at": 21000.699999928474,
+              "appendEpoch": 19,
+              "currentEpoch": 20,
+              "queueHead": "empty"
+            },
+            {
+              "at": 23017.199999928474,
+              "appendEpoch": 21,
+              "currentEpoch": 22,
+              "queueHead": "empty"
+            },
+            {
+              "at": 28059.100000023842,
+              "appendEpoch": 26,
+              "currentEpoch": 27,
+              "queueHead": "empty"
+            },
+            {
+              "at": 33091.5,
+              "appendEpoch": 31,
+              "currentEpoch": 32,
+              "queueHead": "empty"
+            },
+            {
+              "at": 41139.5,
+              "appendEpoch": 39,
+              "currentEpoch": 40,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 638,
+          "resetsDuringAppend": 10,
+          "staleAppendCompletions": 10,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 10
+        },
+        "end": {
+          "time": 1492.47618,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromePid": "",
+        "webapkPid": "",
+        "adbForwards": "",
+        "containerState": "exited"
+      }
+    },
+    {
+      "label": "galaxy-rapid-250ms",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "os": null,
+      "browser": "Google Chrome 151.0.7922.174",
+      "powerMode": null,
+      "displayHz": 60,
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": null,
+      "condition": {
+        "mode": "direct",
+        "count": 100,
+        "intervalMs": 250,
+        "cpuRate": 1,
+        "geometry": {
+          "time": 14.44771,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 982.0000610351562,
+            "width": 1655.4285888671875,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 2,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 362.7000000476837,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 392,
+          "resetsDuringAppend": 15,
+          "staleAppendCompletions": 15,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 15,
+          "events": [
+            {
+              "at": 362.7000000476837,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            },
+            {
+              "at": 7060.799999952316,
+              "appendEpoch": 17,
+              "currentEpoch": 18,
+              "queueHead": "empty"
+            },
+            {
+              "at": 7568.299999952316,
+              "appendEpoch": 19,
+              "currentEpoch": 20,
+              "queueHead": "empty"
+            },
+            {
+              "at": 8330.700000047684,
+              "appendEpoch": 22,
+              "currentEpoch": 23,
+              "queueHead": "empty"
+            },
+            {
+              "at": 9363,
+              "appendEpoch": 26,
+              "currentEpoch": 27,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11402.700000047684,
+              "appendEpoch": 34,
+              "currentEpoch": 35,
+              "queueHead": "empty"
+            },
+            {
+              "at": 14209.100000023842,
+              "appendEpoch": 45,
+              "currentEpoch": 46,
+              "queueHead": "empty"
+            },
+            {
+              "at": 14463.200000047684,
+              "appendEpoch": 46,
+              "currentEpoch": 47,
+              "queueHead": "empty"
+            },
+            {
+              "at": 16753.299999952316,
+              "appendEpoch": 55,
+              "currentEpoch": 56,
+              "queueHead": "empty"
+            },
+            {
+              "at": 18787,
+              "appendEpoch": 63,
+              "currentEpoch": 64,
+              "queueHead": "empty"
+            },
+            {
+              "at": 19548,
+              "appendEpoch": 66,
+              "currentEpoch": 67,
+              "queueHead": "empty"
+            },
+            {
+              "at": 19804.299999952316,
+              "appendEpoch": 67,
+              "currentEpoch": 68,
+              "queueHead": "empty"
+            },
+            {
+              "at": 24150.399999976158,
+              "appendEpoch": 84,
+              "currentEpoch": 85,
+              "queueHead": "empty"
+            },
+            {
+              "at": 26205,
+              "appendEpoch": 92,
+              "currentEpoch": 93,
+              "queueHead": "empty"
+            },
+            {
+              "at": 28006.100000023842,
+              "appendEpoch": 99,
+              "currentEpoch": 100,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 390,
+          "resetsDuringAppend": 14,
+          "staleAppendCompletions": 14,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 14
+        },
+        "end": {
+          "time": 1491.649605,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromePid": "",
+        "webapkPid": "",
+        "adbForwards": "",
+        "containerState": "exited"
+      }
+    },
+    {
+      "label": "galaxy-rapid-100ms",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "os": null,
+      "browser": "Google Chrome 151.0.7922.174",
+      "powerMode": null,
+      "displayHz": 60,
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": null,
+      "condition": {
+        "mode": "direct",
+        "count": 100,
+        "intervalMs": 100,
+        "cpuRate": 1,
+        "geometry": {
+          "time": 14.457985,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 982.0000610351562,
+            "width": 1655.4285888671875,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 2,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 278.40000009536743,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 25,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 278.40000009536743,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 23,
+          "resetsDuringAppend": 0,
+          "staleAppendCompletions": 0,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 0
+        },
+        "end": {
+          "time": 1491.503115,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromePid": "",
+        "webapkPid": "",
+        "adbForwards": "",
+        "containerState": "exited"
+      }
+    },
+    {
+      "label": "galaxy-rapid-250ms-cpu4",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "os": null,
+      "browser": "Google Chrome 151.0.7922.174",
+      "powerMode": null,
+      "displayHz": 60,
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": null,
+      "condition": {
+        "mode": "direct",
+        "count": 80,
+        "intervalMs": 250,
+        "cpuRate": 4,
+        "geometry": {
+          "time": 14.452777,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 982.0000610351562,
+            "width": 1655.4285888671875,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 2,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 297.10000002384186,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 313,
+          "resetsDuringAppend": 17,
+          "staleAppendCompletions": 17,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 17,
+          "events": [
+            {
+              "at": 297.10000002384186,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            },
+            {
+              "at": 4570.399999976158,
+              "appendEpoch": 7,
+              "currentEpoch": 8,
+              "queueHead": "empty"
+            },
+            {
+              "at": 5604.699999928474,
+              "appendEpoch": 11,
+              "currentEpoch": 12,
+              "queueHead": "empty"
+            },
+            {
+              "at": 6109.699999928474,
+              "appendEpoch": 13,
+              "currentEpoch": 14,
+              "queueHead": "empty"
+            },
+            {
+              "at": 8714.5,
+              "appendEpoch": 23,
+              "currentEpoch": 24,
+              "queueHead": "empty"
+            },
+            {
+              "at": 8979.399999976158,
+              "appendEpoch": 24,
+              "currentEpoch": 25,
+              "queueHead": "empty"
+            },
+            {
+              "at": 9512.699999928474,
+              "appendEpoch": 26,
+              "currentEpoch": 27,
+              "queueHead": "empty"
+            },
+            {
+              "at": 10032.799999952316,
+              "appendEpoch": 28,
+              "currentEpoch": 29,
+              "queueHead": "empty"
+            },
+            {
+              "at": 10801.5,
+              "appendEpoch": 31,
+              "currentEpoch": 32,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11841.199999928474,
+              "appendEpoch": 35,
+              "currentEpoch": 36,
+              "queueHead": "empty"
+            },
+            {
+              "at": 13374.299999952316,
+              "appendEpoch": 41,
+              "currentEpoch": 42,
+              "queueHead": "empty"
+            },
+            {
+              "at": 18541.899999976158,
+              "appendEpoch": 61,
+              "currentEpoch": 62,
+              "queueHead": "empty"
+            },
+            {
+              "at": 21119.199999928474,
+              "appendEpoch": 71,
+              "currentEpoch": 72,
+              "queueHead": "empty"
+            },
+            {
+              "at": 21372.199999928474,
+              "appendEpoch": 72,
+              "currentEpoch": 73,
+              "queueHead": "empty"
+            },
+            {
+              "at": 22407.600000023842,
+              "appendEpoch": 76,
+              "currentEpoch": 77,
+              "queueHead": "empty"
+            },
+            {
+              "at": 22936,
+              "appendEpoch": 78,
+              "currentEpoch": 79,
+              "queueHead": "empty"
+            },
+            {
+              "at": 23448.600000023842,
+              "appendEpoch": 80,
+              "currentEpoch": 81,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 311,
+          "resetsDuringAppend": 16,
+          "staleAppendCompletions": 16,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 16
+        },
+        "end": {
+          "time": 1310.104366,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromePid": "",
+        "webapkPid": "",
+        "adbForwards": "",
+        "containerState": "exited"
+      }
+    },
+    {
+      "label": "windows-release-equivalent",
+      "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+      "os": "Windows 11",
+      "browser": "Google Chrome",
+      "powerMode": "Best power efficiency",
+      "displayHz": 60,
+      "transport": "LAN direct (SSH tunnel is CDP only)",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": {
+        "CapturedAt": "2026-09-03T00:52:16.3722657+09:00",
+        "CpuLoadPercentSamples": [
+          2,
+          4,
+          3,
+          4,
+          6,
+          7,
+          6,
+          14
+        ],
+        "CpuLoadPercentMedian": 6,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 4,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 489300
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "condition": {
+        "mode": "direct",
+        "count": 40,
+        "intervalMs": 1000,
+        "cpuRate": 1,
+        "geometry": {
+          "time": 15.229105,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 790,
+            "width": 1500,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 3,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 562.6999999955297,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 514,
+          "resetsDuringAppend": 10,
+          "staleAppendCompletions": 10,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 10,
+          "events": [
+            {
+              "at": 562.6999999955297,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            },
+            {
+              "at": 8029,
+              "appendEpoch": 5,
+              "currentEpoch": 6,
+              "queueHead": "empty"
+            },
+            {
+              "at": 9101.29999999702,
+              "appendEpoch": 6,
+              "currentEpoch": 7,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11140.59999999404,
+              "appendEpoch": 8,
+              "currentEpoch": 9,
+              "queueHead": "empty"
+            },
+            {
+              "at": 20998.79999999702,
+              "appendEpoch": 17,
+              "currentEpoch": 18,
+              "queueHead": "empty"
+            },
+            {
+              "at": 23225.79999999702,
+              "appendEpoch": 19,
+              "currentEpoch": 20,
+              "queueHead": "empty"
+            },
+            {
+              "at": 28718.39999999851,
+              "appendEpoch": 24,
+              "currentEpoch": 25,
+              "queueHead": "empty"
+            },
+            {
+              "at": 30942,
+              "appendEpoch": 26,
+              "currentEpoch": 27,
+              "queueHead": "empty"
+            },
+            {
+              "at": 45291.5,
+              "appendEpoch": 39,
+              "currentEpoch": 40,
+              "queueHead": "empty"
+            },
+            {
+              "at": 46409.29999999702,
+              "appendEpoch": 40,
+              "currentEpoch": 41,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 511,
+          "resetsDuringAppend": 9,
+          "staleAppendCompletions": 9,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 9
+        },
+        "end": {
+          "time": 1492.460742,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "PagesSeen": 1,
+        "PagesPaused": 1,
+        "PagesExitedFullscreen": 1,
+        "PagesClosed": 1,
+        "CleanupErrors": [],
+        "RemainingDedicatedChromeProcesses": 0,
+        "TaskRemoved": true
+      }
+    },
+    {
+      "label": "windows-rapid-250ms",
+      "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+      "os": "Windows 11",
+      "browser": "Google Chrome",
+      "powerMode": "Best power efficiency",
+      "displayHz": 60,
+      "transport": "LAN direct (SSH tunnel is CDP only)",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "preflight": {
+        "CapturedAt": "2026-09-03T00:54:03.0113027+09:00",
+        "CpuLoadPercentSamples": [
+          10,
+          9,
+          2,
+          8,
+          0,
+          8,
+          11,
+          0
+        ],
+        "CpuLoadPercentMedian": 8,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 5,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 141364
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 10,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 31181
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 6,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 15786
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "condition": {
+        "mode": "direct",
+        "count": 100,
+        "intervalMs": 250,
+        "cpuRate": 1,
+        "geometry": {
+          "time": 15.40896,
+          "duration": 1815.3746888888888,
+          "paused": false,
+          "fullscreen": true,
+          "rect": {
+            "x": 20,
+            "y": 790,
+            "width": 1500,
+            "height": 20
+          }
+        },
+        "before": {
+          "appendStarts": 2,
+          "resetsDuringAppend": 1,
+          "staleAppendCompletions": 1,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 1,
+          "events": [
+            {
+              "at": 343.80000000447035,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "after": {
+          "appendStarts": 315,
+          "resetsDuringAppend": 19,
+          "staleAppendCompletions": 19,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 19,
+          "events": [
+            {
+              "at": 343.80000000447035,
+              "appendEpoch": 0,
+              "currentEpoch": 1,
+              "queueHead": "empty"
+            },
+            {
+              "at": 5023.30000000447,
+              "appendEpoch": 5,
+              "currentEpoch": 6,
+              "queueHead": "empty"
+            },
+            {
+              "at": 6035.5,
+              "appendEpoch": 9,
+              "currentEpoch": 10,
+              "queueHead": "empty"
+            },
+            {
+              "at": 7851.39999999851,
+              "appendEpoch": 16,
+              "currentEpoch": 17,
+              "queueHead": "empty"
+            },
+            {
+              "at": 9407.70000000298,
+              "appendEpoch": 22,
+              "currentEpoch": 23,
+              "queueHead": "empty"
+            },
+            {
+              "at": 10722.20000000298,
+              "appendEpoch": 27,
+              "currentEpoch": 28,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11251.30000000447,
+              "appendEpoch": 29,
+              "currentEpoch": 30,
+              "queueHead": "empty"
+            },
+            {
+              "at": 11764.10000000149,
+              "appendEpoch": 31,
+              "currentEpoch": 32,
+              "queueHead": "empty"
+            },
+            {
+              "at": 12022.20000000298,
+              "appendEpoch": 32,
+              "currentEpoch": 33,
+              "queueHead": "empty"
+            },
+            {
+              "at": 12280.10000000149,
+              "appendEpoch": 33,
+              "currentEpoch": 34,
+              "queueHead": "empty"
+            },
+            {
+              "at": 14145.39999999851,
+              "appendEpoch": 40,
+              "currentEpoch": 41,
+              "queueHead": "empty"
+            },
+            {
+              "at": 17528.60000000149,
+              "appendEpoch": 53,
+              "currentEpoch": 54,
+              "queueHead": "empty"
+            },
+            {
+              "at": 21172.10000000149,
+              "appendEpoch": 67,
+              "currentEpoch": 68,
+              "queueHead": "empty"
+            },
+            {
+              "at": 22722.10000000149,
+              "appendEpoch": 73,
+              "currentEpoch": 74,
+              "queueHead": "empty"
+            },
+            {
+              "at": 23759.20000000298,
+              "appendEpoch": 77,
+              "currentEpoch": 78,
+              "queueHead": "empty"
+            },
+            {
+              "at": 25851.20000000298,
+              "appendEpoch": 85,
+              "currentEpoch": 86,
+              "queueHead": "empty"
+            },
+            {
+              "at": 27151.39999999851,
+              "appendEpoch": 90,
+              "currentEpoch": 91,
+              "queueHead": "empty"
+            },
+            {
+              "at": 27409.20000000298,
+              "appendEpoch": 91,
+              "currentEpoch": 92,
+              "queueHead": "empty"
+            },
+            {
+              "at": 28702.20000000298,
+              "appendEpoch": 96,
+              "currentEpoch": 97,
+              "queueHead": "empty"
+            }
+          ]
+        },
+        "delta": {
+          "appendStarts": 313,
+          "resetsDuringAppend": 18,
+          "staleAppendCompletions": 18,
+          "initSegmentsDiscarded": 0,
+          "mediaSegmentsDiscarded": 0,
+          "emptyQueueCompletions": 18
+        },
+        "end": {
+          "time": 1491.816183,
+          "paused": false,
+          "state": "converting"
+        }
+      },
+      "cleanup": {
+        "PagesSeen": 1,
+        "PagesPaused": 1,
+        "PagesExitedFullscreen": 1,
+        "PagesClosed": 1,
+        "CleanupErrors": [],
+        "RemainingDedicatedChromeProcesses": 0,
+        "TaskRemoved": true
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "file": "galaxy-mse-frequency-normal-drag-40.json",
+      "reason": "CDP coordinate touch input did not reach DPlayer seek handling: appendStarts delta was 0 and media time advanced only by ordinary playback. It is not counted."
+    },
+    {
+      "reason": "Exploratory runs on a reused page established counter visibility and selected intervals, but are not independent runs and are not counted."
+    }
+  ],
+  "interpretation": "The first half of the race was observable: 67 resets overlapped an append and all 67 old updateend callbacks completed after the reset. In these runs the new queue was still empty at every completion, so the pre-fix queue.shift() discarded zero init or media segments. The concrete init-loss frequency was therefore 0/460 measured seek operations under these conditions; this does not disprove the deterministic reproduction test or prove zero probability in other browsers, fragment sizes, or schedules.",
+  "cleanup": "Every accepted run paused playback, exited fullscreen, closed the single test page, stopped dedicated Chrome or the Android Chrome package, removed CDP transport, and stopped the isolated KonomiTV container."
+}
