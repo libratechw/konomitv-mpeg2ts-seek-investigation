@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Separate real video-frame drops from requestVideoFrameCallback collection delay during recorded HLS 1080p60 playback.",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayModeConfigured": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "onePageDuringMeasurement": true,
+    "konomiBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "konomiDiffHash": "7751a1353cfe297f0f9ee77ce8c303e744d0d5f5cf8aa72ed452ede0fc32b808",
+    "fixture": {
+      "path": "nogizaka.ts (local SSD copy)",
+      "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+    },
+    "targetSeconds": 600,
+    "expectedRate": "60000/1001 fps",
+    "serverSession": "Exactly one encoder session for the requested quality in each run; no default-quality concurrent session.",
+    "thermal": "Thermal Status 0 during the instrumented runs; no thermal throttling observed."
+  },
+  "primaryCounterOnly": [
+    {
+      "codec": "H.264",
+      "raw": "galaxy-recorded-hls-h264-1080p60-counter-only-600s.json",
+      "collector": "counter-only-no-rvfc",
+      "collectorHash": "9f02088520763c2b4265d2c885bd8cfcb3377bbf8469c64e5a962c63bb125ecd",
+      "durationMs": 600000.3000000715,
+      "mediaTimeDelta": 599.9994740000001,
+      "totalVideoFrames": 35964,
+      "droppedVideoFrames": 2,
+      "videoDecodedBytes": 716214963,
+      "audioDecodedBytes": 18834432,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "codec": "HEVC",
+      "raw": "galaxy-recorded-hls-hevc-1080p60-counter-only-600s.json",
+      "collector": "counter-only-no-rvfc",
+      "collectorHash": "9f02088520763c2b4265d2c885bd8cfcb3377bbf8469c64e5a962c63bb125ecd",
+      "durationMs": 600000.7999999523,
+      "mediaTimeDelta": 600.00088,
+      "totalVideoFrames": 35966,
+      "droppedVideoFrames": 0,
+      "videoDecodedBytes": 259412151,
+      "audioDecodedBytes": 14601318,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  ],
+  "rvfcDiagnostic": [
+    {
+      "codec": "H.264",
+      "raw": "galaxy-recorded-hls-h264-1080p60-rvfc-600s.json",
+      "callbackFps": 59.45162703225101,
+      "presentedFrameAdvance": 35963,
+      "callbackIntervalsOver40Ms": 46,
+      "callbackIntervalMaxMs": 83.40000000002328,
+      "droppedVideoFrames": 2
+    },
+    {
+      "codec": "HEVC",
+      "raw": "galaxy-recorded-hls-hevc-1080p60-rvfc-600s.json",
+      "callbackFps": 59.55159718979854,
+      "presentedFrameAdvance": 35964,
+      "callbackIntervalsOver40Ms": 1,
+      "callbackIntervalMaxMs": 50.09999999997672,
+      "droppedVideoFrames": 1
+    }
+  ],
+  "interpretation": [
+    "H.264 accepted the expected 35964 frames over 600 seconds but Chrome dropped two frames even without per-frame collection or intermediate page evaluation.",
+    "HEVC accepted 35966 frames and dropped zero under the same counter-only conditions, so the observed H.264 drops are not explained by a general 60 Hz display or thermal limit.",
+    "The requestVideoFrameCallback count is lower than presentedFrameAdvance, so callback gaps are not one-for-one evidence of dropped video frames.",
+    "The next comparison should isolate H.264 decoder/output parameters such as profile and bitrate while holding resolution and frame rate constant."
+  ]
+}

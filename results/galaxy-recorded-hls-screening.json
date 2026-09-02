@@ -8474,5 +8474,9 @@
     "For random 1080p60 seek, buffer flush and playlist reload completed in tens of milliseconds; waiting for the first server segment response byte dominated.",
     "The target segment locations were already present in segment_map. A new sidecar seek index cannot remove the measured encoder-and-full-segment wait.",
     "The droppedVideoFrames values collected during seek recovery are not steady-state drop counts and include decoder reset/recovery behavior."
-  ]
+  ],
+  "validity": {
+    "status": "excluded",
+    "reason": "The watch page first started the default 1080p encoder before playback settings were applied and then started the requested-quality encoder. Concurrent encoder sessions confounded server load, so these absolute latency and short steady-state values are not used as current evidence."
+  }
 }

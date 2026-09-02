@@ -1,0 +1,127 @@
+{
+  "variant": "hls-hevc-1080p60-long-clean",
+  "videoId": 1,
+  "sourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "playerControllerSourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "asset": "PlayerController-Dwy3m7IJ.js",
+  "playerAssetHash": "a07356ec96d5d57eb786ea31035cf495e69dfc729000156847d05fe4c6487092",
+  "konomiBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "konomiDiffHash": "7751a1353cfe297f0f9ee77ce8c303e744d0d5f5cf8aa72ed452ede0fc32b808",
+  "serverImage": {
+    "reference": "ghcr.io/tsukumijima/konomitv:latest",
+    "id": "sha256:92a534243f9170fe0808a2e147c96c386677475652f72036438a19870d0f5f49"
+  },
+  "fixture": {
+    "path": "nogizaka.ts (local SSD copy)",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "expectedQuality": "1080p (60fps)",
+  "qualitySetting": "1080p-60fps",
+  "codecMode": "hevc",
+  "frameMode": "normal",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayModeConfigured": "60 Hz",
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "durationMs": 600000.7000000477,
+    "fullscreen": true,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false,
+    "readyState": 4,
+    "playbackRate": 1,
+    "videoWidth": 1920,
+    "videoHeight": 1080,
+    "muted": false,
+    "volume": 1,
+    "currentSrcScheme": "blob:",
+    "streamQualities": [
+      "1080p-60fps-hevc-10bit"
+    ],
+    "buffered": [
+      {
+        "start": 885.885,
+        "end": 1237.23601
+      }
+    ],
+    "qualityName": "1080p (60fps)",
+    "mediaTimeStart": 602.803054,
+    "mediaTimeEnd": 1202.804103,
+    "mediaTimeDelta": 600.001049,
+    "frameCallbacks": 35731,
+    "callbackFps": 59.55159718979854,
+    "callbackIntervals": {
+      "count": 35730,
+      "min": 16.5,
+      "median": 16.699999999982538,
+      "p95": 16.79999999998836,
+      "p99": 16.800000000046566,
+      "max": 50.09999999997672,
+      "over25": 268,
+      "over40": 1,
+      "over100": 0
+    },
+    "mediaTimeIntervals": {
+      "count": 35730,
+      "min": 16.677999999956228,
+      "median": 16.68799999993098,
+      "p95": 16.689000000042142,
+      "p99": 16.689000000042142,
+      "max": 50.0449999999546,
+      "over25": 233,
+      "over40": 1,
+      "over100": 0
+    },
+    "presentedFrameAdvance": 35964,
+    "processingDurationMs": {
+      "count": 35731,
+      "min": 6.4,
+      "median": 13.899999999999999,
+      "p95": 17.8,
+      "p99": 20,
+      "max": 28.1,
+      "over25": 12,
+      "over40": 0,
+      "over100": 0
+    },
+    "decodedBytes": {
+      "video": {
+        "start": 2984878,
+        "end": 262372023,
+        "delta": 259387145
+      },
+      "audio": {
+        "start": 143725,
+        "end": 14744042,
+        "delta": 14600317
+      }
+    },
+    "quality": {
+      "start": {
+        "total": 317,
+        "dropped": 3
+      },
+      "end": {
+        "total": 36282,
+        "dropped": 4
+      },
+      "delta": {
+        "total": 35965,
+        "dropped": 1
+      }
+    }
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

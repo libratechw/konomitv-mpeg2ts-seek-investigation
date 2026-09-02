@@ -263,31 +263,31 @@ KonomiTVは録画TSの入力位置を解決してFFmpegを起動し、MPEG-TS形
 [`VideoEncodingTask`](https://github.com/tsukumijima/KonomiTV/blob/e92fba8bb219589c8e4ada9609ed4a9d91b33c00/server/app/streams/VideoEncodingTask.py#L1180-L1240)は、予定境界へ到達した後のrandom-access frameでsegmentを確定し、その時点でfutureへ全byte列を設定する。
 乃木坂工事中fixtureでは仮想segment長が約6.006秒で、1080p60のFFmpeg出力はH.264、HEVCともGOP長180、約3秒だった。
 
-Galaxy Chrome、LAN直結、全画面で、通常モードのH.264とHEVCを8画質ずつ5秒測った。
-16/16条件で`droppedVideoFrames`増分は0、音声decode byteは増加し、media time間隔の中央値は60pで約16.688ms、30pで約33.367msだった。
-H.264とHEVCの60pはそれぞれ1回だけmedia timeが約33.367ms進んだため、この短時間確認だけで厳密なcadence gapゼロとは判定しない。
-HEVC 30pの3条件ではrVFC通知が一度66.7ms空いたが、media timeにframe分の飛びはなかったため、短いmain-thread callback遅延とencoded frame欠落を区別して長時間再測定する。
-HEVCの要求URLには`-10bit`が付いたが、ローカルFFmpegの実コマンドは`libx265 -pix_fmt yuv420p -profile:v main`であり、この測定は実際の10-bit出力を確認したものではない。
+Galaxy Chrome、LAN直結、全画面で、通常モードのH.264とHEVC 1080p60を各600秒測った。
+主条件はrVFCを登録せず、開始・終了時だけ`getVideoPlaybackQuality()`、media time、映像・音声decode byteを読む。
+認証と再生設定はwatch pageの初回実行前に投入し、各走行のサーバーログで要求品質のencoder sessionが1つだけであることを確認した。
 
-1080p60を600秒群と900秒群で交互に各10回シークした段階別中央値は次のとおりだった。
-測定起点は`video.currentTime`設定、終点は要求時刻の最初のrVFC frameである。
+| 出力 | 受理frame | `droppedVideoFrames` | media time | 音声decode |
+| --- | ---: | ---: | ---: | ---: |
+| H.264 1080p60 | 35,964 | 2 | 599.999秒 | 18,834,432 byte |
+| HEVC 1080p60 | 35,966 | 0 | 600.001秒 | 14,601,318 byte |
 
-| 段階 | H.264 | HEVC |
-| --- | ---: | ---: |
-| buffer flush完了 | 7.2ms | 6.0ms |
-| playlist取得完了 | 38.2ms | 34.7ms |
-| segment request開始 | 38.9ms | 35.9ms |
-| 最初のsegment応答byte | 1060.5ms | 3890.8ms |
-| segment応答完了 | 1167.0ms | 3942.1ms |
-| 要求時刻の最初のrVFC frame | 1340.8ms | 4201.9ms |
+H.264は60000/1001fpsの理論frame数を受理しているため、サーバー出力のcadence欠落ではなく、Chromeが受け取ったframeのうち2件をpredecodeまたは表示期限超過でdropした結果である。
+HEVCは同条件でdrop 0であり、計測中のThermal Statusも0だったため、60Hz表示や端末のthermal throttlingだけではH.264の2件を説明できない。
+次はH.264のprofileとbitrateを解像度・frame rate一定で分け、MediaCodecのcodec別decode処理を確認する。
 
-segment転送時間はH.264 102.8ms、HEVC 45.2msだった。
-サーバーログから求めたencoder開始から最初のsegment完成まではH.264 943.0ms、HEVC 3777.5msだった。
-測定対象sequenceはすべてDBの既存`segment_map`にあり、PAT/PMT取得もencoder開始後約2〜5msで終わった。
-この条件では、位置index、MSE flush、playlist取得、LAN転送より、最初の約6秒segmentを完成させてから応答する契約が支配的である。
-HLS経路の200ms以下を目指す変更はKonomiTVが所有し、短い初回segmentかprogressive/partial deliveryを、segment境界、random access、A/V同期、hls.js対応と合わせて設計する必要がある。
+毎frameのrVFC情報を保持する診断走行では、H.264が2 drop、HEVCが1 dropだった。
+ただしH.264はcallback 35,671回に対して`presentedFrames`が35,963進み、HEVCもcallback 35,731回に対して35,964進んだ。
+したがってrVFC callback間隔の空きは、映像frameのdropと1対1には対応しない。
+[主条件、診断条件、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)を保存した。
 
-測定条件、全16画質run、各seekのeventとresource timingは[録画HLSスクリーニング結果](results/galaxy-recorded-hls-screening.json)に保存した。
+以前の8画質×2codecの5秒測定とHLSシーク測定は、watch pageを空の設定で一度起動してから要求画質へ切り替えていた。
+初期既定の1080pと要求画質のencoder sessionが並行してサーバー負荷を混ぜたため、絶対値として採用しない。
+測定器は設定を初回実行前に投入し、期待するcollector種別とhash、単一encoder sessionを照合するよう修正した。
+他の14画質と既定HLSシークの絶対値はこの固定条件で再測定する。
+
+コード上は、`VideoStream.getSegment()`が対象segmentの`encoded_segment_ts_future`完了までHTTP応答を返さず、約6秒の仮想segmentをrandom-access frameで確定してから全byte列を渡す。
+HLSシークの支配候補はこのsegment完成待ちだが、修正後の単一encoder条件で段階別絶対値を取り直すまで効果量は確定しない。
 
 ## HTTP Range とファイル I/O
 

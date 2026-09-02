@@ -40,23 +40,21 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 
 ### サーバーエンコードHLS
 
-最新KonomiTVの録画HLSをGalaxy Chrome、LAN直結、全画面で短時間確認しました。
-H.264とHEVCの各8画質、計16条件は、5秒間の`droppedVideoFrames`増分がすべて0で、音声のdecodeも継続しました。
-60pは両codecでmedia timeが1回だけ2 frame分進み、HEVC 30pの3画質ではmedia timeを飛ばさずrVFC通知だけが1回遅れたため、長時間試験で区別します。
-これは画質ごとの経路確認であり、長時間のコマ落ちゼロを示す結果ではありません。
+最新KonomiTVの録画HLS 1080p60を、Galaxy Chrome、LAN直結、全画面で10分測りました。
+毎frameの計測を外した主条件では、H.264は理論値どおり35,964 frameを受理しましたが2 frameをdropし、HEVCは35,966 frameを受理してdrop 0でした。
+両方ともmedia timeは約600秒進み、音声のdecodeも継続しました。
 
-1080p60を各10回シークした結果は次のとおりです。
-HEVCのURLは`-10bit`でしたが、ローカルFFmpegの実出力は8-bit Mainでした。
+| 出力 | 受理frame | `droppedVideoFrames` | media time | 判定 |
+| --- | ---: | ---: | ---: | --- |
+| H.264 1080p60 | 35,964 | 2 | 599.999秒 | コマ落ち0は未達 |
+| HEVC 1080p60 | 35,966 | 0 | 600.001秒 | 今回の10分走行は達成 |
 
-| 出力 | 表示復帰時間 | 最初のsegment応答byte | segment転送 | encoder開始からsegment完成 |
-| --- | ---: | ---: | ---: | ---: |
-| H.264 1080p60 | 1340.8ms | 1060.5ms | 102.8ms | 943.0ms |
-| HEVC 1080p60 | 4201.9ms | 3890.8ms | 45.2ms | 3777.5ms |
+rVFC診断版ではH.264が2 drop、HEVCが1 dropでしたが、callback数は`presentedFrames`増分より少なく、callback間隔の空きと映像dropは1対1ではありません。
+主判定には、開始・終了時だけcounterを読む低負荷collectorを使っています。
+詳しい条件と生値は[1080p60長時間比較](results/galaxy-recorded-hls-1080p60-long-comparison.json)に保存しています。
 
-値は中央値です。
-buffer flushは6〜7ms、playlist取得は35〜38msで、測定地点は既存`segment_map`から解決できました。
-支配的な待ちは、サーバーが約6秒のHLS segmentをrandom-access frameまでエンコードし終え、応答を開始するまでです。
-詳しい段階別の値と全runは[録画HLSスクリーニング結果](results/galaxy-recorded-hls-screening.json)に保存しています。
+他の14画質とHLSシークは、再生設定をwatch pageの初回実行前に投入するよう測定器を直した条件で再測定が必要です。
+修正前の測定は、初期既定の1080pと要求画質のencoder sessionが並行したため、現在の絶対値には使いません。
 
 ## PR候補の優先順位
 

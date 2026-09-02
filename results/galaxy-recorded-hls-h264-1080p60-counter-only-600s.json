@@ -1,0 +1,85 @@
+{
+  "variant": "hls-h264-1080p60-counter-only-v2",
+  "videoId": 1,
+  "sourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "playerControllerSourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "collector": "collect-video-element-counter-block.mjs",
+  "collectorHash": "9f02088520763c2b4265d2c885bd8cfcb3377bbf8469c64e5a962c63bb125ecd",
+  "asset": "PlayerController-Dwy3m7IJ.js",
+  "playerAssetHash": "a07356ec96d5d57eb786ea31035cf495e69dfc729000156847d05fe4c6487092",
+  "konomiBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "konomiDiffHash": "7751a1353cfe297f0f9ee77ce8c303e744d0d5f5cf8aa72ed452ede0fc32b808",
+  "serverImage": {
+    "reference": "ghcr.io/tsukumijima/konomitv:latest",
+    "id": "sha256:92a534243f9170fe0808a2e147c96c386677475652f72036438a19870d0f5f49"
+  },
+  "fixture": {
+    "path": "nogizaka.ts (local SSD copy)",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "expectedQuality": "1080p (60fps)",
+  "qualitySetting": "1080p-60fps",
+  "codecMode": "h264",
+  "frameMode": "normal",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayModeConfigured": "60 Hz",
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "collector": "counter-only-no-rvfc",
+    "durationMs": 600000.3000000715,
+    "fullscreen": true,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false,
+    "readyState": 4,
+    "playbackRate": 1,
+    "videoWidth": 1920,
+    "videoHeight": 1080,
+    "streamQualities": [
+      "1080p-60fps"
+    ],
+    "qualityName": "1080p (60fps)",
+    "mediaTimeStart": 608.599059,
+    "mediaTimeEnd": 1208.598533,
+    "mediaTimeDelta": 599.9994740000001,
+    "decodedBytes": {
+      "video": {
+        "start": 17157068,
+        "end": 733372031,
+        "delta": 716214963
+      },
+      "audio": {
+        "start": 372363,
+        "end": 19206795,
+        "delta": 18834432
+      }
+    },
+    "quality": {
+      "start": {
+        "total": 674,
+        "dropped": 4
+      },
+      "end": {
+        "total": 36638,
+        "dropped": 6
+      },
+      "delta": {
+        "total": 35964,
+        "dropped": 2
+      }
+    }
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}
