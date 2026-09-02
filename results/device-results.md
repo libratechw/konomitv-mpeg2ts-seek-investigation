@@ -14,14 +14,15 @@ playerとYADIFの`dist`を再生成してKonomiTVをbuildし直し、`PlayerCont
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `tsukumijima/main` `52a3db5` | `video.currentTime`設定直前 | 40 | 287.1 ms | 330.4 ms | 349.1 ms | 410.2 ms | 14/40 |
 | 正式候補 + timing | `seek-requested` | 40 | 159.1 ms | 194.0 ms | 212.4 ms | 229.0 ms | 40/40 |
-| 公開integration製品コード `e417d12` | `video.currentTime`設定直前 | 40 | 145.8 ms | 211.0 ms | 213.4 ms | 232.5 ms | 40/40 |
+| 旧公開integration製品コード `e417d12` | `video.currentTime`設定直前 | 40 | 145.8 ms | 211.0 ms | 213.4 ms | 232.5 ms | 40/40 |
+| 現在の公開integration、presentation policyなし | `video.currentTime`設定直前 | 40 | 159.7 ms | 181.6 ms | 193.6 ms | 246.8 ms | 40/40 |
 
 初画は、目的時刻のframeをYADIF canvasへ描画し、その直後の`seeked`処理でもvisibleのまま残る最初の描画とした。
 各ブロックの最初に600秒と900秒へwarm-up seekし、測定は600〜609秒と900〜909秒を交互に行った。
 正式候補40回の追加probeは0件で、再生中に確認した安全位置を再利用した結果である。
 coldな未知位置のseek性能を表す値ではない。
 
-同じ起点とinstrumentationで比較できるbaselineと公開integrationでは、中央値を141.2ms（49.2%）、p95を135.8ms（38.9%）、最大を177.7ms（43.3%）短縮し、250ms以内は14/40から40/40になった。
+同じ起点で比較できるbaselineと現在の公開integrationでは、中央値を127.4ms（44.4%）、p95を155.5ms（44.5%）、最大を163.4ms（39.8%）短縮し、250ms以内は14/40から40/40になった。現在のintegrationの40回は描画を直接関連付ける新しいcollectorで取り直したため、旧integrationとの差を個別修正の効果量としては扱わない。
 
 timing版の各走行内で隣接markの差を取った結果は次のとおりである。
 絶対時刻の中央値同士を引いていない。
@@ -74,15 +75,17 @@ Windows Ryzen 7 4700Uは全走行で電源モードが「最適な電力効率�
 | Windows Ryzen 7 4700U | integration | 59.354 | 127 | 8 | 66 | 42 |
 | Windows Ryzen 7 4700U | 1 field + 遅延時catch-up | **59.783** | **43** | 9.5 | **15.5** | 42 |
 
-候補は両端末でcanvas FPS、25ms超間隔、schedulerの`late`を反復して改善した。
-GalaxyのrAFは全走行で25ms超0回だったため、改善はdisplay callback自体の増加ではなく、同じrAF列で表示可能なfieldを誤って捨てない効果である。
-40ms超間隔は一貫して減らず、Chromeの`droppedVideoFrames`も端末内で同数だったため、この2指標の残差はpresentation policyとは別原因である。OriginalではvideoがYADIFの入力textureで、最終表示はcanvasなので、`droppedVideoFrames`をそのまま可視コマ落ち数とは扱わない。video要素単体の対照結果を次節に示す。
+120秒では候補が両端末のcanvas FPS、25ms超間隔、schedulerの`late`を反復して改善した。
+しかし後のGalaxy 600秒A/Bでは、候補ありがrAF 56.662回/秒、入力callback 29.070回/秒、`missed` 541へ徐々に悪化し、候補なしはrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0を維持した。
+短窓の改善より長時間退行を優先し、このpresentation policyはPR候補とintegrationから外した。
 
-候補込みintegrationのGalaxy 40 seekは中央値145.8ms、p95 213.4ms、最大232.5msで、40/40が250ms以内だった。
+両版の`droppedVideoFrames`増分は198で同じだったため、このcounterは長時間の最終canvas劣化を区別しない。OriginalではvideoがYADIFの入力textureで、最終表示はcanvasなので、`droppedVideoFrames`をそのまま可視コマ落ち数とは扱わない。video要素単体の対照結果を次節に示す。
+
+policyなしintegrationのGalaxy 40 seekは中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以内だった。
 元の`tsukumijima/main`を同じ120秒条件で測るとcanvasは0 / 54.191fps、`late`は7076 / 686増えた一方、video media timeは両走行とも120秒進んだ。
 このため元状態の定常FPS低下はdecode停止ではなく、YADIF presentation schedulerが通常fieldを退避することが主要因である。
 
-生値と平均は[Galaxy・Windows二段階presentation集計](yadif-two-stage-presentation-galaxy-windows-summary.json)に保存した。
+120秒の生値と平均は[Galaxy・Windows二段階presentation集計](yadif-two-stage-presentation-galaxy-windows-summary.json)、採用判断を変えた600秒結果は[presentation policy長時間A/B](galaxy-present-one-field-long-run-ab.json)に保存した。
 
 ## Chrome video counterと最終canvas表示の分離
 

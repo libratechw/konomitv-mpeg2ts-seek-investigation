@@ -25,8 +25,8 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 branch固有READMEには、全修正適用前後の比較と、各修正branchへのリンク、目的、内容、効果、レビューコスト、保守コストを掲載しています。
 overflow時刻圧縮をmergeする前の製品コード`e417d12`では、`tsukumijima/main` `52a3db5`との同条件比較で、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→145.8msとなり、250ms以内が14/40→40/40になりました。
 
-現在のintegrationをGalaxyで測ると、120秒定常再生は59.933fpsで、40ms超間隔、YADIFの`late`、`missed`、queue全resetはいずれも0でした。
-`video.currentTime`起点の表示復帰時間は40回の中央値160.5ms、p95 190.6ms、最大228.8msで、40/40が250ms以下でした。
+現在のintegrationをGalaxyで測ると、600秒定常再生はrAF 59.998回/秒、入力video callback 29.970回/秒で、YADIFの`missed`とqueue全resetはいずれも0でした。
+`video.currentTime`起点の表示復帰時間は40回の中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以下でした。
 
 同じintegrationを電源モード「最適な電力効率」のWindows Chromeで測ると、120秒定常再生は59.719fps、40ms超8回、queue全reset 0でした。
 `video.currentTime`起点の表示復帰時間は40回の中央値252.7msで、20/40が250msを超えました。
@@ -61,17 +61,16 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 
 | 順位 | branch | 提出先 | 修正内容 | 効果 | 重さ |
 | ---: | --- | --- | --- | --- | --- |
-| 7 | [`fix/present-one-field-per-refresh`](https://github.com/libratechw/mpeg2toh264/tree/fix/present-one-field-per-refresh) source `fb2e6e4` | tsukumijima | 通常はFIFO順に1 fieldを表示し、2 refresh超の遅れだけ追いつく | Galaxy 120秒 59.791→59.932fps、`late` 9.5→0 | **中**。YADIF 1関数のpresentation policy |
-| 8 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) `f8ab9c7` | otya128 | SourceBuffer操作にseek世代を対応付け、旧`updateend`を新queueへ適用しない | 競合の再現試験が成功。速度差はなく、実利用のstall削減量は未立証 | **中**。MSE状態管理と回帰試験 |
+| 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) `f8ab9c7` | otya128 | SourceBuffer操作にseek世代を対応付け、旧`updateend`を新queueへ適用しない | 競合の再現試験が成功。速度差はなく、実利用の発生頻度を計測中 | **中**。MSE状態管理と回帰試験 |
 
-tsukumijimaフォーク向けの順位4から7は、source と生成済み`dist`を別コミットにしています。
-dist側のcommitは順に `27b327e`、`ac2a2a9`、`f3ba99d`、`21cc3c3` です。
+tsukumijimaフォーク向けの順位4から6は、source と生成済み`dist`を別コミットにしています。
+dist側のcommitは順に `27b327e`、`ac2a2a9`、`f3ba99d` です。
 
 ### 推奨するマージの順序
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
-順位4はqueue policyの土台で、順位5と順位7はその上の独立した兄弟PRです。
-順位1、6、8は他と修正箇所が重ならず、いつでも並行して提出できます。
+順位4はqueue policyの土台で、順位5はその子PRです。
+順位1、6、7は他と修正箇所が重ならず、いつでも並行して提出できます。
 
 tsukumijimaフォーク固有のYADIF変更は、otya128向けの変更へ混ぜません。
 提出先ごとに整理した図は[integration branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
@@ -96,8 +95,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - 順位4 [`26484fd`](https://github.com/libratechw/mpeg2toh264/commit/26484fd)：YADIFのqueue容量不足と時刻同期破綻を分ける修正は、seek後の表示停止を7/90から0/90へ減らしました。容量不足では必要数だけFIFO破棄し、表示不能な時刻列だけqueue全resetします。
 - 順位5 [`7ef6696`](https://github.com/libratechw/mpeg2toh264/commit/7ef6696)：FIFO破棄した時間だけ残りのdeadlineを詰める修正は、Galaxyの負荷注入でFIFO破棄を平均218.0→0.67 fieldへ減らしました。
 - 順位6 [`2d072f3`](https://github.com/libratechw/mpeg2toh264/commit/2d072f3)：seeked直前に描画済みの目的frameを保持する修正は、Linuxで起きた約149msの待ち直しを除きました。Galaxyでは同じ競合が起きず、退行がないことを確認しました。
-- 順位7 [`fb2e6e4`](https://github.com/libratechw/mpeg2toh264/commit/fb2e6e4)：通常は1 rAFにつき1 fieldを表示する修正は、Galaxyの120秒走行を代表値で59.791→59.932fpsへ改善しました。実遅延が2 refreshを超えた場合だけ追いつきます。
-- 順位8 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。通常シークの短縮と実利用でのstall削減量は確認できていません。
+- 順位7 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。通常シークの短縮はなく、実利用で競合が起きる頻度を計測中です。
 
 ## 試して採らなかった案
 
@@ -108,6 +106,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - seek leadを1.0秒から0.5秒へ固定変更する案は表示復帰時間を短縮しましたが、5地点中2地点で要求時刻を越えたため採用しません。
 - PAT/PMTを含むRAPを毎seekで4〜8MiB先読みする案は、追加Rangeの費用を回収できず遅くなりました。再生中の学習やsidecarは、未知のpre-target RAPを取り逃す素材を再現できた場合に再評価します。
 - YADIFへ1 frame分の固定reserveを置く案は、短時間のカクつきを隠しましたが、600秒で最大11.15秒の停止を生じました。queue容量を増やす案もfuture leadを増やすため採用しません。
+- 通常は1 rAFにつき1 fieldだけ表示する案は120秒では59.791→59.932fpsへ改善しましたが、600秒ではrAF 56.662回/秒、`missed` 541まで徐々に悪化しました。同じintegrationからこの案だけを外すとrAF 59.998回/秒、`missed` 0だったため採用しません。
 - 録画TSの`FileResponse` body chunkを増やす案は、Galaxyで小さな差が出ましたがsizeに対して単調でなく、Windowsの対応付き比較も−2.4〜+1.7msで中立だったため採用しません。
 
 ## 測定を読むときの前提
@@ -133,7 +132,13 @@ canvasの40ms超間隔、YADIFの`late`、`degraded`、`discontinuities`、queue
 同じbuildのGalaxy全画面40回では、`video.currentTime`起点の表示復帰時間が中央値157.2ms、p95 187.1ms、最大197.3msで、40/40が250ms以下でした。
 シーク地点は「現在の到達点」と同じ180秒と480秒です。
 
-詳しい条件と生値は[600秒走行](results/galaxy-overflow-compression-clean-600s-summary.json)と[40回シーク](results/galaxy-overflow-compression-visible-seek-40.json)に保存しています。
+現在のintegrationでは、1 rAFにつき1 fieldだけ表示する案を含む版と、その案だけを外した版を同じ軽量collectorで600秒比較しました。
+含む版は3分後から徐々に低下し、全体rAF 56.662回/秒、入力callback 29.070回/秒、YADIFの`missed` 541となりました。
+
+外した版はrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0を維持したため、この案をintegrationとPR候補から外しました。
+
+外した版の40回seekは中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以下でした。
+詳しい条件と生値は[overflow時刻圧縮の600秒走行](results/galaxy-overflow-compression-clean-600s-summary.json)、[presentation policyの600秒A/B](results/galaxy-present-one-field-long-run-ab.json)、[新integrationの40回シーク](results/galaxy-integration-without-present-seek-visible-40.json)に保存しています。
 
 ## 詳細と公開範囲
 

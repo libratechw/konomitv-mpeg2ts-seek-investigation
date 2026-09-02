@@ -178,16 +178,15 @@ PTSとrestart位置を独立したmark列へ分け、値を持つPESだけが対
 
 正式branch群を最新KonomiTVへ組み込み、Galaxy Chrome、LAN直結、body全画面、右パネルなし、単一タブで取り直した。
 600秒と900秒をwarm-upした後の40 seekは追加probe 0件で、`seek-requested`から`seeked`後も残る可視canvas初画まで中央値159.1ms、p95 212.4ms、最大229.0msとなり、40/40が250ms以内だった。
-二段階YADIF候補まで含む公開integration製品コードも、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値145.8ms、p95 213.4ms、最大232.5msとなり、40/40が250ms以内だった。
-同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻すと、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。integration全体では中央値141.2ms（49.2%）、p95 135.8ms（38.9%）を短縮した。
+長時間退行したYADIF presentation policyを除いた公開integration製品コードも、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値159.7ms、p95 193.6ms、最大246.8msとなり、40/40が250ms以内だった。
+同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻した基準は、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。現在のintegrationは基準から中央値127.4ms（44.4%）、p95 155.5ms（44.5%）を短縮した。
 正式候補timing版と公開integrationは計測起点とinstrumentationが異なるため、その差をMSE修正単独の効果とは扱わない。
 正式候補の区間別中央値はRange headers待ち31.8ms、first byteからpicture jobs 24.6ms、最初のworker出力からstream先頭AU 29.7ms、append完了から`canplay`27.6msだった。
 詳細と生値は[Galaxy正式候補とintegration](results/device-results.md#galaxyの正式候補と公開integration)を参照する。
 
-PTSとrestart位置の独立管理、依存する再利用branch、fork固有のdiscontinuity reset接続まで祖先順にmergeしてintegrationを再構築した。
-Galaxy Chrome、LAN直結、全画面、右パネルなし、単一タブ、60Hzで、既知の破損packetより後の120秒を測るとcanvasは59.933fps、描画間隔p95 21.6ms、p99 23.1ms、最大37.9ms、40ms超0回だった。YADIFの`late`、`missed`、全resetは増えなかった。[120秒の生値と後片付け結果](results/galaxy-integration-v2-steady-120s.json)を保存した。
-同じbuildで180〜199秒と480〜499秒を交互に40回seekすると、持続表示される目的canvas初画まで中央値160.5ms、p90 180.9ms、p95 190.6ms、最大228.8msで、40/40が250ms以下だった。目的frame時刻は要求に対して-26.0〜+16.3msで、19/40は`seeking`中に到着したframeを保持した。[40回の生値と後片付け結果](results/galaxy-integration-v2-seek-visible-40.json)を保存した。
-直前の正式候補版は中央値157.2ms、p95 186.8ms、最大197.3msであり、独立mark修正による速度または表示FPSの退行は確認されなかった。
+PTSとrestart位置の独立管理、依存する再利用branch、fork固有のdiscontinuity reset接続まで祖先順にmergeし、長時間退行したpresentation policyを除いてintegrationを再構築した。
+Galaxy Chrome、LAN直結、全画面、右パネルなし、単一タブ、60Hzで、既知の破損packetより後を600秒測るとrAFは59.998回/秒、入力video callbackは29.970回/秒、YADIFの`missed`と全resetは0だった。runtimeのplayerとYADIF JavaScriptは再構築したbranchの生成物とバイト一致する。[600秒A/Bと後片付け結果](results/galaxy-present-one-field-long-run-ab.json)を保存した。
+同じbuildで180〜199秒と480〜499秒を交互に40回seekすると、持続表示される目的canvas初画まで中央値159.7ms、p90 181.6ms、p95 193.6ms、最大246.8msで、40/40が250ms以下だった。19/40は`seeking`中に到着したframeを保持した。[40回の生値と後片付け結果](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
 
 ### Linux Chromeの同一ホスト対照
 
@@ -203,7 +202,7 @@ EVO-X2、Ubuntu 26.04.1、Chrome 152.0.7977.64、59.96Hzで、同じKonomiTVとT
 Lenovo IdeaPad Flex 5 14ARE05、Windows 11、AMD Radeon Graphics、Chrome 152.0.7977.65、60Hz、電源モード「最適な電力効率」で、同じKonomiTV、TS、LAN、全画面、右パネルなし、専用Chrome profileを使った。
 120秒の定常再生はcanvas 59.719fps、40ms超8回、最大70.6msで、rAF自体にも40ms超3回、最大50.1msがあった。
 YADIFは`late`が17、`missed`が2増え、全resetは0だった。
-同じWindowsの旧integration 2走行は59.233 / 59.474fps、`late`増分80 / 52、1-field候補2走行は59.775 / 59.791fps、`late`増分16 / 15であるため、現在のintegrationは1-field候補の改善を維持しているが、この低電力端末では通常のrAF停止と少数のfield破棄が残る。[120秒の生値](results/windows-integration-v2-steady-120s.json)を保存した。
+同じWindowsの旧integration 2走行は59.233 / 59.474fps、`late`増分80 / 52、1-field候補2走行は59.775 / 59.791fps、`late`増分16 / 15だった。この120秒比較では1-field policyが有利だったが、後述のGalaxy 600秒A/Bで長時間退行を確認したため、現在のintegrationからは外した。[120秒の生値](results/windows-integration-v2-steady-120s.json)を保存した。
 
 180〜199秒と480〜499秒を交互に測った40 seekは、持続表示される目的canvas初画まで中央値252.7ms、p95 324.7ms、最大393.8msで、20/40が250msを超えた。
 180秒群は中央値295.3msで20/20が250ms超、480秒群は中央値213.8msで20/20が250ms以内だった。
@@ -537,7 +536,11 @@ presentation policyも同じbuildで分離した。
 この短窓では差がなかったが、最新KonomiTVを通した120秒反復では自然負荷による通常fieldの誤破棄を再現した。
 2走行平均でGalaxyは59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0、Windowsは59.354→59.783fps、25ms超127→43回、`late` 66→15.5となった。
 Windowsは全走行で電源モードが「最適な電力効率」だったことを後から確認した。この設定は変更せず、値は低性能・電力制約下の同一条件A/Bとして扱う。Galaxyとの絶対性能比較や通常設定のWindowsを代表する値には使わない。
-全8走行でmedia timeは約120秒進み、全reset 0だったため、ライブ遅延を蓄積せず通常fieldの誤破棄を減らす独立候補とする。40ms超間隔と`droppedVideoFrames`は改善しておらず、presentation policyとは別原因として残る。
+全8走行でmedia timeは約120秒進み、全reset 0だったため、この時点では通常fieldの誤破棄を減らす独立候補とした。
+
+その後、最新integrationからこのpolicyだけを外した対照を作り、Galaxy、60Hz、全画面、LAN直結、同じ188秒以降を軽量collectorで各600秒測った。policyありは3分後からrAFと入力callbackが徐々に低下し、全体rAF 56.662回/秒、入力callback 29.070回/秒、YADIFの`missed` 541、最大rAF間隔116.7msとなった。policyなしはrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0、最大rAF間隔33.3msを維持した。固定済みcallback traceだけをoffline replayするとpolicyありは163 field多く表示できるため、局所的なcatch-up判断自体は有利だったが、実再生では追加処理とcallback低下のfeedbackがその利点を上回った。両版の`droppedVideoFrames`増分は198で同じで、このcounterも長時間劣化を区別しなかった。[600秒A/B、分ごとの値、raw hash](results/galaxy-present-one-field-long-run-ab.json)を保存した。
+
+policyなし版の40 seekは表示復帰時間の中央値159.7ms、p95 193.6ms、最大246.8msで40/40が250ms以下だった。シーク目標を維持したまま長時間退行だけを除けるため、`fix/present-one-field-per-refresh`はPR候補とintegrationから外す。[40回の生値](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
 
 同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。
 rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callbackに1 frame分の飛びはなかった。
@@ -565,7 +568,7 @@ queueが空のときの最初のfield deadlineを1入力frame分だけ後ろへ�
 
 WindowsではFIFO破棄fieldが平均21.67→0.67、40ms超間隔が平均0.33→0、解除後2秒の最大描画間隔が平均25.5→18.3msとなった。Galaxyでは変更前の2/3走行で破棄が解除後も連鎖し、破棄field平均218.0、12秒窓41.720fps、全reset合計1回だった。変更後は3/3走行とも直ちに約60fpsへ戻り、破棄field平均0.67、12秒窓54.997fps、全reset 0回だった。負荷注入中に失う約60 field自体を隠す変更ではなく、容量破棄後に残った時刻列から、すでに失ったpresentation momentだけを除く正しさ修正である。[全12走行、phase別統計、hash、後片付け結果](results/yadif-overflow-deadline-compression-ab.json)を保存した。
 
-正式候補は`fix/separate-yadif-queue-recovery`を親とする`fix/compress-yadif-overflow-schedule`で、source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。`fix/present-one-field-per-refresh`とは同じ親から分かれる兄弟PR単位であり、presentation policyを含まない。
+正式候補は`fix/separate-yadif-queue-recovery`を親とする`fix/compress-yadif-overflow-schedule`で、source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。長時間退行したpresentation policyを含まず、容量破棄後の時刻整合性だけを直す。
 
 通常負荷の退行確認では、乃木坂工事中fixtureの既知の破損video packetより後にある187.845〜787.846秒を、Galaxy Chrome、LAN直結、全画面、単一タブ、60Hzで600秒測った。入力video callbackは29.972fps、media time差は600.001秒で、全17,982個のmedia time差が約33.367msだった。地デジのインターレース映像1 frameごとの入力callbackなので約30Hzは正常であり、double-rate YADIF canvasは59.942fpsだった。canvas描画間隔はp95 21.8ms、p99 23.2ms、最大39.7msで40ms超0回、WebGL drawは最大0.8msだった。YADIFの`late`、`degraded`、`discontinuities`、全reset、overflow破棄はすべて0だった。[正常負荷600秒の条件、統計、証拠hash、後片付け結果](results/galaxy-overflow-compression-clean-600s-summary.json)を保存した。
 
@@ -885,7 +888,6 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−71.3ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
 | P0 | 再生中に確認したPAT/PMT安全位置を後続seekへ再利用する | 診断A/BでGalaxyのprobe 40→0、canvas中央値−65.0ms、p95−57.9ms。正式branch組み込み版も中央値159.1ms、p95 212.4ms、最大229.0msで40/40を250ms以下に維持 | 中 | ○ | mpeg2toh264 core `787c7ba` + player `ac4f879`。位置報告と利用policyを別PRにする |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
-| P1 | 通常は1 rAFにつき1 field、実遅延時だけcatch-upする | 120秒2走行平均でGalaxy 59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0。Windows 59.354→59.783fps、25ms超127→43回、`late` 66→15.5。全reset 0 | 中 | ◎ | YADIF presentation policy。公開source `fb2e6e4`、dist `21cc3c3`。queue整合性修正の子branch |
 | P2 | 初回fieldのleadを2 fieldから1 fieldへ戻す | 短い3走行では59.64〜59.84→59.98〜60.00fpsだが、reset条件が混在 | 小 | △ | `d4ccb98`の効果を長窓A/Bで再評価。新規修正とは扱わない |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
@@ -1010,10 +1012,9 @@ I-pictureの途中byteだけを返さない。
 1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。`f7b89eb`のstall防止を90 seekで維持し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
 2. **YADIF: 容量破棄後のpresentation deadline圧縮**。公開`fix/compress-yadif-overflow-schedule`で、捨てたfieldの`duration`合計だけ残りの時刻列を詰め、解除後のFIFO破棄連鎖を防ぐ。source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。queue容量回復を親branchとし、presentation policyとは独立したPR単位である。
 3. **YADIF: seeked直前の目的frame保持**。公開`fix/preserve-destination-frame-on-seek`で、source `2d072f3`と生成済みdist `f3ba99d`を別コミットにした。queue回復やpresentation policyとは独立した`seeked`競合のPR単位とする。
-4. **YADIF: presentation policy**。公開`fix/present-one-field-per-refresh`で、通常はFIFO順に1 fieldを表示し、最古fieldが2 refreshを超えて遅れた場合だけ追いつく。GalaxyとWindowsの120秒反復で自然負荷の誤破棄を減らし、source `fb2e6e4`と生成済みdist `21cc3c3`を別コミットにした。queue容量回復を親branchとする独立PR単位である。
-5. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
-6. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
-7. 現在公開済みのupstream向け候補ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchは取り込まない。
+4. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
+5. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
+6. 現在公開済みのupstream向け候補ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchとpresentation policyは取り込まない。
 
 ### `KonomiTV`へ出すもの
 
@@ -1030,7 +1031,7 @@ I-pictureの途中byteだけを返さない。
 設計レビューの8項目では、MSE世代修正はすべてYesとする。
 YADIF後継`26484fd`はstall原因のownerであるqueue時刻へ届き、新しいscheduler層を足さず、同じqueue ownerで容量確保を最小FIFO破棄、表示不能な未来時刻列を全resetとして分ける。前身`f7b89eb`で不足していたinteraction reductionを満たす。
 overflow時刻圧縮`7ef6696`も同じ`#prepareQueue()`で、破棄済みfieldと残存deadlineの不整合だけを直す。新しい状態、閾値、fallbackを増やさず、捨てたdurationという既存値から時刻列を修復するため、原因に対して局所的である。
-presentation policyは容量回復とは別の判断として、独立branchと実機A/Bを維持する。
+presentation policyは容量回復とは別の判断として独立A/Bにしたが、600秒で長時間退行したため採用しない。
 YADIF opacity実験は描画ownerに置いてGalaxyで比較したが、cleanな変更前対照が約60fpsだったため採用しない。
 MSE修正は`MseSink`に置き、修正前に失敗する外部動作の回帰試験とGalaxyの通常seekを確認した。
 KonomiTV側のretryや設定fallbackで原因を隠していない。
@@ -1038,11 +1039,11 @@ KonomiTV側のretryや設定fallbackで原因を隠していない。
 追加の設計レビューでは、PTSなし・restart位置ありのmarkが先行PTSを隠す指摘を再現できたため修正した。
 一方、queueの将来lead上限と表示時の過去lagを共通`#tolerance()`へまとめる案は、異なるpolicyを計算式だけで結合するため採用しない。
 production参照がないことだけを根拠に公開`Mpeg2GopStream::push` APIを削る案も、外部利用者が失う機能を確認できないため採用しない。
-overflow時刻圧縮は`#prepareQueue()`で容量破棄後のscheduleを修復し、1 field表示とcatch-upは`#present()`で通常表示を選ぶため、同じ追いつき機構として片方を削除しない。
+overflow時刻圧縮は`#prepareQueue()`で容量破棄後のscheduleだけを修復する。`#present()`へ追加した1 field表示とcatch-upは600秒で長時間退行したため削除し、異なるownerの判断を残さない。
 scheduler policyを単体試験するため、queue操作を内部moduleへ抽出する案は採用しない。
 低電力Windowsの同一区間・全画面120秒で、現在のintegrationへ戻したcontrolは59.724fps、40ms超11回、`late` 19だったのに対し、結果objectを毎refreshで返す抽出版3走行は59.458〜59.599fps、40ms超14〜18回、`late` 30〜46だった。
 結果objectをなくした診断版2走行は59.641 / 59.650fps、40ms超13 / 17回、`late` 29 / 26まで回復したが、controlへは戻らなかった。
 Linuxでは59.892fps、40回seekの中央値131.1ms、p95 181.7msで退行を示さなかったため、低負荷環境だけでこのhot pathの変更を合格にしない。
 CI試験不足は残るが、productionのrefresh pathへ試験用の関数境界や一時objectを加えず、実ブラウザーで外部挙動を固定できる試験だけを候補とする。
-公開`integration/current-useful-fixes`は変更しておらず、この未公開診断版の値を公開integrationの現行値として扱わない。
+このscheduler抽出診断版は公開`integration/current-useful-fixes`へ含めず、診断版の値を公開integrationの現行値として扱わない。
 生値は[Linux定常](results/linux-scheduler-extraction-steady-120s.json)、[Linux seek](results/linux-scheduler-extraction-seek-visible-40.json)、[Windows control](results/windows-integration-v2-current-control-steady-120s.json)、[Windows抽出版1](results/windows-scheduler-extraction-steady-120s-r1.json)、[2](results/windows-scheduler-extraction-steady-120s-r2.json)、[3](results/windows-scheduler-extraction-steady-120s-r3.json)、[Windows seek](results/windows-scheduler-extraction-seek-visible-40.json)、[no-allocation版1](results/windows-scheduler-noalloc-steady-120s-r1.json)、[2](results/windows-scheduler-noalloc-steady-120s-r2.json)に保存した。
