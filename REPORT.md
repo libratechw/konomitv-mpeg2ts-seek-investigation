@@ -189,6 +189,27 @@ Galaxy Chrome、LAN直結、全画面、右パネルなし、単一タブ、60Hz
 同じbuildで180〜199秒と480〜499秒を交互に40回seekすると、持続表示される目的canvas初画まで中央値160.5ms、p90 180.9ms、p95 190.6ms、最大228.8msで、40/40が250ms以下だった。目的frame時刻は要求に対して-26.0〜+16.3msで、19/40は`seeking`中に到着したframeを保持した。[40回の生値と後片付け結果](results/galaxy-integration-v2-seek-visible-40.json)を保存した。
 直前の正式候補版は中央値157.2ms、p95 186.8ms、最大197.3msであり、独立mark修正による速度または表示FPSの退行は確認されなかった。
 
+### Windows Chromeの低電力条件
+
+Lenovo IdeaPad Flex 5 14ARE05、Windows 11、AMD Radeon Graphics、Chrome 152.0.7977.65、60Hz、電源モード「最適な電力効率」で、同じKonomiTV、TS、LAN、全画面、右パネルなし、専用Chrome profileを使った。
+120秒の定常再生はcanvas 59.719fps、40ms超8回、最大70.6msで、rAF自体にも40ms超3回、最大50.1msがあった。
+YADIFは`late`が17、`missed`が2増え、全resetは0だった。
+同じWindowsの旧integration 2走行は59.233 / 59.474fps、`late`増分80 / 52、1-field候補2走行は59.775 / 59.791fps、`late`増分16 / 15であるため、現在のintegrationは1-field候補の改善を維持しているが、この低電力端末では通常のrAF停止と少数のfield破棄が残る。[120秒の生値](results/windows-integration-v2-steady-120s.json)を保存した。
+
+180〜199秒と480〜499秒を交互に測った40 seekは、持続表示される目的canvas初画まで中央値252.7ms、p95 324.7ms、最大393.8msで、20/40が250msを超えた。
+180秒群は中央値295.3msで20/20が250ms超、480秒群は中央値213.8msで20/20が250ms以内だった。
+両群の区間中央値は`seek`→Range responseが50.3 / 57.5ms、first byte→first fragmentが107.5 / 108.9ms、first fragment→最初のappend完了が12.8 / 11.6msで、180秒群だけ`appended`→`playing`が115.6msとなった。480秒群は35.4msだった。
+
+最初のappend完了時に`video.buffered`も読むと、180秒と181秒は目的時刻を含むが、その先が74 / 75msしかなく`readyState=1`と`seeking=true`だった。
+buffer終端が目的時刻の565 / 568ms先まで伸びた後に`canplay`へ進んだ。
+480秒と481秒は最初のappendで374 / 365ms先まで入り、そのbuffer範囲のまま31 / 34ms後に`canplay`へ進んだ。
+したがってこの二群差はRange往復や最初のfragment生成ではなく、最初のfragmentが目的時刻後に持つ再生余裕と、Chromeが再開に要求する先読みが合わない場合の後続fragment待ちである。[40回の段階値](results/windows-integration-v2-seek-visible-timed-40.json)と[buffer範囲の4回確認](results/windows-integration-v2-seek-buffered-preflight-4.json)を保存した。
+
+固定のseek leadを1.0秒から0.5秒へ変えた診断版は、同じ40地点で中央値252.7→246.0ms、p95 324.7→312.3ms、250ms超20→18回に留まり、180秒群の中央値は295.3→295.1msだった。
+目的時刻より74ms先へ1回、374ms先へ1回着地したため、固定lead変更は速度効果が小さく正確性も壊す。この形は採用しない。[診断版40回](results/windows-integration-v2-lead-half-seek-visible-40.json)を保存した。
+後続fragmentを先に作って待ちを移す方式も全体を短縮しないことは下記のGalaxy実験で確認済みである。
+有効な設計候補は、要求時刻以前でより近い安全なRAPを変換前に得て、目的時刻後の再生余裕を最初のfragmentへ含める方法である。毎seekの広域scanは遅くなるため、再生中に学習するindexか永続indexで追加Rangeなしに解決できる場合だけ実装する。
+
 修正版40 seekでは、first fragmentが要求時刻より前へ開く量と`appended`→`canplay`の相関がPearson 0.943、Spearman 0.879だった。
 そこで、変換済みの後続fragmentから要求時刻以前で最も近いものだけをWorkerが渡せるか確認した。
 乃木坂の実出力は約0.5005秒ごとにfragmentを生成し、600秒seekでは599.9939秒の先頭fragmentを152.0ms、600.4944秒の次fragmentを212.8msに生成した。

@@ -18,6 +18,11 @@ Galaxyの同条件40 seekでは、`tsukumijima/main`からintegrationへの変�
 この総合値は新しいoverflow時刻圧縮をmergeする前の製品コード`e417d12`までで測った値であり、順位5の負荷注入A/Bとは分けています。
 PTSとrestart位置の独立管理まで含めてintegrationを再構築した後のGalaxy回帰では、120秒のcanvasが59.933fps、40ms超間隔、YADIFの`late`、`missed`、全resetはいずれも0でした。
 40 seekは中央値160.5ms、p95 190.6ms、最大228.8msで、40/40が250ms以下でした。
+同じintegrationを電源モード「最適な電力効率」のWindows Chromeで測ると、120秒のcanvasは59.719fps、40ms超8回、最大70.6msで、全resetは0でした。
+40 seekは中央値252.7ms、p95 324.7msで20/40が250msを超えました。
+遅い地点では最初のappendが目的時刻の約75ms先までしか含まず、Chromeが約565ms先までbufferされるのを待っていました。Range往復とfragment生成は速い地点と同程度でした。
+固定leadの短縮は40回で中央値6.7msの改善に留まり、2回は目的時刻より先へ着地したため採用しません。
+次の速度候補は、要求時刻以前で最も近い安全なRAPを追加Rangeなしで得て、最初のfragmentの再生余裕を増やす方式です。
 
 | 順位 | Priority | PR候補branch | 提出先 | 目的 | 修正内容 | 確認できた効果 | 変更の重さ | 統合版 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
