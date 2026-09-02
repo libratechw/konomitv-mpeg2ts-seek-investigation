@@ -1,0 +1,489 @@
+{
+  "definition": "video.currentTime assignment to the first target canvas draw that remains visible across seeked",
+  "variants": {
+    "windows_4w": {
+      "file": "windows-picture-job-4w-10.json",
+      "measured": 10,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "preflightCpuMedianPercent": 3,
+      "targets": {
+        "180-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 293.7,
+            "p90": 308.6,
+            "max": 308.6
+          },
+          "firstFragmentMs": {
+            "median": 167.1,
+            "p90": 173,
+            "max": 173
+          },
+          "secondFragmentMs": {
+            "median": 262,
+            "p90": 267,
+            "max": 267
+          },
+          "secondUpdateendMs": {
+            "median": 272.8,
+            "p90": 280.9,
+            "max": 280.9
+          },
+          "canplayMs": {
+            "median": 298.2,
+            "p90": 303.9,
+            "max": 303.9
+          }
+        },
+        "480-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 221.5,
+            "p90": 272.3,
+            "max": 272.3
+          },
+          "firstFragmentMs": {
+            "median": 164.3,
+            "p90": 166.5,
+            "max": 166.5
+          },
+          "secondFragmentMs": {
+            "median": 254,
+            "p90": 301.1,
+            "max": 301.1
+          },
+          "secondUpdateendMs": {
+            "median": 268.3,
+            "p90": 312.5,
+            "max": 312.5
+          },
+          "canplayMs": {
+            "median": 218.1,
+            "p90": 269.7,
+            "max": 269.7
+          }
+        }
+      },
+      "pictureJobs": {
+        "gop1": {
+          "samples": 130,
+          "byteEncodePearson": 0.9574,
+          "transferAndDispatchOverheadMsMedian": 0.3
+        },
+        "gop2": {
+          "samples": 150,
+          "byteEncodePearson": 0.9116,
+          "transferAndDispatchOverheadMsMedian": 0.3
+        }
+      }
+    },
+    "galaxy_4w": {
+      "file": "galaxy-picture-job-4w-10.json",
+      "measured": 10,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      },
+      "targets": {
+        "180-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 160.6,
+            "p90": 175.5,
+            "max": 175.5
+          },
+          "firstFragmentMs": {
+            "median": 110.1,
+            "p90": 118.8,
+            "max": 118.8
+          },
+          "secondFragmentMs": {
+            "median": 172.8,
+            "p90": 179.4,
+            "max": 179.4
+          },
+          "secondUpdateendMs": {
+            "median": 181,
+            "p90": 188,
+            "max": 188
+          },
+          "canplayMs": {
+            "median": 182.6,
+            "p90": 189.4,
+            "max": 189.4
+          }
+        },
+        "480-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 145.2,
+            "p90": 167.4,
+            "max": 167.4
+          },
+          "firstFragmentMs": {
+            "median": 107.5,
+            "p90": 120.3,
+            "max": 120.3
+          },
+          "secondFragmentMs": {
+            "median": 162.2,
+            "p90": 180.8,
+            "max": 180.8
+          },
+          "secondUpdateendMs": {
+            "median": 178.4,
+            "p90": 190.4,
+            "max": 190.4
+          },
+          "canplayMs": {
+            "median": 141.2,
+            "p90": 162.1,
+            "max": 162.1
+          }
+        }
+      },
+      "pictureJobs": {
+        "gop1": {
+          "samples": 130,
+          "byteEncodePearson": 0.9471,
+          "transferAndDispatchOverheadMsMedian": 0.2
+        },
+        "gop2": {
+          "samples": 150,
+          "byteEncodePearson": 0.8904,
+          "transferAndDispatchOverheadMsMedian": 0.3
+        }
+      }
+    },
+    "windows_size_order_4w": {
+      "file": "windows-picture-job-size-order-4w-20.json",
+      "measured": 20,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "preflightCpuMedianPercent": 4,
+      "targets": {
+        "180-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 293.75,
+            "p90": 313.9,
+            "max": 322
+          },
+          "firstFragmentMs": {
+            "median": 158.2,
+            "p90": 172.2,
+            "max": 177.1
+          },
+          "secondFragmentMs": {
+            "median": 247.15,
+            "p90": 256.8,
+            "max": 270
+          },
+          "secondUpdateendMs": {
+            "median": 259.2,
+            "p90": 269.5,
+            "max": 282.7
+          },
+          "canplayMs": {
+            "median": 288.5,
+            "p90": 312.1,
+            "max": 356.8
+          }
+        },
+        "480-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 207.9,
+            "p90": 212.4,
+            "max": 224.8
+          },
+          "firstFragmentMs": {
+            "median": 148.5,
+            "p90": 164.4,
+            "max": 172.3
+          },
+          "secondFragmentMs": {
+            "median": 237.9,
+            "p90": 251.9,
+            "max": 252.6
+          },
+          "secondUpdateendMs": {
+            "median": 252.4,
+            "p90": 262.6,
+            "max": 263.6
+          },
+          "canplayMs": {
+            "median": 204.9,
+            "p90": 210.4,
+            "max": 217.3
+          }
+        }
+      },
+      "pictureJobs": {
+        "gop1": {
+          "samples": 260,
+          "byteEncodePearson": 0.9596,
+          "transferAndDispatchOverheadMsMedian": 0.2
+        },
+        "gop2": {
+          "samples": 300,
+          "byteEncodePearson": 0.8965,
+          "transferAndDispatchOverheadMsMedian": 0.3
+        }
+      }
+    },
+    "windows_pause50_4w": {
+      "file": "windows-picture-job-4w-pause50-10.json",
+      "measured": 10,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "preflightCpuMedianPercent": 6,
+      "targets": {
+        "180-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 296.5,
+            "p90": 311.5,
+            "max": 311.5
+          },
+          "firstFragmentMs": {
+            "median": 177.1,
+            "p90": 181.4,
+            "max": 181.4
+          },
+          "secondFragmentMs": {
+            "median": 266.9,
+            "p90": 276.2,
+            "max": 276.2
+          },
+          "secondUpdateendMs": {
+            "median": 267.5,
+            "p90": 280.5,
+            "max": 280.5
+          },
+          "canplayMs": {
+            "median": 291.5,
+            "p90": 299.5,
+            "max": 299.5
+          }
+        },
+        "480-series": {
+          "n": 5,
+          "visibleMs": {
+            "median": 208.1,
+            "p90": 213.7,
+            "max": 213.7
+          },
+          "firstFragmentMs": {
+            "median": 153.4,
+            "p90": 166.9,
+            "max": 166.9
+          },
+          "secondFragmentMs": {
+            "median": 244.3,
+            "p90": 253.8,
+            "max": 253.8
+          },
+          "secondUpdateendMs": {
+            "median": 249.5,
+            "p90": 254.4,
+            "max": 254.4
+          },
+          "canplayMs": {
+            "median": 202,
+            "p90": 210,
+            "max": 210
+          }
+        }
+      },
+      "pictureJobs": {
+        "gop1": {
+          "samples": 130,
+          "byteEncodePearson": 0.9667,
+          "transferAndDispatchOverheadMsMedian": 0.25
+        },
+        "gop2": {
+          "samples": 150,
+          "byteEncodePearson": 0.9086,
+          "transferAndDispatchOverheadMsMedian": 0.3
+        }
+      }
+    },
+    "windows_7w": {
+      "file": "windows-seven-workers-20.json",
+      "measured": 20,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "preflightCpuMedianPercent": 7,
+      "targets": {
+        "180-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 312.25,
+            "p90": 327,
+            "max": 343.2
+          },
+          "firstFragmentMs": {
+            "median": 150.0,
+            "p90": 153.4,
+            "max": 163.9
+          },
+          "secondFragmentMs": {
+            "median": 220.8,
+            "p90": 224.5,
+            "max": 235.3
+          },
+          "secondUpdateendMs": {
+            "median": 236.6,
+            "p90": 257.7,
+            "max": 258
+          },
+          "canplayMs": {
+            "median": 305.3,
+            "p90": 318.1,
+            "max": 330.5
+          }
+        },
+        "480-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 220.65,
+            "p90": 244.3,
+            "max": 250.3
+          },
+          "firstFragmentMs": {
+            "median": 154.4,
+            "p90": 165.1,
+            "max": 185.8
+          },
+          "secondFragmentMs": {
+            "median": 221.15,
+            "p90": 233,
+            "max": 266.4
+          },
+          "secondUpdateendMs": {
+            "median": 234.85,
+            "p90": 261.1,
+            "max": 277.6
+          },
+          "canplayMs": {
+            "median": 214.9,
+            "p90": 240.5,
+            "max": 242.6
+          }
+        }
+      }
+    },
+    "windows_pause100_7w": {
+      "file": "windows-seven-workers-pause100-20.json",
+      "measured": 20,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "preflightCpuMedianPercent": 7,
+      "targets": {
+        "180-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 276.35,
+            "p90": 279.9,
+            "max": 283.8
+          },
+          "firstFragmentMs": {
+            "median": 145.65,
+            "p90": 157.3,
+            "max": 165.5
+          },
+          "secondFragmentMs": {
+            "median": 218.7,
+            "p90": 228.1,
+            "max": 236.7
+          },
+          "secondUpdateendMs": {
+            "median": 220.8,
+            "p90": 230.1,
+            "max": 239.1
+          },
+          "canplayMs": {
+            "median": 265.35,
+            "p90": 273.3,
+            "max": 282.4
+          }
+        },
+        "480-series": {
+          "n": 10,
+          "visibleMs": {
+            "median": 210.25,
+            "p90": 213.1,
+            "max": 227.9
+          },
+          "firstFragmentMs": {
+            "median": 145.35,
+            "p90": 157.3,
+            "max": 166.7
+          },
+          "secondFragmentMs": {
+            "median": 215.55,
+            "p90": 231.7,
+            "max": 243.5
+          },
+          "secondUpdateendMs": {
+            "median": 219.3,
+            "p90": 232,
+            "max": 248.2
+          },
+          "canplayMs": {
+            "median": 201.05,
+            "p90": 216.8,
+            "max": 220.9
+          }
+        }
+      }
+    }
+  },
+  "notes": [
+    "The 4-worker size-order run was not interleaved with the FIFO run; only the first-to-second-fragment interval and visible result are used as diagnostic evidence.",
+    "The 50 ms and 100 ms pauses are diagnostic controls, not product candidates.",
+    "All runs used the local-SSD fixture, full-screen Chrome, one playback page, LAN-direct playback, and passed their recorded cleanup checks."
+  ]
+}
