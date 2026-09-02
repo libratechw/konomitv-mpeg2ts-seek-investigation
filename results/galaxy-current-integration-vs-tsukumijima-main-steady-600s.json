@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-09-03",
+  "purpose": "Fill the current integration overview with a new 600-second tsukumijima/main baseline measured under the same low-overhead conditions as the current integration.",
+  "conditions": {
+    "konomiTvCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "fixture": "Nogizaka Koujichuu local-SSD fixture",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "rightPanel": false,
+    "singlePage": true,
+    "durationMs": 600000,
+    "instrumentation": "Per-second rAF/rVFC aggregation and deinterlacer stats; no WebGL method wrapping.",
+    "comparisonNote": "Both runs cover the same known-good cadence interval. Their measured starts differ by 0.366 seconds."
+  },
+  "builds": {
+    "baseline": {
+      "mpeg2toh264Commit": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+      "yadifSourceSha256": "fdf5a1050b0be0c17d5818f2648c8c98dff23850818e42c7660419899142b75e",
+      "konomiPlayerSourceSha256": "182e4e39d8b8658aaa7d37ea29a99949fa892261737d5b97bed5cc3f36531077",
+      "konomiPlayerChanges": "Measurement exposure hook only; pictureWorkers uses the player default of 4 on this device.",
+      "asset": "PlayerController-CiwOYqi0.js",
+      "assetSha256": "a12eaacffa55da71d612d8d2f59b7923b8738e863061216bef7c87c3839c5a72"
+    },
+    "integration": {
+      "branch": "integration/current-useful-fixes",
+      "commitAtPublication": "5b227dea96bf38aaaa2bbfb936386d81bf0ec1a2",
+      "yadifSourceSha256": "6ee69cf2006180ca59662b4d87fce7e68788fdee7b9934e41f25dd06823e613b",
+      "konomiPlayerSourceSha256": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+      "konomiPlayerChanges": "The same measurement exposure hook plus explicit pictureWorkers=4, equal to the player default on this device.",
+      "asset": "PlayerController-Dwy3m7IJ.js",
+      "assetSha256": "a07356ec96d5d57eb786ea31035cf495e69dfc729000156847d05fe4c6487092"
+    }
+  },
+  "calculation": {
+    "yadifGeneratedFieldsPerSecond": "(last filtered - first filtered) / (last stats timestamp - first stats timestamp)",
+    "counterDelta": "last stats counter - first stats counter",
+    "rafAndVideoCallbackPerSecond": "sum of per-second bin counts / measured wall duration"
+  },
+  "results": {
+    "baseline": {
+      "measuredMediaTimeStartSeconds": 187.777807,
+      "measuredMediaTimeEndSeconds": 787.778545,
+      "measuredMediaTimeDeltaSeconds": 600.000738,
+      "measuredWallDurationMs": 600000.3999999762,
+      "yadifGeneratedFields": 35890,
+      "yadifGeneratedFieldsPerSecond": 59.93927244845521,
+      "yadifCounterDelta": {
+        "missed": 0,
+        "late": 32,
+        "queueResetted": 0,
+        "degraded": 0,
+        "discontinuities": 0
+      },
+      "rafPerSecond": 59.99662666891794,
+      "videoCallbackPerSecond": 29.96998002001451,
+      "maximumRafGapMs": 33.20000000001164,
+      "maximumVideoCallbackGapMs": 70.19999992847443,
+      "privateRawSha256": "0684dc2df943089764887ef91b3626e44bb9a138ce7f50ace468ab2e482e4812",
+      "privateRawBytes": 472545
+    },
+    "integration": {
+      "measuredMediaTimeStartSeconds": 188.143591,
+      "measuredMediaTimeEndSeconds": 788.143503,
+      "measuredMediaTimeDeltaSeconds": 599.999912,
+      "measuredWallDurationMs": 600000.6000000238,
+      "yadifGeneratedFields": 35906,
+      "yadifGeneratedFieldsPerSecond": 59.93974641543303,
+      "yadifCounterDelta": {
+        "missed": 0,
+        "late": 45,
+        "queueResetted": 0,
+        "degraded": 0,
+        "discontinuities": 0
+      },
+      "rafPerSecond": 59.99827333505761,
+      "videoCallbackPerSecond": 29.96997003002878,
+      "maximumRafGapMs": 33.300000000046566,
+      "maximumVideoCallbackGapMs": 81,
+      "privateRawSha256": "b7184a24d17be83ab06dfc4839dec6634657d27a650db5de7a5f4692bcac2e68",
+      "privateRawBytes": 473104
+    }
+  },
+  "interpretation": {
+    "steadyState": "Both builds maintained the theoretical 59.94 generated fields per second and recorded zero missed fields over 600 seconds.",
+    "scope": "The queue changes improve seek recovery and injected overflow behavior; this normal steady-state comparison shows no loss and no material gain in generated-field throughput.",
+    "displayLimit": "This low-overhead collector did not wrap WebGL draw calls. The rate is generated YADIF fields, not a direct count of final canvas draws."
+  },
+  "cleanup": {
+    "allRuns": true,
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}
