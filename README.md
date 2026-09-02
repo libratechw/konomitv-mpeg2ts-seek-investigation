@@ -51,6 +51,9 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 
 rVFC診断版ではH.264が2 drop、HEVCが1 dropでしたが、callback数は`presentedFrames`増分より少なく、callback間隔の空きと映像dropは1対1ではありません。
 主判定には、開始・終了時だけcounterを読む低負荷collectorを使っています。
+H.264の発生位置を調べる別の10分走行では1 frameをdropしました。
+発生時は`readyState=4`で約31.4秒先までbuffer済み、最寄りのHLS segment境界から約1.36秒離れ、前後2秒にHLS errorはありませんでした。
+この1件はbuffer枯渇やsegment切替では説明できず、H.264のdecodeまたは表示期限超過側を優先して切り分けます。
 詳しい条件と生値は[1080p60長時間比較](results/galaxy-recorded-hls-1080p60-long-comparison.json)に保存しています。
 
 他の14画質とHLSシークは、再生設定をwatch pageの初回実行前に投入するよう測定器を直した条件で再測定が必要です。

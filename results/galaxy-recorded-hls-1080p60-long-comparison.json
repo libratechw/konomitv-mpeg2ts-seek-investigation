@@ -83,10 +83,38 @@
       "droppedVideoFrames": 1
     }
   ],
+  "dropPositionDiagnostic": {
+    "codec": "H.264",
+    "raw": "galaxy-recorded-hls-h264-1080p60-drop-position-600s.json",
+    "collector": "drop-poll-250ms-no-rvfc",
+    "collectorHash": "e3fc17e87b516b268d7b5dbac8477610947f14a8cd65a5e1939420a669f22562",
+    "durationMs": 600002,
+    "mediaTimeDelta": 600.00274,
+    "totalVideoFrames": 35965,
+    "droppedVideoFrames": 1,
+    "drop": {
+      "mediaTime": 950.070428,
+      "readyState": 4,
+      "bufferedAheadSeconds": 31.393382,
+      "nearestSegmentBoundaryDistanceSeconds": 1.363383,
+      "hlsErrorWithinTwoSeconds": false,
+      "nextHlsEventAfterMs": 1395.2
+    },
+    "cleanup": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  },
   "interpretation": [
     "H.264 accepted the expected 35964 frames over 600 seconds but Chrome dropped two frames even without per-frame collection or intermediate page evaluation.",
     "HEVC accepted 35966 frames and dropped zero under the same counter-only conditions, so the observed H.264 drops are not explained by a general 60 Hz display or thermal limit.",
     "The requestVideoFrameCallback count is lower than presentedFrameAdvance, so callback gaps are not one-for-one evidence of dropped video frames.",
+    "A third H.264 run observed one dropped frame at media time 950.070428 with readyState 4 and 31.393382 seconds buffered ahead. It was 1.363383 seconds from the nearest HLS segment boundary, and no HLS error occurred within two seconds.",
     "The next comparison should isolate H.264 decoder/output parameters such as profile and bitrate while holding resolution and frame rate constant."
   ]
 }

@@ -274,12 +274,16 @@ Galaxy Chrome、LAN直結、全画面で、通常モードのH.264とHEVC 1080p6
 
 H.264は60000/1001fpsの理論frame数を受理しているため、サーバー出力のcadence欠落ではなく、Chromeが受け取ったframeのうち2件をpredecodeまたは表示期限超過でdropした結果である。
 HEVCは同条件でdrop 0であり、計測中のThermal Statusも0だったため、60Hz表示や端末のthermal throttlingだけではH.264の2件を説明できない。
+
+H.264のdrop発生位置を250ms周期で記録する別の600秒走行では、35,965 frame中1件をdropした。
+発生時のmedia timeは950.070秒、`readyState=4`、buffer終端は981.464秒で、約31.4秒先までbuffer済みだった。
+最寄りの6.006秒HLS segment境界から約1.36秒離れ、前後2秒にHLS errorはなかったため、この1件はbuffer枯渇やsegment切替では説明できない。
 次はH.264のprofileとbitrateを解像度・frame rate一定で分け、MediaCodecのcodec別decode処理を確認する。
 
 毎frameのrVFC情報を保持する診断走行では、H.264が2 drop、HEVCが1 dropだった。
 ただしH.264はcallback 35,671回に対して`presentedFrames`が35,963進み、HEVCもcallback 35,731回に対して35,964進んだ。
 したがってrVFC callback間隔の空きは、映像frameのdropと1対1には対応しない。
-[主条件、診断条件、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)を保存した。
+[主条件、診断条件、発生位置、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)を保存した。
 
 以前の8画質×2codecの5秒測定とHLSシーク測定は、watch pageを空の設定で一度起動してから要求画質へ切り替えていた。
 初期既定の1080pと要求画質のencoder sessionが並行してサーバー負荷を混ぜたため、絶対値として採用しない。
