@@ -2,6 +2,7 @@
   "schema": 1,
   "captured_at": "2026-09-02",
   "purpose": "Control measurement for long-running Windows live playback through the server-encoded video path; not Original MPEG-2 direct playback.",
+  "selection_note": "The first 29.97p run inherited the saved 1080p quality and is retained only as a low-load control. The primary run explicitly selected 1080p (60fps) before measurement.",
   "conditions": {
     "client": "IdeaPad Flex 550, Ryzen 7 4700U",
     "os": "Windows",

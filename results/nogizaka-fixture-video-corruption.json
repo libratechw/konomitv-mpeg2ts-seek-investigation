@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "captured_at": "2026-09-02",
+  "purpose": "Separate a source TS defect from YADIF scheduler and browser rendering latency.",
+  "fixture": {
+    "label": "Nogizaka Koujichuu local-SSD fixture",
+    "size_bytes": 3066534364,
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "video_duration_seconds": 1815.2134,
+    "video_start_pts_seconds": 5453.929167,
+    "video_packets_scanned": 54399
+  },
+  "ffprobe": {
+    "version": "8.1.2",
+    "corrupt_video_packets": 1,
+    "packet": {
+      "relative_dts_seconds": 125.0249,
+      "absolute_dts_seconds": 5578.954067,
+      "byte_position": 202364140,
+      "flags": "__C"
+    },
+    "ffmpeg_decode_warning": {
+      "absolute_dts_ticks_90000": 502108869,
+      "absolute_dts_seconds": 5578.987433333334,
+      "relative_dts_seconds": 125.05826633333345,
+      "messages": [
+        "Packet corrupt",
+        "corrupt decoded frame"
+      ]
+    }
+  },
+  "galaxy_runtime_match": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "active_display_hz": 60,
+    "player": "recorded MPEG-2 Original direct playback, YADIF double-rate",
+    "trace_sha256": "d31ced9fc9692cfe8d81e3ca897a8764874bae0de02a05efb4d6abd45dae7b1e",
+    "analysis_sha256": "3b338d141925dc20641a5c0f3ac787db4b34fb234d85ff06f325d2db869aa6b5",
+    "video_callback_gap_ms": 551.9,
+    "video_media_time_jump_ms": 567.233,
+    "canvas_gap_ms": 501.3,
+    "max_raf_gap_ms": 17.0,
+    "max_webgl_draw_call_ms": 1.1,
+    "yadif_delta": {
+      "degraded": 3,
+      "discontinuities": 1,
+      "late": 4,
+      "queueResetted": 0
+    },
+    "cleanup_verified": true
+  },
+  "decision": "Do not use a run crossing this packet to judge zero-drop steady playback or candidate regression. Re-run a 600-second interval from media time 180 through 780, which excludes the known corrupt packet."
+}

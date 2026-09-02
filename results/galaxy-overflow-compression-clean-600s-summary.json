@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "captured_at": "2026-09-02",
+  "purpose": "Normal 600-second Galaxy fullscreen regression after YADIF overflow deadline compression; excludes the known corrupt source packet.",
+  "conditions": {
+    "candidate_source_commit": "7ef6696",
+    "asset": "PlayerController-CndVg5bI.js",
+    "asset_source_hash": "dee176e01908b507a0f95d57c6b7ad535b744197613d48a6a96ffacbc72885c9",
+    "browser": "Google Chrome 151.0.7922.174",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "display_mode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "single_page": true,
+    "presentation_throttle_duration_ms": 0
+  },
+  "source": {
+    "path_label": "local SSD nogizaka.ts fixture",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "measured_media_time_start_s": 187.845406,
+    "measured_media_time_end_s": 787.846155,
+    "known_corrupt_video_packet_relative_dts_s": 125.0249,
+    "exclusion": "The measured interval starts after the known corrupt packet; a separate result records that packet and the matching runtime gap."
+  },
+  "result": {
+    "duration_ms": 600000.2000000477,
+    "media_time_delta_s": 600.0007489999999,
+    "fps": {
+      "draw": 59.94164668611301,
+      "raf": 59.998313333890785,
+      "videoCallback": 29.971656676112058
+    },
+    "note": "videoCallback is the roughly 29.97 Hz interlaced input callback; draw is the roughly 59.94 Hz double-rate YADIF canvas output.",
+    "intervals_ms": {
+      "draw": {
+        "count": 35964,
+        "median": 16.799999952316284,
+        "p95": 21.799999952316284,
+        "p99": 23.200000047683716,
+        "max": 39.700000047683716,
+        "over25": 110,
+        "over40": 0
+      },
+      "raf": {
+        "count": 35998,
+        "median": 16.699999999982538,
+        "p95": 16.79999999998836,
+        "p99": 16.899999999906868,
+        "max": 33.40000000002328,
+        "over25": 2,
+        "over40": 0
+      },
+      "videoCallback": {
+        "count": 17982,
+        "median": 33.39999997615814,
+        "p95": 36.800000071525574,
+        "p99": 38.700000047683716,
+        "max": 68.79999995231628,
+        "over25": 17929,
+        "over40": 82
+      },
+      "videoMediaTime": {
+        "count": 17982,
+        "median": 33.36699999999837,
+        "p95": 33.36699999999837,
+        "p99": 33.367000000055214,
+        "max": 33.36700000011206,
+        "over25": 17982,
+        "over40": 0
+      },
+      "drawCall": {
+        "count": 35965,
+        "median": 0,
+        "p95": 0.10000002384185791,
+        "p99": 0.10000002384185791,
+        "max": 0.8000000715255737,
+        "over25": 0,
+        "over40": 0
+      }
+    },
+    "yadif_stats_delta": {
+      "filtered": 35936,
+      "missed": 0,
+      "degraded": 0,
+      "discontinuities": 0,
+      "late": 0,
+      "queueResetted": 0,
+      "dropped": 200
+    },
+    "queue_timeline": {
+      "event_count_by_kind": {
+        "future": 34,
+        "draw-gap": 36,
+        "frame-gap": 25
+      },
+      "max_queue_depth": 4,
+      "max_last_lead_ms": 75.05135135072851,
+      "overflow_events": 0,
+      "retired_fields": 0
+    },
+    "long_task_count": 0,
+    "cleanup": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  },
+  "evidence_hashes": {
+    "private_raw_trace_sha256": "af7a35600b1890e83afe6dcce6954d81b38a1ca36041cdd5888ba79812826df6",
+    "private_analysis_sha256": "f8a3165b801305207bfe2f89b7854c8a26efe56577b44042a1352c4e0231d592",
+    "published_summary_scope": "The raw trace is not published because the compact summary contains the review-relevant metrics; hashes preserve identity."
+  }
+}

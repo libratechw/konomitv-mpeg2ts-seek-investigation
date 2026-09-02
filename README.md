@@ -15,6 +15,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 upstreamへそのままmergeする対象ではなく、個別PR候補の境界を保ったままKonomiTVで総合効果を測るために使います。
 branch固有READMEに、全修正適用前後の比較と、各修正branchへのリンク、目的、内容、効果、レビューコスト、保守コストを掲載しています。
 Galaxyの同条件40 seekでは、`tsukumijima/main`からintegrationへの変更で可視初画中央値287.1→145.8ms、p95 349.1→213.4ms、250ms以内14/40→40/40でした。
+この総合値は新しいoverflow時刻圧縮をmergeする前の製品コード`e417d12`までで測った値であり、順位5の負荷注入A/Bとは分けています。
 
 | 順位 | Priority | PR候補branch | 提出先 | 目的 | 修正内容 | 確認できた効果 | 変更の重さ | 統合版 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -22,20 +23,21 @@ Galaxyの同条件40 seekでは、`tsukumijima/main`からintegrationへの変�
 | 2 | P0 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) (`bfefdf8`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 再開可能なTS位置をcoreから安全に報告する | fragmentへ直近PAT/PMTを含む`restartOffset`を付与し、別Sessionで同じGOPと音声を再開できる試験を追加 | core単体の再開同値性試験と全Rust testが成功。速度効果は次のplayer PRとの組み合わせで測る | **重**。TS demux、GOP、Session、WASM APIを横断。公開値は`restartOffset`だけに限定 | 採用 |
 | 3 | P0 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) (`295b692`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 一度確認した位置への後続seekでprobeと余分な復号を省く | 観測済みGOPと安全位置をplayer内だけに保持し、要求時刻以前1秒以内の最新位置を再利用 | 診断版A/Bはprobe 40→0、canvas中央値226.5→161.5ms、p95 278.4→220.5ms。正式branch組み込み版は中央値159.1ms、p95 212.4ms、最大229.0msで40/40が250ms以下 | **中**。worker 1ファイル、core PRに依存。永続形式は増やさない | 採用 |
 | 4 | P0 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) (source `26484fd`、dist `27b327e`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | queue満杯と時刻同期破綻を分け、カクつきと長時間stallを防ぐ | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全reset | seek後停止7/90→0/90を維持。注入試験の全reset 14〜15→0、最大lateness 83.3→32.6ms。通常30秒59.768fps | **中**。YADIF 1ファイルのqueue policy。fork固有機能として保守 | 採用 |
-| 5 | P0 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) (source `2d072f3`、dist `f3ba99d`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | seeked直前に描画済みの目的frameを消さない | playhead近傍の描画済みframeを記録し、同じseekの`seeked`でcanvasを再消去しない | Linux 40回のp95 246.5→178.9ms、最大280.0→180.4ms。Galaxyはp95 193.2ms、最大212.8msで退行なし | **中**。YADIF 1ファイルだがseeking/history状態のレビューが必要 | 採用 |
-| 6 | P1 | [`fix/present-one-field-per-refresh`](https://github.com/libratechw/mpeg2toh264/tree/fix/present-one-field-per-refresh) (source `fb2e6e4`、dist `21cc3c3`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | 通常のcallback位相差で表示可能なfieldを誤破棄しない | 通常はFIFO順に1 fieldを表示し、最古fieldが2 refreshを超えて遅れた場合だけ追いつく | 120秒2走行平均でGalaxy 59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0。Windows 59.354→59.783fps、25ms超127→43回、`late` 66→15.5。全reset 0 | **中**。YADIF 1関数のpresentation policy。閾値とqueue不変条件を保守 | 採用 |
-| 7 | P1 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) (`f8ab9c7`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 古いappend完了が新seekのinit segmentを失わせる競合を防ぐ | SourceBuffer操作とseek世代を対応付け、旧`updateend`を新queueへ適用しない | 修正前に失敗する競合試験が成功。通常seek平均251.4→250.1msで速度差はなく、実利用のstall削減量は未立証 | **中**。MSE状態管理と回帰試験。将来保守負荷は小〜中 | 採用 |
-| 8 | P1 | [`feat/seek-timing-context`](https://github.com/libratechw/mpeg2toh264/tree/feat/seek-timing-context) (`58a9920`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | Rangeからdecoder提示までを同じseek IDで分解する | player、worker、transcoder、picture pool、MSEへtiming contextを伝播 | 直接の速度改善なし。probe標本の誤上書き、先頭IDR job 33〜40ms、append後変動を分離できた | **重**。10ファイルにわたり複数層を横断し、公開イベント契約の保守が必要 | 除外（計測専用） |
-| 9 | P3 | [`fix/deliver-completed-fragments-early`](https://github.com/libratechw/mpeg2toh264/tree/fix/deliver-completed-fragments-early) (`30ad508`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 完成fragmentと後続変換を重ねる | transcoderから完成fragmentを逐次通知する | GalaxyとローカルSSD Chromeで初回fragmentと初画のどちらも一貫した短縮なし。後続throughput候補としてのみ残す | **中〜重**。transcoder/workerの順序、cancel、backpressureのレビューが必要 | 除外（効果未確認） |
+| 5 | P0 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) (source `7ef6696`、dist `ac2a2a9`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | 容量確保で捨てた表示時刻の穴からFIFO破棄が連鎖するのを防ぐ | 捨てたfieldの`duration`合計を、残った全fieldのpresentation deadlineから引く | 2秒注入の3走行平均で、Galaxyの破棄218.0→0.67 field、Windows 21.67→0.67 field。Galaxyで2/3走行に続いた連鎖と全reset 1回を解消 | **軽〜中**。`#prepareQueue()`の8行。容量破棄時の時刻不変条件を保守 | 採用 |
+| 6 | P0 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) (source `2d072f3`、dist `f3ba99d`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | seeked直前に描画済みの目的frameを消さない | playhead近傍の描画済みframeを記録し、同じseekの`seeked`でcanvasを再消去しない | Linux 40回のp95 246.5→178.9ms、最大280.0→180.4ms。Galaxyはp95 193.2ms、最大212.8msで退行なし | **中**。YADIF 1ファイルだがseeking/history状態のレビューが必要 | 採用 |
+| 7 | P1 | [`fix/present-one-field-per-refresh`](https://github.com/libratechw/mpeg2toh264/tree/fix/present-one-field-per-refresh) (source `fb2e6e4`、dist `21cc3c3`) | [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) | 通常のcallback位相差で表示可能なfieldを誤破棄しない | 通常はFIFO順に1 fieldを表示し、最古fieldが2 refreshを超えて遅れた場合だけ追いつく | 120秒2走行平均でGalaxy 59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0。Windows 59.354→59.783fps、25ms超127→43回、`late` 66→15.5。全reset 0 | **中**。YADIF 1関数のpresentation policy。閾値とqueue不変条件を保守 | 採用 |
+| 8 | P1 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) (`f8ab9c7`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 古いappend完了が新seekのinit segmentを失わせる競合を防ぐ | SourceBuffer操作とseek世代を対応付け、旧`updateend`を新queueへ適用しない | 修正前に失敗する競合試験が成功。通常seek平均251.4→250.1msで速度差はなく、実利用のstall削減量は未立証 | **中**。MSE状態管理と回帰試験。将来保守負荷は小〜中 | 採用 |
+| 9 | P1 | [`feat/seek-timing-context`](https://github.com/libratechw/mpeg2toh264/tree/feat/seek-timing-context) (`58a9920`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | Rangeからdecoder提示までを同じseek IDで分解する | player、worker、transcoder、picture pool、MSEへtiming contextを伝播 | 直接の速度改善なし。probe標本の誤上書き、先頭IDR job 33〜40ms、append後変動を分離できた | **重**。10ファイルにわたり複数層を横断し、公開イベント契約の保守が必要 | 除外（計測専用） |
+| 10 | P3 | [`fix/deliver-completed-fragments-early`](https://github.com/libratechw/mpeg2toh264/tree/fix/deliver-completed-fragments-early) (`30ad508`) | [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) | 完成fragmentと後続変換を重ねる | transcoderから完成fragmentを逐次通知する | GalaxyとローカルSSD Chromeで初回fragmentと初画のどちらも一貫した短縮なし。後続throughput候補としてのみ残す | **中〜重**。transcoder/workerの順序、cancel、backpressureのレビューが必要 | 除外（効果未確認） |
 
 順位2と3は別PRです。
 coreの再開位置契約を先にレビューし、その祖先上でplayerの利用policyを提案します。
-順位4を先にレビューし、その祖先上で順位6のpresentation policyを独立PRとして提案します。
-順位5は両者とハンクが重ならず、並行して提出できます。
+順位4を先にレビューし、その祖先上で順位5のoverflow時刻圧縮と順位7のpresentation policyを独立した兄弟PRとして提案します。
+順位6はこれらとハンクが重ならず、並行して提出できます。
 これらのfork固有YADIF変更はupstream向け変更へ混ぜません。
-順位8は効果が立証できるまで提出を急ぎません。
+順位9は効果が立証できるまで提出を急ぎません。
 
-順位6のWindows値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った低性能かつ電力制約下の補助条件です。
+順位5と7のWindows値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った低性能かつ電力制約下の補助条件です。
 同一モード内のbranch A/Bとして扱い、Galaxyとの絶対性能比較や通常設定のWindowsを代表する値には使いません。
 
 主な結果は次のとおりです。
@@ -87,6 +89,20 @@ coreの再開位置契約を先にレビューし、その祖先上でplayerの�
 - 残る40ms超canvas間隔は、rAFとWebGL処理が正常なままrVFC入力が約65ms空き、YADIFが保持fieldを使い切ることで発生しました。
   1入力frame分の固定reserveは120秒で40ms超0回でしたが、600秒ではclock差が蓄積して`late` 2071、最大11.15秒停止へ退行したため棄却しました。
   7 slot版は600秒で40ms超0回でもfuture leadが約125msとなるため、可変A/V差を生む形では採用しません。
+- 容量確保でFIFOからfieldを捨てても残りのpresentation deadlineを詰めないため、捨てた表示時刻が穴として残り、次の破棄を連鎖させることをコードと時系列で確認しました。
+  2秒だけpresentationを1回おきにする試験をWindowsとGalaxyで各3回行うと、deadline圧縮前はGalaxyの2/3走行で連鎖し、破棄fieldは平均218.0、全resetは合計1回でした。
+  捨てた`duration`合計を残りのdeadlineから引く`fix/compress-yadif-overflow-schedule`では、GalaxyとWindowsの破棄がともに平均0.67 fieldとなり、Galaxyの全resetも0回でした。
+  注入中は意図的に約30fpsへ落とす試験であり、解除後の60fps復帰と連鎖防止を評価しています。
+- 乃木坂工事中のローカルSSD fixtureには、映像開始から125.025秒、byte位置202,364,140付近に破損video packetが1個ありました。
+  FFprobeの全54,399 video packet走査、FFmpegのdecode警告、GalaxyのrVFC入力停止が同じDTSで一致しました。
+  このpacketを横切る走行はコマ落ち目標の判定から外しました。
+  [fixture破損と実機traceの対応](results/nogizaka-fixture-video-corruption.json)を保存しました。
+- 既知の破損packetより後の187.845〜787.846秒を使ったGalaxy全画面600秒走行では、入力video callback 29.972fpsに対し、double-rate YADIF canvasは59.942fpsでした。
+  canvasの40ms超間隔、YADIFの`late`、`degraded`、`discontinuities`、全reset、overflow破棄はすべて0です。
+  入力の約30Hzはインターレース映像1 frameごとのcallbackで、最終表示は約59.94 field/秒です。
+  [正常負荷600秒の要約](results/galaxy-overflow-compression-clean-600s-summary.json)を保存しました。
+- 同じbuildのGalaxy全画面40回seekでは、操作から持続表示される目的canvas初画まで中央値157.2ms、p95 187.1ms、最大197.3msで、40/40が250ms以下でした。
+  [40回の各走行](results/galaxy-overflow-compression-visible-seek-40.json)を保存しました。
 - 既定では先頭fragmentだけがrandom accessで、後続約0.5秒fragmentは先頭へ依存していました。
   毎GOPにnon-IDR recovery pointを入れ、第2fragmentからMediaCodecを開始すると`appended`→`canplay`中央値は101.4→33.3msとなり、約68msの復号と破棄を確認できました。
   しかし第2fragment生成待ちでappendが中央値69.8ms遅れ、可視初画は中央値+5.7ms、平均+1.3msで改善しませんでした。

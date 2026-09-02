@@ -1,0 +1,715 @@
+{
+  "schema": 1,
+  "captured_at": "2026-09-02",
+  "purpose": "Deterministically exercise YADIF queue capacity by keeping rVFC input active while presenting on every other rAF for two seconds.",
+  "conditions": {
+    "player": "recorded MPEG-2 Original direct playback",
+    "galaxy_browser": "Google Chrome 151.0.7922.174",
+    "galaxy_active_display_hz": 60,
+    "windows_browser": "Google Chrome 152.0.7977.65",
+    "integration_commit": "24fc3e46e8f8f6271e64cbe20215cf391a3136de",
+    "seek_target_seconds": 600,
+    "sample_duration_ms": 12000,
+    "throttle_delay_ms": 2000,
+    "throttle_duration_ms": 2000,
+    "fullscreen": true,
+    "side_panel": false,
+    "single_test_tab": true,
+    "windows_power_mode": "Best power efficiency (unchanged)",
+    "transport": "LAN direct; Windows SSH tunnel carried CDP only"
+  },
+  "candidate": "When FIFO capacity retirement removes fields, subtract their exact summed duration from every remaining presentation deadline.",
+  "formal_candidate": {
+    "branch": "fix/compress-yadif-overflow-schedule",
+    "parent_branch": "fix/separate-yadif-queue-recovery",
+    "source_commit": "7ef6696",
+    "dist_commit": "ac2a2a9",
+    "presentation_policy_included": false
+  },
+  "runs": [
+    {
+      "device": "windows",
+      "variant": "baseline",
+      "run": 1,
+      "source_sha256": "e3131da6a747c909b09b560b3505d659e4a39fc1a34c9eaa77fdd4a070cb06b3",
+      "duration_ms": 12000.5,
+      "media_time_delta_s": 12.000646999999958,
+      "canvas_draws": 661,
+      "canvas_fps_by_window": 55.08103829007125,
+      "max_draw_interval_ms": 68.30000000074506,
+      "draw_intervals_over_40_ms": 1,
+      "yadif_delta": {
+        "late": 61,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 6,
+      "overflow_retired_fields": 7,
+      "phases": {
+        "before": {
+          "draws": 122,
+          "fps_by_window": 61.0,
+          "max_interval_ms": 18.299999997019768,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 59,
+          "fps_by_window": 29.5,
+          "max_interval_ms": 68.30000000074506,
+          "over_40_ms": 1
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 19.0,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 19.899999998509884,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "manual_cleanup_verified": true
+      }
+    },
+    {
+      "device": "windows",
+      "variant": "baseline",
+      "run": 2,
+      "source_sha256": "21c582177b70ad3d37dfa555f009e1d1a40cc3fa24f95c16754e309e895b0ec7",
+      "duration_ms": 12002,
+      "media_time_delta_s": 12.00074799999993,
+      "canvas_draws": 660,
+      "canvas_fps_by_window": 54.99083486085652,
+      "max_draw_interval_ms": 34.69999999925494,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 61,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 0,
+      "overflow_retired_fields": 0,
+      "phases": {
+        "before": {
+          "draws": 119,
+          "fps_by_window": 59.5,
+          "max_interval_ms": 31.5,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 61,
+          "fps_by_window": 30.5,
+          "max_interval_ms": 34.69999999925494,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 119,
+          "fps_by_window": 59.5,
+          "max_interval_ms": 23.600000001490116,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 28.5,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "windows",
+      "variant": "baseline",
+      "run": 3,
+      "source_sha256": "768c988b028cbf71c91ba03db0a63fcba79d46be13ad661c715983ea19b41996",
+      "duration_ms": 12003.199999999255,
+      "media_time_delta_s": 12.002767999999946,
+      "canvas_draws": 661,
+      "canvas_fps_by_window": 55.06864836044063,
+      "max_draw_interval_ms": 39.20000000298023,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 58,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 58,
+      "overflow_retired_fields": 58,
+      "phases": {
+        "before": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 33.5,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 39.20000000298023,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 34.0,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 32.19999999925494,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "windows",
+      "variant": "compressed",
+      "run": 1,
+      "source_sha256": "949a95be3b5d38925f8fbac0f04e9d254c2f55b72e485c471b442fd859e3f6d2",
+      "duration_ms": 12002.5,
+      "media_time_delta_s": 12.001870999999937,
+      "canvas_draws": 662,
+      "canvas_fps_by_window": 55.15517600499896,
+      "max_draw_interval_ms": 37,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 60,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 0,
+      "overflow_retired_fields": 0,
+      "phases": {
+        "before": {
+          "draws": 122,
+          "fps_by_window": 61.0,
+          "max_interval_ms": 37.0,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 34.80000000074506,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 18.900000002235174,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 18.399999998509884,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "manual_cleanup_verified": true
+      }
+    },
+    {
+      "device": "windows",
+      "variant": "compressed",
+      "run": 2,
+      "source_sha256": "e478ba194e73e16a9b748d1ba67707b409c80d9363e961f8b7f5ddbf543d457a",
+      "duration_ms": 12008.39999999851,
+      "media_time_delta_s": 12.007436000000098,
+      "canvas_draws": 661,
+      "canvas_fps_by_window": 55.0448019719598,
+      "max_draw_interval_ms": 34.899999998509884,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 62,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 0,
+      "overflow_retired_fields": 0,
+      "phases": {
+        "before": {
+          "draws": 121,
+          "fps_by_window": 60.5,
+          "max_interval_ms": 28.900000002235174,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 34.899999998509884,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 18.0,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 359,
+          "fps_by_window": 59.833333333333336,
+          "max_interval_ms": 28.199999999254942,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "windows",
+      "variant": "compressed",
+      "run": 3,
+      "source_sha256": "7e4b74bd54c1347b34aaf5a2937c5585b3af0c8fd4f3cca583018e8eb345161e",
+      "duration_ms": 12001.10000000149,
+      "media_time_delta_s": 12.000733000000082,
+      "canvas_draws": 661,
+      "canvas_fps_by_window": 55.078284490581524,
+      "max_draw_interval_ms": 34.400000002235174,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 59,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 2,
+      "overflow_retired_fields": 2,
+      "phases": {
+        "before": {
+          "draws": 121,
+          "fps_by_window": 60.5,
+          "max_interval_ms": 33.5,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 34.400000002235174,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 18.100000001490116,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 25.5,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "baseline",
+      "run": 1,
+      "source_sha256": "762041470dc52836441b709233da9ce52383ea7bccaae5cf8045831d679c5990",
+      "duration_ms": 12000.799999952316,
+      "media_time_delta_s": 11.999747999999954,
+      "canvas_draws": 387,
+      "canvas_fps_by_window": 32.24785014345191,
+      "max_draw_interval_ms": 40.60000002384186,
+      "draw_intervals_over_40_ms": 1,
+      "yadif_delta": {
+        "late": 277,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 332,
+      "overflow_retired_fields": 332,
+      "phases": {
+        "before": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 35.39999997615814,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 36.10000002384186,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 40.60000002384186,
+          "over_40_ms": 1
+        },
+        "recovery_2_8s": {
+          "draws": 207,
+          "fps_by_window": 34.5,
+          "max_interval_ms": 38.0,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "baseline",
+      "run": 2,
+      "source_sha256": "f0b26ebacd1de06c7e9cdd175fe411981167f2021cf5cfc09b3381f35cb72a10",
+      "duration_ms": 12000.5,
+      "media_time_delta_s": 12.00005699999997,
+      "canvas_draws": 660,
+      "canvas_fps_by_window": 54.997708428815464,
+      "max_draw_interval_ms": 37.299999952316284,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 58,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 58,
+      "overflow_retired_fields": 58,
+      "phases": {
+        "before": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 23.5,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 37.299999952316284,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 32.200000047683716,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 26.100000023841858,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "baseline",
+      "run": 3,
+      "source_sha256": "0c9dfcba724004bf265e913422eb108bf0d51dc0eeb8f7ae7bb3a79ab8f62a08",
+      "duration_ms": 12000.399999976158,
+      "media_time_delta_s": 12.000705000000039,
+      "canvas_draws": 455,
+      "canvas_fps_by_window": 37.91540281998133,
+      "max_draw_interval_ms": 42.200000047683716,
+      "draw_intervals_over_40_ms": 1,
+      "yadif_delta": {
+        "late": 216,
+        "queueResetted": 1,
+        "dropped": 4
+      },
+      "overflow_events": 132,
+      "overflow_retired_fields": 264,
+      "phases": {
+        "before": {
+          "draws": 0,
+          "fps_by_window": 0.0,
+          "max_interval_ms": null,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 0,
+          "fps_by_window": 0.0,
+          "max_interval_ms": null,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 95,
+          "fps_by_window": 47.5,
+          "max_interval_ms": 42.200000047683716,
+          "over_40_ms": 1
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 37.200000047683716,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "compressed",
+      "run": 1,
+      "source_sha256": "da90729548b3a7f34b56503a3d469699e2205a40b83a0b2f0963ec099d186928",
+      "duration_ms": 12000.900000095367,
+      "media_time_delta_s": 12.00195199999996,
+      "canvas_draws": 660,
+      "canvas_fps_by_window": 54.99587530891476,
+      "max_draw_interval_ms": 36.89999997615814,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 59,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 2,
+      "overflow_retired_fields": 2,
+      "phases": {
+        "before": {
+          "draws": 121,
+          "fps_by_window": 60.5,
+          "max_interval_ms": 24.399999976158142,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 36.89999997615814,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 35.800000071525574,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 359,
+          "fps_by_window": 59.833333333333336,
+          "max_interval_ms": 24.09999990463257,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "compressed",
+      "run": 2,
+      "source_sha256": "98a2ea686f13b2f9fc9db9890d68124442ad88b652c0a8f5a31d0ab6c475dfa2",
+      "duration_ms": 12000.5,
+      "media_time_delta_s": 12.001359999999977,
+      "canvas_draws": 660,
+      "canvas_fps_by_window": 54.997708428815464,
+      "max_draw_interval_ms": 39.0,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 59,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 0,
+      "overflow_retired_fields": 0,
+      "phases": {
+        "before": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 21.100000023841858,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 39.0,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 22.200000047683716,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 23.600000023841858,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "device": "galaxy",
+      "variant": "compressed",
+      "run": 3,
+      "source_sha256": "a8e639d6ba814e68a122720de55c8832ec80fb084f5213471f3a0aa61ee7368d",
+      "duration_ms": 12000.600000023842,
+      "media_time_delta_s": 12.00059299999998,
+      "canvas_draws": 660,
+      "canvas_fps_by_window": 54.99725013738386,
+      "max_draw_interval_ms": 36.09999990463257,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "late": 58,
+        "queueResetted": 0,
+        "dropped": 4
+      },
+      "overflow_events": 0,
+      "overflow_retired_fields": 0,
+      "phases": {
+        "before": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 24.100000023841858,
+          "over_40_ms": 0
+        },
+        "throttle": {
+          "draws": 60,
+          "fps_by_window": 30.0,
+          "max_interval_ms": 36.09999990463257,
+          "over_40_ms": 0
+        },
+        "recovery_0_2s": {
+          "draws": 120,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 29.699999928474426,
+          "over_40_ms": 0
+        },
+        "recovery_2_8s": {
+          "draws": 360,
+          "fps_by_window": 60.0,
+          "max_interval_ms": 24.700000047683716,
+          "over_40_ms": 0
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  ],
+  "aggregates": {
+    "windows": {
+      "baseline": {
+        "canvas_fps_by_window": 55.04684050378947,
+        "max_draw_interval_ms": 47.40000000099341,
+        "draw_intervals_over_40_ms": 0.3333333333333333,
+        "overflow_events": 21.333333333333332,
+        "overflow_retired_fields": 21.666666666666668,
+        "late_mean": 60,
+        "full_resets_total": 0
+      },
+      "compressed": {
+        "canvas_fps_by_window": 55.09275415584676,
+        "max_draw_interval_ms": 35.433333333581686,
+        "draw_intervals_over_40_ms": 0,
+        "overflow_events": 0.6666666666666666,
+        "overflow_retired_fields": 0.6666666666666666,
+        "late_mean": 60.333333333333336,
+        "full_resets_total": 0
+      }
+    },
+    "galaxy": {
+      "baseline": {
+        "canvas_fps_by_window": 41.7203204640829,
+        "max_draw_interval_ms": 40.03333334128062,
+        "draw_intervals_over_40_ms": 0.6666666666666666,
+        "overflow_events": 174,
+        "overflow_retired_fields": 218,
+        "late_mean": 183.66666666666666,
+        "full_resets_total": 1
+      },
+      "compressed": {
+        "canvas_fps_by_window": 54.996944625038026,
+        "max_draw_interval_ms": 37.3333332935969,
+        "draw_intervals_over_40_ms": 0,
+        "overflow_events": 0.6666666666666666,
+        "overflow_retired_fields": 0.6666666666666666,
+        "late_mean": 58.666666666666664,
+        "full_resets_total": 0
+      }
+    }
+  },
+  "interpretation": [
+    "The injected 30 fps presentation interval is intentional and is not improved by the candidate.",
+    "Baseline overflow retirement leaves empty presentation moments and can continue retiring the oldest field after injection.",
+    "Deadline compression closes only the moments belonging to retired fields. Both devices recovered immediately to about 60 fps without a full reset.",
+    "The last-field hold experiment remains rejected; this candidate is the independent overflow correctness fix."
+  ]
+}
