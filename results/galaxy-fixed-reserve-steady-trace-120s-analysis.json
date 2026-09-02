@@ -1,0 +1,424 @@
+{
+  "variant": "fixed-reserve",
+  "durationMs": 120002.79999995232,
+  "mediaTimeDelta": 120.00389500000006,
+  "fps": {
+    "draw": 59.94026806043574,
+    "raf": 59.99026689379632,
+    "videoCallback": 29.974300599664584
+  },
+  "intervals": {
+    "draw": {
+      "count": 7192,
+      "median": 16.600000023841858,
+      "p95": 20,
+      "p99": 21.300000071525574,
+      "max": 39.10000002384186,
+      "over25": 17,
+      "over40": 0
+    },
+    "raf": {
+      "count": 7198,
+      "median": 16.69999999999709,
+      "p95": 16.80000000000291,
+      "p99": 16.900000000001455,
+      "max": 33.30000000000291,
+      "over25": 1,
+      "over40": 0
+    },
+    "videoCallback": {
+      "count": 3596,
+      "median": 33.39999997615814,
+      "p95": 35.700000047683716,
+      "p99": 37.39999997615814,
+      "max": 53.5,
+      "over25": 3585,
+      "over40": 18
+    },
+    "videoMediaTime": {
+      "count": 3596,
+      "median": 33.36699999999837,
+      "p95": 33.36699999999837,
+      "p99": 33.36699999999837,
+      "max": 33.36700000011206,
+      "over25": 3596,
+      "over40": 0
+    },
+    "drawCall": {
+      "count": 7193,
+      "median": 0,
+      "p95": 0.10000002384185791,
+      "p99": 0.10000002384185791,
+      "max": 1.2999999523162842,
+      "over25": 0,
+      "over40": 0
+    }
+  },
+  "quality": {
+    "start": {
+      "total": 295,
+      "dropped": 0
+    },
+    "end": {
+      "total": 3931,
+      "dropped": 40
+    },
+    "delta": {
+      "total": 3636,
+      "dropped": 40
+    }
+  },
+  "qualityChangeEvents": [
+    {
+      "at": 12198.600000023842,
+      "total": 319,
+      "dropped": 2,
+      "delta": 2
+    },
+    {
+      "at": 15199.100000023842,
+      "total": 411,
+      "dropped": 4,
+      "delta": 2
+    },
+    {
+      "at": 24216,
+      "total": 683,
+      "dropped": 6,
+      "delta": 2
+    },
+    {
+      "at": 27213.400000095367,
+      "total": 775,
+      "dropped": 8,
+      "delta": 2
+    },
+    {
+      "at": 35731.40000009537,
+      "total": 1032,
+      "dropped": 10,
+      "delta": 2
+    },
+    {
+      "at": 39230.700000047684,
+      "total": 1139,
+      "dropped": 12,
+      "delta": 2
+    },
+    {
+      "at": 48230,
+      "total": 1411,
+      "dropped": 14,
+      "delta": 2
+    },
+    {
+      "at": 51231.40000009537,
+      "total": 1503,
+      "dropped": 16,
+      "delta": 2
+    },
+    {
+      "at": 59746.60000002384,
+      "total": 1760,
+      "dropped": 18,
+      "delta": 2
+    },
+    {
+      "at": 63248.10000002384,
+      "total": 1867,
+      "dropped": 20,
+      "delta": 2
+    },
+    {
+      "at": 71248.30000007153,
+      "total": 2109,
+      "dropped": 22,
+      "delta": 2
+    },
+    {
+      "at": 75263.80000007153,
+      "total": 2231,
+      "dropped": 24,
+      "delta": 2
+    },
+    {
+      "at": 83765.60000002384,
+      "total": 2488,
+      "dropped": 26,
+      "delta": 2
+    },
+    {
+      "at": 87265.40000009537,
+      "total": 2595,
+      "dropped": 28,
+      "delta": 2
+    },
+    {
+      "at": 96284.5,
+      "total": 2867,
+      "dropped": 30,
+      "delta": 2
+    },
+    {
+      "at": 99283.40000009537,
+      "total": 2959,
+      "dropped": 32,
+      "delta": 2
+    },
+    {
+      "at": 107800.90000009537,
+      "total": 3216,
+      "dropped": 34,
+      "delta": 2
+    },
+    {
+      "at": 111300.30000007153,
+      "total": 3323,
+      "dropped": 36,
+      "delta": 2
+    },
+    {
+      "at": 119799.80000007153,
+      "total": 3580,
+      "dropped": 38,
+      "delta": 2
+    },
+    {
+      "at": 123302.5,
+      "total": 3687,
+      "dropped": 40,
+      "delta": 2
+    }
+  ],
+  "statsDelta": {
+    "filtered": 7150,
+    "missed": 0,
+    "degraded": 0,
+    "discontinuities": 0,
+    "late": 0,
+    "queueResetted": 0,
+    "dropped": 40
+  },
+  "longTasks": [
+    {
+      "at": 3379.3000000715256,
+      "durationMs": 66
+    }
+  ],
+  "drawOutliers": [
+    {
+      "atMs": 11647.199999928474,
+      "drawGapMs": 33.89999997615814,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.80000000000291,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 48.699999928474426,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 17113.199999928474,
+      "drawGapMs": 32.5,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.900000000001455,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 32.5,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 21506.699999928474,
+      "drawGapMs": 26.299999952316284,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.5,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 40.299999952316284,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 33713.699999928474,
+      "drawGapMs": 33,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.700000000004366,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 32.90000009536743,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 39023.60000002384,
+      "drawGapMs": 27.200000047683716,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.700000000004366,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 42.200000047683716,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 47050.89999997616,
+      "drawGapMs": 39.10000002384186,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 52.39999997615814,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 50531.299999952316,
+      "drawGapMs": 33,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.60000000000582,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 32.89999997615814,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 67183.19999992847,
+      "drawGapMs": 34.59999990463257,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 34.5,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 73990.89999997616,
+      "drawGapMs": 27.399999976158142,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.59999999999127,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 42.39999997615814,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 78009,
+      "drawGapMs": 28.300000071525574,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.60000000000582,
+      "videoCallbacksInGap": 0,
+      "maxVideoCallbackGapMs": 0,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 83735,
+      "drawGapMs": 33.800000071525574,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 33.800000071525574,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 98500,
+      "drawGapMs": 33.39999997615814,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 48.5,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 100598.69999992847,
+      "drawGapMs": 34.199999928474426,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 36,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 108493.19999992847,
+      "drawGapMs": 26.699999928474426,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.69999999999709,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 42,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 110504.89999997616,
+      "drawGapMs": 38.700000047683716,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.60000000000582,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 53.5,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 111194.19999992847,
+      "drawGapMs": 29.399999976158142,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 2,
+      "maxRafGapMs": 16.80000000000291,
+      "videoCallbacksInGap": 1,
+      "maxVideoCallbackGapMs": 42.90000009536743,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    },
+    {
+      "atMs": 115999.89999997616,
+      "drawGapMs": 29.399999976158142,
+      "drawCallMs": 0,
+      "rafCallbacksInGap": 1,
+      "maxRafGapMs": 16.60000000000582,
+      "videoCallbacksInGap": 0,
+      "maxVideoCallbackGapMs": 0,
+      "mediaTimeDeltaMs": null,
+      "qualityChanges": [],
+      "longTasks": []
+    }
+  ],
+  "drawOutliersOver40": [],
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

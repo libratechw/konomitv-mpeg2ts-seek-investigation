@@ -486,6 +486,12 @@ mpeg2toh264の既定`openGopRecovery: 'idr'`は24 GOPごとのrecovery境界で�
 
 したがってcounter増分の原因はperiodic IDR recovery copyで確定できるが、これをnon-IDR recovery pointへ変えることは可視カクつきの修正ではない。既定IDRはhardware decoderへ明確な再開点を与える互換性方針なので、Galaxyだけの成功を根拠に変更しない。[120秒trace](results/galaxy-recovery-point-steady-trace-120s.json)、[解析](results/galaxy-recovery-point-steady-trace-120s-analysis.json)、[seek 1](results/galaxy-recovery-point-seek-visible-1.json)、[seek 2](results/galaxy-recovery-point-seek-visible-2.json)、[既定IDR対照](results/galaxy-idr-current-control-seek-visible.json)を保存した。
 
+残る40ms超のcanvas間隔ではrAFが約60Hzを維持し、同期`drawArrays()`も1ms未満だった一方、rVFC入力が約65ms空いていた。元TSとrVFCの`mediaTime`間隔は全区間約33.367msで、YADIFが入力callbackの揺れを吸収できず、生成済みfieldを使い切ったことが直接要因である。
+
+queueが空のときの最初のfield deadlineを1入力frame分だけ後ろへ置く1行の固定reserve案を試した。120秒では59.940fps、40ms超0回、`late` / reset 0で、20 seekも中央値147.1ms、p95 / 最大213.6ms、20/20が250ms以内だった。しかし600秒へ延ばすと、約512秒から入力と表示clockの差でqueueが容量上限に張り付き、`late` 2071、reset 2、最大11.15秒のcanvas停止、全体56.370fpsとなった。短窓の成功だけでは分からない長期退行なので、この固定reserve案は採用しない。[120秒trace](results/galaxy-fixed-reserve-steady-trace-120s.json)、[同解析](results/galaxy-fixed-reserve-steady-trace-120s-analysis.json)、[600秒trace](results/galaxy-fixed-reserve-steady-trace-600s.json)、[同解析](results/galaxy-fixed-reserve-steady-trace-600s-analysis.json)、[seek](results/galaxy-fixed-reserve-seek-visible-20.json)を保存した。
+
+queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0回だったが、future leadが最大約125msまで増えた。容量を可変遅延bufferとして使うため、A/V差とライブ遅延の上限が変更量から明確にならず、この形も正式候補にしない。5 / 6 / 7 slotの生値は[5 slot](results/galaxy-one-field-slack-five-slot-fullscreen-600s-120s.json)、[6 slot](results/galaxy-six-slot-fullscreen-600s-120s.json)、[7 slot 120秒](results/galaxy-seven-slot-fullscreen-600s-120s.json)、[7 slot 600秒](results/galaxy-seven-slot-fullscreen-600s-600s.json)に残す。次に検討できるのは、video media clockへ上限付きで同期し、通常の1 callback揺れだけを吸収しつつ、蓄積時は必要最小限を捨てるjitter bufferである。追加遅延、A/V差、ライブ追従、seek初画を同時に測れる設計が必要になる。
+
 このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。`konomi/main`で加算されず常に0だった`queueResetted`は、この修正で実際の全resetを再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式buildには検証用global hookを含めていないため、hook変数だけを設定した3走行はpresentation不足の証拠から除外した。正式候補の全条件と除外理由は[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)に保存した。
@@ -815,7 +821,9 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
 | `autoFilm`のseek後lock/hysteresisを調整する | 24fps区間のモード安定を早める可能性 | 単一タブ初画A/Bでは改善余地を確認できず優先度を下げる。定常cadence、誤lock、CM境界の評価候補として残す |
 | seek直後だけ簡易deinterlaceにする | 初画数msの可能性 | 1〜2frame不足時の複製/直接描画は既に実装済み。通常は追加変更不要 |
-| periodic IDR recovery copyをnon-IDR recovery pointへ変える | Galaxyでは120秒の`droppedVideoFrames`が40→0になり、YADIF 59.925fpsとmedia timeを維持 | counterは実画像のない1 tick sampleをChromeが表示しないことを数え、可視40ms超間隔は1回残った。40 seekも既定IDRより安定して速くならず、hardware decoder互換性の広い検証なしには変更しない |
+| periodic IDR recovery copyをnon-IDR recovery pointへ変える | Galaxyでは120秒の`droppedVideoFrames`が40→0になり、YADIF 59.925fpsとmedia timeを維持 | counterは元TSの新しい表示画像に対応しない1 tick sampleをChromeが表示しないことを数え、可視40ms超間隔は1回残った。40 seekも既定IDRより安定して速くならず、hardware decoder互換性の広い検証なしには変更しない |
+| queueが空のとき1入力frame分の固定reserveを置く | 120秒では40ms超1〜2回→0回、20 seekも20/20が250ms以内 | 600秒でclock差が蓄積し、`late` 2071、reset 2、最大11.15秒停止へ退行したため、この式は棄却。長窓とライブ追従を必須試験にする |
+| YADIF queueを7 slotへ広げる | 600秒で59.940fps、40ms超0回 | future leadが最大約125msまで増え、容量依存の可変A/V差とライブ遅延になる。上限付きmedia-clock jitter bufferとして設計し直す場合だけ再評価 |
 | 実行中picture jobを細粒度cancelする | 連続確定時の残余計算削減 | 通常のドラッグは指を離すまでseekしない。連打再現とjob時間の計測が先 |
 | 目的時刻より後への着地を許し近傍RAPから再生する | 固定leadを1秒から0.5秒へ減らしたGalaxy 5地点の代理試験では、可視初画平均222.0→174.6ms、平均47.4ms（21.4%）短縮。約200msの応答に対する21%は官能評価対象として有意義 | 2/5地点で要求時刻より93ms、344ms先へ着地した。近傍RAP選択そのものではない非交互各5回の暫定値なので、upstreamの要求位置を欠落させない既定動作は維持する。固定leadの調整と直前RAP選択を分けて検証する |
 | ユーザー時刻から固定量を引き、その時刻以後かつ元の時刻以前のRAPを選ぶ | `T-d`以後の最初のRAPが`T`以前なら、要求位置を越えず比較的新しいGOPを選べる | `T-d`を現行seek全体へ渡すだけではRange探索も前へ動くため速くならない。`[T-d,T]`にRAPがある保証も固定値だけでは作れない。RAP時刻を確認して`RAP <= T`を選ぶ方式として検証する |
