@@ -175,8 +175,8 @@ coreの公開APIは現在利用する`restartOffset`だけとし、診断版に�
 
 正式branch群を最新KonomiTVへ組み込み、Galaxy Chrome、LAN直結、body全画面、右パネルなし、単一タブで取り直した。
 600秒と900秒をwarm-upした後の40 seekは追加probe 0件で、`seek-requested`から`seeked`後も残る可視canvas初画まで中央値159.1ms、p95 212.4ms、最大229.0msとなり、40/40が250ms以内だった。
-公開integration `606943d`も、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値146.4ms、p95 199.6ms、最大229.7msとなり、40/40が250ms以内だった。
-同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻すと、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。integration全体では中央値140.7ms（49.0%）、p95 149.5ms（42.8%）を短縮した。
+二段階YADIF候補まで含む公開integration製品コードも、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値145.8ms、p95 213.4ms、最大232.5msとなり、40/40が250ms以内だった。
+同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻すと、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。integration全体では中央値141.2ms（49.2%）、p95 135.8ms（38.9%）を短縮した。
 正式候補timing版と公開integrationは計測起点とinstrumentationが異なるため、その差をMSE修正単独の効果とは扱わない。
 正式候補の区間別中央値はRange headers待ち31.8ms、first byteからpicture jobs 24.6ms、最初のworker出力からstream先頭AU 29.7ms、append完了から`canplay`27.6msだった。
 詳細と生値は[Galaxy正式候補とintegration](results/device-results.md#galaxyの正式候補と公開integration)を参照する。
@@ -468,8 +468,9 @@ Galaxyのtrue fullscreen、60Hz、単一タブ、乃木坂工事中、1秒待機
 
 presentation policyも同じbuildで分離した。
 通常8秒を各3回測ると、1 rAFにつき1 field＋最小FIFOは59.91〜60.03fps、2 refresh以上遅れた場合だけcatch-upする二段階版は59.88〜60.04fps、従来の複数field消費は59.98〜60.00fpsで、全群の採取中`late`増分は0だった。
-この条件では1 field化の通常時改善を立証できず、容量FIFOだけでも能力不足後の遅延を4.4〜27.6msへ収束できた。
-このため1 field化と二段階catch-upはqueue整合性修正へ混ぜず、自然負荷で従来版の誤破棄を再現できるまで別候補とする。
+この短窓では差がなかったが、最新KonomiTVを通した120秒反復では自然負荷による通常fieldの誤破棄を再現した。
+2走行平均でGalaxyは59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0、Windowsは59.354→59.783fps、25ms超127→43回、`late` 66→15.5となった。
+全8走行でmedia timeは約120秒進み、全reset 0だったため、ライブ遅延を蓄積せず通常fieldの誤破棄を減らす独立候補とする。40ms超間隔と`droppedVideoFrames`は改善しておらず、別原因として残る。OriginalではvideoがYADIFの入力textureで最終表示はcanvasなので、後者を可視コマ落ち数とは確定せず、サーバーエンコード経路とrVFC入力数を対照測定する。
 
 このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
@@ -756,7 +757,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−71.3ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
 | P0 | 再生中に確認したPAT/PMT安全位置を後続seekへ再利用する | 診断A/BでGalaxyのprobe 40→0、canvas中央値−65.0ms、p95−57.9ms。正式branch組み込み版も中央値159.1ms、p95 212.4ms、最大229.0msで40/40を250ms以下に維持 | 中 | ○ | mpeg2toh264 core `bfefdf8` + player `295b692`。位置報告と利用policyを別PRにする |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
-| P2 | 通常は1 rAFにつき1 field、実遅延時だけcatch-upする | 通常時の誤破棄を防ぐ可能性。現在の全画面通常試験では従来版も59.98〜60.00fps・late 0で改善未立証 | 中 | △ | YADIF presentation policy。queue整合性修正へ混ぜない |
+| P1 | 通常は1 rAFにつき1 field、実遅延時だけcatch-upする | 120秒2走行平均でGalaxy 59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0。Windows 59.354→59.783fps、25ms超127→43回、`late` 66→15.5。全reset 0 | 中 | ◎ | YADIF presentation policy。公開source `fb2e6e4`、dist `21cc3c3`。queue整合性修正の子branch |
 | P2 | 初回fieldのleadを2 fieldから1 fieldへ戻す | 短い3走行では59.64〜59.84→59.98〜60.00fpsだが、reset条件が混在 | 小 | △ | `d4ccb98`の効果を長窓A/Bで再評価。新規修正とは扱わない |
 | P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。実利用の頻度とstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
 | P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
@@ -874,7 +875,7 @@ I-pictureの途中byteだけを返さない。
 
 1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。`f7b89eb`のstall防止を90 seekで維持し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
 2. **YADIF: seeked直前の目的frame保持**。公開`fix/preserve-destination-frame-on-seek`で、source `2d072f3`と生成済みdist `f3ba99d`を別コミットにした。queue回復やpresentation policyとは独立した`seeked`競合のPR単位とする。
-3. **YADIF: presentation policy**。1 rAFにつき1 fieldと遅延時catch-upは、自然負荷で従来版の誤破棄を再現し、queue制御だけでは直らない場合に限り別PRとする。
+3. **YADIF: presentation policy**。公開`fix/present-one-field-per-refresh`で、通常はFIFO順に1 fieldを表示し、最古fieldが2 refreshを超えて遅れた場合だけ追いつく。GalaxyとWindowsの120秒反復で自然負荷の誤破棄を減らし、source `fb2e6e4`と生成済みdist `21cc3c3`を別コミットにした。queue容量回復を親branchとする独立PR単位である。
 4. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
 5. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
 6. 現在公開済みのupstream向け4ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchは取り込まない。

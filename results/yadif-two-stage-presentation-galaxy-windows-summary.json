@@ -1,0 +1,753 @@
+{
+  "scope": "Two-stage YADIF presentation policy on current public integration, native fullscreen, right panel closed, 120-second steady playback at 600 seconds",
+  "revisions": {
+    "konomiTv": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "integrationProductTree": "606943da0434c28dea54c1c5e12d1c42fc960e8d",
+    "candidateValidation": "6269049748c471c5456693a67ec5746af78d85db",
+    "candidateSource": "fb2e6e4b303815300933df41a363d1032dabf32c",
+    "candidateDist": "21cc3c3ba110f6995f3924fedf50a151a5ac4e4e"
+  },
+  "policy": "Keep FIFO order during ordinary callback phase differences; retire old fields only when the oldest is more than two refresh periods late. Queue-capacity FIFO recovery and clock-divergence full reset remain separate.",
+  "measurement": {
+    "material": "Nogizaka Koujichuu verified segment",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "onePageDuringMeasurement": true,
+    "durationMs": 120000,
+    "order": {
+      "windows": "B-F-B-F",
+      "galaxy": "B-F-F-B"
+    }
+  },
+  "results": {
+    "windows": {
+      "integration": {
+        "runs": [
+          {
+            "input": "windows-integration-quiet-panel-free-fullscreen-600s-steady-120s.json",
+            "canvasDrawFps": 59.47430613309493,
+            "mediaTimeDelta": 119.99838,
+            "drawIntervals": {
+              "count": 7136,
+              "min": 1.300000000745058,
+              "median": 16.700000000186265,
+              "p95": 18.299999999813735,
+              "p99": 27.299999999813735,
+              "max": 79.3999999994412,
+              "over25": 89,
+              "over40": 8,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7176,
+              "min": 15.799999999995634,
+              "median": 16.69999999999709,
+              "p95": 17.09999999999127,
+              "p99": 17.19999999999709,
+              "max": 49.89999999999418,
+              "over25": 22,
+              "over40": 1,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3637,
+              "dropped": 42
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7134,
+              "missed": 2,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 52,
+              "queueResetted": 0,
+              "dropped": 42
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "dedicatedChromeStopped": true,
+              "scheduledTaskRemoved": true,
+              "sshCdpTunnelRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": {
+              "CapturedAt": "2026-09-02T11:49:35.6598574+09:00",
+              "CpuLoadPercentSamples": [
+                8,
+                5,
+                4,
+                8,
+                6,
+                9,
+                8,
+                9
+              ],
+              "CpuLoadPercentMedian": 8,
+              "DiskSamples": [
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 3,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 78387
+                },
+                {
+                  "PercentDiskTime": 4,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 31274
+                },
+                {
+                  "PercentDiskTime": 5,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 517645
+                },
+                {
+                  "PercentDiskTime": 14,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 94268
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                }
+              ],
+              "KnownBackgroundLoad": [],
+              "ExplorerSessions": [
+                1
+              ],
+              "InteractiveDesktopAvailable": true
+            }
+          },
+          {
+            "input": "windows-integration-quiet-panel-free-fullscreen-600s-steady-120s-r2.json",
+            "canvasDrawFps": 59.23283972633561,
+            "mediaTimeDelta": 119.99763099999996,
+            "drawIntervals": {
+              "count": 7107,
+              "min": 2.5,
+              "median": 16.700000000186265,
+              "p95": 19.5,
+              "p99": 28.700000000186265,
+              "max": 59.90000000037253,
+              "over25": 165,
+              "over40": 8,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7145,
+              "min": 15.599999999998545,
+              "median": 16.69999999999709,
+              "p95": 17.09999999999127,
+              "p99": 17.30000000000291,
+              "max": 66.59999999999854,
+              "over25": 51,
+              "over40": 2,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3636,
+              "dropped": 42
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7132,
+              "missed": 2,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 80,
+              "queueResetted": 0,
+              "dropped": 42
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "dedicatedChromeStopped": true,
+              "scheduledTaskRemoved": true,
+              "sshCdpTunnelRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": {
+              "CapturedAt": "2026-09-02T11:59:13.2926870+09:00",
+              "CpuLoadPercentSamples": [
+                32,
+                6,
+                3,
+                3,
+                5,
+                4,
+                12,
+                9
+              ],
+              "CpuLoadPercentMedian": 6,
+              "DiskSamples": [
+                {
+                  "PercentDiskTime": 7,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 548613
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                }
+              ],
+              "KnownBackgroundLoad": [],
+              "ExplorerSessions": [
+                1
+              ],
+              "InteractiveDesktopAvailable": true
+            }
+          }
+        ],
+        "mean": {
+          "canvasDrawFps": 59.35357292971527,
+          "drawIntervalsOver25": 127,
+          "drawIntervalsOver40": 8,
+          "drawIntervalMaxMs": 69.64999999990687,
+          "late": 66,
+          "queueResetted": 0,
+          "droppedVideoFrames": 42,
+          "mediaTimeDelta": 119.99800549999998
+        }
+      },
+      "candidate": {
+        "runs": [
+          {
+            "input": "windows-integration-one-field-quiet-panel-free-fullscreen-600s-steady-120s.json",
+            "canvasDrawFps": 59.79121823252974,
+            "mediaTimeDelta": 119.998109,
+            "drawIntervals": {
+              "count": 7174,
+              "min": 2.199999999254942,
+              "median": 16.699999999254942,
+              "p95": 18,
+              "p99": 20.200000000186265,
+              "max": 66.90000000037253,
+              "over25": 32,
+              "over40": 8,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7177,
+              "min": 15.799999999988358,
+              "median": 16.69999999999709,
+              "p95": 17.09999999999127,
+              "p99": 17.200000000004366,
+              "max": 66.69999999999709,
+              "over25": 17,
+              "over40": 4,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3637,
+              "dropped": 42
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7130,
+              "missed": 2,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 15,
+              "queueResetted": 0,
+              "dropped": 42
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "dedicatedChromeStopped": true,
+              "scheduledTaskRemoved": true,
+              "sshCdpTunnelRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": {
+              "CapturedAt": "2026-09-02T11:55:55.3446846+09:00",
+              "CpuLoadPercentSamples": [
+                29,
+                12,
+                5,
+                6,
+                3,
+                3,
+                2,
+                6
+              ],
+              "CpuLoadPercentMedian": 6,
+              "DiskSamples": [
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 6,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 63633
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 1069335
+                }
+              ],
+              "KnownBackgroundLoad": [],
+              "ExplorerSessions": [
+                1
+              ],
+              "InteractiveDesktopAvailable": true
+            }
+          },
+          {
+            "input": "windows-integration-one-field-quiet-panel-free-fullscreen-600s-steady-120s-r2.json",
+            "canvasDrawFps": 59.77470112649409,
+            "mediaTimeDelta": 119.99687199999994,
+            "drawIntervals": {
+              "count": 7172,
+              "min": 1.7999999998137355,
+              "median": 16.700000000186265,
+              "p95": 18.299999999813735,
+              "p99": 23.59999999962747,
+              "max": 64.1000000005588,
+              "over25": 54,
+              "over40": 11,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7174,
+              "min": 15.69999999999709,
+              "median": 16.69999999999709,
+              "p95": 17.09999999999127,
+              "p99": 17.20000000001164,
+              "max": 50,
+              "over25": 22,
+              "over40": 3,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3637,
+              "dropped": 42
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7090,
+              "missed": 2,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 16,
+              "queueResetted": 0,
+              "dropped": 42
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "dedicatedChromeStopped": true,
+              "scheduledTaskRemoved": true,
+              "sshCdpTunnelRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": {
+              "CapturedAt": "2026-09-02T12:18:05.0473815+09:00",
+              "CpuLoadPercentSamples": [
+                5,
+                5,
+                5,
+                9,
+                3,
+                8,
+                4,
+                2
+              ],
+              "CpuLoadPercentMedian": 5,
+              "DiskSamples": [
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 11,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 251702
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                },
+                {
+                  "PercentDiskTime": 0,
+                  "CurrentDiskQueueLength": 0,
+                  "DiskBytesPersec": 0
+                }
+              ],
+              "KnownBackgroundLoad": [],
+              "ExplorerSessions": [
+                1
+              ],
+              "InteractiveDesktopAvailable": true
+            }
+          }
+        ],
+        "mean": {
+          "canvasDrawFps": 59.78295967951191,
+          "drawIntervalsOver25": 43,
+          "drawIntervalsOver40": 9.5,
+          "drawIntervalMaxMs": 65.50000000046566,
+          "late": 15.5,
+          "queueResetted": 0,
+          "droppedVideoFrames": 42,
+          "mediaTimeDelta": 119.99749049999997
+        }
+      },
+      "differenceCandidateMinusIntegration": {
+        "canvasDrawFps": 0.4293867497966417,
+        "drawIntervalsOver25": -84,
+        "drawIntervalsOver40": 1.5,
+        "drawIntervalMaxMs": -4.1499999994412065,
+        "late": -50.5,
+        "queueResetted": 0,
+        "droppedVideoFrames": 0,
+        "mediaTimeDelta": -0.0005150000000071486
+      }
+    },
+    "galaxy": {
+      "integration": {
+        "runs": [
+          {
+            "input": "galaxy-integration-panel-free-fullscreen-600s-steady-120s-b1.json",
+            "canvasDrawFps": 59.84975062603906,
+            "mediaTimeDelta": 120.00130000000001,
+            "drawIntervals": {
+              "count": 7181,
+              "min": 1.8000000715255737,
+              "median": 16.699999928474426,
+              "p95": 21.09999990463257,
+              "p99": 22.5,
+              "max": 36.299999952316284,
+              "over25": 37,
+              "over40": 0,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7199,
+              "min": 16.39999999999418,
+              "median": 16.69999999999709,
+              "p95": 16.80000000000291,
+              "p99": 16.899999999997817,
+              "max": 17,
+              "over25": 0,
+              "over40": 0,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3636,
+              "dropped": 40
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7092,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 11,
+              "queueResetted": 0,
+              "dropped": 40
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "chromeStopped": true,
+              "webapkStopped": true,
+              "adbForwardRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": null
+          },
+          {
+            "input": "galaxy-integration-panel-free-fullscreen-600s-steady-120s-b2.json",
+            "canvasDrawFps": 59.73303466814812,
+            "mediaTimeDelta": 120.0002300000001,
+            "drawIntervals": {
+              "count": 7167,
+              "min": 1.5,
+              "median": 16.799999952316284,
+              "p95": 20.199999928474426,
+              "p99": 21.799999952316284,
+              "max": 48.200000047683716,
+              "over25": 43,
+              "over40": 1,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7199,
+              "min": 16.5,
+              "median": 16.69999999999709,
+              "p95": 16.80000000000291,
+              "p99": 16.899999999997817,
+              "max": 17,
+              "over25": 0,
+              "over40": 0,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3637,
+              "dropped": 40
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7136,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 8,
+              "queueResetted": 0,
+              "dropped": 40
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "chromeStopped": true,
+              "webapkStopped": true,
+              "adbForwardRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": null
+          }
+        ],
+        "mean": {
+          "canvasDrawFps": 59.79139264709359,
+          "drawIntervalsOver25": 40,
+          "drawIntervalsOver40": 0.5,
+          "drawIntervalMaxMs": 42.25,
+          "late": 9.5,
+          "queueResetted": 0,
+          "droppedVideoFrames": 40,
+          "mediaTimeDelta": 120.00076500000006
+        }
+      },
+      "candidate": {
+        "runs": [
+          {
+            "input": "galaxy-integration-one-field-panel-free-fullscreen-600s-steady-120s-f1.json",
+            "canvasDrawFps": 59.93936899084344,
+            "mediaTimeDelta": 120.00341299999991,
+            "drawIntervals": {
+              "count": 7192,
+              "min": 1.2999999523162842,
+              "median": 16.600000023841858,
+              "p95": 20,
+              "p99": 21.399999976158142,
+              "max": 36.5,
+              "over25": 19,
+              "over40": 0,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7199,
+              "min": 16.5,
+              "median": 16.69999999999709,
+              "p95": 16.80000000000291,
+              "p99": 16.899999999997817,
+              "max": 17,
+              "over25": 0,
+              "over40": 0,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3637,
+              "dropped": 40
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7074,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0,
+              "dropped": 40
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "chromeStopped": true,
+              "webapkStopped": true,
+              "adbForwardRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": null
+          },
+          {
+            "input": "galaxy-integration-one-field-panel-free-fullscreen-600s-steady-120s-f2.json",
+            "canvasDrawFps": 59.924450692523415,
+            "mediaTimeDelta": 120.00141100000008,
+            "drawIntervals": {
+              "count": 7190,
+              "min": 1.5,
+              "median": 16.600000023841858,
+              "p95": 20.200000047683716,
+              "p99": 21.899999976158142,
+              "max": 51,
+              "over25": 26,
+              "over40": 2,
+              "over100": 0
+            },
+            "rafIntervals": {
+              "count": 7199,
+              "min": 16.400000000001455,
+              "median": 16.69999999999709,
+              "p95": 16.80000000000291,
+              "p99": 16.900000000001455,
+              "max": 17,
+              "over25": 0,
+              "over40": 0,
+              "over100": 0
+            },
+            "videoPlaybackQualityDelta": {
+              "total": 3636,
+              "dropped": 40
+            },
+            "deinterlacerCounterDelta": {
+              "filtered": 7080,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0,
+              "dropped": 40
+            },
+            "cleanup": {
+              "videoPausedBeforeClose": true,
+              "fullscreenExitedBeforeClose": true,
+              "testPagesClosed": true,
+              "chromeStopped": true,
+              "webapkStopped": true,
+              "adbForwardRemoved": true,
+              "containerStopped": true
+            },
+            "preflight": null
+          }
+        ],
+        "mean": {
+          "canvasDrawFps": 59.93190984168343,
+          "drawIntervalsOver25": 22.5,
+          "drawIntervalsOver40": 1,
+          "drawIntervalMaxMs": 43.75,
+          "late": 0,
+          "queueResetted": 0,
+          "droppedVideoFrames": 40,
+          "mediaTimeDelta": 120.00241199999999
+        }
+      },
+      "differenceCandidateMinusIntegration": {
+        "canvasDrawFps": 0.14051719458984024,
+        "drawIntervalsOver25": -17.5,
+        "drawIntervalsOver40": 0.5,
+        "drawIntervalMaxMs": 1.5,
+        "late": -9.5,
+        "queueResetted": 0,
+        "droppedVideoFrames": 0,
+        "mediaTimeDelta": 0.001646999999934451
+      }
+    }
+  },
+  "interpretation": [
+    "On both devices, the candidate increased mean canvas FPS and reduced intervals over 25 ms and scheduler late retirements.",
+    "Every run advanced media time by approximately 120 seconds and had zero full queue resets, so no live-delay accumulation appeared in these runs.",
+    "Intervals over 40 ms did not consistently improve, and droppedVideoFrames was identical within each device. Those remaining symptoms have another cause."
+  ],
+  "cleanup": {
+    "allRuns": true
+  }
+}
