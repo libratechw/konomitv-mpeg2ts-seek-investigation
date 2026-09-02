@@ -189,6 +189,15 @@ Galaxy Chrome、LAN直結、全画面、右パネルなし、単一タブ、60Hz
 同じbuildで180〜199秒と480〜499秒を交互に40回seekすると、持続表示される目的canvas初画まで中央値160.5ms、p90 180.9ms、p95 190.6ms、最大228.8msで、40/40が250ms以下だった。目的frame時刻は要求に対して-26.0〜+16.3msで、19/40は`seeking`中に到着したframeを保持した。[40回の生値と後片付け結果](results/galaxy-integration-v2-seek-visible-40.json)を保存した。
 直前の正式候補版は中央値157.2ms、p95 186.8ms、最大197.3msであり、独立mark修正による速度または表示FPSの退行は確認されなかった。
 
+### Linux Chromeの同一ホスト対照
+
+EVO-X2、Ubuntu 26.04.1、Chrome 152.0.7977.64、59.96Hzで、同じKonomiTVとTSを同一ホストのLAN addressから開き、全画面、右パネルなし、単一タブで測った。
+既知の正常区間を187.845秒から開始した120秒は、canvas 59.867fps、描画間隔p95 17.4ms、p99 17.7ms、40ms超2回、最大50.5msだった。rAFにも40ms超2回、最大50.0msがあり、YADIFは`late`が5、`missed`が2増え、全resetと入力discontinuityの増加は0だった。[120秒の生値](results/linux-integration-v2-steady-good-segment-120s.json)を保存した。
+
+180〜199秒と480〜499秒を交互に測った40 seekは、持続表示される目的canvas初画まで中央値131.7ms、p95 195.4ms、最大196.2msで40/40が250ms以下だった。
+180秒群は中央値147.6ms、480秒群は114.0msで、目的時刻より先への着地は0回だった。[40回の生値](results/linux-integration-v2-seek-visible-40.json)を保存した。
+同一ホストの対照なのでLANクライアントの目標達成には数えないが、同じ地点差がWindowsより短い待ちで収まることと、integrationのLinux回帰がないことを示す。
+
 ### Windows Chromeの低電力条件
 
 Lenovo IdeaPad Flex 5 14ARE05、Windows 11、AMD Radeon Graphics、Chrome 152.0.7977.65、60Hz、電源モード「最適な電力効率」で、同じKonomiTV、TS、LAN、全画面、右パネルなし、専用Chrome profileを使った。
