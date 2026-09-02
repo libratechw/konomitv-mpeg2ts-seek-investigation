@@ -1,0 +1,375 @@
+{
+  "scope": "Galaxy Chrome, LAN direct, native fullscreen with the right panel closed",
+  "variant": "formal restart-offset reporting, observed restart reuse, probe-sample preservation, YADIF queue recovery, and destination-frame preservation",
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayModeConfigured": "60 Hz",
+    "measuredDisplayHz": 59.88023952095874,
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": [
+      "visible"
+    ],
+    "onePageDuringMeasurement": true,
+    "measuredRuns": 40,
+    "warmupRunsExcluded": 4,
+    "targetsSeconds": [
+      600,
+      601,
+      602,
+      603,
+      604,
+      605,
+      606,
+      607,
+      608,
+      609,
+      900,
+      901,
+      902,
+      903,
+      904,
+      905,
+      906,
+      907,
+      908,
+      909
+    ],
+    "sourceHash": "1308a39f6934cafce01740496c242adc20d3d23aa0d5531596195939b1af8abd",
+    "asset": "PlayerController-BrT24Mvy.js",
+    "rawInputs": [
+      "galaxy-formal-rap-panel-free-fullscreen-seek-1.json",
+      "galaxy-formal-rap-panel-free-fullscreen-seek-2.json"
+    ]
+  },
+  "metricDefinition": "first target canvas draw that remains visible across seeked",
+  "durableCanvasMs": {
+    "n": 40,
+    "min": 122.3,
+    "mean": 159.275,
+    "median": 159.05,
+    "p90": 194.02,
+    "p95": 212.445,
+    "p99": 222.877,
+    "max": 229
+  },
+  "within250Ms": {
+    "count": 40,
+    "total": 40
+  },
+  "probeRequests": {
+    "total": 0,
+    "runsWithProbe": 0
+  },
+  "acceptedWhileSeeking": 0,
+  "absoluteMarkMs": {
+    "seek-requested": {
+      "n": 40,
+      "min": 0,
+      "mean": 0.0,
+      "median": 0.0,
+      "p90": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "max": 0
+    },
+    "seek": {
+      "n": 40,
+      "min": 0.3,
+      "mean": 1.273,
+      "median": 0.7,
+      "p90": 3.07,
+      "p95": 4.02,
+      "p99": 5.193,
+      "max": 5.7
+    },
+    "request": {
+      "n": 40,
+      "min": 0.5,
+      "mean": 1.6,
+      "median": 1.0,
+      "p90": 3.18,
+      "p95": 4.225,
+      "p99": 5.432,
+      "max": 5.9
+    },
+    "response": {
+      "n": 40,
+      "min": 16.1,
+      "mean": 32.645,
+      "median": 32.6,
+      "p90": 43.55,
+      "p95": 49.05,
+      "p99": 58.253,
+      "max": 61.1
+    },
+    "first-byte": {
+      "n": 40,
+      "min": 17.4,
+      "mean": 33.405,
+      "median": 33.3,
+      "p90": 44.34,
+      "p95": 49.735,
+      "p99": 58.653,
+      "max": 61.5
+    },
+    "first-picture-jobs": {
+      "n": 40,
+      "min": 35.5,
+      "mean": 61.208,
+      "median": 60.1,
+      "p90": 76.21,
+      "p95": 79.115,
+      "p99": 85.579,
+      "max": 87.1
+    },
+    "first-picture-output": {
+      "n": 40,
+      "min": 38.5,
+      "mean": 67.098,
+      "median": 65.6,
+      "p90": 81.93,
+      "p95": 86.0,
+      "p99": 93.024,
+      "max": 96.3
+    },
+    "first-access-unit": {
+      "n": 40,
+      "min": 67.7,
+      "mean": 96.543,
+      "median": 96.2,
+      "p90": 112.84,
+      "p95": 116.23,
+      "p99": 123.772,
+      "max": 125.8
+    },
+    "first-fragment": {
+      "n": 40,
+      "min": 69.8,
+      "mean": 104.65,
+      "median": 103.3,
+      "p90": 121.26,
+      "p95": 122.65,
+      "p99": 137.126,
+      "max": 139.7
+    },
+    "append": {
+      "n": 40,
+      "min": 70.4,
+      "mean": 105.503,
+      "median": 104.1,
+      "p90": 122.42,
+      "p95": 123.62,
+      "p99": 138.328,
+      "max": 140.2
+    },
+    "appended": {
+      "n": 40,
+      "min": 75.2,
+      "mean": 115.838,
+      "median": 116.55,
+      "p90": 131.59,
+      "p95": 142.575,
+      "p99": 148.523,
+      "max": 150.2
+    },
+    "canplay": {
+      "n": 40,
+      "min": 119,
+      "mean": 151.43,
+      "median": 149.3,
+      "p90": 180.9,
+      "p95": 206.655,
+      "p99": 213.644,
+      "max": 213.8
+    },
+    "playing": {
+      "n": 40,
+      "min": 119.5,
+      "mean": 152.005,
+      "median": 149.65,
+      "p90": 181.32,
+      "p95": 207.07,
+      "p99": 214.161,
+      "max": 214.2
+    },
+    "durable-canvas": {
+      "n": 40,
+      "min": 122.3,
+      "mean": 159.275,
+      "median": 159.05,
+      "p90": 194.02,
+      "p95": 212.445,
+      "p99": 222.877,
+      "max": 229
+    },
+    "presented": {
+      "n": 40,
+      "min": 123.8,
+      "mean": 161.75,
+      "median": 161.45,
+      "p90": 195.89,
+      "p95": 214.32,
+      "p99": 224.704,
+      "max": 231.1
+    }
+  },
+  "adjacentIntervalMs": {
+    "seek-requestedToseek": {
+      "n": 40,
+      "min": 0.3,
+      "mean": 1.273,
+      "median": 0.7,
+      "p90": 3.07,
+      "p95": 4.02,
+      "p99": 5.193,
+      "max": 5.7
+    },
+    "seekTorequest": {
+      "n": 40,
+      "min": 0.1,
+      "mean": 0.328,
+      "median": 0.3,
+      "p90": 0.6,
+      "p95": 0.705,
+      "p99": 1.044,
+      "max": 1.2
+    },
+    "requestToresponse": {
+      "n": 40,
+      "min": 14.5,
+      "mean": 31.045,
+      "median": 31.75,
+      "p90": 41.74,
+      "p95": 47.565,
+      "p99": 55.885,
+      "max": 59.2
+    },
+    "responseTofirst-byte": {
+      "n": 40,
+      "min": 0.1,
+      "mean": 0.76,
+      "median": 0.55,
+      "p90": 1.7,
+      "p95": 1.835,
+      "p99": 2.622,
+      "max": 2.7
+    },
+    "first-byteTofirst-picture-jobs": {
+      "n": 40,
+      "min": 14.1,
+      "mean": 27.803,
+      "median": 24.55,
+      "p90": 46.96,
+      "p95": 47.735,
+      "p99": 54.518,
+      "max": 56.0
+    },
+    "first-picture-jobsTofirst-picture-output": {
+      "n": 40,
+      "min": 2.8,
+      "mean": 5.89,
+      "median": 6.15,
+      "p90": 7.21,
+      "p95": 8.155,
+      "p99": 11.945,
+      "max": 13.7
+    },
+    "first-picture-outputTofirst-access-unit": {
+      "n": 40,
+      "min": 19.0,
+      "mean": 29.445,
+      "median": 29.7,
+      "p90": 33.0,
+      "p95": 33.065,
+      "p99": 34.483,
+      "max": 34.6
+    },
+    "first-access-unitTofirst-fragment": {
+      "n": 40,
+      "min": 2.1,
+      "mean": 8.107,
+      "median": 8.5,
+      "p90": 13.91,
+      "p95": 14.585,
+      "p99": 16.383,
+      "max": 16.5
+    },
+    "first-fragmentToappend": {
+      "n": 40,
+      "min": 0.2,
+      "mean": 0.853,
+      "median": 0.7,
+      "p90": 1.31,
+      "p95": 1.445,
+      "p99": 3.215,
+      "max": 3.8
+    },
+    "appendToappended": {
+      "n": 40,
+      "min": 4.8,
+      "mean": 10.335,
+      "median": 9.35,
+      "p90": 14.44,
+      "p95": 19.445,
+      "p99": 20.788,
+      "max": 21.1
+    },
+    "appendedTocanplay": {
+      "n": 40,
+      "min": 12.9,
+      "mean": 35.592,
+      "median": 27.55,
+      "p90": 68.0,
+      "p95": 99.47,
+      "p99": 102.822,
+      "max": 102.9
+    },
+    "canplayToplaying": {
+      "n": 40,
+      "min": 0.2,
+      "mean": 0.575,
+      "median": 0.4,
+      "p90": 1.01,
+      "p95": 1.21,
+      "p99": 1.827,
+      "max": 2.1
+    },
+    "playingTodurable-canvas": {
+      "n": 40,
+      "min": -4.7,
+      "mean": 7.27,
+      "median": 6.7,
+      "p90": 12.67,
+      "p95": 13.57,
+      "p99": 16.303,
+      "max": 17.2
+    },
+    "durable-canvasTopresented": {
+      "n": 40,
+      "min": 0.7,
+      "mean": 2.475,
+      "median": 2.1,
+      "p90": 4.11,
+      "p95": 4.525,
+      "p99": 5.854,
+      "max": 6.4
+    }
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  },
+  "interpretation": [
+    "The two warm-up seeks discover safe restart offsets for 600 s and 900 s. The 40 measured seeks exercise in-memory reuse at 600-609 s and 900-909 s, so this is not a cold unknown-position result.",
+    "The playing event is the closest available browser event for resumed playback; it does not prove that audio was physically audible.",
+    "The runtime bundle was rebuilt before these runs so that seek-requested and the seek ID timing context matched the measured source. Earlier attempts that timed out waiting for seek-requested are excluded."
+  ]
+}

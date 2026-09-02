@@ -1,5 +1,59 @@
 # Chrome と Galaxy のシーク・カデンス計測
 
+## Galaxyの正式候補と公開integration
+
+最新KonomiTV `e92fba8`、Galaxy Tab S11 Ultra、Google Chrome、表示設定60Hz、LAN直結、乃木坂工事中、`autoFilm:false`を共通条件にした。
+各走行の開始前は同じoriginのpage targetを0件とし、測定中は対象タブ1枚、`document.fullscreenElement === document.body`、右パネル非表示、前景再生を確認した。
+終了時は再生停止、全画面解除、視聴タブ閉鎖、ChromeとWebAPK停止、ADB forward解除、隔離KonomiTV停止を全走行で確認した。
+
+正式候補のtiming版は、公開`bfefdf8`、`295b692`、`a10253e`、`26484fd`、`2d072f3`と計測専用`58a9920`を検証worktreeで合成した。
+最初のbuildはsourceだけが新しく、KonomiTVが読む生成済みplayer bundleが旧版だったため、`seek-requested`を待つ試行は失敗として除外した。
+playerとYADIFの`dist`を再生成してKonomiTVをbuildし直し、`PlayerController-BrT24Mvy.js`とseek ID付きmarkが実際に読み込まれた後だけを採用した。
+
+| build | 起点 | n | 可視canvas中央値 | p90 | p95 | 最大 | 250ms以下 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 正式候補 + timing | `seek-requested` | 40 | 159.1 ms | 194.0 ms | 212.4 ms | 229.0 ms | 40/40 |
+| 公開integration `606943d` | `video.currentTime`設定直前 | 40 | 146.4 ms | 195.1 ms | 199.6 ms | 229.7 ms | 40/40 |
+
+初画は、目的時刻のframeをYADIF canvasへ描画し、その直後の`seeked`処理でもvisibleのまま残る最初の描画とした。
+各ブロックの最初に600秒と900秒へwarm-up seekし、測定は600〜609秒と900〜909秒を交互に行った。
+正式候補40回の追加probeは0件で、再生中に確認した安全位置を再利用した結果である。
+coldな未知位置のseek性能を表す値ではない。
+
+timing版の各走行内で隣接markの差を取った結果は次のとおりである。
+絶対時刻の中央値同士を引いていない。
+
+| 区間 | 中央値 | p95 | 最大 |
+| --- | ---: | ---: | ---: |
+| `seek-requested` → Worker `seek` | 0.7 ms | 4.0 ms | 5.7 ms |
+| Worker `seek` → 本体Range request | 0.3 ms | 0.7 ms | 1.2 ms |
+| request → response headers | 31.8 ms | 47.6 ms | 59.2 ms |
+| response headers → first byte | 0.6 ms | 1.8 ms | 2.7 ms |
+| first byte → picture jobs | 24.6 ms | 47.7 ms | 56.0 ms |
+| picture jobs → 最初のworker出力 | 6.2 ms | 8.2 ms | 13.7 ms |
+| 最初のworker出力 → stream先頭AU | 29.7 ms | 33.1 ms | 34.6 ms |
+| stream先頭AU → first fragment | 8.5 ms | 14.6 ms | 16.5 ms |
+| first fragment → `appendBuffer` | 0.7 ms | 1.4 ms | 3.8 ms |
+| `appendBuffer` → `updateend`相当 | 9.4 ms | 19.4 ms | 21.1 ms |
+| appended → `canplay` | 27.6 ms | 99.5 ms | 102.9 ms |
+| `canplay` → `playing` | 0.4 ms | 1.2 ms | 2.1 ms |
+| `playing` → 可視canvas | 6.7 ms | 13.6 ms | 17.2 ms |
+
+`playing`は利用できる最も近いブラウザーeventで、物理的に音が聞こえたことを証明するT11ではない。
+公開integrationには計測APIを含めていないため、両buildの約13ms差をMSE世代管理だけの効果とは扱わない。
+
+同じ画面条件の30秒定常測定は次のとおりだった。
+
+| build | canvas FPS | 描画間隔p95 | 最大 | 25ms超 | 40ms超 | queue全reset増分 | `late`増分 | `droppedVideoFrames`増分 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 正式候補 + timing | 59.799 | 21.1 ms | 34.9 ms | 9 | 0 | 0 | 1 | 12 |
+| 公開integration `606943d` | 59.799 | 20.1 ms | 34.8 ms | 8 | 0 | 0 | 4 | 12 |
+
+`DeinterlaceStats.dropped`はYADIF queueの独自破棄数ではなく、実装上`video.getVideoPlaybackQuality().droppedVideoFrames`をそのまま報告する。
+30秒間のvideo media timeはintegrationで30.00024秒進み、canvasは1794回描画された。
+40msを超える可視stallはなく全resetも起きていないが、`late`と`droppedVideoFrames`が増えているため、定常コマ落ちゼロはまだ確定していない。
+生値は[正式候補seek集計](galaxy-formal-rap-panel-free-fullscreen-summary.json)と[公開integration集計](galaxy-integration-panel-free-fullscreen-summary.json)に保存した。
+
 ## タブ状態の監査とGalaxy単一タブ再測定
 
 過去の一部Galaxy測定では、検証用の設定・視聴タブを閉じずに次のタブを開いていた。
