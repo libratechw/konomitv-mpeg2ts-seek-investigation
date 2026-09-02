@@ -219,8 +219,9 @@ HTTP の Range 粒度は byte 単位であり、64 KiB は ASGI body の chunk s
 Range より前をアプリケーションが読み戻す処理や、TS 固有の prefetch はない。
 OS、Python buffered I/O、SMB client、NAS の読み込み粒度はこの値とは別である。
 
-今回のローカル ローカルにread-only mountした録画領域 は読み取り専用 CIFS、`rsize=4 MiB`、`cache=strict`、`actimeo=1` だった。
-これはローカル計測側の mount であり、共有されたサーバー自身の録画保存先が SMB であるという証拠ではない。
+初期計測でread-only mountした録画領域はCIFS、`rsize=4 MiB`、`cache=strict`、`actimeo=1`だった。
+KonomiTVと録画TSが同じPCにある主ユースケースとは異なるため、このCIFS経由の絶対時間は主結果から外した。
+主条件では対象TSをサーバー側ローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認して使う。
 SMB 上なら open/stat/read の往復と cache miss が追加候補になるが、64 KiB の Python read がそのまま64 KiBの SMB requestになるとは限らない。
 帯域十分という前提でも、直列の probe、各 request の DB/stat/open、probe 全体の到着待ちは残る。
 
@@ -479,7 +480,7 @@ rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callback�
 サーバーエンコード経路でも発生し得るが、サーバーで符号化前に間引かれ、bitstreamに存在しないframeはChromeから期待frameとして見えない。
 Originalの最終表示はYADIF canvasなので、このcounterを最終可視fieldのdrop数や目標未達の根拠には使わない。
 
-このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
+このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。`konomi/main`で加算されず常に0だった`queueResetted`は、この修正で実際の全resetを再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式buildには検証用global hookを含めていないため、hook変数だけを設定した3走行はpresentation不足の証拠から除外した。正式候補の全条件と除外理由は[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)に保存した。
 
