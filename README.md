@@ -69,23 +69,12 @@ dist側のcommitは順に `27b327e`、`ac2a2a9`、`f3ba99d`、`21cc3c3` です�
 
 ### 推奨するマージの順序
 
-矢印の先は、元のPRがmergeされた後に提案します。
-
-```mermaid
-flowchart LR
-  n2["2 report-ts-restart-offsets"] --> n3["3 reuse-observed-ts-restarts"]
-  n4["4 separate-yadif-queue-recovery"] --> n5["5 compress-yadif-overflow-schedule"]
-  n4 --> n7["7 present-one-field-per-refresh"]
-  n1["1 preserve-seek-probe-sample"]
-  n6["6 preserve-destination-frame-on-seek"]
-  n8["8 mse-reset-inflight-append"]
-```
-
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5と順位7はその上の独立した兄弟PRです。
-矢印のない順位1、6、8は他とハンクが重ならず、いつでも並行して提出できます。
+順位1、6、8は他と修正箇所が重ならず、いつでも並行して提出できます。
 
 tsukumijimaフォーク固有のYADIF変更は、otya128向けの変更へ混ぜません。
+提出先ごとに整理した図は[integration branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
 
 ### このブランチに含めていない変更
 
