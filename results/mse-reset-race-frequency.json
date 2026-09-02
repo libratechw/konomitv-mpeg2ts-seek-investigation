@@ -9,7 +9,9 @@
     "playerAsset": "PlayerController-me5YHgcA.js",
     "playerAssetSha256": "1cd63d4199519d3a7e225a3edb6888e9a9c5a570d0f3fa831820e8ecdcd9681c",
     "workerAsset": "worker-B_cZGijc.C0njJJPM.js",
-    "workerAssetSha256": "b43bdc41523d5ef2c1b15721909c942d7f7e7067957c158ee3f4948fe9ace896"
+    "workerAssetSha256": "b43bdc41523d5ef2c1b15721909c942d7f7e7067957c158ee3f4948fe9ace896",
+    "diagnosticPatch": "mse-reset-race-frequency-instrumentation.patch",
+    "diagnosticPatchSha256": "79b50ef327e1d1a77f6b990d8688ff38e0065590c091b1f9e929f2e7205d2151"
   },
   "fixture": {
     "label": "Nogizaka Koujichuu local-SSD fixture",

@@ -1,0 +1,218 @@
+diff --git a/packages/player/src/mse.ts b/packages/player/src/mse.ts
+index a2d2885..dd357d0 100644
+--- a/packages/player/src/mse.ts
++++ b/packages/player/src/mse.ts
+@@ -7,7 +7,10 @@
+  * and reading it, go through `seek` and `setCurrentTime` -- so the same buffer
+  * management runs whether MSE is on the page or in the worker.
+  */
+-import { QUEUE_HIGH_WATER_FRAGMENTS } from "./protocol.js";
++import {
++  QUEUE_HIGH_WATER_FRAGMENTS,
++  type MseResetDiagnostic,
++} from "./protocol.js";
+ 
+ /**
+  * How far short of a restart point a removal stops, in seconds.
+@@ -191,6 +194,8 @@ export interface MseSinkOptions {
+    * The two bracket everything MSE does before playback can begin.
+    */
+   onMark?(name: "sourceopen" | "appended"): void;
++  /** Measurement-only snapshot of the pre-fix reset race. */
++  onResetDiagnostic?(diagnostic: MseResetDiagnostic): void;
+   onError?(error: Error): void;
+ }
+ 
+@@ -200,11 +205,20 @@ interface Pending {
+   init: boolean;
+ }
+ 
+-type Operation =
+-  // An updateend belongs to the entry and timeline that started it. A reset
+-  // may replace the queue before the browser finishes the old append.
+-  | { type: "append"; pending: Pending; epoch: number }
+-  | { type: "remove" | "clear" };
++const mseResetDiagnostic: MseResetDiagnostic = {
++  appendStarts: 0,
++  resetsDuringAppend: 0,
++  staleAppendCompletions: 0,
++  initSegmentsDiscarded: 0,
++  mediaSegmentsDiscarded: 0,
++  emptyQueueCompletions: 0,
++  events: [],
++};
++
++const diagnosticGlobal = globalThis as typeof globalThis & {
++  __MPEG2TOH264_MSE_RESET_DIAGNOSTIC__?: MseResetDiagnostic;
++};
++diagnosticGlobal.__MPEG2TOH264_MSE_RESET_DIAGNOSTIC__ = mseResetDiagnostic;
+ 
+ export class MseSink implements FragmentSink {
+   /**
+@@ -233,7 +247,8 @@ export class MseSink implements FragmentSink {
+   #retype: string | null = null;
+   #queue: Pending[] = [];
+   #queuedBytes = 0;
+-  #operation: Operation | null = null;
++  #operation: "append" | "remove" | "clear" | null = null;
++  #diagnosticAppend: { pending: Pending; epoch: number } | null = null;
+   #quotaBlocked = false;
+   /**
+    * Whether a managed source wants data at the moment.
+@@ -348,6 +363,8 @@ export class MseSink implements FragmentSink {
+    */
+   reset(): void {
+     if (this.#closed) return;
++    if (this.#operation === "append") mseResetDiagnostic.resetsDuringAppend++;
++    this.#options.onResetDiagnostic?.(structuredClone(mseResetDiagnostic));
+     this.#epoch++;
+     this.#queue = [];
+     this.#queuedBytes = 0;
+@@ -430,7 +447,7 @@ export class MseSink implements FragmentSink {
+     // Emptying the buffer comes before anything queued behind it, and settles
+     // the quota on its own.
+     if (this.#clearing) {
+-      this.#operation = { type: "clear" };
++      this.#operation = "clear";
+       try {
+         sourceBuffer.remove(0, Number.POSITIVE_INFINITY);
+       } catch (error) {
+@@ -457,11 +474,14 @@ export class MseSink implements FragmentSink {
+         return;
+       }
+     }
+-    this.#operation = { type: "append", pending: next, epoch: this.#epoch };
++    this.#operation = "append";
++    this.#diagnosticAppend = { pending: next, epoch: this.#epoch };
++    mseResetDiagnostic.appendStarts++;
+     try {
+       sourceBuffer.appendBuffer(next.data);
+     } catch (error) {
+       this.#operation = null;
++      this.#diagnosticAppend = null;
+       if (
+         error instanceof DOMException &&
+         error.name === "QuotaExceededError"
+@@ -477,23 +497,40 @@ export class MseSink implements FragmentSink {
+   }
+ 
+   #onUpdateEnd = (): void => {
+-    const operation = this.#operation;
+-    if (operation?.type === "append") {
++    if (this.#operation === "append") {
++      const diagnostic = this.#diagnosticAppend;
++      const queueHead = this.#queue[0];
+       if (
+-        operation.epoch === this.#epoch &&
+-        this.#queue[0] === operation.pending
++        diagnostic !== null &&
++        (diagnostic.epoch !== this.#epoch || queueHead !== diagnostic.pending)
+       ) {
+-        const appended = this.#queue.shift()!;
++        mseResetDiagnostic.staleAppendCompletions++;
++        const head =
++          queueHead?.init === true ? "init" : queueHead ? "media" : "empty";
++        if (head === "init") mseResetDiagnostic.initSegmentsDiscarded++;
++        else if (head === "media") mseResetDiagnostic.mediaSegmentsDiscarded++;
++        else mseResetDiagnostic.emptyQueueCompletions++;
++        mseResetDiagnostic.events.push({
++          at: performance.now(),
++          appendEpoch: diagnostic.epoch,
++          currentEpoch: this.#epoch,
++          queueHead: head,
++        });
++        this.#options.onResetDiagnostic?.(structuredClone(mseResetDiagnostic));
++      }
++      const appended = this.#queue.shift();
++      if (appended) {
+         this.#queuedBytes -= appended.data.byteLength;
+         if (!appended.init) this.#startAtMedia();
+       }
+-    } else if (operation?.type === "remove") {
++    } else if (this.#operation === "remove") {
+       this.#quotaBlocked = false;
+       this.#updateBlocked();
+-    } else if (operation?.type === "clear") {
++    } else if (this.#operation === "clear") {
+       this.#clearing = false;
+     }
+     this.#operation = null;
++    this.#diagnosticAppend = null;
+     this.#applyDuration();
+     this.#evict();
+     this.#updateRoom();
+@@ -613,7 +650,7 @@ export class MseSink implements FragmentSink {
+     ) {
+       this.#randomAccessPoints.shift();
+     }
+-    this.#operation = { type: "remove" };
++    this.#operation = "remove";
+     sourceBuffer.remove(0, removeEnd);
+   }
+ 
+diff --git a/packages/player/src/player.ts b/packages/player/src/player.ts
+index 54e3b08..b2fdc71 100644
+--- a/packages/player/src/player.ts
++++ b/packages/player/src/player.ts
+@@ -678,6 +678,13 @@ export class Mpeg2TsPlayer extends EventTarget {
+         this.#clearVideoTimeline();
+         this.#sink?.reset();
+         break;
++      case "mse-reset-diagnostic":
++        (
++          globalThis as typeof globalThis & {
++            __MPEG2TOH264_MSE_RESET_DIAGNOSTIC__?: typeof notification.diagnostic;
++          }
++        ).__MPEG2TOH264_MSE_RESET_DIAGNOSTIC__ = notification.diagnostic;
++        break;
+       case "scans":
+         this.#addScans(notification.scans);
+         break;
+diff --git a/packages/player/src/protocol.ts b/packages/player/src/protocol.ts
+index 5ae9b88..5f5cbb8 100644
+--- a/packages/player/src/protocol.ts
++++ b/packages/player/src/protocol.ts
+@@ -121,6 +121,22 @@ export interface VideoState {
+   scan?: Scan;
+ }
+ 
++/** Measurement-only snapshot of the pre-fix MSE reset race. */
++export interface MseResetDiagnostic {
++  appendStarts: number;
++  resetsDuringAppend: number;
++  staleAppendCompletions: number;
++  initSegmentsDiscarded: number;
++  mediaSegmentsDiscarded: number;
++  emptyQueueCompletions: number;
++  events: Array<{
++    at: number;
++    appendEpoch: number;
++    currentEpoch: number;
++    queueHead: "init" | "media" | "empty";
++  }>;
++}
++
+ /** A private PES payload from the selected service. */
+ export interface PrivateStream {
+   /** Elementary stream PID from the program map. */
+@@ -253,6 +269,7 @@ export type Notification =
+   | { type: "seekable"; id: number; duration: number }
+   /** Throw away everything buffered; a seek is about to refill it. */
+   | { type: "reset"; id: number }
++  | { type: "mse-reset-diagnostic"; id: number; diagnostic: MseResetDiagnostic }
+   /**
+    * What the source said about its fields, when it first says it and whenever
+    * it changes. See `Scan`.
+diff --git a/packages/player/src/worker.ts b/packages/player/src/worker.ts
+index d6463a0..0a13afa 100644
+--- a/packages/player/src/worker.ts
++++ b/packages/player/src/worker.ts
+@@ -200,6 +200,8 @@ function createWorkerSink(command: LoadCommand): MseSink {
+     seek: (time) => post({ type: "seek", id, time }),
+     onMark: (name) => mark(id, name),
+     onBlocked: (blocked) => post({ type: "blocked", id, blocked }),
++    onResetDiagnostic: (diagnostic) =>
++      post({ type: "mse-reset-diagnostic", id, diagnostic }),
+     onError: (error) => post({ type: "error", id, message: error.message }),
+   });
+   const handle = created.mediaSource.handle;
