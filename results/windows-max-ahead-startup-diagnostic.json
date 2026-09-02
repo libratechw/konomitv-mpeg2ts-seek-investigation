@@ -1,0 +1,1232 @@
+{
+  "purpose": "Test whether the existing buffer-ahead gate can reproduce the decoder-startup relief seen in the artificial post-second-fragment pause.",
+  "scope": "Diagnostic KonomiTV option only; no formal branch or product code change.",
+  "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+  "power_mode": "Best power efficiency (unchanged supplemental constrained condition)",
+  "browser": "Google Chrome 152.0.7977.65",
+  "display_hz": 60,
+  "transport": "LAN direct (SSH tunnel used for CDP only)",
+  "fullscreen": true,
+  "recording": "乃木坂工事中; local SSD copy verified in the parent investigation",
+  "targets_seconds": [
+    180,
+    480
+  ],
+  "method": "B(8)-F(0.5)-F(0.5)-B(8), 20 measured seeks per completed run. The after-control and both 0.5 builds used the same installed player package; only maxAheadSeconds changed.",
+  "player_dist_index_sha256_after_runs": "81be54ab716f2a92f1314434b1a538fa207263a133a3a2d10a38947e5030aad0",
+  "completed_runs": [
+    {
+      "label": "maxAhead=8 before",
+      "source_file": "windows-maxahead8-before-20.json",
+      "variant": "maxahead8-before",
+      "asset": "PlayerController-CkQlTWYo.js",
+      "source_hash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+      "preflight": {
+        "CapturedAt": "2026-09-03T01:13:30.7989308+09:00",
+        "CpuLoadPercentSamples": [
+          2,
+          1,
+          5,
+          16,
+          2,
+          5,
+          4,
+          1
+        ],
+        "CpuLoadPercentMedian": 4,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 5,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 222108
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 4,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 95622176
+          },
+          {
+            "PercentDiskTime": 3,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 15715
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 7,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 579818
+          },
+          {
+            "PercentDiskTime": 6,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 370209
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "summary": {
+        "all": {
+          "n": 20,
+          "median_ms": 253.5,
+          "p95_ms": 326.9,
+          "max_ms": 335.6,
+          "at_or_below_250_ms": 10
+        },
+        "180": {
+          "n": 10,
+          "median_ms": 296.65,
+          "p95_ms": 335.6,
+          "max_ms": 335.6,
+          "at_or_below_250_ms": 0
+        },
+        "480": {
+          "n": 10,
+          "median_ms": 219.45,
+          "p95_ms": 243.9,
+          "max_ms": 243.9,
+          "at_or_below_250_ms": 10
+        }
+      },
+      "samples": [
+        {
+          "target_seconds": 180,
+          "visible_recovery_ms": 312,
+          "first_fragment_ms": 168.800048828125,
+          "second_fragment_ms": 276.2001953125,
+          "first_media_updateend_ms": 192.5,
+          "second_media_updateend_ms": 289.7001953125,
+          "canplay_ms": 308.400146484375
+        },
+        {
+          "target_seconds": 480,
+          "visible_recovery_ms": 209.60009765625,
+          "first_fragment_ms": 152.10009765625,
+          "second_fragment_ms": 232.10009765625,
+          "first_media_updateend_ms": 164.5,
+          "second_media_updateend_ms": 250.60009765625,
+          "canplay_ms": 198.39990234375
+        },
+        {
+          "target_seconds": 181,
+          "visible_recovery_ms": 296.39990234375,
+          "first_fragment_ms": 160.699951171875,
+          "second_fragment_ms": 257.89990234375,
+          "first_media_updateend_ms": 173.89990234375,
+          "second_media_updateend_ms": 268.39990234375,
+          "canplay_ms": 294.89990234375
+        },
+        {
+          "target_seconds": 481,
+          "visible_recovery_ms": 226.5,
+          "first_fragment_ms": 179.599853515625,
+          "second_fragment_ms": 253.699951171875,
+          "first_media_updateend_ms": 185.2998046875,
+          "second_media_updateend_ms": 264.099853515625,
+          "canplay_ms": 216.599853515625
+        },
+        {
+          "target_seconds": 182,
+          "visible_recovery_ms": 326.89990234375,
+          "first_fragment_ms": 167.099853515625,
+          "second_fragment_ms": 268.89990234375,
+          "first_media_updateend_ms": 181.199951171875,
+          "second_media_updateend_ms": 283.800048828125,
+          "canplay_ms": 321.39990234375
+        },
+        {
+          "target_seconds": 482,
+          "visible_recovery_ms": 210.5,
+          "first_fragment_ms": 162.89990234375,
+          "second_fragment_ms": 255.699951171875,
+          "first_media_updateend_ms": 179.10009765625,
+          "second_media_updateend_ms": 269.699951171875,
+          "canplay_ms": 208.5
+        },
+        {
+          "target_seconds": 183,
+          "visible_recovery_ms": 293.800048828125,
+          "first_fragment_ms": 154.39990234375,
+          "second_fragment_ms": 250.10009765625,
+          "first_media_updateend_ms": 169.10009765625,
+          "second_media_updateend_ms": 260.699951171875,
+          "canplay_ms": 285.10009765625
+        },
+        {
+          "target_seconds": 483,
+          "visible_recovery_ms": 243.89990234375,
+          "first_fragment_ms": 180.10009765625,
+          "second_fragment_ms": 283.10009765625,
+          "first_media_updateend_ms": 192,
+          "second_media_updateend_ms": 298.5,
+          "canplay_ms": 276.800048828125
+        },
+        {
+          "target_seconds": 184,
+          "visible_recovery_ms": 291.39990234375,
+          "first_fragment_ms": 157.60009765625,
+          "second_fragment_ms": 256.60009765625,
+          "first_media_updateend_ms": 168.10009765625,
+          "second_media_updateend_ms": 268.699951171875,
+          "canplay_ms": 338.5
+        },
+        {
+          "target_seconds": 484,
+          "visible_recovery_ms": 234.099853515625,
+          "first_fragment_ms": 170.5,
+          "second_fragment_ms": 273.800048828125,
+          "first_media_updateend_ms": 194.099853515625,
+          "second_media_updateend_ms": 288.300048828125,
+          "canplay_ms": 229.39990234375
+        },
+        {
+          "target_seconds": 185,
+          "visible_recovery_ms": 296.89990234375,
+          "first_fragment_ms": 159.60009765625,
+          "second_fragment_ms": 230.300048828125,
+          "first_media_updateend_ms": 169,
+          "second_media_updateend_ms": 235,
+          "canplay_ms": 295.300048828125
+        },
+        {
+          "target_seconds": 485,
+          "visible_recovery_ms": 224.2001953125,
+          "first_fragment_ms": 166.7001953125,
+          "second_fragment_ms": 262.10009765625,
+          "first_media_updateend_ms": 178.60009765625,
+          "second_media_updateend_ms": 272.400146484375,
+          "canplay_ms": 214.7001953125
+        },
+        {
+          "target_seconds": 186,
+          "visible_recovery_ms": 263.099853515625,
+          "first_fragment_ms": 151.39990234375,
+          "second_fragment_ms": 242.599853515625,
+          "first_media_updateend_ms": 163.300048828125,
+          "second_media_updateend_ms": 269.599853515625,
+          "canplay_ms": 285.699951171875
+        },
+        {
+          "target_seconds": 486,
+          "visible_recovery_ms": 193.2998046875,
+          "first_fragment_ms": 147.5,
+          "second_fragment_ms": 243.89990234375,
+          "first_media_updateend_ms": 161,
+          "second_media_updateend_ms": 253.2998046875,
+          "canplay_ms": 189.89990234375
+        },
+        {
+          "target_seconds": 187,
+          "visible_recovery_ms": 293.89990234375,
+          "first_fragment_ms": 167.699951171875,
+          "second_fragment_ms": 258.199951171875,
+          "first_media_updateend_ms": 179.60009765625,
+          "second_media_updateend_ms": 270.199951171875,
+          "canplay_ms": 300.60009765625
+        },
+        {
+          "target_seconds": 487,
+          "visible_recovery_ms": 237.699951171875,
+          "first_fragment_ms": 163.599853515625,
+          "second_fragment_ms": 259.599853515625,
+          "first_media_updateend_ms": 193.199951171875,
+          "second_media_updateend_ms": 275.2998046875,
+          "canplay_ms": 247.199951171875
+        },
+        {
+          "target_seconds": 188,
+          "visible_recovery_ms": 335.60009765625,
+          "first_fragment_ms": 180.5,
+          "second_fragment_ms": 271.60009765625,
+          "first_media_updateend_ms": 194.5,
+          "second_media_updateend_ms": 276,
+          "canplay_ms": 333.5
+        },
+        {
+          "target_seconds": 488,
+          "visible_recovery_ms": 210.800048828125,
+          "first_fragment_ms": 160.5,
+          "second_fragment_ms": 254.199951171875,
+          "first_media_updateend_ms": 173.300048828125,
+          "second_media_updateend_ms": 265.699951171875,
+          "canplay_ms": 218.900146484375
+        },
+        {
+          "target_seconds": 189,
+          "visible_recovery_ms": 300.89990234375,
+          "first_fragment_ms": 154.800048828125,
+          "second_fragment_ms": 254.5,
+          "first_media_updateend_ms": 176.89990234375,
+          "second_media_updateend_ms": 262.699951171875,
+          "canplay_ms": 298.10009765625
+        },
+        {
+          "target_seconds": 489,
+          "visible_recovery_ms": 214.7001953125,
+          "first_fragment_ms": 153.2001953125,
+          "second_fragment_ms": 236,
+          "first_media_updateend_ms": 167.300048828125,
+          "second_media_updateend_ms": 252.10009765625,
+          "canplay_ms": 201.60009765625
+        }
+      ]
+    },
+    {
+      "label": "maxAhead=0.5 run 1",
+      "source_file": "windows-maxahead0p5-first-20.json",
+      "variant": "maxahead0p5-first",
+      "asset": "PlayerController-DcZry257.js",
+      "source_hash": "79d840354a20ff38bbf3916b5fb1f2175c6ba2f050e4eab619daf91f5d675d4e",
+      "preflight": {
+        "CapturedAt": "2026-09-03T01:15:18.0557463+09:00",
+        "CpuLoadPercentSamples": [
+          2,
+          11,
+          4,
+          3,
+          0,
+          6,
+          2,
+          3
+        ],
+        "CpuLoadPercentMedian": 3,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 6,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 1900670
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 3,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 15618
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "summary": {
+        "all": {
+          "n": 20,
+          "median_ms": 250.6,
+          "p95_ms": 395.2,
+          "max_ms": 478.1,
+          "at_or_below_250_ms": 10
+        },
+        "180": {
+          "n": 10,
+          "median_ms": 299.1,
+          "p95_ms": 478.1,
+          "max_ms": 478.1,
+          "at_or_below_250_ms": 0
+        },
+        "480": {
+          "n": 10,
+          "median_ms": 196.45,
+          "p95_ms": 222.1,
+          "max_ms": 222.1,
+          "at_or_below_250_ms": 10
+        }
+      },
+      "samples": [
+        {
+          "target_seconds": 180,
+          "visible_recovery_ms": 279.099853515625,
+          "first_fragment_ms": 153.199951171875,
+          "second_fragment_ms": 245.199951171875,
+          "first_media_updateend_ms": 166,
+          "second_media_updateend_ms": 257.699951171875,
+          "canplay_ms": 306.89990234375
+        },
+        {
+          "target_seconds": 480,
+          "visible_recovery_ms": 197.900146484375,
+          "first_fragment_ms": 151.900146484375,
+          "second_fragment_ms": 235.10009765625,
+          "first_media_updateend_ms": 158.10009765625,
+          "second_media_updateend_ms": 241.800048828125,
+          "canplay_ms": 194
+        },
+        {
+          "target_seconds": 181,
+          "visible_recovery_ms": 293.800048828125,
+          "first_fragment_ms": 159.10009765625,
+          "second_fragment_ms": 252.199951171875,
+          "first_media_updateend_ms": 171.800048828125,
+          "second_media_updateend_ms": 264.199951171875,
+          "canplay_ms": 316
+        },
+        {
+          "target_seconds": 481,
+          "visible_recovery_ms": 189.300048828125,
+          "first_fragment_ms": 130.5,
+          "second_fragment_ms": 211.199951171875,
+          "first_media_updateend_ms": 145.10009765625,
+          "second_media_updateend_ms": 219,
+          "canplay_ms": 179.89990234375
+        },
+        {
+          "target_seconds": 182,
+          "visible_recovery_ms": 297.199951171875,
+          "first_fragment_ms": 162.199951171875,
+          "second_fragment_ms": 255.699951171875,
+          "first_media_updateend_ms": 173.89990234375,
+          "second_media_updateend_ms": 267.39990234375,
+          "canplay_ms": 292.5
+        },
+        {
+          "target_seconds": 482,
+          "visible_recovery_ms": 195,
+          "first_fragment_ms": 133.5,
+          "second_fragment_ms": 226.7998046875,
+          "first_media_updateend_ms": 149.599853515625,
+          "second_media_updateend_ms": 241.199951171875,
+          "canplay_ms": 202.7998046875
+        },
+        {
+          "target_seconds": 183,
+          "visible_recovery_ms": 301,
+          "first_fragment_ms": 159.7998046875,
+          "second_fragment_ms": 257.89990234375,
+          "first_media_updateend_ms": 173.099853515625,
+          "second_media_updateend_ms": 273,
+          "canplay_ms": 335.599853515625
+        },
+        {
+          "target_seconds": 483,
+          "visible_recovery_ms": 213.7998046875,
+          "first_fragment_ms": 161.2998046875,
+          "second_fragment_ms": 253.099853515625,
+          "first_media_updateend_ms": 170.099853515625,
+          "second_media_updateend_ms": 264.5,
+          "canplay_ms": 207.5
+        },
+        {
+          "target_seconds": 184,
+          "visible_recovery_ms": 311,
+          "first_fragment_ms": 172.2001953125,
+          "second_fragment_ms": 280.7001953125,
+          "first_media_updateend_ms": 186,
+          "second_media_updateend_ms": 304.400146484375,
+          "canplay_ms": 308.5
+        },
+        {
+          "target_seconds": 484,
+          "visible_recovery_ms": 194.10009765625,
+          "first_fragment_ms": 140.300048828125,
+          "second_fragment_ms": 225.300048828125,
+          "first_media_updateend_ms": 151.7001953125,
+          "second_media_updateend_ms": 237.60009765625,
+          "canplay_ms": 185.7001953125
+        },
+        {
+          "target_seconds": 185,
+          "visible_recovery_ms": 292.900146484375,
+          "first_fragment_ms": 162.900146484375,
+          "second_fragment_ms": 236.800048828125,
+          "first_media_updateend_ms": 183.300048828125,
+          "second_media_updateend_ms": 243.400146484375,
+          "canplay_ms": 282
+        },
+        {
+          "target_seconds": 485,
+          "visible_recovery_ms": 212.5,
+          "first_fragment_ms": 160.800048828125,
+          "second_fragment_ms": 257.400146484375,
+          "first_media_updateend_ms": 171.900146484375,
+          "second_media_updateend_ms": 270.10009765625,
+          "canplay_ms": 205.5
+        },
+        {
+          "target_seconds": 186,
+          "visible_recovery_ms": 395.199951171875,
+          "first_fragment_ms": 126.699951171875,
+          "second_fragment_ms": 200.5,
+          "first_media_updateend_ms": 136.7998046875,
+          "second_media_updateend_ms": 212,
+          "canplay_ms": 387.39990234375
+        },
+        {
+          "target_seconds": 486,
+          "visible_recovery_ms": 179,
+          "first_fragment_ms": 132.7001953125,
+          "second_fragment_ms": 222.400146484375,
+          "first_media_updateend_ms": 142.800048828125,
+          "second_media_updateend_ms": 237.60009765625,
+          "canplay_ms": 175
+        },
+        {
+          "target_seconds": 187,
+          "visible_recovery_ms": 478.099853515625,
+          "first_fragment_ms": 157,
+          "second_fragment_ms": 237.300048828125,
+          "first_media_updateend_ms": 170.099853515625,
+          "second_media_updateend_ms": 248.699951171875,
+          "canplay_ms": 470.599853515625
+        },
+        {
+          "target_seconds": 487,
+          "visible_recovery_ms": 183.800048828125,
+          "first_fragment_ms": 122.199951171875,
+          "second_fragment_ms": 222.199951171875,
+          "first_media_updateend_ms": 143.699951171875,
+          "second_media_updateend_ms": 239,
+          "canplay_ms": 174.5
+        },
+        {
+          "target_seconds": 188,
+          "visible_recovery_ms": 316.699951171875,
+          "first_fragment_ms": 173.599853515625,
+          "second_fragment_ms": 258.800048828125,
+          "first_media_updateend_ms": 186.199951171875,
+          "second_media_updateend_ms": 271.300048828125,
+          "canplay_ms": 314.800048828125
+        },
+        {
+          "target_seconds": 488,
+          "visible_recovery_ms": 222.10009765625,
+          "first_fragment_ms": 169.7001953125,
+          "second_fragment_ms": 259.2001953125,
+          "first_media_updateend_ms": 180.800048828125,
+          "second_media_updateend_ms": 269.2001953125,
+          "canplay_ms": 217.5
+        },
+        {
+          "target_seconds": 189,
+          "visible_recovery_ms": 295.199951171875,
+          "first_fragment_ms": 158.699951171875,
+          "second_fragment_ms": 241.699951171875,
+          "first_media_updateend_ms": 168.39990234375,
+          "second_media_updateend_ms": 252.800048828125,
+          "canplay_ms": 309.10009765625
+        },
+        {
+          "target_seconds": 489,
+          "visible_recovery_ms": 213.60009765625,
+          "first_fragment_ms": 154.300048828125,
+          "second_fragment_ms": 235.2001953125,
+          "first_media_updateend_ms": 168.60009765625,
+          "second_media_updateend_ms": 251.7001953125,
+          "canplay_ms": 203.10009765625
+        }
+      ]
+    },
+    {
+      "label": "maxAhead=0.5 run 2",
+      "source_file": "windows-maxahead0p5-second-20.json",
+      "variant": "maxahead0p5-second",
+      "asset": "PlayerController-DcZry257.js",
+      "source_hash": "79d840354a20ff38bbf3916b5fb1f2175c6ba2f050e4eab619daf91f5d675d4e",
+      "preflight": {
+        "CapturedAt": "2026-09-03T01:16:24.2623084+09:00",
+        "CpuLoadPercentSamples": [
+          10,
+          7,
+          14,
+          0,
+          3,
+          1,
+          6,
+          9
+        ],
+        "CpuLoadPercentMedian": 7,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 14,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 7779305
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 4,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 613557
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "summary": {
+        "all": {
+          "n": 20,
+          "median_ms": 243.4,
+          "p95_ms": 410.8,
+          "max_ms": 487.9,
+          "at_or_below_250_ms": 10
+        },
+        "180": {
+          "n": 10,
+          "median_ms": 286.4,
+          "p95_ms": 487.9,
+          "max_ms": 487.9,
+          "at_or_below_250_ms": 0
+        },
+        "480": {
+          "n": 10,
+          "median_ms": 198.75,
+          "p95_ms": 215,
+          "max_ms": 215,
+          "at_or_below_250_ms": 10
+        }
+      },
+      "samples": [
+        {
+          "target_seconds": 180,
+          "visible_recovery_ms": 280.300048828125,
+          "first_fragment_ms": 149.900146484375,
+          "second_fragment_ms": 238.900146484375,
+          "first_media_updateend_ms": 161,
+          "second_media_updateend_ms": 251.2001953125,
+          "canplay_ms": 270.300048828125
+        },
+        {
+          "target_seconds": 480,
+          "visible_recovery_ms": 196.7998046875,
+          "first_fragment_ms": 150.39990234375,
+          "second_fragment_ms": 246,
+          "first_media_updateend_ms": 167.099853515625,
+          "second_media_updateend_ms": 253.099853515625,
+          "canplay_ms": 206.39990234375
+        },
+        {
+          "target_seconds": 181,
+          "visible_recovery_ms": 322,
+          "first_fragment_ms": 169.199951171875,
+          "second_fragment_ms": 275,
+          "first_media_updateend_ms": 180.5,
+          "second_media_updateend_ms": 288.60009765625,
+          "canplay_ms": 314.199951171875
+        },
+        {
+          "target_seconds": 481,
+          "visible_recovery_ms": 190.60009765625,
+          "first_fragment_ms": 142.699951171875,
+          "second_fragment_ms": 219.5,
+          "first_media_updateend_ms": 148.699951171875,
+          "second_media_updateend_ms": 230.400146484375,
+          "canplay_ms": 183.5
+        },
+        {
+          "target_seconds": 182,
+          "visible_recovery_ms": 277.10009765625,
+          "first_fragment_ms": 149.800048828125,
+          "second_fragment_ms": 239,
+          "first_media_updateend_ms": 158.10009765625,
+          "second_media_updateend_ms": 251.60009765625,
+          "canplay_ms": 275.10009765625
+        },
+        {
+          "target_seconds": 482,
+          "visible_recovery_ms": 210.89990234375,
+          "first_fragment_ms": 164.89990234375,
+          "second_fragment_ms": 258.099853515625,
+          "first_media_updateend_ms": 170.39990234375,
+          "second_media_updateend_ms": 272.199951171875,
+          "canplay_ms": 204.599853515625
+        },
+        {
+          "target_seconds": 183,
+          "visible_recovery_ms": 275.699951171875,
+          "first_fragment_ms": 152.89990234375,
+          "second_fragment_ms": 245,
+          "first_media_updateend_ms": 164.60009765625,
+          "second_media_updateend_ms": 267.39990234375,
+          "canplay_ms": 274.199951171875
+        },
+        {
+          "target_seconds": 483,
+          "visible_recovery_ms": 209.39990234375,
+          "first_fragment_ms": 157.099853515625,
+          "second_fragment_ms": 246.599853515625,
+          "first_media_updateend_ms": 168.7998046875,
+          "second_media_updateend_ms": 258.099853515625,
+          "canplay_ms": 204.39990234375
+        },
+        {
+          "target_seconds": 184,
+          "visible_recovery_ms": 295.10009765625,
+          "first_fragment_ms": 166.300048828125,
+          "second_fragment_ms": 261.10009765625,
+          "first_media_updateend_ms": 173,
+          "second_media_updateend_ms": 272.300048828125,
+          "canplay_ms": 286.7001953125
+        },
+        {
+          "target_seconds": 484,
+          "visible_recovery_ms": 213.699951171875,
+          "first_fragment_ms": 165.60009765625,
+          "second_fragment_ms": 251.300048828125,
+          "first_media_updateend_ms": 177,
+          "second_media_updateend_ms": 261.800048828125,
+          "canplay_ms": 211.699951171875
+        },
+        {
+          "target_seconds": 185,
+          "visible_recovery_ms": 271.7998046875,
+          "first_fragment_ms": 159,
+          "second_fragment_ms": 220.89990234375,
+          "first_media_updateend_ms": 168.599853515625,
+          "second_media_updateend_ms": 227.099853515625,
+          "canplay_ms": 267.5
+        },
+        {
+          "target_seconds": 485,
+          "visible_recovery_ms": 197.199951171875,
+          "first_fragment_ms": 147,
+          "second_fragment_ms": 239.60009765625,
+          "first_media_updateend_ms": 156.199951171875,
+          "second_media_updateend_ms": 252.10009765625,
+          "canplay_ms": 189.699951171875
+        },
+        {
+          "target_seconds": 186,
+          "visible_recovery_ms": 410.800048828125,
+          "first_fragment_ms": 124.099853515625,
+          "second_fragment_ms": 200.300048828125,
+          "first_media_updateend_ms": 132.5,
+          "second_media_updateend_ms": 215,
+          "canplay_ms": 407.300048828125
+        },
+        {
+          "target_seconds": 486,
+          "visible_recovery_ms": 178.900146484375,
+          "first_fragment_ms": 120.699951171875,
+          "second_fragment_ms": 221.60009765625,
+          "first_media_updateend_ms": 142.5,
+          "second_media_updateend_ms": 233.400146484375,
+          "canplay_ms": 172.199951171875
+        },
+        {
+          "target_seconds": 187,
+          "visible_recovery_ms": 276.10009765625,
+          "first_fragment_ms": 155.800048828125,
+          "second_fragment_ms": 249.400146484375,
+          "first_media_updateend_ms": 169.800048828125,
+          "second_media_updateend_ms": 263.199951171875,
+          "canplay_ms": 273.699951171875
+        },
+        {
+          "target_seconds": 487,
+          "visible_recovery_ms": 200.300048828125,
+          "first_fragment_ms": 152.60009765625,
+          "second_fragment_ms": 241.5,
+          "first_media_updateend_ms": 163,
+          "second_media_updateend_ms": 255.199951171875,
+          "canplay_ms": 199.10009765625
+        },
+        {
+          "target_seconds": 188,
+          "visible_recovery_ms": 292.5,
+          "first_fragment_ms": 165.199951171875,
+          "second_fragment_ms": 247.5,
+          "first_media_updateend_ms": 179.699951171875,
+          "second_media_updateend_ms": 254.800048828125,
+          "canplay_ms": 282.300048828125
+        },
+        {
+          "target_seconds": 488,
+          "visible_recovery_ms": 215,
+          "first_fragment_ms": 169.39990234375,
+          "second_fragment_ms": 259,
+          "first_media_updateend_ms": 178.800048828125,
+          "second_media_updateend_ms": 269.89990234375,
+          "canplay_ms": 213.199951171875
+        },
+        {
+          "target_seconds": 189,
+          "visible_recovery_ms": 487.89990234375,
+          "first_fragment_ms": 162.5,
+          "second_fragment_ms": 253.800048828125,
+          "first_media_updateend_ms": 172.699951171875,
+          "second_media_updateend_ms": 263.199951171875,
+          "canplay_ms": 484.10009765625
+        },
+        {
+          "target_seconds": 489,
+          "visible_recovery_ms": 170.60009765625,
+          "first_fragment_ms": 121.800048828125,
+          "second_fragment_ms": 204.300048828125,
+          "first_media_updateend_ms": 131.199951171875,
+          "second_media_updateend_ms": 217.199951171875,
+          "canplay_ms": 166.699951171875
+        }
+      ]
+    },
+    {
+      "label": "maxAhead=8 after",
+      "source_file": "windows-maxahead8-after-20.json",
+      "variant": "maxahead8-after",
+      "asset": "PlayerController-DMUyqUHo.js",
+      "source_hash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+      "preflight": {
+        "CapturedAt": "2026-09-03T01:18:10.6026147+09:00",
+        "CpuLoadPercentSamples": [
+          6,
+          5,
+          6,
+          0,
+          0,
+          3,
+          2,
+          9
+        ],
+        "CpuLoadPercentMedian": 5,
+        "DiskSamples": [
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          },
+          {
+            "PercentDiskTime": 0,
+            "CurrentDiskQueueLength": 0,
+            "DiskBytesPersec": 0
+          }
+        ],
+        "KnownBackgroundLoad": [],
+        "ExplorerSessions": [
+          1
+        ],
+        "InteractiveDesktopAvailable": true
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "dedicatedChromeStopped": true,
+        "scheduledTaskRemoved": true,
+        "sshCdpTunnelRemoved": true,
+        "containerStopped": true
+      },
+      "summary": {
+        "all": {
+          "n": 20,
+          "median_ms": 246.2,
+          "p95_ms": 312.6,
+          "max_ms": 324,
+          "at_or_below_250_ms": 10
+        },
+        "180": {
+          "n": 10,
+          "median_ms": 291.25,
+          "p95_ms": 324,
+          "max_ms": 324,
+          "at_or_below_250_ms": 0
+        },
+        "480": {
+          "n": 10,
+          "median_ms": 208.7,
+          "p95_ms": 231.2,
+          "max_ms": 231.2,
+          "at_or_below_250_ms": 10
+        }
+      },
+      "samples": [
+        {
+          "target_seconds": 180,
+          "visible_recovery_ms": 324,
+          "first_fragment_ms": 178.89990234375,
+          "second_fragment_ms": 274.300048828125,
+          "first_media_updateend_ms": 187.5,
+          "second_media_updateend_ms": 287.39990234375,
+          "canplay_ms": 320
+        },
+        {
+          "target_seconds": 480,
+          "visible_recovery_ms": 230.89990234375,
+          "first_fragment_ms": 171,
+          "second_fragment_ms": 253.800048828125,
+          "first_media_updateend_ms": 184.10009765625,
+          "second_media_updateend_ms": 268.10009765625,
+          "canplay_ms": 220.5
+        },
+        {
+          "target_seconds": 181,
+          "visible_recovery_ms": 291.800048828125,
+          "first_fragment_ms": 154.800048828125,
+          "second_fragment_ms": 253.89990234375,
+          "first_media_updateend_ms": 168.800048828125,
+          "second_media_updateend_ms": 264.800048828125,
+          "canplay_ms": 300.300048828125
+        },
+        {
+          "target_seconds": 481,
+          "visible_recovery_ms": 207,
+          "first_fragment_ms": 151.400146484375,
+          "second_fragment_ms": 228.10009765625,
+          "first_media_updateend_ms": 160.7001953125,
+          "second_media_updateend_ms": 232.10009765625,
+          "canplay_ms": 195
+        },
+        {
+          "target_seconds": 182,
+          "visible_recovery_ms": 290.699951171875,
+          "first_fragment_ms": 149.199951171875,
+          "second_fragment_ms": 244.39990234375,
+          "first_media_updateend_ms": 162.199951171875,
+          "second_media_updateend_ms": 252.300048828125,
+          "canplay_ms": 288.89990234375
+        },
+        {
+          "target_seconds": 482,
+          "visible_recovery_ms": 208.199951171875,
+          "first_fragment_ms": 146.89990234375,
+          "second_fragment_ms": 257.800048828125,
+          "first_media_updateend_ms": 170.89990234375,
+          "second_media_updateend_ms": 269.39990234375,
+          "canplay_ms": 203.699951171875
+        },
+        {
+          "target_seconds": 183,
+          "visible_recovery_ms": 306.60009765625,
+          "first_fragment_ms": 165.699951171875,
+          "second_fragment_ms": 262.300048828125,
+          "first_media_updateend_ms": 178.60009765625,
+          "second_media_updateend_ms": 278.300048828125,
+          "canplay_ms": 304.39990234375
+        },
+        {
+          "target_seconds": 483,
+          "visible_recovery_ms": 231.199951171875,
+          "first_fragment_ms": 173.39990234375,
+          "second_fragment_ms": 269.89990234375,
+          "first_media_updateend_ms": 185.5,
+          "second_media_updateend_ms": 277.39990234375,
+          "canplay_ms": 228
+        },
+        {
+          "target_seconds": 184,
+          "visible_recovery_ms": 309.900146484375,
+          "first_fragment_ms": 167.300048828125,
+          "second_fragment_ms": 273.60009765625,
+          "first_media_updateend_ms": 180,
+          "second_media_updateend_ms": 301.199951171875,
+          "canplay_ms": 303.800048828125
+        },
+        {
+          "target_seconds": 484,
+          "visible_recovery_ms": 228.099853515625,
+          "first_fragment_ms": 181.2998046875,
+          "second_fragment_ms": 271.199951171875,
+          "first_media_updateend_ms": 189.599853515625,
+          "second_media_updateend_ms": 281.89990234375,
+          "canplay_ms": 225.2998046875
+        },
+        {
+          "target_seconds": 185,
+          "visible_recovery_ms": 290.699951171875,
+          "first_fragment_ms": 160.099853515625,
+          "second_fragment_ms": 223.39990234375,
+          "first_media_updateend_ms": 168.099853515625,
+          "second_media_updateend_ms": 228.5,
+          "canplay_ms": 280.2998046875
+        },
+        {
+          "target_seconds": 485,
+          "visible_recovery_ms": 196.900146484375,
+          "first_fragment_ms": 146.900146484375,
+          "second_fragment_ms": 246.699951171875,
+          "first_media_updateend_ms": 155.800048828125,
+          "second_media_updateend_ms": 266.10009765625,
+          "canplay_ms": 191.900146484375
+        },
+        {
+          "target_seconds": 186,
+          "visible_recovery_ms": 261.199951171875,
+          "first_fragment_ms": 155.400146484375,
+          "second_fragment_ms": 247.699951171875,
+          "first_media_updateend_ms": 163.400146484375,
+          "second_media_updateend_ms": 260.800048828125,
+          "canplay_ms": 286.60009765625
+        },
+        {
+          "target_seconds": 486,
+          "visible_recovery_ms": 205.300048828125,
+          "first_fragment_ms": 150,
+          "second_fragment_ms": 246.5,
+          "first_media_updateend_ms": 162.300048828125,
+          "second_media_updateend_ms": 261.60009765625,
+          "canplay_ms": 193
+        },
+        {
+          "target_seconds": 187,
+          "visible_recovery_ms": 274.599853515625,
+          "first_fragment_ms": 152.199951171875,
+          "second_fragment_ms": 245.099853515625,
+          "first_media_updateend_ms": 164.89990234375,
+          "second_media_updateend_ms": 252.39990234375,
+          "canplay_ms": 268.699951171875
+        },
+        {
+          "target_seconds": 487,
+          "visible_recovery_ms": 209.199951171875,
+          "first_fragment_ms": 161.5,
+          "second_fragment_ms": 251,
+          "first_media_updateend_ms": 170.300048828125,
+          "second_media_updateend_ms": 264.099853515625,
+          "canplay_ms": 205.599853515625
+        },
+        {
+          "target_seconds": 188,
+          "visible_recovery_ms": 312.599853515625,
+          "first_fragment_ms": 160.099853515625,
+          "second_fragment_ms": 245.800048828125,
+          "first_media_updateend_ms": 176.300048828125,
+          "second_media_updateend_ms": 269.099853515625,
+          "canplay_ms": 302
+        },
+        {
+          "target_seconds": 488,
+          "visible_recovery_ms": 212.300048828125,
+          "first_fragment_ms": 152,
+          "second_fragment_ms": 239.699951171875,
+          "first_media_updateend_ms": 165.599853515625,
+          "second_media_updateend_ms": 252.5,
+          "canplay_ms": 201.099853515625
+        },
+        {
+          "target_seconds": 189,
+          "visible_recovery_ms": 280,
+          "first_fragment_ms": 144.199951171875,
+          "second_fragment_ms": 229.199951171875,
+          "first_media_updateend_ms": 154.099853515625,
+          "second_media_updateend_ms": 241.599853515625,
+          "canplay_ms": 270.89990234375
+        },
+        {
+          "target_seconds": 489,
+          "visible_recovery_ms": 194.900146484375,
+          "first_fragment_ms": 146.900146484375,
+          "second_fragment_ms": 232.800048828125,
+          "first_media_updateend_ms": 158.400146484375,
+          "second_media_updateend_ms": 241.5,
+          "canplay_ms": 205.699951171875
+        }
+      ]
+    }
+  ],
+  "maxAhead_0_1_failure": {
+    "stage": "initial playback before measured seeks",
+    "observed_error": "timed out waiting for the initial video frame",
+    "video_state_at_timeout": {
+      "currentTime": 15.347561,
+      "seeking": false,
+      "readyState": 2
+    },
+    "preflight": {
+      "CapturedAt": "2026-09-03T01:20:20.5982975+09:00",
+      "CpuLoadPercentSamples": [
+        4,
+        0,
+        1,
+        2,
+        13,
+        6,
+        4,
+        8
+      ],
+      "CpuLoadPercentMedian": 4,
+      "DiskSamples": [
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 1,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 5,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 519164
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        },
+        {
+          "PercentDiskTime": 0,
+          "CurrentDiskQueueLength": 0,
+          "DiskBytesPersec": 0
+        }
+      ],
+      "KnownBackgroundLoad": [],
+      "ExplorerSessions": [
+        1
+      ],
+      "InteractiveDesktopAvailable": true
+    },
+    "cleanup": {
+      "PagesSeen": 1,
+      "PagesPaused": 1,
+      "PagesExitedFullscreen": 1,
+      "PagesClosed": 1,
+      "CleanupErrors": [],
+      "RemainingDedicatedChromeProcesses": 0,
+      "TaskRemoved": true
+    },
+    "cleanup_verified": true
+  },
+  "conclusion": [
+    "0.5 seconds did not improve the slow 180-second target and produced worse high-tail outliers.",
+    "0.1 seconds prevented initial playback from reaching the first displayed frame.",
+    "Do not change the fixed maxAheadSeconds default for seek startup. A seek-only startup policy would require an explicit decoder-ready signal and a deadlock-safe resume path before it could be a candidate."
+  ]
+}
