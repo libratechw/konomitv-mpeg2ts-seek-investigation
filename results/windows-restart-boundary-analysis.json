@@ -1,0 +1,73 @@
+{
+  "variant": "integration-current-v2 restart-boundary analysis",
+  "mpeg2toh264Commit": "47cca299f182049f12f5e22529b37bbf491de411",
+  "fixture": {
+    "name": "Nogizaka Koujichuu local-SSD fixture",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "serviceId": 41008,
+    "videoPid": 256,
+    "pmtPid": 257
+  },
+  "method": {
+    "packetPositions": "FFprobe keyframe packet positions plus a sequential 188-byte TS packet scan for PAT and PMT payload-unit starts",
+    "fragmentMapping": "The current Session was opened at each PAT/PMT-safe byte with the measured timeline origin and reported Fragment.start and restart_offset; passthrough and transcode returned identical starts and restart offsets",
+    "timelineOriginTicks": 490836106,
+    "seekPolicy": "worker.ts restartBefore selects the latest observed Fragment.start that is no later than the requested time"
+  },
+  "targets": [
+    {
+      "targetSeconds": 180,
+      "observedFirstBufferedRange": [179.242666, 180.074354],
+      "candidates": [
+        {
+          "fragmentStartSeconds": 179.573856,
+          "restartByte": 297515076,
+          "pmtByte": 297556624,
+          "gopPesByte": 297728268,
+          "selected": true,
+          "reason": "latest candidate no later than target"
+        },
+        {
+          "fragmentStartSeconds": 180.074356,
+          "restartByte": 298430072,
+          "pmtByte": 298472184,
+          "gopPesByte": 298513732,
+          "selected": false,
+          "reason": "starts 74.356 ms after target"
+        }
+      ],
+      "conclusion": "The exact-seek policy already selects the closest known safe fragment. A denser byte index cannot select the next fragment without skipping requested content."
+    },
+    {
+      "targetSeconds": 480,
+      "observedFirstBufferedRange": [479.402666, 480.374354],
+      "candidates": [
+        {
+          "fragmentStartSeconds": 479.373356,
+          "restartByte": 815111224,
+          "pmtByte": 815148824,
+          "gopPesByte": 815171760,
+          "selected": false,
+          "reason": "an observed later candidate is also no later than target"
+        },
+        {
+          "fragmentStartSeconds": 479.873856,
+          "restartByte": 815780504,
+          "pmtByte": 815818480,
+          "gopPesByte": 815886160,
+          "selected": true,
+          "reason": "latest candidate no later than target"
+        },
+        {
+          "fragmentStartSeconds": 480.374356,
+          "restartByte": 816507500,
+          "gopPesByte": 816609584,
+          "selected": false,
+          "reason": "starts after target"
+        }
+      ],
+      "conclusion": "The current in-memory restart index can use the closer pre-target fragment at this cadence phase."
+    }
+  ],
+  "scope": "This establishes why the measured 180-second and 480-second groups differ for this fixture and exact-seek policy. It does not claim that every recording has the same GOP or program-table cadence."
+}

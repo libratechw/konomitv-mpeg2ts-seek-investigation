@@ -217,7 +217,15 @@ buffer終端が目的時刻の565 / 568ms先まで伸びた後に`canplay`へ進
 固定のseek leadを1.0秒から0.5秒へ変えた診断版は、同じ40地点で中央値252.7→246.0ms、p95 324.7→312.3ms、250ms超20→18回に留まり、180秒群の中央値は295.3→295.1msだった。
 目的時刻より74ms先へ1回、374ms先へ1回着地したため、固定lead変更は速度効果が小さく正確性も壊す。この形は採用しない。[診断版40回](results/windows-integration-v2-lead-half-seek-visible-40.json)を保存した。
 後続fragmentを先に作って待ちを移す方式も全体を短縮しないことは下記のGalaxy実験で確認済みである。
-有効な設計候補は、要求時刻以前でより近い安全なRAPを変換前に得て、目的時刻後の再生余裕を最初のfragmentへ含める方法である。毎seekの広域scanは遅くなるため、再生中に学習するindexか永続indexで追加Rangeなしに解決できる場合だけ実装する。
+
+現行のin-memory restart indexが近い安全位置を取り逃している可能性も、180秒と480秒で直接確認した。
+180秒では選択中のfragmentが179.573856秒から始まり、次のPAT/PMT安全位置は既知でもfragment開始が180.074356秒となるため、要求位置を越えない既定policyでは選べない。
+480秒では479.873856秒から始まる安全位置を選べるため、現行indexがすでに利用している。
+したがって180秒群では、indexを高密度化しても正確なseekのまま初回fragmentを近づけられない。
+sidecar indexはcold seekのprobe削減には有効だが、このcadence位置の後続fragment待ちを単独では解消しない。[TS packet、restart位置、fragment時刻の対応](results/windows-restart-boundary-analysis.json)を保存した。
+
+要求位置を越えないままWindowsの180秒群を短縮するには、Range応答と最初のfragment生成を短縮するか、目的時刻後のdecode余裕を現在より早く渡す必要がある。
+要求位置から74ms後のGOPへ移るfast seekは別のoptionとしては評価できるが、既定の正確性policyを置き換えない。
 
 修正版40 seekでは、first fragmentが要求時刻より前へ開く量と`appended`→`canplay`の相関がPearson 0.943、Spearman 0.879だった。
 そこで、変換済みの後続fragmentから要求時刻以前で最も近いものだけをWorkerが渡せるか確認した。
@@ -241,7 +249,8 @@ non-IDR recovery-pointを毎GOPへ入れ、seek後の先頭fragmentを意図的�
 しかし第2fragmentを生成するまでappendがtarget対応中央値69.8ms遅れ、可視canvasのtarget対応差は中央値+5.7ms、平均+1.3msで改善しなかった。
 さらに10地点中5地点は第2fragmentが要求時刻を0.294〜0.494秒越えた。
 したがって「先に古いGOPを変換し、後続recovery fragmentを待つ」方式は棄却する。
-この結果は、要求時刻以前で最も近いRAPのbyte位置を変換前に得て、そのGOPをSessionの先頭fragmentにする設計なら、同じdecoder discardを待ち時間なしで除ける可能性を示す。
+この結果は、要求時刻以前に現在より近いRAPが実在する地点なら、そのbyte位置を変換前に得ることでdecoder discardを待ち時間なしで減らせる可能性を示す。
+ただし上記のWindows 180秒地点には、その条件を満たす次のfragmentが存在しない。
 詳細は[recovery fragment選択実験](results/galaxy-recovery-fragment-selection.json)に保存した。
 
 ## HTTP Range とファイル I/O
@@ -844,8 +853,8 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P2 | 選択範囲のbufferを保持するseek、clearを必要範囲に限定 | 再seekの再変換削減。removeが支配的なら有効 | 中〜大 | ○ | mpeg2toh264 MSE。RAPとoverlapを再設計 |
 | P2 | download handlerのDB/stat/open、chunk sizeを計測して必要箇所だけ改善 | NAS/ASGI待ちが大きい環境で有効 | 小〜中 | ◎ | KonomiTV。Starlette一般問題は同upstream |
 | P2 | AAC必要量が揃った完成GOPを次GOP境界前に出す | 128〜256KiB、0〜約22msの改善候補 | 中 | ○ | mpeg2toh264 Session。試作済み・保留 |
-| P1 | coreが実際のGOP/RAP byteを返し、再生中のin-memory indexへ学習する | 学習済み位置では約68msのdecoder discardを、後続fragment待ちなしで除ける可能性 | 中 | ○ | mpeg2toh264 core/player。byteをRange先頭へ誤対応しない契約が必要 |
-| P2 | 永続sidecarと有効なstream configを持つseek resolver | cold seekのprobeと、直前RAPより前からの復号を削減。今回のdecoder区間は約68ms | 大 | ○ | KonomiTV固有保存、playerの汎用API |
+| P1 | coreが実際のGOP/RAP byteを返し、再生中のin-memory indexへ学習する | 要求時刻以前に近いRAPが実在する地点ではdecoder discardを減らせる可能性。Windows 180秒地点は現行indexですでに最適で短縮不可 | 中 | ○ | mpeg2toh264 core/player。byteをRange先頭へ誤対応しない契約が必要 |
+| P2 | 永続sidecarと有効なstream configを持つseek resolver | cold seekのprobeと、近いpre-target RAPがある地点の復号を削減。GOP cadenceで次候補がtarget後になる地点は短縮しない | 大 | ○ | KonomiTV固有保存、playerの汎用API |
 | P3 | 初回のsub-GOP fragment、video/audioの段階投入 | 初画の理論的な下限を下げ得る | 大 | △ | mpeg2toh264 core/player |
 
 P2のAAC/GOP保留変更は、単に条件を消してよいという提案ではない。
@@ -865,7 +874,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | --- | --- | --- |
 | probeでPTSを得た時点で128KiB全体の到着待ちを止める | LAN走行の6 offset中5点は先頭32KiB、全点は64KiB以内でPTSを取得できた。2 probeなら後半64KiBを2回省ける可能性 | RTTと次の直列probeは残る。stream reader化後にcancelしたresponse量とprobe-completeを同条件で測る |
 | 最後のprobe byte列を本体変換へ再利用する | 128KiBの重複取得削減 | probe位置と採用offsetが一致する場合だけ有効。sessionへprefix入力する契約が要る |
-| 実際に採用したGOP/PES byteをcoreから返してindexへ追加する | probe標本に加えてRAP近傍の対応点を増やせる可能性 | `source.offset`への誤対応は`a10253e`で除去済み。追加APIはprobe標本だけで不足する素材を再現してから実装 |
+| 実際に採用したGOP/PES byteをcoreから返してindexへ追加する | probe標本に加えてRAP近傍の対応点を増やせる可能性 | Windows 180秒地点では現行restart indexが次候補も把握できるが、開始がtarget後なので選べない。未知のpre-target RAPを取り逃す素材を再現してから追加する |
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
