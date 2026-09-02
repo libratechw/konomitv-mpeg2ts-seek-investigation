@@ -83,10 +83,7 @@ fork固有のYADIF変更はupstream向け変更へ混ぜず、順位9は効果�
 - seek leadを1.0秒から0.5秒へ固定変更する案は可視初画を短縮しましたが、5地点中2地点で要求時刻を越えたため採用しません。
 - PAT/PMTを含むRAPを毎seekで4〜8MiB先読みする案は、追加Rangeの費用を回収できず遅くなりました。再生中の学習やsidecarは、未知のpre-target RAPを取り逃す素材を再現できた場合に再評価します。
 - YADIFへ1 frame分の固定reserveを置く案は、短時間のカクつきを隠しましたが、600秒で最大11.15秒の停止を生じました。queue容量を増やす案もfuture leadを増やすため採用しません。
-
-## 追加確認が必要な案
-
-- 録画TSの`FileResponse` body chunkを64KiBから1MiBへ増やす案は、Galaxyの可視初画中央値を6.9〜13.0ms短縮しましたが、Windowsでは中立でした。より多い反復と中間chunk sizeの比較が必要なため、まだbranch化していません。
+- 録画TSの`FileResponse` body chunkを増やす案は、Galaxyで小さな差が出ましたがsizeに対して単調でなく、Windowsの対応付き比較も−2.4〜+1.7msで中立だったため採用しません。
 
 ## 測定を読むときの前提
 

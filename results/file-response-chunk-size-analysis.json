@@ -1,62 +1,93 @@
 {
-  "status": "needs-more-evidence",
+  "status": "not-adopted",
   "baseline": "Starlette FileResponse.chunk_size = 65536",
-  "candidate": "Set chunk_size = 1048576 only for VideoDownloadAPI",
+  "candidates": [262144, 524288, 1048576],
   "konomiTvCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
   "mpeg2toh264Commit": "47cca299f182049f12f5e22529b37bbf491de411",
   "fixture": {
     "name": "nogizaka.ts",
     "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
   },
-  "method": {
-    "order": "B-F-F-B",
-    "measuredSeeksPerVariant": 20,
-    "groups": "Five targets from 180 through 184 seconds and five targets from 480 through 484 seconds per block pair.",
+  "commonMethod": {
     "metric": "video.currentTime assignment to the first canvas frame that remains visible after seeked",
     "fullscreen": true,
     "transport": "LAN direct",
     "cleanupVerifiedForEveryBlock": true
   },
-  "galaxy": {
-    "device": "Galaxy Tab S11 Ultra SM-X930",
-    "results": [
+  "initial64KiBTo1MiBComparison": {
+    "order": "B-F-F-B",
+    "measuredSeeksPerVariant": 20,
+    "galaxy": [
       {
         "targetGroup": 180,
         "nPerVariant": 10,
         "visibleMedianMs": {"64KiB": 168.5, "1MiB": 161.60009765625},
-        "visibleP90Ms": {"64KiB": 197.300048828125, "1MiB": 177.199951171875},
         "firstByteToFragmentMedianMs": {"64KiB": 72.9000244140625, "1MiB": 68.4000244140625}
       },
       {
         "targetGroup": 480,
         "nPerVariant": 10,
         "visibleMedianMs": {"64KiB": 151.0499267578125, "1MiB": 138.050048828125},
-        "visibleP90Ms": {"64KiB": 208, "1MiB": 170.599853515625},
         "firstByteToFragmentMedianMs": {"64KiB": 73.35009765625, "1MiB": 67.0999755859375}
       }
-    ]
-  },
-  "windows": {
-    "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
-    "powerMode": "Best power efficiency",
-    "results": [
+    ],
+    "windows": [
       {
         "targetGroup": 180,
         "nPerVariant": 10,
         "visibleMedianMs": {"64KiB": 297.7501220703125, "1MiB": 298.449951171875},
-        "visibleP90Ms": {"64KiB": 331.89990234375, "1MiB": 494.5},
         "firstByteToFragmentMedianMs": {"64KiB": 110.8499755859375, "1MiB": 111.8499755859375}
       },
       {
         "targetGroup": 480,
         "nPerVariant": 10,
         "visibleMedianMs": {"64KiB": 215.5, "1MiB": 211.9000244140625},
-        "visibleP90Ms": {"64KiB": 253.39990234375, "1MiB": 240.800048828125},
         "firstByteToFragmentMedianMs": {"64KiB": 96.099853515625, "1MiB": 100.25}
       }
     ]
   },
-  "conclusion": "Galaxy improved by 6.9 to 13.0 ms at the median, while Windows was neutral. Keep this as a low-priority candidate until larger repetitions and an intermediate chunk-size sweep reproduce the device-specific effect.",
+  "galaxySizeSweep": {
+    "order": "64KiB, 256KiB, 512KiB, 1MiB, 1MiB, 512KiB, 256KiB, 64KiB",
+    "measuredSeeksPerSize": 20,
+    "nPerTargetGroupAndSize": 10,
+    "results": [
+      {
+        "targetGroup": 180,
+        "visibleMedianMs": {"64KiB": 171.25, "256KiB": 162.199951171875, "512KiB": 177.550048828125, "1MiB": 164.9000244140625},
+        "firstByteToFragmentMedianMs": {"64KiB": 76.3001708984375, "256KiB": 75.4000244140625, "512KiB": 77.0999755859375, "1MiB": 73.2000732421875},
+        "pairedVisibleDeltaVs64KiBMs": {"256KiB": -7.0001220703125, "512KiB": 3.5499267578125, "1MiB": -2.25}
+      },
+      {
+        "targetGroup": 480,
+        "visibleMedianMs": {"64KiB": 153.9000244140625, "256KiB": 141.949951171875, "512KiB": 148, "1MiB": 142.4000244140625},
+        "firstByteToFragmentMedianMs": {"64KiB": 75.0999755859375, "256KiB": 70.8499755859375, "512KiB": 69.550048828125, "1MiB": 70.1500244140625},
+        "pairedVisibleDeltaVs64KiBMs": {"256KiB": -15.4000244140625, "512KiB": -5.10009765625, "1MiB": -6.64990234375}
+      }
+    ]
+  },
+  "windows256KiBRevalidation": {
+    "powerMode": "Best power efficiency",
+    "order": "B-F-F-B",
+    "measuredSeeksPerVariant": 40,
+    "nPerTargetGroupAndVariant": 20,
+    "results": [
+      {
+        "targetGroup": 180,
+        "visibleMedianMs": {"64KiB": 294.0001220703125, "256KiB": 287.6500244140625},
+        "firstByteToFragmentMedianMs": {"64KiB": 109.2000732421875, "256KiB": 111.25},
+        "pairedVisibleDeltaMs": 1.7000732421875,
+        "pairedFirstByteToFragmentDeltaMs": 1.199951171875
+      },
+      {
+        "targetGroup": 480,
+        "visibleMedianMs": {"64KiB": 206.6500244140625, "256KiB": 200.5499267578125},
+        "firstByteToFragmentMedianMs": {"64KiB": 101.8499755859375, "256KiB": 103.4000244140625},
+        "pairedVisibleDeltaMs": -2.400146484375,
+        "pairedFirstByteToFragmentDeltaMs": 0.75
+      }
+    ]
+  },
+  "conclusion": "The Galaxy result was small and non-monotonic across chunk sizes. Target- and pass-matched Windows comparisons were neutral, and the first-byte-to-fragment interval did not improve. Do not create a branch. Reconsider only if another transport or storage environment reproduces a stable chunk-size bottleneck.",
   "rawResults": [
     "galaxy-file-response-64k-b1.json",
     "galaxy-file-response-1m-f1.json",
@@ -65,6 +96,18 @@
     "windows-file-response-64k-b1.json",
     "windows-file-response-1m-f1.json",
     "windows-file-response-1m-f2.json",
-    "windows-file-response-64k-b2.json"
+    "windows-file-response-64k-b2.json",
+    "galaxy-file-response-sweep-64k-a.json",
+    "galaxy-file-response-sweep-256k-a.json",
+    "galaxy-file-response-sweep-512k-a.json",
+    "galaxy-file-response-sweep-1m-a.json",
+    "galaxy-file-response-sweep-1m-b.json",
+    "galaxy-file-response-sweep-512k-b.json",
+    "galaxy-file-response-sweep-256k-b.json",
+    "galaxy-file-response-sweep-64k-b.json",
+    "windows-file-response-sweep-64k-b1.json",
+    "windows-file-response-sweep-256k-f1.json",
+    "windows-file-response-sweep-256k-f2.json",
+    "windows-file-response-sweep-64k-b2.json"
   ]
 }
