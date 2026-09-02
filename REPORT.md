@@ -800,6 +800,32 @@ MSE追加の数msも速度効果と判定しない。
 120秒と1500秒ではvideo/filmが切り替わったため、番組全体を24fpsとみなす根拠にはしない。
 各走行は[MADDER film候補の計測](results/madder-film-seek.json)に保存した。
 
+### picture jobと2個目のfragment
+
+integration `47cca29`とKonomiTV `e92fba8`を基準に、診断用markだけを加えたbuildでpicture Workerごとの処理時間を測った。
+素材はローカルSSD上の乃木坂工事中、Chrome全画面、LAN直結、既定と同じ4 Workerである。
+Windowsは電源モード「最適な電力効率」の補助条件で、各preflightのCPU負荷中央値は3〜7%だった。
+180〜184秒と480〜484秒を交互にseekし、各端末でwarmup後10回を測った。
+
+Windowsの180秒側は、要求からfirst fragment中央値167.1ms、second fragment 262.0ms、second media updateend 272.8ms、`canplay` 298.2ms、表示復帰293.7msだった。
+480秒側は最初のfragmentだけで`canplay`でき、表示復帰中央値221.5msだった。
+同じbuildのGalaxyは180秒側でも表示復帰中央値160.6msで、second fragment中央値172.8msより前に目的canvasを描画できた。
+したがって2個目のGOP待ちは全端末の固定条件ではなく、seek先が最初のfragment末尾に近いことと、Chromeのdecoderが最初のfragmentだけで目的frameを提示できるかの組み合わせで発生する。
+
+各GOPは13〜15個のpicture jobを持ち、Windowsではindex 0と概ね3個ごとの大きなjobが25〜55ms、その他が7〜16msだった。
+job byte数とencode時間のPearson相関は、Windowsの最初のGOPで0.957、2個目で0.912、Galaxyで0.947 / 0.890だった。
+Workerへの投入から応答までの時間からWASM encode時間を引いた中央値は0.2〜0.3msで、転送は支配的でなかった。
+
+byte数の大きいjobから投入する試作は、Windows 180秒側のfirst→second fragment中央値を94.0→91.8msと約2.2ms短縮したが、表示復帰は293.7→293.8msで変わらなかった。
+4 Workerのsecond fragment後に50msの空白を置く診断も、second updateend→`canplay`が25.4→24.0ms、表示復帰が293.7→296.5msで、既定4 Workerのdecoder競合を支持しなかった。
+一方、7 Workerはsecond fragmentを220.8msまで早めても表示復帰が312.3msへ悪化し、100msの診断用空白で276.4msへ戻った。
+既定上限4は変換とdecoderのCPU競合を避ける役割を果たしており、単純なWorker増加は採用しない。
+
+Windowsの該当位置をさらに短縮するには、2個目のGOP全体の完了を待たず、目的frameに必要な先頭pictureをfMP4へ確定する設計が必要になる。
+現行`IncrementalTranscoder::complete()`は全pictureの成否から破損pictureを再計画し、全access unitを組み立てた後に`Session::finish_gop()`が音声とtimelineを含むfragmentを確定する。
+部分出力は、破損判定、transcoder state、音声境界、MP4 sample timelineを分割して保持する必要があり、小変更ではない。
+[集計と全走行](results/picture-job-critical-path-analysis.json)に、Windows / Galaxyの4 Worker、投入順試作、診断用CPU空白、7 Worker比較への参照を保存した。
+
 ## 仮説の評価と優先順位
 
 実測を含む通常seekの候補順位は、(1) append後のdecoder提示、(2) GOP/AAC収集と最初のIDR jobを含む初期H.264/fMP4生成、(3) PTS probeとrequest往復、(4) PAT/PMTとheader再取得、(5)連続操作の残余計算である。
@@ -818,7 +844,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 2. RAP不一致の余分な読み込み | 確認。offsetはRAP未整列。本体Rangeは初画までに数十MiBを読み、tables/PES/GOP再取得とA/V条件を含む。RAP indexで短縮余地はあるが後段は消えない |
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
-| 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。Galaxyでは最初のIDR jobだけでjobs後33〜40msを占め、任意の後続jobは4〜7msで先に終わった。IDR固有の予測・再構築が変換側critical path |
+| 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。最新のjob粒度計測では、WindowsとGalaxyの両方でjob byte数とencode時間の相関が0.89〜0.96、Worker往復の追加時間は中央値0.2〜0.3msだった。Windowsの一部seekは目的frame提示に2個目のGOP全体を必要とし、変換とfragment境界がcritical pathになった |
 | 6. YADIF/IVTCの過剰な初画待ち | 単一タブの乃木坂A/BでYADIF停止7/90→0/90となり、queue再同期によるstall防止を確認。通常時中央値はほぼ不変。MADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
@@ -873,7 +899,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 | P3 | AAC必要量が揃った完成GOPを次GOP境界前に出す | 単体では入力を320〜512KiB削減したが、GalaxyとWindowsのfragment生成・可視初画を短縮しなかった | 中 | △ | mpeg2toh264 Session。実機B-F-F-Bで不採用 |
 | P1 | coreが実際のGOP/RAP byteを返し、再生中のin-memory indexへ学習する | 要求時刻以前に近いRAPが実在する地点ではdecoder discardを減らせる可能性。Windows 180秒地点は現行indexですでに最適で短縮不可 | 中 | ○ | mpeg2toh264 core/player。byteをRange先頭へ誤対応しない契約が必要 |
 | P2 | 永続sidecarと有効なstream configを持つseek resolver | cold seekのprobeと、近いpre-target RAPがある地点の復号を削減。GOP cadenceで次候補がtarget後になる地点は短縮しない | 大 | ○ | KonomiTV固有保存、playerの汎用API |
-| P3 | 初回のsub-GOP fragment、video/audioの段階投入 | 初画の理論的な下限を下げ得る | 大 | △ | mpeg2toh264 core/player |
+| P2 | 初回のsub-GOP fragment、video/audioの段階投入 | Windowsの該当位置で約90msの2個目GOP全体待ちを短縮し、初画の理論的な下限を下げ得る | 大 | △ | mpeg2toh264 core/player。破損再計画、state、音声、MP4 timelineの分割が必要 |
 
 P2のAAC/GOP保留変更は、単に条件を消してよいという提案ではない。
 音声が遅れて多重化されるTS、mono/stereo/5.1変更、dual mono、PTS wrap/discontinuity、open GOP、field picture、破損素材、異なるMSE実装で確認する。
@@ -899,6 +925,8 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
 | 録画TSの`FileResponse` body chunkを64KiBから増やす | Galaxyの一部条件で最大15.4msの対応付き差が出た | 64〜1024KiBで単調性がなく、Windows各40 seekは−2.4〜+1.7msで中立だったため採用しない。別transport/storageで再現した場合だけ再評価する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |
+| picture jobをbyte数の大きい順に投入する | job byte数とencode時間はWindows / Galaxyで強く相関した | Windows 180秒側のfirst→second fragmentは中央値約2.2ms短縮したが、表示復帰は293.7→293.8msで変わらなかった。正式変更にはせず、GOP内を部分出力する設計で優先jobを選ぶ場合の根拠として残す。[集計と全走行](results/picture-job-critical-path-analysis.json) |
+| picture Workerを既定4より増やす | 7 Workerではsecond fragmentが中央値約41ms早まった | Windows 180秒側の表示復帰は312.3msへ悪化し、変換とdecoderのCPU競合を確認した。既定上限4は維持し、増加案は採用しない。[集計と全走行](results/picture-job-critical-path-analysis.json) |
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
