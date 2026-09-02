@@ -1,0 +1,89 @@
+{
+  "purpose": "Separate H.264 profile and bitrate effects on low-frequency steady-playback drops while holding resolution and frame rate constant.",
+  "conditions": {
+    "serverBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "clientAsset": "PlayerController-Dwy3m7IJ.js",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "video": "1920x1080, 60000/1001 fps, GOP 180, FFmpeg yadif mode 1",
+    "audio": "AAC 48 kHz, 256 Kbps",
+    "collector": "counter-only-no-rvfc",
+    "durationPerRunMs": 600000,
+    "measurementRunnerHash": "fb7063a8dc42fb073ab6fee829c93ee1a38b03ac11f5457a99337227149acc12"
+  },
+  "diagnosticServerSource": {
+    "file": "VideoEncodingTask.py",
+    "sourceHash": "7ecd62ae7f5148d727bdf897471d91bf7029e6d2e6c0cbce3efcd85a656dfe62",
+    "diffHash": "ad52da0a761565c099353532a0eecf1a37d3115a6f0b78d28a2dfe8d26150a96",
+    "scope": "Diagnostic-only environment overrides for H.264 profile, target bitrate, and maximum bitrate. Resolution, frame rate, GOP, deinterlacing, audio, and output format remain unchanged."
+  },
+  "runsInOrder": [
+    {
+      "condition": "High profile, 9500K target, 13000K maximum",
+      "role": "opening baseline",
+      "raw": "galaxy-recorded-hls-h264-1080p60-counter-only-600s.json",
+      "acceptedFrames": 35964,
+      "droppedFrames": 2,
+      "decodedVideoBytes": 716214963,
+      "mediaTimeDeltaSeconds": 599.999474
+    },
+    {
+      "condition": "High profile, 3500K target, 5200K maximum",
+      "role": "bitrate diagnostic",
+      "raw": "galaxy-recorded-hls-h264-high-low-bitrate-600s.json",
+      "acceptedFrames": 35964,
+      "droppedFrames": 0,
+      "decodedVideoBytes": 264490885,
+      "mediaTimeDeltaSeconds": 600.001864
+    },
+    {
+      "condition": "Main profile, 9500K target, 13000K maximum",
+      "role": "profile diagnostic",
+      "raw": "galaxy-recorded-hls-h264-main-normal-bitrate-600s.json",
+      "acceptedFrames": 35964,
+      "droppedFrames": 2,
+      "decodedVideoBytes": 716385980,
+      "mediaTimeDeltaSeconds": 600.000047
+    },
+    {
+      "condition": "Main profile, 3500K target, 5200K maximum",
+      "role": "profile and bitrate diagnostic",
+      "raw": "galaxy-recorded-hls-h264-main-low-bitrate-600s.json",
+      "acceptedFrames": 35964,
+      "droppedFrames": 1,
+      "decodedVideoBytes": 264578656,
+      "mediaTimeDeltaSeconds": 600.000152
+    },
+    {
+      "condition": "High profile, 9500K target, 13000K maximum",
+      "role": "closing baseline",
+      "raw": "galaxy-recorded-hls-h264-upstream-normal-closing-baseline-600s.json",
+      "acceptedFrames": 35964,
+      "droppedFrames": 1,
+      "decodedVideoBytes": 716191061,
+      "mediaTimeDeltaSeconds": 600.001805
+    }
+  ],
+  "totals": {
+    "normalBitrate": {
+      "runs": 3,
+      "acceptedFrames": 107892,
+      "droppedFrames": 5
+    },
+    "lowBitrate": {
+      "runs": 2,
+      "acceptedFrames": 71928,
+      "droppedFrames": 1
+    }
+  },
+  "result": [
+    "Changing only the H.264 profile from High to Main did not improve the observed count: the normal-bitrate Main run dropped two frames.",
+    "The two low-bitrate runs dropped zero and one frame, while the opening and closing High-profile baselines dropped two and one frames. The observed rate is lower at low bitrate, but the event count is too small to establish a reliable effect.",
+    "All runs advanced media time by about 600 seconds, accepted the expected frame count, continued audio decoding, used one requested quality, and completed cleanup.",
+    "The low-bitrate condition is diagnostic and is not a proposed product setting because its visual-quality tradeoff has not been evaluated."
+  ]
+}

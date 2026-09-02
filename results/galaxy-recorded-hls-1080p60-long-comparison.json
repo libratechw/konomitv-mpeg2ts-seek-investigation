@@ -16,6 +16,7 @@
     },
     "targetSeconds": 600,
     "expectedRate": "60000/1001 fps",
+    "actualHEVCOutput": "libx265 Main, yuv420p, 8-bit. The API request included -10bit, but the local software FFmpeg backend produced 8-bit output.",
     "serverSession": "Exactly one encoder session for the requested quality in each run; no default-quality concurrent session.",
     "thermal": "Thermal Status 0 during the instrumented runs; no thermal throttling observed."
   },
@@ -115,6 +116,6 @@
     "HEVC accepted 35966 frames and dropped zero under the same counter-only conditions, so the observed H.264 drops are not explained by a general 60 Hz display or thermal limit.",
     "The requestVideoFrameCallback count is lower than presentedFrameAdvance, so callback gaps are not one-for-one evidence of dropped video frames.",
     "A third H.264 run observed one dropped frame at media time 950.070428 with readyState 4 and 31.393382 seconds buffered ahead. It was 1.363383 seconds from the nearest HLS segment boundary, and no HLS error occurred within two seconds.",
-    "The next comparison should isolate H.264 decoder/output parameters such as profile and bitrate while holding resolution and frame rate constant."
+    "The follow-up profile and bitrate comparison is recorded in galaxy-recorded-hls-h264-profile-bitrate-comparison.json. Changing High to Main alone did not improve the count. Low-bitrate runs observed fewer drops, but the event count is too small to establish a reliable effect."
   ]
 }

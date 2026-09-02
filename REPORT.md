@@ -272,18 +272,28 @@ Galaxy Chrome、LAN直結、全画面で、通常モードのH.264とHEVC 1080p6
 | H.264 1080p60 | 35,964 | 2 | 599.999秒 | 18,834,432 byte |
 | HEVC 1080p60 | 35,966 | 0 | 600.001秒 | 14,601,318 byte |
 
-H.264は60000/1001fpsの理論frame数を受理しているため、サーバー出力のcadence欠落ではなく、Chromeが受け取ったframeのうち2件をpredecodeまたは表示期限超過でdropした結果である。
+HEVCのAPI要求は`1080p-60fps-hevc-10bit`だったが、今回のソフトウェアFFmpegが実際に生成した映像は`libx265 Main`、`yuv420p`の8bitだった。
+したがって、この値は10bit HEVCの結果には数えない。
+
+H.264は60000/1001fpsの理論frame数を受理しているため、サーバー出力のframe数不足ではない。
+現行Chromiumでは、[`VideoRendererImpl`](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/media/renderers/video_renderer_impl.cc)が表示選択時のdrop数を統計へ加算し、[`VideoRendererAlgorithm`](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/media/filters/video_renderer_algorithm.cc)がdecoded frameのうち表示に選ばれず取り除かれたframeに加え、時刻が逆行したframeや1ms未満の間隔でqueueへ入ったframeもdropとして数える。
+この計測だけでは両者を分離できない。
 HEVCは同条件でdrop 0であり、計測中のThermal Statusも0だったため、60Hz表示や端末のthermal throttlingだけではH.264の2件を説明できない。
 
 H.264のdrop発生位置を250ms周期で記録する別の600秒走行では、35,965 frame中1件をdropした。
 発生時のmedia timeは950.070秒、`readyState=4`、buffer終端は981.464秒で、約31.4秒先までbuffer済みだった。
 最寄りの6.006秒HLS segment境界から約1.36秒離れ、前後2秒にHLS errorはなかったため、この1件はbuffer枯渇やsegment切替では説明できない。
-次はH.264のprofileとbitrateを解像度・frame rate一定で分け、MediaCodecのcodec別decode処理を確認する。
+H.264のprofileとbitrateを、1920×1080、60000/1001fps、GOP 180、AAC 256Kbpsのまま分けて各600秒測った。
+既定のHigh・9.5/13Mbpsは開始側2/35,964 drop、終了側1/35,964 drop、Main・9.5/13Mbpsは2/35,964 dropだった。
+High・3.5/5.2Mbpsは0/35,964 drop、Main・3.5/5.2Mbpsは1/35,964 dropだった。
+通常bitrateの3走行合計は5/107,892、低bitrateの2走行合計は1/71,928で、低bitrate側に少ない傾向はあるが、事象数が少ないため効果は確定できない。
+HighからMainへの変更単独では改善を確認できなかった。
+低bitrate条件は原因切り分け用であり、画質を評価していないため製品設定の候補にはしない。
 
 毎frameのrVFC情報を保持する診断走行では、H.264が2 drop、HEVCが1 dropだった。
 ただしH.264はcallback 35,671回に対して`presentedFrames`が35,963進み、HEVCもcallback 35,731回に対して35,964進んだ。
 したがってrVFC callback間隔の空きは、映像frameのdropと1対1には対応しない。
-[主条件、診断条件、発生位置、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)を保存した。
+[主条件、診断条件、発生位置、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)と[H.264 profile・bitrate比較](results/galaxy-recorded-hls-h264-profile-bitrate-comparison.json)を保存した。
 
 以前の8画質×2codecの5秒測定とHLSシーク測定は、watch pageを空の設定で一度起動してから要求画質へ切り替えていた。
 初期既定の1080pと要求画質のencoder sessionが並行してサーバー負荷を混ぜたため、絶対値として採用しない。

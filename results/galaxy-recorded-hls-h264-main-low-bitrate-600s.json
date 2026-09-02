@@ -1,0 +1,96 @@
+{
+  "variant": "hls-h264-main-low-bitrate-r1",
+  "videoId": 1,
+  "sourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "playerControllerSourceHash": "b69659ce9cb093e6ec6b6a48ab8995816d42501d1389abdd2f24503303ad0ff6",
+  "collector": "collect-video-element-counter-block.mjs",
+  "collectorHash": "9f02088520763c2b4265d2c885bd8cfcb3377bbf8469c64e5a962c63bb125ecd",
+  "asset": "PlayerController-Dwy3m7IJ.js",
+  "playerAssetHash": "a07356ec96d5d57eb786ea31035cf495e69dfc729000156847d05fe4c6487092",
+  "konomiBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "konomiDiffHash": "7751a1353cfe297f0f9ee77ce8c303e744d0d5f5cf8aa72ed452ede0fc32b808",
+  "serverImage": {
+    "reference": "ghcr.io/tsukumijima/konomitv:latest",
+    "id": "sha256:92a534243f9170fe0808a2e147c96c386677475652f72036438a19870d0f5f49"
+  },
+  "serverSource": {
+    "name": "VideoEncodingTask.py",
+    "hash": "7ecd62ae7f5148d727bdf897471d91bf7029e6d2e6c0cbce3efcd85a656dfe62",
+    "baseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "diffHash": "ad52da0a761565c099353532a0eecf1a37d3115a6f0b78d28a2dfe8d26150a96",
+    "diagnosticEnvironment": [
+      "KONOMITV_DIAG_H264_PROFILE=main",
+      "KONOMITV_DIAG_H264_VIDEO_BITRATE=3500K",
+      "KONOMITV_DIAG_H264_VIDEO_BITRATE_MAX=5200K"
+    ]
+  },
+  "fixture": {
+    "path": "local NVMe fixture (SHA-256 verified)",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "expectedQuality": "1080p (60fps)",
+  "qualitySetting": "1080p-60fps",
+  "codecMode": "h264",
+  "frameMode": "normal",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayModeConfigured": "60 Hz",
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "collector": "counter-only-no-rvfc",
+    "durationMs": 600000.3000000715,
+    "fullscreen": true,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false,
+    "readyState": 4,
+    "playbackRate": 1,
+    "videoWidth": 1920,
+    "videoHeight": 1080,
+    "streamQualities": [
+      "1080p-60fps"
+    ],
+    "qualityName": "1080p (60fps)",
+    "mediaTimeStart": 608.750658,
+    "mediaTimeEnd": 1208.75081,
+    "mediaTimeDelta": 600.000152,
+    "decodedBytes": {
+      "video": {
+        "start": 6669665,
+        "end": 271248321,
+        "delta": 264578656
+      },
+      "audio": {
+        "start": 377979,
+        "end": 19211979,
+        "delta": 18834000
+      }
+    },
+    "quality": {
+      "start": {
+        "total": 681,
+        "dropped": 0
+      },
+      "end": {
+        "total": 36645,
+        "dropped": 1
+      },
+      "delta": {
+        "total": 35964,
+        "dropped": 1
+      }
+    }
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}
