@@ -1,6 +1,7 @@
-# KonomiTV 録画 MPEG-2 TS 直接再生調査
+# KonomiTV 録画再生のシーク・表示品質調査
 
-KonomiTVの「録画MPEG-2 TSをブラウザーで直接再生する経路」について、シーク後の表示復帰時間、定常再生のFPS、コマ落ち、短いカクつき、長時間stallをコードと実機で調べた記録です。
+KonomiTVの録画再生について、シーク後の表示復帰時間、定常再生のFPS、コマ落ち、短いカクつき、長時間stallをコードと実機で調べた記録です。
+主対象はMPEG-2 TSのOriginal直接再生ですが、サーバーエンコードHLSとの違いも同じ指標で確認します。
 リポジトリ名には調査開始時の`seek-investigation`が残っていますが、素材本来のcadenceを維持し、負荷やシークの後も安定した表示へ戻るまでを対象とします。
 
 ## 測定指標
@@ -36,6 +37,26 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 
 同一ホストのLinux Chromeでは、正常区間120秒が59.867fps、p99 17.7ms、queue全reset 0でした。
 同じ40回の`video.currentTime`起点の表示復帰時間は中央値131.7ms、p95 195.4ms、最大196.2msでしたが、LANクライアントの目標達成には数えません。
+
+### サーバーエンコードHLS
+
+最新KonomiTVの録画HLSをGalaxy Chrome、LAN直結、全画面で短時間確認しました。
+H.264とHEVCの各8画質、計16条件は、5秒間の`droppedVideoFrames`増分がすべて0で、音声のdecodeも継続しました。
+60pは両codecでmedia timeが1回だけ2 frame分進み、HEVC 30pの3画質ではmedia timeを飛ばさずrVFC通知だけが1回遅れたため、長時間試験で区別します。
+これは画質ごとの経路確認であり、長時間のコマ落ちゼロを示す結果ではありません。
+
+1080p60を各10回シークした結果は次のとおりです。
+HEVCのURLは`-10bit`でしたが、ローカルFFmpegの実出力は8-bit Mainでした。
+
+| 出力 | 表示復帰時間 | 最初のsegment応答byte | segment転送 | encoder開始からsegment完成 |
+| --- | ---: | ---: | ---: | ---: |
+| H.264 1080p60 | 1340.8ms | 1060.5ms | 102.8ms | 943.0ms |
+| HEVC 1080p60 | 4201.9ms | 3890.8ms | 45.2ms | 3777.5ms |
+
+値は中央値です。
+buffer flushは6〜7ms、playlist取得は35〜38msで、測定地点は既存`segment_map`から解決できました。
+支配的な待ちは、サーバーが約6秒のHLS segmentをrandom-access frameまでエンコードし終え、応答を開始するまでです。
+詳しい段階別の値と全runは[録画HLSスクリーニング結果](results/galaxy-recorded-hls-screening.json)に保存しています。
 
 ## PR候補の優先順位
 
