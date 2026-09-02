@@ -299,7 +299,18 @@ PAT / PMT、PES、sequence header、AAC config、GOP 途中状態は新しい se
 GOP 長が0.5秒なら、2個の完成 GOP は約1秒分の素材を読むという意味である。
 **1秒の実時間を必ず待つという意味ではない。**
 録画は実時間より速く読めるため、所要時間は必要 byte数、配信応答、TS parse、変換速度に依存する。
-I-picture の位置が既知でも、GOP全体の収集、追加 GOP保留、AAC条件は現状のまま残る。
+I-picture の位置が既知でも、GOP全体の収集とAAC条件は残る。
+
+追加GOP保留が実際の体感遅延を支配するか確かめるため、完成GOPに必要なAAC frame数が揃った時点で出力する候補を作った。
+回帰試験は、後続GOPがなくても映像と音声の両`traf`を持つfragmentを出せることを確認し、現行コードでは失敗、候補では成功した。
+乃木坂fixtureを64KiBずつ渡した単体計測では、180秒地点の初回fragmentまでの入力が2,228,224→1,703,936 bytes、480秒地点が1,900,544→1,572,864 bytesとなった。
+両版の先頭3 fragmentはbyte列、時刻、sample数が一致した。
+
+一方、全画面・LAN直結のB-F-F-B実機比較では短縮しなかった。
+Galaxyの可視初画中央値は180秒群が162.7→179.2ms、480秒群が150.7→164.7ms、`first-byte`→`first-fragment`中央値も80.3→83.4ms、75.0→84.1msだった。
+Windowsの可視初画中央値も180秒群が304.3→328.5ms、480秒群が222.4→265.1msで、同区間のfragment生成は116.4→124.5ms、116.0→120.8msだった。
+入力byte数は減るがChromeへ届く初回fragmentと可視初画を短縮しないため、この変更は採用しない。
+[単体計測と実機A/Bの集計](results/completed-gop-hold-analysis.json)および同JSONから参照する8ブロックの生データを保存した。
 
 初期状態は IDR待ちで、[transcode.rs:582](https://github.com/otya128/mpeg2toh264/blob/d5df08ba9c661a5576545d3d30464d8f3bf64639/crates/mpeg2toh264/src/transcode.rs#L582) が最初の利用可能な I-picture を H.264 IDR にする。
 それ以前の P-pictureや参照が揃わない B-pictureは落とし、timeline 側も同じ picture を除外する。

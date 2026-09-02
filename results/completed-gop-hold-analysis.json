@@ -1,0 +1,96 @@
+{
+  "status": "not-adopted",
+  "reason": "The candidate reduced TS input before fragment emission offline, but did not reduce first-byte-to-first-fragment or visible-frame latency in Chrome.",
+  "baselineCommit": "47cca299f182049f12f5e22529b37bbf491de411",
+  "candidateDiffSha256": "d88c958bcf542709fa3cbbbd97fa74b95559cf99245d03232a8e2eb406440dc7",
+  "konomiTvCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "candidate": "Emit a completed GOP as soon as the exact AAC sample count for it is available, instead of retaining one additional completed GOP.",
+  "offline": {
+    "chunkBytes": 65536,
+    "outputIdentity": "The first three init/media fragments had identical bytes, hashes, timestamps and sample counts in baseline and candidate runs.",
+    "targets": [
+      {
+        "targetSeconds": 180,
+        "firstFragmentInputBytes": {
+          "baseline": 2228224,
+          "candidate": 1703936,
+          "difference": -524288
+        }
+      },
+      {
+        "targetSeconds": 480,
+        "firstFragmentInputBytes": {
+          "baseline": 1900544,
+          "candidate": 1572864,
+          "difference": -327680
+        }
+      }
+    ]
+  },
+  "browserMethod": {
+    "order": "B-F-F-B",
+    "measuredSeeksPerVariant": 40,
+    "groups": "Ten targets from 180 through 189 seconds and ten targets from 480 through 489 seconds per block pair.",
+    "metric": "video.currentTime assignment to the first canvas frame that remains visible after seeked",
+    "fullscreen": true,
+    "transport": "LAN direct",
+    "cleanupVerifiedForEveryBlock": true
+  },
+  "galaxy": {
+    "device": "Galaxy Tab S11 Ultra SM-X930",
+    "results": [
+      {
+        "targetGroup": 180,
+        "nPerVariant": 20,
+        "visibleMedianMs": {"baseline": 162.6500244140625, "candidate": 179.1500244140625},
+        "visibleP90Ms": {"baseline": 191.89990234375, "candidate": 209.10009765625},
+        "firstByteToFragmentMedianMs": {"baseline": 80.2999267578125, "candidate": 83.4000244140625},
+        "under250": {"baseline": 20, "candidate": 20}
+      },
+      {
+        "targetGroup": 480,
+        "nPerVariant": 20,
+        "visibleMedianMs": {"baseline": 150.6500244140625, "candidate": 164.6500244140625},
+        "visibleP90Ms": {"baseline": 198.10009765625, "candidate": 195.599853515625},
+        "firstByteToFragmentMedianMs": {"baseline": 74.9500732421875, "candidate": 84.10009765625},
+        "under250": {"baseline": 20, "candidate": 20}
+      }
+    ]
+  },
+  "windows": {
+    "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+    "powerMode": "Best power efficiency",
+    "results": [
+      {
+        "targetGroup": 180,
+        "nPerVariant": 20,
+        "visibleMedianMs": {"baseline": 304.25, "candidate": 328.5001220703125},
+        "visibleP90Ms": {"baseline": 361.199951171875, "candidate": 360.60009765625},
+        "firstByteToFragmentMedianMs": {"baseline": 116.35009765625, "candidate": 124.5},
+        "under250": {"baseline": 0, "candidate": 0}
+      },
+      {
+        "targetGroup": 480,
+        "nPerVariant": 20,
+        "visibleMedianMs": {"baseline": 222.400146484375, "candidate": 265.14990234375},
+        "visibleP90Ms": {"baseline": 286, "candidate": 293.39990234375},
+        "firstByteToFragmentMedianMs": {"baseline": 115.9500732421875, "candidate": 120.75},
+        "under250": {"baseline": 15, "candidate": 3}
+      }
+    ]
+  },
+  "rawResults": [
+    "windows-completed-gop-hold-baseline-b1.json",
+    "windows-completed-gop-hold-candidate-f1.json",
+    "windows-completed-gop-hold-candidate-f2.json",
+    "windows-completed-gop-hold-baseline-b2.json",
+    "galaxy-completed-gop-hold-baseline-b1.json",
+    "galaxy-completed-gop-hold-candidate-f1.json",
+    "galaxy-completed-gop-hold-candidate-f2.json",
+    "galaxy-completed-gop-hold-baseline-b2.json"
+  ]
+}

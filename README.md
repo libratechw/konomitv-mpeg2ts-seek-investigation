@@ -78,6 +78,7 @@ fork固有のYADIF変更はupstream向け変更へ混ぜず、順位9は効果�
 
 - Android Chromiumのcanvasへ`opacity: 0.999`を設定する案は、不透明な対照でも約60fpsを維持したため採用しません。DOM occlusionが原因だという説明も再現できませんでした。
 - 完成fragmentを早く渡す案は、GalaxyとローカルSSD Chromeのどちらでも可視初画を一貫して短縮しませんでした。後続fragmentのthroughput候補としてのみ残します。
+- AACが揃った完成GOPをさらに1 GOP保留しない案は、初回fragmentまでの入力を最大512KiB減らしました。しかしGalaxyの可視初画は180秒群で162.7→179.2msとなり、`first-byte`からのfragment生成も短縮しなかったため採用しません。
 - 毎GOPをnon-IDR recovery pointにする案は、decoderが古いGOPを捨てる時間を約68ms減らしました。しかし次fragmentの生成待ちで相殺され、hardware decoder互換性も未確認なので採用しません。
 - seek leadを1.0秒から0.5秒へ固定変更する案は可視初画を短縮しましたが、5地点中2地点で要求時刻を越えたため採用しません。
 - PAT/PMTを含むRAPを毎seekで4〜8MiB先読みする案は、追加Rangeの費用を回収できず遅くなりました。再生中の学習やsidecarは、未知のpre-target RAPを取り逃す素材を再現できた場合に再評価します。
