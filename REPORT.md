@@ -930,6 +930,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |
 | picture jobをbyte数の大きい順に投入する | job byte数とencode時間はWindows / Galaxyで強く相関した | Windows 180秒側のfirst→second fragmentは中央値約2.2ms短縮したが、表示復帰は293.7→293.8msで変わらなかった。正式変更にはせず、GOP内を部分出力する設計で優先jobを選ぶ場合の根拠として残す。[集計と全走行](results/picture-job-critical-path-analysis.json) |
 | picture Workerを既定4より増やす | 7 Workerではsecond fragmentが中央値約41ms早まった | Windows 180秒側の表示復帰は312.3msへ悪化し、変換とdecoderのCPU競合を確認した。既定上限4は維持し、増加案は採用しない。[集計と全走行](results/picture-job-critical-path-analysis.json) |
+| `maxAheadSeconds`を固定0.5秒へ下げる | 2個目のfragment後に既存backpressureを働かせ、decoder起動中の後続変換を止める | Windowsの180秒側は8秒版291.3ms、0.5秒版286.4 / 299.1msで短縮せず、0.5秒版の最大値は478.1 / 487.9msへ悪化した。0.1秒版は初回再生が`readyState=2`で停止したため、固定値の変更は採用しない。seek中だけの制御にはdecoder準備完了の通知と、2 fragmentで再生できない場合の再開条件が必要。[集計と全走行](results/windows-max-ahead-startup-diagnostic.json) |
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
