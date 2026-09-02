@@ -134,8 +134,9 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 
 ## 長時間再生と反復シーク
 
-10分間の連続再生で表示が劣化しないかを、順位5のoverflow時刻圧縮だけを適用したbuild（`7ef6696`）で確認しました。
-「現在の到達点」で示したintegrationとはbuildが異なるため、数値を直接は比べません。
+10分間の連続再生で表示が劣化しないかを、順位4を親に持つ順位5のoverflow時刻圧縮branch（source `7ef6696`）を適用したbuildで確認しました。
+現在のintegrationにもこのbranchを含みますが、他の修正も加わった別buildです。
+表示復帰時間の中央値157.2msと160.5msは近く、どちらも40/40が250ms以下でしたが、3.3msの差を修正効果や退行としては扱いません。
 
 既知の破損packetより後を使ったGalaxy全画面600秒走行では、入力video callback 29.972fpsに対し、double-rate YADIF canvasは59.942fpsでした。
 canvasの40ms超間隔、YADIFの`late`、`degraded`、`discontinuities`、queue全reset、FIFO破棄はいずれも0でした。
