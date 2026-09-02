@@ -23,6 +23,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
 | seek probe標本の保持 | 公開`fix/preserve-seek-probe-sample`、`upstream/main`基点の`a10253e` |
 | DPlayer | `DPlayer/`へclone。`master`の`a5f847877eada1390456aea4ed7da8e31b4c166e`（v1.33.1）がKonomiTVのlockfileと一致 |
+| Windows補助端末 | Ryzen 7 4700U、Google Chrome。電源モードは「最適な電力効率」のまま維持し、低性能・電力制約下の補助条件として扱う |
 | ローカルbackend | 公式`ghcr.io/tsukumijima/konomitv:latest`、revision `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`、digest `sha256:4220e7ad65f877921b880eaa81822297e3694f83a6b3815b3569328398a740e4` |
 | 共有された稼働環境 | 共有されたLAN内稼働環境。公開 API の版表記は `0.14.1`。版表記だけでは Git commit を特定できない |
 | 共有環境で確認したWorker | `/assets/worker-Dl8lDoXO.BZ9fuFvy.js` が依存`52a3db5e`の`packages/player/dist/assets/worker-Dl8lDoXO.js`と一致 |
@@ -471,6 +472,7 @@ presentation policyも同じbuildで分離した。
 通常8秒を各3回測ると、1 rAFにつき1 field＋最小FIFOは59.91〜60.03fps、2 refresh以上遅れた場合だけcatch-upする二段階版は59.88〜60.04fps、従来の複数field消費は59.98〜60.00fpsで、全群の採取中`late`増分は0だった。
 この短窓では差がなかったが、最新KonomiTVを通した120秒反復では自然負荷による通常fieldの誤破棄を再現した。
 2走行平均でGalaxyは59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0、Windowsは59.354→59.783fps、25ms超127→43回、`late` 66→15.5となった。
+Windowsは全走行で電源モードが「最適な電力効率」だったことを後から確認した。この設定は変更せず、値は低性能・電力制約下の同一条件A/Bとして扱う。Galaxyとの絶対性能比較や通常設定のWindowsを代表する値には使わない。
 全8走行でmedia timeは約120秒進み、全reset 0だったため、ライブ遅延を蓄積せず通常fieldの誤破棄を減らす独立候補とする。40ms超間隔と`droppedVideoFrames`は改善しておらず、presentation policyとは別原因として残る。
 
 同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。

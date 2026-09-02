@@ -65,6 +65,7 @@ timing版の各走行内で隣接markの差を取った結果は次のとおり�
 queue容量回復を分離したintegrationを基準に、通常のcallback位相差ではFIFO順に1 fieldを表示し、最古fieldが2 refreshを超えて遅れた場合だけ古いfieldを退避する候補を比較した。
 最新KonomiTV `e92fba8`、LAN直結、全画面、右パネルなし、単一タブ、乃木坂工事中600秒から120秒を共通条件とした。
 WindowsはB-F-B-F、GalaxyはB-F-F-Bの順で各版2走行とし、全走行でmedia timeが約120秒進み、queue全resetは0だった。
+Windows Ryzen 7 4700Uは全走行で電源モードが「最適な電力効率」だったことを後から確認した。この設定は変更せず、低性能・電力制約下の補助条件として扱う。同一モード内のbranch A/Bには使えるが、Galaxyとの絶対性能比較や通常設定のWindowsを代表する値には使わない。
 
 | 端末 | build | canvas FPS平均 | 25ms超平均 | 40ms超平均 | `late`平均 | `droppedVideoFrames`平均 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
