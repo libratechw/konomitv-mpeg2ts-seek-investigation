@@ -75,13 +75,35 @@ WindowsはB-F-B-F、GalaxyはB-F-F-Bの順で各版2走行とし、全走行でm
 
 候補は両端末でcanvas FPS、25ms超間隔、schedulerの`late`を反復して改善した。
 GalaxyのrAFは全走行で25ms超0回だったため、改善はdisplay callback自体の増加ではなく、同じrAF列で表示可能なfieldを誤って捨てない効果である。
-40ms超間隔は一貫して減らず、Chromeの`droppedVideoFrames`も端末内で同数だったため、この2指標の残差は別原因である。OriginalではvideoがYADIFの入力textureで、最終表示はcanvasなので、`droppedVideoFrames`をそのまま可視コマ落ち数とは扱わない。サーバーエンコード経路とrVFC入力数を対照測定して分離する。
+40ms超間隔は一貫して減らず、Chromeの`droppedVideoFrames`も端末内で同数だったため、この2指標の残差はpresentation policyとは別原因である。OriginalではvideoがYADIFの入力textureで、最終表示はcanvasなので、`droppedVideoFrames`をそのまま可視コマ落ち数とは扱わない。video要素単体の対照結果を次節に示す。
 
 候補込みintegrationのGalaxy 40 seekは中央値145.8ms、p95 213.4ms、最大232.5msで、40/40が250ms以内だった。
 元の`tsukumijima/main`を同じ120秒条件で測るとcanvasは0 / 54.191fps、`late`は7076 / 686増えた一方、video media timeは両走行とも120秒進んだ。
 このため元状態の定常FPS低下はdecode停止ではなく、YADIF presentation schedulerが通常fieldを退避することが主要因である。
 
 生値と平均は[Galaxy・Windows二段階presentation集計](yadif-two-stage-presentation-galaxy-windows-summary.json)に保存した。
+
+## Chrome video counterと最終canvas表示の分離
+
+同じGalaxy、Chrome、LAN直結、body全画面、右パネルなし、単一タブ、600秒へseekした条件で、`requestVideoFrameCallback`と`getVideoPlaybackQuality()`をvideo要素から直接採取した。
+Originalではvideoが約29.97fpsのYADIF入力であり、最終表示は約59.94fpsのcanvasである。
+サーバーエンコード1080p60ではvideo自体が最終表示になる。
+
+| 経路 | 採取時間 | media time進行 | rVFC callback FPS | rVFC数 | `totalVideoFrames`増分 | `droppedVideoFrames`増分 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original内部video | 30秒 | 30.008秒 | 29.966 | 899 | 910 | 10 |
+| サーバーエンコード1080p60 | 30秒 | 30.000秒 | 59.632 | 1789 | 1798 | 0 |
+| サーバーエンコード1080p60 | 120秒 | 119.999秒 | 59.683 | 7162 | 7193 | 0 |
+
+OriginalのrVFC `mediaTime`間隔は898区間すべて約33.367msで、約66.7msの欠落はなかった。
+一方、`totalVideoFrames - droppedVideoFrames`の境界差を除く提示数はrVFC数と整合する。
+したがってOriginalで一定比率に増えるcounterは内部videoのpredecodeまたはdisplay deadline判定であり、YADIF canvasが実際に表示したfield数ではない。
+
+[Media Playback Quality仕様](https://w3c.github.io/media-playback-quality/)は、`droppedVideoFrames`をpredecodeで落としたframeと、decode後に表示期限へ間に合わず落としたframeの合計と定義する。
+このcounterはサーバーエンコード経路でも増え得るが、サーバーが入力を間引いてビットストリームへ含めなかったframeをChromeは期待frameとして数えられない。
+今回のサーバーエンコード走行ではstartupとseek後、採取開始前までに累積13だったが、定常30秒と120秒の採取中は増えなかった。
+
+生値は[Originalとサーバーエンコードのvideo要素対照](galaxy-video-playback-quality-original-vs-server-encoded.json)に保存した。
 
 ## タブ状態の監査とGalaxy単一タブ再測定
 

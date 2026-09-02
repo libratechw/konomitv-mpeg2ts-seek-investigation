@@ -1,0 +1,86 @@
+{
+  "variant": "server-1080p60-pilot",
+  "sourceHash": "bf1da9b567c29a85923ace4be63c4353dbcf138ac0ade83ace977ecf2698014e",
+  "asset": "PlayerController-BKvdtklC.js",
+  "expectedQuality": "1080p (60fps)",
+  "qualitySetting": "1080p-60fps",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayModeConfigured": "60 Hz",
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "durationMs": 30000.5,
+    "fullscreen": true,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false,
+    "readyState": 4,
+    "playbackRate": 1,
+    "qualityName": "1080p (60fps)",
+    "mediaTimeStart": 607.859498,
+    "mediaTimeEnd": 637.859141,
+    "mediaTimeDelta": 29.999642999999992,
+    "frameCallbacks": 1789,
+    "callbackFps": 59.63233946100898,
+    "callbackIntervals": {
+      "count": 1788,
+      "min": 16.5,
+      "median": 16.69999999999709,
+      "p95": 16.799999999999272,
+      "p99": 16.80000000000291,
+      "max": 50,
+      "over25": 9,
+      "over40": 1,
+      "over100": 0
+    },
+    "mediaTimeIntervals": {
+      "count": 1788,
+      "min": 16.677999999956228,
+      "median": 16.68799999993098,
+      "p95": 16.689000000042142,
+      "p99": 16.689000000042142,
+      "max": 50.05600000004051,
+      "over25": 7,
+      "over40": 1,
+      "over100": 0
+    },
+    "presentedFrameAdvance": 1796,
+    "processingDurationMs": {
+      "count": 1789,
+      "min": 6.8,
+      "median": 13.799999999999999,
+      "p95": 20.2,
+      "p99": 25.5,
+      "max": 33.099999999999994,
+      "over25": 21,
+      "over40": 0,
+      "over100": 0
+    },
+    "quality": {
+      "start": {
+        "total": 627,
+        "dropped": 13
+      },
+      "end": {
+        "total": 2425,
+        "dropped": 13
+      },
+      "delta": {
+        "total": 1798,
+        "dropped": 0
+      }
+    }
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

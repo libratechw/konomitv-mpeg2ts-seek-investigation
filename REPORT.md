@@ -470,7 +470,14 @@ presentation policyも同じbuildで分離した。
 通常8秒を各3回測ると、1 rAFにつき1 field＋最小FIFOは59.91〜60.03fps、2 refresh以上遅れた場合だけcatch-upする二段階版は59.88〜60.04fps、従来の複数field消費は59.98〜60.00fpsで、全群の採取中`late`増分は0だった。
 この短窓では差がなかったが、最新KonomiTVを通した120秒反復では自然負荷による通常fieldの誤破棄を再現した。
 2走行平均でGalaxyは59.791→59.932fps、25ms超40→22.5回、`late` 9.5→0、Windowsは59.354→59.783fps、25ms超127→43回、`late` 66→15.5となった。
-全8走行でmedia timeは約120秒進み、全reset 0だったため、ライブ遅延を蓄積せず通常fieldの誤破棄を減らす独立候補とする。40ms超間隔と`droppedVideoFrames`は改善しておらず、別原因として残る。OriginalではvideoがYADIFの入力textureで最終表示はcanvasなので、後者を可視コマ落ち数とは確定せず、サーバーエンコード経路とrVFC入力数を対照測定する。
+全8走行でmedia timeは約120秒進み、全reset 0だったため、ライブ遅延を蓄積せず通常fieldの誤破棄を減らす独立候補とする。40ms超間隔と`droppedVideoFrames`は改善しておらず、presentation policyとは別原因として残る。
+
+同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。
+rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callbackに1 frame分の飛びはなかった。
+サーバーエンコード1080p60は30秒でrVFC 59.632fps、counter増分0、120秒で59.683fps、counter増分0だった。
+[Media Playback Quality仕様](https://w3c.github.io/media-playback-quality/)では、このcounterはpredecodeまたはdecode後のdisplay deadline超過で落としたvideo frameを数える。
+サーバーエンコード経路でも発生し得るが、サーバーで符号化前に間引かれ、bitstreamに存在しないframeはChromeから期待frameとして見えない。
+Originalの最終表示はYADIF canvasなので、このcounterを最終可視fieldのdrop数や目標未達の根拠には使わない。
 
 このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 

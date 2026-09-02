@@ -1,0 +1,286 @@
+{
+  "purpose": "Separate Chrome video playback quality from final YADIF canvas presentation",
+  "revisions": {
+    "konomiTV": "e92fba8",
+    "mpeg2toh264IntegrationProductTree": "e417d12",
+    "playerAsset": "PlayerController-BKvdtklC.js"
+  },
+  "fixture": {
+    "recordedProgramId": 1,
+    "seekTargetSeconds": 600
+  },
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayMode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "panel": false,
+    "pageCount": 1
+  },
+  "interpretation": {
+    "counterDefinition": "Frames dropped predecode or after decode because a display deadline was missed",
+    "serverOmittedFrames": "Frames omitted before encoding are not necessarily visible to Chrome as expected frames",
+    "originalFinalPresentation": "YADIF WebGL canvas, not the video element"
+  },
+  "runs": {
+    "original30": {
+      "variant": "original-video-pilot",
+      "sourceHash": "bf1da9b567c29a85923ace4be63c4353dbcf138ac0ade83ace977ecf2698014e",
+      "asset": "PlayerController-BKvdtklC.js",
+      "expectedQuality": "Original (MPEG-2)",
+      "qualitySetting": "original",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "browser": "Google Chrome",
+      "displayModeConfigured": "60 Hz",
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "sample": {
+        "durationMs": 30000.299999952316,
+        "fullscreen": true,
+        "fullscreenBody": true,
+        "panelDisplay": false,
+        "visibilityState": "visible",
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1,
+        "qualityName": "Original (MPEG-2)",
+        "mediaTimeStart": 609.847527,
+        "mediaTimeEnd": 639.855985,
+        "mediaTimeDelta": 30.00845800000002,
+        "frameCallbacks": 899,
+        "callbackFps": 29.966367003044265,
+        "callbackIntervals": {
+          "count": 898,
+          "min": 33,
+          "median": 33.30000000000291,
+          "p95": 33.5,
+          "p99": 33.599999999998545,
+          "max": 50,
+          "over25": 898,
+          "over40": 1,
+          "over100": 0
+        },
+        "mediaTimeIntervals": {
+          "count": 898,
+          "min": 33.366000000000895,
+          "median": 33.36699999999837,
+          "p95": 33.36699999999837,
+          "p99": 33.36699999999837,
+          "max": 33.36700000011206,
+          "over25": 898,
+          "over40": 0,
+          "over100": 0
+        },
+        "presentedFrameAdvance": 898,
+        "processingDurationMs": {
+          "count": 899,
+          "min": 8.200000000000001,
+          "median": 18.599999999999998,
+          "p95": 208.3,
+          "p99": 271.5,
+          "max": 335.9,
+          "over25": 263,
+          "over40": 144,
+          "over100": 144
+        },
+        "quality": {
+          "start": {
+            "total": 370,
+            "dropped": 2
+          },
+          "end": {
+            "total": 1280,
+            "dropped": 12
+          },
+          "delta": {
+            "total": 910,
+            "dropped": 10
+          }
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    "serverEncoded30": {
+      "variant": "server-1080p60-pilot",
+      "sourceHash": "bf1da9b567c29a85923ace4be63c4353dbcf138ac0ade83ace977ecf2698014e",
+      "asset": "PlayerController-BKvdtklC.js",
+      "expectedQuality": "1080p (60fps)",
+      "qualitySetting": "1080p-60fps",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "browser": "Google Chrome",
+      "displayModeConfigured": "60 Hz",
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "sample": {
+        "durationMs": 30000.5,
+        "fullscreen": true,
+        "fullscreenBody": true,
+        "panelDisplay": false,
+        "visibilityState": "visible",
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1,
+        "qualityName": "1080p (60fps)",
+        "mediaTimeStart": 607.859498,
+        "mediaTimeEnd": 637.859141,
+        "mediaTimeDelta": 29.999642999999992,
+        "frameCallbacks": 1789,
+        "callbackFps": 59.63233946100898,
+        "callbackIntervals": {
+          "count": 1788,
+          "min": 16.5,
+          "median": 16.69999999999709,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000291,
+          "max": 50,
+          "over25": 9,
+          "over40": 1,
+          "over100": 0
+        },
+        "mediaTimeIntervals": {
+          "count": 1788,
+          "min": 16.677999999956228,
+          "median": 16.68799999993098,
+          "p95": 16.689000000042142,
+          "p99": 16.689000000042142,
+          "max": 50.05600000004051,
+          "over25": 7,
+          "over40": 1,
+          "over100": 0
+        },
+        "presentedFrameAdvance": 1796,
+        "processingDurationMs": {
+          "count": 1789,
+          "min": 6.8,
+          "median": 13.799999999999999,
+          "p95": 20.2,
+          "p99": 25.5,
+          "max": 33.099999999999994,
+          "over25": 21,
+          "over40": 0,
+          "over100": 0
+        },
+        "quality": {
+          "start": {
+            "total": 627,
+            "dropped": 13
+          },
+          "end": {
+            "total": 2425,
+            "dropped": 13
+          },
+          "delta": {
+            "total": 1798,
+            "dropped": 0
+          }
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    "serverEncoded120": {
+      "variant": "server-1080p60-formal",
+      "sourceHash": "bf1da9b567c29a85923ace4be63c4353dbcf138ac0ade83ace977ecf2698014e",
+      "asset": "PlayerController-BKvdtklC.js",
+      "expectedQuality": "1080p (60fps)",
+      "qualitySetting": "1080p-60fps",
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "browser": "Google Chrome",
+      "displayModeConfigured": "60 Hz",
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "onePageDuringMeasurement": true,
+      "sample": {
+        "durationMs": 120000.39999997616,
+        "fullscreen": true,
+        "fullscreenBody": true,
+        "panelDisplay": false,
+        "visibilityState": "visible",
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1,
+        "qualityName": "1080p (60fps)",
+        "mediaTimeStart": 607.97766,
+        "mediaTimeEnd": 727.976566,
+        "mediaTimeDelta": 119.99890600000003,
+        "frameCallbacks": 7162,
+        "callbackFps": 59.68313438956389,
+        "callbackIntervals": {
+          "count": 7161,
+          "min": 16.5,
+          "median": 16.69999999999709,
+          "p95": 16.79999999998836,
+          "p99": 16.80000000000291,
+          "max": 66.60000000000582,
+          "over25": 28,
+          "over40": 8,
+          "over100": 0
+        },
+        "mediaTimeIntervals": {
+          "count": 7161,
+          "min": 16.677999999956228,
+          "median": 16.68799999993098,
+          "p95": 16.689000000042142,
+          "p99": 16.689000000042142,
+          "max": 66.73299999999927,
+          "over25": 21,
+          "over40": 8,
+          "over100": 0
+        },
+        "presentedFrameAdvance": 7191,
+        "processingDurationMs": {
+          "count": 7162,
+          "min": 6.7,
+          "median": 13.700000000000001,
+          "p95": 20.2,
+          "p99": 25.2,
+          "max": 39.300000000000004,
+          "over25": 77,
+          "over40": 0,
+          "over100": 0
+        },
+        "quality": {
+          "start": {
+            "total": 630,
+            "dropped": 13
+          },
+          "end": {
+            "total": 7823,
+            "dropped": 13
+          },
+          "delta": {
+            "total": 7193,
+            "dropped": 0
+          }
+        }
+      },
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  }
+}
