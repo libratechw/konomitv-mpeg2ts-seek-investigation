@@ -983,4 +983,10 @@ KonomiTV側のretryや設定fallbackで原因を隠していない。
 一方、queueの将来lead上限と表示時の過去lagを共通`#tolerance()`へまとめる案は、異なるpolicyを計算式だけで結合するため採用しない。
 production参照がないことだけを根拠に公開`Mpeg2GopStream::push` APIを削る案も、外部利用者が失う機能を確認できないため採用しない。
 overflow時刻圧縮は`#prepareQueue()`で容量破棄後のscheduleを修復し、1 field表示とcatch-upは`#present()`で通常表示を選ぶため、同じ追いつき機構として片方を削除しない。
-scheduler policyのCI試験不足は残るが、試験専用の抽象をproductionへ足さず、FIFO順、必要最小限の容量破棄、実時刻破綻時だけの全resetを外部挙動として固定できる試験を設計する。
+scheduler policyを単体試験するため、queue操作を内部moduleへ抽出する案は採用しない。
+低電力Windowsの同一区間・全画面120秒で、現在のintegrationへ戻したcontrolは59.724fps、40ms超11回、`late` 19だったのに対し、結果objectを毎refreshで返す抽出版3走行は59.458〜59.599fps、40ms超14〜18回、`late` 30〜46だった。
+結果objectをなくした診断版2走行は59.641 / 59.650fps、40ms超13 / 17回、`late` 29 / 26まで回復したが、controlへは戻らなかった。
+Linuxでは59.892fps、40回seekの中央値131.1ms、p95 181.7msで退行を示さなかったため、低負荷環境だけでこのhot pathの変更を合格にしない。
+CI試験不足は残るが、productionのrefresh pathへ試験用の関数境界や一時objectを加えず、実ブラウザーで外部挙動を固定できる試験だけを候補とする。
+公開`integration/current-useful-fixes`は変更しておらず、この未公開診断版の値を公開integrationの現行値として扱わない。
+生値は[Linux定常](results/linux-scheduler-extraction-steady-120s.json)、[Linux seek](results/linux-scheduler-extraction-seek-visible-40.json)、[Windows control](results/windows-integration-v2-current-control-steady-120s.json)、[Windows抽出版1](results/windows-scheduler-extraction-steady-120s-r1.json)、[2](results/windows-scheduler-extraction-steady-120s-r2.json)、[3](results/windows-scheduler-extraction-steady-120s-r3.json)、[Windows seek](results/windows-scheduler-extraction-seek-visible-40.json)、[no-allocation版1](results/windows-scheduler-noalloc-steady-120s-r1.json)、[2](results/windows-scheduler-noalloc-steady-120s-r2.json)に保存した。

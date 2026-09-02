@@ -1,0 +1,6168 @@
+{
+  "variant": "scheduler-tested",
+  "sourceHash": "182e4e39d8b8658aaa7d37ea29a99949fa892261737d5b97bed5cc3f36531077",
+  "sourceHashSubject": "KonomiTV client/src/services/player/PlayerController.ts observation hook",
+  "asset": "PlayerController-CSNMkxB6.js",
+  "device": "EVO-X2 Linux desktop",
+  "os": "Ubuntu 26.04.1 LTS",
+  "gpu": "AMD Radeon 890M",
+  "browser": "Google Chrome 152.0.7977.64 ",
+  "displayHz": 59.96,
+  "transport": "same-host LAN address",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "measuredCount": 40,
+    "warmupCount": 2,
+    "targetBases": [
+      180,
+      480
+    ],
+    "paused": false,
+    "fullscreen": true,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "viewport": {
+      "innerWidth": 1920,
+      "innerHeight": 1024,
+      "screenWidth": 1920,
+      "screenHeight": 1080,
+      "devicePixelRatio": 1
+    },
+    "visibilityState": "visible",
+    "rafMedianMs": 16.699999999999818,
+    "measuredRafHz": 59.88023952095874,
+    "metricDefinition": "video.currentTime assignment to the first target canvas draw that remains visible across seeked",
+    "runs": [
+      {
+        "index": 0,
+        "warmup": true,
+        "target": 180,
+        "firstDurableCanvasMs": 216.89990234375,
+        "firstDurableCanvasMediaTime": 179.974255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 209.10009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 4814.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345247750,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                11.306666,
+                24.917333
+              ]
+            ],
+            "fromRequestMs": 57.699951171875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 4832.499755859375,
+            "sincePrevious": 17.599853515625,
+            "observedAt": 1788345247761.2,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 68.89990234375,
+            "fromSeekMs": 11.199951171875
+          },
+          {
+            "name": "response",
+            "sinceLoad": 4839.69970703125,
+            "sincePrevious": 7.199951171875,
+            "observedAt": 1788345247768.4001,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 76.10009765625,
+            "fromSeekMs": 18.400146484375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 4840.099853515625,
+            "sincePrevious": 0.400146484375,
+            "observedAt": 1788345247768.6,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 76.300048828125,
+            "fromSeekMs": 18.60009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 4895.69970703125,
+            "sincePrevious": 55.599853515625,
+            "observedAt": 1788345247824.4001,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 132.10009765625,
+            "fromSeekMs": 74.400146484375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 4895.7998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345247824.7,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 132.39990234375,
+            "fromSeekMs": 74.699951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 4904.7998046875,
+            "sincePrevious": 9,
+            "observedAt": 1788345247833.8,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                179.242666,
+                180.074354
+              ]
+            ],
+            "fromRequestMs": 141.5,
+            "fromSeekMs": 83.800048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 4973.7998046875,
+            "sincePrevious": 69,
+            "observedAt": 1788345247902.2,
+            "currentTime": 180,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                179.242666,
+                180.565333
+              ]
+            ],
+            "fromRequestMs": 209.89990234375,
+            "fromSeekMs": 152.199951171875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 4973.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345247902.3,
+            "currentTime": 180,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                179.242666,
+                180.565333
+              ]
+            ],
+            "fromRequestMs": 210,
+            "fromSeekMs": 152.300048828125
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "warmup": true,
+        "target": 480,
+        "firstDurableCanvasMs": 263.199951171875,
+        "firstDurableCanvasMediaTime": 479.973955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 242.89990234375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 5234.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345248164.9001,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                179.242666,
+                182.570666
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 5253.599853515625,
+            "sincePrevious": 18.699951171875,
+            "observedAt": 1788345248235,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 72.099853515625,
+            "fromSeekMs": 70.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 5280.7998046875,
+            "sincePrevious": 27.199951171875,
+            "observedAt": 1788345248235,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 72.099853515625,
+            "fromSeekMs": 70.099853515625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 5281.099853515625,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345248235,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 72.099853515625,
+            "fromSeekMs": 70.099853515625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 5338.89990234375,
+            "sincePrevious": 57.800048828125,
+            "observedAt": 1788345248267.5,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.599853515625,
+            "fromSeekMs": 102.599853515625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 5338.999755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345248267.7,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.7998046875,
+            "fromSeekMs": 102.7998046875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 5344.999755859375,
+            "sincePrevious": 6,
+            "observedAt": 1788345248273.6,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                478.912,
+                479.871999
+              ]
+            ],
+            "fromRequestMs": 110.699951171875,
+            "fromSeekMs": 108.699951171875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 5478.199951171875,
+            "sincePrevious": 133.2001953125,
+            "observedAt": 1788345248406.7,
+            "currentTime": 480.000175,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                478.912,
+                480.874666
+              ]
+            ],
+            "fromRequestMs": 243.7998046875,
+            "fromSeekMs": 241.7998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 5478.2998046875,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345248406.8,
+            "currentTime": 480.000268,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                478.912,
+                480.874666
+              ]
+            ],
+            "fromRequestMs": 243.89990234375,
+            "fromSeekMs": 241.89990234375
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "warmup": false,
+        "target": 180,
+        "firstDurableCanvasMs": 179.800048828125,
+        "firstDurableCanvasMediaTime": 179.974255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 174.300048828125,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 5752.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345248682.7,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                478.912,
+                483.370666
+              ]
+            ],
+            "fromRequestMs": 2.699951171875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 5752.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345248682.8,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                478.912,
+                483.370666
+              ]
+            ],
+            "fromRequestMs": 2.800048828125,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 5777.499755859375,
+            "sincePrevious": 25.099853515625,
+            "observedAt": 1788345248706.1,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 26.10009765625,
+            "fromSeekMs": 23.400146484375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 5777.69970703125,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345248706.3,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 26.300048828125,
+            "fromSeekMs": 23.60009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 5843.599853515625,
+            "sincePrevious": 65.900146484375,
+            "observedAt": 1788345248772.3,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 92.300048828125,
+            "fromSeekMs": 89.60009765625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 5843.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345248772.5,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 92.5,
+            "fromSeekMs": 89.800048828125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 5851.2998046875,
+            "sincePrevious": 7.5,
+            "observedAt": 1788345248780,
+            "currentTime": 180,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                179.242666,
+                180.074354
+              ]
+            ],
+            "fromRequestMs": 100,
+            "fromSeekMs": 97.300048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 5926.89990234375,
+            "sincePrevious": 75.60009765625,
+            "observedAt": 1788345248855.5,
+            "currentTime": 180.000947,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                179.242666,
+                180.565333
+              ]
+            ],
+            "fromRequestMs": 175.5,
+            "fromSeekMs": 172.800048828125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 5927.199951171875,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345248855.8,
+            "currentTime": 180.00128,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                179.242666,
+                180.565333
+              ]
+            ],
+            "fromRequestMs": 175.800048828125,
+            "fromSeekMs": 173.10009765625
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "warmup": false,
+        "target": 480,
+        "firstDurableCanvasMs": 97.10009765625,
+        "firstDurableCanvasMediaTime": 479.973955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 95.10009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 6184.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345249115.3,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                179.242666,
+                182.570666
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 6184.89990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345249115.3,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                179.242666,
+                182.570666
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 6195.2998046875,
+            "sincePrevious": 10,
+            "observedAt": 1788345249124.1,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.300048828125,
+            "fromSeekMs": 8.800048828125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 6195.69970703125,
+            "sincePrevious": 0.39990234375,
+            "observedAt": 1788345249124.4001,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.60009765625,
+            "fromSeekMs": 9.10009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 6252.69970703125,
+            "sincePrevious": 57,
+            "observedAt": 1788345249181.3,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 68.5,
+            "fromSeekMs": 66
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 6252.7998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345249181.4001,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 68.60009765625,
+            "fromSeekMs": 66.10009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 6258.89990234375,
+            "sincePrevious": 6.10009765625,
+            "observedAt": 1788345249187.4001,
+            "currentTime": 480,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                479.402666,
+                480.374354
+              ]
+            ],
+            "fromRequestMs": 74.60009765625,
+            "fromSeekMs": 72.10009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 6280.099853515625,
+            "sincePrevious": 21.199951171875,
+            "observedAt": 1788345249208.7,
+            "currentTime": 480,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                479.402666,
+                480.374354
+              ]
+            ],
+            "fromRequestMs": 95.89990234375,
+            "fromSeekMs": 93.39990234375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 6280.2998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345249208.8,
+            "currentTime": 480,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                479.402666,
+                480.374354
+              ]
+            ],
+            "fromRequestMs": 96,
+            "fromSeekMs": 93.5
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "warmup": false,
+        "target": 181,
+        "firstDurableCanvasMs": 178.199951171875,
+        "firstDurableCanvasMediaTime": 180.975255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 174,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 6536.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345249465.3,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                479.402666,
+                482.876854
+              ]
+            ],
+            "fromRequestMs": 0.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 6536.599853515625,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345249465.4001,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                479.402666,
+                482.876854
+              ]
+            ],
+            "fromRequestMs": 1,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 6563.39990234375,
+            "sincePrevious": 26.800048828125,
+            "observedAt": 1788345249495,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 30.599853515625,
+            "fromSeekMs": 29.699951171875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 6563.69970703125,
+            "sincePrevious": 0.2998046875,
+            "observedAt": 1788345249495.1,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 30.699951171875,
+            "fromSeekMs": 29.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 6632.69970703125,
+            "sincePrevious": 69,
+            "observedAt": 1788345249561.2,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 96.7998046875,
+            "fromSeekMs": 95.89990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 6632.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345249561.6,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 97.199951171875,
+            "fromSeekMs": 96.300048828125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 6638.999755859375,
+            "sincePrevious": 6.300048828125,
+            "observedAt": 1788345249567.6,
+            "currentTime": 181,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                180.224,
+                181.075354
+              ]
+            ],
+            "fromRequestMs": 103.199951171875,
+            "fromSeekMs": 102.300048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 6710.7998046875,
+            "sincePrevious": 71.800048828125,
+            "observedAt": 1788345249639.3,
+            "currentTime": 181,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                180.224,
+                181.567999
+              ]
+            ],
+            "fromRequestMs": 174.89990234375,
+            "fromSeekMs": 174
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 6710.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345249639.4001,
+            "currentTime": 181,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                180.224,
+                181.567999
+              ]
+            ],
+            "fromRequestMs": 175,
+            "fromSeekMs": 174.10009765625
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "warmup": false,
+        "target": 481,
+        "firstDurableCanvasMs": 129.60009765625,
+        "firstDurableCanvasMediaTime": 480.974955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 127,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 6968.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345249898.8,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                180.224,
+                183.573333
+              ]
+            ],
+            "fromRequestMs": 2.60009765625,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 6968.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345249898.8,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                180.224,
+                183.573333
+              ]
+            ],
+            "fromRequestMs": 2.60009765625,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 6977.69970703125,
+            "sincePrevious": 9.19970703125,
+            "observedAt": 1788345249906.4001,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 10.2001953125,
+            "fromSeekMs": 7.60009765625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 6977.999755859375,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345249906.5,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 10.300048828125,
+            "fromSeekMs": 7.699951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 7064.999755859375,
+            "sincePrevious": 87,
+            "observedAt": 1788345249994.6,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.400146484375,
+            "fromSeekMs": 95.800048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 7065.19970703125,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345249994.8,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.60009765625,
+            "fromSeekMs": 96
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 7071.999755859375,
+            "sincePrevious": 6.800048828125,
+            "observedAt": 1788345250000.5,
+            "currentTime": 481,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                480.426666,
+                481.365333
+              ]
+            ],
+            "fromRequestMs": 104.300048828125,
+            "fromSeekMs": 101.699951171875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 7095.7998046875,
+            "sincePrevious": 23.800048828125,
+            "observedAt": 1788345250024.2,
+            "currentTime": 481,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                480.426666,
+                481.365333
+              ]
+            ],
+            "fromRequestMs": 128,
+            "fromSeekMs": 125.39990234375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 7096,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345250024.4001,
+            "currentTime": 481,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                480.426666,
+                481.365333
+              ]
+            ],
+            "fromRequestMs": 128.2001953125,
+            "fromSeekMs": 125.60009765625
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "warmup": false,
+        "target": 182,
+        "firstDurableCanvasMs": 179,
+        "firstDurableCanvasMediaTime": 181.976255,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 182.400146484375,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 7351.89990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345250282.8,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                480.426666,
+                483.877854
+              ]
+            ],
+            "fromRequestMs": 2.800048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 7352.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345250282.9001,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                480.426666,
+                483.877854
+              ]
+            ],
+            "fromRequestMs": 2.900146484375,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 7369.7998046875,
+            "sincePrevious": 17.2998046875,
+            "observedAt": 1788345250298.4001,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 18.400146484375,
+            "fromSeekMs": 15.60009765625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 7369.999755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345250298.6,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 18.60009765625,
+            "fromSeekMs": 15.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 7450.099853515625,
+            "sincePrevious": 80.10009765625,
+            "observedAt": 1788345250378.8,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.800048828125,
+            "fromSeekMs": 96
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 7450.19970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345250378.9001,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.900146484375,
+            "fromSeekMs": 96.10009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 7456.999755859375,
+            "sincePrevious": 6.800048828125,
+            "observedAt": 1788345250385.8,
+            "currentTime": 182,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                181.205333,
+                182.076354
+              ]
+            ],
+            "fromRequestMs": 105.800048828125,
+            "fromSeekMs": 103
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 7534.699951171875,
+            "sincePrevious": 77.7001953125,
+            "observedAt": 1788345250463.3,
+            "currentTime": 182,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                181.205333,
+                182.570666
+              ]
+            ],
+            "fromRequestMs": 183.300048828125,
+            "fromSeekMs": 180.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 7534.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345250463.3,
+            "currentTime": 182,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                181.205333,
+                182.570666
+              ]
+            ],
+            "fromRequestMs": 183.300048828125,
+            "fromSeekMs": 180.5
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "warmup": false,
+        "target": 482,
+        "firstDurableCanvasMs": 108.2998046875,
+        "firstDurableCanvasMediaTime": 481.975955,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 111.39990234375,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 7789.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345250719.8,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                181.205333,
+                184.575999
+              ]
+            ],
+            "fromRequestMs": 2.39990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 7789.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345250719.9001,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                181.205333,
+                184.575999
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 7804.599853515625,
+            "sincePrevious": 14.89990234375,
+            "observedAt": 1788345250733.3,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15.89990234375,
+            "fromSeekMs": 13.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 7804.999755859375,
+            "sincePrevious": 0.39990234375,
+            "observedAt": 1788345250733.6,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.199951171875,
+            "fromSeekMs": 13.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 7869.2998046875,
+            "sincePrevious": 64.300048828125,
+            "observedAt": 1788345250798,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 80.599853515625,
+            "fromSeekMs": 78.199951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 7869.499755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345250798.2,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 80.7998046875,
+            "fromSeekMs": 78.39990234375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 7877.099853515625,
+            "sincePrevious": 7.60009765625,
+            "observedAt": 1788345250805.8,
+            "currentTime": 482,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                481.429333,
+                482.367999
+              ]
+            ],
+            "fromRequestMs": 88.39990234375,
+            "fromSeekMs": 86
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 7900.89990234375,
+            "sincePrevious": 23.800048828125,
+            "observedAt": 1788345250829.5,
+            "currentTime": 482,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                481.429333,
+                482.367999
+              ]
+            ],
+            "fromRequestMs": 112.099853515625,
+            "fromSeekMs": 109.699951171875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 7901.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345250829.5,
+            "currentTime": 482,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                481.429333,
+                482.367999
+              ]
+            ],
+            "fromRequestMs": 112.099853515625,
+            "fromSeekMs": 109.699951171875
+          }
+        ]
+      },
+      {
+        "index": 8,
+        "warmup": false,
+        "target": 183,
+        "firstDurableCanvasMs": 208.699951171875,
+        "firstDurableCanvasMediaTime": 182.977255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 194.60009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 8155.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345251085.1,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                481.429333,
+                484.373333
+              ]
+            ],
+            "fromRequestMs": 1.300048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 8156.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345251085.1,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                481.429333,
+                484.373333
+              ]
+            ],
+            "fromRequestMs": 1.300048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 8189.89990234375,
+            "sincePrevious": 33.699951171875,
+            "observedAt": 1788345251118.6,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 34.800048828125,
+            "fromSeekMs": 33.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 8190.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345251118.8,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 35,
+            "fromSeekMs": 33.699951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 8274.69970703125,
+            "sincePrevious": 84.599853515625,
+            "observedAt": 1788345251203.4001,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 119.60009765625,
+            "fromSeekMs": 118.300048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 8274.89990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345251203.6,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 119.800048828125,
+            "fromSeekMs": 118.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 8282.599853515625,
+            "sincePrevious": 7.699951171875,
+            "observedAt": 1788345251213.3,
+            "currentTime": 183,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                182.250666,
+                183.077354
+              ]
+            ],
+            "fromRequestMs": 129.5,
+            "fromSeekMs": 128.199951171875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 8350.699951171875,
+            "sincePrevious": 68.10009765625,
+            "observedAt": 1788345251279.4001,
+            "currentTime": 183,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                182.250666,
+                183.573333
+              ]
+            ],
+            "fromRequestMs": 195.60009765625,
+            "fromSeekMs": 194.300048828125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 8351,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345251279.4001,
+            "currentTime": 183,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                182.250666,
+                183.573333
+              ]
+            ],
+            "fromRequestMs": 195.60009765625,
+            "fromSeekMs": 194.300048828125
+          }
+        ]
+      },
+      {
+        "index": 9,
+        "warmup": false,
+        "target": 483,
+        "firstDurableCanvasMs": 178.900146484375,
+        "firstDurableCanvasMediaTime": 482.976955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 173.10009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 8618.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345251549.1,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                182.250666,
+                185.578666
+              ]
+            ],
+            "fromRequestMs": 2.400146484375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 8618.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345251549.2,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                182.250666,
+                185.578666
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 8645.2998046875,
+            "sincePrevious": 26.39990234375,
+            "observedAt": 1788345251574,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 27.300048828125,
+            "fromSeekMs": 24.89990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 8645.499755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345251574,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 27.300048828125,
+            "fromSeekMs": 24.89990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 8746.999755859375,
+            "sincePrevious": 101.5,
+            "observedAt": 1788345251678.3,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 131.60009765625,
+            "fromSeekMs": 129.199951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 8747.19970703125,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345251678.5,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 131.800048828125,
+            "fromSeekMs": 129.39990234375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 8764.39990234375,
+            "sincePrevious": 17.2001953125,
+            "observedAt": 1788345251695.6,
+            "currentTime": 483,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                482.410666,
+                483.370666
+              ]
+            ],
+            "fromRequestMs": 148.900146484375,
+            "fromSeekMs": 146.5
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 8792.199951171875,
+            "sincePrevious": 27.800048828125,
+            "observedAt": 1788345251720.7,
+            "currentTime": 483,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                482.410666,
+                483.370666
+              ]
+            ],
+            "fromRequestMs": 174,
+            "fromSeekMs": 171.599853515625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 8792.39990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345251720.8,
+            "currentTime": 483,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                482.410666,
+                483.370666
+              ]
+            ],
+            "fromRequestMs": 174.10009765625,
+            "fromSeekMs": 171.699951171875
+          }
+        ]
+      },
+      {
+        "index": 10,
+        "warmup": false,
+        "target": 184,
+        "firstDurableCanvasMs": 196.800048828125,
+        "firstDurableCanvasMediaTime": 183.978255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 195,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 9054.499755859375,
+            "sincePrevious": 2.89990234375,
+            "observedAt": 1788345251983.1,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                482.410666,
+                485.375999
+              ]
+            ],
+            "fromRequestMs": 3.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 9054.599853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345251983.2,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                482.410666,
+                485.375999
+              ]
+            ],
+            "fromRequestMs": 3.599853515625,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 9080.099853515625,
+            "sincePrevious": 25.5,
+            "observedAt": 1788345252011.7,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 32.099853515625,
+            "fromSeekMs": 28.599853515625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 9080.19970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345252011.8,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 32.199951171875,
+            "fromSeekMs": 28.699951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 9172.39990234375,
+            "sincePrevious": 92.2001953125,
+            "observedAt": 1788345252101.1,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 121.5,
+            "fromSeekMs": 118
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 9172.499755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345252101.2,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 121.599853515625,
+            "fromSeekMs": 118.099853515625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 9179.2998046875,
+            "sincePrevious": 6.800048828125,
+            "observedAt": 1788345252108,
+            "currentTime": 184,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                183.146666,
+                184.078354
+              ]
+            ],
+            "fromRequestMs": 128.39990234375,
+            "fromSeekMs": 124.89990234375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 9246.89990234375,
+            "sincePrevious": 67.60009765625,
+            "observedAt": 1788345252175.6,
+            "currentTime": 184,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                183.146666,
+                184.575999
+              ]
+            ],
+            "fromRequestMs": 196,
+            "fromSeekMs": 192.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 9247.199951171875,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345252175.6,
+            "currentTime": 184,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                183.146666,
+                184.575999
+              ]
+            ],
+            "fromRequestMs": 196,
+            "fromSeekMs": 192.5
+          }
+        ]
+      },
+      {
+        "index": 11,
+        "warmup": false,
+        "target": 484,
+        "firstDurableCanvasMs": 95.5,
+        "firstDurableCanvasMediaTime": 483.977955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 88.60009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 9501.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345252430.7,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                183.146666,
+                187.071999
+              ]
+            ],
+            "fromRequestMs": 0.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 9501.7998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345252431.6,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                183.146666,
+                187.071999
+              ]
+            ],
+            "fromRequestMs": 1.800048828125,
+            "fromSeekMs": 0.900146484375
+          },
+          {
+            "name": "response",
+            "sinceLoad": 9510.7998046875,
+            "sincePrevious": 9,
+            "observedAt": 1788345252439.4001,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 9.60009765625,
+            "fromSeekMs": 8.7001953125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 9510.999755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345252439.5,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 9.699951171875,
+            "fromSeekMs": 8.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 9563.69970703125,
+            "sincePrevious": 52.699951171875,
+            "observedAt": 1788345252493.2,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 63.39990234375,
+            "fromSeekMs": 62.5
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 9563.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345252493.3,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 63.5,
+            "fromSeekMs": 62.60009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 9569.599853515625,
+            "sincePrevious": 5.900146484375,
+            "observedAt": 1788345252498.2,
+            "currentTime": 484,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                483.52,
+                484.373333
+              ]
+            ],
+            "fromRequestMs": 68.39990234375,
+            "fromSeekMs": 67.5
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 9590.199951171875,
+            "sincePrevious": 20.60009765625,
+            "observedAt": 1788345252518.7,
+            "currentTime": 484,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                483.52,
+                484.373333
+              ]
+            ],
+            "fromRequestMs": 88.89990234375,
+            "fromSeekMs": 88
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 9590.2998046875,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345252518.7,
+            "currentTime": 484,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                483.52,
+                484.373333
+              ]
+            ],
+            "fromRequestMs": 88.89990234375,
+            "fromSeekMs": 88
+          }
+        ]
+      },
+      {
+        "index": 12,
+        "warmup": false,
+        "target": 185,
+        "firstDurableCanvasMs": 130.400146484375,
+        "firstDurableCanvasMediaTime": 184.979255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 125.800048828125,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 9849.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345252780.1,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                483.52,
+                487.381333
+              ]
+            ],
+            "fromRequestMs": 1.900146484375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 9850.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345252780.2,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                483.52,
+                487.381333
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 9861.599853515625,
+            "sincePrevious": 11.300048828125,
+            "observedAt": 1788345252790.2,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12,
+            "fromSeekMs": 10.099853515625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 9861.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345252790.3,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12.10009765625,
+            "fromSeekMs": 10.199951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 9919.69970703125,
+            "sincePrevious": 57.89990234375,
+            "observedAt": 1788345252848.4001,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 70.2001953125,
+            "fromSeekMs": 68.300048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 9919.7998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345252848.5,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 70.300048828125,
+            "fromSeekMs": 68.39990234375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 9925.39990234375,
+            "sincePrevious": 5.60009765625,
+            "observedAt": 1788345252854.1,
+            "currentTime": 185,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                184.213333,
+                185.079354
+              ]
+            ],
+            "fromRequestMs": 75.900146484375,
+            "fromSeekMs": 74
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 9976.199951171875,
+            "sincePrevious": 50.800048828125,
+            "observedAt": 1788345252904.7,
+            "currentTime": 185,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                184.213333,
+                185.578666
+              ]
+            ],
+            "fromRequestMs": 126.5,
+            "fromSeekMs": 124.599853515625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 9976.39990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345252904.8,
+            "currentTime": 185,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                184.213333,
+                185.578666
+              ]
+            ],
+            "fromRequestMs": 126.60009765625,
+            "fromSeekMs": 124.699951171875
+          }
+        ]
+      },
+      {
+        "index": 13,
+        "warmup": false,
+        "target": 485,
+        "firstDurableCanvasMs": 97.10009765625,
+        "firstDurableCanvasMediaTime": 484.978955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 88.7001953125,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 10233.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345253162.5,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                184.213333,
+                188.582854
+              ]
+            ],
+            "fromRequestMs": 0.800048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 10233.599853515625,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345253163.9001,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                184.213333,
+                188.582854
+              ]
+            ],
+            "fromRequestMs": 2.2001953125,
+            "fromSeekMs": 1.400146484375
+          },
+          {
+            "name": "response",
+            "sinceLoad": 10244.19970703125,
+            "sincePrevious": 10.599853515625,
+            "observedAt": 1788345253172.9001,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.2001953125,
+            "fromSeekMs": 10.400146484375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 10244.39990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345253173,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.300048828125,
+            "fromSeekMs": 10.5
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 10298.999755859375,
+            "sincePrevious": 54.599853515625,
+            "observedAt": 1788345253227.7,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 66,
+            "fromSeekMs": 65.199951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 10299.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345253227.7,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 66,
+            "fromSeekMs": 65.199951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 10304.69970703125,
+            "sincePrevious": 5.599853515625,
+            "observedAt": 1788345253233.3,
+            "currentTime": 485,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                484.416,
+                485.375999
+              ]
+            ],
+            "fromRequestMs": 71.60009765625,
+            "fromSeekMs": 70.800048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 10322.599853515625,
+            "sincePrevious": 17.900146484375,
+            "observedAt": 1788345253251.1,
+            "currentTime": 485,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                484.416,
+                485.375999
+              ]
+            ],
+            "fromRequestMs": 89.400146484375,
+            "fromSeekMs": 88.60009765625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 10322.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345253251.2,
+            "currentTime": 485,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                484.416,
+                485.375999
+              ]
+            ],
+            "fromRequestMs": 89.5,
+            "fromSeekMs": 88.699951171875
+          }
+        ]
+      },
+      {
+        "index": 14,
+        "warmup": false,
+        "target": 186,
+        "firstDurableCanvasMs": 113.800048828125,
+        "firstDurableCanvasMediaTime": 185.980255,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 126,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 10583.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345253513.6,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                484.416,
+                487.871999
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 10583.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345253513.7,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                484.416,
+                487.871999
+              ]
+            ],
+            "fromRequestMs": 2.099853515625,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 10594.39990234375,
+            "sincePrevious": 10.60009765625,
+            "observedAt": 1788345253523,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.39990234375,
+            "fromSeekMs": 9.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 10594.499755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345253523,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.39990234375,
+            "fromSeekMs": 9.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 10645.19970703125,
+            "sincePrevious": 50.699951171875,
+            "observedAt": 1788345253573.8,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 62.199951171875,
+            "fromSeekMs": 60.199951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 10645.2998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345253574,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 62.39990234375,
+            "fromSeekMs": 60.39990234375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 10650.999755859375,
+            "sincePrevious": 5.699951171875,
+            "observedAt": 1788345253579.5,
+            "currentTime": 186,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                185.109333,
+                186.080354
+              ]
+            ],
+            "fromRequestMs": 67.89990234375,
+            "fromSeekMs": 65.89990234375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 10710,
+            "sincePrevious": 59.000244140625,
+            "observedAt": 1788345253638.5,
+            "currentTime": 186,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                185.109333,
+                186.580854
+              ]
+            ],
+            "fromRequestMs": 126.89990234375,
+            "fromSeekMs": 124.89990234375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 10710.099853515625,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345253638.6,
+            "currentTime": 186,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                185.109333,
+                186.580854
+              ]
+            ],
+            "fromRequestMs": 127,
+            "fromSeekMs": 125
+          }
+        ]
+      },
+      {
+        "index": 15,
+        "warmup": false,
+        "target": 486,
+        "firstDurableCanvasMs": 86,
+        "firstDurableCanvasMediaTime": 485.979955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 83.400146484375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 10960.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345253891,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                185.109333,
+                189.077333
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 10960.89990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345253891,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                185.109333,
+                189.077333
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 10973.7998046875,
+            "sincePrevious": 12.699951171875,
+            "observedAt": 1788345253902.4001,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 13.400146484375,
+            "fromSeekMs": 11.400146484375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 10973.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345253902.5,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 13.5,
+            "fromSeekMs": 11.5
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 11026.69970703125,
+            "sincePrevious": 52.7998046875,
+            "observedAt": 1788345253955.4001,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 66.400146484375,
+            "fromSeekMs": 64.400146484375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 11026.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345253955.5,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 66.5,
+            "fromSeekMs": 64.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 11029.999755859375,
+            "sincePrevious": 3.300048828125,
+            "observedAt": 1788345253959.4001,
+            "currentTime": 486,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                485.525333,
+                486.378666
+              ]
+            ],
+            "fromRequestMs": 70.400146484375,
+            "fromSeekMs": 68.400146484375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 11044.5,
+            "sincePrevious": 14.500244140625,
+            "observedAt": 1788345253972.9001,
+            "currentTime": 486,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                485.525333,
+                486.378666
+              ]
+            ],
+            "fromRequestMs": 83.900146484375,
+            "fromSeekMs": 81.900146484375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 11044.599853515625,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345253973,
+            "currentTime": 486,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                485.525333,
+                486.378666
+              ]
+            ],
+            "fromRequestMs": 84,
+            "fromSeekMs": 82
+          }
+        ]
+      },
+      {
+        "index": 16,
+        "warmup": false,
+        "target": 187,
+        "firstDurableCanvasMs": 131.5,
+        "firstDurableCanvasMediaTime": 186.981255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 125.699951171875,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 11298.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345254227.7,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                485.525333,
+                489.383354
+              ]
+            ],
+            "fromRequestMs": 0.7998046875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 11298.7998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345254228.8,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                485.525333,
+                489.383354
+              ]
+            ],
+            "fromRequestMs": 1.89990234375,
+            "fromSeekMs": 1.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 11311.099853515625,
+            "sincePrevious": 12.300048828125,
+            "observedAt": 1788345254239.7,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12.7998046875,
+            "fromSeekMs": 12
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 11311.19970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345254239.8,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12.89990234375,
+            "fromSeekMs": 12.10009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 11365.999755859375,
+            "sincePrevious": 54.800048828125,
+            "observedAt": 1788345254294.7,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 67.7998046875,
+            "fromSeekMs": 67
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 11365.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345254294.9001,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 68,
+            "fromSeekMs": 67.2001953125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 11372.599853515625,
+            "sincePrevious": 6.60009765625,
+            "observedAt": 1788345254301.2,
+            "currentTime": 187,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                186.218666,
+                187.071999
+              ]
+            ],
+            "fromRequestMs": 74.2998046875,
+            "fromSeekMs": 73.5
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 11424.699951171875,
+            "sincePrevious": 52.10009765625,
+            "observedAt": 1788345254353.3,
+            "currentTime": 187,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                186.218666,
+                187.581854
+              ]
+            ],
+            "fromRequestMs": 126.39990234375,
+            "fromSeekMs": 125.60009765625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 11424.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345254353.4001,
+            "currentTime": 187,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                186.218666,
+                187.581854
+              ]
+            ],
+            "fromRequestMs": 126.5,
+            "fromSeekMs": 125.7001953125
+          }
+        ]
+      },
+      {
+        "index": 17,
+        "warmup": false,
+        "target": 487,
+        "firstDurableCanvasMs": 97.2998046875,
+        "firstDurableCanvasMediaTime": 486.980955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 95.599853515625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 11682.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345254611.7,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                186.218666,
+                190.584854
+              ]
+            ],
+            "fromRequestMs": 0.7998046875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 11682.7998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345254611.8,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                186.218666,
+                190.584854
+              ]
+            ],
+            "fromRequestMs": 0.89990234375,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 11694.89990234375,
+            "sincePrevious": 12.10009765625,
+            "observedAt": 1788345254623.5,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12.599853515625,
+            "fromSeekMs": 11.800048828125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 11694.999755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345254623.6,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12.699951171875,
+            "fromSeekMs": 11.900146484375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 11754.39990234375,
+            "sincePrevious": 59.400146484375,
+            "observedAt": 1788345254683,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 72.099853515625,
+            "fromSeekMs": 71.300048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 11754.499755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345254683.1,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 72.199951171875,
+            "fromSeekMs": 71.400146484375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 11760.2998046875,
+            "sincePrevious": 5.800048828125,
+            "observedAt": 1788345254688.8,
+            "currentTime": 487,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                486.421333,
+                487.381333
+              ]
+            ],
+            "fromRequestMs": 77.89990234375,
+            "fromSeekMs": 77.10009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 11778.39990234375,
+            "sincePrevious": 18.10009765625,
+            "observedAt": 1788345254706.8,
+            "currentTime": 487,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                486.421333,
+                487.381333
+              ]
+            ],
+            "fromRequestMs": 95.89990234375,
+            "fromSeekMs": 95.10009765625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 11778.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345254706.8,
+            "currentTime": 487,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                486.421333,
+                487.381333
+              ]
+            ],
+            "fromRequestMs": 95.89990234375,
+            "fromSeekMs": 95.10009765625
+          }
+        ]
+      },
+      {
+        "index": 18,
+        "warmup": false,
+        "target": 188,
+        "firstDurableCanvasMs": 149,
+        "firstDurableCanvasMediaTime": 187.982255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 145.5,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 12031.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345254960.3,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                486.421333,
+                490.384354
+              ]
+            ],
+            "fromRequestMs": 0.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 12031.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345254961.2,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                486.421333,
+                490.384354
+              ]
+            ],
+            "fromRequestMs": 1.7998046875,
+            "fromSeekMs": 0.89990234375
+          },
+          {
+            "name": "response",
+            "sinceLoad": 12042.599853515625,
+            "sincePrevious": 11.300048828125,
+            "observedAt": 1788345254971.3,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 11.89990234375,
+            "fromSeekMs": 11
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 12042.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345254971.4001,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 12,
+            "fromSeekMs": 11.10009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 12112.19970703125,
+            "sincePrevious": 69.39990234375,
+            "observedAt": 1788345255040.8,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 81.39990234375,
+            "fromSeekMs": 80.5
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 12112.2998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345255040.9001,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 81.5,
+            "fromSeekMs": 80.60009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 12118.39990234375,
+            "sincePrevious": 6.10009765625,
+            "observedAt": 1788345255047,
+            "currentTime": 188,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                187.2,
+                188.074666
+              ]
+            ],
+            "fromRequestMs": 87.599853515625,
+            "fromSeekMs": 86.699951171875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 12177.5,
+            "sincePrevious": 59.10009765625,
+            "observedAt": 1788345255106.1,
+            "currentTime": 188.001053,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                187.2,
+                188.582854
+              ]
+            ],
+            "fromRequestMs": 146.699951171875,
+            "fromSeekMs": 145.800048828125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 12177.699951171875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255106.2,
+            "currentTime": 188.00115,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                187.2,
+                188.582854
+              ]
+            ],
+            "fromRequestMs": 146.7998046875,
+            "fromSeekMs": 145.89990234375
+          }
+        ]
+      },
+      {
+        "index": 19,
+        "warmup": false,
+        "target": 488,
+        "firstDurableCanvasMs": 114.5,
+        "firstDurableCanvasMediaTime": 487.981955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 102.300048828125,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 12432.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345255362.9001,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                187.2,
+                191.585854
+              ]
+            ],
+            "fromRequestMs": 2.2001953125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 12432.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345255363.1,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                187.2,
+                191.585854
+              ]
+            ],
+            "fromRequestMs": 2.400146484375,
+            "fromSeekMs": 0.199951171875
+          },
+          {
+            "name": "response",
+            "sinceLoad": 12446.39990234375,
+            "sincePrevious": 13.800048828125,
+            "observedAt": 1788345255377.1,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.400146484375,
+            "fromSeekMs": 14.199951171875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 12446.599853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255377.1,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.400146484375,
+            "fromSeekMs": 14.199951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 12508.599853515625,
+            "sincePrevious": 62,
+            "observedAt": 1788345255437.3,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 76.60009765625,
+            "fromSeekMs": 74.39990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 12508.69970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345255437.5,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 76.800048828125,
+            "fromSeekMs": 74.599853515625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 12514.39990234375,
+            "sincePrevious": 5.7001953125,
+            "observedAt": 1788345255443.2,
+            "currentTime": 488,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                487.402666,
+                488.382354
+              ]
+            ],
+            "fromRequestMs": 82.5,
+            "fromSeekMs": 80.2998046875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 12535.099853515625,
+            "sincePrevious": 20.699951171875,
+            "observedAt": 1788345255463.7,
+            "currentTime": 488,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                487.402666,
+                488.382354
+              ]
+            ],
+            "fromRequestMs": 103,
+            "fromSeekMs": 100.7998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 12535.2998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255463.7,
+            "currentTime": 488,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                487.402666,
+                488.382354
+              ]
+            ],
+            "fromRequestMs": 103,
+            "fromSeekMs": 100.7998046875
+          }
+        ]
+      },
+      {
+        "index": 20,
+        "warmup": false,
+        "target": 189,
+        "firstDurableCanvasMs": 147.60009765625,
+        "firstDurableCanvasMediaTime": 188.983255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 143,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 12799.39990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345255728.4001,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                487.402666,
+                490.879999
+              ]
+            ],
+            "fromRequestMs": 1.10009765625,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 12799.599853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255728.5,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                487.402666,
+                490.879999
+              ]
+            ],
+            "fromRequestMs": 1.199951171875,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 12815.2998046875,
+            "sincePrevious": 15.699951171875,
+            "observedAt": 1788345255743.9001,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.60009765625,
+            "fromSeekMs": 15.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 12815.499755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255744,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.699951171875,
+            "fromSeekMs": 15.599853515625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 12882.39990234375,
+            "sincePrevious": 66.900146484375,
+            "observedAt": 1788345255811.1,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 83.800048828125,
+            "fromSeekMs": 82.699951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 12882.499755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345255811.2,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 83.89990234375,
+            "fromSeekMs": 82.7998046875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 12887.39990234375,
+            "sincePrevious": 4.900146484375,
+            "observedAt": 1788345255816,
+            "currentTime": 189,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                188.224,
+                189.077333
+              ]
+            ],
+            "fromRequestMs": 88.699951171875,
+            "fromSeekMs": 87.599853515625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 12942.5,
+            "sincePrevious": 55.10009765625,
+            "observedAt": 1788345255871.1,
+            "currentTime": 189,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                188.224,
+                189.583854
+              ]
+            ],
+            "fromRequestMs": 143.800048828125,
+            "fromSeekMs": 142.699951171875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 12942.699951171875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345255871.2,
+            "currentTime": 189,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                188.224,
+                189.583854
+              ]
+            ],
+            "fromRequestMs": 143.89990234375,
+            "fromSeekMs": 142.7998046875
+          }
+        ]
+      },
+      {
+        "index": 21,
+        "warmup": false,
+        "target": 489,
+        "firstDurableCanvasMs": 112.10009765625,
+        "firstDurableCanvasMediaTime": 488.982955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 106.39990234375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 13201.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345256130.8,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                188.224,
+                192.586854
+              ]
+            ],
+            "fromRequestMs": 1,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 13201.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345256130.9001,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                188.224,
+                192.586854
+              ]
+            ],
+            "fromRequestMs": 1.10009765625,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 13216.19970703125,
+            "sincePrevious": 14.2998046875,
+            "observedAt": 1788345256144.8,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15,
+            "fromSeekMs": 14
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 13216.39990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345256144.9001,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15.10009765625,
+            "fromSeekMs": 14.10009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 13279.19970703125,
+            "sincePrevious": 62.7998046875,
+            "observedAt": 1788345256207.8,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 78,
+            "fromSeekMs": 77
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 13279.2998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345256207.9001,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 78.10009765625,
+            "fromSeekMs": 77.10009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 13284.7998046875,
+            "sincePrevious": 5.5,
+            "observedAt": 1788345256213.4001,
+            "currentTime": 489,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                488.533333,
+                489.383354
+              ]
+            ],
+            "fromRequestMs": 83.60009765625,
+            "fromSeekMs": 82.60009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 13308.699951171875,
+            "sincePrevious": 23.900146484375,
+            "observedAt": 1788345256237.3,
+            "currentTime": 489,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                488.533333,
+                489.383354
+              ]
+            ],
+            "fromRequestMs": 107.5,
+            "fromSeekMs": 106.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 13309,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345256237.5,
+            "currentTime": 489,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                488.533333,
+                489.383354
+              ]
+            ],
+            "fromRequestMs": 107.699951171875,
+            "fromSeekMs": 106.699951171875
+          }
+        ]
+      },
+      {
+        "index": 22,
+        "warmup": false,
+        "target": 190,
+        "firstDurableCanvasMs": 147,
+        "firstDurableCanvasMediaTime": 189.984255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 138.39990234375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 13566.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345256496.8,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                488.533333,
+                491.882666
+              ]
+            ],
+            "fromRequestMs": 1.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 13566.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345256496.8,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                488.533333,
+                491.882666
+              ]
+            ],
+            "fromRequestMs": 1.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 13582.39990234375,
+            "sincePrevious": 15.699951171875,
+            "observedAt": 1788345256511.1,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.199951171875,
+            "fromSeekMs": 14.300048828125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 13582.599853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345256511.2,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.2998046875,
+            "fromSeekMs": 14.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 13648.89990234375,
+            "sincePrevious": 66.300048828125,
+            "observedAt": 1788345256577.7,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 82.7998046875,
+            "fromSeekMs": 80.89990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 13648.999755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345256577.9001,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 83,
+            "fromSeekMs": 81.10009765625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 13654.39990234375,
+            "sincePrevious": 5.400146484375,
+            "observedAt": 1788345256583.1,
+            "currentTime": 190,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                189.226666,
+                190.079999
+              ]
+            ],
+            "fromRequestMs": 88.199951171875,
+            "fromSeekMs": 86.300048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 13705.599853515625,
+            "sincePrevious": 51.199951171875,
+            "observedAt": 1788345256634.2,
+            "currentTime": 190,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                189.226666,
+                190.584854
+              ]
+            ],
+            "fromRequestMs": 139.2998046875,
+            "fromSeekMs": 137.39990234375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 13705.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345256634.4001,
+            "currentTime": 190,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                189.226666,
+                190.584854
+              ]
+            ],
+            "fromRequestMs": 139.5,
+            "fromSeekMs": 137.60009765625
+          }
+        ]
+      },
+      {
+        "index": 23,
+        "warmup": false,
+        "target": 490,
+        "firstDurableCanvasMs": 128.699951171875,
+        "firstDurableCanvasMediaTime": 489.983955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 118.199951171875,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 13969.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345256899.9001,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                189.226666,
+                193.578666
+              ]
+            ],
+            "fromRequestMs": 3.300048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 13969.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345256900,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                189.226666,
+                193.578666
+              ]
+            ],
+            "fromRequestMs": 3.39990234375,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 13986.89990234375,
+            "sincePrevious": 17.39990234375,
+            "observedAt": 1788345256915.7,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.099853515625,
+            "fromSeekMs": 15.7998046875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 13987.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345256915.8,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.199951171875,
+            "fromSeekMs": 15.89990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 14057.19970703125,
+            "sincePrevious": 70.099853515625,
+            "observedAt": 1788345256985.9001,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 89.300048828125,
+            "fromSeekMs": 86
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 14057.2998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345256986.1,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 89.5,
+            "fromSeekMs": 86.199951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 14069.19970703125,
+            "sincePrevious": 11.89990234375,
+            "observedAt": 1788345256998,
+            "currentTime": 490,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                489.536,
+                490.384354
+              ]
+            ],
+            "fromRequestMs": 101.39990234375,
+            "fromSeekMs": 98.099853515625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 14087,
+            "sincePrevious": 17.80029296875,
+            "observedAt": 1788345257015.7,
+            "currentTime": 490,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                489.536,
+                490.384354
+              ]
+            ],
+            "fromRequestMs": 119.099853515625,
+            "fromSeekMs": 115.7998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 14087.2998046875,
+            "sincePrevious": 0.2998046875,
+            "observedAt": 1788345257015.8,
+            "currentTime": 490,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                489.536,
+                490.384354
+              ]
+            ],
+            "fromRequestMs": 119.199951171875,
+            "fromSeekMs": 115.89990234375
+          }
+        ]
+      },
+      {
+        "index": 24,
+        "warmup": false,
+        "target": 191,
+        "firstDurableCanvasMs": 146.89990234375,
+        "firstDurableCanvasMediaTime": 190.985255,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 152.099853515625,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 14349.89990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345257281.3,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                489.536,
+                493.387354
+              ]
+            ],
+            "fromRequestMs": 3.199951171875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 14349.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345257281.4001,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                489.536,
+                493.387354
+              ]
+            ],
+            "fromRequestMs": 3.300048828125,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 14364.89990234375,
+            "sincePrevious": 14.89990234375,
+            "observedAt": 1788345257293.6,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15.5,
+            "fromSeekMs": 12.300048828125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 14365.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345257293.7,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15.599853515625,
+            "fromSeekMs": 12.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 14433.89990234375,
+            "sincePrevious": 68.800048828125,
+            "observedAt": 1788345257362.7,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 84.599853515625,
+            "fromSeekMs": 81.39990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 14433.999755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345257362.8,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 84.699951171875,
+            "fromSeekMs": 81.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 14439.7998046875,
+            "sincePrevious": 5.800048828125,
+            "observedAt": 1788345257368.4001,
+            "currentTime": 191,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                190.122666,
+                191.082666
+              ]
+            ],
+            "fromRequestMs": 90.300048828125,
+            "fromSeekMs": 87.10009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 14502.39990234375,
+            "sincePrevious": 62.60009765625,
+            "observedAt": 1788345257430.9001,
+            "currentTime": 191.00062,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                190.122666,
+                191.585854
+              ]
+            ],
+            "fromRequestMs": 152.800048828125,
+            "fromSeekMs": 149.60009765625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 14502.599853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345257431.1,
+            "currentTime": 191.000743,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                190.122666,
+                191.585854
+              ]
+            ],
+            "fromRequestMs": 153,
+            "fromSeekMs": 149.800048828125
+          }
+        ]
+      },
+      {
+        "index": 25,
+        "warmup": false,
+        "target": 491,
+        "firstDurableCanvasMs": 94.099853515625,
+        "firstDurableCanvasMediaTime": 490.984955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 97.39990234375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 14754.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345257685.1,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                190.122666,
+                194.581333
+              ]
+            ],
+            "fromRequestMs": 2.699951171875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 14754.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345257685.2,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                190.122666,
+                194.581333
+              ]
+            ],
+            "fromRequestMs": 2.7998046875,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 14769.69970703125,
+            "sincePrevious": 15.099853515625,
+            "observedAt": 1788345257698.5,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.099853515625,
+            "fromSeekMs": 13.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 14769.89990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345257698.5,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.099853515625,
+            "fromSeekMs": 13.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 14827.499755859375,
+            "sincePrevious": 57.599853515625,
+            "observedAt": 1788345257756.8,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 74.39990234375,
+            "fromSeekMs": 71.699951171875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 14827.69970703125,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345257756.9001,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 74.5,
+            "fromSeekMs": 71.800048828125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 14830.999755859375,
+            "sincePrevious": 3.300048828125,
+            "observedAt": 1788345257761,
+            "currentTime": 491,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                490.645333,
+                491.385354
+              ]
+            ],
+            "fromRequestMs": 78.599853515625,
+            "fromSeekMs": 75.89990234375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 14851.699951171875,
+            "sincePrevious": 20.7001953125,
+            "observedAt": 1788345257780.3,
+            "currentTime": 491,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                490.645333,
+                491.385354
+              ]
+            ],
+            "fromRequestMs": 97.89990234375,
+            "fromSeekMs": 95.199951171875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 14851.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345257780.4001,
+            "currentTime": 491,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                490.645333,
+                491.385354
+              ]
+            ],
+            "fromRequestMs": 98,
+            "fromSeekMs": 95.300048828125
+          }
+        ]
+      },
+      {
+        "index": 26,
+        "warmup": false,
+        "target": 192,
+        "firstDurableCanvasMs": 145.5,
+        "firstDurableCanvasMediaTime": 191.986255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 138.400146484375,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 15101.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345258030.4001,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                490.645333,
+                494.378666
+              ]
+            ],
+            "fromRequestMs": 0.900146484375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 15101.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345258030.4001,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                490.645333,
+                494.378666
+              ]
+            ],
+            "fromRequestMs": 0.900146484375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 15118.19970703125,
+            "sincePrevious": 16.7998046875,
+            "observedAt": 1788345258046.9001,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 17.400146484375,
+            "fromSeekMs": 16.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 15118.39990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345258047,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 17.5,
+            "fromSeekMs": 16.599853515625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 15184.099853515625,
+            "sincePrevious": 65.699951171875,
+            "observedAt": 1788345258112.9001,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 83.400146484375,
+            "fromSeekMs": 82.5
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 15184.2998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345258113,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 83.5,
+            "fromSeekMs": 82.599853515625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 15187.599853515625,
+            "sincePrevious": 3.300048828125,
+            "observedAt": 1788345258116.2,
+            "currentTime": 192,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                191.232,
+                192.085333
+              ]
+            ],
+            "fromRequestMs": 86.699951171875,
+            "fromSeekMs": 85.7998046875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 15240.2998046875,
+            "sincePrevious": 52.699951171875,
+            "observedAt": 1788345258168.9001,
+            "currentTime": 192,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                191.232,
+                192.586854
+              ]
+            ],
+            "fromRequestMs": 139.400146484375,
+            "fromSeekMs": 138.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 15240.5,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345258169,
+            "currentTime": 192,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                191.232,
+                192.586854
+              ]
+            ],
+            "fromRequestMs": 139.5,
+            "fromSeekMs": 138.599853515625
+          }
+        ]
+      },
+      {
+        "index": 27,
+        "warmup": false,
+        "target": 492,
+        "firstDurableCanvasMs": 113.699951171875,
+        "firstDurableCanvasMediaTime": 491.985955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 112,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 15499.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345258430.7,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                191.232,
+                195.583999
+              ]
+            ],
+            "fromRequestMs": 2.39990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 15500.2998046875,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345258430.8,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                191.232,
+                195.583999
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 15519.2998046875,
+            "sincePrevious": 19,
+            "observedAt": 1788345258447.9001,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.60009765625,
+            "fromSeekMs": 17.2001953125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 15519.39990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345258448,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.699951171875,
+            "fromSeekMs": 17.300048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 15590.499755859375,
+            "sincePrevious": 71.099853515625,
+            "observedAt": 1788345258519.3,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 91,
+            "fromSeekMs": 88.60009765625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 15590.599853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345258519.4001,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 91.10009765625,
+            "fromSeekMs": 88.7001953125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 15595.7998046875,
+            "sincePrevious": 5.199951171875,
+            "observedAt": 1788345258524.4001,
+            "currentTime": 492,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                491.413333,
+                492.386354
+              ]
+            ],
+            "fromRequestMs": 96.10009765625,
+            "fromSeekMs": 93.7001953125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 15612.699951171875,
+            "sincePrevious": 16.900146484375,
+            "observedAt": 1788345258541.3,
+            "currentTime": 492,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                491.413333,
+                492.386354
+              ]
+            ],
+            "fromRequestMs": 113,
+            "fromSeekMs": 110.60009765625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 15612.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345258541.4001,
+            "currentTime": 492,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                491.413333,
+                492.386354
+              ]
+            ],
+            "fromRequestMs": 113.10009765625,
+            "fromSeekMs": 110.7001953125
+          }
+        ]
+      },
+      {
+        "index": 28,
+        "warmup": false,
+        "target": 193,
+        "firstDurableCanvasMs": 147.39990234375,
+        "firstDurableCanvasMediaTime": 192.987255,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 149.5,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 15866.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345258795.3,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                491.413333,
+                495.381333
+              ]
+            ],
+            "fromRequestMs": 0.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 15866.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345258796.7,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                491.413333,
+                495.381333
+              ]
+            ],
+            "fromRequestMs": 2.2998046875,
+            "fromSeekMs": 1.39990234375
+          },
+          {
+            "name": "response",
+            "sinceLoad": 15884.999755859375,
+            "sincePrevious": 18.699951171875,
+            "observedAt": 1788345258813.7,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.2998046875,
+            "fromSeekMs": 18.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 15885.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345258813.7,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.2998046875,
+            "fromSeekMs": 18.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 15955.999755859375,
+            "sincePrevious": 70.89990234375,
+            "observedAt": 1788345258884.8,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 90.39990234375,
+            "fromSeekMs": 89.5
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 15956.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345258885,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 90.599853515625,
+            "fromSeekMs": 89.699951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 15961.69970703125,
+            "sincePrevious": 5.599853515625,
+            "observedAt": 1788345258890.4001,
+            "currentTime": 193,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                192.213333,
+                193.087354
+              ]
+            ],
+            "fromRequestMs": 96,
+            "fromSeekMs": 95.10009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 16016,
+            "sincePrevious": 54.30029296875,
+            "observedAt": 1788345258944.6,
+            "currentTime": 193,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                192.213333,
+                193.578666
+              ]
+            ],
+            "fromRequestMs": 150.199951171875,
+            "fromSeekMs": 149.300048828125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 16016.199951171875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345258944.7,
+            "currentTime": 193,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                192.213333,
+                193.578666
+              ]
+            ],
+            "fromRequestMs": 150.2998046875,
+            "fromSeekMs": 149.39990234375
+          }
+        ]
+      },
+      {
+        "index": 29,
+        "warmup": false,
+        "target": 493,
+        "firstDurableCanvasMs": 128.5,
+        "firstDurableCanvasMediaTime": 492.986955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 119.599853515625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 16268.599853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345259199.5,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                192.213333,
+                196.586666
+              ]
+            ],
+            "fromRequestMs": 2.89990234375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 16268.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345259199.6,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                192.213333,
+                196.586666
+              ]
+            ],
+            "fromRequestMs": 3,
+            "fromSeekMs": 0.10009765625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 16283.89990234375,
+            "sincePrevious": 15.199951171875,
+            "observedAt": 1788345259212.5,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 15.89990234375,
+            "fromSeekMs": 13
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 16284.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345259212.6,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16,
+            "fromSeekMs": 13.10009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 16365.7998046875,
+            "sincePrevious": 81.699951171875,
+            "observedAt": 1788345259294.6,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98,
+            "fromSeekMs": 95.10009765625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 16365.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345259294.9001,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.300048828125,
+            "fromSeekMs": 95.400146484375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 16371.39990234375,
+            "sincePrevious": 5.5,
+            "observedAt": 1788345259300.1,
+            "currentTime": 493,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                492.437333,
+                493.387354
+              ]
+            ],
+            "fromRequestMs": 103.5,
+            "fromSeekMs": 100.60009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 16388.2998046875,
+            "sincePrevious": 16.89990234375,
+            "observedAt": 1788345259317,
+            "currentTime": 493,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                492.437333,
+                493.387354
+              ]
+            ],
+            "fromRequestMs": 120.39990234375,
+            "fromSeekMs": 117.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 16388.599853515625,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345259317.1,
+            "currentTime": 493,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                492.437333,
+                493.387354
+              ]
+            ],
+            "fromRequestMs": 120.5,
+            "fromSeekMs": 117.60009765625
+          }
+        ]
+      },
+      {
+        "index": 30,
+        "warmup": false,
+        "target": 194,
+        "firstDurableCanvasMs": 147.699951171875,
+        "firstDurableCanvasMediaTime": 193.988255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 142.599853515625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 16649.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345259579.7,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                492.437333,
+                496.383999
+              ]
+            ],
+            "fromRequestMs": 2.2998046875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 16649.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345259579.7,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                492.437333,
+                496.383999
+              ]
+            ],
+            "fromRequestMs": 2.2998046875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 16663.69970703125,
+            "sincePrevious": 14.19970703125,
+            "observedAt": 1788345259593.4001,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16,
+            "fromSeekMs": 13.7001953125
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 16663.89990234375,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345259593.5,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.099853515625,
+            "fromSeekMs": 13.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 16732.69970703125,
+            "sincePrevious": 68.7998046875,
+            "observedAt": 1788345259661.5,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 84.099853515625,
+            "fromSeekMs": 81.800048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 16732.7998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345259661.7,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 84.2998046875,
+            "fromSeekMs": 82
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 16738.69970703125,
+            "sincePrevious": 5.89990234375,
+            "observedAt": 1788345259667.3,
+            "currentTime": 194,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                193.216,
+                194.088354
+              ]
+            ],
+            "fromRequestMs": 89.89990234375,
+            "fromSeekMs": 87.60009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 16792.199951171875,
+            "sincePrevious": 53.500244140625,
+            "observedAt": 1788345259720.9001,
+            "currentTime": 194,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                193.216,
+                194.581333
+              ]
+            ],
+            "fromRequestMs": 143.5,
+            "fromSeekMs": 141.2001953125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 16792.599853515625,
+            "sincePrevious": 0.39990234375,
+            "observedAt": 1788345259721.1,
+            "currentTime": 194,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                193.216,
+                194.581333
+              ]
+            ],
+            "fromRequestMs": 143.699951171875,
+            "fromSeekMs": 141.400146484375
+          }
+        ]
+      },
+      {
+        "index": 31,
+        "warmup": false,
+        "target": 494,
+        "firstDurableCanvasMs": 131.300048828125,
+        "firstDurableCanvasMediaTime": 493.987955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 118.699951171875,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 17049.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345259979.9001,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                193.216,
+                197.589333
+              ]
+            ],
+            "fromRequestMs": 2.60009765625,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 17049.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345259979.9001,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                193.216,
+                197.589333
+              ]
+            ],
+            "fromRequestMs": 2.60009765625,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 17067.599853515625,
+            "sincePrevious": 18.300048828125,
+            "observedAt": 1788345259996.3,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19,
+            "fromSeekMs": 16.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 17067.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345259996.4001,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.10009765625,
+            "fromSeekMs": 16.5
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 17140.999755859375,
+            "sincePrevious": 73.199951171875,
+            "observedAt": 1788345260069.8,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 92.5,
+            "fromSeekMs": 89.89990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 17141.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345260070,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 92.699951171875,
+            "fromSeekMs": 90.099853515625
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 17145.999755859375,
+            "sincePrevious": 4.89990234375,
+            "observedAt": 1788345260074.7,
+            "currentTime": 494,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                493.525333,
+                494.378666
+              ]
+            ],
+            "fromRequestMs": 97.39990234375,
+            "fromSeekMs": 94.7998046875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 17168.099853515625,
+            "sincePrevious": 22.10009765625,
+            "observedAt": 1788345260096.7,
+            "currentTime": 494,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                493.525333,
+                494.378666
+              ]
+            ],
+            "fromRequestMs": 119.39990234375,
+            "fromSeekMs": 116.7998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 17168.39990234375,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345260096.8,
+            "currentTime": 494,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                493.525333,
+                494.378666
+              ]
+            ],
+            "fromRequestMs": 119.5,
+            "fromSeekMs": 116.89990234375
+          }
+        ]
+      },
+      {
+        "index": 32,
+        "warmup": false,
+        "target": 195,
+        "firstDurableCanvasMs": 163.7998046875,
+        "firstDurableCanvasMediaTime": 194.989255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 151.099853515625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 17433.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345260362.4001,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                493.525333,
+                497.386666
+              ]
+            ],
+            "fromRequestMs": 1,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 17433.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345260362.5,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                493.525333,
+                497.386666
+              ]
+            ],
+            "fromRequestMs": 1.099853515625,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 17453.999755859375,
+            "sincePrevious": 20.699951171875,
+            "observedAt": 1788345260382.7,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 21.2998046875,
+            "fromSeekMs": 20.2998046875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 17454.19970703125,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345260382.8,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 21.39990234375,
+            "fromSeekMs": 20.39990234375
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 17531.099853515625,
+            "sincePrevious": 76.900146484375,
+            "observedAt": 1788345260459.8,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.39990234375,
+            "fromSeekMs": 97.39990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 17531.19970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345260460.1,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.699951171875,
+            "fromSeekMs": 97.699951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 17536.599853515625,
+            "sincePrevious": 5.400146484375,
+            "observedAt": 1788345260465.3,
+            "currentTime": 195,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                194.24,
+                195.089354
+              ]
+            ],
+            "fromRequestMs": 103.89990234375,
+            "fromSeekMs": 102.89990234375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 17584.699951171875,
+            "sincePrevious": 48.10009765625,
+            "observedAt": 1788345260513.2,
+            "currentTime": 195,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                194.24,
+                195.583999
+              ]
+            ],
+            "fromRequestMs": 151.7998046875,
+            "fromSeekMs": 150.7998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 17584.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345260513.4001,
+            "currentTime": 195,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                194.24,
+                195.583999
+              ]
+            ],
+            "fromRequestMs": 152,
+            "fromSeekMs": 151
+          }
+        ]
+      },
+      {
+        "index": 33,
+        "warmup": false,
+        "target": 495,
+        "firstDurableCanvasMs": 113.300048828125,
+        "firstDurableCanvasMediaTime": 494.988955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 104.5,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 17850.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345260781.1,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                194.24,
+                198.591999
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 17850.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345260781.2,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                194.24,
+                198.591999
+              ]
+            ],
+            "fromRequestMs": 2.599853515625,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 17867.7998046875,
+            "sincePrevious": 17.099853515625,
+            "observedAt": 1788345260796.5,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 17.89990234375,
+            "fromSeekMs": 15.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 17868.099853515625,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345260796.7,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 18.099853515625,
+            "fromSeekMs": 15.599853515625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 17932.19970703125,
+            "sincePrevious": 64.099853515625,
+            "observedAt": 1788345260861,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 82.39990234375,
+            "fromSeekMs": 79.89990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 17932.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345260861.1,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 82.5,
+            "fromSeekMs": 80
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 17945.999755859375,
+            "sincePrevious": 13.800048828125,
+            "observedAt": 1788345260874.6,
+            "currentTime": 495,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                494.634666,
+                495.381333
+              ]
+            ],
+            "fromRequestMs": 96,
+            "fromSeekMs": 93.5
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 17955,
+            "sincePrevious": 9.000244140625,
+            "observedAt": 1788345260883.6,
+            "currentTime": 495,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                494.634666,
+                495.381333
+              ]
+            ],
+            "fromRequestMs": 105,
+            "fromSeekMs": 102.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 17955.199951171875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345260883.7,
+            "currentTime": 495,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                494.634666,
+                495.381333
+              ]
+            ],
+            "fromRequestMs": 105.099853515625,
+            "fromSeekMs": 102.599853515625
+          }
+        ]
+      },
+      {
+        "index": 34,
+        "warmup": false,
+        "target": 196,
+        "firstDurableCanvasMs": 164.39990234375,
+        "firstDurableCanvasMediaTime": 195.990255,
+        "acceptedWhileSeeking": true,
+        "seekedMs": 167.89990234375,
+        "seekedVisibility": "visible",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 18215.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345261146.2,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                494.634666,
+                498.389333
+              ]
+            ],
+            "fromRequestMs": 2.2998046875,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 18215.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345261146.4001,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                494.634666,
+                498.389333
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0.2001953125
+          },
+          {
+            "name": "response",
+            "sinceLoad": 18238.89990234375,
+            "sincePrevious": 23.10009765625,
+            "observedAt": 1788345261167.6,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 23.699951171875,
+            "fromSeekMs": 21.400146484375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 18239.099853515625,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345261167.9001,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 24,
+            "fromSeekMs": 21.7001953125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 18319.499755859375,
+            "sincePrevious": 80.39990234375,
+            "observedAt": 1788345261248.3,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.39990234375,
+            "fromSeekMs": 102.10009765625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 18319.599853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345261248.4001,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.5,
+            "fromSeekMs": 102.2001953125
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 18324.599853515625,
+            "sincePrevious": 5,
+            "observedAt": 1788345261253.2,
+            "currentTime": 196,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                195.221333,
+                196.090354
+              ]
+            ],
+            "fromRequestMs": 109.2998046875,
+            "fromSeekMs": 107
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 18383.7998046875,
+            "sincePrevious": 59.199951171875,
+            "observedAt": 1788345261312.4001,
+            "currentTime": 196,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                195.221333,
+                196.586666
+              ]
+            ],
+            "fromRequestMs": 168.5,
+            "fromSeekMs": 166.2001953125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 18384,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 1788345261312.5,
+            "currentTime": 196,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                195.221333,
+                196.586666
+              ]
+            ],
+            "fromRequestMs": 168.599853515625,
+            "fromSeekMs": 166.300048828125
+          }
+        ]
+      },
+      {
+        "index": 35,
+        "warmup": false,
+        "target": 496,
+        "firstDurableCanvasMs": 112.199951171875,
+        "firstDurableCanvasMediaTime": 495.989955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 108.699951171875,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 18635.19970703125,
+            "sincePrevious": 0.39990234375,
+            "observedAt": 1788345261563.9001,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                195.221333,
+                199.093354
+              ]
+            ],
+            "fromRequestMs": 1,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 18635.2998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345261564,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                195.221333,
+                199.093354
+              ]
+            ],
+            "fromRequestMs": 1.099853515625,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 18653.599853515625,
+            "sincePrevious": 18.300048828125,
+            "observedAt": 1788345261582.4001,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.5,
+            "fromSeekMs": 18.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 18653.89990234375,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345261582.6,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 19.699951171875,
+            "fromSeekMs": 18.699951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 18720.499755859375,
+            "sincePrevious": 66.599853515625,
+            "observedAt": 1788345261649.2,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 86.2998046875,
+            "fromSeekMs": 85.2998046875
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 18720.499755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345261649.4001,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 86.5,
+            "fromSeekMs": 85.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 18725.39990234375,
+            "sincePrevious": 4.900146484375,
+            "observedAt": 1788345261654.2,
+            "currentTime": 496,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                495.530666,
+                496.383999
+              ]
+            ],
+            "fromRequestMs": 91.2998046875,
+            "fromSeekMs": 90.2998046875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 18743.7998046875,
+            "sincePrevious": 18.39990234375,
+            "observedAt": 1788345261672.5,
+            "currentTime": 496,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                495.530666,
+                496.383999
+              ]
+            ],
+            "fromRequestMs": 109.599853515625,
+            "fromSeekMs": 108.599853515625
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 18744.199951171875,
+            "sincePrevious": 0.400146484375,
+            "observedAt": 1788345261672.6,
+            "currentTime": 496,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                495.530666,
+                496.383999
+              ]
+            ],
+            "fromRequestMs": 109.699951171875,
+            "fromSeekMs": 108.699951171875
+          }
+        ]
+      },
+      {
+        "index": 36,
+        "warmup": false,
+        "target": 197,
+        "firstDurableCanvasMs": 163.699951171875,
+        "firstDurableCanvasMediaTime": 196.991255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 150.5,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 18999.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345261929.9001,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                495.530666,
+                498.892854
+              ]
+            ],
+            "fromRequestMs": 1.900146484375,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 18999.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345261930,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                495.530666,
+                498.892854
+              ]
+            ],
+            "fromRequestMs": 2,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 19017.599853515625,
+            "sincePrevious": 17.699951171875,
+            "observedAt": 1788345261946.3,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 18.300048828125,
+            "fromSeekMs": 16.39990234375
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 19017.69970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345261946.4001,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 18.400146484375,
+            "fromSeekMs": 16.5
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 19097.7998046875,
+            "sincePrevious": 80.10009765625,
+            "observedAt": 1788345262026.5,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.5,
+            "fromSeekMs": 96.599853515625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 19097.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345262026.7,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 98.699951171875,
+            "fromSeekMs": 96.7998046875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 19103.2998046875,
+            "sincePrevious": 5.39990234375,
+            "observedAt": 1788345262031.8,
+            "currentTime": 197,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                196.224,
+                197.091354
+              ]
+            ],
+            "fromRequestMs": 103.800048828125,
+            "fromSeekMs": 101.89990234375
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 19150.599853515625,
+            "sincePrevious": 47.300048828125,
+            "observedAt": 1788345262079.2,
+            "currentTime": 197,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                196.224,
+                197.589333
+              ]
+            ],
+            "fromRequestMs": 151.199951171875,
+            "fromSeekMs": 149.2998046875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 19150.7998046875,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345262079.4001,
+            "currentTime": 197,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                196.224,
+                197.589333
+              ]
+            ],
+            "fromRequestMs": 151.400146484375,
+            "fromSeekMs": 149.5
+          }
+        ]
+      },
+      {
+        "index": 37,
+        "warmup": false,
+        "target": 497,
+        "firstDurableCanvasMs": 114,
+        "firstDurableCanvasMediaTime": 496.990955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 110.300048828125,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 19415.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345262346.9001,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                196.224,
+                200.594854
+              ]
+            ],
+            "fromRequestMs": 2.7001953125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 19416.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345262347,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                196.224,
+                200.594854
+              ]
+            ],
+            "fromRequestMs": 2.800048828125,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 19436.7998046875,
+            "sincePrevious": 20.39990234375,
+            "observedAt": 1788345262365.5,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 21.300048828125,
+            "fromSeekMs": 18.599853515625
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 19436.999755859375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345262365.6,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 21.400146484375,
+            "fromSeekMs": 18.699951171875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 19506.999755859375,
+            "sincePrevious": 70,
+            "observedAt": 1788345262435.9001,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 91.7001953125,
+            "fromSeekMs": 89
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 19507.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345262436.1,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 91.900146484375,
+            "fromSeekMs": 89.199951171875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 19510.19970703125,
+            "sincePrevious": 3.099853515625,
+            "observedAt": 1788345262438.7,
+            "currentTime": 497,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                496.426666,
+                497.386666
+              ]
+            ],
+            "fromRequestMs": 94.5,
+            "fromSeekMs": 91.7998046875
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 19526.699951171875,
+            "sincePrevious": 16.500244140625,
+            "observedAt": 1788345262455.3,
+            "currentTime": 497,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                496.426666,
+                497.386666
+              ]
+            ],
+            "fromRequestMs": 111.10009765625,
+            "fromSeekMs": 108.39990234375
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 19526.89990234375,
+            "sincePrevious": 0.199951171875,
+            "observedAt": 1788345262455.5,
+            "currentTime": 497,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                496.426666,
+                497.386666
+              ]
+            ],
+            "fromRequestMs": 111.300048828125,
+            "fromSeekMs": 108.599853515625
+          }
+        ]
+      },
+      {
+        "index": 38,
+        "warmup": false,
+        "target": 198,
+        "firstDurableCanvasMs": 180.89990234375,
+        "firstDurableCanvasMediaTime": 197.992255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 168.60009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 19782.69970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345262713.3,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                496.426666,
+                499.391999
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 19782.89990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345262713.3,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                496.426666,
+                499.391999
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 19824.099853515625,
+            "sincePrevious": 40.89990234375,
+            "observedAt": 1788345262752.8,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 42,
+            "fromSeekMs": 39.5
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 19824.19970703125,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345262752.9001,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 42.10009765625,
+            "fromSeekMs": 39.60009765625
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 19900.7998046875,
+            "sincePrevious": 76.60009765625,
+            "observedAt": 1788345262829.6,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 118.800048828125,
+            "fromSeekMs": 116.300048828125
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 19900.89990234375,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345262829.8,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 119,
+            "fromSeekMs": 116.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 19906.19970703125,
+            "sincePrevious": 5.2998046875,
+            "observedAt": 1788345262834.8,
+            "currentTime": 198,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                197.226666,
+                198.092354
+              ]
+            ],
+            "fromRequestMs": 124,
+            "fromSeekMs": 121.5
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 19951.599853515625,
+            "sincePrevious": 45.400146484375,
+            "observedAt": 1788345262880.3,
+            "currentTime": 198,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                197.226666,
+                198.591999
+              ]
+            ],
+            "fromRequestMs": 169.5,
+            "fromSeekMs": 167
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 19951.89990234375,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345262880.4001,
+            "currentTime": 198,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                197.226666,
+                198.591999
+              ]
+            ],
+            "fromRequestMs": 169.60009765625,
+            "fromSeekMs": 167.10009765625
+          }
+        ]
+      },
+      {
+        "index": 39,
+        "warmup": false,
+        "target": 498,
+        "firstDurableCanvasMs": 130.89990234375,
+        "firstDurableCanvasMediaTime": 497.991955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 120.5,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 20215.7998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345263146.9001,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                197.226666,
+                201.595854
+              ]
+            ],
+            "fromRequestMs": 2.800048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 20215.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345263146.9001,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                197.226666,
+                201.595854
+              ]
+            ],
+            "fromRequestMs": 2.800048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "response",
+            "sinceLoad": 20235.999755859375,
+            "sincePrevious": 19.999755859375,
+            "observedAt": 1788345263164.6,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 20.5,
+            "fromSeekMs": 17.699951171875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 20236.099853515625,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345263164.7,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 20.599853515625,
+            "fromSeekMs": 17.7998046875
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 20314.2998046875,
+            "sincePrevious": 78.199951171875,
+            "observedAt": 1788345263243.5,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 99.39990234375,
+            "fromSeekMs": 96.599853515625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 20314.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345263243.7,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 99.599853515625,
+            "fromSeekMs": 96.7998046875
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 20320.2998046875,
+            "sincePrevious": 6,
+            "observedAt": 1788345263248.9001,
+            "currentTime": 498,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                497.536,
+                498.389333
+              ]
+            ],
+            "fromRequestMs": 104.800048828125,
+            "fromSeekMs": 102
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 20336.7998046875,
+            "sincePrevious": 16.5,
+            "observedAt": 1788345263265.4001,
+            "currentTime": 498,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                497.536,
+                498.389333
+              ]
+            ],
+            "fromRequestMs": 121.300048828125,
+            "fromSeekMs": 118.5
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 20337.099853515625,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345263265.6,
+            "currentTime": 498,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                497.536,
+                498.389333
+              ]
+            ],
+            "fromRequestMs": 121.5,
+            "fromSeekMs": 118.699951171875
+          }
+        ]
+      },
+      {
+        "index": 40,
+        "warmup": false,
+        "target": 199,
+        "firstDurableCanvasMs": 163.5,
+        "firstDurableCanvasMediaTime": 198.993255,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 157.5,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 20599.999755859375,
+            "sincePrevious": 0,
+            "observedAt": 1788345263530.6,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                497.536,
+                501.395354
+              ]
+            ],
+            "fromRequestMs": 2.300048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 20600.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345263530.7,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                497.536,
+                501.395354
+              ]
+            ],
+            "fromRequestMs": 2.39990234375,
+            "fromSeekMs": 0.099853515625
+          },
+          {
+            "name": "response",
+            "sinceLoad": 20621.69970703125,
+            "sincePrevious": 21.2998046875,
+            "observedAt": 1788345263550.3,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 22,
+            "fromSeekMs": 19.699951171875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 20621.7998046875,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 1788345263550.4001,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 22.10009765625,
+            "fromSeekMs": 19.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 20704.2998046875,
+            "sincePrevious": 82.5,
+            "observedAt": 1788345263633,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.699951171875,
+            "fromSeekMs": 102.39990234375
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 20704.2998046875,
+            "sincePrevious": 0,
+            "observedAt": 1788345263633.1,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 104.800048828125,
+            "fromSeekMs": 102.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 20709.599853515625,
+            "sincePrevious": 5.300048828125,
+            "observedAt": 1788345263638.4001,
+            "currentTime": 199,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                198.144,
+                199.093354
+              ]
+            ],
+            "fromRequestMs": 110.10009765625,
+            "fromSeekMs": 107.800048828125
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 20758.199951171875,
+            "sincePrevious": 48.60009765625,
+            "observedAt": 1788345263686.8,
+            "currentTime": 199,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                198.144,
+                199.593854
+              ]
+            ],
+            "fromRequestMs": 158.5,
+            "fromSeekMs": 156.199951171875
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 20758.5,
+            "sincePrevious": 0.300048828125,
+            "observedAt": 1788345263687.1,
+            "currentTime": 199,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                198.144,
+                199.593854
+              ]
+            ],
+            "fromRequestMs": 158.800048828125,
+            "fromSeekMs": 156.5
+          }
+        ]
+      },
+      {
+        "index": 41,
+        "warmup": false,
+        "target": 499,
+        "firstDurableCanvasMs": 130.400146484375,
+        "firstDurableCanvasMediaTime": 498.992955,
+        "acceptedWhileSeeking": false,
+        "seekedMs": 119.60009765625,
+        "seekedVisibility": "hidden",
+        "seekedOpacity": "1",
+        "playerTimings": [
+          {
+            "name": "seek",
+            "sinceLoad": 21016.099853515625,
+            "sincePrevious": 0,
+            "observedAt": 1788345263946.8,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                198.144,
+                202.596854
+              ]
+            ],
+            "fromRequestMs": 2.300048828125,
+            "fromSeekMs": 0
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 21016.39990234375,
+            "sincePrevious": 0,
+            "observedAt": 1788345263947,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                198.144,
+                202.596854
+              ]
+            ],
+            "fromRequestMs": 2.5,
+            "fromSeekMs": 0.199951171875
+          },
+          {
+            "name": "response",
+            "sinceLoad": 21031.39990234375,
+            "sincePrevious": 15,
+            "observedAt": 1788345263960.5,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16,
+            "fromSeekMs": 13.699951171875
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 21031.499755859375,
+            "sincePrevious": 0.099853515625,
+            "observedAt": 1788345263960.6,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 16.10009765625,
+            "fromSeekMs": 13.800048828125
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 21109.19970703125,
+            "sincePrevious": 77.699951171875,
+            "observedAt": 1788345264037.9001,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 93.400146484375,
+            "fromSeekMs": 91.10009765625
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 21109.19970703125,
+            "sincePrevious": 0,
+            "observedAt": 1788345264038.2,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [],
+            "fromRequestMs": 93.699951171875,
+            "fromSeekMs": 91.39990234375
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 21114.099853515625,
+            "sincePrevious": 4.900146484375,
+            "observedAt": 1788345264043.9001,
+            "currentTime": 499,
+            "readyState": 1,
+            "seeking": true,
+            "buffered": [
+              [
+                498.538666,
+                499.391999
+              ]
+            ],
+            "fromRequestMs": 99.400146484375,
+            "fromSeekMs": 97.10009765625
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 21136.2998046875,
+            "sincePrevious": 22.199951171875,
+            "observedAt": 1788345264065.1,
+            "currentTime": 499.000105,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                498.538666,
+                499.391999
+              ]
+            ],
+            "fromRequestMs": 120.60009765625,
+            "fromSeekMs": 118.300048828125
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 21136.699951171875,
+            "sincePrevious": 0.400146484375,
+            "observedAt": 1788345264065.2,
+            "currentTime": 499.000292,
+            "readyState": 4,
+            "seeking": false,
+            "buffered": [
+              [
+                498.538666,
+                499.391999
+              ]
+            ],
+            "fromRequestMs": 120.699951171875,
+            "fromSeekMs": 118.39990234375
+          }
+        ]
+      }
+    ]
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "dedicatedChromeStopped": true,
+    "containerStopped": true
+  }
+}
