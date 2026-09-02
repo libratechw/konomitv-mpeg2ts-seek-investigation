@@ -9,7 +9,7 @@
     "transport": "LAN direct",
     "fullscreen": true,
     "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
-    "video": "1920x1080, 60000/1001 fps, GOP 180, FFmpeg yadif mode 1",
+    "video": "Coded 1440x1080 with SAR 4:3 (display 1920x1080), 60000/1001 fps, GOP 180, FFmpeg yadif mode 1",
     "audio": "AAC 48 kHz, 256 Kbps",
     "collector": "counter-only-no-rvfc",
     "durationPerRunMs": 600000,

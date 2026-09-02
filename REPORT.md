@@ -283,7 +283,14 @@ HEVCは同条件でdrop 0であり、計測中のThermal Statusも0だったた�
 H.264のdrop発生位置を250ms周期で記録する別の600秒走行では、35,965 frame中1件をdropした。
 発生時のmedia timeは950.070秒、`readyState=4`、buffer終端は981.464秒で、約31.4秒先までbuffer済みだった。
 最寄りの6.006秒HLS segment境界から約1.36秒離れ、前後2秒にHLS errorはなかったため、この1件はbuffer枯渇やsegment切替では説明できない。
-H.264のprofileとbitrateを、1920×1080、60000/1001fps、GOP 180、AAC 256Kbpsのまま分けて各600秒測った。
+
+drop位置を含むsequence 157を、同じfixture、KonomiTV commit、エンコード設定で後のセッションから再生成し、サーバーMPEG-TSとhls.jsの`BUFFER_APPENDING`直前のvideo fMP4を保存した。
+元のdrop走行のbyte列そのものではないため、同じsequenceを再生成した証拠として扱う。
+TSとfMP4はいずれも440 frameで、隣接PTSは1501 tickが220件、1502 tickが219件、重複・逆行・1ms未満間隔は0件だった。
+keyframe位置も一致し、FFmpegの厳格decodeで警告はなかった。
+既知区間ではChromiumの逆行・重複・近接timestampによるenqueue drop条件が成立せず、decoded frameの表示期限超過を優先して調べる。
+
+H.264のprofileとbitrateを、coded 1440×1080、SAR 4:3、表示1920×1080、60000/1001fps、GOP 180、AAC 256Kbpsのまま分けて各600秒測った。
 既定のHigh・9.5/13Mbpsは開始側2/35,964 drop、終了側1/35,964 drop、Main・9.5/13Mbpsは2/35,964 dropだった。
 High・3.5/5.2Mbpsは0/35,964 drop、Main・3.5/5.2Mbpsは1/35,964 dropだった。
 通常bitrateの3走行合計は5/107,892、低bitrateの2走行合計は1/71,928で、低bitrate側に少ない傾向はあるが、事象数が少ないため効果は確定できない。
@@ -293,7 +300,7 @@ HighからMainへの変更単独では改善を確認できなかった。
 毎frameのrVFC情報を保持する診断走行では、H.264が2 drop、HEVCが1 dropだった。
 ただしH.264はcallback 35,671回に対して`presentedFrames`が35,963進み、HEVCもcallback 35,731回に対して35,964進んだ。
 したがってrVFC callback間隔の空きは、映像frameのdropと1対1には対応しない。
-[主条件、診断条件、発生位置、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)と[H.264 profile・bitrate比較](results/galaxy-recorded-hls-h264-profile-bitrate-comparison.json)を保存した。
+[主条件、診断条件、発生位置、全生値](results/galaxy-recorded-hls-1080p60-long-comparison.json)、[H.264 profile・bitrate比較](results/galaxy-recorded-hls-h264-profile-bitrate-comparison.json)、[drop区間のtimestamp検査](results/galaxy-recorded-hls-h264-drop-segment-timestamps.json)を保存した。
 
 以前の8画質×2codecの5秒測定とHLSシーク測定は、watch pageを空の設定で一度起動してから要求画質へ切り替えていた。
 初期既定の1080pと要求画質のencoder sessionが並行してサーバー負荷を混ぜたため、絶対値として採用しない。

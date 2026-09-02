@@ -1,0 +1,105 @@
+{
+  "purpose": "Check whether the H.264 segment containing the previously observed drop position has duplicate, reversed, or sub-millisecond video timestamps before and after hls.js remuxing.",
+  "scope": {
+    "serverBaseCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "clientAsset": "PlayerController-Dwy3m7IJ.js",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "quality": "1080p-60fps H.264",
+    "segmentSequence": 157,
+    "relationToDropRun": "The earlier drop occurred at media time 950.070428 inside sequence 157. These bytes were regenerated later from the same fixture, sequence, KonomiTV commit, and encoding settings; they are not the retained bytes from the original drop run.",
+    "diagnosticOnly": "CDP response-body and SourceBuffer-input capture add overhead. Dropped-frame counts from the capture runs are excluded from performance comparisons."
+  },
+  "tools": {
+    "ffprobe": "8.1.2",
+    "measurementRunnerSha256": "fb7063a8dc42fb073ab6fee829c93ee1a38b03ac11f5457a99337227149acc12",
+    "mpegTsCaptureSha256": "f6d1fdda898f635c61590a563d98fd5eca6678d20ba48c5d671a39862504eb04",
+    "pagePreparationSha256": "e4b4afd78d3c6f3acbd8badf2d671a48fb60ad90cf8b718a0fe3cf55575d0f56",
+    "fmp4DumpSha256": "439e05ba0fa0383903fda4954fe84f47605de3b611d6148e25c681e4840d398d"
+  },
+  "serverMpegTs": {
+    "bytes": 11037668,
+    "sha256": "b0cec7a97b72c5c6878b3b9888cf203edd1577651c082edfabc84300195f25a3",
+    "container": "MPEG-TS",
+    "video": {
+      "codec": "H.264 High level 4.2, yuv420p, coded 1440x1080, SAR 4:3",
+      "frames": 440,
+      "timeBase": "1/90000",
+      "firstPts": 575873060,
+      "lastPts": 576532218,
+      "spanSeconds": 7.3239777777777775,
+      "nonIncreasingIntervals": 0,
+      "intervalsBelowOneMillisecond": 0,
+      "intervalHistogramTicks": [
+        {"ticks": 1501, "count": 220},
+        {"ticks": 1502, "count": 219}
+      ],
+      "keyFramePts": [575873060, 576074261, 576263450]
+    },
+    "audio": [
+      {
+        "streamIndex": 1,
+        "codec": "AAC LC, 48000 Hz, stereo",
+        "frames": 344,
+        "samplesPerFrame": 1024,
+        "nonIncreasingIntervals": 0,
+        "intervalHistogramTicks": [{"ticks": 1920, "count": 343}]
+      },
+      {
+        "streamIndex": 2,
+        "codec": "AAC LC, 48000 Hz, stereo",
+        "frames": 344,
+        "samplesPerFrame": 1024,
+        "nonIncreasingIntervals": 0,
+        "intervalHistogramTicks": [{"ticks": 1920, "count": 343}]
+      }
+    ],
+    "strictDecodeWarnings": 0
+  },
+  "hlsJsVideoFmp4": {
+    "stage": "Video BUFFER_APPENDING data immediately before SourceBuffer append",
+    "initSegment": {
+      "bytes": 731,
+      "sha256": "87a4f044267b5784e4d7a549c7f130db4d6b19ec128bf165ba0d91b73ed55e39",
+      "identicalCaptures": 2
+    },
+    "mediaFragment": {
+      "bytes": 10419601,
+      "sha256": "63371fe4ac30ffd2dfabec45651936d05480b93b885f4d0ca21798b449aef7e7"
+    },
+    "initAndMediaSha256": "fa3be65c95e2bd4da31eb224f4c3ef5b3cc6b7c646485065009051f927a839f5",
+    "video": {
+      "frames": 440,
+      "timeBase": "1/90000",
+      "firstPts": 575873060,
+      "lastPts": 576532218,
+      "spanSeconds": 7.3239777777777775,
+      "nonIncreasingIntervals": 0,
+      "intervalsBelowOneMillisecond": 0,
+      "intervalHistogramTicks": [
+        {"ticks": 1501, "count": 220},
+        {"ticks": 1502, "count": 219}
+      ],
+      "sampleDurationHistogramTicks": [
+        {"ticks": 1501, "count": 221},
+        {"ticks": 1502, "count": 219}
+      ],
+      "keyFramePts": [575873060, 576074261, 576263450]
+    },
+    "strictDecodeWarnings": 0
+  },
+  "result": [
+    "The MPEG-TS video PTS sequence is strictly increasing and consists only of the 1501/1502 tick alternation required for 60000/1001 fps.",
+    "The hls.js fMP4 input to SourceBuffer preserves the same 440 frames, PTS values, interval histogram, and key-frame positions.",
+    "The known segment does not exercise Chromium's enqueue-drop paths for reversed timestamps, duplicate timestamps, or intervals below one millisecond.",
+    "This shifts the leading explanation for the observed drop toward a decoded frame missing its presentation deadline. It does not prove that every segment has clean timestamps or identify the Android decoder/compositor stage responsible."
+  ],
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

@@ -115,7 +115,7 @@
     "H.264 accepted the expected 35964 frames over 600 seconds but Chrome dropped two frames even without per-frame collection or intermediate page evaluation.",
     "HEVC accepted 35966 frames and dropped zero under the same counter-only conditions, so the observed H.264 drops are not explained by a general 60 Hz display or thermal limit.",
     "The requestVideoFrameCallback count is lower than presentedFrameAdvance, so callback gaps are not one-for-one evidence of dropped video frames.",
-    "A third H.264 run observed one dropped frame at media time 950.070428 with readyState 4 and 31.393382 seconds buffered ahead. It was 1.363383 seconds from the nearest HLS segment boundary, and no HLS error occurred within two seconds.",
+    "A third H.264 run observed one dropped frame at media time 950.070428 with readyState 4 and 31.393382 seconds buffered ahead. It was 1.363383 seconds from the nearest HLS segment boundary, and no HLS error occurred within two seconds. A later regeneration of the containing sequence had ideal 1501/1502 tick video PTS spacing in both the server MPEG-TS and hls.js fMP4 output; see galaxy-recorded-hls-h264-drop-segment-timestamps.json.",
     "The follow-up profile and bitrate comparison is recorded in galaxy-recorded-hls-h264-profile-bitrate-comparison.json. Changing High to Main alone did not improve the count. Low-bitrate runs observed fewer drops, but the event count is too small to establish a reliable effect."
   ]
 }

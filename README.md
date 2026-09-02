@@ -54,6 +54,7 @@ HEVCのAPI要求は10bitでしたが、ソフトウェアFFmpegの実出力は`l
 
 H.264のprofileとbitrateを分けた10分走行では、既定のHigh・9.5Mbpsが開始側2 drop、終了側1 drop、Main・9.5Mbpsが2 dropでした。
 High・3.5Mbpsは0 drop、Main・3.5Mbpsは1 dropでした。
+
 profile変更単独の改善は確認できず、低bitrate側は少ない傾向ですが、合計6件の低頻度事象なので効果はまだ確定できません。
 3.5Mbpsは原因切り分け用で、画質を評価していないため製品設定の候補ではありません。
 
@@ -61,8 +62,10 @@ rVFC診断版ではH.264が2 drop、HEVCが1 dropでしたが、callback数は`p
 主判定には、開始・終了時だけcounterを読む低負荷collectorを使っています。
 H.264の発生位置を調べる別の10分走行では1 frameをdropしました。
 発生時は`readyState=4`で約31.4秒先までbuffer済み、最寄りのHLS segment境界から約1.36秒離れ、前後2秒にHLS errorはありませんでした。
-この1件はbuffer枯渇やsegment切替では説明できず、H.264のdecodeまたは表示期限超過側を優先して切り分けます。
-詳しい条件と生値は[1080p60長時間比較](results/galaxy-recorded-hls-1080p60-long-comparison.json)と[H.264 profile・bitrate比較](results/galaxy-recorded-hls-h264-profile-bitrate-comparison.json)に保存しています。
+同じfixture・sequence・設定で再生成したsegmentは、サーバーTSとhls.js変換後のfMP4の全440 frameが1501/1502 tickの理想PTS列でした。
+元走行のbyte列そのものではありませんが、重複・逆行・1ms未満間隔はなく、表示期限超過側を優先して切り分けます。
+
+詳しい条件と生値は[1080p60長時間比較](results/galaxy-recorded-hls-1080p60-long-comparison.json)、[H.264 profile・bitrate比較](results/galaxy-recorded-hls-h264-profile-bitrate-comparison.json)、[drop区間のtimestamp検査](results/galaxy-recorded-hls-h264-drop-segment-timestamps.json)に保存しています。
 
 他の14画質とHLSシークは、再生設定をwatch pageの初回実行前に投入するよう測定器を直した条件で再測定が必要です。
 修正前の測定は、初期既定の1080pと要求画質のencoder sessionが並行したため、現在の絶対値には使いません。
