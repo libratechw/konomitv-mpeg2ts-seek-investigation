@@ -478,6 +478,7 @@ Windowsは全走行で電源モードが「最適な電力効率」だったこ�
 同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。
 rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callbackに1 frame分の飛びはなかった。
 サーバーエンコード1080p60は30秒でrVFC 59.632fps、counter増分0、120秒で59.683fps、counter増分0だった。
+別PCのMirakurunから隔離KonomiTVへライブTSを入力し、電源モード「最適な電力効率」のWindows Chromeで600秒の対照試験も行った。サーバー側FFmpegで29.97pへ変換した1080pは`presentedFrames`実効29.969fps、rVFC 29.942fps、counter増分1だった。59.94pへ変換した`1080p (60fps)`は`presentedFrames`実効59.935fps、rVFC 58.817fps、40ms超12回、最大66.8ms、counter増分1だった。60pはほぼ理論fpsで進んだがdrop 0ではなく、Windows / Chrome共通の稀な期限超過を否定できない。この経路はサーバー側`libx264`と通常のvideo要素を使い、録画OriginalのWASM / MSE / WebGL YADIF canvasを通らない比較対象である。[30p / 60p条件と全結果](results/windows-mirakurun-live-30p-60p-600s.json)を保存した。
 [Media Playback Quality仕様](https://w3c.github.io/media-playback-quality/)では、このcounterはpredecodeまたはdecode後のdisplay deadline超過で落としたvideo frameを数える。
 サーバーエンコード経路でも発生し得るが、サーバーで符号化前に間引かれ、bitstreamに存在しないframeはChromeから期待frameとして見えない。
 Originalの最終表示はYADIF canvasなので、このcounterを最終可視fieldのdrop数や目標未達の根拠には使わない。
@@ -491,6 +492,10 @@ mpeg2toh264の既定`openGopRecovery: 'idr'`は24 GOPごとのrecovery境界で�
 残る40ms超のcanvas間隔ではrAFが約60Hzを維持し、同期`drawArrays()`も1ms未満だった一方、rVFC入力が約65ms空いていた。元TSとrVFCの`mediaTime`間隔は全区間約33.367msで、YADIFが入力callbackの揺れを吸収できず、生成済みfieldを使い切ったことが直接要因である。
 
 queueが空のときの最初のfield deadlineを1入力frame分だけ後ろへ置く1行の固定reserve案を試した。120秒では59.940fps、40ms超0回、`late` / reset 0で、20 seekも中央値147.1ms、p95 / 最大213.6ms、20/20が250ms以内だった。しかし600秒へ延ばすと、約512秒から入力と表示clockの差でqueueが容量上限に張り付き、`late` 2071、reset 2、最大11.15秒のcanvas停止、全体56.370fpsとなった。短窓の成功だけでは分からない長期退行なので、この固定reserve案は採用しない。[120秒trace](results/galaxy-fixed-reserve-steady-trace-120s.json)、[同解析](results/galaxy-fixed-reserve-steady-trace-120s-analysis.json)、[600秒trace](results/galaxy-fixed-reserve-steady-trace-600s.json)、[同解析](results/galaxy-fixed-reserve-steady-trace-600s-analysis.json)、[seek](results/galaxy-fixed-reserve-seek-visible-20.json)を保存した。
+
+入力callbackが遅れたときだけ最後の1 fieldを1 refresh保持する案は、120秒2走行で59.933fps、40ms超0回だった。しかし600秒ではqueue満杯時のFIFO破棄が連鎖し、`late` 4112、40ms超43回、53.087fpsへ悪化した。満杯時に最古fieldを捨てても残りの`at`を動かさないため、次に表示すべきfieldが約1 refresh先のまま残り、次の入力でも最古fieldを捨てる循環がコードと時系列の両方で成立した。
+
+容量確保で捨てたfieldの`duration`合計だけ残りの`at`を手前へ詰めると、同じ保持刺激を含む600秒で59.938fps、40ms超0回、全reset 0となり、FIFO破棄は孤立した2 fieldだけで連鎖しなかった。ただし保持を加えないintegrationの600秒は`late` 0、最大33.6msで、組み合わせ版は`late` 2、最大39.1msだった。最後のfieldを保持するpolicyは採用せず、破棄した表示時刻の穴を閉じる変更だけをoverflowの正しさ修正として分離して再現試験する。[条件、hash、主要統計、event抜粋](results/galaxy-yadif-input-gap-overflow-analysis.json)を保存した。
 
 queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0回だったが、future leadが最大約125msまで増えた。容量を可変遅延bufferとして使うため、A/V差とライブ遅延の上限が変更量から明確にならず、この形も正式候補にしない。5 / 6 / 7 slotの生値は[5 slot](results/galaxy-one-field-slack-five-slot-fullscreen-600s-120s.json)、[6 slot](results/galaxy-six-slot-fullscreen-600s-120s.json)、[7 slot 120秒](results/galaxy-seven-slot-fullscreen-600s-120s.json)、[7 slot 600秒](results/galaxy-seven-slot-fullscreen-600s-600s.json)に残す。次に検討できるのは、video media clockへ上限付きで同期し、通常の1 callback揺れだけを吸収しつつ、蓄積時は必要最小限を捨てるjitter bufferである。追加遅延、A/V差、ライブ追従、seek初画を同時に測れる設計が必要になる。
 

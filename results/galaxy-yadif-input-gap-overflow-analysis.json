@@ -1,0 +1,616 @@
+{
+  "schema": 1,
+  "captured_at": "2026-09-02",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "display_mode": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "side_panel": false,
+    "single_test_tab": true,
+    "seek_target_seconds": 600
+  },
+  "integration_commit": "24fc3e46e8f8f6271e64cbe20215cf391a3136de",
+  "runs": [
+    {
+      "label": "integration-diagnostic-120s",
+      "sha256": "a54324caf047e760e4f416498dc71ad9263a1911cfc562c292f82c01bbd58539",
+      "bytes": 1960124,
+      "duration_ms": 120000.39999997616,
+      "media_time_delta_s": 119.99961499999995,
+      "canvas_draw_count": 7191,
+      "canvas_fps": 59.9265545481433,
+      "draw_interval_max_ms": 51.0,
+      "draw_intervals_over_40_ms": 2,
+      "yadif_delta": {
+        "filtered": 7078,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 40
+      },
+      "event_counts": {
+        "empty": 1,
+        "frame-gap": 6,
+        "future": 7,
+        "draw-gap": 8
+      },
+      "overflow_retired_fields": 0,
+      "selected_event_excerpt": [],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "integration-diagnostic-600s",
+      "sha256": "342cd30401cdc5235fa44479d0c64cfdfb7562d7e5aa6a62f0807db58526c5a8",
+      "bytes": 9891071,
+      "duration_ms": 600000.5,
+      "media_time_delta_s": 599.999774,
+      "canvas_draw_count": 35964,
+      "canvas_fps": 59.93998168282961,
+      "draw_interval_max_ms": 36.59999990463257,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "filtered": 35874,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 200
+      },
+      "event_counts": {
+        "frame-gap": 46,
+        "future": 35,
+        "draw-gap": 36
+      },
+      "overflow_retired_fields": 0,
+      "selected_event_excerpt": [],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "hold-only-120s-r1",
+      "sha256": "4af723d921cb2d39a15a718c0f0bbe6d224a300915838c0c028c747d7cbbd312",
+      "bytes": 2022461,
+      "duration_ms": 120000.5,
+      "media_time_delta_s": 120.00100099999997,
+      "canvas_draw_count": 7192,
+      "canvas_fps": 59.93304101634827,
+      "draw_interval_max_ms": 37.10000002384186,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "filtered": 7136,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 40
+      },
+      "event_counts": {
+        "frame-gap": 201,
+        "input-gap-hold": 1,
+        "draw-gap": 8,
+        "future": 7
+      },
+      "overflow_retired_fields": 0,
+      "selected_event_excerpt": [
+        {
+          "kind": "input-gap-hold",
+          "at": 19918.5,
+          "queueDepth": 1,
+          "firstLeadMs": 22.440351403965906,
+          "lastLeadMs": 22.440351403965906,
+          "gapMs": 48.5
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "hold-only-120s-r2",
+      "sha256": "d93bad3e769e62bb7479f969698e6bbea60b905affcfc609b5b2d43c60d99908",
+      "bytes": 1958643,
+      "duration_ms": 120000.5,
+      "media_time_delta_s": 119.98634700000002,
+      "canvas_draw_count": 7192,
+      "canvas_fps": 59.935738486478826,
+      "draw_interval_max_ms": 36.09999990463257,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "filtered": 7080,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 40
+      },
+      "event_counts": {
+        "future": 4,
+        "draw-gap": 8,
+        "input-gap-hold": 4,
+        "frame-gap": 6
+      },
+      "overflow_retired_fields": 0,
+      "selected_event_excerpt": [
+        {
+          "kind": "input-gap-hold",
+          "at": 28429.7,
+          "queueDepth": 1,
+          "firstLeadMs": 23.591372807015432,
+          "lastLeadMs": 23.591372807015432,
+          "gapMs": 46.90000004768444
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 54329.5,
+          "queueDepth": 1,
+          "firstLeadMs": 16.32475118671573,
+          "lastLeadMs": 16.32475118671573,
+          "gapMs": 46.200000047683716
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 89229.7,
+          "queueDepth": 1,
+          "firstLeadMs": 17.658089027070673,
+          "lastLeadMs": 17.658089027070673,
+          "gapMs": 47.400000047680805
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 123363.1,
+          "queueDepth": 1,
+          "firstLeadMs": 18.3580890296289,
+          "lastLeadMs": 18.3580890296289,
+          "gapMs": 45.899999952322105
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "hold-only-600s",
+      "sha256": "ffd8d65f01af83bb7366977bee01e0734ffb50f17a5087387477bfc9036cfb8c",
+      "bytes": 12273278,
+      "duration_ms": 600000.4000000954,
+      "media_time_delta_s": 600.0005759999999,
+      "canvas_draw_count": 31852,
+      "canvas_fps": 53.08662798992292,
+      "draw_interval_max_ms": 54.799999952316284,
+      "draw_intervals_over_40_ms": 43,
+      "yadif_delta": {
+        "filtered": 35864,
+        "late": 4112,
+        "queueResetted": 0,
+        "dropped": 200
+      },
+      "event_counts": {
+        "future": 4148,
+        "draw-gap": 4119,
+        "overflow": 4112,
+        "frame-gap": 139
+      },
+      "overflow_retired_fields": 4112,
+      "selected_event_excerpt": [
+        {
+          "kind": "overflow",
+          "at": 15669.1,
+          "queueDepth": 4,
+          "firstLeadMs": 8.25910814769668,
+          "lastLeadMs": 58.30901355310016,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15702.5,
+          "queueDepth": 4,
+          "firstLeadMs": 8.225675715262696,
+          "lastLeadMs": 58.27572976931697,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15735.8,
+          "queueDepth": 4,
+          "firstLeadMs": 8.292351390939075,
+          "lastLeadMs": 58.34239193147914,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15769.3,
+          "queueDepth": 4,
+          "firstLeadMs": 8.159108147696315,
+          "lastLeadMs": 58.209013553099794,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15802.5,
+          "queueDepth": 4,
+          "firstLeadMs": 8.32567571526124,
+          "lastLeadMs": 58.37572976931551,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15835.8,
+          "queueDepth": 4,
+          "firstLeadMs": 8.39235139093762,
+          "lastLeadMs": 58.44239193147769,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15869.2,
+          "queueDepth": 4,
+          "firstLeadMs": 8.359108147693405,
+          "lastLeadMs": 58.409013553096884,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15902.6,
+          "queueDepth": 4,
+          "firstLeadMs": 8.325675715259422,
+          "lastLeadMs": 58.37572976931369,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15935.9,
+          "queueDepth": 4,
+          "firstLeadMs": 8.3923513909358,
+          "lastLeadMs": 58.44239193147587,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 15969.2,
+          "queueDepth": 4,
+          "firstLeadMs": 8.45910814769195,
+          "lastLeadMs": 58.50901355309543,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16002.5,
+          "queueDepth": 4,
+          "firstLeadMs": 8.52567571525833,
+          "lastLeadMs": 58.5757297693126,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16035.9,
+          "queueDepth": 4,
+          "firstLeadMs": 8.492351390934346,
+          "lastLeadMs": 58.54239193147441,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16069.2,
+          "queueDepth": 4,
+          "firstLeadMs": 8.559108147690495,
+          "lastLeadMs": 58.60901355309397,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16102.5,
+          "queueDepth": 4,
+          "firstLeadMs": 8.625675715256875,
+          "lastLeadMs": 58.67572976931115,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16135.9,
+          "queueDepth": 4,
+          "firstLeadMs": 8.59235139093289,
+          "lastLeadMs": 58.64239193147296,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16169.2,
+          "queueDepth": 4,
+          "firstLeadMs": 8.65910814768904,
+          "lastLeadMs": 58.70901355309252,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16202.5,
+          "queueDepth": 4,
+          "firstLeadMs": 8.72567571525542,
+          "lastLeadMs": 58.77572976930969,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16235.9,
+          "queueDepth": 4,
+          "firstLeadMs": 8.692351390931435,
+          "lastLeadMs": 58.7423919314715,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16269.2,
+          "queueDepth": 4,
+          "firstLeadMs": 8.759108147687584,
+          "lastLeadMs": 58.80901355309106,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 16302.6,
+          "queueDepth": 4,
+          "firstLeadMs": 8.725675715253601,
+          "lastLeadMs": 58.77572976930787,
+          "requiredOutputs": 2,
+          "retired": 1
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "compress-overflow-plus-hold-120s",
+      "sha256": "a11289c8494d0346a2d06cd5a1aa513df876549e51fb31bb6ec36797ae0767c3",
+      "bytes": 2040028,
+      "duration_ms": 120000.79999995232,
+      "media_time_delta_s": 120.00104399999998,
+      "canvas_draw_count": 7192,
+      "canvas_fps": 59.93209196423958,
+      "draw_interval_max_ms": 34.90000009536743,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "filtered": 7128,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 40
+      },
+      "event_counts": {
+        "frame-gap": 261,
+        "future": 7,
+        "draw-gap": 8,
+        "input-gap-hold": 1
+      },
+      "overflow_retired_fields": 0,
+      "selected_event_excerpt": [
+        {
+          "kind": "input-gap-hold",
+          "at": 18965.9,
+          "queueDepth": 1,
+          "firstLeadMs": 14.963368009437545,
+          "lastLeadMs": 14.963368009437545
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "label": "compress-overflow-plus-hold-600s",
+      "sha256": "aff4837379a6c180c00438858bf015456fc25849352a2e18024d4911d4d13457",
+      "bytes": 9900337,
+      "duration_ms": 600000.6000000238,
+      "media_time_delta_s": 600.0009259999999,
+      "canvas_draw_count": 35963,
+      "canvas_fps": 59.93838490036,
+      "draw_interval_max_ms": 39.10000002384186,
+      "draw_intervals_over_40_ms": 0,
+      "yadif_delta": {
+        "filtered": 35892,
+        "late": 2,
+        "queueResetted": 0,
+        "dropped": 200
+      },
+      "event_counts": {
+        "frame-gap": 83,
+        "future": 22,
+        "draw-gap": 37,
+        "overflow": 2,
+        "input-gap-hold": 15
+      },
+      "overflow_retired_fields": 2,
+      "selected_event_excerpt": [
+        {
+          "kind": "overflow",
+          "at": 35781.9,
+          "queueDepth": 4,
+          "firstLeadMs": 8.199806746924878,
+          "lastLeadMs": 58.24984728747222,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "overflow",
+          "at": 103998.6,
+          "queueDepth": 4,
+          "firstLeadMs": 9.649752697878284,
+          "lastLeadMs": 59.69980675193074,
+          "requiredOutputs": 2,
+          "retired": 1
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 111099,
+          "queueDepth": 1,
+          "firstLeadMs": 16.349752698472003,
+          "lastLeadMs": 16.349752698472003
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 149198.6,
+          "queueDepth": 1,
+          "firstLeadMs": 21.483131074754056,
+          "lastLeadMs": 21.483131074754056
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 176465.5,
+          "queueDepth": 1,
+          "firstLeadMs": 15.149752690747846,
+          "lastLeadMs": 15.149752690747846
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 217765.4,
+          "queueDepth": 1,
+          "firstLeadMs": 23.18313106102869,
+          "lastLeadMs": 23.18313106102869
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 245498.9,
+          "queueDepth": 1,
+          "firstLeadMs": 17.383131055394188,
+          "lastLeadMs": 17.383131055394188
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 279332.2,
+          "queueDepth": 1,
+          "firstLeadMs": 17.88313106802525,
+          "lastLeadMs": 17.88313106802525
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 312998.6,
+          "queueDepth": 1,
+          "firstLeadMs": 18.449752721004188,
+          "lastLeadMs": 18.449752721004188
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 381732,
+          "queueDepth": 1,
+          "firstLeadMs": 20.38313116331119,
+          "lastLeadMs": 20.38313116331119
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 417232.1,
+          "queueDepth": 1,
+          "firstLeadMs": 22.41646903421497,
+          "lastLeadMs": 22.41646903421497
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 444965.4,
+          "queueDepth": 1,
+          "firstLeadMs": 16.81646904995432,
+          "lastLeadMs": 16.81646904995432
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 476965.4,
+          "queueDepth": 1,
+          "firstLeadMs": 15.449752845277544,
+          "lastLeadMs": 15.449752845277544
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 511398.7,
+          "queueDepth": 1,
+          "firstLeadMs": 16.549752857768908,
+          "lastLeadMs": 16.549752857768908
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 544165.5,
+          "queueDepth": 1,
+          "firstLeadMs": 15.816469073994085,
+          "lastLeadMs": 15.816469073994085
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 579365.4,
+          "queueDepth": 1,
+          "firstLeadMs": 17.749752849107608,
+          "lastLeadMs": 17.749752849107608
+        },
+        {
+          "kind": "input-gap-hold",
+          "at": 611065.4,
+          "queueDepth": 1,
+          "firstLeadMs": 16.083131220075302,
+          "lastLeadMs": 16.083131220075302
+        }
+      ],
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  ],
+  "conclusions": [
+    "The remaining rare >40 ms canvas gap starts when a long requestVideoFrameCallback input gap meets an empty YADIF queue; rAF and WebGL remain regular.",
+    "Holding the last field for one refresh is unsafe: its 600 s run entered a full-queue overflow loop and fell to about 53.09 canvas fps.",
+    "Subtracting the exact retired field duration from remaining presentation deadlines prevents that overflow from leaving a schedule hole; with the same hold stimulus, 600 s recovered to about 59.94 canvas fps with two isolated FIFO retirements and no full reset.",
+    "The hold policy is rejected because the unchanged integration 600 s run had zero late retirements and a lower maximum draw interval. Deadline compression remains an independent overflow-correctness candidate."
+  ]
+}

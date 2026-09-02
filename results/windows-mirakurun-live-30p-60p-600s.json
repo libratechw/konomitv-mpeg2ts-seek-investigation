@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "captured_at": "2026-09-02",
+  "purpose": "Control measurement for long-running Windows live playback through the server-encoded video path; not Original MPEG-2 direct playback.",
+  "conditions": {
+    "client": "IdeaPad Flex 550, Ryzen 7 4700U",
+    "os": "Windows",
+    "browser": "Google Chrome 152.0.7977.65",
+    "power_mode": "Best power efficiency (kept unchanged)",
+    "server": "isolated local KonomiTV e92fba8 using mpeg2toh264 integration 24fc3e4 client bundle",
+    "source": "live terrestrial broadcast from Mirakurun on another PC",
+    "transport": "LAN",
+    "fullscreen": true,
+    "side_panel": false,
+    "single_test_tab": true,
+    "preflight_during_60p": {
+      "cpu_load_percent_samples": [
+        19,
+        18,
+        23,
+        19,
+        18,
+        26,
+        28,
+        25
+      ],
+      "cpu_median_percent": 23,
+      "disk_queue_length_samples": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "known_background_processes_over_10_percent": []
+    }
+  },
+  "runs": {
+    "server_encoded_1080p_2997": {
+      "source_sha256": "07562c0c5017b40e00f4897bce919133e63fc625cc85a275f9bee419179b3659",
+      "metrics": {
+        "durationMs": 600000.8000000007,
+        "fullscreen": true,
+        "fullscreenBody": true,
+        "panelDisplay": false,
+        "visibilityState": "visible",
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1,
+        "qualityName": "1080p",
+        "mediaTimeStart": 62.355583,
+        "mediaTimeEnd": 662.338916,
+        "mediaTimeDelta": 599.983333,
+        "frameCallbacks": 17965,
+        "callbackFps": 29.941626744497636,
+        "callbackIntervals": {
+          "count": 17964,
+          "min": 15.699999999982538,
+          "median": 33.300000000046566,
+          "p95": 33.79999999998836,
+          "p99": 49.600000000034925,
+          "max": 116.79999999998836,
+          "over25": 17787,
+          "over40": 189,
+          "over100": 1
+        },
+        "mediaTimeIntervals": {
+          "count": 17964,
+          "min": 32.999999999901775,
+          "median": 33.00000000001546,
+          "p95": 34.000000000020236,
+          "p99": 34.00000000004866,
+          "max": 100.00000000002274,
+          "over25": 17964,
+          "over40": 16,
+          "over100": 1
+        },
+        "presentedFrameAdvance": 17981,
+        "processingDurationMs": {
+          "count": 17965,
+          "min": 16.2,
+          "median": 117.4,
+          "p95": 251,
+          "p99": 284.1,
+          "max": 334.8,
+          "over25": 17210,
+          "over40": 16921,
+          "over100": 11076
+        },
+        "quality": {
+          "start": {
+            "total": 1872,
+            "dropped": 3
+          },
+          "end": {
+            "total": 19854,
+            "dropped": 4
+          },
+          "delta": {
+            "total": 17982,
+            "dropped": 1
+          }
+        }
+      }
+    },
+    "server_encoded_1080p_5994": {
+      "source_sha256": "e4153ed17b9779fc02fa35e9ae8465bee1f39512834fe87c9205fb0c1467b5d2",
+      "metrics": {
+        "durationMs": 600000.1999999993,
+        "fullscreen": true,
+        "fullscreenBody": true,
+        "panelDisplay": false,
+        "visibilityState": "visible",
+        "paused": false,
+        "readyState": 4,
+        "playbackRate": 1,
+        "qualityName": "1080p (60fps)",
+        "mediaTimeStart": 68.151125,
+        "mediaTimeEnd": 668.1339,
+        "mediaTimeDelta": 599.9827750000001,
+        "frameCallbacks": 35290,
+        "callbackFps": 58.81664706111772,
+        "callbackIntervals": {
+          "count": 35289,
+          "min": 15.5,
+          "median": 16.699999999953434,
+          "p95": 17.100000000034925,
+          "p99": 33.30000000001746,
+          "max": 66.79999999993015,
+          "over25": 691,
+          "over40": 12,
+          "over100": 0
+        },
+        "mediaTimeIntervals": {
+          "count": 35289,
+          "min": 15.99999999996271,
+          "median": 16.999999999995907,
+          "p95": 17.00000000005275,
+          "p99": 33.00000000001546,
+          "max": 83.99999999994634,
+          "over25": 654,
+          "over40": 11,
+          "over100": 0
+        },
+        "presentedFrameAdvance": 35961,
+        "processingDurationMs": {
+          "count": 35290,
+          "min": 1.1,
+          "median": 66.19999999999999,
+          "p95": 133.6,
+          "p99": 134.5,
+          "max": 185.9,
+          "over25": 31921,
+          "over40": 27235,
+          "over100": 7939
+        },
+        "quality": {
+          "start": {
+            "total": 4089,
+            "dropped": 3
+          },
+          "end": {
+            "total": 40052,
+            "dropped": 4
+          },
+          "delta": {
+            "total": 35963,
+            "dropped": 1
+          }
+        }
+      }
+    }
+  },
+  "server_encoder": {
+    "2997": "libx264, FFmpeg yadif mode 0, output 30000/1001, GOP 15",
+    "5994": "libx264, FFmpeg yadif mode 1, output 60000/1001, GOP 30"
+  },
+  "cleanup": {
+    "video_paused": true,
+    "fullscreen_exited": true,
+    "test_page_closed": true,
+    "dedicated_chrome_processes_remaining": 0,
+    "scheduled_task_removed": true,
+    "cdp_tunnel_removed": true,
+    "isolated_konomitv_stopped": true
+  },
+  "interpretation": [
+    "The 59.94p server-encoded path advanced presentedFrames at about 59.935 fps over 600 seconds.",
+    "Both 29.97p and 59.94p runs incremented droppedVideoFrames by one, so the Windows/Chrome control was not a zero-drop result.",
+    "This path uses server-side FFmpeg and the normal video element. It does not exercise the recorded MPEG-2 direct playback WASM, MSE, or WebGL YADIF canvas path."
+  ]
+}
