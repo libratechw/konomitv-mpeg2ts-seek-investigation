@@ -5,7 +5,7 @@
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束した。
 当時の絶対時間はタブ数を記録していなかったため主結果から外すが、単一タブで取り直した短い録画でもresponse中央値50〜52msに対し、可視YADIF canvas初描画中央値215〜267msで、index探索以外の待ちが残った。
 
-シークとは別に、単一タブのGalaxy A/BでYADIF出力がほぼ停止する走行を基準版7/90、queue再同期版0/90で再現した。
+シークとは別に、単一タブ・全画面のGalaxy A/BでYADIF出力がほぼ停止する走行を、正式な基準版35/90、queue容量・時刻同期分離版1/90で再現した。
 canvasのopacity変更は原因または修正ではなかった。
 停止時もrAFとfilterは動作したが、fieldの表示予定が未来へ連鎖してqueueが飽和していた。
 また、MSE resetと古いappend完了が競合すると新しいinit segmentが失われる問題を人工試験で再現し、別branchで修正した。
@@ -18,7 +18,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue容量・時刻同期の分離 | 公開`fix/separate-yadif-queue-recovery`、`konomi/main`基点のsource `26484fd`、dist `27b327e`。前身`f7b89eb`の停止防止を0/90のまま維持し、容量不足は最小FIFO、表示不能な未来時刻列だけ全resetへ分離 |
+| YADIF queue容量・時刻同期の分離 | 公開`fix/separate-yadif-queue-recovery`、`konomi/main`基点のsource `26484fd`、dist `27b327e`。正式な基準版との直接比較で停止35/90→1/90。容量不足は最小FIFO、表示不能な未来時刻列だけ全resetへ分離 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -498,39 +498,37 @@ filter済みfieldの表示予定は正常時に先頭約18ms、末尾約35〜52m
 フォーク版にも以前は同じ処理があったが、個別のlate破棄へ変更した際に`queueResetted`が互換用の常時0カウンターとなった。
 Android seek後の先行callbackでは、個別破棄だけでは未来へ進んだ時刻列を戻せない。
 
-upstream実装と同様に、飽和時にqueueを消してcallback時刻へ戻す処理をフォークへ適合した正式候補を、単一タブ規則の下で再測定した。
-各ブロック開始前にCDP page targetを0件へ戻し、測定中は前景の視聴page 1枚だけとした。
-基準版と修正版の短窓ブロック順はB-F-F-B-B-F-F-Bとし、読み込まれた`PlayerController` assetも各走行で照合した。
-WebGL2のdefault framebufferへの`drawArrays()`を直接数え、`drawFps < 10`または`late`増分30超を停止とした結果は次のとおりだった。
+提出する2ビルドを、単一タブ・全画面規則の下で直接測定した。
+基準Aは`konomi/main` `52a3db5`、候補Bはsource `26484fd`とdist `27b327e`で、差分はこのbranchだけである。
+各走行で読み込まれた`PlayerController` assetを照合し、WebGL2のdefault framebufferへの`drawArrays()`を直接数えた。
+`drawFps < 10`または`late`増分30超を停止とした結果は次のとおりだった。
 
-| 条件 | n | 停止 | 1.8秒窓drawFps中央値 | p10 | 最低 | queue reset |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 基準 `52a3db5` | 90 | **7** | 44.94 | 43.23 | 1.67 | 0 |
-| queue再同期 `f7b89eb` | 90 | **0** | 44.97 | 40.53 | 14.98 | 29 |
+| 条件 | n | 停止 | drawFps<10 | `late`増分>30 | `late`増分合計 | 最低drawFps | queue全reset |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 基準 `52a3db5` | 90 | **35** | 18 | 31 | 1859 | 1.67 | 0 |
+| 候補 `26484fd` | 90 | **1** | 0 | 1 | 294 | 29.98 | 51 |
 
-基準版の7件はすべて540秒台で、4件はdrawFps 10未満、残る3件は`late`増分30超だった。
-修正版のqueue再同期は29回作動し、停止を0件に抑えた。
-停止率のWilson 95%区間は基準3.82〜15.19%、修正版0〜4.09%で、7対0の条件付きFisher両側確率は約0.0138だった。
-一方、中央値差は0.03fpsでbootstrap 95%区間も-0.54〜0.59fpsだったため、通常走行の平均fpsを改善する変更とは扱わない。
-この1.8秒値にはseek応答中の無描画時間も含まれ、定常fpsそのものではなくseek直後の復帰窓である。
+候補の1件は`late`増分31で境界を1だけ超え、`drawFps < 10`は0件だった。
+この1.8秒値にはseek応答中の無描画時間も含まれるため、定常fpsではなくseek直後の復帰窓である。
+候補は平均fpsを上げる変更ではなく、未来へ進んだ時刻列を全resetで戻し、長時間stallを防ぐ正しさの修正として扱う。
 
-4秒窓10回では基準版が中央値53.61fps・最低52.24fps、修正版が53.60fps・最低51.72fpsで、停止はどちらも0件だった。
-したがってqueue再同期は、通常の復帰時間や定常fpsを一律に短縮する変更ではなく、稀に未来時刻列が戻らなくなる長時間stallを防ぐ正しさの修正として維持する。
+容量圧迫も提出コードの制御ロジックで測り直した。
+AとBへ同じ計測専用フックだけを加え、YADIF double-rateを明示的に開始した後、8秒窓のうち2秒間だけrVFC入力を維持したままpresentationを1/2 rAFへ制限した。
+1 rAFにつき1 fieldへ変えるpolicyやqueue制御の変更は含めていない。
+最大presentation latenessは、`#present()`が破棄する前のqueue先頭について`max(0, rAF時刻 - 表示予定時刻)`を測った値である。
 
-ただし、`f7b89eb`は時刻列が未来へ破綻した場合と、単なるqueue容量不足を区別せず、5 fieldのqueueを全消去する。
-1 rAFにつき1 fieldを表示する比較版では、この全消去が処理能力不足中に繰り返され得るため、容量確保と時刻再同期を分けて検証した。
-Galaxyのtrue fullscreen、60Hz、単一タブ、乃木坂工事中、1秒待機後8秒採取を共通条件とし、2秒間だけrVFC入力を維持したままpresentationを1/2 rAFへ制限した。
-これは実際のライブ障害の頻度を示す試験ではなく、処理能力不足時のqueue制御を決定的に比較するための注入試験である。
+| 制御ロジック | n | 容量FIFO破棄/走行 | presentation破棄/走行 | 合計破棄/走行 | 全reset/走行 | 最大lateness | 8秒窓draw fps |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 基準 `52a3db5` | 3 | 55〜60 | 0〜4 | 59〜64 | 0 | 0ms | 52.46〜52.50 |
+| 候補 `26484fd` | 3 | 0〜26 | 34〜61 | 60〜61 | 0 | 6.52ms | 52.24〜52.50 |
 
-| queue容量不足時の処理 | n | 2秒間の破棄 | 全reset | 最大presentation lateness | 8秒窓draw fps |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 必要枚数だけFIFO破棄 | 3 | 58〜60 field | 0 | 32.6ms | 52.33〜52.51 |
-| queue全消去 | 3 | 57〜60 field | 14〜15回 | 83.3ms | 52.46〜52.51 |
+意図的に約60回のpresentation機会を失わせたため、合計破棄数は両版で同程度だった。
+候補ではrAF位相により容量FIFOと既存presentation破棄の比率が変わったが、3走行ともqueue全resetはなく、破棄前の遅れも最大6.52msに収まった。
+以前の全reset 14〜15回、最大83.3msという値は、削除済み前身と1 rAF 1 field policyを含む診断版の結果であり、提出buildの証拠には使わない。
 
-不足時間を同じにしたため8秒全体の平均fpsは同等だが、全消去版だけ4 field前後をまとめて14〜15回失い、66.5〜83.3msのlatenessを記録した。
-最小FIFO版は1枚ずつ捨て、全resetなしで解除後約1秒に58fps前後、その後約60fpsへ戻った。
-したがって、容量不足では必要な空き枚数だけ先頭から捨て、queue末尾が`(容量 + 1) × max(refresh間隔, output間隔)`より先へ進んだ場合だけ時刻同期破綻として全resetする案を、`f7b89eb`の後継候補とする。
-この閾値は現在のqueueでは表示しきれない未来時刻を表し、単なる満杯を時刻破綻とみなさない。
+全resetの閾値を`(queue容量 + 1) × max(refresh間隔, output間隔)`とする`+1`は、測定で選んだ係数ではない。
+queue容量分は保持できるfieldを表し、残る1間隔はrVFCが同じcompositeのrAF直後に到着する通常の位相差を時刻破綻と誤認しないための余裕である。
+これより小さいと次のcompositeを待つ正当なfieldをresetし得る一方、さらに広げると表示slotのない未来時刻列を余分に許容する。
 
 presentation policyも同じbuildで分離した。
 通常8秒を各3回測ると、1 rAFにつき1 field＋最小FIFOは59.91〜60.03fps、2 refresh以上遅れた場合だけcatch-upする二段階版は59.88〜60.04fps、従来の複数field消費は59.98〜60.00fpsで、全群の採取中`late`増分は0だった。
@@ -577,9 +575,9 @@ WindowsではFIFO破棄fieldが平均21.67→0.67、40ms超間隔が平均0.33�
 
 queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0回だったが、future leadが最大約125msまで増えた。容量を可変遅延bufferとして使うため、A/V差とライブ遅延の上限が変更量から明確にならず、この形も正式候補にしない。5 / 6 / 7 slotの生値は[5 slot](results/galaxy-one-field-slack-five-slot-fullscreen-600s-120s.json)、[6 slot](results/galaxy-six-slot-fullscreen-600s-120s.json)、[7 slot 120秒](results/galaxy-seven-slot-fullscreen-600s-120s.json)、[7 slot 600秒](results/galaxy-seven-slot-fullscreen-600s-600s.json)に残す。次に検討できるのは、video media clockへ上限付きで同期し、通常の1 callback揺れだけを吸収しつつ、蓄積時は必要最小限を捨てるjitter bufferである。追加遅延、A/V差、ライブ追従、seek初画を同時に測れる設計が必要になる。
 
-このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。Galaxyの同じ540/900秒交互seekを90回行い、停止0/90、queue reset 44回、最低draw 36.09fpsで、前身の停止防止を維持した。`konomi/main`で加算されず常に0だった`queueResetted`は、この修正で実際の全resetを再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
+このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。正式な基準版との540/900秒交互90 seekでは、停止35/90→1/90、`late`増分合計1859→294、最低draw 1.67→29.98fpsだった。候補のqueue全resetは51回で、`konomi/main`で加算されず常に0だった`queueResetted`が実際の再同期を再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
-50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式buildには検証用global hookを含めていないため、hook変数だけを設定した3走行はpresentation不足の証拠から除外した。正式候補の全条件と除外理由は[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)に保存した。
+50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
 独立した効果としては未確定なので、これもqueue整合性修正へ混ぜず長窓A/Bを行う。
@@ -849,7 +847,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
 | 5. IDR/recovery待ち | 初期IをIDR化するまでの入力と計算は必要。24 GOP周期待ちではない。最新のjob粒度計測では、WindowsとGalaxyの両方でjob byte数とencode時間の相関が0.89〜0.96、Worker往復の追加時間は中央値0.2〜0.3msだった。Windowsの一部seekは目的frame提示に2個目のGOP全体を必要とし、変換とfragment境界がcritical pathになった |
-| 6. YADIF/IVTCの過剰な初画待ち | 単一タブの乃木坂A/BでYADIF停止7/90→0/90となり、queue再同期によるstall防止を確認。通常時中央値はほぼ不変。MADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
+| 6. YADIF/IVTCの過剰な初画待ち | 正式buildの単一タブ乃木坂A/BでYADIF停止35/90→1/90となり、queue再同期によるstall防止を確認。MADDER A/Bでは`autoFilm:false/true`のcanvas初描画分布が重なり、IVTC固有の初画待ちは支持されなかった |
 | 7. 古い処理のキャンセルがない | abortと世代判定あり。ただし実行中WASM pictureは完了待ち、同期処理中のevent配送も遅れ得る |
 
 ## 実装済み変更と提出先
@@ -865,7 +863,7 @@ MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追�
 | --- | --- | --- | --- | --- |
 | YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | branchは削除。結果だけを本調査リポジトリに保存 |
 | YADIF初回fieldの保持 | rVFCが同じcompositeのrAF直後に来ると、次のrAFまでに2 fieldとも期限切れになり得たため | 初回fieldの表示時刻へ1 field周期の余裕を追加した | cleanな不透明版は30秒と12秒で約60fpsを維持。ただし変更単独の同条件A/Bによる効果量は未確定 | `tsukumijima/mpeg2toh264`へ取り込み済み。source `d4ccb98`、KonomiTV固定依存`52a3db5`に含まれる |
-| YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せず、前身の全resetは単なる容量不足でも4〜5 fieldをまとめて失ったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 前身の停止7/90→0/90を正式候補でも0/90のまま維持。注入試験では全reset 14〜15回→0回、最大lateness 83.3→32.6ms。通常30秒は前身59.758fps、後継59.768fpsでreset増分0 | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
+| YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せなかったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 正式基準との直接比較で停止35/90→1/90、`late`合計1859→294。提出ロジックへの2秒注入3走行は全reset 0、最大lateness 6.52ms | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
 | seeked直前に届いた目的frameを保持 | Chromiumが目的frameを`seeking=true`のまま提示した直後、fork固有`seeked`処理が表示済みcanvasを隠し、次frameまで約149ms待ち直したため | 現在のbuffered範囲とplayhead近傍のframeをseek先として記憶し、そのframeを描画済みなら`seeked`でhistory/canvasを再消去しない | Linuxの早着2/2は修正前にhidden、修正版5/5はvisibleを維持。Linux 40回p95 246.5→178.9ms、最大280.0→180.4ms。Galaxy 40回p95 220.5→193.2ms、最大243.1→212.8msで退行なし | `tsukumijima/mpeg2toh264` fork。公開source `2d072f3`、dist `f3ba99d` |
 | 確認済みTS再開位置の再利用 | 一度変換したGOPでも後のseekがPTS probeと未整列byte推定を繰り返していたため | media fragmentへPAT/PMT安全位置を付け、同じplayer内の後続seekを安全位置から開始する。PTSとrestart位置は独立したmark列で保持する | 診断A/BはGalaxyでprobe 40→0、canvas中央値226.5→161.5ms、p95 278.4→220.5ms。正式branch組み込み版40回はprobe 0、中央値159.1ms、p95 212.4ms、最大229.0msで全走行250ms以下。PTSなしPESの回帰試験も成功 | `otya128/mpeg2toh264`。公開core `787c7ba`、そのbranchを祖先にしたplayer `ac4f879` |
 | MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。GalaxyとWindowsの計460回ではappend中reset 67回、新init誤破棄0回。実Chrome通常seekは251.4→250.1msで有意な短縮なし | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
@@ -883,7 +881,7 @@ DPlayerには今回修正を実装しておらず、現時点で直接PRにす�
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | stall防止0/90を維持しつつ、注入試験の全reset 14〜15回→0回、最大lateness 83.3→32.6ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。公開source `26484fd`、dist `27b327e` |
+| P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | 正式基準との直接比較で停止35/90→1/90、`late`合計1859→294。提出ロジックへの2秒注入3走行は全reset 0、最大lateness 6.52ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。公開source `26484fd`、dist `27b327e` |
 | P0 | YADIFの容量破棄で失ったpresentation durationだけ残りのdeadlineを詰める | Galaxyの破棄連鎖2/3走行を解消し、破棄field平均218.0→0.67、全reset 1→0。Windowsも21.67→0.67 | 小 | ◎ | tsukumijimaフォークYADIF。公開source `7ef6696`、dist `ac2a2a9`。queue容量回復の子branch |
 | P0 | seeked直前に描画済みの目的frameを保持する | 早着時の約149ms待ち直しを除去。Linux p95−67.6ms、最大−99.6ms、40/40を250ms以下へ | 小 | ◎ | tsukumijimaフォークYADIF。公開source `2d072f3`、dist `f3ba99d` |
 | P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−71.3ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
@@ -1011,7 +1009,7 @@ I-pictureの途中byteだけを返さない。
 
 ### `tsukumijima/mpeg2toh264`へ出すもの
 
-1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。`f7b89eb`のstall防止を90 seekで維持し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
+1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。正式な基準版との90 seekで停止35/90→1/90を確認し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
 2. **YADIF: 容量破棄後のpresentation deadline圧縮**。公開`fix/compress-yadif-overflow-schedule`で、捨てたfieldの`duration`合計だけ残りの時刻列を詰め、解除後のFIFO破棄連鎖を防ぐ。source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。queue容量回復を親branchとし、presentation policyとは独立したPR単位である。
 3. **YADIF: seeked直前の目的frame保持**。公開`fix/preserve-destination-frame-on-seek`で、source `2d072f3`と生成済みdist `f3ba99d`を別コミットにした。queue回復やpresentation policyとは独立した`seeked`競合のPR単位とする。
 4. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。

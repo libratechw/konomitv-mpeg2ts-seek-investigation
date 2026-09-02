@@ -53,7 +53,7 @@ TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時
 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) `a10253e` | otya128 | first fragment時刻でprobe標本を上書きする5行を削除 | 追加probe 14/40→0/40。表示復帰時間 296.3→244.3ms | **軽**。1ファイル5行の削除 |
 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) `787c7ba` | otya128 | fragmentへ`restartOffset`を付与し、PTSとrestart位置を別のmark列で持つ | 再開同値性と回帰の試験が成功。単独の速度効果はなく、順位3の前提 | **重**。TS demuxからWASMまで横断 |
 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) `ac4f879` | otya128 | 観測済みの安全位置をplayer内に保持し、要求時刻以前1秒以内の最新位置を再利用 | 診断版A/Bでprobe 40→0、表示復帰時間 226.5→161.5ms | **中**。worker 1ファイル。順位2に依存 |
-| 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) source `26484fd` | tsukumijima | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけqueue全reset | seek後の表示停止 7/90→0/90 | **中**。YADIF 1ファイルのqueue policy |
+| 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) source `26484fd` | tsukumijima | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけqueue全reset | seek後の表示停止 35/90→1/90。2秒注入は全reset 0、最大lateness 6.52ms | **中**。YADIF 1ファイルのqueue policy |
 | 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) source `7ef6696` | tsukumijima | FIFO破棄したfieldの`duration`合計を、残ったfieldのdeadlineから引く | 2秒注入の3走行平均で、GalaxyのFIFO破棄 218.0→0.67 field | **軽〜中**。`#prepareQueue()`の8行 |
 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) source `2d072f3` | tsukumijima | playhead近傍の描画済みframeを記録し、同じseekの`seeked`で消さない | Linux 40回の表示復帰時間 p95 246.5→178.9ms。Galaxyは退行なし | **中**。seeking/history状態のレビューが必要 |
 
@@ -92,7 +92,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - 順位1 [`a10253e`](https://github.com/libratechw/mpeg2toh264/commit/a10253e)：probe標本をfirst fragment時刻で上書きしない修正は、不要な追加probeをなくし、`seek-requested`起点の表示復帰時間を代表値で71.3ms短縮しました。
 - 順位2 [`787c7ba`](https://github.com/libratechw/mpeg2toh264/commit/787c7ba)：media fragmentへ再開可能なTS位置を付ける修正は、別Sessionで同じGOPと音声を再開できることを試験で確認しました。単独の速度効果はなく、順位3の前提です。
 - 順位3 [`ac4f879`](https://github.com/libratechw/mpeg2toh264/commit/ac4f879)：観測済みのPAT/PMT安全位置を後続シークで再利用する修正は、Galaxyの診断版でprobeを40件から0件へ減らしました。永続indexは導入していません。
-- 順位4 [`26484fd`](https://github.com/libratechw/mpeg2toh264/commit/26484fd)：YADIFのqueue容量不足と時刻同期破綻を分ける修正は、seek後の表示停止を7/90から0/90へ減らしました。容量不足では必要数だけFIFO破棄し、表示不能な時刻列だけqueue全resetします。
+- 順位4 [`26484fd`](https://github.com/libratechw/mpeg2toh264/commit/26484fd)：YADIFのqueue容量不足と時刻同期破綻を分ける修正は、正式な基準版との直接比較でseek後の表示停止を35/90から1/90へ減らしました。容量不足では必要数だけFIFO破棄し、表示不能な時刻列だけqueue全resetします。提出ロジックへの2秒注入3走行では全reset 0、最大lateness 6.52msでした。
 - 順位5 [`7ef6696`](https://github.com/libratechw/mpeg2toh264/commit/7ef6696)：FIFO破棄した時間だけ残りのdeadlineを詰める修正は、Galaxyの負荷注入でFIFO破棄を平均218.0→0.67 fieldへ減らしました。
 - 順位6 [`2d072f3`](https://github.com/libratechw/mpeg2toh264/commit/2d072f3)：seeked直前に描画済みの目的frameを保持する修正は、Linuxで起きた約149msの待ち直しを除きました。Galaxyでは同じ競合が起きず、退行がないことを確認しました。
 - 順位7 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。GalaxyとWindowsの計460回ではappend中resetを67回観測しましたが、新initの誤破棄は0回でした。
