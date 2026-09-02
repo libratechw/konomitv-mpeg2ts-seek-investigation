@@ -8,7 +8,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 
 優先順位は、確認できた効果、正しさへの影響、差分の理解しやすさ、レビュー負荷、将来の保守コストから決めています。`軽`は局所的で契約変更がない変更、`中`は状態管理または小さなAPI追加、`重`は複数層を横断する変更です。生成済み`dist`を追跡するtsukumijimaフォーク向けbranchでは、sourceとdistを別コミットにしています。
 
-総合検証用の[`integration/current-useful-fixes`](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)は、表で「採用」とした互換性のある修正をまとめたbranchです。upstreamへそのままmergeする対象ではなく、個別PR候補の境界を保ったままKonomiTVで総合効果を測るために使います。branch固有READMEに、各修正の目的、内容、効果、レビューコストと保守コストを掲載しています。Galaxyの公開integration実測は40/40 seekが250ms以内でした。
+総合検証用の[`integration/current-useful-fixes`](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)は、表で「採用」とした互換性のある修正をまとめたbranchです。upstreamへそのままmergeする対象ではなく、個別PR候補の境界を保ったままKonomiTVで総合効果を測るために使います。branch固有READMEに、全修正適用前後の比較と、各修正の目的、内容、効果、レビューコスト、保守コストを掲載しています。Galaxyの同条件40 seekでは、`tsukumijima/main`からintegrationへの変更で可視初画中央値287.1→146.4ms、p95 349.1→199.6ms、250ms以内14/40→40/40でした。
 
 | 順位 | Priority | PR候補branch | 提出先 | 目的 | 修正内容 | 確認できた効果 | 変更の重さ | 統合版 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ KonomiTV の「録画 MPEG-2 TS をブラウザーで直接再生する経路」
 - probeで測ったRange開始byteとPTSの対応を、後続のfirst fragment時刻で上書きしていました。Galaxyの新規タブ・全画面・LAN直結B-F-F-B再検証では、この上書きをやめると追加probeが14/40から0/40になり、20地点中12地点で要求時刻を越えない範囲の新しいGOPを選びました。実際にcanvasを可視化した初画はtarget対応中央値71.3ms短縮し、中央値296.3→244.3ms、p90 373.0→280.7msでした。中央値は250ms目標内ですが、安定達成には残るtailの改善が必要です。
 - 一度変換したGOPのTS byteとPAT/PMT安全位置をplayer内で再利用する診断版では、Galaxyの反復seek 40回でprobeが40件から0件になり、canvas中央値226.5→161.5ms、p95 278.4→220.5ms、250ms以下28/40→40/40でした。永続indexではなく実際に確認した位置だけを再利用します。正式化する場合は、coreの位置報告とplayerのseek policyを別の変更にします。
 - 正式branchを組み込んだtiming版を、Galaxy Chrome、LAN直結、body全画面、右パネルなし、単一タブで40回測ると、`seek-requested`から可視canvas初画は中央値159.1ms、p95 212.4ms、最大229.0msで、全走行が250ms以内でした。warm-upで600秒と900秒の安全位置を学習した後の反復seekであり、coldな未知位置の値ではありません。
-- 公開integration `606943d`を同じ画面条件で40回測ると、`video.currentTime`設定から可視canvas初画は中央値146.4ms、p95 199.6ms、最大229.7msで、40/40が250ms以内でした。30秒の定常canvasは59.799fps、描画間隔最大34.8ms、40ms超0、queue全reset増分0でした。Chromeの`droppedVideoFrames`は12増えたため、定常コマ落ちゼロはまだ確定していません。
+- 公開integration `606943d`を同じ画面条件で40回測ると、`video.currentTime`設定から可視canvas初画は中央値146.4ms、p95 199.6ms、最大229.7msで、40/40が250ms以内でした。同じKonomiTVで`tsukumijima/main` `52a3db5`へ戻した40回は中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40でした。integrationは中央値を140.7ms（49.0%）短縮しています。30秒定常再生はbaselineの1/2走行でcanvas出力が停止し、integrationは2/2走行で59.799〜59.866fpsを維持しました。ただし全走行でChromeの`droppedVideoFrames`が12増えたため、コマ落ちゼロは未達です。
 - 既定では先頭fragmentだけがrandom accessで、後続約0.5秒fragmentは先頭へ依存していました。毎GOPにnon-IDR recovery pointを入れ、第2fragmentからMediaCodecを開始すると`appended`→`canplay`中央値は101.4→33.3msとなり、約68msの復号・破棄を確認できました。しかし第2fragment生成待ちでappendが中央値69.8ms遅れ、可視初画は中央値+5.7ms、平均+1.3msで改善しませんでした。次の有力案は後続fragmentを待つことではなく、変換前に要求時刻以前で最新のRAP byteを得て、そこを最初のfragmentにすることです。
 - queue再同期版の旧MADDER試験はfilm候補2区間への10回seekすべてで初画が返りましたが、絶対時間はタブ状態を固定した新測定へ置き換えました。区間によってvideo/film判定が切り替わるため、録画全体を24fpsとは扱っていません。
 - 古い検証タブが設定と再生資源を残し得ることが分かったため、Galaxyの絶対時間を対象タブ1枚だけで再測定しました。可視YADIF canvas初描画の中央値 / p90は乃木坂工事中215.2 / 261.3ms、MADDER #08 267.4 / 311.4msです。既存`presented` eventは`video.seeking`解除を待ってMADDERを約200ms過大評価していたため、画面初画の指標から外しました。以前の絶対値も主結果から外しています。

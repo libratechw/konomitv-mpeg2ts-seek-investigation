@@ -1,0 +1,261 @@
+{
+  "scope": "Latest tsukumijima baseline versus all compatible public fixes on Galaxy Chrome, LAN direct, fullscreen with the right panel closed",
+  "revisions": {
+    "konomiTv": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "baseline": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+    "integrationProductTree": "606943da0434c28dea54c1c5e12d1c42fc960e8d"
+  },
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayModeConfigured": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "onePageDuringMeasurement": true,
+    "seekMetricDefinition": "video.currentTime assignment to the first target canvas draw that remains visible across seeked",
+    "seekTargetsSeconds": [
+      600,
+      601,
+      602,
+      603,
+      604,
+      605,
+      606,
+      607,
+      608,
+      609,
+      900,
+      901,
+      902,
+      903,
+      904,
+      905,
+      906,
+      907,
+      908,
+      909
+    ]
+  },
+  "seek": {
+    "baseline": {
+      "measuredRuns": 40,
+      "warmupRunsExcluded": 4,
+      "durableCanvasMs": {
+        "n": 40,
+        "min": 177.7998046875,
+        "mean": 277.144970703125,
+        "median": 287.050048828125,
+        "p90": 330.4499755859375,
+        "p95": 349.1250976562499,
+        "p99": 397.68100830078123,
+        "max": 410.199951171875
+      },
+      "within250Ms": {
+        "count": 14,
+        "total": 40
+      },
+      "acceptedWhileSeeking": 0
+    },
+    "integration": {
+      "metricDefinition": "video.currentTime assignment to the first target canvas draw that remains visible across seeked",
+      "measuredRuns": 40,
+      "warmupRunsExcluded": 4,
+      "targetsSeconds": [
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        900,
+        901,
+        902,
+        903,
+        904,
+        905,
+        906,
+        907,
+        908,
+        909
+      ],
+      "durableCanvasMs": {
+        "n": 40,
+        "min": 113.4,
+        "mean": 154.91,
+        "median": 146.4,
+        "p90": 195.09,
+        "p95": 199.585,
+        "p99": 228.218,
+        "max": 229.7
+      },
+      "within250Ms": {
+        "count": 40,
+        "total": 40
+      },
+      "acceptedWhileSeeking": 0
+    },
+    "improvement": {
+      "medianMs": 140.650048828125,
+      "medianPercent": 48.99844100439121,
+      "p95Ms": 149.5400976562499,
+      "p95Percent": 42.83281226704811,
+      "maxMs": 180.499951171875,
+      "maxPercent": 44.00291873663461,
+      "within250MsCount": 26
+    }
+  },
+  "steady30Seconds": {
+    "baseline": {
+      "runs": [
+        {
+          "input": "galaxy-tsukumijima-main-baseline-panel-free-fullscreen-600s-steady-30s.json",
+          "canvasDrawFps": 0,
+          "canvasDraws": 0,
+          "drawIntervals": {
+            "count": 0,
+            "min": null,
+            "median": null,
+            "p95": null,
+            "p99": null,
+            "max": null,
+            "over25": 0,
+            "over40": 0,
+            "over100": 0
+          },
+          "videoPlaybackQualityDelta": {
+            "total": 911,
+            "dropped": 12
+          },
+          "deinterlacerCounterDelta": {
+            "filtered": 1710,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 1710,
+            "queueResetted": 0,
+            "dropped": 10
+          }
+        },
+        {
+          "input": "galaxy-tsukumijima-main-baseline-panel-free-fullscreen-600s-steady-30s-r2.json",
+          "canvasDrawFps": 59.699801000615885,
+          "canvasDraws": 1791,
+          "drawIntervals": {
+            "count": 1790,
+            "min": 1.399999976158142,
+            "median": 16.700000047683716,
+            "p95": 20.600000023841858,
+            "p99": 22,
+            "max": 35.5,
+            "over25": 11,
+            "over40": 0,
+            "over100": 0
+          },
+          "videoPlaybackQualityDelta": {
+            "total": 911,
+            "dropped": 12
+          },
+          "deinterlacerCounterDelta": {
+            "filtered": 1778,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 6,
+            "queueResetted": 0,
+            "dropped": 12
+          }
+        }
+      ],
+      "maintainedCanvasOutput": {
+        "count": 1,
+        "total": 2
+      }
+    },
+    "integration": {
+      "runs": [
+        {
+          "input": "galaxy-integration-panel-free-fullscreen-600s-steady-30s.json",
+          "canvasDrawFps": 59.79920267734516,
+          "canvasDraws": 1794,
+          "drawIntervals": {
+            "count": 1793,
+            "min": 2.899999976158142,
+            "median": 16.600000023841858,
+            "p95": 20.09999990463257,
+            "p99": 21.899999976158142,
+            "max": 34.799999952316284,
+            "over25": 8,
+            "over40": 0,
+            "over100": 0
+          },
+          "videoPlaybackQualityDelta": {
+            "total": 912,
+            "dropped": 12
+          },
+          "deinterlacerCounterDelta": {
+            "filtered": 1708,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 4,
+            "queueResetted": 0,
+            "dropped": 12
+          }
+        },
+        {
+          "input": "galaxy-integration-panel-free-fullscreen-600s-steady-30s-r2.json",
+          "canvasDrawFps": 59.86566890551824,
+          "canvasDraws": 1796,
+          "drawIntervals": {
+            "count": 1795,
+            "min": 1.5999999046325684,
+            "median": 16.600000023841858,
+            "p95": 20.299999952316284,
+            "p99": 22,
+            "max": 36.89999997615814,
+            "over25": 8,
+            "over40": 0,
+            "over100": 0
+          },
+          "videoPlaybackQualityDelta": {
+            "total": 911,
+            "dropped": 12
+          },
+          "deinterlacerCounterDelta": {
+            "filtered": 1712,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 0,
+            "queueResetted": 0,
+            "dropped": 12
+          }
+        }
+      ],
+      "maintainedCanvasOutput": {
+        "count": 2,
+        "total": 2
+      }
+    }
+  },
+  "interpretation": [
+    "The seek comparison uses the same KonomiTV revision, device, LAN route, fullscreen UI state, targets, warm-up policy, and visible-canvas metric.",
+    "The baseline maintained canvas output in one of two steady runs and produced no canvas frames in the other while decoded video continued; this establishes an intermittent stall, not its population frequency.",
+    "All four steady runs reported 12 droppedVideoFrames in 30 seconds. Zero frame loss is not achieved by the integration branch."
+  ],
+  "cleanup": {
+    "allRuns": true,
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

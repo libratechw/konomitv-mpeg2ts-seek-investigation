@@ -176,7 +176,8 @@ coreの公開APIは現在利用する`restartOffset`だけとし、診断版に�
 正式branch群を最新KonomiTVへ組み込み、Galaxy Chrome、LAN直結、body全画面、右パネルなし、単一タブで取り直した。
 600秒と900秒をwarm-upした後の40 seekは追加probe 0件で、`seek-requested`から`seeked`後も残る可視canvas初画まで中央値159.1ms、p95 212.4ms、最大229.0msとなり、40/40が250ms以内だった。
 公開integration `606943d`も、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値146.4ms、p95 199.6ms、最大229.7msとなり、40/40が250ms以内だった。
-両者は計測起点とinstrumentationが異なるため、差をMSE修正単独の効果とは扱わない。
+同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻すと、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。integration全体では中央値140.7ms（49.0%）、p95 149.5ms（42.8%）を短縮した。
+正式候補timing版と公開integrationは計測起点とinstrumentationが異なるため、その差をMSE修正単独の効果とは扱わない。
 正式候補の区間別中央値はRange headers待ち31.8ms、first byteからpicture jobs 24.6ms、最初のworker出力からstream先頭AU 29.7ms、append完了から`canplay`27.6msだった。
 詳細と生値は[Galaxy正式候補とintegration](results/device-results.md#galaxyの正式候補と公開integration)を参照する。
 

@@ -12,6 +12,7 @@ playerとYADIFの`dist`を再生成してKonomiTVをbuildし直し、`PlayerCont
 
 | build | 起点 | n | 可視canvas中央値 | p90 | p95 | 最大 | 250ms以下 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `tsukumijima/main` `52a3db5` | `video.currentTime`設定直前 | 40 | 287.1 ms | 330.4 ms | 349.1 ms | 410.2 ms | 14/40 |
 | 正式候補 + timing | `seek-requested` | 40 | 159.1 ms | 194.0 ms | 212.4 ms | 229.0 ms | 40/40 |
 | 公開integration `606943d` | `video.currentTime`設定直前 | 40 | 146.4 ms | 195.1 ms | 199.6 ms | 229.7 ms | 40/40 |
 
@@ -19,6 +20,8 @@ playerとYADIFの`dist`を再生成してKonomiTVをbuildし直し、`PlayerCont
 各ブロックの最初に600秒と900秒へwarm-up seekし、測定は600〜609秒と900〜909秒を交互に行った。
 正式候補40回の追加probeは0件で、再生中に確認した安全位置を再利用した結果である。
 coldな未知位置のseek性能を表す値ではない。
+
+同じ起点とinstrumentationで比較できるbaselineと公開integrationでは、中央値を140.7ms（49.0%）、p95を149.5ms（42.8%）、最大を180.5ms（44.0%）短縮し、250ms以内は14/40から40/40になった。
 
 timing版の各走行内で隣接markの差を取った結果は次のとおりである。
 絶対時刻の中央値同士を引いていない。
@@ -46,13 +49,16 @@ timing版の各走行内で隣接markの差を取った結果は次のとおり�
 
 | build | canvas FPS | 描画間隔p95 | 最大 | 25ms超 | 40ms超 | queue全reset増分 | `late`増分 | `droppedVideoFrames`増分 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `tsukumijima/main` 1回目 | 0.000 | — | — | — | — | 0 | 1710 | 12 |
+| `tsukumijima/main` 2回目 | 59.700 | 20.6 ms | 35.5 ms | 11 | 0 | 0 | 6 | 12 |
 | 正式候補 + timing | 59.799 | 21.1 ms | 34.9 ms | 9 | 0 | 0 | 1 | 12 |
-| 公開integration `606943d` | 59.799 | 20.1 ms | 34.8 ms | 8 | 0 | 0 | 4 | 12 |
+| 公開integration `606943d` 1回目 | 59.799 | 20.1 ms | 34.8 ms | 8 | 0 | 0 | 4 | 12 |
+| 公開integration `606943d` 2回目 | 59.866 | 20.3 ms | 36.9 ms | 8 | 0 | 0 | 0 | 12 |
 
 `DeinterlaceStats.dropped`はYADIF queueの独自破棄数ではなく、実装上`video.getVideoPlaybackQuality().droppedVideoFrames`をそのまま報告する。
 30秒間のvideo media timeはintegrationで30.00024秒進み、canvasは1794回描画された。
 40msを超える可視stallはなく全resetも起きていないが、`late`と`droppedVideoFrames`が増えているため、定常コマ落ちゼロはまだ確定していない。
-生値は[正式候補seek集計](galaxy-formal-rap-panel-free-fullscreen-summary.json)と[公開integration集計](galaxy-integration-panel-free-fullscreen-summary.json)に保存した。
+baselineの停止は2回中1回だけであり、発生率を確定する標本数ではない。生値は[全修正適用前後の比較集計](galaxy-integration-vs-tsukumijima-main-summary.json)、[正式候補seek集計](galaxy-formal-rap-panel-free-fullscreen-summary.json)、[公開integration集計](galaxy-integration-panel-free-fullscreen-summary.json)に保存した。
 
 ## タブ状態の監査とGalaxy単一タブ再測定
 
