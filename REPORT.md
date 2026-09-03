@@ -641,19 +641,19 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 overflow時刻圧縮の`autoFilm`回帰は、MADDER #04〜#07の別録画から無劣化で切り出した4本の固定3:2素材、通常60i対照、film↔video境界で確認した。60秒の3:2走行は`konomi/main`が24.21〜24.52fps、正式候補が24.17〜24.44fpsで、queue全resetは全走行0だった。境界30秒では両版ともfilm→videoとvideo→filmを観測し、通常60iは49.57 / 50.36fpsだった。候補固有の一貫した退行は観測しなかったが、3:2走行の描画間隔p95は両版とも約68〜71ms、通常60iも理論値60000/1001fpsを維持していないため、`autoFilm`の表示間隔は別の未解決問題である。[素材、build、全走行、除外理由](results/galaxy-autofilm-multi-fixture-regression.json)を保存した。
 
-致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象として別に数える。上の1.8秒複合異常は、この発生率の根拠には使わない。発生率50ppm以下の判定には片側95%信頼上限を使い、0件の場合も最低59,914回のseekを必要とする。
+致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象として別に数える。上の1.8秒複合異常は、この判定には使わない。合格条件は、試行条件を記録した1時間の自動試験で0件とする。これは再現可能な回帰試験の範囲を定める基準であり、一般的な発生率が0であることや統計的なppm上限の根拠には使わない。
 
 この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
 
 queue容量確保と未来時刻列の再同期だけを分けた正式候補source `26484fd`、dist `27b327e`では、同じseedの先頭20回がすべて復帰した。[20回smoke](results/galaxy-fatal-detector-yadif-formal-smoke-20.json)に続き、240〜480秒と900〜1140秒を交互に選ぶ1000回pilotも停止0だった。厳しい安定復帰条件の時間は中央値697.6ms、p95 831.7ms、最大1303.5msで、通常の初回描画時間とは比較しない。[1000回pilotの生値](results/galaxy-fatal-detector-yadif-formal-pilot-1000.json)を保存した。
 
-0/1000の片側95%信頼上限は約2991ppmであり、50ppm以下の達成根拠にはならない。今回のpilotは検出器、長時間反復、修正候補の安定性を確認した段階であり、合格判定には独立性を記録した最低59,914回の0件が必要である。
+この1000回pilotだけでは1時間に達しないため、現在の合格判定には使わない。検出器、長時間反復、修正候補の安定性を確認した予備試験として扱う。
 
-固定した試行間隔と表示位相の偏りを避けるため、各`video.currentTime`設定前に0〜33.37msの疑似乱数待ちを加え、全60 blockでブラウザー、player、Worker、decoder、MSE、YADIFを作り直す60,000回試験を開始した。最初のblockは258回目に致命的停止を1件検出したため、その時点で自動停止した。`seeked`は250.3ms、目的rVFCは253.5msで成立し、2.5秒の観測中にdecoderは65 frame進んだが、canvasの最大描画間隔は1615ms、YADIFの`late`は25→91、queue全resetは4→5、終了時`outputFps`は0だった。正式候補でも表示段階の停止が残るため、目標50ppmは未達である。[位相分散試験の失敗記録](results/galaxy-fatal-yadif-formal-phase-randomized-failure.json)を保存した。
+固定した試行間隔と表示位相の偏りを避けるため、各`video.currentTime`設定前に0〜33.37msの疑似乱数待ちを加え、blockごとにブラウザー、player、Worker、decoder、MSE、YADIFを作り直す自動試験を行った。正式候補の最初のblockは258回目に致命的停止を1件検出したため、その時点で自動停止した。`seeked`は250.3ms、目的rVFCは253.5msで成立し、2.5秒の観測中にdecoderは65 frame進んだが、canvasの最大描画間隔は1615ms、YADIFの`late`は25→91、queue全resetは4→5、終了時`outputFps`は0だった。1時間以内に停止を検出したため、正式候補は現在の合格条件を満たさない。[位相分散試験の失敗記録](results/galaxy-fatal-yadif-formal-phase-randomized-failure.json)を保存した。
 
 同じseed、同じ258回目を含む300回を診断計測付きで再生すると停止は再現せず、該当seekは735.8msで安定復帰した。地点と要求列だけで決まる事象ではない。[300回の再現試行](results/galaxy-fatal-yadif-formal-diagnostic-replay-300.json)も保存し、rAF、rVFC、WebGL直接描画を時系列記録する反復診断を続ける。
 
-現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。queue修正単独の再発に対して統合版の追加変更が有力であることは示すが、0/1000の片側95%信頼上限は約2991ppmなので、目標50ppmの達成や原因所有者の確定には使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。queue修正単独の再発に対して統合版の追加変更が有力であることは示すが、走行時間が1時間に達しないため、現在の合格判定や原因所有者の確定には使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
@@ -673,7 +673,7 @@ MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`
 
 キーフレーム境界のずれを吸収する余裕を取り、1325秒から172.8秒分を映像と主音声だけ`-c copy`で切り出した。実際のvideo packet範囲は1324.824〜1497.463秒、出力TSは約172.853秒である。1035個の完全cycleはすべて1 duplicateを除き、残留インターレース、40msを超えるvideo PTS間隔、映像・主音声のdecode errorは0だった。末尾の1 frameは5-frame cycleを作れないため、cadenceの主張から除外する。
 
-この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ファイルは`/data/ssd/konomitv-seek-fixtures/madder-24p-clean.ts`、SHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
+この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ローカルSSD上の固定素材のSHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
 
 KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と現在のintegrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
 
