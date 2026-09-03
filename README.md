@@ -172,7 +172,11 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、復帰後の約3秒間に9回のcadence不合格を検出しました。
 この候補は順位4・5を含まないため、cadence不合格が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。異常TSの1時間条件もcadence不合格により満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+順位1〜7の統合版へ順位9を重ねた検証buildでも、同じ固定欠損を1時間反復しました。
+224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、復帰後のcadence不合格は4件残りました。
+同じseedの先頭11 blockでは、順位9単独の9/220から4/220へ減りましたが、統合版のどの修正が差を生んだかは未確定です。[集計と全block](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を公開しています。
+
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもcadence不合格が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
