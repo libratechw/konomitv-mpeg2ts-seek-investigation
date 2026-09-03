@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "status": "reference-only",
+  "variant": "rank5-overflow-schedule-one-hour-block-reset",
+  "sourceHash": "47c1faba14a82ee5a90e107a4bd97ea582ab46906404fac9f1fe325bcafd093a",
+  "distHash": "f01507068c8c37c64fcba777d3c65bcfd51dbd4f232f9b6d410517b7943a7e1d",
+  "asset": "PlayerController-DNoDCdBW.js",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "videoId": 1,
+  "frameMode": "normal",
+  "targetBandsSeconds": [
+    [
+      240,
+      480
+    ],
+    [
+      900,
+      1140
+    ]
+  ],
+  "runnerSha256": "9c36db98c7e22203619b0d3c30ab39ad57061c6f84bf90636f89b2a47e9eb81d",
+  "collectorSha256": "c22dea81394a5945eb6941e59e0a247d24ad7a6140c91197a91a6983f9375636",
+  "containerImageId": "sha256:92a534243f9170fe0808a2e147c96c386677475652f72036438a19870d0f5f49",
+  "konomiTVRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "durationSeconds": 3600,
+  "cleanupReserveSeconds": 30,
+  "blockSize": 1000,
+  "baseSeed": 30260913,
+  "startedAtUnixMs": 1788420371913,
+  "stopAtUnixMs": 1788423941913,
+  "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block.",
+  "createdAt": "2026-09-03T17:25:47.216023+09:00",
+  "endedAtUnixMs": 1788423947186,
+  "wallClockElapsedSeconds": 3575.273,
+  "measurementSeconds": 3491.416,
+  "blockCount": 5,
+  "clientSessionCount": 5,
+  "betweenBlockResetCount": 4,
+  "attemptedSeeks": 4399,
+  "completedSeeks": 4399,
+  "fatalStops": 0,
+  "failures": [],
+  "stableRecoveryLatency": {
+    "count": 4399,
+    "minimumMs": 326.39999997615814,
+    "medianMs": 665.2999999523163,
+    "p90Ms": 779.5,
+    "p95Ms": 808.1000000238419,
+    "p99Ms": 862.1000000238419,
+    "maximumMs": 1208,
+    "meanMs": 654.8383496253158
+  },
+  "maximumDrawGap": {
+    "count": 4399,
+    "minimumMs": 180.60000002384186,
+    "medianMs": 416.7000000476837,
+    "p90Ms": 527.2000000476837,
+    "p95Ms": 552.3000000715256,
+    "p99Ms": 604.8000000715256,
+    "maximumMs": 983,
+    "meanMs": 404.8023187107432
+  },
+  "hostLoad": {
+    "sampleCount": 712,
+    "load1Minimum": 0.52,
+    "load1Maximum": 2.39,
+    "load1P95": 1.84,
+    "samplesWithFfmpeg": 0
+  },
+  "blocks": [
+    {
+      "file": "block-000.json",
+      "seed": 30260913,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 809.849,
+      "sha256": "41ea44b9fe9752f53118e8913075bb9cf38b28fdf8683936b48bd9584d721733"
+    },
+    {
+      "file": "block-001.json",
+      "seed": 31260916,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 798.679,
+      "sha256": "f3d618cb58c26191dd5af11870190d73fcf625a97f116686ff044592f400954b"
+    },
+    {
+      "file": "block-002.json",
+      "seed": 32260919,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 793.879,
+      "sha256": "863eba4c7918a49377163fb38ea4e63b30db51d8e1b92a99809e0345df543e7c"
+    },
+    {
+      "file": "block-003.json",
+      "seed": 33260922,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 802.047,
+      "sha256": "3b9cd07f7fe46b18c768cd205d2cfcc5d84c02c55d619fca5a62e1ce9094d0e3"
+    },
+    {
+      "file": "block-004.json",
+      "seed": 34260925,
+      "stopReason": "time-limit",
+      "attempted": 399,
+      "completed": 399,
+      "fatalStops": 0,
+      "measurementSeconds": 286.962,
+      "sha256": "2fe812efae8106f7b9d5d3aaa64e7013e0d5ef87e2aad7dcb0f539a10ca7a2e3"
+    }
+  ],
+  "acceptanceCriterion": "No fatal display stop is detected during one bounded hour.",
+  "fatalDefinition": "Stable display did not recover within 2000 ms of assigning video.currentTime without another user operation.",
+  "scope": "This bounded regression gate does not estimate a zero population rate or a ppm upper bound.",
+  "generatedStatus": "passed",
+  "sourceSummarySha256": "6d196b659cad7d4e03660ab6d4c6e2f2e078465f5b312e1c5c17c44a36d91142",
+  "validity": {
+    "acceptedForOneHourGate": false,
+    "reason": "A YADIF diagnostic build ran on the same Linux host during block 0. The run is retained as high-load reference evidence and is not the clean one-hour acceptance run.",
+    "interference": {
+      "overlappedBlock": 0,
+      "sourceEditedAt": "2026-09-03T16:35:36+09:00",
+      "distBuildCompletedAt": "2026-09-03T16:35:49+09:00"
+    }
+  }
+}

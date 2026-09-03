@@ -67,12 +67,17 @@ video decoderは67 frame、音声decodeも61,270 byte進みましたが、canvas
 順位4は通常のシーク停止を大幅に減らしますが、1時間0件の合格条件は満たしません。[集計と4 blockの生値](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)を公開しています。
 
 順位5は、FIFO破棄したfieldが占めていた空の表示時間を詰めます。
-同じseedの停止地点を含む短い8 seekはすべて復帰しましたが、計測版が一致しないため修正単独の効果量には使いません。[短い同一sequence確認](results/galaxy-yadif-rank5-same-seed-short-control.json)を保存しています。
+順位4と順位5へ同じ受動計測を加え、同じseed、同じ4回目、同じ目的時刻を比較しました。
+順位4は2.5秒で復帰せず104 fieldをFIFO破棄しましたが、順位5は4 fieldの破棄で止まり、508.5msから安定描画へ復帰しました。[同一計装の順位5結果](results/galaxy-yadif-rank5-same-instrumentation-success.json)を保存しています。
 
 順位5の連続セッション試験では4,073 seek・停止0でしたが、実行中runnerを編集したため正式結果から除外しました。
 blockごとの再生成も行っていないので、順位4との効果比較や順位5の合格根拠には使いません。[除外理由と参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)を残しています。
 
-致命的な表示停止と`autoFilm`の cadence 維持は、どちらもまだ目標を達成していません。
+blockごとにブラウザーとplayer各層を作り直す別の1時間試験も4,399 seek・停止0でしたが、最初のblock中に同一ホストで診断buildを実行しました。
+高負荷を含む参考結果として残し、無負荷の1時間合格根拠には使いません。[条件と全blockのhash](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)を保存しています。
+
+致命的な表示停止は修正機構の同一計装A/Bまで確認できましたが、正式branchの無負荷1時間試験はまだ完了していません。
+`autoFilm`のcadence維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 
 ### サーバーエンコードHLS
