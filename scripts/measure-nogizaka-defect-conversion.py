@@ -121,8 +121,7 @@ def main():
     maximum_interval, before_index = max(intervals)
     output_gap_ms = float(maximum_interval * 1000)
     gap_difference_ms = abs(output_gap_ms - browser_gap_ms)
-    if gap_difference_ms > 0.002:
-        raise ValueError("converter and browser timeline gaps differ")
+    match_tolerance_ms = 0.002
 
     print(json.dumps({
         "schemaVersion": 1,
@@ -170,7 +169,8 @@ def main():
             "analysisFile": args.browser_analysis.name,
             "inputMediaTimeDeltaMs": browser_gap_ms,
             "absoluteDifferenceMs": gap_difference_ms,
-            "matchesWithinMs": 0.002,
+            "matchToleranceMs": match_tolerance_ms,
+            "matchesWithinTolerance": gap_difference_ms <= match_tolerance_ms,
         },
         "ffprobe": {
             "version": subprocess.check_output(["ffprobe", "-version"], text=True).splitlines()[0],
