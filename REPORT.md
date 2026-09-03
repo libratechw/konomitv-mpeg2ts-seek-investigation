@@ -745,7 +745,11 @@ integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを�
 
 同じ固定byte windowを、integration `44e06a4`由来として記録したconverter binaryでオフライン変換した。source revisionは呼び出し側の宣言であり、実行したbinaryは結果JSONのSHA-256で識別する。出力fMP4をFFprobeで復号すると、隣接frameの表示時刻に最大567.233msの間隔があり、GalaxyのrVFCで観測したmedia timeの567.233ms飛びと0.002ms以内で一致した。したがって、Galaxyで見えた時刻の飛びはAndroid decoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれる。破損B-pictureを含む入力のkeyframe間隔は15 frame・500.5msだったが、固定windowは先頭と末尾がstream途中なので、入出力frame数の差から破棄picture数を決めない。画素の正常性、表示可能だった最小picture集合、A/V同期は引き続き未証明である。[変換結果](results/nogizaka-defect-conversion-timeline.json)と[再現スクリプト](scripts/measure-nogizaka-defect-conversion.py)を公開した。
 
-公開候補`fix/preserve-complete-pictures-before-loss`は、packet欠落後のbyteを読む前に、次のpicture開始位置まで受信済みで完了を確認できるprefixをtranscoderへ渡し、完了を確認できない末尾を破棄する。同じ固定byte windowをsource `f27442d`から構築したbinaryで変換すると、出力video sampleは34から41へ増え、最大表示間隔は567.233msから300.300msへ短縮した。音声sampleは92のままだった。このオフライン結果はconverter出力の改善を示すが、候補buildをブラウザーで測った値ではない。field pair、open GOP、画素の正常性、A/V同期、異常TSの1時間条件は引き続き未確認である。[候補の変換結果](results/nogizaka-defect-preserve-complete-pictures.json)を保存した。
+公開候補`fix/preserve-complete-pictures-before-loss`は、packet欠落後のbyteを読む前に、次のpicture開始位置まで受信済みで完了を確認できるprefixをtranscoderへ渡し、完了を確認できない末尾を破棄する。同じ固定byte windowをsource `f27442d`から構築したbinaryで変換すると、出力video sampleは34から41へ増え、最大表示間隔は567.233msから300.300msへ短縮した。
+
+fMP4の`tfdt`と`trun`を直接解析すると、映像trackの先頭decode時刻、末尾decode時刻、先頭presentation時刻、末尾presentation時刻は両版で一致した。音声trackも92 sample、先頭0、末尾94,208、最大間隔1,024 sampleで、各sampleのdecode時刻・duration・composition offsetから作ったSHA-256も一致した。mux上の音声fragment数は2から3へ変わったが、符号化済み音声sample時刻列は変わっていない。
+
+このオフライン結果はconverter出力の映像改善と音声時刻列の不変を示すが、可聴音声clockやブラウザー出力を測っていないため、音ズレがないことの証明には使わない。実在するfield picture破損、画素の正常性、可聴A/V同期は引き続き未確認である。[基準版](results/nogizaka-defect-conversion-timeline.json)と[候補版](results/nogizaka-defect-preserve-complete-pictures.json)の変換結果を保存した。
 
 修正単独の差を確認するため、最新KonomiTV `7307e0e`へ直接の親`52a3db5`と候補`f80154f`を組み込み、Galaxy、LAN直結、全画面、同じfixture、同じ113.67秒seekでB-C-C-Bの順に各2回測った。15秒traceはすべて既知の欠陥125.0249秒を横切り、利用者操作、playback error、visibility変更、致命的停止はなかった。
 

@@ -19,6 +19,8 @@ import tempfile
 from decimal import Decimal
 from pathlib import Path
 
+from fmp4_timeline import parse_fmp4_timeline
+
 FIXTURE_SHA = "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
 WINDOW_START = 200_484_140
 WINDOW_LENGTH = 3_760_000
@@ -86,6 +88,7 @@ def main():
         source_frames, source_warnings = probe_frames(window, "warning")
         output_frames, output_warnings = probe_frames(output, "warning")
         output_sha = sha256(output)
+        fmp4_timeline = parse_fmp4_timeline(output)
 
     summary_match = re.search(
         r"(?m)^(\d+) media fragments, (\d+) video samples, "
@@ -124,7 +127,7 @@ def main():
     match_tolerance_ms = 0.002
 
     print(json.dumps({
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "fixture": {
             "sha256": fixture_sha,
             "sizeBytes": args.fixture.stat().st_size,
@@ -165,6 +168,7 @@ def main():
                 "intervalMs": output_gap_ms,
             },
         },
+        "fmp4Timeline": fmp4_timeline,
         "browserCrossCheck": {
             "analysisFile": args.browser_analysis.name,
             "inputMediaTimeDeltaMs": browser_gap_ms,
@@ -182,6 +186,7 @@ def main():
             "The fixed byte window starts and ends mid-stream, so input and output frame counts do not by themselves measure discarded pictures.",
             "A timeline gap that matches the browser measurement within the recorded tolerance locates that browser jump in converter output; a mismatch requires a browser run of the measured converter before drawing the same conclusion.",
             "Decoded frame metadata does not prove which damaged pixels could have been displayed safely.",
+            "The fMP4 track timeline proves encoded sample timing, not audible output timing.",
             "This offline conversion does not measure audible A/V synchronization or browser rendering.",
         ],
     }, indent=2))

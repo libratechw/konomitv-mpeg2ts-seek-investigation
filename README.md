@@ -172,7 +172,7 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、復帰後の約3秒間に9回のcadence不合格を検出しました。
 この候補は順位4・5を含まないため、cadence不合格が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。実在するfield picture破損、画素の正常性、ブラウザー上のA/V同期は未確認です。異常TSの1時間条件もcadence不合格により満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。異常TSの1時間条件もcadence不合格により満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
@@ -213,7 +213,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 | データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
 | 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
 | 機械可読な集計値と生値 | [`results/`](results/) |
-| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[異常TSのpacketとpictureの照合](scripts/inspect-nogizaka-transport-defect.py)、[破損区間の変換時刻列](scripts/measure-nogizaka-defect-conversion.py)を含む） |
+| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[異常TSのpacketとpictureの照合](scripts/inspect-nogizaka-transport-defect.py)、[fMP4時刻列の解析](scripts/fmp4_timeline.py)、[破損区間の変換比較](scripts/measure-nogizaka-defect-conversion.py)を含む） |
 
 録画ファイル、認証情報、実際のLAN内アドレス、ローカルパス、アクセスログは含みません。
 番組名は素材の識別用であり、録画データ自体は配布しません。

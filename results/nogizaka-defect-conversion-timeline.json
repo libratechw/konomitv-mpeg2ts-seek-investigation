@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "fixture": {
     "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
     "sizeBytes": 3066534364,
@@ -45,6 +45,37 @@
       "intervalMs": 567.233
     }
   },
+  "fmp4Timeline": {
+    "fragmentCount": 3,
+    "tracks": {
+      "video": {
+        "trackId": 1,
+        "timeScale": 90000,
+        "fragmentCount": 3,
+        "sampleCount": 34,
+        "firstDecodeTime": 40814,
+        "lastDecodeEnd": 193967,
+        "firstPresentationTime": 43817,
+        "lastPresentationEnd": 196970,
+        "maximumPresentationInterval": 51051,
+        "maximumPresentationIntervalMs": 567.2333333333333,
+        "sampleTimingSha256": "bcb066d51119a952c26726a34a1a2ecbeb71ae1655590061a0e89990e59ec1e2"
+      },
+      "audio": {
+        "trackId": 2,
+        "timeScale": 48000,
+        "fragmentCount": 2,
+        "sampleCount": 92,
+        "firstDecodeTime": 0,
+        "lastDecodeEnd": 94208,
+        "firstPresentationTime": 0,
+        "lastPresentationEnd": 94208,
+        "maximumPresentationInterval": 1024,
+        "maximumPresentationIntervalMs": 21.333333333333332,
+        "sampleTimingSha256": "489bdbe6434e7d37b3ff84c5a644e1d87bb072213d7dcc8f2c13b894969d8afd"
+      }
+    }
+  },
   "browserCrossCheck": {
     "analysisFile": "galaxy-integration-current-v3-anomalous-recovery-analysis.json",
     "inputMediaTimeDeltaMs": 567.2330000000017,
@@ -62,6 +93,7 @@
     "The fixed byte window starts and ends mid-stream, so input and output frame counts do not by themselves measure discarded pictures.",
     "A timeline gap that matches the browser measurement within the recorded tolerance locates that browser jump in converter output; a mismatch requires a browser run of the measured converter before drawing the same conclusion.",
     "Decoded frame metadata does not prove which damaged pixels could have been displayed safely.",
+    "The fMP4 track timeline proves encoded sample timing, not audible output timing.",
     "This offline conversion does not measure audible A/V synchronization or browser rendering."
   ]
 }
