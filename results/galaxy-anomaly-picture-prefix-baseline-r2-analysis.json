@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "defectMediaTime": 125.0249
+  },
+  "build": {
+    "sourceHash": "229cdbe20b87baa3350073cd4e7121c164c7b1c5f57be284fac6286524d8cc37",
+    "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+    "asset": "PlayerController-CvVcN22D.js"
+  },
+  "detectedInputGap": {
+    "spansKnownDefect": true,
+    "beforeMediaTime": 125.019355,
+    "afterMediaTime": 125.586588,
+    "mediaTimeDeltaMs": 567.2330000000017,
+    "callbackIntervalMs": 554.3999999761581,
+    "startsAtMs": 3599,
+    "endsAtMs": 4153.399999976158
+  },
+  "displayRecovery": {
+    "fatalDefinitionMs": 2000,
+    "fatalStop": false,
+    "stableDrawCount": 8,
+    "maximumStableIntervalMs": 50,
+    "minimumStableSpanMs": 100,
+    "stableConfirmationMs": 865,
+    "firstStableDrawAfterGapMs": 652.6999999284744,
+    "largestSurroundingDrawGapMs": 522.3999999761581
+  },
+  "cadenceRecovery": {
+    "expectedDrawFps": 59.94005994005994,
+    "expectedFpsToleranceRatio": 0.01,
+    "qualifyingWindowMs": 3000,
+    "found": false,
+    "firstQualifyingWindowStartsAfterGapMs": null,
+    "confirmedAfterGapMs": null,
+    "firstQualifyingWindow": null,
+    "trailingWindowTargetMs": 5000,
+    "trailingWindowSufficient": false,
+    "trailingWindow": {
+      "drawCount": 0,
+      "durationMs": 0,
+      "drawFps": null,
+      "fpsErrorRatio": null,
+      "fpsWithinOnePercent": null,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": null,
+      "browserDroppedFramesDelta": 2,
+      "yadifLateDelta": 304
+    },
+    "expectedRateRecovered": false,
+    "zeroVisibleDropProven": false,
+    "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+  },
+  "decoderRecovery": {
+    "audioDecodedBytesAdvanced": true,
+    "audioFirstAdvancedAfterGapMs": 3.1999999284744263,
+    "audioDecodedBytesTotalDelta": 358032,
+    "videoDecodedBytesTotalDelta": 59228562,
+    "browserDroppedFrames": 17
+  },
+  "streamRecovery": {
+    "windowStartsAt": 16241.300000071526,
+    "windowEndsAt": 27643.200000047684,
+    "playerDroppedPacketsDelta": 0,
+    "playerErrorsDelta": 0,
+    "playerAudioFramesDelta": 539,
+    "playerVideoFramesDelta": 349,
+    "yadifDiscontinuitiesDelta": 1,
+    "yadifDegradedDelta": 3,
+    "yadifLateDelta": 564,
+    "yadifQueueResetDelta": 0,
+    "minimumUnavoidableDropProven": false,
+    "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+  },
+  "unattended": {
+    "userInteractionEvents": [],
+    "playbackErrors": [],
+    "visibilityChanges": [],
+    "passed": true
+  },
+  "audioSync": {
+    "proven": false,
+    "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+  },
+  "cleanup": {
+    "verified": true,
+    "requiredKeys": [
+      "videoPausedBeforeClose",
+      "fullscreenExitedBeforeClose",
+      "testPagesClosed",
+      "chromeStopped",
+      "webapkStopped",
+      "adbForwardRemoved",
+      "containerStopped"
+    ],
+    "observed": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  }
+}

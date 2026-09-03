@@ -737,6 +737,17 @@ integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを�
 
 公開候補`fix/preserve-complete-pictures-before-loss`は、packet欠落後のbyteを読む前に、次のpicture開始位置まで受信済みで完了を確認できるprefixをtranscoderへ渡し、完了を確認できない末尾を破棄する。同じ固定byte windowをsource `f27442d`から構築したbinaryで変換すると、出力video sampleは34から41へ増え、最大表示間隔は567.233msから300.300msへ短縮した。音声sampleは92のままだった。このオフライン結果はconverter出力の改善を示すが、候補buildをブラウザーで測った値ではない。field pair、open GOP、画素の正常性、A/V同期、異常TSの1時間条件は引き続き未確認である。[候補の変換結果](results/nogizaka-defect-preserve-complete-pictures.json)を保存した。
 
+修正単独の差を確認するため、最新KonomiTV `7307e0e`へ直接の親`52a3db5`と候補`f80154f`を組み込み、Galaxy、LAN直結、全画面、同じfixture、同じ113.67秒seekでB-C-C-Bの順に各2回測った。15秒traceはすべて既知の欠陥125.0249秒を横切り、利用者操作、playback error、visibility変更、致命的停止はなかった。
+
+| build | rVFCの映像時刻間隔 | canvas最大描画間隔 | Chrome drop | YADIF degraded | discontinuity | 期待表示FPSへ復帰 |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 基準1 | 600.600 ms | 569.6 ms | 17 | 3 | 1 | はい |
+| 候補1 | 33.367 ms | 23.1 ms | 6 | 0 | 0 | はい |
+| 候補2 | 33.367 ms | 20.7 ms | 6 | 0 | 0 | はい |
+| 基準2 | 567.233 ms | 522.4 ms | 17 | 3 | 1 | いいえ |
+
+候補のrVFC映像時刻間隔は2走行とも30000/1001fpsの1 frame分まで縮まり、基準版にあったYADIFのdegradedとdiscontinuityも起きなかった。この直接A/Bは、この固定欠陥に対するブラウザー上の効果を示す。2走行では異常TSの1時間条件、可視scanout、最小限の不可避drop、可聴A/V同期、field pair、open GOP、画素の正常性を証明しない。[A/B集計と全trace](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を保存した。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
@@ -1091,7 +1102,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
-| packet欠落前に完了を確認できるpictureを保持する | 実在する破損区間のオフライン変換で出力sampleが34→41へ増え、最大表示間隔が567.233→300.300msへ短縮 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は、次のpicture開始位置を受信済みのprefixだけをtranscoderへ渡す。field pair、open GOP、画素の正常性、ブラウザー上のA/V同期を確認してからintegrationへ入れる。[変換結果](results/nogizaka-defect-preserve-complete-pictures.json) |
+| packet欠落前に完了を確認できるpictureを保持する | Galaxyの同条件各2走行で、欠陥をまたぐ映像時刻間隔が567.233〜600.600→33.367ms、Chrome dropが17→6 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は、次のpicture開始位置を受信済みのprefixだけをtranscoderへ渡す。field pair、open GOP、画素の正常性、ブラウザー上のA/V同期、異常TSの1時間条件を確認してからintegrationへ入れる。[A/B結果](results/galaxy-anomaly-preserve-complete-pictures-ab.json) |
 | AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
 | 録画TSの`FileResponse` body chunkを64KiBから増やす | Galaxyの一部条件で最大15.4msの対応付き差が出た | 64〜1024KiBで単調性がなく、Windows各40 seekは−2.4〜+1.7msで中立だったため採用しない。別transport/storageで再現した場合だけ再評価する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |

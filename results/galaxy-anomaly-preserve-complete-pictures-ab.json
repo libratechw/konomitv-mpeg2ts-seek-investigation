@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Compare transport-loss picture-prefix recovery with its direct parent under the same browser and KonomiTV conditions.",
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "knownDefectMediaTime": 125.0249
+  },
+  "environment": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "transport": "LAN direct",
+    "displayModeConfigured": "60 Hz",
+    "fullscreen": true,
+    "frameMode": "normal",
+    "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "seekTarget": 113.67,
+    "traceDurationMs": 15000,
+    "onePageDuringMeasurement": true,
+    "runnerSha256": "d886f44f766a548ba783dbc102986afd0c38e6e869690cf",
+    "collectorSha256": "e22428074c2db342fc325739565166b09b109d59cbc1418d7aca2264c8894929"
+  },
+  "builds": {
+    "baseline": {
+      "revision": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+      "sourceHash": "229cdbe20b87baa3350073cd4e7121c164c7b1c5f57be284fac6286524d8cc37",
+      "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+      "asset": "PlayerController-CvVcN22D.js",
+      "assetSha256": "2fe75779d449af397b4e599876a6d1774b1cc12608d3713eaa28e43dd62446e8"
+    },
+    "candidate": {
+      "sourceCommit": "f27442d",
+      "distCommit": "f80154f",
+      "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
+      "distHash": "04306641753016a51c138518fa3aaeec2a11056d5621ecc3844c56585fd45d03",
+      "asset": "PlayerController-B8RHo49u.js",
+      "assetSha256": "646994e114d1d11231a56ef7e281766b076b9241068bde3469e8ff59e64ad054"
+    }
+  },
+  "runOrder": [
+    "baseline-r1",
+    "candidate-r1",
+    "candidate-r2",
+    "baseline-r2"
+  ],
+  "runs": [
+    {
+      "id": "baseline-r1",
+      "analysisFile": "galaxy-anomaly-picture-prefix-baseline-r1-analysis.json",
+      "traceFile": "galaxy-anomaly-picture-prefix-baseline-r1-trace.json",
+      "result": {
+        "schemaVersion": 2,
+        "fixture": {
+          "name": "nogizaka.ts",
+          "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+          "defectMediaTime": 125.0249
+        },
+        "build": {
+          "sourceHash": "229cdbe20b87baa3350073cd4e7121c164c7b1c5f57be284fac6286524d8cc37",
+          "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+          "asset": "PlayerController-CvVcN22D.js"
+        },
+        "detectedInputGap": {
+          "spansKnownDefect": true,
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.619955,
+          "mediaTimeDeltaMs": 600.6,
+          "callbackIntervalMs": 602.3999999761581,
+          "startsAtMs": 3587.600000023842,
+          "endsAtMs": 4190
+        },
+        "displayRecovery": {
+          "fatalDefinitionMs": 2000,
+          "fatalStop": false,
+          "stableDrawCount": 8,
+          "maximumStableIntervalMs": 50,
+          "minimumStableSpanMs": 100,
+          "stableConfirmationMs": 814.2999999523163,
+          "firstStableDrawAfterGapMs": 649.7999999523163,
+          "largestSurroundingDrawGapMs": 569.5999999046326
+        },
+        "cadenceRecovery": {
+          "expectedDrawFps": 59.94005994005994,
+          "expectedFpsToleranceRatio": 0.01,
+          "qualifyingWindowMs": 3000,
+          "found": true,
+          "firstQualifyingWindowStartsAfterGapMs": 2515.2000000476837,
+          "confirmedAfterGapMs": 5516.5,
+          "firstQualifyingWindow": {
+            "drawCount": 181,
+            "durationMs": 3001.2999999523163,
+            "drawFps": 59.97401126273941,
+            "fpsErrorRatio": 0.0005664212333691706,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 24
+          },
+          "trailingWindowTargetMs": 5000,
+          "trailingWindowSufficient": true,
+          "trailingWindow": {
+            "drawCount": 299,
+            "durationMs": 4988.900000095367,
+            "drawFps": 59.73260638503547,
+            "fpsErrorRatio": 0.0034610168096582718,
+            "fpsWithinOnePercent": true,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 32.700000047683716,
+            "browserDroppedFramesDelta": 2,
+            "yadifLateDelta": 0
+          },
+          "expectedRateRecovered": true,
+          "zeroVisibleDropProven": false,
+          "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+        },
+        "decoderRecovery": {
+          "audioDecodedBytesAdvanced": true,
+          "audioFirstAdvancedAfterGapMs": 12.799999952316284,
+          "audioDecodedBytesTotalDelta": 359032,
+          "videoDecodedBytesTotalDelta": 58969973,
+          "browserDroppedFrames": 17
+        },
+        "streamRecovery": {
+          "windowStartsAt": 15094.700000047684,
+          "windowEndsAt": 26507.900000095367,
+          "playerDroppedPacketsDelta": 0,
+          "playerErrorsDelta": 0,
+          "playerAudioFramesDelta": 516,
+          "playerVideoFramesDelta": 334,
+          "yadifDiscontinuitiesDelta": 1,
+          "yadifDegradedDelta": 3,
+          "yadifLateDelta": 0,
+          "yadifQueueResetDelta": 0,
+          "minimumUnavoidableDropProven": false,
+          "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+        },
+        "unattended": {
+          "userInteractionEvents": [],
+          "playbackErrors": [],
+          "visibilityChanges": [],
+          "passed": true
+        },
+        "audioSync": {
+          "proven": false,
+          "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+        },
+        "cleanup": {
+          "verified": true,
+          "requiredKeys": [
+            "videoPausedBeforeClose",
+            "fullscreenExitedBeforeClose",
+            "testPagesClosed",
+            "chromeStopped",
+            "webapkStopped",
+            "adbForwardRemoved",
+            "containerStopped"
+          ],
+          "observed": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      }
+    },
+    {
+      "id": "candidate-r1",
+      "analysisFile": "galaxy-anomaly-picture-prefix-candidate-r1-analysis.json",
+      "traceFile": "galaxy-anomaly-picture-prefix-candidate-r1-trace.json",
+      "result": {
+        "schemaVersion": 2,
+        "fixture": {
+          "name": "nogizaka.ts",
+          "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+          "defectMediaTime": 125.0249
+        },
+        "build": {
+          "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
+          "distHash": "04306641753016a51c138518fa3aaeec2a11056d5621ecc3844c56585fd45d03",
+          "asset": "PlayerController-B8RHo49u.js"
+        },
+        "detectedInputGap": {
+          "spansKnownDefect": true,
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.052722,
+          "mediaTimeDeltaMs": 33.36699999999837,
+          "callbackIntervalMs": 30,
+          "startsAtMs": 3596.100000023842,
+          "endsAtMs": 3626.100000023842
+        },
+        "displayRecovery": {
+          "fatalDefinitionMs": 2000,
+          "fatalStop": false,
+          "stableDrawCount": 8,
+          "maximumStableIntervalMs": 50,
+          "minimumStableSpanMs": 100,
+          "stableConfirmationMs": 145,
+          "firstStableDrawAfterGapMs": 30.200000047683716,
+          "largestSurroundingDrawGapMs": 23.100000023841858
+        },
+        "cadenceRecovery": {
+          "expectedDrawFps": 59.94005994005994,
+          "expectedFpsToleranceRatio": 0.01,
+          "qualifyingWindowMs": 3000,
+          "found": true,
+          "firstQualifyingWindowStartsAfterGapMs": 596.6000000238419,
+          "confirmedAfterGapMs": 3616.100000023842,
+          "firstQualifyingWindow": {
+            "drawCount": 182,
+            "durationMs": 3019.5,
+            "drawFps": 59.943699287961586,
+            "fpsErrorRatio": 0.00006071645415914032,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 22.299999952316284
+          },
+          "trailingWindowTargetMs": 5000,
+          "trailingWindowSufficient": true,
+          "trailingWindow": {
+            "drawCount": 298,
+            "durationMs": 4978.700000047684,
+            "drawFps": 59.65412657865617,
+            "fpsErrorRatio": 0.004770321579419578,
+            "fpsWithinOnePercent": true,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 33.89999997615814,
+            "browserDroppedFramesDelta": 2,
+            "yadifLateDelta": 1
+          },
+          "expectedRateRecovered": true,
+          "zeroVisibleDropProven": false,
+          "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+        },
+        "decoderRecovery": {
+          "audioDecodedBytesAdvanced": true,
+          "audioFirstAdvancedAfterGapMs": 4.100000023841858,
+          "audioDecodedBytesTotalDelta": 359032,
+          "videoDecodedBytesTotalDelta": 60373406,
+          "browserDroppedFrames": 6
+        },
+        "streamRecovery": {
+          "windowStartsAt": 15135.799999952316,
+          "windowEndsAt": 26541.199999928474,
+          "playerDroppedPacketsDelta": 0,
+          "playerErrorsDelta": 0,
+          "playerAudioFramesDelta": 516,
+          "playerVideoFramesDelta": 334,
+          "yadifDiscontinuitiesDelta": 0,
+          "yadifDegradedDelta": 0,
+          "yadifLateDelta": 1,
+          "yadifQueueResetDelta": 0,
+          "minimumUnavoidableDropProven": false,
+          "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+        },
+        "unattended": {
+          "userInteractionEvents": [],
+          "playbackErrors": [],
+          "visibilityChanges": [],
+          "passed": true
+        },
+        "audioSync": {
+          "proven": false,
+          "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+        },
+        "cleanup": {
+          "verified": true,
+          "requiredKeys": [
+            "videoPausedBeforeClose",
+            "fullscreenExitedBeforeClose",
+            "testPagesClosed",
+            "chromeStopped",
+            "webapkStopped",
+            "adbForwardRemoved",
+            "containerStopped"
+          ],
+          "observed": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      }
+    },
+    {
+      "id": "candidate-r2",
+      "analysisFile": "galaxy-anomaly-picture-prefix-candidate-r2-analysis.json",
+      "traceFile": "galaxy-anomaly-picture-prefix-candidate-r2-trace.json",
+      "result": {
+        "schemaVersion": 2,
+        "fixture": {
+          "name": "nogizaka.ts",
+          "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+          "defectMediaTime": 125.0249
+        },
+        "build": {
+          "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
+          "distHash": "04306641753016a51c138518fa3aaeec2a11056d5621ecc3844c56585fd45d03",
+          "asset": "PlayerController-B8RHo49u.js"
+        },
+        "detectedInputGap": {
+          "spansKnownDefect": true,
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.052722,
+          "mediaTimeDeltaMs": 33.36699999999837,
+          "callbackIntervalMs": 36.60000002384186,
+          "startsAtMs": 3611.0999999046326,
+          "endsAtMs": 3647.6999999284744
+        },
+        "displayRecovery": {
+          "fatalDefinitionMs": 2000,
+          "fatalStop": false,
+          "stableDrawCount": 8,
+          "maximumStableIntervalMs": 50,
+          "minimumStableSpanMs": 100,
+          "stableConfirmationMs": 145.70000004768372,
+          "firstStableDrawAfterGapMs": 36.700000047683716,
+          "largestSurroundingDrawGapMs": 20.700000047683716
+        },
+        "cadenceRecovery": {
+          "expectedDrawFps": 59.94005994005994,
+          "expectedFpsToleranceRatio": 0.01,
+          "qualifyingWindowMs": 3000,
+          "found": true,
+          "firstQualifyingWindowStartsAfterGapMs": 585.7000000476837,
+          "confirmedAfterGapMs": 3604.8000000715256,
+          "firstQualifyingWindow": {
+            "drawCount": 181,
+            "durationMs": 3019.100000023842,
+            "drawFps": 59.620416679996865,
+            "fpsErrorRatio": 0.005332715055385623,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 32.200000047683716
+          },
+          "trailingWindowTargetMs": 5000,
+          "trailingWindowSufficient": true,
+          "trailingWindow": {
+            "drawCount": 298,
+            "durationMs": 4982.300000071526,
+            "drawFps": 59.611023020640324,
+            "fpsErrorRatio": 0.0054894326056505694,
+            "fpsWithinOnePercent": true,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": 35.59999990463257,
+            "browserDroppedFramesDelta": 2,
+            "yadifLateDelta": 1
+          },
+          "expectedRateRecovered": true,
+          "zeroVisibleDropProven": false,
+          "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+        },
+        "decoderRecovery": {
+          "audioDecodedBytesAdvanced": true,
+          "audioFirstAdvancedAfterGapMs": 89.20000004768372,
+          "audioDecodedBytesTotalDelta": 359032,
+          "videoDecodedBytesTotalDelta": 60030210,
+          "browserDroppedFrames": 6
+        },
+        "streamRecovery": {
+          "windowStartsAt": 15139.699999928474,
+          "windowEndsAt": 26529.699999928474,
+          "playerDroppedPacketsDelta": 0,
+          "playerErrorsDelta": 0,
+          "playerAudioFramesDelta": 539,
+          "playerVideoFramesDelta": 349,
+          "yadifDiscontinuitiesDelta": 0,
+          "yadifDegradedDelta": 0,
+          "yadifLateDelta": 1,
+          "yadifQueueResetDelta": 0,
+          "minimumUnavoidableDropProven": false,
+          "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+        },
+        "unattended": {
+          "userInteractionEvents": [],
+          "playbackErrors": [],
+          "visibilityChanges": [],
+          "passed": true
+        },
+        "audioSync": {
+          "proven": false,
+          "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+        },
+        "cleanup": {
+          "verified": true,
+          "requiredKeys": [
+            "videoPausedBeforeClose",
+            "fullscreenExitedBeforeClose",
+            "testPagesClosed",
+            "chromeStopped",
+            "webapkStopped",
+            "adbForwardRemoved",
+            "containerStopped"
+          ],
+          "observed": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      }
+    },
+    {
+      "id": "baseline-r2",
+      "analysisFile": "galaxy-anomaly-picture-prefix-baseline-r2-analysis.json",
+      "traceFile": "galaxy-anomaly-picture-prefix-baseline-r2-trace.json",
+      "result": {
+        "schemaVersion": 2,
+        "fixture": {
+          "name": "nogizaka.ts",
+          "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+          "defectMediaTime": 125.0249
+        },
+        "build": {
+          "sourceHash": "229cdbe20b87baa3350073cd4e7121c164c7b1c5f57be284fac6286524d8cc37",
+          "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+          "asset": "PlayerController-CvVcN22D.js"
+        },
+        "detectedInputGap": {
+          "spansKnownDefect": true,
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.586588,
+          "mediaTimeDeltaMs": 567.2330000000017,
+          "callbackIntervalMs": 554.3999999761581,
+          "startsAtMs": 3599,
+          "endsAtMs": 4153.399999976158
+        },
+        "displayRecovery": {
+          "fatalDefinitionMs": 2000,
+          "fatalStop": false,
+          "stableDrawCount": 8,
+          "maximumStableIntervalMs": 50,
+          "minimumStableSpanMs": 100,
+          "stableConfirmationMs": 865,
+          "firstStableDrawAfterGapMs": 652.6999999284744,
+          "largestSurroundingDrawGapMs": 522.3999999761581
+        },
+        "cadenceRecovery": {
+          "expectedDrawFps": 59.94005994005994,
+          "expectedFpsToleranceRatio": 0.01,
+          "qualifyingWindowMs": 3000,
+          "found": false,
+          "firstQualifyingWindowStartsAfterGapMs": null,
+          "confirmedAfterGapMs": null,
+          "firstQualifyingWindow": null,
+          "trailingWindowTargetMs": 5000,
+          "trailingWindowSufficient": false,
+          "trailingWindow": {
+            "drawCount": 0,
+            "durationMs": 0,
+            "drawFps": null,
+            "fpsErrorRatio": null,
+            "fpsWithinOnePercent": null,
+            "intervalsOver40Ms": 0,
+            "maximumIntervalMs": null,
+            "browserDroppedFramesDelta": 2,
+            "yadifLateDelta": 304
+          },
+          "expectedRateRecovered": false,
+          "zeroVisibleDropProven": false,
+          "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+        },
+        "decoderRecovery": {
+          "audioDecodedBytesAdvanced": true,
+          "audioFirstAdvancedAfterGapMs": 3.1999999284744263,
+          "audioDecodedBytesTotalDelta": 358032,
+          "videoDecodedBytesTotalDelta": 59228562,
+          "browserDroppedFrames": 17
+        },
+        "streamRecovery": {
+          "windowStartsAt": 16241.300000071526,
+          "windowEndsAt": 27643.200000047684,
+          "playerDroppedPacketsDelta": 0,
+          "playerErrorsDelta": 0,
+          "playerAudioFramesDelta": 539,
+          "playerVideoFramesDelta": 349,
+          "yadifDiscontinuitiesDelta": 1,
+          "yadifDegradedDelta": 3,
+          "yadifLateDelta": 564,
+          "yadifQueueResetDelta": 0,
+          "minimumUnavoidableDropProven": false,
+          "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+        },
+        "unattended": {
+          "userInteractionEvents": [],
+          "playbackErrors": [],
+          "visibilityChanges": [],
+          "passed": true
+        },
+        "audioSync": {
+          "proven": false,
+          "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+        },
+        "cleanup": {
+          "verified": true,
+          "requiredKeys": [
+            "videoPausedBeforeClose",
+            "fullscreenExitedBeforeClose",
+            "testPagesClosed",
+            "chromeStopped",
+            "webapkStopped",
+            "adbForwardRemoved",
+            "containerStopped"
+          ],
+          "observed": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      }
+    }
+  ],
+  "comparison": {
+    "videoMediaTimeGapMs": {
+      "baseline": [
+        600.6,
+        567.2330000000017
+      ],
+      "candidate": [
+        33.36699999999837,
+        33.36699999999837
+      ]
+    },
+    "largestCanvasDrawGapMs": {
+      "baseline": [
+        569.5999999046326,
+        522.3999999761581
+      ],
+      "candidate": [
+        23.100000023841858,
+        20.700000047683716
+      ]
+    },
+    "browserDroppedFrames": {
+      "baseline": [
+        17,
+        17
+      ],
+      "candidate": [
+        6,
+        6
+      ]
+    },
+    "yadifDegradedDelta": {
+      "baseline": [
+        3,
+        3
+      ],
+      "candidate": [
+        0,
+        0
+      ]
+    },
+    "fatalStops": {
+      "baseline": [
+        false,
+        false
+      ],
+      "candidate": [
+        false,
+        false
+      ]
+    },
+    "expectedRateRecovered": {
+      "baseline": [
+        true,
+        false
+      ],
+      "candidate": [
+        true,
+        true
+      ]
+    }
+  },
+  "conclusion": "In both runs the candidate reduced the known-defect media-time gap to one 30000/1001 frame interval, reduced Chrome droppedVideoFrames from 17 to 6, and avoided YADIF degraded/discontinuity events. This is a direct branch-only A/B result for this fixed defect.",
+  "limitations": [
+    "Two runs per build do not prove the one-hour anomalous-TS acceptance condition.",
+    "The trace does not prove compositor scanout or audible A/V synchronization.",
+    "The minimum unavoidable drop set is not identified.",
+    "Field-pair, open-GOP, pixel-integrity, and other defect patterns remain unverified."
+  ]
+}

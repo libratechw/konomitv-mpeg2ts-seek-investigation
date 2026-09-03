@@ -165,9 +165,10 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 
 順位9はTS packet欠落時に、完了を確認できない末尾pictureだけでなく、同じ蓄積中GOPの正常な先行pictureまで破棄する範囲を縮めます。
-実在する破損区間のオフライン変換では、出力sampleが34→41へ増え、最大表示間隔が567.233→300.300msへ短縮しました。
+同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから33.367msへ縮まり、Chromeのdrop counterは17から6へ減りました。
+候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
-field pair、open GOP、画素の正常性、ブラウザー上のA/V同期は未確認なので、integrationにはまだ含めていません。[条件と結果](results/nogizaka-defect-preserve-complete-pictures.json)を参照してください。
+field pair、open GOP、画素の正常性、ブラウザー上のA/V同期、異常TSの1時間条件は未確認なので、integrationにはまだ含めていません。[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。

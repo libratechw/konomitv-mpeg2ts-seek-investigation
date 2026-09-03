@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 2,
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "defectMediaTime": 125.0249
+  },
+  "build": {
+    "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
+    "distHash": "04306641753016a51c138518fa3aaeec2a11056d5621ecc3844c56585fd45d03",
+    "asset": "PlayerController-B8RHo49u.js"
+  },
+  "detectedInputGap": {
+    "spansKnownDefect": true,
+    "beforeMediaTime": 125.019355,
+    "afterMediaTime": 125.052722,
+    "mediaTimeDeltaMs": 33.36699999999837,
+    "callbackIntervalMs": 30,
+    "startsAtMs": 3596.100000023842,
+    "endsAtMs": 3626.100000023842
+  },
+  "displayRecovery": {
+    "fatalDefinitionMs": 2000,
+    "fatalStop": false,
+    "stableDrawCount": 8,
+    "maximumStableIntervalMs": 50,
+    "minimumStableSpanMs": 100,
+    "stableConfirmationMs": 145,
+    "firstStableDrawAfterGapMs": 30.200000047683716,
+    "largestSurroundingDrawGapMs": 23.100000023841858
+  },
+  "cadenceRecovery": {
+    "expectedDrawFps": 59.94005994005994,
+    "expectedFpsToleranceRatio": 0.01,
+    "qualifyingWindowMs": 3000,
+    "found": true,
+    "firstQualifyingWindowStartsAfterGapMs": 596.6000000238419,
+    "confirmedAfterGapMs": 3616.100000023842,
+    "firstQualifyingWindow": {
+      "drawCount": 182,
+      "durationMs": 3019.5,
+      "drawFps": 59.943699287961586,
+      "fpsErrorRatio": 0.00006071645415914032,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": 22.299999952316284
+    },
+    "trailingWindowTargetMs": 5000,
+    "trailingWindowSufficient": true,
+    "trailingWindow": {
+      "drawCount": 298,
+      "durationMs": 4978.700000047684,
+      "drawFps": 59.65412657865617,
+      "fpsErrorRatio": 0.004770321579419578,
+      "fpsWithinOnePercent": true,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": 33.89999997615814,
+      "browserDroppedFramesDelta": 2,
+      "yadifLateDelta": 1
+    },
+    "expectedRateRecovered": true,
+    "zeroVisibleDropProven": false,
+    "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
+  },
+  "decoderRecovery": {
+    "audioDecodedBytesAdvanced": true,
+    "audioFirstAdvancedAfterGapMs": 4.100000023841858,
+    "audioDecodedBytesTotalDelta": 359032,
+    "videoDecodedBytesTotalDelta": 60373406,
+    "browserDroppedFrames": 6
+  },
+  "streamRecovery": {
+    "windowStartsAt": 15135.799999952316,
+    "windowEndsAt": 26541.199999928474,
+    "playerDroppedPacketsDelta": 0,
+    "playerErrorsDelta": 0,
+    "playerAudioFramesDelta": 516,
+    "playerVideoFramesDelta": 334,
+    "yadifDiscontinuitiesDelta": 0,
+    "yadifDegradedDelta": 0,
+    "yadifLateDelta": 1,
+    "yadifQueueResetDelta": 0,
+    "minimumUnavoidableDropProven": false,
+    "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+  },
+  "unattended": {
+    "userInteractionEvents": [],
+    "playbackErrors": [],
+    "visibilityChanges": [],
+    "passed": true
+  },
+  "audioSync": {
+    "proven": false,
+    "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+  },
+  "cleanup": {
+    "verified": true,
+    "requiredKeys": [
+      "videoPausedBeforeClose",
+      "fullscreenExitedBeforeClose",
+      "testPagesClosed",
+      "chromeStopped",
+      "webapkStopped",
+      "adbForwardRemoved",
+      "containerStopped"
+    ],
+    "observed": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  }
+}
