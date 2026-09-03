@@ -342,6 +342,30 @@ SMB 上なら open/stat/read の往復と cache miss が追加候補になるが
 Worker は変換と並行して入力を先読みし、未変換入力が32 MiBに達すると request を abort、8 MiB以下へ減ると次の byteから再開する。
 このため不要な先読みはあり得るが、常時小さい Range を連発する設計ではない。
 
+### 切断後も続く FileResponse の処理
+
+Starlette 1.6.0 と Uvicorn 0.52.4（httptools、ASGI 2.3）では、client が Range を中断しても、`FileResponse` が要求終端までファイルを読み続けることを再現した。
+16 MiB の合成ファイルを実際の localhost HTTP で配信し、client が3 MiBを受信したところで接続を閉じた。
+
+| 応答の条件 | client が受信した量 | FileResponse が ASGI に渡した総量 |
+| --- | ---: | ---: |
+| 終端なし Range、3 MiBで切断 | 3 MiB | 16 MiB（ファイル末尾まで） |
+| 3 MiBの有限Range、最後まで受信 | 3 MiB | 3 MiB |
+| 4 MiBの有限Range、3 MiBで切断 | 3 MiB | 4 MiB（要求終端まで） |
+| 終端なし Range、切断監視を加えた診断用実装 | 3 MiB | 3 MiB + 64 KiB |
+
+表の右列は、実際の `FileResponse` が `send()` に渡したbodyの合計であり、clientへ届いた量や物理ディスク読み込み量ではない。
+各 `send()` 後に時刻待ちなしでevent loopへ制御を戻し、実際のUvicornとclientに切断を処理させた。[再現コード](scripts/reproduce-file-response-disconnect.py)と[全条件・生値・終了確認](results/file-response-disconnect-http-repro.json)を公開している。
+
+原因は、[FileResponse](https://github.com/Kludex/starlette/blob/1.6.0/starlette/responses.py)が `http.disconnect` を監視せず、[Uvicornのhttptools実装](https://github.com/encode/uvicorn/blob/0.52.4/uvicorn/protocols/http/httptools_impl.py)が切断後の `send()` を例外なしで終了する組合せである。
+このため読み込みループは切断を検出できず、`bytes=offset-` なら末尾まで進む。[Starlette #1301](https://github.com/Kludex/starlette/issues/1301)にも同じ問題の報告がある。
+
+有限Rangeは中断後に残る処理量を制限するが、切断処理自体の修正にはならない。
+サーバー側の切断監視は不要な処理を止める候補として分けて評価する。診断用実装はbackground task、pathsend、multipart、WebSocketを検証しておらず、正式な修正ではない。
+
+この試験はHTTP配信処理の因果関係を示すもので、表示停止の全件がこの原因であることや、修正後のシーク時間を示すものではない。
+実KonomiTVでの反復Rangeとサーバーの論理I/O量を比較し、その後にplayerを通したシーク復帰を検証する。
+
 ## TS 解析、変換、音声待ち
 
 [worker.ts:530](https://github.com/otya128/mpeg2toh264/blob/d5df08ba9c661a5576545d3d30464d8f3bf64639/packages/player/src/worker.ts#L530) は seek 後に新しい `Transcoder` / Rust `Session` を作る。

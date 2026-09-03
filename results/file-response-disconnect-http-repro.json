@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "scriptSha256": "cc8b9cc358767cd04ad16a18d63fd1d594795126317e1c8e4343f84568255d6c",
+  "versions": {
+    "starlette": "1.6.0",
+    "uvicorn": "0.52.4",
+    "httptools": "0.7.1",
+    "anyio": "4.15.0"
+  },
+  "scope": "Linux loopback HTTP with a generated zero-filled file; ASGI body bytes are not disk I/O or bytes delivered to the client. No playback latency claim.",
+  "observer": "Count actual ASGI body messages before delegating to Uvicorn.send; yield once after each send without a timed delay.",
+  "listenerScope": "Diagnostic cancellation around FileResponse.__call__, with no background task, pathsend, multipart, or WebSocket coverage; not a production-ready patch.",
+  "temporaryFixtureRemoved": true,
+  "results": [
+    {
+      "condition": "unbounded-abort",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 16777216,
+      "asgiBodyCalls": 256,
+      "bytesSubmittedAfterClientClose": 13631488,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 5.853086999650259,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "bounded-complete",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-3145727",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3145728,
+      "asgiBodyCalls": 48,
+      "bytesSubmittedAfterClientClose": 0,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.04643900001610746,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "bounded-abort",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-4194303",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 4194304,
+      "asgiBodyCalls": 64,
+      "bytesSubmittedAfterClientClose": 1048576,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.4677440001614741,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "unbounded-disconnect-listener",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3211264,
+      "asgiBodyCalls": 49,
+      "bytesSubmittedAfterClientClose": 65536,
+      "disconnectReceivedByListener": true,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.2361859997108695,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    }
+  ]
+}
