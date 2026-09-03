@@ -81,8 +81,8 @@ blockごとにブラウザーとplayer各層を作り直す別の1時間試験�
 [集計と各blockの生値](results/galaxy-integration-current-v3-one-hour-summary.json)を公開しています。
 
 同じbuildで既知の破損video packetを1回横切ると、利用者操作なしで表示が復帰し、致命的な表示停止はありませんでした。
-ただし、復帰後5秒のcanvas描画は56.41fpsで、期待する59.94fpsの±1%には戻りませんでした。
-音声decodeの進行は確認しましたが、A/V同期と、コマ落ちが入力欠落から避けられない最小範囲であることは未証明です。[単発の異常区間解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)を保存しています。
+復帰途中を除いた末尾5秒のcanvas描画は60.01fpsで、期待する59.94fpsの±1%へ戻り、40ms超の間隔は0回でした。
+一方、同じ窓でChromeのdrop counterが2、YADIFの`late`が1増えています。canvasのdraw呼出しはcompositorの表示そのものではないため、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未証明です。[単発の異常区間解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)を保存しています。
 
 `autoFilm`のcadence維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。

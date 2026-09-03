@@ -671,7 +671,11 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 同じintegrationをsource、dist、KonomiTV revision、fixture、runnerのhashで固定し、無負荷で1時間上限の試験を行った。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,459.837秒で4,644回すべてが2秒以内に安定復帰した。壁時計では3,575.237秒で、致命的な表示停止は0件だった。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-integration-current-v3-one-hour-summary.json)および[5 blockの生値](results/galaxy-integration-current-v3-one-hour-block-000.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
 
-同じbuildで既知の破損video packetを1回横切る15秒traceを取得した。入力rVFCは125.019秒から125.587秒へ567.233ms進み、canvasの最大描画間隔は521.9msだった。表示は安定条件へ863.0msで復帰し、利用者操作、再seek、playback error、visibility変更はなかったため、この単発走行に致命的な表示停止はない。一方、復帰確認後5秒のcanvas描画は56.41fpsで、期待値59.94fpsとの差が5.89%あり、±1%条件を満たさなかった。音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。
+同じbuildで既知の破損video packetを1回横切る15秒traceを取得した。入力rVFCは125.019秒から125.587秒へ567.233ms進み、canvasの最大描画間隔は521.9msだった。表示は安定条件へ863.0msで復帰し、利用者操作、再seek、playback error、visibility変更はなかったため、この単発走行に致命的な表示停止はない。
+
+表示進行の復帰直後にはdecoderの追いつきを含むため、定常cadenceと分けた。3秒以上にわたり期待値の±1%かつ40ms超の間隔0回となる最初の窓は欠陥直前から1,615ms後に始まり、4,627.5ms後に確認できた。trace末尾5秒のcanvas描画は60.01fpsで、期待値59.94fpsとの差は0.11%、40ms超は0回だった。一方、この窓でもChromeのdrop counterが2、YADIFの`late`が1増え、最大描画間隔は30.5msだった。canvasのdraw呼出しはcompositorのscanoutを証明しないため、可視コマ落ち0とは判定しない。
+
+音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 

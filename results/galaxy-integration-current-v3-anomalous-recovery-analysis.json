@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 2,
   "fixture": {
     "name": "nogizaka.ts",
     "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
@@ -26,16 +27,39 @@
     "minimumStableSpanMs": 100,
     "stableConfirmationMs": 863,
     "firstStableDrawAfterGapMs": 647.3999999761581,
-    "largestSurroundingDrawGapMs": 521.9000000953674,
-    "postRecoveryWindowMs": 4999,
-    "minimumPostRecoveryWindowMs": 3000,
-    "postRecoveryWindowSufficient": true,
-    "postRecoveryDrawFps": 56.41128225645129,
+    "largestSurroundingDrawGapMs": 521.9000000953674
+  },
+  "cadenceRecovery": {
     "expectedDrawFps": 59.94005994005994,
-    "postRecoveryFpsErrorRatio": 0.058871774354871016,
-    "postRecoveryFpsWithinOnePercent": false,
-    "postRecoveryDrawIntervalsOver40Ms": 0,
-    "postRecoveryMaximumDrawIntervalMs": 37.10000002384186
+    "expectedFpsToleranceRatio": 0.01,
+    "qualifyingWindowMs": 3000,
+    "found": true,
+    "firstQualifyingWindowStartsAfterGapMs": 1615,
+    "confirmedAfterGapMs": 4627.5,
+    "firstQualifyingWindow": {
+      "drawCount": 180,
+      "durationMs": 3012.5,
+      "drawFps": 59.41908713692946,
+      "fpsErrorRatio": 0.00869156293222678,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": 33.39999997615814
+    },
+    "trailingWindowTargetMs": 5000,
+    "trailingWindowSufficient": true,
+    "trailingWindow": {
+      "drawCount": 300,
+      "durationMs": 4982.699999928474,
+      "drawFps": 60.007626388161455,
+      "fpsErrorRatio": 0.0011272335758269608,
+      "fpsWithinOnePercent": true,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": 30.5,
+      "browserDroppedFramesDelta": 2,
+      "yadifLateDelta": 1
+    },
+    "expectedRateRecovered": true,
+    "zeroVisibleDropProven": false,
+    "zeroVisibleDropReason": "Canvas draw calls do not prove compositor scanout, and a skipped 60 Hz presentation can remain below the 40 ms gap threshold."
   },
   "decoderRecovery": {
     "audioDecodedBytesAdvanced": true,
@@ -46,14 +70,14 @@
   },
   "streamRecovery": {
     "windowStartsAt": 14885.800000071526,
-    "windowEndsAt": 20748.800000071526,
+    "windowEndsAt": 26555.399999976158,
     "playerDroppedPacketsDelta": 0,
     "playerErrorsDelta": 0,
-    "playerAudioFramesDelta": 282,
-    "playerVideoFramesDelta": 184,
+    "playerAudioFramesDelta": 540,
+    "playerVideoFramesDelta": 349,
     "yadifDiscontinuitiesDelta": 1,
     "yadifDegradedDelta": 3,
-    "yadifLateDelta": 5,
+    "yadifLateDelta": 6,
     "yadifQueueResetDelta": 0,
     "minimumUnavoidableDropProven": false,
     "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
