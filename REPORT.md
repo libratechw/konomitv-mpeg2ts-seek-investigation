@@ -344,6 +344,12 @@ Worker は変換と並行して入力を先読みし、未変換入力が32 MiB�
 
 ### 切断後も続く FileResponse の処理
 
+低電力Windowsの実KonomiTVでは、終端なしRangeを3 MiBで中断する操作を200回繰り返すと、3 MiB受信までの時間が最初の20回の中央値76.1msから最後の20回の1,083.1msへ悪化した。
+同じ位置・受信量で3 MiBの有限Rangeを読み切る対照は38.6→35.0msだった。両条件とも新しいbackendで開始し、WindowsのNodeからbackendへ直接接続してChrome、Akebi、変換、MSE、decoderを除外した。
+
+中断条件では、終了10秒後までのbackend論理読み込み増分が84.13GBとなり、client終了後の10秒間だけでも6.23GB増えた。
+有限Rangeの対照は0.629GBで、終了後の追加読み込みは0だった。これはプロセスの論理I/Oであり、物理ディスクやネットワーク転送量ではない。[同条件の全400要求・集計方法・hash・終了確認](results/windows-range-abort-bounded-200.json)を公開している。
+
 Starlette 1.6.0 と Uvicorn 0.52.4（httptools、ASGI 2.3）では、client が Range を中断しても、`FileResponse` が要求終端までファイルを読み続けることを再現した。
 16 MiB の合成ファイルを実際の localhost HTTP で配信し、client が3 MiBを受信したところで接続を閉じた。
 
@@ -365,6 +371,12 @@ Starlette 1.6.0 と Uvicorn 0.52.4（httptools、ASGI 2.3）では、client が 
 
 この試験はHTTP配信処理の因果関係を示すもので、表示停止の全件がこの原因であることや、修正後のシーク時間を示すものではない。
 実KonomiTVでの反復Rangeとサーバーの論理I/O量を比較し、その後にplayerを通したシーク復帰を検証する。
+
+[Starlette候補 `d70956b`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) は、ASGI 2.4より前のHTTP streamingで切断を監視し、ファイルのcloseをキャンセルから保護する。
+HEAD、pathsend、WebSocket、ASGI 2.4以降の送信経路は維持し、正常終了時にも監視taskを終了する。
+
+候補自体を同じHTTP再現に使うと、診断用の外側listenerなしで、終端なしRangeと4 MiB有限Rangeの両方が3 MiB + 64 KiBで終了した。
+Starlette最新main `39fd0ff` に対する切断の12試験は修正前に失敗し、候補では既存試験を含む1,219件が成功、2件が期待された失敗となった。[候補の実HTTP結果・source commit・試験条件](results/file-response-disconnect-starlette-fix.json)を保存している。
 
 ## TS 解析、変換、音声待ち
 

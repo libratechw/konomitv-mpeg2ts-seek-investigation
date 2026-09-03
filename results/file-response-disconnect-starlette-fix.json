@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "scriptSha256": "cc8b9cc358767cd04ad16a18d63fd1d594795126317e1c8e4343f84568255d6c",
+  "versions": {
+    "starlette": "1.6.0",
+    "uvicorn": "0.52.4",
+    "httptools": "0.7.1",
+    "anyio": "4.15.0"
+  },
+  "scope": "Linux loopback HTTP with a generated zero-filled file; ASGI body bytes are not disk I/O or bytes delivered to the client. No playback latency claim. Candidate code includes cancellation-safe file closure; compare the conditions without the diagnostic listener to assess the library fix.",
+  "observer": "Count actual ASGI body messages before delegating to Uvicorn.send; yield once after each send without a timed delay.",
+  "listenerScope": "Diagnostic cancellation around FileResponse.__call__, with no background task, pathsend, multipart, or WebSocket coverage; not a production-ready patch.",
+  "temporaryFixtureRemoved": true,
+  "results": [
+    {
+      "condition": "unbounded-abort",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3211264,
+      "asgiBodyCalls": 49,
+      "bytesSubmittedAfterClientClose": 65536,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.2533369997763657,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "bounded-complete",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-3145727",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3145728,
+      "asgiBodyCalls": 48,
+      "bytesSubmittedAfterClientClose": 0,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.08386899980905582,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "bounded-abort",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-4194303",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3211264,
+      "asgiBodyCalls": 49,
+      "bytesSubmittedAfterClientClose": 65536,
+      "disconnectReceivedByListener": false,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.33676500015644706,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    },
+    {
+      "condition": "unbounded-disconnect-listener",
+      "fixtureBytes": 16777216,
+      "requestedRange": "bytes=0-",
+      "readTargetBytes": 3145728,
+      "asgiBodyBytes": 3211264,
+      "asgiBodyCalls": 49,
+      "bytesSubmittedAfterClientClose": 65536,
+      "disconnectReceivedByListener": true,
+      "asgiSpecVersion": "2.3",
+      "statusLine": "HTTP/1.1 206 Partial Content",
+      "clientBodyBytes": 3145728,
+      "completionAfterCloseMs": 0.28814600000259816,
+      "cleanup": {
+        "serverStopped": true,
+        "socketClosed": true
+      }
+    }
+  ],
+  "sourceCommit": "d70956b1155c9a1af1099fec153a53cd480b730b",
+  "baseCommit": "39fd0ffac25593fce39466320c9a666957ce8b8c",
+  "sourceFileSha256": "3e270531f6eaed4be7076b6ee7632009725fac84f05b2a7818c590c33fae9e8c",
+  "sourceSelection": "The same HTTP reproduction script was run with the candidate checkout on PYTHONPATH; dependencies were unchanged.",
+  "regressionTests": {
+    "command": "python -m pytest tests -q",
+    "passed": 1219,
+    "xfailed": 2,
+    "newDisconnectTestsFailedBeforeFix": 12,
+    "dependencySet": "candidate repository uv.lock, dev group"
+  },
+  "baselineResult": "file-response-disconnect-http-repro.json"
+}

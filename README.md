@@ -137,7 +137,7 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 **P0**は効果を実測で確認し、変更範囲が原因に届いているものです。
 **P1**は正しさを守る修正ですが、実利用での改善量を立証できていないものです。
 
-提出先は[`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264)と[`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264)の2つです。
+提出先は[`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264)、[`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264)、ファイル配信を所有する[`Kludex/starlette`](https://github.com/Kludex/starlette)です。
 tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdistを別コミットにしています。
 
 | | 順位 | branch | 提出先 | source | dist |
@@ -149,8 +149,14 @@ tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdis
 | P0 | 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | tsukumijima | `7ef6696` | `ac2a2a9` |
 | P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | tsukumijima | `2d072f3` | `f3ba99d` |
 | P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | otya128 | `f8ab9c7` | — |
+| P1 | 8 | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | Kludex/starlette | `d70956b` | — |
 
-各修正の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
+順位1〜7の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
+
+順位8は、切断済みのファイル応答が末尾まで読み続ける問題を止めます。
+16 MiBのHTTP再現では、3 MiB受信後の切断に対するASGI処理量が16 MiBから3 MiB + 64 KiBへ減りましたが、実KonomiTVの表示復帰への効果は未測定です。変更はFileResponseのtaskキャンセルとファイルcloseに限られ、レビュー負荷は中、保守対象はASGIの切断・終了処理です。[条件と根拠](REPORT.md#切断後も続く-fileresponse-の処理)を参照してください。
+
+順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
