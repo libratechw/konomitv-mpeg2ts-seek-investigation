@@ -30,11 +30,26 @@
     },
     "candidate": {
       "sourceCommit": "f27442d",
-      "distCommit": "f80154f",
+      "testCommit": "27eed22",
+      "measuredDistCommit": "f80154f",
+      "currentDistCommit": "e36dd0b",
+      "currentRuntimeByteIdenticalToMeasured": true,
       "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
       "distHash": "04306641753016a51c138518fa3aaeec2a11056d5621ecc3844c56585fd45d03",
       "asset": "PlayerController-B8RHo49u.js",
       "assetSha256": "646994e114d1d11231a56ef7e281766b076b9241068bde3469e8ff59e64ad054"
+    }
+  },
+  "candidateTestVerification": {
+    "commit": "e36dd0b",
+    "commands": [
+      "cargo fmt --check",
+      "cargo test --release"
+    ],
+    "result": {
+      "passed": 239,
+      "failed": 0,
+      "fieldAndOpenGopTransportLossTestPassed": true
     }
   },
   "runOrder": [
@@ -589,6 +604,6 @@
     "Two runs per build do not prove the one-hour anomalous-TS acceptance condition.",
     "The trace does not prove compositor scanout or audible A/V synchronization.",
     "The minimum unavoidable drop set is not identified.",
-    "Field-pair, open-GOP, pixel-integrity, and other defect patterns remain unverified."
+    "Fixed interlaced and open-GOP fixtures pass Session regression tests, but real damaged field-pair/open-GOP browser cases, pixel integrity, and other defect patterns remain unverified."
   ]
 }
