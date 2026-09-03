@@ -17,6 +17,14 @@ FIXTURE_SHA = "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
 START = 200484140
 LENGTH = 3760000
 VIDEO_PID = 256
+DEFECT_PICTURE_PTS_90K = 502_108_869
+
+
+def read_bits(data, start, length):
+    value = 0
+    for offset in range(start, start + length):
+        value = (value << 1) | ((data[offset // 8] >> (7 - offset % 8)) & 1)
+    return value
 
 
 def inspect(data):
@@ -65,7 +73,43 @@ def inspect(data):
         es.extend(packet[payload:])
     map_offsets = [item[0] for item in mapping]
     pes_offsets = [item[0] for item in pes]
+    start_codes = [(match.start(), match.group(1)[0])
+                   for match in re.finditer(b"\x00\x00\x01(.)", es, re.DOTALL)]
+    picture_coding = {}
+    current_gop = None
+    for index, (at, code) in enumerate(start_codes):
+        if code == 0xB8:
+            payload = es[at + 4:at + 8]
+            current_gop = {
+                "esByteOffset": at,
+                "closedGop": bool(read_bits(payload, 25, 1)),
+                "brokenLink": bool(read_bits(payload, 26, 1)),
+            }
+            continue
+        if code != 0x00:
+            continue
+        coding = {"gop": current_gop}
+        for extension_at, extension_code in start_codes[index + 1:]:
+            if extension_code in (0x00, 0xB3, 0xB8):
+                break
+            if extension_code != 0xB5:
+                continue
+            payload = es[extension_at + 4:extension_at + 10]
+            if read_bits(payload, 0, 4) != 8:
+                continue
+            coding.update({
+                "pictureStructure": {
+                    1: "top-field", 2: "bottom-field", 3: "frame",
+                }[read_bits(payload, 22, 2)],
+                "progressiveFrame": bool(read_bits(payload, 32, 1)),
+            })
+            break
+        if "pictureStructure" not in coding:
+            raise ValueError("picture coding extension not found")
+        picture_coding[at] = coding
+
     pictures = []
+    picture_records = []
     for match in re.finditer(b"\x00\x00\x01\x00", es):
         at = match.start()
         index = bisect.bisect_right(pes_offsets, at) - 1
@@ -76,10 +120,47 @@ def inspect(data):
         kind = (bits >> 3) & 7
         if kind not in (1, 2, 3):
             raise ValueError("invalid picture type")
-        pictures.append({"pictureByteOffset": source[1] + at - source[0],
-                         "pesByteOffset": pes[index][1], "pts90k": pes[index][2],
-                         "type": "?IPB"[kind], "temporalReference": bits >> 6})
-    return anomalies, pictures
+        picture = {"pictureByteOffset": source[1] + at - source[0],
+                   "pesByteOffset": pes[index][1], "pts90k": pes[index][2],
+                   "type": "?IPB"[kind], "temporalReference": bits >> 6}
+        pictures.append(picture)
+        picture_records.append((picture, picture_coding[at]))
+    defect_records = [
+        record for record in picture_records
+        if record[0]["pts90k"] == DEFECT_PICTURE_PTS_90K
+    ]
+    if len(defect_records) != 1:
+        raise ValueError("fixed defect picture is missing or ambiguous")
+    defect_record = defect_records[0]
+    defect_picture, coding = defect_record
+    gop = coding["gop"]
+    if gop is None:
+        raise ValueError("defect picture has no GOP header in the fixed window")
+    same_gop = [picture for picture, candidate_coding in picture_records
+                if candidate_coding["gop"] is gop]
+    intra_temporal_reference = next(
+        picture["temporalReference"] for picture in same_gop
+        if picture["type"] == "I"
+    )
+    leading_b = [
+        picture["temporalReference"] for picture in same_gop
+        if picture["type"] == "B"
+        and picture["temporalReference"] < intra_temporal_reference
+    ]
+    gop_source = mapping[bisect.bisect_right(map_offsets, gop["esByteOffset"]) - 1]
+    defect_picture_coding = {
+        **defect_picture,
+        "pictureStructure": coding["pictureStructure"],
+        "progressiveFrame": coding["progressiveFrame"],
+        "gopHeaderByteOffset": (
+            gop_source[1] + gop["esByteOffset"] - gop_source[0]
+        ),
+        "closedGop": gop["closedGop"],
+        "brokenLink": gop["brokenLink"],
+        "leadingBPictureTemporalReferences": leading_b,
+        "openGopConfirmed": not gop["closedGop"] and bool(leading_b),
+    }
+    return anomalies, pictures, defect_picture_coding
 
 
 def main():
@@ -94,7 +175,7 @@ def main():
         data = source.read(LENGTH)
     if len(data) != LENGTH:
         raise ValueError("short read")
-    anomalies, pictures = inspect(data)
+    anomalies, pictures, defect_picture_coding = inspect(data)
     command = ["ffprobe", "-v", "warning", "-f", "mpegts", "-i", "pipe:0",
                "-select_streams", "v:0", "-show_frames", "-show_entries",
                "frame=pts,pkt_pos,pict_type", "-of", "json"]
@@ -112,6 +193,7 @@ def main():
         "window": {"byteStart": START, "byteLength": LENGTH,
                    "sha256": hashlib.sha256(data).hexdigest()},
         "videoPid": VIDEO_PID, "continuityAnomalies": anomalies,
+        "defectPictureCoding": defect_picture_coding,
         "pictures": local, "ffprobeCrossCheckCount": len(local),
         "ffprobeVersion": subprocess.check_output(["ffprobe", "-version"], text=True).splitlines()[0],
         "ffprobeFrames": frames,
@@ -120,6 +202,7 @@ def main():
             "Counter gaps give a missing count modulo 16, not the exact number of lost packets.",
             "Only the fixed byte window was inspected for transport anomalies.",
             "ffprobe may conceal damage; decoded frames do not prove undamaged pixels.",
+            "A frame picture with progressive_frame=0 is interlaced-coded, but it is not a field picture.",
             "The byte window starts mid-stream; startup warnings are not additional fixture defects.",
             "This does not prove browser drop attribution or minimum recoverable frame loss.",
         ],

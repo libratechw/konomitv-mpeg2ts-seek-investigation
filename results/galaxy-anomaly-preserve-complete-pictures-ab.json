@@ -604,6 +604,6 @@
     "Two runs per build do not prove the one-hour anomalous-TS acceptance condition.",
     "The trace does not prove compositor scanout or audible A/V synchronization.",
     "The minimum unavoidable drop set is not identified.",
-    "Fixed interlaced and open-GOP fixtures pass Session regression tests, but real damaged field-pair/open-GOP browser cases, pixel integrity, and other defect patterns remain unverified."
+    "Fixed interlaced and open-GOP fixtures pass Session regression tests, and this real damaged frame picture is inside a confirmed open GOP. Real damaged field-picture browser cases, pixel integrity, and other defect patterns remain unverified."
   ]
 }

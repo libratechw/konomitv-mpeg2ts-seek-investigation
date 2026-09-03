@@ -727,9 +727,10 @@
     "Only the fixed byte window was inspected for transport anomalies.",
     "ffprobe may conceal damage; decoded frames do not prove undamaged pixels.",
     "The byte window starts mid-stream; startup warnings are not additional fixture defects.",
-    "This does not prove browser drop attribution or minimum recoverable frame loss."
+    "This does not prove browser drop attribution or minimum recoverable frame loss.",
+    "A frame picture with progressive_frame=0 is interlaced-coded, but it is not a field picture."
   ],
-  "scriptSha256": "c32aaa99bcc2c75b5f368b1389d960acc7925fc1babfa91f1f4d022571b66675",
+  "scriptSha256": "06d8d5226f376434bdaa3604b1a2dbf1db5650c9d32299e7a3032cabec5aaf1d",
   "interpretation": {
     "transportLoss": {
       "byteOffset": 202401364,
@@ -737,10 +738,19 @@
       "pictureType": "B",
       "temporalReference": 7,
       "pts90k": 502108869,
-      "relativeToVideoStartSeconds": 125.05826633333345
+      "relativeToVideoStartSeconds": 125.05826633333345,
+      "pictureStructure": "frame",
+      "progressiveFrame": false,
+      "gopHeaderByteOffset": 201727381,
+      "closedGop": false,
+      "leadingBPictureTemporalReferences": [
+        0,
+        1
+      ],
+      "openGopConfirmed": true
     },
     "ffprobePacketPositionCaveat": "The earlier corrupt-video-packet report names PES position 202364140 (B6). The raw continuity hole is inside the next PES at 202392340 (B7); do not treat the demux packet position as the missing 188-byte TS packet location.",
-    "recoverability": "A B picture is not a forward reference for subsequent MPEG-2 pictures. This local evidence motivates preserving intact pictures across a damaged B PES; actual converter output and pixel equivalence still require testing.",
+    "recoverability": "The damaged B picture is a frame picture inside a confirmed open GOP. A B picture is not a forward reference for subsequent MPEG-2 pictures. This local evidence motivates preserving intact pictures across the damaged B PES; actual converter output and pixel equivalence still require testing.",
     "minimumLossNotProven": true
   },
   "codeEvidence": {
@@ -757,5 +767,22 @@
       }
     },
     "behavior": "A mid-PES continuity loss discards that PES and marks damaged_previous_pes. Session::ingest_packet passes the marker to Mpeg2GopStream::discard_pending, clearing the accumulated GOP rather than only the missing picture."
+  },
+  "defectPictureCoding": {
+    "pictureByteOffset": 202392358,
+    "pesByteOffset": 202392340,
+    "pts90k": 502108869,
+    "type": "B",
+    "temporalReference": 7,
+    "pictureStructure": "frame",
+    "progressiveFrame": false,
+    "gopHeaderByteOffset": 201727381,
+    "closedGop": false,
+    "brokenLink": false,
+    "leadingBPictureTemporalReferences": [
+      0,
+      1
+    ],
+    "openGopConfirmed": true
   }
 }

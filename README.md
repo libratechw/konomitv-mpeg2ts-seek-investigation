@@ -168,7 +168,7 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから33.367msへ縮まり、Chromeのdrop counterは17から6へ減りました。
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。実在するfield pair・open GOP破損、画素の正常性、ブラウザー上のA/V同期、異常TSの1時間条件は未確認なので、integrationにはまだ含めていません。[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。実在するfield picture破損、画素の正常性、ブラウザー上のA/V同期、異常TSの1時間条件は未確認なので、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
