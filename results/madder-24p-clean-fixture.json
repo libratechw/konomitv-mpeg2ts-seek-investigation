@@ -4,7 +4,7 @@
   "ffmpeg": "8.1.2",
   "source": {
     "name": "2026-08-28_MADDER(マダー) #08 乃木坂46五百城茉央、flumpool山村隆太.ts",
-    "localPath": "/data/ssd/konomitv-seek-fixtures/madder.ts",
+    "fixtureFile": "madder.ts",
     "sizeBytes": 3115609884,
     "sha256": "894c063b789a5bff24ec6441883ec6b11a024e553d62c2d367ef8123cfe9178e",
     "copyVerification": "The local SSD copy and the read-only mounted source produced the same SHA-256 in this run.",
@@ -41,7 +41,7 @@
   },
   "fixture": {
     "name": "madder-24p-clean.ts",
-    "path": "/data/ssd/konomitv-seek-fixtures/madder-24p-clean.ts",
+    "file": "madder-24p-clean.ts",
     "cutCommand": "ffmpeg -hide_banner -loglevel warning -i SOURCE -ss 1325 -t 172.8 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
     "requestedSourceStartSeconds": 1325,
     "requestedSourceEndSeconds": 1497.8,
