@@ -1,0 +1,1989 @@
+{
+  "schemaVersion": 1,
+  "scope": "Windows low-power auxiliary condition; Node on the same Windows host requests the isolated KonomiTV backend directly. No Chrome, Akebi proxy, decoder, or player in the request path. Not a seek latency measurement.",
+  "conditions": {
+    "count": 200,
+    "wantedBytes": 3145728,
+    "gapMs": 50,
+    "seed": 20260921,
+    "runtimeReset": "Fresh backend process for each mode",
+    "powerMode": "Best power efficiency"
+  },
+  "method": {
+    "firstAndLast": "Median of first 20 and last 20 samples in original request order",
+    "slope": "OLS: sum((index-meanIndex)*(value-meanValue))/sum((index-meanIndex)^2)",
+    "counter": "Win32_Process logical read transfers for the backend process, not physical disk or network bytes"
+  },
+  "baseline": {
+    "file": "windows-range-abort-bounded-200.json",
+    "sha256": "52dc2cfb321e70ebd3601fe059ed3935e445cc29e90b86a3c22eca7df711de56",
+    "runMode": "abort"
+  },
+  "candidate": {
+    "commit": "d70956b1155c9a1af1099fec153a53cd480b730b",
+    "baseCommit": "39fd0ff",
+    "responsesSha256": "3e270531f6eaed4be7076b6ee7632009725fac84f05b2a7818c590c33fae9e8c",
+    "baselineResponsesSha256": "10a5f318bb014296e57d9a3f6ffa51d478e21b07d5bf978597dba2ec9dc21e4a",
+    "application": "Only starlette/responses.py replaced in the isolated environment; same player, dependencies and request sequence. No bounded Range change.",
+    "dependencyVersions": {
+      "python": "3.11.15",
+      "starlettePackageMetadata": "1.6.0 (responses.py replaced by candidate)",
+      "uvicorn": "0.52.4",
+      "httptools": "0.8.0",
+      "anyio": "4.14.2",
+      "fastapi": "0.136.3"
+    },
+    "raw": {
+      "mode": "abort",
+      "count": 200,
+      "wantedBytes": 3145728,
+      "gapMs": 50,
+      "seed": 20260921,
+      "totalBytes": 3066534364,
+      "samples": [
+        {
+          "index": 0,
+          "offset": 542568431,
+          "bytesRead": 3145728,
+          "responseMs": 21.659699999999987,
+          "firstByteMs": 23.268699999999995,
+          "readMs": 26.224999999999994,
+          "totalMs": 49.49369999999999
+        },
+        {
+          "index": 1,
+          "offset": 1816251132,
+          "bytesRead": 3145728,
+          "responseMs": 146.40120000000002,
+          "firstByteMs": 147.54840000000002,
+          "readMs": 21.52940000000001,
+          "totalMs": 169.07780000000002
+        },
+        {
+          "index": 2,
+          "offset": 558426845,
+          "bytesRead": 3145728,
+          "responseMs": 7.527999999999963,
+          "firstByteMs": 8.501199999999983,
+          "readMs": 21.76819999999998,
+          "totalMs": 30.269399999999962
+        },
+        {
+          "index": 3,
+          "offset": 1811547514,
+          "bytesRead": 3145728,
+          "responseMs": 6.7374999999999545,
+          "firstByteMs": 7.981800000000021,
+          "readMs": 14.94769999999994,
+          "totalMs": 22.929499999999962
+        },
+        {
+          "index": 4,
+          "offset": 548831093,
+          "bytesRead": 3145728,
+          "responseMs": 5.716300000000047,
+          "firstByteMs": 6.500499999999988,
+          "readMs": 18.9461,
+          "totalMs": 25.44659999999999
+        },
+        {
+          "index": 5,
+          "offset": 1688667646,
+          "bytesRead": 3145728,
+          "responseMs": 5.9599000000000615,
+          "firstByteMs": 6.593900000000076,
+          "readMs": 20.46819999999991,
+          "totalMs": 27.062099999999987
+        },
+        {
+          "index": 6,
+          "offset": 940259557,
+          "bytesRead": 3145728,
+          "responseMs": 7.14790000000005,
+          "firstByteMs": 8.198200000000043,
+          "readMs": 17.602699999999913,
+          "totalMs": 25.800899999999956
+        },
+        {
+          "index": 7,
+          "offset": 2050533639,
+          "bytesRead": 3145728,
+          "responseMs": 6.076400000000035,
+          "firstByteMs": 6.7485000000000355,
+          "readMs": 15.970000000000027,
+          "totalMs": 22.718500000000063
+        },
+        {
+          "index": 8,
+          "offset": 1071868750,
+          "bytesRead": 3145728,
+          "responseMs": 6.740499999999997,
+          "firstByteMs": 7.891200000000026,
+          "readMs": 18.444399999999973,
+          "totalMs": 26.3356
+        },
+        {
+          "index": 9,
+          "offset": 2199362294,
+          "bytesRead": 3145728,
+          "responseMs": 8.177900000000136,
+          "firstByteMs": 9.301400000000058,
+          "readMs": 16.16800000000012,
+          "totalMs": 25.469400000000178
+        },
+        {
+          "index": 10,
+          "offset": 571076180,
+          "bytesRead": 3145728,
+          "responseMs": 6.628900000000158,
+          "firstByteMs": 7.462200000000166,
+          "readMs": 18.972299999999905,
+          "totalMs": 26.43450000000007
+        },
+        {
+          "index": 11,
+          "offset": 1980767099,
+          "bytesRead": 3145728,
+          "responseMs": 5.862100000000055,
+          "firstByteMs": 6.5883000000001175,
+          "readMs": 18.405700000000024,
+          "totalMs": 24.994000000000142
+        },
+        {
+          "index": 12,
+          "offset": 1046904812,
+          "bytesRead": 3145728,
+          "responseMs": 6.273800000000165,
+          "firstByteMs": 6.956699999999955,
+          "readMs": 14.7179000000001,
+          "totalMs": 21.674600000000055
+        },
+        {
+          "index": 13,
+          "offset": 1959353146,
+          "bytesRead": 3145728,
+          "responseMs": 7.460900000000038,
+          "firstByteMs": 8.497900000000072,
+          "readMs": 17.55880000000002,
+          "totalMs": 26.05670000000009
+        },
+        {
+          "index": 14,
+          "offset": 908319156,
+          "bytesRead": 3145728,
+          "responseMs": 6.483799999999974,
+          "firstByteMs": 7.757899999999836,
+          "readMs": 17.11290000000008,
+          "totalMs": 24.870799999999917
+        },
+        {
+          "index": 15,
+          "offset": 1755498820,
+          "bytesRead": 3145728,
+          "responseMs": 5.518399999999929,
+          "firstByteMs": 6.362699999999904,
+          "readMs": 15.62720000000013,
+          "totalMs": 21.989900000000034
+        },
+        {
+          "index": 16,
+          "offset": 495933480,
+          "bytesRead": 3145728,
+          "responseMs": 6.872100000000046,
+          "firstByteMs": 7.834299999999985,
+          "readMs": 18.282799999999952,
+          "totalMs": 26.117099999999937
+        },
+        {
+          "index": 17,
+          "offset": 2130316785,
+          "bytesRead": 3145728,
+          "responseMs": 7.659799999999905,
+          "firstByteMs": 8.878999999999905,
+          "readMs": 18.866899999999987,
+          "totalMs": 27.745899999999892
+        },
+        {
+          "index": 18,
+          "offset": 742123404,
+          "bytesRead": 3145728,
+          "responseMs": 6.507399999999961,
+          "firstByteMs": 7.672399999999925,
+          "readMs": 20.411600000000135,
+          "totalMs": 28.08400000000006
+        },
+        {
+          "index": 19,
+          "offset": 2295710859,
+          "bytesRead": 3145728,
+          "responseMs": 5.998699999999872,
+          "firstByteMs": 6.817800000000034,
+          "readMs": 29.325599999999895,
+          "totalMs": 36.14339999999993
+        },
+        {
+          "index": 20,
+          "offset": 538439419,
+          "bytesRead": 3145728,
+          "responseMs": 6.684799999999996,
+          "firstByteMs": 7.672800000000052,
+          "readMs": 18.205999999999904,
+          "totalMs": 25.878799999999956
+        },
+        {
+          "index": 21,
+          "offset": 1892233563,
+          "bytesRead": 3145728,
+          "responseMs": 5.811300000000074,
+          "firstByteMs": 6.831200000000081,
+          "readMs": 13.463199999999915,
+          "totalMs": 20.294399999999996
+        },
+        {
+          "index": 22,
+          "offset": 863243536,
+          "bytesRead": 3145728,
+          "responseMs": 5.871600000000399,
+          "firstByteMs": 6.5788000000002285,
+          "readMs": 14.254599999999755,
+          "totalMs": 20.833399999999983
+        },
+        {
+          "index": 23,
+          "offset": 1978463668,
+          "bytesRead": 3145728,
+          "responseMs": 6.602599999999711,
+          "firstByteMs": 7.557999999999993,
+          "readMs": 19.939899999999852,
+          "totalMs": 27.497899999999845
+        },
+        {
+          "index": 24,
+          "offset": 930141922,
+          "bytesRead": 3145728,
+          "responseMs": 6.3180999999999585,
+          "firstByteMs": 6.846599999999853,
+          "readMs": 13.473000000000411,
+          "totalMs": 20.319600000000264
+        },
+        {
+          "index": 25,
+          "offset": 1900123701,
+          "bytesRead": 3145728,
+          "responseMs": 6.229699999999866,
+          "firstByteMs": 7.3880999999996675,
+          "readMs": 15.120700000000397,
+          "totalMs": 22.508800000000065
+        },
+        {
+          "index": 26,
+          "offset": 575223808,
+          "bytesRead": 3145728,
+          "responseMs": 6.866099999999733,
+          "firstByteMs": 7.729899999999816,
+          "readMs": 13.552299999999832,
+          "totalMs": 21.282199999999648
+        },
+        {
+          "index": 27,
+          "offset": 1769479370,
+          "bytesRead": 3145728,
+          "responseMs": 7.01969999999983,
+          "firstByteMs": 7.772699999999986,
+          "readMs": 17.51170000000002,
+          "totalMs": 25.284400000000005
+        },
+        {
+          "index": 28,
+          "offset": 512074820,
+          "bytesRead": 3145728,
+          "responseMs": 5.98030000000017,
+          "firstByteMs": 6.784500000000207,
+          "readMs": 14.679599999999937,
+          "totalMs": 21.464100000000144
+        },
+        {
+          "index": 29,
+          "offset": 2212604115,
+          "bytesRead": 3145728,
+          "responseMs": 6.304800000000341,
+          "firstByteMs": 7.0067000000003645,
+          "readMs": 16.299999999999727,
+          "totalMs": 23.30670000000009
+        },
+        {
+          "index": 30,
+          "offset": 671071076,
+          "bytesRead": 3145728,
+          "responseMs": 5.5219999999999345,
+          "firstByteMs": 6.371299999999792,
+          "readMs": 14.813100000000304,
+          "totalMs": 21.184400000000096
+        },
+        {
+          "index": 31,
+          "offset": 1785891667,
+          "bytesRead": 3145728,
+          "responseMs": 7.289900000000216,
+          "firstByteMs": 8.251400000000103,
+          "readMs": 14.268599999999878,
+          "totalMs": 22.519999999999982
+        },
+        {
+          "index": 32,
+          "offset": 987549268,
+          "bytesRead": 3145728,
+          "responseMs": 5.9059000000002015,
+          "firstByteMs": 6.7215000000001055,
+          "readMs": 13.760299999999916,
+          "totalMs": 20.48180000000002
+        },
+        {
+          "index": 33,
+          "offset": 2172534187,
+          "bytesRead": 3145728,
+          "responseMs": 6.0253999999999905,
+          "firstByteMs": 6.794399999999769,
+          "readMs": 14.015400000000227,
+          "totalMs": 20.809799999999996
+        },
+        {
+          "index": 34,
+          "offset": 613753797,
+          "bytesRead": 3145728,
+          "responseMs": 7.574200000000019,
+          "firstByteMs": 8.674800000000232,
+          "readMs": 18.05159999999978,
+          "totalMs": 26.726400000000012
+        },
+        {
+          "index": 35,
+          "offset": 2134566321,
+          "bytesRead": 3145728,
+          "responseMs": 5.847700000000259,
+          "firstByteMs": 6.660000000000309,
+          "readMs": 16.797700000000077,
+          "totalMs": 23.457700000000386
+        },
+        {
+          "index": 36,
+          "offset": 1016648059,
+          "bytesRead": 3145728,
+          "responseMs": 6.1240999999999985,
+          "firstByteMs": 6.916899999999714,
+          "readMs": 12.544499999999971,
+          "totalMs": 19.461399999999685
+        },
+        {
+          "index": 37,
+          "offset": 1924511165,
+          "bytesRead": 3145728,
+          "responseMs": 5.5974999999998545,
+          "firstByteMs": 6.484399999999823,
+          "readMs": 13.880200000000059,
+          "totalMs": 20.364599999999882
+        },
+        {
+          "index": 38,
+          "offset": 851438676,
+          "bytesRead": 3145728,
+          "responseMs": 6.03229999999985,
+          "firstByteMs": 6.929099999999835,
+          "readMs": 15.601700000000164,
+          "totalMs": 22.5308
+        },
+        {
+          "index": 39,
+          "offset": 2028191784,
+          "bytesRead": 3145728,
+          "responseMs": 6.015599999999722,
+          "firstByteMs": 6.69439999999986,
+          "readMs": 14.966300000000047,
+          "totalMs": 21.660699999999906
+        },
+        {
+          "index": 40,
+          "offset": 865904216,
+          "bytesRead": 3145728,
+          "responseMs": 6.153200000000197,
+          "firstByteMs": 6.8746000000001,
+          "readMs": 13.151600000000144,
+          "totalMs": 20.026200000000244
+        },
+        {
+          "index": 41,
+          "offset": 2008316192,
+          "bytesRead": 3145728,
+          "responseMs": 6.098399999999856,
+          "firstByteMs": 7.0733000000000175,
+          "readMs": 18.20089999999982,
+          "totalMs": 25.274199999999837
+        },
+        {
+          "index": 42,
+          "offset": 996092940,
+          "bytesRead": 3145728,
+          "responseMs": 6.04989999999998,
+          "firstByteMs": 7.061999999999898,
+          "readMs": 14.027100000000246,
+          "totalMs": 21.089100000000144
+        },
+        {
+          "index": 43,
+          "offset": 2244959445,
+          "bytesRead": 3145728,
+          "responseMs": 5.130200000000059,
+          "firstByteMs": 6.38189999999986,
+          "readMs": 15.230800000000272,
+          "totalMs": 21.61270000000013
+        },
+        {
+          "index": 44,
+          "offset": 753297674,
+          "bytesRead": 3145728,
+          "responseMs": 6.166900000000169,
+          "firstByteMs": 6.858600000000024,
+          "readMs": 16.404199999999946,
+          "totalMs": 23.26279999999997
+        },
+        {
+          "index": 45,
+          "offset": 1819091192,
+          "bytesRead": 3145728,
+          "responseMs": 6.000700000000052,
+          "firstByteMs": 6.8180999999999585,
+          "readMs": 13.757399999999961,
+          "totalMs": 20.57549999999992
+        },
+        {
+          "index": 46,
+          "offset": 1018775151,
+          "bytesRead": 3145728,
+          "responseMs": 6.527000000000044,
+          "firstByteMs": 7.207899999999881,
+          "readMs": 14.308700000000044,
+          "totalMs": 21.516599999999926
+        },
+        {
+          "index": 47,
+          "offset": 1712530667,
+          "bytesRead": 3145728,
+          "responseMs": 6.327900000000227,
+          "firstByteMs": 7.063200000000052,
+          "readMs": 15.413300000000163,
+          "totalMs": 22.476500000000215
+        },
+        {
+          "index": 48,
+          "offset": 584679747,
+          "bytesRead": 3145728,
+          "responseMs": 6.813199999999597,
+          "firstByteMs": 8.303799999999683,
+          "readMs": 17.933799999999792,
+          "totalMs": 26.237599999999475
+        },
+        {
+          "index": 49,
+          "offset": 2201962430,
+          "bytesRead": 3145728,
+          "responseMs": 5.565200000000004,
+          "firstByteMs": 6.600500000000466,
+          "readMs": 12.720899999999347,
+          "totalMs": 19.321399999999812
+        },
+        {
+          "index": 50,
+          "offset": 827950711,
+          "bytesRead": 3145728,
+          "responseMs": 6.725800000000163,
+          "firstByteMs": 7.874899999999798,
+          "readMs": 15.67280000000028,
+          "totalMs": 23.547700000000077
+        },
+        {
+          "index": 51,
+          "offset": 1819995076,
+          "bytesRead": 3145728,
+          "responseMs": 6.543099999999868,
+          "firstByteMs": 7.333099999999831,
+          "readMs": 12.252700000000004,
+          "totalMs": 19.585799999999836
+        },
+        {
+          "index": 52,
+          "offset": 652546048,
+          "bytesRead": 3145728,
+          "responseMs": 4.756399999999303,
+          "firstByteMs": 5.482899999999972,
+          "readMs": 13.819499999999607,
+          "totalMs": 19.30239999999958
+        },
+        {
+          "index": 53,
+          "offset": 2072074391,
+          "bytesRead": 3145728,
+          "responseMs": 5.953099999999722,
+          "firstByteMs": 6.908399999999347,
+          "readMs": 15.013100000000122,
+          "totalMs": 21.92149999999947
+        },
+        {
+          "index": 54,
+          "offset": 788027995,
+          "bytesRead": 3145728,
+          "responseMs": 6.341499999999542,
+          "firstByteMs": 7.142899999999827,
+          "readMs": 15.477899999999863,
+          "totalMs": 22.62079999999969
+        },
+        {
+          "index": 55,
+          "offset": 2218091845,
+          "bytesRead": 3145728,
+          "responseMs": 8.447799999999916,
+          "firstByteMs": 9.501400000000103,
+          "readMs": 13.910399999999754,
+          "totalMs": 23.411799999999857
+        },
+        {
+          "index": 56,
+          "offset": 782756888,
+          "bytesRead": 3145728,
+          "responseMs": 6.005000000000109,
+          "firstByteMs": 6.95470000000023,
+          "readMs": 13.4983000000002,
+          "totalMs": 20.45300000000043
+        },
+        {
+          "index": 57,
+          "offset": 2005941003,
+          "bytesRead": 3145728,
+          "responseMs": 5.497400000000198,
+          "firstByteMs": 6.252800000000207,
+          "readMs": 14.239599999999882,
+          "totalMs": 20.49240000000009
+        },
+        {
+          "index": 58,
+          "offset": 608897069,
+          "bytesRead": 3145728,
+          "responseMs": 6.00840000000062,
+          "firstByteMs": 6.969700000000557,
+          "readMs": 13.633299999999508,
+          "totalMs": 20.603000000000065
+        },
+        {
+          "index": 59,
+          "offset": 2154590732,
+          "bytesRead": 3145728,
+          "responseMs": 5.690300000000207,
+          "firstByteMs": 6.415200000000368,
+          "readMs": 14.478299999999763,
+          "totalMs": 20.89350000000013
+        },
+        {
+          "index": 60,
+          "offset": 593474400,
+          "bytesRead": 3145728,
+          "responseMs": 6.70929999999953,
+          "firstByteMs": 7.455199999999422,
+          "readMs": 13.918099999999868,
+          "totalMs": 21.37329999999929
+        },
+        {
+          "index": 61,
+          "offset": 2165887341,
+          "bytesRead": 3145728,
+          "responseMs": 5.797800000000279,
+          "firstByteMs": 6.763700000000426,
+          "readMs": 14.867199999999684,
+          "totalMs": 21.63090000000011
+        },
+        {
+          "index": 62,
+          "offset": 584615050,
+          "bytesRead": 3145728,
+          "responseMs": 6.330800000000636,
+          "firstByteMs": 7.236400000000685,
+          "readMs": 17.277999999999338,
+          "totalMs": 24.514400000000023
+        },
+        {
+          "index": 63,
+          "offset": 1764224286,
+          "bytesRead": 3145728,
+          "responseMs": 5.440200000000004,
+          "firstByteMs": 6.040299999999661,
+          "readMs": 10.343499999999949,
+          "totalMs": 16.38379999999961
+        },
+        {
+          "index": 64,
+          "offset": 813001416,
+          "bytesRead": 3145728,
+          "responseMs": 5.86410000000069,
+          "firstByteMs": 7.025400000000445,
+          "readMs": 14.67029999999977,
+          "totalMs": 21.695700000000215
+        },
+        {
+          "index": 65,
+          "offset": 1962169584,
+          "bytesRead": 3145728,
+          "responseMs": 5.171299999999974,
+          "firstByteMs": 5.870100000000093,
+          "readMs": 14.417399999999361,
+          "totalMs": 20.287499999999454
+        },
+        {
+          "index": 66,
+          "offset": 731578972,
+          "bytesRead": 3145728,
+          "responseMs": 5.559999999999491,
+          "firstByteMs": 6.431999999999789,
+          "readMs": 15.543400000000474,
+          "totalMs": 21.975400000000263
+        },
+        {
+          "index": 67,
+          "offset": 1790431318,
+          "bytesRead": 3145728,
+          "responseMs": 5.118099999999686,
+          "firstByteMs": 6.22609999999986,
+          "readMs": 13.342099999999846,
+          "totalMs": 19.568199999999706
+        },
+        {
+          "index": 68,
+          "offset": 672615485,
+          "bytesRead": 3145728,
+          "responseMs": 5.775499999999738,
+          "firstByteMs": 6.568400000000111,
+          "readMs": 13.969099999999344,
+          "totalMs": 20.537499999999454
+        },
+        {
+          "index": 69,
+          "offset": 1945981518,
+          "bytesRead": 3145728,
+          "responseMs": 5.318599999999606,
+          "firstByteMs": 6.1556000000000495,
+          "readMs": 16.114800000000287,
+          "totalMs": 22.270400000000336
+        },
+        {
+          "index": 70,
+          "offset": 460013168,
+          "bytesRead": 3145728,
+          "responseMs": 6.174099999999271,
+          "firstByteMs": 7.024800000000141,
+          "readMs": 14.948599999999715,
+          "totalMs": 21.973399999999856
+        },
+        {
+          "index": 71,
+          "offset": 1947465951,
+          "bytesRead": 3145728,
+          "responseMs": 5.457900000000336,
+          "firstByteMs": 6.285899999999856,
+          "readMs": 13.736499999999978,
+          "totalMs": 20.022399999999834
+        },
+        {
+          "index": 72,
+          "offset": 627542397,
+          "bytesRead": 3145728,
+          "responseMs": 4.953499999999622,
+          "firstByteMs": 5.987299999999777,
+          "readMs": 16.467099999999846,
+          "totalMs": 22.454399999999623
+        },
+        {
+          "index": 73,
+          "offset": 1975580283,
+          "bytesRead": 3145728,
+          "responseMs": 6.846999999999753,
+          "firstByteMs": 7.477100000000064,
+          "readMs": 13.907999999999447,
+          "totalMs": 21.38509999999951
+        },
+        {
+          "index": 74,
+          "offset": 1051997085,
+          "bytesRead": 3145728,
+          "responseMs": 5.691100000000006,
+          "firstByteMs": 6.980000000000473,
+          "readMs": 18.454499999999825,
+          "totalMs": 25.4345000000003
+        },
+        {
+          "index": 75,
+          "offset": 2102319699,
+          "bytesRead": 3145728,
+          "responseMs": 5.317600000000311,
+          "firstByteMs": 6.360599999999977,
+          "readMs": 13.051099999999678,
+          "totalMs": 19.411699999999655
+        },
+        {
+          "index": 76,
+          "offset": 772198013,
+          "bytesRead": 3145728,
+          "responseMs": 5.129499999999098,
+          "firstByteMs": 5.819499999999607,
+          "readMs": 14.636199999999917,
+          "totalMs": 20.455699999999524
+        },
+        {
+          "index": 77,
+          "offset": 2284443780,
+          "bytesRead": 3145728,
+          "responseMs": 5.29740000000038,
+          "firstByteMs": 6.250299999999697,
+          "readMs": 13.523000000000138,
+          "totalMs": 19.773299999999836
+        },
+        {
+          "index": 78,
+          "offset": 462390234,
+          "bytesRead": 3145728,
+          "responseMs": 5.456000000000131,
+          "firstByteMs": 6.467599999999948,
+          "readMs": 12.914700000000266,
+          "totalMs": 19.382300000000214
+        },
+        {
+          "index": 79,
+          "offset": 1806548849,
+          "bytesRead": 3145728,
+          "responseMs": 6.862999999999374,
+          "firstByteMs": 7.75669999999991,
+          "readMs": 14.694999999999709,
+          "totalMs": 22.45169999999962
+        },
+        {
+          "index": 80,
+          "offset": 575626498,
+          "bytesRead": 3145728,
+          "responseMs": 5.703300000000127,
+          "firstByteMs": 6.5812000000005355,
+          "readMs": 14.291999999999462,
+          "totalMs": 20.873199999999997
+        },
+        {
+          "index": 81,
+          "offset": 2245691301,
+          "bytesRead": 3145728,
+          "responseMs": 7.027399999999943,
+          "firstByteMs": 7.777699999999641,
+          "readMs": 13.116399999999885,
+          "totalMs": 20.894099999999526
+        },
+        {
+          "index": 82,
+          "offset": 649438563,
+          "bytesRead": 3145728,
+          "responseMs": 7.293700000000172,
+          "firstByteMs": 8.021200000000135,
+          "readMs": 13.162800000000061,
+          "totalMs": 21.184000000000196
+        },
+        {
+          "index": 83,
+          "offset": 2056949050,
+          "bytesRead": 3145728,
+          "responseMs": 5.544599999999264,
+          "firstByteMs": 7.171699999999873,
+          "readMs": 15.144599999999627,
+          "totalMs": 22.3162999999995
+        },
+        {
+          "index": 84,
+          "offset": 924099589,
+          "bytesRead": 3145728,
+          "responseMs": 6.100400000000263,
+          "firstByteMs": 7.077299999999923,
+          "readMs": 13.383100000000013,
+          "totalMs": 20.460399999999936
+        },
+        {
+          "index": 85,
+          "offset": 1999271848,
+          "bytesRead": 3145728,
+          "responseMs": 6.15729999999985,
+          "firstByteMs": 7.011400000000322,
+          "readMs": 14.09479999999985,
+          "totalMs": 21.10620000000017
+        },
+        {
+          "index": 86,
+          "offset": 844770996,
+          "bytesRead": 3145728,
+          "responseMs": 5.564800000000105,
+          "firstByteMs": 6.3127000000004045,
+          "readMs": 14.14930000000004,
+          "totalMs": 20.462000000000444
+        },
+        {
+          "index": 87,
+          "offset": 1723278674,
+          "bytesRead": 3145728,
+          "responseMs": 4.88339999999971,
+          "firstByteMs": 5.707799999999224,
+          "readMs": 14.899000000000342,
+          "totalMs": 20.606799999999566
+        },
+        {
+          "index": 88,
+          "offset": 1046328821,
+          "bytesRead": 3145728,
+          "responseMs": 6.900700000000143,
+          "firstByteMs": 7.574700000000121,
+          "readMs": 14.47400000000016,
+          "totalMs": 22.04870000000028
+        },
+        {
+          "index": 89,
+          "offset": 2216374154,
+          "bytesRead": 3145728,
+          "responseMs": 6.48910000000069,
+          "firstByteMs": 7.223899999999958,
+          "readMs": 13.190300000000207,
+          "totalMs": 20.414200000000164
+        },
+        {
+          "index": 90,
+          "offset": 685764442,
+          "bytesRead": 3145728,
+          "responseMs": 7.112600000000384,
+          "firstByteMs": 8.085699999999633,
+          "readMs": 20.376500000000306,
+          "totalMs": 28.46219999999994
+        },
+        {
+          "index": 91,
+          "offset": 1762471076,
+          "bytesRead": 3145728,
+          "responseMs": 6.603800000000774,
+          "firstByteMs": 7.4476000000004206,
+          "readMs": 13.266300000000228,
+          "totalMs": 20.71390000000065
+        },
+        {
+          "index": 92,
+          "offset": 698923611,
+          "bytesRead": 3145728,
+          "responseMs": 5.757499999999709,
+          "firstByteMs": 6.99159999999938,
+          "readMs": 14.451400000000831,
+          "totalMs": 21.44300000000021
+        },
+        {
+          "index": 93,
+          "offset": 1939529168,
+          "bytesRead": 3145728,
+          "responseMs": 5.736100000000079,
+          "firstByteMs": 7.116899999999987,
+          "readMs": 20.070300000000316,
+          "totalMs": 27.187200000000303
+        },
+        {
+          "index": 94,
+          "offset": 626337984,
+          "bytesRead": 3145728,
+          "responseMs": 6.074399999999514,
+          "firstByteMs": 6.838699999999335,
+          "readMs": 14.630500000000211,
+          "totalMs": 21.469199999999546
+        },
+        {
+          "index": 95,
+          "offset": 1831501860,
+          "bytesRead": 3145728,
+          "responseMs": 6.57129999999961,
+          "firstByteMs": 7.3859999999995125,
+          "readMs": 13.259200000000419,
+          "totalMs": 20.64519999999993
+        },
+        {
+          "index": 96,
+          "offset": 860201154,
+          "bytesRead": 3145728,
+          "responseMs": 5.582599999999729,
+          "firstByteMs": 6.389599999999518,
+          "readMs": 13.77140000000054,
+          "totalMs": 20.161000000000058
+        },
+        {
+          "index": 97,
+          "offset": 2214930591,
+          "bytesRead": 3145728,
+          "responseMs": 6.666000000000167,
+          "firstByteMs": 7.750300000000607,
+          "readMs": 15.537499999999454,
+          "totalMs": 23.28780000000006
+        },
+        {
+          "index": 98,
+          "offset": 590099621,
+          "bytesRead": 3145728,
+          "responseMs": 5.7520999999997,
+          "firstByteMs": 6.438200000000506,
+          "readMs": 14.948999999999614,
+          "totalMs": 21.38720000000012
+        },
+        {
+          "index": 99,
+          "offset": 1954072541,
+          "bytesRead": 3145728,
+          "responseMs": 6.70259999999962,
+          "firstByteMs": 7.417199999999866,
+          "readMs": 13.175099999999475,
+          "totalMs": 20.59229999999934
+        },
+        {
+          "index": 100,
+          "offset": 783415515,
+          "bytesRead": 3145728,
+          "responseMs": 6.400700000000143,
+          "firstByteMs": 7.141600000000835,
+          "readMs": 13.657599999998638,
+          "totalMs": 20.799199999999473
+        },
+        {
+          "index": 101,
+          "offset": 1848321054,
+          "bytesRead": 3145728,
+          "responseMs": 5.919499999999971,
+          "firstByteMs": 6.826399999999921,
+          "readMs": 14.793300000001182,
+          "totalMs": 21.619700000001103
+        },
+        {
+          "index": 102,
+          "offset": 814868367,
+          "bytesRead": 3145728,
+          "responseMs": 5.605299999999261,
+          "firstByteMs": 6.421799999998257,
+          "readMs": 14.08730000000105,
+          "totalMs": 20.509099999999307
+        },
+        {
+          "index": 103,
+          "offset": 2023197510,
+          "bytesRead": 3145728,
+          "responseMs": 7.185300000001007,
+          "firstByteMs": 8.228100000000268,
+          "readMs": 13.951500000001033,
+          "totalMs": 22.1796000000013
+        },
+        {
+          "index": 104,
+          "offset": 816896307,
+          "bytesRead": 3145728,
+          "responseMs": 7.351400000001377,
+          "firstByteMs": 7.9399000000012165,
+          "readMs": 14.177099999998973,
+          "totalMs": 22.11700000000019
+        },
+        {
+          "index": 105,
+          "offset": 2262803258,
+          "bytesRead": 3145728,
+          "responseMs": 6.8606999999992695,
+          "firstByteMs": 7.798999999999069,
+          "readMs": 14.882900000000518,
+          "totalMs": 22.681899999999587
+        },
+        {
+          "index": 106,
+          "offset": 519528793,
+          "bytesRead": 3145728,
+          "responseMs": 5.469100000000253,
+          "firstByteMs": 6.3148999999993976,
+          "readMs": 15.240499999999884,
+          "totalMs": 21.55539999999928
+        },
+        {
+          "index": 107,
+          "offset": 2190475339,
+          "bytesRead": 3145728,
+          "responseMs": 5.966000000000349,
+          "firstByteMs": 6.645500000000538,
+          "readMs": 14.801799999999275,
+          "totalMs": 21.447299999999814
+        },
+        {
+          "index": 108,
+          "offset": 702632953,
+          "bytesRead": 3145728,
+          "responseMs": 6.268500000000131,
+          "firstByteMs": 7.240299999999479,
+          "readMs": 14.299600000000282,
+          "totalMs": 21.53989999999976
+        },
+        {
+          "index": 109,
+          "offset": 2020296266,
+          "bytesRead": 3145728,
+          "responseMs": 5.574500000000626,
+          "firstByteMs": 6.340100000001257,
+          "readMs": 14.576199999999517,
+          "totalMs": 20.916300000000774
+        },
+        {
+          "index": 110,
+          "offset": 986544898,
+          "bytesRead": 3145728,
+          "responseMs": 5.272100000000137,
+          "firstByteMs": 5.96690000000126,
+          "readMs": 14.39639999999963,
+          "totalMs": 20.36330000000089
+        },
+        {
+          "index": 111,
+          "offset": 2179512933,
+          "bytesRead": 3145728,
+          "responseMs": 6.210700000001452,
+          "firstByteMs": 7.148400000000038,
+          "readMs": 14.492300000001705,
+          "totalMs": 21.640700000001743
+        },
+        {
+          "index": 112,
+          "offset": 740391713,
+          "bytesRead": 3145728,
+          "responseMs": 5.326499999999214,
+          "firstByteMs": 6.157900000000154,
+          "readMs": 14.322699999998804,
+          "totalMs": 20.480599999998958
+        },
+        {
+          "index": 113,
+          "offset": 1787410135,
+          "bytesRead": 3145728,
+          "responseMs": 6.116299999999683,
+          "firstByteMs": 7.0085999999992055,
+          "readMs": 13.650799999999435,
+          "totalMs": 20.65939999999864
+        },
+        {
+          "index": 114,
+          "offset": 718729011,
+          "bytesRead": 3145728,
+          "responseMs": 5.276699999998527,
+          "firstByteMs": 6.00249999999869,
+          "readMs": 20.008499999999913,
+          "totalMs": 26.010999999998603
+        },
+        {
+          "index": 115,
+          "offset": 2007705446,
+          "bytesRead": 3145728,
+          "responseMs": 5.51929999999993,
+          "firstByteMs": 6.337700000000041,
+          "readMs": 12.832099999999627,
+          "totalMs": 19.169799999999668
+        },
+        {
+          "index": 116,
+          "offset": 806689156,
+          "bytesRead": 3145728,
+          "responseMs": 9.96979999999894,
+          "firstByteMs": 10.670500000000175,
+          "readMs": 13.762499999998909,
+          "totalMs": 24.432999999999083
+        },
+        {
+          "index": 117,
+          "offset": 1890198785,
+          "bytesRead": 3145728,
+          "responseMs": 5.333199999999124,
+          "firstByteMs": 5.8593999999993684,
+          "readMs": 13.281000000000859,
+          "totalMs": 19.140400000000227
+        },
+        {
+          "index": 118,
+          "offset": 521491029,
+          "bytesRead": 3145728,
+          "responseMs": 10.645199999999022,
+          "firstByteMs": 12.471799999999348,
+          "readMs": 19.221600000000763,
+          "totalMs": 31.69340000000011
+        },
+        {
+          "index": 119,
+          "offset": 2218052966,
+          "bytesRead": 3145728,
+          "responseMs": 7.865300000001298,
+          "firstByteMs": 8.546299999999974,
+          "readMs": 14.822100000001228,
+          "totalMs": 23.368400000001202
+        },
+        {
+          "index": 120,
+          "offset": 847915542,
+          "bytesRead": 3145728,
+          "responseMs": 8.38969999999972,
+          "firstByteMs": 9.155899999999747,
+          "readMs": 14.545799999999872,
+          "totalMs": 23.70169999999962
+        },
+        {
+          "index": 121,
+          "offset": 1802076568,
+          "bytesRead": 3145728,
+          "responseMs": 9.72860000000037,
+          "firstByteMs": 10.688500000000204,
+          "readMs": 14.082000000000335,
+          "totalMs": 24.77050000000054
+        },
+        {
+          "index": 122,
+          "offset": 979338843,
+          "bytesRead": 3145728,
+          "responseMs": 10.936299999999392,
+          "firstByteMs": 12.742999999998574,
+          "readMs": 13.520300000000134,
+          "totalMs": 26.263299999998708
+        },
+        {
+          "index": 123,
+          "offset": 1765711129,
+          "bytesRead": 3145728,
+          "responseMs": 6.785499999999956,
+          "firstByteMs": 7.628399999999601,
+          "readMs": 13.540500000000975,
+          "totalMs": 21.168900000000576
+        },
+        {
+          "index": 124,
+          "offset": 533694151,
+          "bytesRead": 3145728,
+          "responseMs": 6.543499999999767,
+          "firstByteMs": 7.399600000000646,
+          "readMs": 14.064799999998286,
+          "totalMs": 21.464399999998932
+        },
+        {
+          "index": 125,
+          "offset": 1687535056,
+          "bytesRead": 3145728,
+          "responseMs": 9.42489999999998,
+          "firstByteMs": 10.408800000001065,
+          "readMs": 21.63299999999981,
+          "totalMs": 32.041800000000876
+        },
+        {
+          "index": 126,
+          "offset": 978312105,
+          "bytesRead": 3145728,
+          "responseMs": 10.939000000000306,
+          "firstByteMs": 12.670799999999872,
+          "readMs": 16.340500000000247,
+          "totalMs": 29.01130000000012
+        },
+        {
+          "index": 127,
+          "offset": 2065499694,
+          "bytesRead": 3145728,
+          "responseMs": 11.134700000000521,
+          "firstByteMs": 12.879399999999805,
+          "readMs": 13.646199999999226,
+          "totalMs": 26.52559999999903
+        },
+        {
+          "index": 128,
+          "offset": 961910057,
+          "bytesRead": 3145728,
+          "responseMs": 6.584799999998722,
+          "firstByteMs": 7.591499999998632,
+          "readMs": 13.475599999999758,
+          "totalMs": 21.06709999999839
+        },
+        {
+          "index": 129,
+          "offset": 2164605825,
+          "bytesRead": 3145728,
+          "responseMs": 8.072000000000116,
+          "firstByteMs": 8.580400000000736,
+          "readMs": 13.120199999999386,
+          "totalMs": 21.700600000000122
+        },
+        {
+          "index": 130,
+          "offset": 866808581,
+          "bytesRead": 3145728,
+          "responseMs": 10.057699999999386,
+          "firstByteMs": 10.795899999999165,
+          "readMs": 12.887099999999919,
+          "totalMs": 23.682999999999083
+        },
+        {
+          "index": 131,
+          "offset": 1757652693,
+          "bytesRead": 3145728,
+          "responseMs": 6.3474999999998545,
+          "firstByteMs": 7.379299999998693,
+          "readMs": 13.856999999999971,
+          "totalMs": 21.236299999998664
+        },
+        {
+          "index": 132,
+          "offset": 1072744450,
+          "bytesRead": 3145728,
+          "responseMs": 11.58770000000004,
+          "firstByteMs": 13.624900000000707,
+          "readMs": 19.050199999999677,
+          "totalMs": 32.675100000000384
+        },
+        {
+          "index": 133,
+          "offset": 2189126292,
+          "bytesRead": 3145728,
+          "responseMs": 10.387300000000323,
+          "firstByteMs": 12.125500000000102,
+          "readMs": 15.717399999999543,
+          "totalMs": 27.842899999999645
+        },
+        {
+          "index": 134,
+          "offset": 645212915,
+          "bytesRead": 3145728,
+          "responseMs": 10.971299999999246,
+          "firstByteMs": 12.81500000000051,
+          "readMs": 15.21559999999954,
+          "totalMs": 28.03060000000005
+        },
+        {
+          "index": 135,
+          "offset": 1862100620,
+          "bytesRead": 3145728,
+          "responseMs": 10.809900000000198,
+          "firstByteMs": 12.471700000000055,
+          "readMs": 17.413699999999153,
+          "totalMs": 29.88539999999921
+        },
+        {
+          "index": 136,
+          "offset": 742725540,
+          "bytesRead": 3145728,
+          "responseMs": 11.812099999999191,
+          "firstByteMs": 13.602799999998751,
+          "readMs": 15.527299999999741,
+          "totalMs": 29.130099999998492
+        },
+        {
+          "index": 137,
+          "offset": 1730194809,
+          "bytesRead": 3145728,
+          "responseMs": 6.320999999999913,
+          "firstByteMs": 6.990699999998469,
+          "readMs": 13.411700000000565,
+          "totalMs": 20.402399999999034
+        },
+        {
+          "index": 138,
+          "offset": 469153572,
+          "bytesRead": 3145728,
+          "responseMs": 7.02599999999984,
+          "firstByteMs": 7.769399999999223,
+          "readMs": 14.449900000001435,
+          "totalMs": 22.219300000000658
+        },
+        {
+          "index": 139,
+          "offset": 1708924203,
+          "bytesRead": 3145728,
+          "responseMs": 6.071200000000317,
+          "firstByteMs": 7.219499999999243,
+          "readMs": 16.62379999999939,
+          "totalMs": 23.843299999998635
+        },
+        {
+          "index": 140,
+          "offset": 1045524473,
+          "bytesRead": 3145728,
+          "responseMs": 7.076100000000224,
+          "firstByteMs": 7.985199999999168,
+          "readMs": 13.963400000000547,
+          "totalMs": 21.948599999999715
+        },
+        {
+          "index": 141,
+          "offset": 2191001193,
+          "bytesRead": 3145728,
+          "responseMs": 10.39810000000034,
+          "firstByteMs": 12.016200000000026,
+          "readMs": 15.942800000000716,
+          "totalMs": 27.959000000000742
+        },
+        {
+          "index": 142,
+          "offset": 891968692,
+          "bytesRead": 3145728,
+          "responseMs": 10.71349999999984,
+          "firstByteMs": 12.518200000000434,
+          "readMs": 16.08759999999893,
+          "totalMs": 28.605799999999363
+        },
+        {
+          "index": 143,
+          "offset": 2139782471,
+          "bytesRead": 3145728,
+          "responseMs": 10.945700000000215,
+          "firstByteMs": 12.792100000000573,
+          "readMs": 15.37079999999878,
+          "totalMs": 28.162899999999354
+        },
+        {
+          "index": 144,
+          "offset": 630335221,
+          "bytesRead": 3145728,
+          "responseMs": 10.281200000001263,
+          "firstByteMs": 11.769900000001144,
+          "readMs": 16.424599999998463,
+          "totalMs": 28.194499999999607
+        },
+        {
+          "index": 145,
+          "offset": 2126329849,
+          "bytesRead": 3145728,
+          "responseMs": 10.374400000000605,
+          "firstByteMs": 12.092399999999543,
+          "readMs": 16.343700000001263,
+          "totalMs": 28.436100000000806
+        },
+        {
+          "index": 146,
+          "offset": 951858020,
+          "bytesRead": 3145728,
+          "responseMs": 5.304299999999785,
+          "firstByteMs": 6.17529999999897,
+          "readMs": 20.26260000000002,
+          "totalMs": 26.43789999999899
+        },
+        {
+          "index": 147,
+          "offset": 2057298101,
+          "bytesRead": 3145728,
+          "responseMs": 11.704200000000128,
+          "firstByteMs": 13.505300000000716,
+          "readMs": 15.075399999999718,
+          "totalMs": 28.580700000000434
+        },
+        {
+          "index": 148,
+          "offset": 645751113,
+          "bytesRead": 3145728,
+          "responseMs": 6.520799999998417,
+          "firstByteMs": 7.202400000000125,
+          "readMs": 13.810899999998583,
+          "totalMs": 21.013299999998708
+        },
+        {
+          "index": 149,
+          "offset": 1792604415,
+          "bytesRead": 3145728,
+          "responseMs": 10.479600000000573,
+          "firstByteMs": 11.173499999998967,
+          "readMs": 13.099100000001272,
+          "totalMs": 24.27260000000024
+        },
+        {
+          "index": 150,
+          "offset": 806669201,
+          "bytesRead": 3145728,
+          "responseMs": 10.874899999998888,
+          "firstByteMs": 12.70219999999972,
+          "readMs": 15.960699999999633,
+          "totalMs": 28.662899999999354
+        },
+        {
+          "index": 151,
+          "offset": 1711698964,
+          "bytesRead": 3145728,
+          "responseMs": 10.751999999998588,
+          "firstByteMs": 12.22269999999844,
+          "readMs": 15.512400000001435,
+          "totalMs": 27.735099999999875
+        },
+        {
+          "index": 152,
+          "offset": 777304738,
+          "bytesRead": 3145728,
+          "responseMs": 6.995999999999185,
+          "firstByteMs": 7.712399999998524,
+          "readMs": 13.96520000000055,
+          "totalMs": 21.677599999999074
+        },
+        {
+          "index": 153,
+          "offset": 2071700556,
+          "bytesRead": 3145728,
+          "responseMs": 34.822699999998804,
+          "firstByteMs": 35.7510999999995,
+          "readMs": 14.71849999999904,
+          "totalMs": 50.469599999998536
+        },
+        {
+          "index": 154,
+          "offset": 666307773,
+          "bytesRead": 3145728,
+          "responseMs": 11.436499999999796,
+          "firstByteMs": 13.287599999999657,
+          "readMs": 13.726900000001478,
+          "totalMs": 27.014500000001135
+        },
+        {
+          "index": 155,
+          "offset": 1916910280,
+          "bytesRead": 3145728,
+          "responseMs": 10.689300000000003,
+          "firstByteMs": 11.550499999999374,
+          "readMs": 13.14470000000074,
+          "totalMs": 24.695200000000114
+        },
+        {
+          "index": 156,
+          "offset": 630591468,
+          "bytesRead": 3145728,
+          "responseMs": 10.201200000001336,
+          "firstByteMs": 10.927400000000489,
+          "readMs": 14.112999999999374,
+          "totalMs": 25.040399999999863
+        },
+        {
+          "index": 157,
+          "offset": 2053385486,
+          "bytesRead": 3145728,
+          "responseMs": 9.661799999999857,
+          "firstByteMs": 10.335499999999229,
+          "readMs": 18.190700000001016,
+          "totalMs": 28.526200000000244
+        },
+        {
+          "index": 158,
+          "offset": 657443372,
+          "bytesRead": 3145728,
+          "responseMs": 10.244399999999587,
+          "firstByteMs": 12.093800000000556,
+          "readMs": 15.623799999999392,
+          "totalMs": 27.717599999999948
+        },
+        {
+          "index": 159,
+          "offset": 2122066207,
+          "bytesRead": 3145728,
+          "responseMs": 5.56210000000101,
+          "firstByteMs": 6.6766999999999825,
+          "readMs": 15.384200000000419,
+          "totalMs": 22.0609000000004
+        },
+        {
+          "index": 160,
+          "offset": 475100651,
+          "bytesRead": 3145728,
+          "responseMs": 8.541900000000169,
+          "firstByteMs": 9.392099999999118,
+          "readMs": 14.641600000000835,
+          "totalMs": 24.033699999999953
+        },
+        {
+          "index": 161,
+          "offset": 2189230272,
+          "bytesRead": 3145728,
+          "responseMs": 6.58520000000135,
+          "firstByteMs": 7.3672999999998865,
+          "readMs": 13.110400000001391,
+          "totalMs": 20.477700000001278
+        },
+        {
+          "index": 162,
+          "offset": 632077222,
+          "bytesRead": 3145728,
+          "responseMs": 7.232500000000073,
+          "firstByteMs": 8.450699999999415,
+          "readMs": 13.952699999999822,
+          "totalMs": 22.403399999999237
+        },
+        {
+          "index": 163,
+          "offset": 2295428862,
+          "bytesRead": 3145728,
+          "responseMs": 6.289700000001176,
+          "firstByteMs": 7.0218000000004395,
+          "readMs": 13.72149999999965,
+          "totalMs": 20.74330000000009
+        },
+        {
+          "index": 164,
+          "offset": 1023698335,
+          "bytesRead": 3145728,
+          "responseMs": 10.078599999998914,
+          "firstByteMs": 11.637799999998606,
+          "readMs": 14.145400000001246,
+          "totalMs": 25.78319999999985
+        },
+        {
+          "index": 165,
+          "offset": 1887672682,
+          "bytesRead": 3145728,
+          "responseMs": 9.77770000000055,
+          "firstByteMs": 10.527099999999336,
+          "readMs": 13.890199999999822,
+          "totalMs": 24.41729999999916
+        },
+        {
+          "index": 166,
+          "offset": 759854886,
+          "bytesRead": 3145728,
+          "responseMs": 7.182700000001205,
+          "firstByteMs": 8.359400000001187,
+          "readMs": 17.0099999999984,
+          "totalMs": 25.369399999999587
+        },
+        {
+          "index": 167,
+          "offset": 1815023573,
+          "bytesRead": 3145728,
+          "responseMs": 8.449500000000626,
+          "firstByteMs": 9.181899999999587,
+          "readMs": 13.393000000000029,
+          "totalMs": 22.574899999999616
+        },
+        {
+          "index": 168,
+          "offset": 861817995,
+          "bytesRead": 3145728,
+          "responseMs": 7.260299999999916,
+          "firstByteMs": 8.16740000000027,
+          "readMs": 13.60189999999966,
+          "totalMs": 21.76929999999993
+        },
+        {
+          "index": 169,
+          "offset": 1893170501,
+          "bytesRead": 3145728,
+          "responseMs": 11.676699999999983,
+          "firstByteMs": 12.061100000000806,
+          "readMs": 12.04069999999956,
+          "totalMs": 24.101800000000367
+        },
+        {
+          "index": 170,
+          "offset": 850779023,
+          "bytesRead": 3145728,
+          "responseMs": 10.496300000000701,
+          "firstByteMs": 11.60109999999986,
+          "readMs": 13.955900000000838,
+          "totalMs": 25.5570000000007
+        },
+        {
+          "index": 171,
+          "offset": 1826133898,
+          "bytesRead": 3145728,
+          "responseMs": 7.305599999999686,
+          "firstByteMs": 8.069900000000416,
+          "readMs": 12.597899999998845,
+          "totalMs": 20.66779999999926
+        },
+        {
+          "index": 172,
+          "offset": 790678405,
+          "bytesRead": 3145728,
+          "responseMs": 9.708000000000538,
+          "firstByteMs": 10.459999999999127,
+          "readMs": 13.474600000001374,
+          "totalMs": 23.9346000000005
+        },
+        {
+          "index": 173,
+          "offset": 2013389883,
+          "bytesRead": 3145728,
+          "responseMs": 5.668699999998353,
+          "firstByteMs": 6.807199999999284,
+          "readMs": 18.28189999999995,
+          "totalMs": 25.089099999999235
+        },
+        {
+          "index": 174,
+          "offset": 1049922873,
+          "bytesRead": 3145728,
+          "responseMs": 10.782499999999345,
+          "firstByteMs": 11.442399999999907,
+          "readMs": 13.48739999999998,
+          "totalMs": 24.929799999999886
+        },
+        {
+          "index": 175,
+          "offset": 1905023909,
+          "bytesRead": 3145728,
+          "responseMs": 6.780200000001059,
+          "firstByteMs": 7.954400000000533,
+          "readMs": 14.18289999999979,
+          "totalMs": 22.137300000000323
+        },
+        {
+          "index": 176,
+          "offset": 613621131,
+          "bytesRead": 3145728,
+          "responseMs": 9.790999999999258,
+          "firstByteMs": 10.478399999999965,
+          "readMs": 12.935199999999895,
+          "totalMs": 23.41359999999986
+        },
+        {
+          "index": 177,
+          "offset": 1773111071,
+          "bytesRead": 3145728,
+          "responseMs": 7.115200000000186,
+          "firstByteMs": 7.975200000000768,
+          "readMs": 13.389600000000428,
+          "totalMs": 21.364800000001196
+        },
+        {
+          "index": 178,
+          "offset": 1036666813,
+          "bytesRead": 3145728,
+          "responseMs": 6.360399999999572,
+          "firstByteMs": 7.107200000000375,
+          "readMs": 14.98530000000028,
+          "totalMs": 22.092500000000655
+        },
+        {
+          "index": 179,
+          "offset": 2138252505,
+          "bytesRead": 3145728,
+          "responseMs": 11.103499999999258,
+          "firstByteMs": 11.949399999999514,
+          "readMs": 13.677700000000186,
+          "totalMs": 25.6270999999997
+        },
+        {
+          "index": 180,
+          "offset": 962253159,
+          "bytesRead": 3145728,
+          "responseMs": 7.0468999999993684,
+          "firstByteMs": 7.965399999999136,
+          "readMs": 16.293800000001283,
+          "totalMs": 24.25920000000042
+        },
+        {
+          "index": 181,
+          "offset": 1727779114,
+          "bytesRead": 3145728,
+          "responseMs": 9.968699999999444,
+          "firstByteMs": 10.870299999998679,
+          "readMs": 13.480499999999665,
+          "totalMs": 24.350799999998344
+        },
+        {
+          "index": 182,
+          "offset": 785477899,
+          "bytesRead": 3145728,
+          "responseMs": 10.814000000000306,
+          "firstByteMs": 12.649499999999534,
+          "readMs": 13.453300000001036,
+          "totalMs": 26.10280000000057
+        },
+        {
+          "index": 183,
+          "offset": 1900442259,
+          "bytesRead": 3145728,
+          "responseMs": 10.750800000001618,
+          "firstByteMs": 11.641300000001138,
+          "readMs": 13.445200000000114,
+          "totalMs": 25.08650000000125
+        },
+        {
+          "index": 184,
+          "offset": 771691502,
+          "bytesRead": 3145728,
+          "responseMs": 10.832899999999427,
+          "firstByteMs": 11.627699999999095,
+          "readMs": 13.734200000000783,
+          "totalMs": 25.361899999999878
+        },
+        {
+          "index": 185,
+          "offset": 2103305495,
+          "bytesRead": 3145728,
+          "responseMs": 10.536000000000058,
+          "firstByteMs": 11.41569999999956,
+          "readMs": 13.630100000000311,
+          "totalMs": 25.045799999999872
+        },
+        {
+          "index": 186,
+          "offset": 945705600,
+          "bytesRead": 3145728,
+          "responseMs": 6.414899999999761,
+          "firstByteMs": 6.984700000000885,
+          "readMs": 13.574999999998909,
+          "totalMs": 20.559699999999793
+        },
+        {
+          "index": 187,
+          "offset": 1841933103,
+          "bytesRead": 3145728,
+          "responseMs": 11.051900000000387,
+          "firstByteMs": 12.941100000000006,
+          "readMs": 15.997400000000198,
+          "totalMs": 28.938500000000204
+        },
+        {
+          "index": 188,
+          "offset": 793981494,
+          "bytesRead": 3145728,
+          "responseMs": 5.292699999999968,
+          "firstByteMs": 6.194499999999607,
+          "readMs": 14.52350000000115,
+          "totalMs": 20.718000000000757
+        },
+        {
+          "index": 189,
+          "offset": 2040529274,
+          "bytesRead": 3145728,
+          "responseMs": 6.677200000000084,
+          "firstByteMs": 7.550999999999476,
+          "readMs": 17.8091000000004,
+          "totalMs": 25.360099999999875
+        },
+        {
+          "index": 190,
+          "offset": 1068441197,
+          "bytesRead": 3145728,
+          "responseMs": 10.906699999999546,
+          "firstByteMs": 12.697799999999916,
+          "readMs": 14.539600000000064,
+          "totalMs": 27.23739999999998
+        },
+        {
+          "index": 191,
+          "offset": 2161974555,
+          "bytesRead": 3145728,
+          "responseMs": 11.034600000000864,
+          "firstByteMs": 12.466500000000451,
+          "readMs": 13.51469999999972,
+          "totalMs": 25.98120000000017
+        },
+        {
+          "index": 192,
+          "offset": 558117830,
+          "bytesRead": 3145728,
+          "responseMs": 9.838399999998728,
+          "firstByteMs": 10.570899999998801,
+          "readMs": 12.8054000000011,
+          "totalMs": 23.3762999999999
+        },
+        {
+          "index": 193,
+          "offset": 1895593375,
+          "bytesRead": 3145728,
+          "responseMs": 9.903200000000652,
+          "firstByteMs": 10.758300000001327,
+          "readMs": 13.703299999999217,
+          "totalMs": 24.461600000000544
+        },
+        {
+          "index": 194,
+          "offset": 529184271,
+          "bytesRead": 3145728,
+          "responseMs": 8.319400000000314,
+          "firstByteMs": 9.419600000001083,
+          "readMs": 17.46049999999923,
+          "totalMs": 26.88010000000031
+        },
+        {
+          "index": 195,
+          "offset": 1942171010,
+          "bytesRead": 3145728,
+          "responseMs": 10.238199999999779,
+          "firstByteMs": 11.847499999999854,
+          "readMs": 15.78900000000067,
+          "totalMs": 27.636500000000524
+        },
+        {
+          "index": 196,
+          "offset": 719398033,
+          "bytesRead": 3145728,
+          "responseMs": 8.33730000000105,
+          "firstByteMs": 9.232700000000477,
+          "readMs": 13.705900000000838,
+          "totalMs": 22.938600000001315
+        },
+        {
+          "index": 197,
+          "offset": 2168163936,
+          "bytesRead": 3145728,
+          "responseMs": 5.968600000000151,
+          "firstByteMs": 6.92489999999998,
+          "readMs": 14.31210000000101,
+          "totalMs": 21.23700000000099
+        },
+        {
+          "index": 198,
+          "offset": 805852029,
+          "bytesRead": 3145728,
+          "responseMs": 5.403299999999945,
+          "firstByteMs": 6.167799999999261,
+          "readMs": 14.718199999999342,
+          "totalMs": 20.885999999998603
+        },
+        {
+          "index": 199,
+          "offset": 1853858097,
+          "bytesRead": 3145728,
+          "responseMs": 9.766200000000026,
+          "firstByteMs": 10.571200000000317,
+          "readMs": 12.834799999998722,
+          "totalMs": 23.40599999999904
+        }
+      ]
+    },
+    "statistics": {
+      "responseMs": {
+        "first20Median": 6.683200000000056,
+        "last20Median": 9.87079999999969,
+        "overallMedian": 6.593900000000531,
+        "olsMsPerRequest": -0.0020915615390384047
+      },
+      "firstByteMs": {
+        "first20Median": 7.79609999999991,
+        "last20Median": 10.664750000000822,
+        "overallMedian": 7.458699999999794,
+        "olsMsPerRequest": -0.0010238307957709315
+      },
+      "readMs": {
+        "first20Median": 18.42505,
+        "last20Median": 13.72005000000081,
+        "overallMedian": 14.476149999999961,
+        "olsMsPerRequest": -0.013476518487961284
+      },
+      "totalMs": {
+        "first20Median": 26.086900000000014,
+        "last20Median": 24.753700000000208,
+        "overallMedian": 22.49265000000014,
+        "olsMsPerRequest": -0.014500349283732217
+      }
+    },
+    "provenance": {
+      "sourceHash": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+      "distHash": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+      "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+      "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+      "runnerSha256": "dbc0b521e1687c409f2a2e0b2b2c1fb54d65ecbd6f237260d2def49b59432671",
+      "collectorSha256": "cf1c713c3723f412da0d2779243ee8aec16e8e1c4fb2af2a94abb45d23c0d6f9",
+      "completedAt": "2026-09-03T16:29:22.4310280Z"
+    },
+    "backendCounters": {
+      "before": {
+        "capturedAt": "2026-09-03T16:28:55.8469304Z",
+        "readOperationCount": 4239,
+        "readTransferCount": 31671034,
+        "writeOperationCount": 34,
+        "writeTransferCount": 55673,
+        "userModeTime100ns": 62500000,
+        "kernelModeTime100ns": 15000000,
+        "threadCount": 18,
+        "handleCount": 404
+      },
+      "immediatelyAfter": {
+        "capturedAt": "2026-09-03T16:29:12.3107003Z",
+        "readOperationCount": 14363,
+        "readTransferCount": 694566867,
+        "writeOperationCount": 235,
+        "writeTransferCount": 78386,
+        "userModeTime100ns": 100937500,
+        "kernelModeTime100ns": 27031250,
+        "threadCount": 18,
+        "handleCount": 406
+      },
+      "afterTenSecondsIdle": {
+        "capturedAt": "2026-09-03T16:29:22.4062089Z",
+        "readOperationCount": 14363,
+        "readTransferCount": 694566867,
+        "writeOperationCount": 235,
+        "writeTransferCount": 78386,
+        "userModeTime100ns": 101250000,
+        "kernelModeTime100ns": 27187500,
+        "threadCount": 20,
+        "handleCount": 407
+      }
+    },
+    "backendCounterDeltas": {
+      "immediatelyAfter": {
+        "readOperationCount": 10124,
+        "readTransferCount": 662895833,
+        "userModeTime100ns": 38437500,
+        "kernelModeTime100ns": 12031250
+      },
+      "afterTenSecondsIdle": {
+        "readOperationCount": 10124,
+        "readTransferCount": 662895833,
+        "userModeTime100ns": 38750000,
+        "kernelModeTime100ns": 12187500
+      }
+    },
+    "readTransferBytesDuringIdle": 0,
+    "termination": {
+      "status": "completed",
+      "runnerExitCode": 0,
+      "timedOut": false,
+      "startedAt": "2026-09-03T16:28:54.9119677Z",
+      "completedAt": "2026-09-03T16:29:22.7601771Z"
+    },
+    "cleanup": {
+      "success": true,
+      "processes": [
+        {
+          "name": "backend",
+          "success": true,
+          "status": "stopped"
+        },
+        {
+          "name": "akebi",
+          "success": true,
+          "status": "stopped"
+        },
+        {
+          "name": "launcher",
+          "success": true,
+          "status": "already-stopped"
+        },
+        {
+          "name": "stub",
+          "success": true,
+          "status": "stopped"
+        }
+      ],
+      "remainingPorts": [],
+      "checkedAt": "2026-09-04T01:29:24.6810599+09:00"
+    },
+    "restoration": {
+      "restored": true,
+      "responsesSha256": "10a5f318bb014296e57d9a3f6ffa51d478e21b07d5bf978597dba2ec9dc21e4a",
+      "candidatePycacheRemoved": true,
+      "remainingMatchingPycache": 0
+    },
+    "privateEvidenceSha256": {
+      "abort.raw.json": "e75ce18726b5729be54b012dc91eb22313afa38d8c9e7316584500a6281da9c1",
+      "abort.raw.json.diagnostic.json": "42d99ada1e90add185d9bab46e1d85aedfb7e8e3c0b890615d663fc772241b5b",
+      "abort.raw.json.outer.terminal.json": "6f3a39b27f783d7e7b8816deca492a451c56833ae8a3c1e3ef424e5835b57a60",
+      "cleanup.json": "212ac8f23be364114f6bcc0b9623c6f78e5f2edc356e0e5f2798f099db171c0c",
+      "run-summary.json": "7dae0f4075a53461e8301f723bfc0e074917e86152ac14b265ecdcfaf8c47ed1"
+    }
+  },
+  "exclusions": [
+    {
+      "run": "First candidate attempt",
+      "reason": "Launcher exited during cleanup and identity validation failed. Not used; fresh rerun has successful cleanup."
+    }
+  ],
+  "limitations": [
+    "One ordered baseline/candidate pair, not a randomized repeated comparison.",
+    "HTTP receive time and logical I/O only; Chrome playback, fatal stop incidence, autoFilm and A/V sync not measured here."
+  ]
+}

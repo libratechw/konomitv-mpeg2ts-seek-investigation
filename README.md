@@ -153,8 +153,11 @@ tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdis
 
 順位1〜7の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
 
-順位8は、切断済みのファイル応答が末尾まで読み続ける問題を止めます。
-16 MiBのHTTP再現では、3 MiB受信後の切断に対するASGI処理量が16 MiBから3 MiB + 64 KiBへ減りましたが、実KonomiTVの表示復帰への効果は未測定です。変更はFileResponseのtaskキャンセルとファイルcloseに限られ、レビュー負荷は中、保守対象はASGIの切断・終了処理です。[条件と根拠](REPORT.md#切断後も続く-fileresponse-の処理)を参照してください。
+順位8は、client切断後もファイル応答が末尾まで読み続ける問題を止めます。
+Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正前は受信時間が76.1→1,083.1msへ悪化し、修正後は26.1→24.8msで推移しました（最初・最後の20回の中央値）。
+これはHTTP受信時間であり、実Chromeでの表示復帰への効果は未測定です。
+
+変更はFileResponseのtaskキャンセルとファイルcloseに限られ、レビュー負荷は中、保守対象はASGIの切断・終了処理です。[条件と根拠](REPORT.md#切断後も続く-fileresponse-の処理)を参照してください。
 
 順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 

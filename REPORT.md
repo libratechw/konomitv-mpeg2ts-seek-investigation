@@ -370,13 +370,25 @@ Starlette 1.6.0 と Uvicorn 0.52.4（httptools、ASGI 2.3）では、client が 
 サーバー側の切断監視は不要な処理を止める候補として分けて評価する。診断用実装はbackground task、pathsend、multipart、WebSocketを検証しておらず、正式な修正ではない。
 
 この試験はHTTP配信処理の因果関係を示すもので、表示停止の全件がこの原因であることや、修正後のシーク時間を示すものではない。
-実KonomiTVでの反復Rangeとサーバーの論理I/O量を比較し、その後にplayerを通したシーク復帰を検証する。
+playerを通したシーク復帰への効果は、別途検証する。
 
 [Starlette候補 `d70956b`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) は、ASGI 2.4より前のHTTP streamingで切断を監視し、ファイルのcloseをキャンセルから保護する。
 HEAD、pathsend、WebSocket、ASGI 2.4以降の送信経路は維持し、正常終了時にも監視taskを終了する。
 
-候補自体を同じHTTP再現に使うと、診断用の外側listenerなしで、終端なしRangeと4 MiB有限Rangeの両方が3 MiB + 64 KiBで終了した。
+候補自体を同じHTTP再現に使うと、診断用の外側listenerなしで、FileResponseがASGIの`send()`へ渡した総量は、終端なしRangeと4 MiB有限Rangeの両方で3 MiB + 64 KiBに留まった。
 Starlette最新main `39fd0ff` に対する切断の12試験は修正前に失敗し、候補では既存試験を含む1,219件が成功、2件が期待された失敗となった。[候補の実HTTP結果・source commit・試験条件](results/file-response-disconnect-starlette-fix.json)を保存している。
+
+Windowsの隔離KonomiTVで`responses.py`だけを候補へ置き換え、同じ位置・受信量・待ち間隔の200要求を再測定した。
+終端なしRangeを途中で切断する条件は変えず、player側の有限Range化も加えていない。
+
+| 条件 | 3 MiB受信時間・最初20回の中央値 | 最後20回の中央値 | 要求終了後10秒間の追加論理読み込み |
+| --- | ---: | ---: | ---: |
+| Starlette修正前 | 76.1ms | 1,083.1ms | 6.23GB |
+| Starlette候補 `d70956b` | 26.1ms | 24.8ms | 0 byte |
+
+この対照では、サーバー側の修正だけで切断後の読み込みと反復による劣化を抑えた。
+各版1走行の順序固定比較であり、通常シークの改善量や致命的停止率は示さない。
+試験後のプロセス停止と元ファイルへの復元を確認した。[全200要求・比較元・ファイルhash・終了確認](results/windows-range-abort-starlette-fix-200.json)を保存している。
 
 ## TS 解析、変換、音声待ち
 
