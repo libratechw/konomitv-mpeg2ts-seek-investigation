@@ -4,7 +4,10 @@ KonomiTVの録画再生について、シーク後の表示復帰時間、定常
 主対象はMPEG-2 TSのOriginal直接再生ですが、サーバーエンコードHLSとの違いも同じ指標で確認します。
 リポジトリ名には調査開始時の`seek-investigation`が残っていますが、素材本来のcadenceを維持し、負荷やシークの後も安定した表示へ戻るまでを対象とします。
 
-## 測定指標
+各修正が何をして、どれだけ効いたかは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
+この文書は、何をどう測り、その数値をどこまで信じてよいか、どの順で提出するかを扱います。
+
+## 何を測ったか
 
 **表示復帰時間**は、シーク先の映像がYADIF canvasに出て、`seeked`の後も消えずに残るまでの時間です。
 終点は共通ですが、起点は次の2種類があるため、数値には起点を併記します。
@@ -18,40 +21,39 @@ UIのtouch eventから`video.currentTime`設定までを含む値も、この2�
 YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queue全reset**と呼びます。
 容量確保や実遅延からの追いつきで古いfieldだけを捨てる処理と、その件数は、**FIFO破棄**と呼びます。
 
-## 現在の到達点
+**致命的な表示停止**は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象です。
+発生率50ppm以下の判定には片側95%信頼上限を使うため、0件でも最低59,914回のシークが必要です。
 
-総合検証用の[`integration/current-useful-fixes`](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)は、表で「採用」とした互換性のある修正をまとめたbranchです。
-個別PR候補の境界と祖先関係を保ったままKonomiTVで総合効果を測るためのもので、upstreamへそのままmergeする対象ではありません。
+## この数値をどこまで信じてよいか
 
-branch固有READMEには、全修正適用前後の比較と、各修正branchへのリンク、目的、内容、効果、レビューコスト、保守コストを掲載しています。
-overflow時刻圧縮をmergeする前の製品コード`e417d12`では、`tsukumijima/main` `52a3db5`との同条件比較で、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→145.8msとなり、250ms以内が14/40→40/40になりました。
+- 主計測では録画TSをKonomiTVサーバー側のローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認しています。CIFS経由の絶対時間は主結果へ使いません。
+- TS内の時刻は、永続GOP indexではなく、小さなHTTP RangeでPTSを探すメモリ内indexから求めます。約43GBのTSでも各地点2 probeで収束し、毎回先頭から走査する構成ではありません。
+- 乃木坂工事中fixtureには、映像開始から125.025秒付近に破損video packetが1個あります。このpacketを横切る走行は、コマ落ち0の判定から外します。
+- Galaxyの絶対時間は、古い検証タブが設定と再生資源を残さないよう、対象タブ1枚で取り直しました。以前の絶対値は主結果から外しています。
+- 別buildどうしの表示復帰時間は、中央値が数ms違っても効果や退行として扱いません。overflow時刻圧縮だけを載せたbuildと統合検証版は中央値157.2msと160.5msでしたが、他の修正も入った別buildの比較なので、この3.3msの差は判定に使っていません。
+- 既存`presented` eventは`video.seeking`解除後のbuffered frameを示し、表示復帰時間とは一致しません。前景再生中の体感レイテンシには使いません。
+- `droppedVideoFrames`はpredecodeまたは表示期限超過のdropを数え、最終YADIF canvasの可視コマ落ち数ではありません。Originalで数えた極短IDR recovery sampleのdropと、YADIF出力の表示間隔を分けて評価します。
+- Windowsの値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った補助条件です。同一モード内のbranch A/Bに使い、通常設定のWindowsやGalaxyとの絶対性能比較には使いません。
+- 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。`autoFilm`回帰では、期待値を`24000/1001`fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。24fpsは略称に限り、判定と誤差計算には使いません。
 
-現在のintegrationをGalaxyで測ると、600秒定常再生はrAF 59.998回/秒、入力video callback 29.970回/秒で、YADIFの`missed`とqueue全resetはいずれも0でした。
-`video.currentTime`起点の表示復帰時間は40回の中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以下でした。
+## 分かったこと
 
-致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象です。
-固定位相のpilotでは`tsukumijima/main`が2回目で停止し、順位4の正式候補は1000/1000回復帰しました。
+### MPEG-2 TS 直接再生
 
-試行ごとに0〜33.37msの待ちを加えて位相を分散した正式候補の追加試験では、258回目に1件再発しました。
-順位4は同じ固定位相条件では発生を減らしましたが、単独では目標50ppmを達成していません。
+通常シークの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取とH.264変換、MSE投入とdecoder再開です。
+「indexがなく毎回先頭から走査するため遅い」という構成ではありません。
 
-現在のintegration全体を正確に組み込んだbuildでは、同じ位相分散条件の1000回すべてが2秒以内に安定復帰しました。
-ただし0/1000の片側95%信頼上限は約2991ppmなので、目標50ppmの達成根拠にはしていません。[buildと1000回の結果](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を公開しています。
+支配的だったのは次の3つで、いずれも修正しました。
 
-`24000/1001`fpsを期待する固定MADDER素材で`autoFilm`を120秒ずつ各2回測ると、基準版のcanvas描画は27.64〜27.77fps、integrationは26.97〜27.18fpsでした。
-両版とも固定3:2区間のcadence維持を達成していません。integrationの方が低い差は観測しましたが、各2回だけなので個別修正の退行量とは断定しません。[4走行の集計と生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を公開しています。
+- probeで測ったbyte→PTS標本を、後続fragmentの時刻で上書きしていました。
+- YADIFがqueue容量不足と時刻同期の破綻を区別せず、シーク後に表示がほぼ停止しました。
+- MSE resetと古いappend完了が競合すると、新しいinit segmentを失い得ました。
 
-同じ低負荷collectorで`tsukumijima/main` `52a3db5`も600秒測り直すと、YADIF生成field FPSは基準版59.939fps、integration 59.940fpsで、`missed`は両方0でした。
-この値はYADIFの`filtered` counterから求めており、WebGL canvas描画の直接計数ではありません。[条件、計算式、証拠hash](results/galaxy-current-integration-vs-tsukumijima-main-steady-600s.json)を保存しています。
+7件の修正をまとめた統合検証版では、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→159.7msとなり、250ms以内が14/40→40/40になりました。
+全11指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
 
-同じintegrationを電源モード「最適な電力効率」のWindows Chromeで測ると、120秒定常再生は59.719fps、40ms超8回、queue全reset 0でした。
-`video.currentTime`起点の表示復帰時間は40回の中央値252.7msで、20/40が250msを超えました。
-
-Windowsの遅い地点では、最初のappendが目的時刻の約75ms先までしか含まず、Chromeが約565ms先までbufferされるのを待っていました。
-TSと現行Sessionの対応を調べると、次の安全なfragmentは要求時刻より74ms後から始まるため、正確なシークを保つ現行policyでは現在の選択が最適でした。
-
-同一ホストのLinux Chromeでは、正常区間120秒が59.867fps、p99 17.7ms、queue全reset 0でした。
-同じ40回の`video.currentTime`起点の表示復帰時間は中央値131.7ms、p95 195.4ms、最大196.2msでしたが、LANクライアントの目標達成には数えません。
+致命的な表示停止と`autoFilm`の cadence 維持は、どちらもまだ目標を達成していません。
+到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 
 ### サーバーエンコードHLS
 
@@ -85,67 +87,54 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 他の14画質とHLSシークは、再生設定をwatch pageの初回実行前に投入するよう測定器を直した条件で再測定が必要です。
 修正前の測定は、初期既定の1080pと要求画質のencoder sessionが並行したため、現在の絶対値には使いません。
 
-## PR候補の優先順位
+### 長時間再生と反復シーク
+
+**定常再生の判定は600秒で行い、120秒の結果は補助として扱います。**
+120秒では検出できない劣化があるためです。
+1 rAFにつき1 fieldだけ表示する案は120秒で改善しましたが、600秒では3分後から徐々に悪化しました。
+このため定常再生の判定は600秒で行い、120秒の結果は補助として扱います。
+
+生値は[overflow時刻圧縮の600秒走行](results/galaxy-overflow-compression-clean-600s-summary.json)、[presentation policyの600秒A/B](results/galaxy-present-one-field-long-run-ab.json)、[統合検証版の40回シーク](results/galaxy-integration-without-present-seek-visible-40.json)に保存しています。
+
+## 提出の順序をどう決めたか
 
 優先順位は、確認できた効果、正しさへの影響、差分の理解しやすさ、レビュー負荷、将来の保守コストから決めています。
-`軽`は局所的で契約変更がない変更、`中`は状態管理または小さなAPI追加、`重`は複数層を横断する変更です。
+**P0**は効果を実測で確認し、変更範囲が原因に届いているものです。
+**P1**は正しさを守る修正ですが、実利用での改善量を立証できていないものです。
 
-提出先は [`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264) と [`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264) の2つです。
-生成済み`dist`を追跡するtsukumijimaフォーク向けbranchでは、sourceとdistを別コミットにしています。
-効果の数値はこの表をREADME内の正本とし、詳しい統計量と生値は[`results/`](results/)から参照できます。
+提出先は[`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264)と[`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264)の2つです。
+tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdistを別コミットにしています。
 
-### P0
+| | 順位 | branch | 提出先 | source | dist |
+| --- | ---: | --- | --- | --- | --- |
+| P0 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) | otya128 | `a10253e` | — |
+| P0 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) | otya128 | `787c7ba` | — |
+| P0 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) | otya128 | `ac4f879` | — |
+| P0 | 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) | tsukumijima | `26484fd` | `27b327e` |
+| P0 | 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | tsukumijima | `7ef6696` | `ac2a2a9` |
+| P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | tsukumijima | `2d072f3` | `f3ba99d` |
+| P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | otya128 | `f8ab9c7` | — |
 
-| 順位 | branch | 提出先 | 修正内容 | 効果 | 重さ |
-| ---: | --- | --- | --- | --- | --- |
-| 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) `a10253e` | otya128 | first fragment時刻でprobe標本を上書きする5行を削除 | 追加probe 14/40→0/40。表示復帰時間 296.3→244.3ms | **軽**。1ファイル5行の削除 |
-| 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) `787c7ba` | otya128 | fragmentへ`restartOffset`を付与し、PTSとrestart位置を別のmark列で持つ | 再開同値性と回帰の試験が成功。単独の速度効果はなく、順位3の前提 | **重**。TS demuxからWASMまで横断 |
-| 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) `ac4f879` | otya128 | 観測済みの安全位置をplayer内に保持し、要求時刻以前1秒以内の最新位置を再利用 | 診断版A/Bでprobe 40→0、表示復帰時間 226.5→161.5ms | **中**。worker 1ファイル。順位2に依存 |
-| 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) source `26484fd` | tsukumijima | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけqueue全reset | 最低描画FPS 1.67→29.98。固定位相1000回は停止0だが、位相分散時は258回目に1件再発 | **中**。YADIF 1ファイルのqueue policy |
-| 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) source `7ef6696` | tsukumijima | FIFO破棄したfieldの`duration`合計を、残ったfieldのdeadlineから引く | 負荷注入時の表示field破棄 218.0→0.67（99.7%減）。通常600秒は59.942fps | **軽〜中**。`#prepareQueue()`の8行 |
-| 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) source `2d072f3` | tsukumijima | playhead近傍の描画済みframeを記録し、同じseekの`seeked`で消さない | Linux 40回の表示復帰時間 p95 246.5→178.9ms。Galaxyは退行なし | **中**。seeking/history状態のレビューが必要 |
-
-### P1
-
-| 順位 | branch | 提出先 | 修正内容 | 効果 | 重さ |
-| ---: | --- | --- | --- | --- | --- |
-| 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) `f8ab9c7` | otya128 | SourceBuffer操作にseek世代を対応付け、旧`updateend`を新queueへ適用しない | 460回のseekでappend中resetを67回観測。新initの誤破棄は0回 | **中**。MSE状態管理と回帰試験 |
-
-tsukumijimaフォーク向けの順位4から6は、source と生成済み`dist`を別コミットにしています。
-dist側のcommitは順に `27b327e`、`ac2a2a9`、`f3ba99d` です。
-
-### 推奨するマージの順序
+各修正の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
 順位1、6、7は他と修正箇所が重ならず、いつでも並行して提出できます。
+提出先ごとに整理した依存の図は[レビューの順序](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
 
 tsukumijimaフォーク固有のYADIF変更は、otya128向けの変更へ混ぜません。
-提出先ごとに整理した図は[integration branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
 
-### このブランチに含めていない変更
+### まだ提出しないもの
 
-[`feat/seek-timing-context`](https://github.com/libratechw/mpeg2toh264/tree/feat/seek-timing-context) `58a9920` は計測専用のため含めていません。
+[`feat/seek-timing-context`](https://github.com/libratechw/mpeg2toh264/tree/feat/seek-timing-context) `58a9920`は計測専用です。
 player、worker、transcoder、picture pool、MSEへ同じseek IDのtiming contextを伝播し、probe標本の誤上書きなどを分離できました。
 直接の速度改善はなく、10ファイルにわたる横断と公開event契約の保守が必要なため、効果が立証できるまで提出を急ぎません。
 
-[`fix/deliver-completed-fragments-early`](https://github.com/libratechw/mpeg2toh264/tree/fix/deliver-completed-fragments-early) `30ad508` は効果が確認できないため含めていません。
+[`fix/deliver-completed-fragments-early`](https://github.com/libratechw/mpeg2toh264/tree/fix/deliver-completed-fragments-early) `30ad508`は効果が確認できていません。
 transcoderから完成fragmentを逐次通知しますが、初回fragmentと表示復帰のどちらも一貫して短縮しませんでした。
 transcoderとworkerの順序、cancel、backpressureのレビューが必要な規模でもあるため、後続throughputの候補としてのみ残します。
 
-## 採用した修正と根拠
-
-表の順位と、対応するsource commitを添えます。
-
-- 順位1 [`a10253e`](https://github.com/libratechw/mpeg2toh264/commit/a10253e)：probe標本をfirst fragment時刻で上書きしない修正は、不要な追加probeをなくし、`seek-requested`起点の表示復帰時間を代表値で71.3ms短縮しました。
-- 順位2 [`787c7ba`](https://github.com/libratechw/mpeg2toh264/commit/787c7ba)：media fragmentへ再開可能なTS位置を付ける修正は、別Sessionで同じGOPと音声を再開できることを試験で確認しました。単独の速度効果はなく、順位3の前提です。
-- 順位3 [`ac4f879`](https://github.com/libratechw/mpeg2toh264/commit/ac4f879)：観測済みのPAT/PMT安全位置を後続シークで再利用する修正は、Galaxyの診断版でprobeを40件から0件へ減らしました。永続indexは導入していません。
-- 順位4 [`26484fd`](https://github.com/libratechw/mpeg2toh264/commit/26484fd)：YADIFのqueue容量不足と時刻同期破綻を分ける修正は、正式な基準版との直接比較でseek後1.8秒の描画10fps未満を18/90から0/90へ、複合異常を35/90から1/90へ減らしました。容量不足では必要数だけFIFO破棄し、表示不能な時刻列だけqueue全resetします。提出ロジックへの2秒注入3走行では全reset 0、最大lateness 6.52msでした。
-- 順位5 [`7ef6696`](https://github.com/libratechw/mpeg2toh264/commit/7ef6696)：FIFO破棄した時間だけ残りのdeadlineを詰める修正は、Galaxyの負荷注入でFIFO破棄を平均218.0→0.67 fieldへ減らしました。
-- 順位6 [`2d072f3`](https://github.com/libratechw/mpeg2toh264/commit/2d072f3)：seeked直前に描画済みの目的frameを保持する修正は、Linuxで起きた約149msの待ち直しを除きました。Galaxyでは同じ競合が起きず、退行がないことを確認しました。
-- 順位7 [`f8ab9c7`](https://github.com/libratechw/mpeg2toh264/commit/f8ab9c7)：MSE操作の世代管理は、旧append完了が新しいinit segmentを失わせる模擬競合を防ぎます。GalaxyとWindowsの計460回ではappend中resetを67回観測しましたが、新initの誤破棄は0回でした。
-
-## 試して採らなかった案
+## 採らなかった案と理由
 
 - Android Chromiumのcanvasへ`opacity: 0.999`を設定する案は、不透明な対照でも約60fpsを維持したため採用しません。DOM occlusionが原因だという説明も再現できませんでした。
 - 完成fragmentを早く渡す案は、GalaxyとローカルSSD Chromeのどちらでも表示復帰時間を一貫して短縮しませんでした。後続fragmentのthroughput候補としてのみ残します。
@@ -154,44 +143,20 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - seek leadを1.0秒から0.5秒へ固定変更する案は表示復帰時間を短縮しましたが、5地点中2地点で要求時刻を越えたため採用しません。
 - PAT/PMTを含むRAPを毎seekで4〜8MiB先読みする案は、追加Rangeの費用を回収できず遅くなりました。再生中の学習やsidecarは、未知のpre-target RAPを取り逃す素材を再現できた場合に再評価します。
 - YADIFへ1 frame分の固定reserveを置く案は、短時間のカクつきを隠しましたが、600秒で最大11.15秒の停止を生じました。queue容量を増やす案もfuture leadを増やすため採用しません。
-- 通常は1 rAFにつき1 fieldだけ表示する案は120秒では59.791→59.932fpsへ改善しましたが、600秒ではrAF 56.662回/秒、`missed` 541まで徐々に悪化しました。同じintegrationからこの案だけを外すとrAF 59.998回/秒、`missed` 0だったため採用しません。
+- 通常は1 rAFにつき1 fieldだけ表示する案は120秒では59.791→59.932fpsへ改善しましたが、600秒ではrAF 56.662回/秒、`missed` 541まで徐々に悪化しました。同じintegrationからこの案だけを外すとrAF 59.998回/秒、`missed` 0だったため採用しません。branchは削除し、測定と判断だけを残しています。
 - 録画TSの`FileResponse` body chunkを増やす案は、Galaxyで小さな差が出ましたがsizeに対して単調でなく、Windowsの対応付き比較も−2.4〜+1.7msで中立だったため採用しません。
 
-## 測定を読むときの前提
+棄却に至った測定の条件と生値は[REPORT.md](REPORT.md)にあります。
 
-- 主計測では録画TSをKonomiTVサーバー側のローカルNVMeへコピーし、コピー元とSHA-256が一致することを確認しています。CIFS経由の絶対時間は主結果へ使いません。
-- TS内の時刻は、永続GOP indexではなく、小さなHTTP RangeでPTSを探すメモリ内indexから求めます。約43GBのTSでも各地点2 probeで収束し、毎回先頭から走査する構成ではありません。
-- 乃木坂工事中fixtureには、映像開始から125.025秒付近に破損video packetが1個あります。このpacketを横切る走行は、コマ落ち0の判定から外します。
-- Galaxyの絶対時間は、古い検証タブが設定と再生資源を残さないよう、対象タブ1枚で取り直しました。以前の絶対値は主結果から外しています。
-- 既存`presented` eventは`video.seeking`解除後のbuffered frameを示し、表示復帰時間とは一致しません。前景再生中の体感レイテンシには使いません。
-- `droppedVideoFrames`はpredecodeまたは表示期限超過のdropを数え、最終YADIF canvasの可視コマ落ち数ではありません。Originalで数えた極短IDR recovery sampleのdropと、YADIF出力の表示間隔を分けて評価します。
-- Windowsの値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った補助条件です。同一モード内のbranch A/Bに使い、通常設定のWindowsやGalaxyとの絶対性能比較には使いません。
-- 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。`autoFilm`回帰では、期待値を`24000/1001`fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。24fpsは略称に限り、判定と誤差計算には使いません。
+## データの所在
 
-## 長時間再生と反復シーク
-
-10分間の連続再生で表示が劣化しないかを、順位4を親に持つ順位5のoverflow時刻圧縮branch（source `7ef6696`）を適用したbuildで確認しました。
-現在のintegrationにもこのbranchを含みますが、他の修正も加わった別buildです。
-表示復帰時間の中央値157.2msと160.5msは近く、どちらも40/40が250ms以下でしたが、3.3msの差を修正効果や退行としては扱いません。
-
-既知の破損packetより後を使ったGalaxy全画面600秒走行では、入力video callback 29.972fpsに対し、double-rate YADIF canvasは59.942fpsでした。
-canvasの40ms超間隔、YADIFの`late`、`degraded`、`discontinuities`、queue全reset、FIFO破棄はいずれも0でした。
-
-同じbuildのGalaxy全画面40回では、`video.currentTime`起点の表示復帰時間が中央値157.2ms、p95 187.1ms、最大197.3msで、40/40が250ms以下でした。
-シーク地点は「現在の到達点」と同じ180秒と480秒です。
-
-現在のintegrationでは、1 rAFにつき1 fieldだけ表示する案を含む版と、その案だけを外した版を同じ軽量collectorで600秒比較しました。
-含む版は3分後から徐々に低下し、全体rAF 56.662回/秒、入力callback 29.070回/秒、YADIFの`missed` 541となりました。
-
-外した版はrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0を維持したため、この案をintegrationとPR候補から外しました。
-
-外した版の40回seekは中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以下でした。
-詳しい条件と生値は[overflow時刻圧縮の600秒走行](results/galaxy-overflow-compression-clean-600s-summary.json)、[presentation policyの600秒A/B](results/galaxy-present-one-field-long-run-ab.json)、[新integrationの40回シーク](results/galaxy-integration-without-present-seek-visible-40.json)に保存しています。
-
-## 詳細と公開範囲
-
-詳しいデータフロー、仮説評価、改善候補は[REPORT.md](REPORT.md)にあります。
-実機条件と素材ごとの結果は[results/device-results.md](results/device-results.md)、機械可読な集計値は[`results/`](results/)に置いています。
+| 知りたいこと | 場所 |
+| --- | --- |
+| 各修正が何をして、どれだけ効いたか | [統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes) |
+| データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
+| 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
+| 機械可読な集計値と生値 | [`results/`](results/) |
+| 公開可能な集計スクリプト | [`scripts/`](scripts/) |
 
 録画ファイル、認証情報、実際のLAN内アドレス、ローカルパス、アクセスログは含みません。
 番組名は素材の識別用であり、録画データ自体は配布しません。

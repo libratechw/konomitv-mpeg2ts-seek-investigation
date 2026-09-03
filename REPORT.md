@@ -943,17 +943,11 @@ YADIF opacity変更は棄却した実験である。
 upstream向け候補branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
-| 変更 | なぜ・目的 | 何を修正したか | 実測または確認できた効果 | 本来の提出先 |
-| --- | --- | --- | --- | --- |
-| YADIF canvasのopacity試作 | Galaxyで約30fps状態の後、`opacity: 0.999`版が約60fpsだったため | canvas生成時に`opacity: 0.999`を設定した | cleanなopaque対照は30秒と12秒の両方で約60fps。video rVFCも約30Hzを維持したため、改善効果と当初のChromium因果説明は立証できなかった | branchは削除。結果だけを本調査リポジトリに保存 |
-| YADIF初回fieldの保持 | rVFCが同じcompositeのrAF直後に来ると、次のrAFまでに2 fieldとも期限切れになり得たため | 初回fieldの表示時刻へ1 field周期の余裕を追加した | cleanな不透明版は30秒と12秒で約60fpsを維持。ただし変更単独の同条件A/Bによる効果量は未確定 | `tsukumijima/mpeg2toh264`へ取り込み済み。source `d4ccb98`、KonomiTV固定依存`52a3db5`に含まれる |
-| YADIF queue容量・時刻同期の分離 | フォークの個別late破棄ではseek後の未来時刻を戻せなかったため | 容量不足では必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする | 正式基準との直接比較で描画10fps未満18/90→0/90、複合異常35/90→1/90、`late`合計1859→294。提出ロジックへの2秒注入3走行は全reset 0、最大lateness 6.52ms | `tsukumijima/mpeg2toh264` fork。公開source `26484fd`、専用dist `27b327e` |
-| seeked直前に届いた目的frameを保持 | Chromiumが目的frameを`seeking=true`のまま提示した直後、fork固有`seeked`処理が表示済みcanvasを隠し、次frameまで約149ms待ち直したため | 現在のbuffered範囲とplayhead近傍のframeをseek先として記憶し、そのframeを描画済みなら`seeked`でhistory/canvasを再消去しない | Linuxの早着2/2は修正前にhidden、修正版5/5はvisibleを維持。Linux 40回p95 246.5→178.9ms、最大280.0→180.4ms。Galaxy 40回p95 220.5→193.2ms、最大243.1→212.8msで退行なし | `tsukumijima/mpeg2toh264` fork。公開source `2d072f3`、dist `f3ba99d` |
-| 確認済みTS再開位置の再利用 | 一度変換したGOPでも後のseekがPTS probeと未整列byte推定を繰り返していたため | media fragmentへPAT/PMT安全位置を付け、同じplayer内の後続seekを安全位置から開始する。PTSとrestart位置は独立したmark列で保持する | 診断A/BはGalaxyでprobe 40→0、canvas中央値226.5→161.5ms、p95 278.4→220.5ms。正式branch組み込み版40回はprobe 0、中央値159.1ms、p95 212.4ms、最大229.0msで全走行250ms以下。PTSなしPESの回帰試験も成功 | `otya128/mpeg2toh264`。公開core `787c7ba`、そのbranchを祖先にしたplayer `ac4f879` |
-| MSE resetと古いappend完了の競合修正 | seek reset中に旧`updateend`が新queueをshiftし、新しいinit segmentを失い得るため | 実行中SourceBuffer操作とseek世代を追跡し、旧世代の完了を新queueへ適用しない | 修正前に失敗する模擬競合試験は修正後に成功。GalaxyとWindowsの計460回ではappend中reset 67回、新init誤破棄0回。実Chrome通常seekは251.4→250.1msで有意な短縮なし | `otya128/mpeg2toh264` player。公開commit `f8ab9c7` |
-| seek単位の段階計測 | Range、picture変換、fragment、append、decoder提示のどこが遅いかを同一seekで分離できなかったため | seek IDとtargetを引き回し、probe PTSとbyte、本体Range、picture jobs、先頭AU、batch、fragment、appendを記録 | 直接の速度改善はない。Galaxyで先頭IDR jobが33〜40ms、append後のplayingが27〜149ms、LAN first byteがADB reverseより約30〜61ms遅いことと、probe標本の誤上書きを分離。`presented`は可視初画ではなくseek解除後のbuffered frameだと追補 | `otya128/mpeg2toh264` player。公開branch HEAD `58a9920` |
-| probe標本をfirst fragment時刻で上書きしない | Range開始byteはGOP開始byteではなく、後続fragment時刻を対応付けると補間がずれるため | `source.offset`とfirst fragment時刻をindexへ記録する5行を削除し、実測したprobe標本を保持 | Galaxy B-F-F-B各40 seekで追加probe 14/40→0/40。20地点中12地点で0.5005〜1.001秒後かつ要求時刻以前のGOPを選び、target対応のbrowser提示と可視canvasをともに71.3ms短縮。canvas中央値296.3→244.3ms、p90 373.0→280.7ms | `otya128/mpeg2toh264` worker。公開commit `a10253e` |
-| 完成fragmentの早期受け渡し | 完成済みfragmentと後続picture処理を直列化しないため | transcoderが完成fragmentを逐次通知し、後続unit変換と受け渡しを重ねた | 単一タブGalaxy各40 seekでは短縮なし。一時markでは最初の通知がfirst fragment後10/10だった。ローカルSSD Chrome B-F-F-Bでも300秒はfirst fragment平均−5.1ms、450秒は+4.9ms、`presented`差は−4.4/+0.9msで一貫しなかった | `otya128/mpeg2toh264` player/transcoder。公開commit `30ad508`。後続throughput候補 |
+各修正の目的、修正内容、効果、実装の重さは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にある。
+提出の順位と、まだ提出しないものの理由は[README](README.md#提出の順序をどう決めたか)にある。
+
+YADIF初回fieldの保持`d4ccb98`は本調査の候補ではなく、すでに`tsukumijima/mpeg2toh264`へ取り込まれ、KonomiTV固定依存`52a3db5`に含まれる既存の変更である。
+cleanな不透明版は30秒と12秒で約60fpsを維持したが、この変更単独の同条件A/Bによる効果量は未確定である。
 
 公開中のupstream向け候補ブランチは、すべて`upstream/main`（`d5df08b`）を土台として再構成した。
 各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。
@@ -963,19 +957,13 @@ tsukumijimaフォークには、upstream採用前のbackport、またはフォ�
 KonomiTVに出す変更は、Original再生UIのT0計測、download handlerのDB/stat/open/first body計測と実測に基づくI/O修正、必要性が確認された場合のrecording単位sidecar保存である。
 DPlayerには今回修正を実装しておらず、現時点で直接PRにする根拠もない。
 
+この表は、まだ提出していない候補だけを扱う。提出済みの7件は上のREADMEにある。
+
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | YADIFの容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけ全resetする | 正式基準との直接比較で描画10fps未満18/90→0/90、複合異常35/90→1/90、`late`合計1859→294。提出ロジックへの2秒注入3走行は全reset 0、最大lateness 6.52ms | 小〜中 | ◎ | tsukumijimaフォークYADIF。公開source `26484fd`、dist `27b327e` |
-| P0 | YADIFの容量破棄で失ったpresentation durationだけ残りのdeadlineを詰める | Galaxyの破棄連鎖2/3走行を解消し、破棄field平均218.0→0.67、全reset 1→0。Windowsも21.67→0.67 | 小 | ◎ | tsukumijimaフォークYADIF。公開source `7ef6696`、dist `ac2a2a9`。queue容量回復の子branch |
-| P0 | seeked直前に描画済みの目的frameを保持する | 早着時の約149ms待ち直しを除去。Linux p95−67.6ms、最大−99.6ms、40/40を250ms以下へ | 小 | ◎ | tsukumijimaフォークYADIF。公開source `2d072f3`、dist `f3ba99d` |
-| P0 | probeで測ったbyte→PTS標本をfirst fragment時刻で上書きしない | 追加probe 14/40→0/40、要求時刻以前の新しいGOP選択12/20地点、可視初画のtarget対応中央値−71.3ms | 小 | ◎ | mpeg2toh264 Worker。`a10253e`で実装済み |
-| P0 | 再生中に確認したPAT/PMT安全位置を後続seekへ再利用する | 診断A/BでGalaxyのprobe 40→0、canvas中央値−65.0ms、p95−57.9ms。正式branch組み込み版も中央値159.1ms、p95 212.4ms、最大229.0msで40/40を250ms以下に維持 | 中 | ○ | mpeg2toh264 core `787c7ba` + player `ac4f879`。位置報告と利用policyを別PRにする |
 | P2 | field時刻を各rVFCの`expectedDisplayTime`へ再アンカーする | 旧条件では過渡最低値が良かったが、単一タブA/Bは未実施 | 中 | △ | 比較実験。upstream復元後も過渡低下が再現する場合だけ再検討 |
 | P2 | 初回fieldのleadを2 fieldから1 fieldへ戻す | 短い3走行では59.64〜59.84→59.98〜60.00fpsだが、reset条件が混在 | 小 | △ | `d4ccb98`の効果を長窓A/Bで再評価。新規修正とは扱わない |
-| P1 | MSE reset中の古いappend完了を新queueへ適用しない | 到達可能なinit喪失競合を防ぐ。計460回ではappend中reset 67回、新init誤破棄0回。実利用のstall削減量は未立証 | 小〜中 | ○ | mpeg2toh264 player。`f8ab9c7`で実装済み |
-| P0 | seek ID付き計測を正式API化し、probe、本体Range、picture worker段階を分離 | 原因選択への効果大。直接の速度改善なし | 小〜中 | ◎ | player。branch HEAD `58a9920`。MSE operation、raw rVFC、canvas描画は次段 |
 | P2 | probeを選択service/video PID優先にする | 複数service TSで誤ったPTSを採る可能性を下げる | 中 | ○ | mpeg2toh264 source/core。標本上書き修正とは分離 |
-| P2 | 完成済みfragmentを入力chunk内の後続処理と重ねる | 後続fragmentのthroughput候補。単一タブGalaxyとローカルSSD Chromeで初回fragment・初画の一貫した短縮なし | 中 | ○ | mpeg2toh264 Transcoder/Worker。`30ad508`で実装済み。初回media fragmentを早める設計ではない |
 | P2 | 初回IDRを独立slice/jobへ安全に分割してpicture poolで並列化する | 現在33〜40msの単一critical jobを短縮する余地。画質・bitstreamは変わり得る | 大 | △ | mpeg2toh264 core/job protocol。slice境界、intra予測、Safari/VideoToolbox検証が必要 |
 | P2 | 有効probeを本体へ再利用、PTS検出後にprobe読取を止める | 重複128 KiBと待ちを削減。RTT自体は残る | 中 | ○ | mpeg2toh264 source/worker |
 | P2 | 入力queueの32/8 MiB high/low waterを小さくする | seek後の不要な先読みと連続seek時のI/O競合を削減。初画短縮は未確認 | 小 | ◎ | mpeg2toh264 Worker。8/2 MiB試作は未採用 |
@@ -1076,29 +1064,23 @@ I-pictureの途中byteだけを返さない。
 
 ## Issue / PR の切り出し
 
+公開済みの候補branchは[README](README.md#提出の順序をどう決めたか)にある。
+ここに挙げるのは、まだbranchにしていない切り出し候補である。
+
 ### `otya128/mpeg2toh264`へ直接出すもの
 
-1. **player: reset中のSourceBuffer operationとqueueの世代整合性**。修正前に失敗する回帰試験を添付し、速度改善とは分離する。
-2. **player: seek単位の基本timing**。seek ID、target、probe、本体Range、fragment、appendまでを1 PRにする。
-3. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。基本timingと分けるかはAPIレビューで決める。
-4. **player/transcoder: 完成fragmentの早期受け渡し**。出力順序、cancel、backpressureを回帰試験で固定する。
-5. **YADIF: visibility遷移とfield schedulingの再現試験**。約30fps状態を自動再現できた場合に、既存`d4ccb98`で不足する境界条件をIssue化する。opacity変更は含めない。
-6. **worker: probeで測ったbyte→PTS標本の保持**。Range先頭byteをGOP開始byteとみなす誤記録を削除する。公開commit `a10253e`と反復計測を添付する。
-7. **source/core: PTS probeのservice選択**。複数serviceでの誤選択を再現してから全PID probeを扱う。
-8. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性の追加試験が通った場合だけ独立PRにする。
-9. **Worker: seek入力queueの先読み上限**。連続seekの中止済みRange量とp95で効果を確認してから独立PRにする。
-10. **core: 初回IDRの並列可能なslice/job設計**。bitstreamと複数decoderの互換性を確認する大規模変更として分離する。
-11. **core: media fragmentを再びdemuxできるPAT/PMT安全位置**。公開`feat/report-ts-restart-offsets`の`787c7ba`。実際に報告位置から新Sessionを開き、同じfragment時刻とAACへ復帰する試験と、PTSなしPESが先行PTSを隠さない回帰試験を含む。未使用のGOP source byteは公開しない。
-12. **player: 確認済み安全位置のin-memory再利用**。公開`perf/reuse-observed-ts-restarts`の`ac4f879`。core branchを祖先にし、未知位置では既存probeへ戻る。永続保存とは分ける。
+1. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。基本timingと分けるかはAPIレビューで決める。
+2. **YADIF: visibility遷移とfield schedulingの再現試験**。約30fps状態を自動再現できた場合に、既存`d4ccb98`で不足する境界条件をIssue化する。opacity変更は含めない。
+3. **source/core: PTS probeのservice選択**。複数serviceでの誤選択を再現してから全PID probeを扱う。
+4. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性の追加試験が通った場合だけ独立PRにする。
+5. **Worker: seek入力queueの先読み上限**。連続seekの中止済みRange量とp95で効果を確認してから独立PRにする。
+6. **core: 初回IDRの並列可能なslice/job設計**。bitstreamと複数decoderの互換性を確認する大規模変更として分離する。
 
 ### `tsukumijima/mpeg2toh264`へ出すもの
 
-1. **YADIF: queue容量確保と時刻再同期の分離**。公開`fix/separate-yadif-queue-recovery`で、容量不足は必要枚数だけFIFO破棄し、queue末尾が表示可能な未来範囲を越えた場合だけ全resetする。正式な基準版との90 seekで描画10fps未満18/90→0/90、複合異常35/90→1/90を確認し、source `26484fd`と生成済みdist `27b327e`を別コミットにした。
-2. **YADIF: 容量破棄後のpresentation deadline圧縮**。公開`fix/compress-yadif-overflow-schedule`で、捨てたfieldの`duration`合計だけ残りの時刻列を詰め、解除後のFIFO破棄連鎖を防ぐ。source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。queue容量回復を親branchとし、presentation policyとは独立したPR単位である。
-3. **YADIF: seeked直前の目的frame保持**。公開`fix/preserve-destination-frame-on-seek`で、source `2d072f3`と生成済みdist `f3ba99d`を別コミットにした。queue回復やpresentation policyとは独立した`seeked`競合のPR単位とする。
-4. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
-5. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
-6. 現在公開済みのupstream向け候補ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchとpresentation policyは取り込まない。
+1. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
+2. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
+3. 現在公開済みのupstream向け候補ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchとpresentation policyは取り込まない。
 
 ### `KonomiTV`へ出すもの
 
