@@ -753,6 +753,16 @@ KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と現在のintegrationをそ�
 
 基準版のcanvas描画は27.641 / 27.774fps、integrationは27.181 / 26.971fpsだった。film/video判定の遷移は基準版28 / 28回、integration 38 / 33回で、両版とも期待するfilm cadenceを維持しなかった。YADIFの`missed`とqueue全resetは全走行0なので、入力停止やqueue全resetではなく、固定3:2区間で`autoFilm`判定を維持できないことがcadence未達の直接の観測である。integrationの方が低い差は観測したが、各2走行だけなので個別修正の退行量とは断定しない。Chromeの`droppedVideoFrames`増分40はcanvasの可視drop数とは扱わない。[4走行の集計、build hash、生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を保存した。
 
+位相保持の試作がMADDER #04でfilmを維持できなかった走行では、YADIFの`missed`が302増え、毎秒statsの隣り合う標本間57区間すべてで増加していた。
+同じ試作の他3走行は`missed`増分0で、毎秒statsのmodeがすべてfilmだった。Chromeのdrop counterは4走行とも20増えており、この不調を単独では区別できない。
+
+`missed`はrVFC間の`presentedFrames`の飛びから数えるフレーム数である。
+試作が使ったdeinterlacerは、その飛びを検出すると3フレームの履歴とfilm判定をリセットするため、位相の誤lockだけを原因とする根拠はない。
+毎秒のstatsしかなく、フレームが飛ばされた理由や、同一区間内のmode変更との前後関係は未確定である。試作は採用せず、rVFCと履歴リセットをframe単位で照合してから対策を判断する。[既存5走行の再集計・counterの定義・source hash](results/galaxy-autofilm-callback-loss-review.json)を保存した。
+
+[rVFCの仕様](https://wicg.github.io/video-rvfc/)は、callbackを描画更新に合わせて実行するが、各frameへ厳密に追従する保証はしない。
+したがって`missed`をTSやdecoderの欠落と同一視せず、callbackの処理時間、遅れて呼ばれた時間、GPU読出しの待ち時間を分けて調べる。
+
 ## 連続 seek とキャンセル
 
 通常のドラッグmoveはseekを送らず、指を離した時点で確定する。
@@ -1082,7 +1092,8 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
-| `autoFilm`のseek後lock/hysteresisを調整する | 3:2区間のmode安定を早める可能性 | 位相保持の試作は通常走行で23.97〜24.18fpsへ安定したが、MADDER #04の4走行中1回は58標本中57標本をvideo modeで処理し、47.45fpsのまま60秒以内にfilmへ復帰しなかった。誤lockを解消するまで採用しない。[複数素材の結果](results/galaxy-autofilm-multi-fixture-regression.json) |
+| `autoFilm`のseek後lock/hysteresisを調整する | 3:2区間のmode安定を早める可能性 | 位相保持の試作は通常走行で23.97〜24.18fpsへ安定したが、MADDER #04の4走行中1回は58標本中57標本がvideo modeで、47.45fpsだった。この走行では`missed`が302増えた。検出時に履歴をリセットする実装のため、誤lockとは断定できない。復帰しない原因を分離するまで採用しない。[複数素材](results/galaxy-autofilm-multi-fixture-regression.json)・[入力欠落の再集計](results/galaxy-autofilm-callback-loss-review.json) |
+| `autoFilm`解析の同期GPU読出しを減らす | rVFC間でフレームを取り逃すことを減らす可能性 | `#analyseFilm()`は1入力で2回`readPixels()`を行う。ただし各処理の所要時間と`missed`との関係は未計測であり、主因とは確定していない。fieldmatch・decimateの精度を変えずに短縮できるかは、待ち時間の測定後に判断する。 |
 | seek直後だけ簡易deinterlaceにする | 初画数msの可能性 | 1〜2frame不足時の複製/直接描画は既に実装済み。通常は追加変更不要 |
 | periodic IDR recovery copyをnon-IDR recovery pointへ変える | Galaxyでは120秒の`droppedVideoFrames`が40→0になり、YADIF 59.925fpsとmedia timeを維持 | counterは元TSの新しい表示画像に対応しない1 tick sampleをChromeが表示しないことを数え、可視40ms超間隔は1回残った。40 seekも既定IDRより安定して速くならず、hardware decoder互換性の広い検証なしには変更しない |
 | queueが空のとき1入力frame分の固定reserveを置く | 120秒では40ms超1〜2回→0回、20 seekも20/20が250ms以内 | 600秒でclock差が蓄積し、`late` 2071、reset 2、最大11.15秒停止へ退行したため、この式は棄却。長窓とライブ追従を必須試験にする |

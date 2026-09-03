@@ -1039,6 +1039,6 @@
     "Both the baseline and overflow deadline compression switched in both directions in the mixed-cadence boundary run.",
     "Average film output near 24000/1001 does not establish smooth playback: film-run p95 draw intervals remained about 68 to 71 ms.",
     "The 60000/1001 control remained near 50 fps with autoFilm enabled, so autoFilm processing still fails the steady-display target independently of overflow recovery.",
-    "The IVTC phase candidate is rejected in its measured form because one of four e04 starts stayed in video mode for 57 of 58 samples instead of recovering to film mode."
+    "The IVTC phase candidate remains unadopted because one of four e04 starts had video mode in 57 of 58 samples. That run also accumulated 302 missed frames across every observed stats interval, invoking the frame-history reset path. Erroneous phase lock is not established; see galaxy-autofilm-callback-loss-review.json for the separate counter review."
   ]
 }
