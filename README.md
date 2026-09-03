@@ -52,6 +52,9 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 7件の修正をまとめた統合検証版では、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→159.7msとなり、250ms以内が14/40→40/40になりました。
 全11指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
 
+YADIF停止の内部traceでは、rVFCが133回、rAFが265回進む4.419秒間にcanvas描画が0回で、queue全reset後に復帰しました。
+decoderがframeを供給し続けても、容量確保でfieldを捨てた後に未来の表示予定時刻が残り、次の破棄を連鎖させることで表示停止が継続します。[時系列の機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)に根拠と適用限界を保存しています。
+
 致命的な表示停止と`autoFilm`の cadence 維持は、どちらもまだ目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 

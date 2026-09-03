@@ -625,6 +625,10 @@ queueが空のときの最初のfield deadlineを1入力frame分だけ後ろへ�
 
 WindowsではFIFO破棄fieldが平均21.67→0.67、40ms超間隔が平均0.33→0、解除後2秒の最大描画間隔が平均25.5→18.3msとなった。Galaxyでは変更前の2/3走行で破棄が解除後も連鎖し、破棄field平均218.0、12秒窓41.720fps、全reset合計1回だった。変更後は3/3走行とも直ちに約60fpsへ戻り、破棄field平均0.67、12秒窓54.997fps、全reset 0回だった。負荷注入中に失う約60 field自体を隠す変更ではなく、容量破棄後に残った時刻列から、すでに失ったpresentation momentだけを除く正しさ修正である。[全12走行、phase別統計、hash、後片付け結果](results/yadif-overflow-deadline-compression-ab.json)を保存した。
 
+Galaxy変更前の3走行目では、計測開始8.1ms後にqueue容量5から2 fieldをFIFO破棄した直後、残った先頭fieldが53.5ms先、末尾が120.2ms先となった。rVFC 133回、rAF 265回、video media time 4.404秒分が進む間もcanvas直接描画は0回で、計測開始4391.5ms後のqueue全resetに続き4419.0ms後に最初のcanvas描画が行われた。人工的なpresentation不足は計測開始2000ms後に始まるため、少なくともその前の1991.9msは人工負荷なしでfuture deadline待ちが継続していた。これにより、decoderやrAFの停止ではなく、FIFO破棄後のdeadline列が次の入力へ引き継がれる循環が4秒超の表示停止を維持したことを確認した。[元trace](results/galaxy-yadif-pre-injection-future-queue-stall-trace.json)と[機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)を保存した。
+
+この診断buildには計測開始後に有効化する人工負荷フックが含まれる。負荷開始前から停止していたことは確認できるが、正式候補そのものに診断だけを加えた自然発生traceは別に取得し、branch単位の最終根拠とする。
+
 正式候補は`fix/separate-yadif-queue-recovery`を親とする`fix/compress-yadif-overflow-schedule`で、source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。長時間退行したpresentation policyを含まず、容量破棄後の時刻整合性だけを直す。
 
 通常負荷の退行確認では、乃木坂工事中fixtureの既知の破損video packetより後にある187.845〜787.846秒を、Galaxy Chrome、LAN直結、全画面、単一タブ、60Hzで600秒測った。入力video callbackは29.972fps、media time差は600.001秒で、全17,982個のmedia time差が約33.367msだった。地デジのインターレース映像1 frameごとの入力callbackなので約30Hzは正常であり、double-rate YADIF canvasは59.942fpsだった。canvas描画間隔はp95 21.8ms、p99 23.2ms、最大39.7msで40ms超0回、WebGL drawは最大0.8msだった。YADIFの`late`、`degraded`、`discontinuities`、全reset、overflow破棄はすべて0だった。[正常負荷600秒の条件、統計、証拠hash、後片付け結果](results/galaxy-overflow-compression-clean-600s-summary.json)を保存した。

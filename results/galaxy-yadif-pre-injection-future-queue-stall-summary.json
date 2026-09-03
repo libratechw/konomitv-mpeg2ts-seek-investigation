@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "source": {
+    "file": "galaxy-yadif-pre-injection-future-queue-stall-trace.json",
+    "variant": "overflow-baseline-throttle-r3",
+    "sourceSha256": "bf77c817c11f711f8371e8b50ab188f8dcd2aa488a18a8dd7acd64ee8646caba",
+    "asset": "PlayerController-C3IepUSE.js",
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayModeConfigured": "60 Hz",
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "cleanup": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  },
+  "timing": {
+    "measurementStartedAt": 11432.900000095367,
+    "syntheticLoadStartsAt": 13432.900000095367,
+    "firstOverflowAt": 11441,
+    "firstFutureWaitAt": 11441,
+    "clockResetAt": 15824.4,
+    "firstDirectCanvasDrawAt": 15851.900000095367,
+    "firstOverflowSinceMeasurementMs": 8.099999904632568,
+    "clockResetSinceMeasurementMs": 4391.499999904632,
+    "firstDrawSinceMeasurementMs": 4419.0,
+    "futureQueueWaitBeforeSyntheticLoadMs": 1991.9000000953674
+  },
+  "queueAtFirstOverflow": {
+    "depthBeforeRetirement": 5,
+    "retired": 2,
+    "requiredOutputs": 2,
+    "firstLeadMs": 20.097126346028745,
+    "lastLeadMs": 86.83050472440664
+  },
+  "queueAfterFirstRetirement": {
+    "depth": 5,
+    "firstLeadMs": 53.46384256224519,
+    "lastLeadMs": 120.19712634602729
+  },
+  "decoderAndDisplayDuringNoDrawInterval": {
+    "videoFrameCallbacks": 133,
+    "animationFrames": 265,
+    "mediaTimeAdvanceSeconds": 4.40440000000001,
+    "directCanvasDraws": 0
+  },
+  "interpretation": [
+    "The queue was already full and waiting on future deadlines before the synthetic presentation shortage began.",
+    "Video frame callbacks and animation frames continued while no direct canvas draw occurred.",
+    "The first direct canvas draw followed the queue clock reset, which localizes this stall to YADIF presentation scheduling rather than decoder starvation.",
+    "The source build included a later synthetic-load hook, so an exact submission-build natural-failure trace is still required before treating this as the final branch-level proof."
+  ]
+}
