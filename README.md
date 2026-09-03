@@ -76,6 +76,9 @@ blockごとの再生成も行っていないので、順位4との効果比較�
 blockごとにブラウザーとplayer各層を作り直す別の1時間試験も4,399 seek・停止0でしたが、最初のblock中に同一ホストで診断buildを実行しました。
 高負荷を含む参考結果として残し、無負荷の1時間合格根拠には使いません。[条件と全blockのhash](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)を保存しています。
 
+順位5の正式buildを最新KonomiTVへ組み込んだ無負荷の1時間試験では、4,415回のseekすべてが2秒以内に安定復帰し、致命的な表示停止は0件でした。
+この結果は順位5の1時間条件を満たしますが、順位4の1時間試験とはKonomiTV revisionが異なるため、停止率の差を順位5だけの効果とは扱いません。[集計と各blockの生値](results/galaxy-yadif-rank5-latest-one-hour-summary.json)を公開しています。
+
 現在のintegrationを固定した無負荷の1時間試験は、4,644回のseekすべてが2秒以内に安定復帰し、致命的な表示停止0件でした。
 この試験は正常区間だけを選ぶ反復seekであり、正常TSの1時間連続再生や異常TSの1時間試験を兼ねません。
 [集計と各blockの生値](results/galaxy-integration-current-v3-one-hour-summary.json)を公開しています。

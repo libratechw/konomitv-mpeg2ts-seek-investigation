@@ -667,6 +667,10 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 同じ正式buildでChrome、page、player、Worker、decoder、MSE、YADIFを1,000 seekごとに作り直す1時間試験は、5 session、実測3491.416秒で4,399 seekすべてが復帰した。ただし最初のblock中に、同じLinuxホストで上の順位5診断buildを実行した。発生した追加負荷を分離できないため、[高負荷を含む参考結果](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)として残し、無負荷の1時間合格根拠には使わない。
 
+順位5の正式build source `7ef6696` / dist `ac2a2a9`を最新KonomiTV `7307e0ec39aed6a4772908cdbfb44223da42be6d`へ組み込み、同じrunner、collector、fixture、位相分散、block再生成条件で無負荷の1時間試験を行った。5 session、実測3,486.728秒で4,415回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。安定復帰時間は中央値661.2ms、p95 804.0ms、最大1,213.5msだった。全blockの終了後に動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-yadif-rank5-latest-one-hour-summary.json)および[5 blockの生値](results/galaxy-yadif-rank5-latest-one-hour-block-000.json)を保存した。
+
+順位4の1時間試験はKonomiTV `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`、順位5の上記試験は`7307e0e`であり、runner、collector、fixtureは一致するがKonomiTV revisionは一致しない。このため、順位5が現行の1時間条件を満たす根拠には使うが、3,008回目の停止が0件になった差を順位5だけの効果とは扱わない。順位5の因果効果は、同一計装、同一seed、同一目的時刻でFIFO破棄104→4 field、致命的停止→508.5msからの安定描画となった比較で評価する。
+
 現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
 同じintegrationをsource、dist、KonomiTV revision、fixture、runnerのhashで固定し、無負荷で1時間上限の試験を行った。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,459.837秒で4,644回すべてが2秒以内に安定復帰した。壁時計では3,575.237秒で、致命的な表示停止は0件だった。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-integration-current-v3-one-hour-summary.json)および[5 blockの生値](results/galaxy-integration-current-v3-one-hour-block-000.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。

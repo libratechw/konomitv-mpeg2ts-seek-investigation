@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "variant": "yadif-rank5-latest-7307e0e-one-hour-block-reset",
+  "sourceHash": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+  "distHash": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+  "asset": "PlayerController-Buc-P0iB.js",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "videoId": 1,
+  "frameMode": "normal",
+  "targetBandsSeconds": [
+    [
+      240,
+      480
+    ],
+    [
+      900,
+      1140
+    ]
+  ],
+  "runnerSha256": "9c36db98c7e22203619b0d3c30ab39ad57061c6f84bf90636f89b2a47e9eb81d",
+  "collectorSha256": "c22dea81394a5945eb6941e59e0a247d24ad7a6140c91197a91a6983f9375636",
+  "containerImageId": "sha256:fea16cb0ca37fd036c6f518c670695aa4a3ead08598343baea6ecaf63d16f688",
+  "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+  "durationSeconds": 3600,
+  "cleanupReserveSeconds": 30,
+  "blockSize": 1000,
+  "baseSeed": 45260933,
+  "startedAtUnixMs": 1788439810649,
+  "stopAtUnixMs": 1788443380649,
+  "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block.",
+  "createdAt": "2026-09-03T22:49:46.404534+09:00",
+  "endedAtUnixMs": 1788443386377,
+  "wallClockElapsedSeconds": 3575.728,
+  "measurementSeconds": 3486.728,
+  "blockCount": 5,
+  "clientSessionCount": 5,
+  "betweenBlockResetCount": 4,
+  "attemptedSeeks": 4415,
+  "completedSeeks": 4415,
+  "fatalStops": 0,
+  "failures": [],
+  "stableRecoveryLatency": {
+    "count": 4415,
+    "minimumMs": 341.8000000715256,
+    "medianMs": 661.1999999284744,
+    "p90Ms": 776.1000000238419,
+    "p95Ms": 804,
+    "p99Ms": 857.2999999523163,
+    "maximumMs": 1213.5,
+    "meanMs": 651.0304190252807
+  },
+  "maximumDrawGap": {
+    "count": 4415,
+    "minimumMs": 149.60000002384186,
+    "medianMs": 400.6999999284744,
+    "p90Ms": 517.3999999761581,
+    "p95Ms": 549.1000000238419,
+    "p99Ms": 586,
+    "maximumMs": 984.3999999761581,
+    "meanMs": 394.7055266142161
+  },
+  "hostLoad": {
+    "sampleCount": 712,
+    "load1Minimum": 0.66,
+    "load1Maximum": 3.52,
+    "load1P95": 2.26,
+    "samplesWithFfmpeg": 0
+  },
+  "blocks": [
+    {
+      "file": "block-000.json",
+      "seed": 45260933,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 800.649,
+      "sha256": "968a0c06423199ecb30007410df06a5ded91d20018e90005165786d5b2f776cb"
+    },
+    {
+      "file": "block-001.json",
+      "seed": 46260936,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 790.665,
+      "sha256": "1a3ddf93ed9633bb59cca63d1cd1c1a0421ad3bb99627d2bcfa3f7b785e3b5d0"
+    },
+    {
+      "file": "block-002.json",
+      "seed": 47260939,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 795.614,
+      "sha256": "09c9c71e3a3f042da7ad59927a7e4c94cc2d6b57b0aa48a25052a2b2f8b7ab91"
+    },
+    {
+      "file": "block-003.json",
+      "seed": 48260942,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 802.914,
+      "sha256": "5e6cce99ac56053d45f145d2c093ac0a499d4185c805dc58bd627ee25ecbf1a4"
+    },
+    {
+      "file": "block-004.json",
+      "seed": 49260945,
+      "stopReason": "time-limit",
+      "attempted": 415,
+      "completed": 415,
+      "fatalStops": 0,
+      "measurementSeconds": 296.886,
+      "sha256": "c9d92127b93bc3ed4f923f9a1595c6a7ed52497d68e6f3a63633f2ea8e6db40c"
+    }
+  ],
+  "acceptanceCriterion": "No fatal display stop is detected during one bounded hour.",
+  "fatalDefinition": "Stable display did not recover within 2000 ms of assigning video.currentTime without another user operation.",
+  "scope": "This bounded regression gate does not estimate a zero population rate or a ppm upper bound."
+}
