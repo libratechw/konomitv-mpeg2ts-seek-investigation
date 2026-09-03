@@ -1,0 +1,907 @@
+{
+  "variant": "anomaly-rank9-one-hour",
+  "sourceHash": "72def4d2d7c0e804aee215a1c9b22bf05c2bd18b883ceb0dddce145dcad62607",
+  "distHash": "c2e385f6662b7cb30494ac3e2eb546c5282976e274a36c356587362ba6ca2b11",
+  "asset": "PlayerController-B8RHo49u.js",
+  "videoId": 1,
+  "frameMode": "normal",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 20,
+    "completed": 20,
+    "stopReason": "count-complete",
+    "measurementStartedAtUnixMs": 1788467143180,
+    "measurementEndedAtUnixMs": 1788467439708,
+    "seed": 29260936,
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
+    "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
+    "trials": [
+      {
+        "index": 0,
+        "jitterMs": 1.5377953064239895,
+        "seekStableMs": 508.10000002384186,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.39999997615814
+        },
+        "recovery": {
+          "firstDrawMs": 52,
+          "confirmedMs": 167.79999995231628,
+          "maximumDrawGapMs": 19.399999976158142
+        },
+        "cadence": {
+          "durationMs": 2989.4000000953674,
+          "drawCount": 180,
+          "drawFps": 59.87823643349487,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0010314221678605746,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.200000047683716,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18241307,
+          "audioDecodedBytes": 116960,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": {
+            "videoFrames": 120,
+            "audioFrames": 188,
+            "dropped": 0,
+            "errors": 0
+          }
+        }
+      },
+      {
+        "index": 1,
+        "jitterMs": 12.346857857812816,
+        "seekStableMs": 302.2000000476837,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 49.5
+        },
+        "recovery": {
+          "firstDrawMs": 68.69999992847443,
+          "confirmedMs": 182.89999997615814,
+          "maximumDrawGapMs": 19.600000023841858
+        },
+        "cadence": {
+          "durationMs": 2989.2999999523163,
+          "drawCount": 180,
+          "drawFps": 59.88023952191326,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0009980039760804176,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 22.399999976158142,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 116960,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 2,
+        "jitterMs": 16.624680998905873,
+        "seekStableMs": 333.40000009536743,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.299999952316284
+        },
+        "recovery": {
+          "firstDrawMs": 49.89999997615814,
+          "confirmedMs": 169.60000002384186,
+          "maximumDrawGapMs": 21.5
+        },
+        "cadence": {
+          "durationMs": 2978.899999976158,
+          "drawCount": 180,
+          "drawFps": 60.089294706580496,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002489733354784628,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 23.399999976158142,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18361905,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 3,
+        "jitterMs": 4.787155614079286,
+        "seekStableMs": 322.3000000715256,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 32.60000002384186
+        },
+        "recovery": {
+          "firstDrawMs": 47.700000047683716,
+          "confirmedMs": 169.10000002384186,
+          "maximumDrawGapMs": 22.399999976158142
+        },
+        "cadence": {
+          "durationMs": 2999.6999999284744,
+          "drawCount": 181,
+          "drawFps": 60.006000601490804,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0011001100348715992,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.5,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18551586,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 4,
+        "jitterMs": 33.11696939782705,
+        "seekStableMs": 327.2999999523163,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 49.60000002384186
+        },
+        "recovery": {
+          "firstDrawMs": 66.5,
+          "confirmedMs": 183.20000004768372,
+          "maximumDrawGapMs": 19.600000023841858
+        },
+        "cadence": {
+          "durationMs": 2987.2999999523163,
+          "drawCount": 180,
+          "drawFps": 59.920329395392905,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0003291712535283534,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 22.600000023841858,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 5,
+        "jitterMs": 26.792111213280197,
+        "seekStableMs": 326.10000002384186,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.799999952316284
+        },
+        "recovery": {
+          "firstDrawMs": 52.5,
+          "confirmedMs": 167.10000002384186,
+          "maximumDrawGapMs": 19.799999952316284
+        },
+        "cadence": {
+          "durationMs": 2986.899999976158,
+          "drawCount": 180,
+          "drawFps": 59.92835381212254,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.00019529723442231225,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 23.399999976158142,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 17919133,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 6,
+        "jitterMs": 20.21015739296563,
+        "seekStableMs": 292.2000000476837,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.5
+        },
+        "recovery": {
+          "firstDrawMs": 48.5,
+          "confirmedMs": 169.70000004768372,
+          "maximumDrawGapMs": 22.300000071525574
+        },
+        "cadence": {
+          "durationMs": 2999.0999999046326,
+          "drawCount": 181,
+          "drawFps": 60.01800540352898,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0013003901488751908,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 7,
+        "jitterMs": 9.038479748896012,
+        "seekStableMs": 318.2000000476837,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 34.09999990463257
+        },
+        "recovery": {
+          "firstDrawMs": 47.89999997615814,
+          "confirmedMs": 169.29999995231628,
+          "maximumDrawGapMs": 22.100000023841858
+        },
+        "cadence": {
+          "durationMs": 2979.2999999523163,
+          "drawCount": 180,
+          "drawFps": 60.081227134852114,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002355139366449447,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 26.600000023841858,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 8,
+        "jitterMs": 16.843574058590455,
+        "seekStableMs": 313.89999997615814,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 32
+        },
+        "recovery": {
+          "firstDrawMs": 47.39999997615814,
+          "confirmedMs": 168.59999990463257,
+          "maximumDrawGapMs": 23.199999928474426
+        },
+        "cadence": {
+          "durationMs": 2978.5,
+          "drawCount": 180,
+          "drawFps": 60.09736444519053,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002624363493928671,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.5,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 19052667,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 9,
+        "jitterMs": 3.9017924720110995,
+        "seekStableMs": 357.2999999523163,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 34.800000071525574
+        },
+        "recovery": {
+          "firstDrawMs": 49.40000009536743,
+          "confirmedMs": 170.30000007152557,
+          "maximumDrawGapMs": 23.600000023841858
+        },
+        "cadence": {
+          "durationMs": 2998.5,
+          "drawCount": 181,
+          "drawFps": 60.03001500750375,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0015007503751875689,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 25.700000047683716,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18730429,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 10,
+        "jitterMs": 3.137186088366434,
+        "seekStableMs": 291.7999999523163,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.5
+        },
+        "recovery": {
+          "firstDrawMs": 48,
+          "confirmedMs": 171,
+          "maximumDrawGapMs": 22
+        },
+        "cadence": {
+          "durationMs": 2999.8000000715256,
+          "drawCount": 179,
+          "drawFps": 59.33728915119537,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.010056225994223875,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 33.5,
+          "passed": false
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 17593297,
+          "audioDecodedBytes": 116960,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 1,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 11,
+        "jitterMs": 2.543137932460134,
+        "seekStableMs": 288.5,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.5
+        },
+        "recovery": {
+          "firstDrawMs": 48.700000047683716,
+          "confirmedMs": 170.20000004768372,
+          "maximumDrawGapMs": 21.799999952316284
+        },
+        "cadence": {
+          "durationMs": 2978.7000000476837,
+          "drawCount": 180,
+          "drawFps": 60.093329303768265,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002557043884533898,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 23.5,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 12,
+        "jitterMs": 2.2793263085419313,
+        "seekStableMs": 325.6999999284744,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 34.5
+        },
+        "recovery": {
+          "firstDrawMs": 51.10000002384186,
+          "confirmedMs": 169.60000002384186,
+          "maximumDrawGapMs": 20.299999952316284
+        },
+        "cadence": {
+          "durationMs": 2980.2000000476837,
+          "drawCount": 180,
+          "drawFps": 60.06308301360176,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002052434943589417,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.5,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 17876713,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 13,
+        "jitterMs": 27.737089071011482,
+        "seekStableMs": 326.1999999284744,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 17.299999952316284
+        },
+        "recovery": {
+          "firstDrawMs": 33.699999928474426,
+          "confirmedMs": 157.5,
+          "maximumDrawGapMs": 23.300000071525574
+        },
+        "cadence": {
+          "durationMs": 2998.7999999523163,
+          "drawCount": 181,
+          "drawFps": 60.02400960479597,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0014005602400128014,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 25.399999976158142,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18509230,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 14,
+        "jitterMs": 32.808226717473005,
+        "seekStableMs": 295.2000000476837,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33
+        },
+        "recovery": {
+          "firstDrawMs": 50.89999997615814,
+          "confirmedMs": 169.30000007152557,
+          "maximumDrawGapMs": 20.600000023841858
+        },
+        "cadence": {
+          "durationMs": 2999.1999999284744,
+          "drawCount": 181,
+          "drawFps": 60.01600426923602,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0012670045584209637,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 23.600000023841858,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18186992,
+          "audioDecodedBytes": 116960,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 15,
+        "jitterMs": 26.495232667929184,
+        "seekStableMs": 319.60000002384186,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 33.699999928474426
+        },
+        "recovery": {
+          "firstDrawMs": 47.89999997615814,
+          "confirmedMs": 168.19999992847443,
+          "maximumDrawGapMs": 22.700000047683716
+        },
+        "cadence": {
+          "durationMs": 2979.5,
+          "drawCount": 180,
+          "drawFps": 60.077194160093974,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002287855904234485,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 25.800000071525574,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 19186089,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 16,
+        "jitterMs": 16.84642983195372,
+        "seekStableMs": 310.5,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 16.199999928474426
+        },
+        "recovery": {
+          "firstDrawMs": 33.10000002384186,
+          "confirmedMs": 155.10000002384186,
+          "maximumDrawGapMs": 22
+        },
+        "cadence": {
+          "durationMs": 2978.5,
+          "drawCount": 180,
+          "drawFps": 60.09736444519053,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.002624363493928671,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.200000047683716,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18509230,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 17,
+        "jitterMs": 33.268173824902625,
+        "seekStableMs": 323.60000002384186,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 34.5
+        },
+        "recovery": {
+          "firstDrawMs": 48.300000071525574,
+          "confirmedMs": 167.40000009536743,
+          "maximumDrawGapMs": 21.699999928474426
+        },
+        "cadence": {
+          "durationMs": 2980.7999999523163,
+          "drawCount": 180,
+          "drawFps": 60.05099302296815,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.001850733599851989,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 25.299999952316284,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18509230,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 18,
+        "jitterMs": 32.415345411592476,
+        "seekStableMs": 297,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 32.40000009536743
+        },
+        "recovery": {
+          "firstDrawMs": 48.10000002384186,
+          "confirmedMs": 168.20000004768372,
+          "maximumDrawGapMs": 21.90000009536743
+        },
+        "cadence": {
+          "durationMs": 2999.7000000476837,
+          "drawCount": 181,
+          "drawFps": 60.00600059910614,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0011001099950874098,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 24.200000047683716,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18241307,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      },
+      {
+        "index": 19,
+        "jitterMs": 16.121294107218272,
+        "seekStableMs": 311.1999999284744,
+        "defect": {
+          "beforeMediaTime": 125.005422,
+          "afterMediaTime": 125.038788,
+          "mediaTimeGapMs": 33.366000000000895,
+          "callbackGapMs": 32.89999997615814
+        },
+        "recovery": {
+          "firstDrawMs": 49.5,
+          "confirmedMs": 167.30000007152557,
+          "maximumDrawGapMs": 20.899999976158142
+        },
+        "cadence": {
+          "durationMs": 2982.5999999046326,
+          "drawCount": 180,
+          "drawFps": 60.014752231517285,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.0012461163958133895,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 23.399999976158142,
+          "passed": true
+        },
+        "deltas": {
+          "browserTotalFrames": 111,
+          "browserDroppedFrames": 2,
+          "videoDecodedBytes": 18551586,
+          "audioDecodedBytes": 115600,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "queueResetted": 0
+          },
+          "player": null
+        }
+      }
+    ],
+    "failures": [],
+    "cadenceFailures": [
+      {
+        "index": 10,
+        "cadence": {
+          "durationMs": 2999.8000000715256,
+          "drawCount": 179,
+          "drawFps": 59.33728915119537,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.010056225994223875,
+          "intervalsOver40Ms": 0,
+          "maximumIntervalMs": 33.5,
+          "passed": false
+        }
+      }
+    ],
+    "pageStateChanges": [],
+    "userInteractionEvents": [],
+    "pageCountAtStart": 1,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

@@ -169,7 +169,10 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから33.367msへ縮まり、Chromeのdrop counterは17から6へ減りました。
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。実在するfield picture破損、画素の正常性、ブラウザー上のA/V同期、異常TSの1時間条件は未確認なので、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、復帰後の約3秒間に9回のcadence不合格を検出しました。
+この候補は順位4・5を含まないため、cadence不合格が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
+
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。実在するfield picture破損、画素の正常性、ブラウザー上のA/V同期は未確認です。異常TSの1時間条件もcadence不合格により満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[オフライン変換結果](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。

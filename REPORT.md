@@ -760,6 +760,12 @@ integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを�
 
 公開branchには、interlaced `hd1080i.m2v`とcomplementary B fieldを含む`open_gop_leading_bb.m2v`へ2種類のpacket欠落位置を与えるSession回帰試験を`27eed22`で追加した。現在のtip `e36dd0b`で`cargo fmt --check`と`cargo test --release`を実行し、239件が成功、失敗0件だった。現在のdist `e36dd0b`はGalaxyで測った`f80154f`とruntime source・distがバイト一致し、差分は試験だけである。この固定fixtureは通常のfield pair・open-GOP filterを通るが、実在するfield pair・open GOP破損のブラウザー挙動を一般化しない。
 
+候補tip `e36dd0b`単独を最新KonomiTV `7307e0e`へ組み込み、同じ固定欠損を反復通過する1時間上限の自動試験を行った。20回ごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、12 sessionで223回すべてが2秒以内に安定復帰した。致命的な表示停止は0件で、欠損後の初回描画は中央値48.5ms、安定確認は中央値168.6ms、映像時刻の間隔は全試行33.366msだった。
+
+一方、安定復帰後の約3秒間を60000/1001fpsの±1%かつ40ms超の描画間隔0回で判定すると、223回中9回が不合格だった。8回は58.936〜59.340fps、1回は60.058fpsまで追いついたものの40.4msの描画間隔を1回含んだ。このため異常TSの1時間条件は満たさない。
+
+このbuildは順位4・5のYADIF修正を含まず、直接の親`52a3db5`へ順位9だけを適用している。したがって9回のcadence不合格をtransport loss修正の副作用とは判定せず、同条件の親buildとintegrationへ順位9を重ねたbuildを比較する。各blockの終了処理は成功し、走行終了後にもChrome、WebAPK、ADB forward、隔離KonomiTVが残っていないことを確認した。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-rank9-one-hour-summary.json)を保存した。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
