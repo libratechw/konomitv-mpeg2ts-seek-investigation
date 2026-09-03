@@ -35,6 +35,12 @@ overflow時刻圧縮をmergeする前の製品コード`e417d12`では、`tsukum
 試行ごとに0〜33.37msの待ちを加えて位相を分散した正式候補の追加試験では、258回目に1件再発しました。
 順位4は同じ固定位相条件では発生を減らしましたが、単独では目標50ppmを達成していません。
 
+現在のintegration全体を正確に組み込んだbuildでは、同じ位相分散条件の1000回すべてが2秒以内に安定復帰しました。
+ただし0/1000の片側95%信頼上限は約2991ppmなので、目標50ppmの達成根拠にはしていません。[buildと1000回の結果](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を公開しています。
+
+`24000/1001`fpsを期待する固定MADDER素材で`autoFilm`を120秒ずつ各2回測ると、基準版のcanvas描画は27.64〜27.77fps、integrationは26.97〜27.18fpsでした。
+両版とも固定3:2区間のcadence維持を達成していません。integrationの方が低い差は観測しましたが、各2回だけなので個別修正の退行量とは断定しません。[4走行の集計と生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を公開しています。
+
 同じ低負荷collectorで`tsukumijima/main` `52a3db5`も600秒測り直すと、YADIF生成field FPSは基準版59.939fps、integration 59.940fpsで、`missed`は両方0でした。
 この値はYADIFの`filtered` counterから求めており、WebGL canvas描画の直接計数ではありません。[条件、計算式、証拠hash](results/galaxy-current-integration-vs-tsukumijima-main-steady-600s.json)を保存しています。
 
@@ -160,7 +166,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - 既存`presented` eventは`video.seeking`解除後のbuffered frameを示し、表示復帰時間とは一致しません。前景再生中の体感レイテンシには使いません。
 - `droppedVideoFrames`はpredecodeまたは表示期限超過のdropを数え、最終YADIF canvasの可視コマ落ち数ではありません。Originalで数えた極短IDR recovery sampleのdropと、YADIF出力の表示間隔を分けて評価します。
 - Windowsの値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った補助条件です。同一モード内のbranch A/Bに使い、通常設定のWindowsやGalaxyとの絶対性能比較には使いません。
-- 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。今後の`autoFilm`回帰では、期待値を24000/1001fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。
+- 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。`autoFilm`回帰では、期待値を`24000/1001`fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。24fpsは略称に限り、判定と誤差計算には使いません。
 
 ## 長時間再生と反復シーク
 

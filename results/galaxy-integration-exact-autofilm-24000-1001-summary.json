@@ -1,0 +1,178 @@
+{
+  "purpose": "Compare autoFilm output cadence on a fixed hard-telecine fixture",
+  "expectedOutputFrameRate": {
+    "fraction": "24000/1001",
+    "fps": 23.976023976023978,
+    "note": "The terrestrial MPEG-2 input is 30000/1001 interlaced frames per second. 24fps is shorthand only."
+  },
+  "fixture": {
+    "name": "madder-24p-clean.ts",
+    "sha256": "163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb",
+    "durationSeconds": 172.705867,
+    "inputFrameRate": "30000/1001",
+    "validatedCycles": 1035,
+    "residualInterlacedFrames": 0,
+    "videoDecodeErrors": 0,
+    "audioDecodeErrors": 0
+  },
+  "condition": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "frameMode": "24fps (autoFilm enabled)",
+    "durationSecondsPerRun": 120,
+    "runsPerBuild": 2
+  },
+  "builds": {
+    "baseline": {
+      "mpeg2toh264Revision": "52a3db5",
+      "KonomiTVRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+      "playerControllerAsset": "PlayerController-CiwOYqi0.js",
+      "yadifSourceSha256": "fdf5a1050b0be0c17d5818f2648c8c98dff23850818e42c7660419899142b75e",
+      "runs": [
+        {
+          "mediaTimeDeltaSeconds": 120.00187500000001,
+          "inputVideoCallbackFps": 29.96639197473428,
+          "canvasDrawFps": 27.641413287039377,
+          "drawIntervalMs": {
+            "p95": 70.40000009536743,
+            "p99": 92.89999997615814,
+            "max": 141.80000007152557,
+            "over40ms": 1293
+          },
+          "filmModeFraction": 0.8547008547008547,
+          "filmVideoModeTransitions": 28,
+          "yadif": {
+            "missed": 0,
+            "queueResetted": 0,
+            "late": 30
+          },
+          "chromeDroppedVideoFramesDelta": 40,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "mediaTimeDeltaSeconds": 120.00458900000001,
+          "inputVideoCallbackFps": 29.965418107578852,
+          "canvasDrawFps": 27.77384275655181,
+          "drawIntervalMs": {
+            "p95": 70.59999990463257,
+            "p99": 93.10000002384186,
+            "max": 150,
+            "over40ms": 1291
+          },
+          "filmModeFraction": 0.8717948717948718,
+          "filmVideoModeTransitions": 28,
+          "yadif": {
+            "missed": 0,
+            "queueResetted": 0,
+            "late": 23
+          },
+          "chromeDroppedVideoFramesDelta": 40,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      ]
+    },
+    "integration": {
+      "integrationTip": "cf2a1fc3697d7d9308ec48c7a73e7efc082b35e5",
+      "KonomiTVRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+      "playerControllerAsset": "PlayerController-B_gLasOx.js",
+      "yadifSourceSha256": "6ee69cf2006180ca59662b4d87fce7e68788fdee7b9934e41f25dd06823e613b",
+      "runs": [
+        {
+          "mediaTimeDeltaSeconds": 120.01121700000002,
+          "inputVideoCallbackFps": 29.96379513629944,
+          "canvasDrawFps": 27.180728513517455,
+          "drawIntervalMs": {
+            "p95": 69.30000007152557,
+            "p99": 85.29999995231628,
+            "max": 115.79999995231628,
+            "over40ms": 1356
+          },
+          "filmModeFraction": 0.8050847457627118,
+          "filmVideoModeTransitions": 38,
+          "yadif": {
+            "missed": 0,
+            "queueResetted": 0,
+            "late": 35
+          },
+          "chromeDroppedVideoFramesDelta": 40,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "mediaTimeDeltaSeconds": 120.01753399999998,
+          "inputVideoCallbackFps": 29.97060431136171,
+          "canvasDrawFps": 26.97104424683844,
+          "drawIntervalMs": {
+            "p95": 70.60000002384186,
+            "p99": 87.10000002384186,
+            "max": 132.60000002384186,
+            "over40ms": 1353
+          },
+          "filmModeFraction": 0.8205128205128205,
+          "filmVideoModeTransitions": 33,
+          "yadif": {
+            "missed": 0,
+            "queueResetted": 0,
+            "late": 46
+          },
+          "chromeDroppedVideoFramesDelta": 40,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "baselineCanvasDrawFpsRange": [
+      27.641413287039377,
+      27.77384275655181
+    ],
+    "integrationCanvasDrawFpsRange": [
+      26.97104424683844,
+      27.180728513517455
+    ],
+    "baselineModeTransitionsRange": [
+      28,
+      28
+    ],
+    "integrationModeTransitionsRange": [
+      33,
+      38
+    ],
+    "conclusion": "Both builds fail to hold 24000/1001fps. The integration values are lower in these two runs, but two runs per build are not enough to attribute that difference to one candidate change."
+  },
+  "counterCaveat": "Chrome droppedVideoFrames is a decoder/video-element counter and is not treated as the number of visible canvas drops. Canvas draw intervals are reported separately."
+}

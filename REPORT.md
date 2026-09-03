@@ -647,6 +647,8 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 同じseed、同じ258回目を含む300回を診断計測付きで再生すると停止は再現せず、該当seekは735.8msで安定復帰した。地点と要求列だけで決まる事象ではない。[300回の再現試行](results/galaxy-fatal-yadif-formal-diagnostic-replay-300.json)も保存し、rAF、rVFC、WebGL直接描画を時系列記録する反復診断を続ける。
 
+現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。queue修正単独の再発に対して統合版の追加変更が有力であることは示すが、0/1000の片側95%信頼上限は約2991ppmなので、目標50ppmの達成や原因所有者の確定には使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
@@ -666,6 +668,10 @@ MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`
 キーフレーム境界のずれを吸収する余裕を取り、1325秒から172.8秒分を映像と主音声だけ`-c copy`で切り出した。実際のvideo packet範囲は1324.824〜1497.463秒、出力TSは約172.853秒である。1035個の完全cycleはすべて1 duplicateを除き、残留インターレース、40msを超えるvideo PTS間隔、映像・主音声のdecode errorは0だった。末尾の1 frameは5-frame cycleを作れないため、cadenceの主張から除外する。
 
 この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ファイルは`/data/ssd/konomitv-seek-fixtures/madder-24p-clean.ts`、SHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
+
+KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と現在のintegrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
+
+基準版のcanvas描画は27.641 / 27.774fps、integrationは27.181 / 26.971fpsだった。film/video判定の遷移は基準版28 / 28回、integration 38 / 33回で、両版とも期待するfilm cadenceを維持しなかった。YADIFの`missed`とqueue全resetは全走行0なので、入力停止やqueue全resetではなく、固定3:2区間で`autoFilm`判定を維持できないことがcadence未達の直接の観測である。integrationの方が低い差は観測したが、各2走行だけなので個別修正の退行量とは断定しない。Chromeの`droppedVideoFrames`増分40はcanvasの可視drop数とは扱わない。[4走行の集計、build hash、生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を保存した。
 
 ## 連続 seek とキャンセル
 

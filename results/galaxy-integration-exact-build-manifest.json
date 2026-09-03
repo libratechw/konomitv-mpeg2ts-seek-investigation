@@ -1,0 +1,31 @@
+{
+  "createdAt": "2026-09-03",
+  "purpose": "Exact integration build for phase-randomized fatal seek-stop and autoFilm regression measurements",
+  "KonomiTV": {
+    "revision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "instrumentation": "45-line seek timing exposure enabled only by the seek-timing query parameter",
+    "instrumentationPatchSha256": "f0bec4e4ce17914ef4b49c33b9addcbe50f376de16ee0cfc9ae77a1bcf8362f6",
+    "pictureWorkersOverride": false,
+    "playerControllerAsset": "PlayerController-B_gLasOx.js",
+    "playerControllerAssetSha256": "64005641e5a3936be52469d95f17a2a3982ebbfdd3e2ec11ae5c8fb81e8443dd",
+    "workerAsset": "worker-CNm-lBzJ.DedM3Nyk.js",
+    "workerAssetSha256": "3c94dedb9aefa3023abaf0bedd90dc6a339c9182dcf46ffc86e96dc810d7ab21",
+    "buildNode": "v24.19.0"
+  },
+  "mpeg2toh264": {
+    "integrationTip": "cf2a1fc3697d7d9308ec48c7a73e7efc082b35e5",
+    "lastYadifSourceChange": "d0871637385f2b506d31d988372bebb89aea084e",
+    "lastPlayerSourceChange": "7d6e9e447e0ea082e63a5cd8e6502b2f052376d0",
+    "yadifSourceSha256": "6ee69cf2006180ca59662b4d87fce7e68788fdee7b9934e41f25dd06823e613b",
+    "yadifDistSha256": "6fea1ecc9ceb33f04da84f5d7a92201d16a8cbfd48bf19ca9f2ae9433840e928",
+    "playerDistSha256": "152312683c8f6f283750fca8b671ce975a0456967bd7212a0d5cff289e06ac2a",
+    "installedDistMatchesIntegration": true
+  },
+  "runtime": {
+    "imageRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "imageDigest": "sha256:4220e7ad65f877921b880eaa81822297e3694f83a6b3815b3569328398a740e4",
+    "databaseTemplateSha256": "69addc2ea498c6967f47a16e65f6332dd6c7ed8eec6911bab5b32878c44229f3",
+    "databaseRuntimeState": "An isolated writable copy of the scanned template; KonomiTV updates it at startup, so the live database hash is not an invariant.",
+    "LANDirect": true
+  }
+}
