@@ -729,6 +729,10 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 
+元TSの不連続は、映像PID 256のbyte位置202,401,364でcontinuity counterが1から6へ飛んだ箇所だった。discontinuityの通知はなく、欠落数は16を法として4 packetに相当する。この位置はB-picture（temporal reference 7、PTS 502108869）のPES内にあり、FFprobeのcorrupt表示が指した直前のPES位置とは異なる。独立に読んだ周辺24 pictureの種類・PTS・PES位置はFFprobeと一致した。[TS byte解析・照合結果](results/nogizaka-transport-defect-localization.json)と[固定fixture用の再現スクリプト](scripts/inspect-nogizaka-transport-defect.py)を公開している。
+
+integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを破棄する。今回の損傷対象は後続pictureの参照元にならないB-pictureなので、正常なpictureまで破棄している可能性がある。ただし、変換後の各pictureとの対応と画素の正常性は未検証であり、「1 pictureだけ落とせば十分」とはまだ判定しない。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
@@ -1083,6 +1087,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
+| 損傷したB-pictureの前後にある正常pictureを保持する | 異常TSの不要なコマ落ちを減らす可能性 | 不連続がB-pictureのPES内にあることを特定したが、現行は蓄積中GOPを破棄する。変換後の欠落範囲と正常pictureの画素を照合してから実装する。[TS解析](results/nogizaka-transport-defect-localization.json) |
 | AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
 | 録画TSの`FileResponse` body chunkを64KiBから増やす | Galaxyの一部条件で最大15.4msの対応付き差が出た | 64〜1024KiBで単調性がなく、Windows各40 seekは−2.4〜+1.7msで中立だったため採用しない。別transport/storageで再現した場合だけ再評価する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |

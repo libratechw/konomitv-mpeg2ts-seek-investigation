@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "fixtureSizeBytes": 3066534364,
+  "window": {
+    "byteStart": 200484140,
+    "byteLength": 3760000,
+    "sha256": "c31cfc79cb38b2ec2f1e740031fa9b898f309179f3e21f099d8a323ee5a27f94"
+  },
+  "videoPid": 256,
+  "continuityAnomalies": [
+    {
+      "byteOffset": 202401364,
+      "pid": 256,
+      "previousByteOffset": 202401176,
+      "previousCC": 1,
+      "cc": 6,
+      "discontinuityIndicator": false,
+      "missingCounterValuesModulo16": 4
+    }
+  ],
+  "pictures": [
+    {
+      "pictureByteOffset": 201708038,
+      "pesByteOffset": 201708020,
+      "pts90k": 502081842,
+      "type": "B",
+      "temporalReference": 13
+    },
+    {
+      "pictureByteOffset": 201727393,
+      "pesByteOffset": 201727196,
+      "pts90k": 502093854,
+      "type": "I",
+      "temporalReference": 2
+    },
+    {
+      "pictureByteOffset": 202064110,
+      "pesByteOffset": 202064092,
+      "pts90k": 502087848,
+      "type": "B",
+      "temporalReference": 0
+    },
+    {
+      "pictureByteOffset": 202090430,
+      "pesByteOffset": 202090412,
+      "pts90k": 502090851,
+      "type": "B",
+      "temporalReference": 1
+    },
+    {
+      "pictureByteOffset": 202117507,
+      "pesByteOffset": 202117484,
+      "pts90k": 502102863,
+      "type": "P",
+      "temporalReference": 5
+    },
+    {
+      "pictureByteOffset": 202212066,
+      "pesByteOffset": 202212048,
+      "pts90k": 502096857,
+      "type": "B",
+      "temporalReference": 3
+    },
+    {
+      "pictureByteOffset": 202238198,
+      "pesByteOffset": 202238180,
+      "pts90k": 502099860,
+      "type": "B",
+      "temporalReference": 4
+    },
+    {
+      "pictureByteOffset": 202265839,
+      "pesByteOffset": 202265816,
+      "pts90k": 502111872,
+      "type": "P",
+      "temporalReference": 8
+    },
+    {
+      "pictureByteOffset": 202364158,
+      "pesByteOffset": 202364140,
+      "pts90k": 502105866,
+      "type": "B",
+      "temporalReference": 6
+    },
+    {
+      "pictureByteOffset": 202392358,
+      "pesByteOffset": 202392340,
+      "pts90k": 502108869,
+      "type": "B",
+      "temporalReference": 7
+    },
+    {
+      "pictureByteOffset": 202419247,
+      "pesByteOffset": 202419224,
+      "pts90k": 502120881,
+      "type": "P",
+      "temporalReference": 11
+    },
+    {
+      "pictureByteOffset": 202523770,
+      "pesByteOffset": 202523752,
+      "pts90k": 502114875,
+      "type": "B",
+      "temporalReference": 9
+    },
+    {
+      "pictureByteOffset": 202551218,
+      "pesByteOffset": 202551200,
+      "pts90k": 502117878,
+      "type": "B",
+      "temporalReference": 10
+    },
+    {
+      "pictureByteOffset": 202579987,
+      "pesByteOffset": 202579964,
+      "pts90k": 502129890,
+      "type": "P",
+      "temporalReference": 14
+    },
+    {
+      "pictureByteOffset": 202683006,
+      "pesByteOffset": 202682988,
+      "pts90k": 502123884,
+      "type": "B",
+      "temporalReference": 12
+    },
+    {
+      "pictureByteOffset": 202713462,
+      "pesByteOffset": 202713444,
+      "pts90k": 502126887,
+      "type": "B",
+      "temporalReference": 13
+    },
+    {
+      "pictureByteOffset": 202746729,
+      "pesByteOffset": 202746532,
+      "pts90k": 502138899,
+      "type": "I",
+      "temporalReference": 2
+    },
+    {
+      "pictureByteOffset": 203080626,
+      "pesByteOffset": 203080608,
+      "pts90k": 502132893,
+      "type": "B",
+      "temporalReference": 0
+    },
+    {
+      "pictureByteOffset": 203112962,
+      "pesByteOffset": 203112944,
+      "pts90k": 502135896,
+      "type": "B",
+      "temporalReference": 1
+    },
+    {
+      "pictureByteOffset": 203134211,
+      "pesByteOffset": 203134188,
+      "pts90k": 502147908,
+      "type": "P",
+      "temporalReference": 5
+    },
+    {
+      "pictureByteOffset": 203222378,
+      "pesByteOffset": 203222360,
+      "pts90k": 502141902,
+      "type": "B",
+      "temporalReference": 3
+    },
+    {
+      "pictureByteOffset": 203253398,
+      "pesByteOffset": 203253380,
+      "pts90k": 502144905,
+      "type": "B",
+      "temporalReference": 4
+    },
+    {
+      "pictureByteOffset": 203284611,
+      "pesByteOffset": 203284588,
+      "pts90k": 502156917,
+      "type": "P",
+      "temporalReference": 8
+    },
+    {
+      "pictureByteOffset": 203382366,
+      "pesByteOffset": 203382348,
+      "pts90k": 502150911,
+      "type": "B",
+      "temporalReference": 6
+    }
+  ],
+  "ffprobeCrossCheckCount": 24,
+  "ffprobeVersion": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+  "ffprobeFrames": [
+    {
+      "pts": 502048809,
+      "pkt_pos": "422436",
+      "pict_type": "I",
+      "tags": {
+        "timecode": "00:00:00:00"
+      },
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        },
+        {
+          "side_data_type": "GOP timecode",
+          "timecode": "00:00:00:00"
+        }
+      ]
+    },
+    {
+      "pts": 502051812,
+      "pkt_pos": "807084",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502054815,
+      "pkt_pos": "823440",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502057818,
+      "pkt_pos": "735832",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502060821,
+      "pkt_pos": "913492",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502063824,
+      "pkt_pos": "930600",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502066827,
+      "pkt_pos": "840172",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502069830,
+      "pkt_pos": "1051860",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502072833,
+      "pkt_pos": "1071600",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502075836,
+      "pkt_pos": "948084",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502078839,
+      "pkt_pos": "1205456",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502081842,
+      "pkt_pos": "1223880",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502084845,
+      "pkt_pos": "1091716",
+      "pict_type": "P",
+      "tags": {
+        "timecode": "00:00:00:00"
+      },
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        },
+        {
+          "side_data_type": "GOP timecode",
+          "timecode": "00:00:00:00"
+        }
+      ]
+    },
+    {
+      "pts": 502087848,
+      "pkt_pos": "1579952",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502090851,
+      "pkt_pos": "1606272",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502093854,
+      "pkt_pos": "1243056",
+      "pict_type": "I",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502096857,
+      "pkt_pos": "1727908",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502099860,
+      "pkt_pos": "1754040",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502102863,
+      "pkt_pos": "1633344",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502105866,
+      "pkt_pos": "1880000",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502108869,
+      "pkt_pos": "1908200",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502111872,
+      "pkt_pos": "1781676",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502114875,
+      "pkt_pos": "2039612",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502117878,
+      "pkt_pos": "2067060",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502120881,
+      "pkt_pos": "1935084",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502123884,
+      "pkt_pos": "2198848",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502126887,
+      "pkt_pos": "2229304",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502129890,
+      "pkt_pos": "2095824",
+      "pict_type": "P",
+      "tags": {
+        "timecode": "00:00:00:00"
+      },
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        },
+        {
+          "side_data_type": "GOP timecode",
+          "timecode": "00:00:00:00"
+        }
+      ]
+    },
+    {
+      "pts": 502132893,
+      "pkt_pos": "2596468",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502135896,
+      "pkt_pos": "2628804",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502138899,
+      "pkt_pos": "2262392",
+      "pict_type": "I",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502141902,
+      "pkt_pos": "2738220",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502144905,
+      "pkt_pos": "2769240",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502147908,
+      "pkt_pos": "2650048",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502150911,
+      "pkt_pos": "2898208",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502153914,
+      "pkt_pos": "2925280",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502156917,
+      "pkt_pos": "2800448",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502159920,
+      "pkt_pos": "3046352",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502162923,
+      "pkt_pos": "3068724",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502165926,
+      "pkt_pos": "2949720",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502168929,
+      "pkt_pos": "3179268",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502171932,
+      "pkt_pos": "3200136",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502174935,
+      "pkt_pos": "3090532",
+      "pict_type": "P",
+      "tags": {
+        "timecode": "00:00:00:00"
+      },
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        },
+        {
+          "side_data_type": "GOP timecode",
+          "timecode": "00:00:00:00"
+        }
+      ]
+    },
+    {
+      "pts": 502177938,
+      "pkt_pos": "3555080",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502180941,
+      "pkt_pos": "3574632",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502183944,
+      "pkt_pos": "3222884",
+      "pict_type": "I",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502186947,
+      "pkt_pos": "3688936",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502189950,
+      "pkt_pos": "3708300",
+      "pict_type": "B",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502192953,
+      "pkt_pos": "3594936",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    },
+    {
+      "pts": 502201962,
+      "pkt_pos": "3729920",
+      "pict_type": "P",
+      "side_data_list": [
+        {
+          "side_data_type": "AVPanScan"
+        }
+      ]
+    }
+  ],
+  "ffprobeWarnings": "[aac] Sample rate index in program config element does not match the sample rate index configured by the container.\n[aac] channel element 3.6 is not allocated\n[mpeg2video] Invalid frame dimensions 0x0.\n    Last message repeated 7 times\n[mpegts] Packet corrupt (stream = 1, dts = 502108869).\nUnsupported codec with id 98306 for input stream 0\nUnsupported codec with id 98314 for input stream 4\n[mpeg2video] 00 motion_type at 49 28\n[mpeg2video] Warning MVs not available\n[mpeg2video] ac-tex damaged at 15 30\n[mpeg2video] Warning MVs not available\n",
+  "limitations": [
+    "Counter gaps give a missing count modulo 16, not the exact number of lost packets.",
+    "Only the fixed byte window was inspected for transport anomalies.",
+    "ffprobe may conceal damage; decoded frames do not prove undamaged pixels.",
+    "The byte window starts mid-stream; startup warnings are not additional fixture defects.",
+    "This does not prove browser drop attribution or minimum recoverable frame loss."
+  ],
+  "scriptSha256": "c32aaa99bcc2c75b5f368b1389d960acc7925fc1babfa91f1f4d022571b66675",
+  "interpretation": {
+    "transportLoss": {
+      "byteOffset": 202401364,
+      "containingPesByteOffset": 202392340,
+      "pictureType": "B",
+      "temporalReference": 7,
+      "pts90k": 502108869,
+      "relativeToVideoStartSeconds": 125.05826633333345
+    },
+    "ffprobePacketPositionCaveat": "The earlier corrupt-video-packet report names PES position 202364140 (B6). The raw continuity hole is inside the next PES at 202392340 (B7); do not treat the demux packet position as the missing 188-byte TS packet location.",
+    "recoverability": "A B picture is not a forward reference for subsequent MPEG-2 pictures. This local evidence motivates preserving intact pictures across a damaged B PES; actual converter output and pixel equivalence still require testing.",
+    "minimumLossNotProven": true
+  },
+  "codeEvidence": {
+    "integrationCommit": "44e06a4632ad1da91073fbce7a4816514f6ff58a",
+    "paths": {
+      "crates/mpeg2toh264/src/container/mpegts.rs": {
+        "sha256": "bd739a958412f02c7e7fabbd957daace137b7bc5325964bfefa26097b68b09cd"
+      },
+      "crates/mpeg2toh264/src/session.rs": {
+        "sha256": "d8a38156ffe4650a6dd56c0c49e64968a6ee8bbf9e7df3b04e9907daed2b0953"
+      },
+      "crates/mpeg2toh264/src/mpeg2/gop_stream.rs": {
+        "sha256": "45a81ac40e968d34f194acbfe87fa7376a5eaa65b1f93d266f6731c2b2d115b5"
+      }
+    },
+    "behavior": "A mid-PES continuity loss discards that PES and marks damaged_previous_pes. Session::ingest_packet passes the marker to Mpeg2GopStream::discard_pending, clearing the accumulated GOP rather than only the missing picture."
+  }
+}
