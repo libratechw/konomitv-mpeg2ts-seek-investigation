@@ -390,6 +390,16 @@ Windowsの隔離KonomiTVで`responses.py`だけを候補へ置き換え、同じ
 各版1走行の順序固定比較であり、通常シークの改善量や致命的停止率は示さない。
 試験後のプロセス停止と元ファイルへの復元を確認した。[全200要求・比較元・ファイルhash・終了確認](results/windows-range-abort-starlette-fix-200.json)を保存している。
 
+同じStarlette候補と実Chromeを使い、Windowsの隔離KonomiTVとローカルTSだけで1時間の反復シーク試験も行った。
+Chrome、page、player、Worker、decoder、MSE、YADIFを1,000要求ごとに作り直した5 sessionで、4,738回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。
+安定復帰時間は中央値565.7ms、p95 779.715ms、最大987.6msだった。
+これは8回連続描画と100ms以上の持続まで待つ致命的停止検出器の値で、通常シークの初回描画200ms目標とは比較しない。
+最後のsessionは時間上限で終了したため、要求5,000回のうち完了した4,738回だけを観測済みの復帰として数える。
+
+この走行には同条件のStarlette修正前がなく、候補による表示復帰時間や停止頻度の改善量は示さない。
+選択したシーク区間は既知の破損packetを横切らないため、異常TSの1時間条件にも使わない。
+全sessionの終了処理、Chromeとローカルruntimeの停止、Starlette実行ファイルの復元を確認した。[build、測定条件、各blockのhash、終了確認](results/windows-starlette-candidate-one-hour-seek.json)を保存している。
+
 ## TS 解析、変換、音声待ち
 
 [worker.ts:530](https://github.com/otya128/mpeg2toh264/blob/d5df08ba9c661a5576545d3d30464d8f3bf64639/packages/player/src/worker.ts#L530) は seek 後に新しい `Transcoder` / Rust `Session` を作る。

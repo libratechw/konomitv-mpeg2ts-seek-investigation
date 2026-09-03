@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Check whether the Starlette FileResponse disconnect candidate causes a fatal seek-display stop during one bounded hour on the Windows auxiliary host.",
+  "scope": "Windows-local KonomiTV and TS, physical Google Chrome, fullscreen, one page per block, 60 Hz display, Best power efficiency. Seek targets are normal selected bands and do not cross the known damaged-packet interval.",
+  "candidate": {
+    "repository": "Kludex/starlette",
+    "sourceCommit": "d70956b1155c9a1af1099fec153a53cd480b730b",
+    "declaredBaseCommit": "39fd0ff",
+    "candidateResponsesSha256": "3e270531f6eaed4be7076b6ee7632009725fac84f05b2a7818c590c33fae9e8c",
+    "runtimeBaseResponsesSha256": "10a5f318bb014296e57d9a3f6ffa51d478e21b07d5bf978597dba2ec9dc21e4a"
+  },
+  "playerBuild": {
+    "variant": "rank5-tip",
+    "konomiTVCommit": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "sourceSha256": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+    "distSha256": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+    "distTreeSha256": "012880c6876c24f7a62fa69088154cfaa6b6e841411f5798c9ea42023ce7b52f",
+    "asset": "PlayerController-Buc-P0iB.js",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "conditions": {
+    "durationSeconds": 3600,
+    "cleanupReserveSeconds": 30,
+    "minimumFinalBlockSeconds": 45,
+    "blockSize": 1000,
+    "baseSeed": 20260934,
+    "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF were recreated for each block.",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "fatalDefinition": "Stable display did not recover within 2000 ms of assigning video.currentTime without another user operation.",
+    "stableDefinition": "Target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run.",
+    "runnerSha256": "961f7a523e9f5c682402795ea64ab9565f193d85c668b064647e06bf6fb473c6",
+    "collectorSha256": "0ad322d4b7c4c3d48e99715b6749d5aacc2c82904f18a8fa6326f416cd35a412",
+    "toolsManifestSha256": "01c1b76099e818316feefbab6721eaa0d42489028e089b4b5cc222e287745e70"
+  },
+  "result": {
+    "status": "complete",
+    "attemptedSeeks": 5000,
+    "completedSeeks": 4738,
+    "fatalStops": 0,
+    "blockCount": 5,
+    "clientSessionCount": 5,
+    "betweenBlockResetCount": 4,
+    "measurementSeconds": 3462.995,
+    "wallClockElapsedSeconds": 3582.449,
+    "scheduledMeasurementWindowSeconds": 3570,
+    "coverageSatisfied": true,
+    "stableRecoveryLatencyMs": {
+      "count": 4738,
+      "median": 565.7,
+      "p95": 779.715,
+      "maximum": 987.6
+    },
+    "failures": []
+  },
+  "blocks": [
+    {
+      "name": "block-000.json",
+      "sha256": "c7992f40eaec4dd8a681943df1e4e16a06de742322498dfe11102978cd94941d",
+      "seed": 20260934,
+      "requestedSeeks": 1000,
+      "completedSeeks": 1000,
+      "fatalStops": 0,
+      "stopReason": "count-complete",
+      "measurementSeconds": 723.403,
+      "fullscreen": true,
+      "singlePage": true,
+      "collectorTimedOut": false,
+      "cleanupSucceeded": true
+    },
+    {
+      "name": "block-001.json",
+      "sha256": "0efab7d48735976fa63773b394656b499f31a52a1ea1f27994abb34bee4f1db9",
+      "seed": 21260937,
+      "requestedSeeks": 1000,
+      "completedSeeks": 1000,
+      "fatalStops": 0,
+      "stopReason": "count-complete",
+      "measurementSeconds": 727.73,
+      "fullscreen": true,
+      "singlePage": true,
+      "collectorTimedOut": false,
+      "cleanupSucceeded": true
+    },
+    {
+      "name": "block-002.json",
+      "sha256": "eeb34e57adf5cb4cf19443f7493d2a4e5fdf0aac87d359905a991ad98f6c2e93",
+      "seed": 22260940,
+      "requestedSeeks": 1000,
+      "completedSeeks": 1000,
+      "fatalStops": 0,
+      "stopReason": "count-complete",
+      "measurementSeconds": 745.191,
+      "fullscreen": true,
+      "singlePage": true,
+      "collectorTimedOut": false,
+      "cleanupSucceeded": true
+    },
+    {
+      "name": "block-003.json",
+      "sha256": "8b93e6034de3d1fd42bda93f10de1009ff435909e72360604c873a4835ca6861",
+      "seed": 23260943,
+      "requestedSeeks": 1000,
+      "completedSeeks": 1000,
+      "fatalStops": 0,
+      "stopReason": "count-complete",
+      "measurementSeconds": 728.35,
+      "fullscreen": true,
+      "singlePage": true,
+      "collectorTimedOut": false,
+      "cleanupSucceeded": true
+    },
+    {
+      "name": "block-004.json",
+      "sha256": "ded5fd47806d5e9464aa0bffd63a355d82e272e42bc28574680f322047dc5a00",
+      "seed": 24260946,
+      "requestedSeeks": 1000,
+      "completedSeeks": 738,
+      "fatalStops": 0,
+      "stopReason": "time-limit",
+      "measurementSeconds": 538.321,
+      "fullscreen": true,
+      "singlePage": true,
+      "collectorTimedOut": false,
+      "cleanupSucceeded": true
+    }
+  ],
+  "cleanup": {
+    "allBlocksSucceeded": true,
+    "chromeStopped": true,
+    "cdpUnavailable": true,
+    "remainingChromeProcesses": 0,
+    "runtimeStopped": true,
+    "scheduledTaskRemoved": true,
+    "candidateRuntimeRestored": true,
+    "restoredResponsesSha256": "10a5f318bb014296e57d9a3f6ffa51d478e21b07d5bf978597dba2ec9dc21e4a",
+    "pycacheRemaining": 0
+  },
+  "rawEvidence": {
+    "campaignSummarySha256": "ce677ad67ce6908dbc5a6bf8f73f02bc408792bf529da4ce76b5bf8721405802",
+    "wrapperSummarySha256": "55deb5a834cce917a9faf9942e5210adb083d74c011fa232889587329e9a8fea",
+    "blockFiles": [
+      {
+        "name": "block-000.json",
+        "sha256": "c7992f40eaec4dd8a681943df1e4e16a06de742322498dfe11102978cd94941d"
+      },
+      {
+        "name": "block-001.json",
+        "sha256": "0efab7d48735976fa63773b394656b499f31a52a1ea1f27994abb34bee4f1db9"
+      },
+      {
+        "name": "block-002.json",
+        "sha256": "eeb34e57adf5cb4cf19443f7493d2a4e5fdf0aac87d359905a991ad98f6c2e93"
+      },
+      {
+        "name": "block-003.json",
+        "sha256": "8b93e6034de3d1fd42bda93f10de1009ff435909e72360604c873a4835ca6861"
+      },
+      {
+        "name": "block-004.json",
+        "sha256": "ded5fd47806d5e9464aa0bffd63a355d82e272e42bc28574680f322047dc5a00"
+      }
+    ],
+    "publication": "Raw files are retained privately because they contain local paths. This file contains the public, reproducible fields and hashes."
+  },
+  "limitations": [
+    "This is a candidate-only run. No same-condition Starlette baseline was measured.",
+    "Fatal-stop absence does not establish a seek-latency improvement or attribute any difference to the Starlette candidate.",
+    "Stable-recovery latency includes eight consecutive draws spanning at least 100 ms and is not the normal first-draw seek-latency metric.",
+    "The Windows low-power host is an auxiliary condition and is not an absolute-performance comparison with Galaxy or normally configured Windows.",
+    "The last block ended at the time limit: 5000 seeks were requested and 4738 completed stable recovery. Only completedSeeks are counted as observed recoveries.",
+    "The selected seek bands do not cross the known damaged-packet interval, so this is not the anomalous-TS one-hour acceptance test."
+  ]
+}

@@ -158,7 +158,8 @@ tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdis
 
 順位8は、client切断後もファイル応答が末尾まで読み続ける問題を止めます。
 Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正前は受信時間が76.1→1,083.1msへ悪化し、修正後は26.1→24.8msで推移しました（最初・最後の20回の中央値）。
-これはHTTP受信時間であり、実Chromeでの表示復帰への効果は未測定です。
+実Chromeを使う候補単独の1時間試験では、4,738回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でした。
+同条件のStarlette修正前を測っていないため、表示復帰時間や停止頻度の改善量は未確定です。[1時間試験の条件と結果](results/windows-starlette-candidate-one-hour-seek.json)を公開しています。
 
 変更はFileResponseのtaskキャンセルとファイルcloseに限られ、レビュー負荷は中、保守対象はASGIの切断・終了処理です。[条件と根拠](REPORT.md#切断後も続く-fileresponse-の処理)を参照してください。
 
