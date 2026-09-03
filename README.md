@@ -56,6 +56,13 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 YADIF停止の内部traceでは、rVFCが133回、rAFが265回進む4.419秒間にcanvas描画が0回で、queue全reset後に復帰しました。
 decoderがframeを供給し続けても、容量確保でfieldを捨てた後に未来の表示予定時刻が残り、次の破棄を連鎖させることで表示停止が継続します。[時系列の機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)に根拠と適用限界を保存しています。
 
+順位4の提出buildを1,000 seekごとに作り直す1時間上限の試験では、3,008回目に致命的な表示停止を1件検出しました。
+video decoderは67 frame、音声decodeも61,270 byte進みましたが、canvasの最大描画間隔は1,679ms、YADIFの`late`は2→70、終了時`outputFps`は0でした。
+順位4は通常のシーク停止を大幅に減らしますが、1時間0件の合格条件は満たしません。[集計と4 blockの生値](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)を公開しています。
+
+順位5の連続セッション試験では4,073 seek・停止0でしたが、実行中runnerを編集したため正式結果から除外しました。
+blockごとの再生成も行っていないので、順位4との効果比較や順位5の合格根拠には使いません。[除外理由と参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)を残しています。
+
 致命的な表示停止と`autoFilm`の cadence 維持は、どちらもまだ目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 

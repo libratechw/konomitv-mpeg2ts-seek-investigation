@@ -653,6 +653,12 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 同じseed、同じ258回目を含む300回を診断計測付きで再生すると停止は再現せず、該当seekは735.8msで安定復帰した。地点と要求列だけで決まる事象ではない。[300回の再現試行](results/galaxy-fatal-yadif-formal-diagnostic-replay-300.json)も保存し、rAF、rVFC、WebGL直接描画を時系列記録する反復診断を続ける。
 
+提出build source `26484fd` / dist `27b327e`を、読み取り専用snapshotへ固定したrunnerで再試験した。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、各blockに別seedを使った。第4 blockの8回目、全体の3,008回目で致命的停止を1件検出し、1時間上限の試験を2,447.503秒で自動停止した。先行3 blockは各1,000回、合計3,000回が安定復帰していた。
+
+停止時は`seeked`が178.6ms、目的rVFCが189.0msで成立し、`readyState`は4、video decoderは67 frame、音声decodeは61,270 byte進んだ。一方、canvasの最大描画間隔は1,679ms、YADIFの`late`は2→70、queue全resetは1→2、終了時`outputFps`は0だった。server、MSE入力、decoder、音声の停止ではなく、YADIF表示側で復帰しない点は以前の258回目と一致する。ただし今回の計測はqueue内部の時系列traceを含まないため、未来の表示予定時刻が残る同一機構かまでは確定しない。[全体集計](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)と[停止block](results/galaxy-yadif-rank4-one-hour-block-reset-block-003.json)を含む4 blockの生値を保存した。
+
+後続のoverflow時刻圧縮 source `7ef6696` / dist `ac2a2a9`では、単一の連続セッションで4,073 seek・停止0、実測3,572.682秒だった。ただし実行中のshell runnerを編集したため、collectorのraw出力後にrunnerが失敗した。blockごとの再生成も行っていない。この走行は[除外理由付きの参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)として残すが、順位5の合格根拠にも、順位4との効果比較にも使わない。順位5の因果効果には、同じ読み取り専用snapshotとblock再生成条件で別の1時間試験が必要である。
+
 現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。queue修正単独の再発に対して統合版の追加変更が有力であることは示すが、走行時間が1時間に達しないため、現在の合格判定や原因所有者の確定には使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
