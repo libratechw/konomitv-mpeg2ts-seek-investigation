@@ -661,13 +661,17 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 最後の直接描画後もrVFCは51回進んだが、51回のqueue容量確保で計101 fieldをFIFO破棄した。各入力callbackの直前には古い先頭fieldが表示期限へ近づいていたが、2 fieldを破棄すると残った先頭が再び約3〜4 refresh先へ移る。rAFは表示対象を得られず、次の入力callbackが同じ破棄を繰り返した。これにより、自然発生した致命的停止の原因を、容量破棄後の空いたpresentation momentを残すYADIFの時刻列へ特定した。[受動計測を含む生値](results/galaxy-yadif-rank4-natural-fatal-timeline.json)を保存した。
 
-後続のoverflow時刻圧縮へ同じ受動計測を加え、同じseedの4回目、905.784979秒へのseekを比較した。順位4は2.5秒で復帰せず、overflow 54回、FIFO破棄104 field、future待ち116回、queue全reset 1回だった。差分をoverflow時刻圧縮だけにした順位5は、overflow 4回、FIFO破棄4 field、future待ち7回、queue全reset 0回で、508.5msの描画から安定列が始まり、692.6msで安定を確認した。decoder、音声、canvas描画も進み、先頭4 seekを完了した。[同一計装の順位5結果](results/galaxy-yadif-rank5-same-instrumentation-success.json)を保存した。これにより、空いたpresentation momentを詰める変更が自然発生した循環を止める因果を同一計装で確認した。長時間の合格は、正式branchの無負荷1時間試験で別に確認する。
+後続のoverflow時刻圧縮へ同じ受動計測を加え、同じseedの4回目、905.784979秒へのseekを比較した。順位4は2.5秒で復帰せず、overflow 54回、FIFO破棄104 field、future待ち116回、queue全reset 1回だった。差分をoverflow時刻圧縮だけにした順位5は、overflow 4回、FIFO破棄4 field、future待ち7回、queue全reset 0回で、508.5msの描画から安定列が始まり、692.6msで安定を確認した。decoder、音声、canvas描画も進み、先頭4 seekを完了した。[同一計装の順位5結果](results/galaxy-yadif-rank5-same-instrumentation-success.json)を保存した。これにより、空いたpresentation momentを詰める変更が自然発生した循環を止める因果を同一計装で確認した。
 
 後続のoverflow時刻圧縮 source `7ef6696` / dist `ac2a2a9`では、単一の連続セッションで4,073 seek・停止0、実測3,572.682秒だった。ただし実行中のshell runnerを編集したため、collectorのraw出力後にrunnerが失敗した。blockごとの再生成も行っていない。この走行は[除外理由付きの参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)として残すが、順位5の合格根拠にも、順位4との効果比較にも使わない。順位5の因果効果には、同じ読み取り専用snapshotとblock再生成条件で別の1時間試験が必要である。
 
 同じ正式buildでChrome、page、player、Worker、decoder、MSE、YADIFを1,000 seekごとに作り直す1時間試験は、5 session、実測3491.416秒で4,399 seekすべてが復帰した。ただし最初のblock中に、同じLinuxホストで上の順位5診断buildを実行した。発生した追加負荷を分離できないため、[高負荷を含む参考結果](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)として残し、無負荷の1時間合格根拠には使わない。
 
-現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。queue修正単独の再発に対して統合版の追加変更が有力であることは示すが、走行時間が1時間に達しないため、現在の合格判定や原因所有者の確定には使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+
+同じintegrationをsource、dist、KonomiTV revision、fixture、runnerのhashで固定し、無負荷で1時間上限の試験を行った。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,459.837秒で4,644回すべてが2秒以内に安定復帰した。壁時計では3,575.237秒で、致命的な表示停止は0件だった。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-integration-current-v3-one-hour-summary.json)および[5 blockの生値](results/galaxy-integration-current-v3-one-hour-block-000.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
+
+同じbuildで既知の破損video packetを1回横切る15秒traceを取得した。入力rVFCは125.019秒から125.587秒へ567.233ms進み、canvasの最大描画間隔は521.9msだった。表示は安定条件へ863.0msで復帰し、利用者操作、再seek、playback error、visibility変更はなかったため、この単発走行に致命的な表示停止はない。一方、復帰確認後5秒のcanvas描画は56.41fpsで、期待値59.94fpsとの差が5.89%あり、±1%条件を満たさなかった。音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 

@@ -25,8 +25,8 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 合格条件は、正常TSと異常TSのそれぞれについて、試行条件を記録した1時間の自動試験で0件です。
 これは再現可能な回帰試験の基準であり、一般的な発生率が0であることを示す統計的な推定ではありません。
 
-正常TSの目標は、コマ落ち3時間に1回以下、理論上の表示FPSの安定維持、シークの表示復帰時間200ms以下です。
-1時間連続再生のコマ落ちと40ms超の描画間隔も、発生率と短いカクつきを調べる指標として記録します。
+正常TSの目標は、1時間連続再生でコマ落ち0件、40ms超の描画間隔0回、理論上の表示FPSの安定維持、シークの表示復帰時間200ms以下です。
+番組1本を通して見ても、コマ落ち0件を目標とします。
 異常TSは別に評価し、1時間の自動試験で致命的な表示停止0件、利用者操作なしでの継続または復帰、避けられない最小範囲だけのコマ落ち、復帰後の理論FPSと音声同期を必須条件とします。
 
 これらを達成した後も、技術的な改善余地がなくなるまで検証と改善を続けます。
@@ -57,7 +57,7 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 - MSE resetと古いappend完了が競合すると、新しいinit segmentを失い得ました。
 
 7件の修正をまとめた統合検証版では、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→159.7msとなり、当時の250ms判定では14/40→40/40になりました。
-全11指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
+代表指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
 
 正式候補へ受動的なqueue計測だけを加えた自然発生traceでは、最後のcanvas直接描画後もrVFCが51回進む一方、51回の容量確保で計101 fieldをFIFO破棄しました。
 破棄のたびに次のfieldが再び将来へ移り、rAFが表示対象を得られない循環が続きました。[自然発生trace](results/galaxy-yadif-rank4-natural-fatal-timeline.json)に記録しています。
@@ -76,7 +76,14 @@ blockごとの再生成も行っていないので、順位4との効果比較�
 blockごとにブラウザーとplayer各層を作り直す別の1時間試験も4,399 seek・停止0でしたが、最初のblock中に同一ホストで診断buildを実行しました。
 高負荷を含む参考結果として残し、無負荷の1時間合格根拠には使いません。[条件と全blockのhash](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)を保存しています。
 
-致命的な表示停止は修正機構の同一計装A/Bまで確認できましたが、正式branchの無負荷1時間試験はまだ完了していません。
+現在のintegrationを固定した無負荷の1時間試験は、4,644回のseekすべてが2秒以内に安定復帰し、致命的な表示停止0件でした。
+この試験は正常区間だけを選ぶ反復seekであり、正常TSの1時間連続再生や異常TSの1時間試験を兼ねません。
+[集計と各blockの生値](results/galaxy-integration-current-v3-one-hour-summary.json)を公開しています。
+
+同じbuildで既知の破損video packetを1回横切ると、利用者操作なしで表示が復帰し、致命的な表示停止はありませんでした。
+ただし、復帰後5秒のcanvas描画は56.41fpsで、期待する59.94fpsの±1%には戻りませんでした。
+音声decodeの進行は確認しましたが、A/V同期と、コマ落ちが入力欠落から避けられない最小範囲であることは未証明です。[単発の異常区間解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)を保存しています。
+
 `autoFilm`のcadence維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 

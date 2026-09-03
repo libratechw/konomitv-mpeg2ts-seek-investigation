@@ -1,0 +1,92 @@
+{
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "defectMediaTime": 125.0249
+  },
+  "build": {
+    "sourceHash": "e5f54726cc72d6d5a8d2d3aba2db15cbd2ac994cf8b63dd056e4561566570585",
+    "distHash": "488d25ecbdac6bf2e7624773728c57a0f28728418297f29e04f4adff856063f5",
+    "asset": "PlayerController-Dao1fubM.js"
+  },
+  "detectedInputGap": {
+    "spansKnownDefect": true,
+    "beforeMediaTime": 125.019355,
+    "afterMediaTime": 125.586588,
+    "mediaTimeDeltaMs": 567.2330000000017,
+    "callbackIntervalMs": 551.5,
+    "startsAtMs": 3330.9000000953674,
+    "endsAtMs": 3882.4000000953674
+  },
+  "displayRecovery": {
+    "fatalDefinitionMs": 2000,
+    "fatalStop": false,
+    "stableDrawCount": 8,
+    "maximumStableIntervalMs": 50,
+    "minimumStableSpanMs": 100,
+    "stableConfirmationMs": 863,
+    "firstStableDrawAfterGapMs": 647.3999999761581,
+    "largestSurroundingDrawGapMs": 521.9000000953674,
+    "postRecoveryWindowMs": 4999,
+    "minimumPostRecoveryWindowMs": 3000,
+    "postRecoveryWindowSufficient": true,
+    "postRecoveryDrawFps": 56.41128225645129,
+    "expectedDrawFps": 59.94005994005994,
+    "postRecoveryFpsErrorRatio": 0.058871774354871016,
+    "postRecoveryFpsWithinOnePercent": false,
+    "postRecoveryDrawIntervalsOver40Ms": 0,
+    "postRecoveryMaximumDrawIntervalMs": 37.10000002384186
+  },
+  "decoderRecovery": {
+    "audioDecodedBytesAdvanced": true,
+    "audioFirstAdvancedAfterGapMs": 69.39999997615814,
+    "audioDecodedBytesTotalDelta": 357648,
+    "videoDecodedBytesTotalDelta": 59874590,
+    "browserDroppedFrames": 17
+  },
+  "streamRecovery": {
+    "windowStartsAt": 14885.800000071526,
+    "windowEndsAt": 20748.800000071526,
+    "playerDroppedPacketsDelta": 0,
+    "playerErrorsDelta": 0,
+    "playerAudioFramesDelta": 282,
+    "playerVideoFramesDelta": 184,
+    "yadifDiscontinuitiesDelta": 1,
+    "yadifDegradedDelta": 3,
+    "yadifLateDelta": 5,
+    "yadifQueueResetDelta": 0,
+    "minimumUnavoidableDropProven": false,
+    "minimumUnavoidableDropReason": "The trace does not identify every missing input frame and its decode dependencies."
+  },
+  "unattended": {
+    "userInteractionEvents": [],
+    "playbackErrors": [],
+    "visibilityChanges": [],
+    "passed": true
+  },
+  "audioSync": {
+    "proven": false,
+    "reason": "Decoded-byte progress proves that audio decoding continued, but a media element does not expose an independent audible audio clock. A/V sync needs a mux-timeline check or captured-output comparison."
+  },
+  "cleanup": {
+    "verified": true,
+    "requiredKeys": [
+      "videoPausedBeforeClose",
+      "fullscreenExitedBeforeClose",
+      "testPagesClosed",
+      "chromeStopped",
+      "webapkStopped",
+      "adbForwardRemoved",
+      "containerStopped"
+    ],
+    "observed": {
+      "videoPausedBeforeClose": true,
+      "fullscreenExitedBeforeClose": true,
+      "testPagesClosed": true,
+      "chromeStopped": true,
+      "webapkStopped": true,
+      "adbForwardRemoved": true,
+      "containerStopped": true
+    }
+  }
+}
