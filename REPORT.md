@@ -635,13 +635,17 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。正式な基準版との540/900秒交互90 seekでは、描画10fps未満18/90→0/90、複合異常35/90→1/90、`late`増分合計1859→294、最低draw 1.67→29.98fpsだった。候補のqueue全resetは51回で、`konomi/main`で加算されず常に0だった`queueResetted`が実際の再同期を再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
-致命的な表示停止は、利用者の再seekなどがないと2秒以上表示が復帰しない事象として別に数える。上の1.8秒複合異常は、この発生率の根拠には使わない。発生率50ppm以下の判定には片側95%信頼上限を使い、0件の場合も最低59,914回のseekを必要とする。
+致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象として別に数える。上の1.8秒複合異常は、この発生率の根拠には使わない。発生率50ppm以下の判定には片側95%信頼上限を使い、0件の場合も最低59,914回のseekを必要とする。
 
 この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
 
 queue容量確保と未来時刻列の再同期だけを分けた正式候補source `26484fd`、dist `27b327e`では、同じseedの先頭20回がすべて復帰した。[20回smoke](results/galaxy-fatal-detector-yadif-formal-smoke-20.json)に続き、240〜480秒と900〜1140秒を交互に選ぶ1000回pilotも停止0だった。厳しい安定復帰条件の時間は中央値697.6ms、p95 831.7ms、最大1303.5msで、通常の初回描画時間とは比較しない。[1000回pilotの生値](results/galaxy-fatal-detector-yadif-formal-pilot-1000.json)を保存した。
 
 0/1000の片側95%信頼上限は約2991ppmであり、50ppm以下の達成根拠にはならない。今回のpilotは検出器、長時間反復、修正候補の安定性を確認した段階であり、合格判定には独立性を記録した最低59,914回の0件が必要である。
+
+固定した試行間隔と表示位相の偏りを避けるため、各`video.currentTime`設定前に0〜33.37msの疑似乱数待ちを加え、全60 blockでブラウザー、player、Worker、decoder、MSE、YADIFを作り直す60,000回試験を開始した。最初のblockは258回目に致命的停止を1件検出したため、その時点で自動停止した。`seeked`は250.3ms、目的rVFCは253.5msで成立し、2.5秒の観測中にdecoderは65 frame進んだが、canvasの最大描画間隔は1615ms、YADIFの`late`は25→91、queue全resetは4→5、終了時`outputFps`は0だった。正式候補でも表示段階の停止が残るため、目標50ppmは未達である。[位相分散試験の失敗記録](results/galaxy-fatal-yadif-formal-phase-randomized-failure.json)を保存した。
+
+同じseed、同じ258回目を含む300回を診断計測付きで再生すると停止は再現せず、該当seekは735.8msで安定復帰した。地点と要求列だけで決まる事象ではない。[300回の再現試行](results/galaxy-fatal-yadif-formal-diagnostic-replay-300.json)も保存し、rAF、rVFC、WebGL直接描画を時系列記録する反復診断を続ける。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
