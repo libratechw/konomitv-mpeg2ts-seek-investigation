@@ -655,7 +655,13 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 提出build source `26484fd` / dist `27b327e`を、読み取り専用snapshotへ固定したrunnerで再試験した。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、各blockに別seedを使った。第4 blockの8回目、全体の3,008回目で致命的停止を1件検出し、1時間上限の試験を2,447.503秒で自動停止した。先行3 blockは各1,000回、合計3,000回が安定復帰していた。
 
-停止時は`seeked`が178.6ms、目的rVFCが189.0msで成立し、`readyState`は4、video decoderは67 frame、音声decodeは61,270 byte進んだ。一方、canvasの最大描画間隔は1,679ms、YADIFの`late`は2→70、queue全resetは1→2、終了時`outputFps`は0だった。server、MSE入力、decoder、音声の停止ではなく、YADIF表示側で復帰しない点は以前の258回目と一致する。ただし今回の計測はqueue内部の時系列traceを含まないため、未来の表示予定時刻が残る同一機構かまでは確定しない。[全体集計](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)と[停止block](results/galaxy-yadif-rank4-one-hour-block-reset-block-003.json)を含む4 blockの生値を保存した。
+停止時は`seeked`が178.6ms、目的rVFCが189.0msで成立し、`readyState`は4、video decoderは67 frame、音声decodeは61,270 byte進んだ。一方、canvasの最大描画間隔は1,679ms、YADIFの`late`は2→70、queue全resetは1→2、終了時`outputFps`は0だった。server、MSE入力、decoder、音声の停止ではなく、YADIF表示側で復帰しない点は以前の258回目と一致する。[全体集計](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)と[停止block](results/galaxy-yadif-rank4-one-hour-block-reset-block-003.json)を含む4 blockの生値を保存した。
+
+同じ提出sourceへqueue時系列を記録する受動的な計測だけを加え、別seedで自然発生を反復した。4回目のseekで`seeked`は147.9ms、目的rVFCは154.4msで成立し、decoderは67 frame、音声decodeは63,454 byte進んだ。canvasの最後の直接描画は804.3msで、その後1,697.3msは直接描画がなかった。
+
+最後の直接描画後もrVFCは51回進んだが、51回のqueue容量確保で計101 fieldをFIFO破棄した。各入力callbackの直前には古い先頭fieldが表示期限へ近づいていたが、2 fieldを破棄すると残った先頭が再び約3〜4 refresh先へ移る。rAFは表示対象を得られず、次の入力callbackが同じ破棄を繰り返した。これにより、自然発生した致命的停止の原因を、容量破棄後の空いたpresentation momentを残すYADIFの時刻列へ特定した。[受動計測を含む生値](results/galaxy-yadif-rank4-natural-fatal-timeline.json)を保存した。
+
+後続のoverflow時刻圧縮では、同じseedの停止地点を含む8 seekがすべて復帰した。ただし順位4だけが受動計測版で、順位5は正式buildのため、これだけを修正単独の効果量や長時間の合格根拠には使わない。[短い同一sequence確認](results/galaxy-yadif-rank5-same-seed-short-control.json)を保存した。両版へ同じ受動計測を加えたA/Bと、正式buildの1時間試験で一般化を確認する。
 
 後続のoverflow時刻圧縮 source `7ef6696` / dist `ac2a2a9`では、単一の連続セッションで4,073 seek・停止0、実測3,572.682秒だった。ただし実行中のshell runnerを編集したため、collectorのraw出力後にrunnerが失敗した。blockごとの再生成も行っていない。この走行は[除外理由付きの参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)として残すが、順位5の合格根拠にも、順位4との効果比較にも使わない。順位5の因果効果には、同じ読み取り専用snapshotとblock再生成条件で別の1時間試験が必要である。
 

@@ -1,0 +1,98 @@
+{
+  "variant": "rank5-exact-rank4-failure-seed",
+  "sourceHash": "47c1faba14a82ee5a90e107a4bd97ea582ab46906404fac9f1fe325bcafd093a",
+  "distHash": "f01507068c8c37c64fcba777d3c65bcfd51dbd4f232f9b6d410517b7943a7e1d",
+  "asset": "PlayerController-DNoDCdBW.js",
+  "videoId": 1,
+  "frameMode": "normal",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 8,
+    "completed": 8,
+    "pageCountAtStart": 1,
+    "stopReason": "count-complete",
+    "stopAtUnixMs": null,
+    "measurementStartedAtUnixMs": 1788420326131,
+    "measurementEndedAtUnixMs": 1788420331431,
+    "seed": 23260913,
+    "fatalDefinition": "stable display did not recover within 2000 ms of assigning video.currentTime without another user operation",
+    "stableDefinition": "target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "targetTimesSeconds": [
+      430.4331966675818,
+      994.3599546141922,
+      264.42350272089243,
+      905.7849790714681,
+      251.0975875519216,
+      955.5521255917847,
+      422.4629864282906,
+      1075.9838904440403
+    ],
+    "interSeekJitterRangeMs": [
+      0,
+      33.36666666666667
+    ],
+    "interSeekJitterMs": [
+      20.094894018319124,
+      17.274367054031853,
+      12.734836184078207,
+      0.9979202147262792,
+      31.006851180316882,
+      25.38788041990871,
+      15.708671913319268,
+      9.293096956602918
+    ],
+    "stableLatenciesMs": [
+      489.8000000715256,
+      495.89999997615814,
+      496.6999999284744,
+      689.7000000476837,
+      444.2999999523163,
+      420.60000002384186,
+      395.89999997615814,
+      646.4000000953674
+    ],
+    "maximumDrawGapsMs": [
+      243,
+      284.7999999523163,
+      271.3000000715256,
+      330.39999997615814,
+      231.19999992847443,
+      230.60000002384186,
+      215.79999995231628,
+      314.60000002384186
+    ],
+    "failures": [],
+    "userInteractionEvents": [],
+    "pageStateChanges": [],
+    "paused": false,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

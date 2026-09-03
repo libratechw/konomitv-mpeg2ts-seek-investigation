@@ -53,12 +53,15 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 7件の修正をまとめた統合検証版では、Galaxyの`video.currentTime`起点の表示復帰時間が中央値287.1→159.7msとなり、250ms以内が14/40→40/40になりました。
 全11指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
 
-YADIF停止の内部traceでは、rVFCが133回、rAFが265回進む4.419秒間にcanvas描画が0回で、queue全reset後に復帰しました。
-decoderがframeを供給し続けても、容量確保でfieldを捨てた後に未来の表示予定時刻が残り、次の破棄を連鎖させることで表示停止が継続します。[時系列の機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)に根拠と適用限界を保存しています。
+正式候補へ受動的なqueue計測だけを加えた自然発生traceでは、最後のcanvas直接描画後もrVFCが51回進む一方、51回の容量確保で計101 fieldをFIFO破棄しました。
+破棄のたびに次のfieldが再び将来へ移り、rAFが表示対象を得られない循環が続きました。[自然発生trace](results/galaxy-yadif-rank4-natural-fatal-timeline.json)に記録しています。
 
 順位4の提出buildを1,000 seekごとに作り直す1時間上限の試験では、3,008回目に致命的な表示停止を1件検出しました。
 video decoderは67 frame、音声decodeも61,270 byte進みましたが、canvasの最大描画間隔は1,679ms、YADIFの`late`は2→70、終了時`outputFps`は0でした。
 順位4は通常のシーク停止を大幅に減らしますが、1時間0件の合格条件は満たしません。[集計と4 blockの生値](results/galaxy-yadif-rank4-one-hour-block-reset-summary.json)を公開しています。
+
+順位5は、FIFO破棄したfieldが占めていた空の表示時間を詰めます。
+同じseedの停止地点を含む短い8 seekはすべて復帰しましたが、計測版が一致しないため修正単独の効果量には使いません。[短い同一sequence確認](results/galaxy-yadif-rank5-same-seed-short-control.json)を保存しています。
 
 順位5の連続セッション試験では4,073 seek・停止0でしたが、実行中runnerを編集したため正式結果から除外しました。
 blockごとの再生成も行っていないので、順位4との効果比較や順位5の合格根拠には使いません。[除外理由と参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)を残しています。
