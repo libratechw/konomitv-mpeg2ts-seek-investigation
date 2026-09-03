@@ -1,0 +1,86 @@
+{
+  "variant": "fatal-detector-yadif-formal-smoke",
+  "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+  "asset": "PlayerController-fRoI6-nM.js",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 20,
+    "completed": 20,
+    "seed": 20260903,
+    "fatalDefinition": "stable display did not recover within 2000 ms of assigning video.currentTime without another user operation",
+    "stableDefinition": "target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "stableLatenciesMs": [
+      380.3000000715256,
+      896.5999999046326,
+      410.7999999523163,
+      346.60000002384186,
+      430.09999990463257,
+      498.2999999523163,
+      447.8000000715256,
+      431.39999997615814,
+      427.90000009536743,
+      363.59999990463257,
+      443.7999999523163,
+      444.10000002384186,
+      380.5,
+      344.89999997615814,
+      431,
+      413.40000009536743,
+      395.5,
+      479.2000000476837,
+      414.7000000476837,
+      516.6000000238419
+    ],
+    "maximumDrawGapsMs": [
+      218,
+      432.5,
+      231.39999997615814,
+      200.60000002384186,
+      249.69999992847443,
+      319.2000000476837,
+      264.3000000715256,
+      234.19999992847443,
+      232.89999997615814,
+      215.59999990463257,
+      218.60000002384186,
+      231.30000007152557,
+      214.70000004768372,
+      181.59999990463257,
+      248.19999992847443,
+      231.89999997615814,
+      232.5,
+      236.20000004768372,
+      214.20000004768372,
+      267.2999999523163
+    ],
+    "failures": [],
+    "paused": false,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

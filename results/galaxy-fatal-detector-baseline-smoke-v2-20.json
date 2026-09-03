@@ -1,0 +1,109 @@
+{
+  "variant": "fatal-detector-baseline-smoke-v2",
+  "sourceHash": "fdf5a1050b0be0c17d5818f2648c8c98dff23850818e42c7660419899142b75e",
+  "asset": "PlayerController-CiwOYqi0.js",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 20,
+    "completed": 1,
+    "seed": 20260903,
+    "fatalDefinition": "stable display did not recover within 2000 ms of assigning video.currentTime without another user operation",
+    "stableDefinition": "target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "stableLatenciesMs": [
+      414.6999999284744
+    ],
+    "maximumDrawGapsMs": [
+      234.79999995231628,
+      1790.6000000238419
+    ],
+    "failures": [
+      {
+        "index": 1,
+        "target": 973.6857803352177,
+        "outcome": "fatal-display-stop",
+        "elapsedMs": 2501.899999976158,
+        "maximumDrawGapMs": 1790.6000000238419,
+        "seekedMs": 151.79999995231628,
+        "latestMediaTime": 975.802622,
+        "currentTime": 975.814612,
+        "seeking": false,
+        "readyState": 4,
+        "targetDrawCount": 2,
+        "targetReadyMs": 161.09999990463257,
+        "firstTargetDrawMs": 678.5999999046326,
+        "stableAtMs": null,
+        "stableConfirmedAtMs": null,
+        "statsBefore": {
+          "filtered": 158,
+          "missed": 0,
+          "degraded": 5,
+          "discontinuities": 1,
+          "late": 0,
+          "queueResetted": 0,
+          "dropped": 0,
+          "fps": 59.972915460301536,
+          "frameMs": 1.4000000184582126,
+          "maxQueuedFields": 4,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 59.972915460301536,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "statsAfter": {
+          "filtered": 228,
+          "missed": 0,
+          "degraded": 11,
+          "discontinuities": 3,
+          "late": 57,
+          "queueResetted": 0,
+          "dropped": 0,
+          "fps": 1.9362958660530205,
+          "frameMs": 1.067741943943885,
+          "maxQueuedFields": 5,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 1.9362958660530205,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "qualityDelta": {
+          "totalVideoFrames": 62,
+          "droppedVideoFrames": 0
+        },
+        "canvasVisibility": "visible",
+        "canvasOpacity": "1"
+      }
+    ],
+    "paused": false,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

@@ -29,6 +29,9 @@ overflow時刻圧縮をmergeする前の製品コード`e417d12`では、`tsukum
 現在のintegrationをGalaxyで測ると、600秒定常再生はrAF 59.998回/秒、入力video callback 29.970回/秒で、YADIFの`missed`とqueue全resetはいずれも0でした。
 `video.currentTime`起点の表示復帰時間は40回の中央値159.7ms、p95 193.6ms、最大246.8msで、40/40が250ms以下でした。
 
+致命的な表示停止を「再seekなしでは2秒以内に安定表示へ戻らない事象」と定義した同一seedの試験では、`tsukumijima/main`が2回目で停止し、順位4の正式候補は1000/1000回復帰しました。
+0/1000の片側95%信頼上限は約2991ppmなので、目標50ppmの達成判定には使わずpilot結果として扱います。
+
 同じ低負荷collectorで`tsukumijima/main` `52a3db5`も600秒測り直すと、YADIF生成field FPSは基準版59.939fps、integration 59.940fpsで、`missed`は両方0でした。
 この値はYADIFの`filtered` counterから求めており、WebGL canvas描画の直接計数ではありません。[条件、計算式、証拠hash](results/galaxy-current-integration-vs-tsukumijima-main-steady-600s.json)を保存しています。
 
@@ -89,7 +92,7 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) `a10253e` | otya128 | first fragment時刻でprobe標本を上書きする5行を削除 | 追加probe 14/40→0/40。表示復帰時間 296.3→244.3ms | **軽**。1ファイル5行の削除 |
 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) `787c7ba` | otya128 | fragmentへ`restartOffset`を付与し、PTSとrestart位置を別のmark列で持つ | 再開同値性と回帰の試験が成功。単独の速度効果はなく、順位3の前提 | **重**。TS demuxからWASMまで横断 |
 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) `ac4f879` | otya128 | 観測済みの安全位置をplayer内に保持し、要求時刻以前1秒以内の最新位置を再利用 | 診断版A/Bでprobe 40→0、表示復帰時間 226.5→161.5ms | **中**。worker 1ファイル。順位2に依存 |
-| 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) source `26484fd` | tsukumijima | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけqueue全reset | 最低描画FPS 1.67→29.98。描画10fps未満18/90→0/90、複合異常35/90→1/90 | **中**。YADIF 1ファイルのqueue policy |
+| 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) source `26484fd` | tsukumijima | 容量不足は必要枚数だけFIFO破棄し、表示不能な未来時刻列だけqueue全reset | 基準版が2回目で致命的停止。正式候補は1000回停止0。最低描画FPS 1.67→29.98 | **中**。YADIF 1ファイルのqueue policy |
 | 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) source `7ef6696` | tsukumijima | FIFO破棄したfieldの`duration`合計を、残ったfieldのdeadlineから引く | 負荷注入時の表示field破棄 218.0→0.67（99.7%減）。通常600秒は59.942fps | **軽〜中**。`#prepareQueue()`の8行 |
 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) source `2d072f3` | tsukumijima | playhead近傍の描画済みframeを記録し、同じseekの`seeked`で消さない | Linux 40回の表示復帰時間 p95 246.5→178.9ms。Galaxyは退行なし | **中**。seeking/history状態のレビューが必要 |
 

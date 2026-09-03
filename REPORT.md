@@ -637,6 +637,12 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 致命的な表示停止は、利用者の再seekなどがないと2秒以上表示が復帰しない事象として別に数える。上の1.8秒複合異常は、この発生率の根拠には使わない。発生率50ppm以下の判定には片側95%信頼上限を使い、0件の場合も最低59,914回のseekを必要とする。
 
+この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
+
+queue容量確保と未来時刻列の再同期だけを分けた正式候補source `26484fd`、dist `27b327e`では、同じseedの先頭20回がすべて復帰した。[20回smoke](results/galaxy-fatal-detector-yadif-formal-smoke-20.json)に続き、240〜480秒と900〜1140秒を交互に選ぶ1000回pilotも停止0だった。厳しい安定復帰条件の時間は中央値697.6ms、p95 831.7ms、最大1303.5msで、通常の初回描画時間とは比較しない。[1000回pilotの生値](results/galaxy-fatal-detector-yadif-formal-pilot-1000.json)を保存した。
+
+0/1000の片側95%信頼上限は約2991ppmであり、50ppm以下の達成根拠にはならない。今回のpilotは検出器、長時間反復、修正候補の安定性を確認した段階であり、合格判定には独立性を記録した最低59,914回の0件が必要である。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
