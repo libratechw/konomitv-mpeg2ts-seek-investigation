@@ -1,0 +1,58 @@
+{
+  "status": "excluded-from-formal-evidence",
+  "reason": "The live shell runner file was edited during execution. The collector completed and cleanup was externally verified, but the runner failed before wrapping and gating the raw result.",
+  "scope": "Continuous single-client session; it does not recreate Chrome, player, Worker, decoder, MSE, and YADIF between blocks.",
+  "variant": "fix/compress-yadif-overflow-schedule",
+  "sourceCommit": "7ef6696",
+  "distCommit": "ac2a2a9",
+  "sourceHash": "47c1faba14a82ee5a90e107a4bd97ea582ab46906404fac9f1fe325bcafd093a",
+  "distHash": "f01507068c8c37c64fcba777d3c65bcfd51dbd4f232f9b6d410517b7943a7e1d",
+  "asset": "PlayerController-DNoDCdBW.js",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "rawFile": "galaxy-fatal-queue-compress-one-hour.json.raw",
+  "rawSha256": "aadddb92f4044965021684a64dbfbc7a223a9002e4fe925a78a90cba9381b81c",
+  "measurementSeconds": 3572.682,
+  "attemptedSeeks": 4073,
+  "completedSeeks": 4073,
+  "fatalStops": 0,
+  "stopReason": "time-limit",
+  "stableRecoveryLatency": {
+    "count": 4073,
+    "minimumMs": 358.40000009536743,
+    "medianMs": 747.3000000715256,
+    "p90Ms": 824.2999999523163,
+    "p95Ms": 848.5999999046326,
+    "p99Ms": 908.1000000238419,
+    "maximumMs": 1194.5,
+    "meanMs": 737.6026516072205
+  },
+  "maximumDrawGap": {
+    "count": 4073,
+    "minimumMs": 168.20000004768372,
+    "medianMs": 501.89999997615814,
+    "p90Ms": 577.1999999284744,
+    "p95Ms": 596.6000000238419,
+    "p99Ms": 646.6999999284744,
+    "maximumMs": 913.5,
+    "meanMs": 486.82376626660016
+  },
+  "contamination": {
+    "userInteractionEvents": 0,
+    "pageStateChanges": 0,
+    "pageCountAtStart": "not recorded by the collector revision used"
+  },
+  "cleanupExternallyVerified": {
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  },
+  "hostLoad": {
+    "sampleCount": 681,
+    "load1Minimum": 0.95,
+    "load1P95": 1.9,
+    "load1Maximum": 2.23,
+    "samplesWithFfmpeg": 0
+  }
+}

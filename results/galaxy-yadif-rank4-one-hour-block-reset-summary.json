@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "variant": "yadif-rank4-one-hour-block-reset",
+  "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+  "distHash": "3cc72212e684b27a02a8cdc4c3790f93429cd9c16042ec208b1b7660cf62f286",
+  "asset": "PlayerController-fRoI6-nM.js",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "videoId": 1,
+  "frameMode": "normal",
+  "targetBandsSeconds": [
+    [
+      240,
+      480
+    ],
+    [
+      900,
+      1140
+    ]
+  ],
+  "runnerSha256": "9c36db98c7e22203619b0d3c30ab39ad57061c6f84bf90636f89b2a47e9eb81d",
+  "collectorSha256": "c22dea81394a5945eb6941e59e0a247d24ad7a6140c91197a91a6983f9375636",
+  "containerImageId": "sha256:92a534243f9170fe0808a2e147c96c386677475652f72036438a19870d0f5f49",
+  "konomiTVRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+  "durationSeconds": 3600,
+  "cleanupReserveSeconds": 30,
+  "blockSize": 1000,
+  "baseSeed": 20260904,
+  "startedAtUnixMs": 1788416865558,
+  "stopAtUnixMs": 1788420435558,
+  "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block.",
+  "createdAt": "2026-09-03T16:08:33.086028+09:00",
+  "endedAtUnixMs": 1788419313061,
+  "wallClockElapsedSeconds": 2447.503,
+  "measurementSeconds": 2378.997,
+  "blockCount": 4,
+  "clientSessionCount": 4,
+  "betweenBlockResetCount": 3,
+  "attemptedSeeks": 3008,
+  "completedSeeks": 3007,
+  "fatalStops": 1,
+  "failures": [
+    {
+      "block": 3,
+      "index": 7,
+      "target": 1075.9838904440403,
+      "outcome": "fatal-display-stop",
+      "elapsedMs": 2500.899999976158,
+      "maximumDrawGapMs": 1679,
+      "seekedMs": 178.59999990463257,
+      "latestMediaTime": 1078.071455,
+      "currentTime": 1078.079634,
+      "seeking": false,
+      "readyState": 4,
+      "targetDrawCount": 6,
+      "targetReadyMs": 189,
+      "firstTargetDrawMs": 673,
+      "stableAtMs": null,
+      "stableConfirmedAtMs": null,
+      "statsBefore": {
+        "filtered": 218,
+        "missed": 0,
+        "degraded": 28,
+        "discontinuities": 8,
+        "late": 2,
+        "queueResetted": 1,
+        "dropped": 0,
+        "fps": 19.709729438326615,
+        "frameMs": 3.2153846483964186,
+        "maxQueuedFields": 3,
+        "mode": "video",
+        "match": "c",
+        "combScore": 0,
+        "outputFps": 21.501523023629034,
+        "duplicateScore": null,
+        "duplicateRunnerUp": null
+      },
+      "statsAfter": {
+        "filtered": 312,
+        "missed": 0,
+        "degraded": 31,
+        "discontinuities": 9,
+        "late": 70,
+        "queueResetted": 2,
+        "dropped": 1,
+        "fps": 0,
+        "frameMs": 1.0354838640459123,
+        "maxQueuedFields": 5,
+        "mode": "video",
+        "match": "c",
+        "combScore": 0,
+        "outputFps": 0,
+        "duplicateScore": null,
+        "duplicateRunnerUp": null
+      },
+      "qualityDelta": {
+        "totalVideoFrames": 67,
+        "droppedVideoFrames": 1
+      },
+      "audioDecodedBytesDelta": 61270,
+      "canvasVisibility": "visible",
+      "canvasOpacity": "1"
+    }
+  ],
+  "stableRecoveryLatency": {
+    "count": 3007,
+    "minimumMs": 355,
+    "medianMs": 661.6999999284744,
+    "p90Ms": 777.2000000476837,
+    "p95Ms": 805,
+    "p99Ms": 851,
+    "maximumMs": 1309.1000000238419,
+    "meanMs": 651.8446957096531
+  },
+  "maximumDrawGap": {
+    "count": 3008,
+    "minimumMs": 149.89999997615814,
+    "medianMs": 404.55000001192093,
+    "p90Ms": 521.3999999761581,
+    "p95Ms": 550.7999999523163,
+    "p99Ms": 588.1000000238419,
+    "maximumMs": 1679,
+    "meanMs": 399.51040558572464
+  },
+  "hostLoad": {
+    "sampleCount": 488,
+    "load1Minimum": 0.7,
+    "load1Maximum": 2.3,
+    "load1P95": 1.9,
+    "samplesWithFfmpeg": 0
+  },
+  "blocks": [
+    {
+      "file": "block-000.json",
+      "seed": 20260904,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 805.385,
+      "sha256": "0349b198eeafa91daf459f760cc3e65b11e7d73ea476e3cffae4755356908b85"
+    },
+    {
+      "file": "block-001.json",
+      "seed": 21260907,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 776.55,
+      "sha256": "c80a1ff70e12d6a26b8df107fab9754473757b690fa45501d16f13c633a94cfa"
+    },
+    {
+      "file": "block-002.json",
+      "seed": 22260910,
+      "stopReason": "count-complete",
+      "attempted": 1000,
+      "completed": 1000,
+      "fatalStops": 0,
+      "measurementSeconds": 790.084,
+      "sha256": "22f7fe9d39665bfa0917893ffa58a60a228ee60d85d5046280e7aad499616964"
+    },
+    {
+      "file": "block-003.json",
+      "seed": 23260913,
+      "stopReason": "fatal-stop",
+      "attempted": 8,
+      "completed": 7,
+      "fatalStops": 1,
+      "measurementSeconds": 6.978,
+      "sha256": "50120e0b0e7b4010973018a9ab495c8954ff57e2d1570b1127fb039f7204faaf"
+    }
+  ],
+  "acceptanceCriterion": "No fatal display stop is detected during one bounded hour.",
+  "fatalDefinition": "Stable display did not recover within 2000 ms of assigning video.currentTime without another user operation.",
+  "scope": "This bounded regression gate does not estimate a zero population rate or a ppm upper bound."
+}

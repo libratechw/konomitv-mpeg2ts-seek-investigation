@@ -1,0 +1,158 @@
+{
+  "variant": "yadif-rank4-one-hour-block-reset",
+  "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+  "distHash": "3cc72212e684b27a02a8cdc4c3790f93429cd9c16042ec208b1b7660cf62f286",
+  "asset": "PlayerController-fRoI6-nM.js",
+  "videoId": 1,
+  "frameMode": "normal",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 1000,
+    "completed": 7,
+    "pageCountAtStart": 1,
+    "stopReason": "fatal-stop",
+    "stopAtUnixMs": 1788420435558,
+    "measurementStartedAtUnixMs": 1788419302104,
+    "measurementEndedAtUnixMs": 1788419309082,
+    "seed": 23260913,
+    "fatalDefinition": "stable display did not recover within 2000 ms of assigning video.currentTime without another user operation",
+    "stableDefinition": "target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "targetTimesSeconds": [
+      430.4331966675818,
+      994.3599546141922,
+      264.42350272089243,
+      905.7849790714681,
+      251.0975875519216,
+      955.5521255917847,
+      422.4629864282906,
+      1075.9838904440403
+    ],
+    "interSeekJitterRangeMs": [
+      0,
+      33.36666666666667
+    ],
+    "interSeekJitterMs": [
+      20.094894018319124,
+      17.274367054031853,
+      12.734836184078207,
+      0.9979202147262792,
+      31.006851180316882,
+      25.38788041990871,
+      15.708671913319268,
+      9.293096956602918
+    ],
+    "stableLatenciesMs": [
+      581,
+      544.8000000715256,
+      463.40000009536743,
+      605,
+      397.1999999284744,
+      417.5,
+      414.10000002384186
+    ],
+    "maximumDrawGapsMs": [
+      232.5,
+      248.10000002384186,
+      249.89999997615814,
+      348.7999999523163,
+      229.29999995231628,
+      247.60000002384186,
+      231.39999997615814,
+      1679
+    ],
+    "failures": [
+      {
+        "index": 7,
+        "target": 1075.9838904440403,
+        "outcome": "fatal-display-stop",
+        "elapsedMs": 2500.899999976158,
+        "maximumDrawGapMs": 1679,
+        "seekedMs": 178.59999990463257,
+        "latestMediaTime": 1078.071455,
+        "currentTime": 1078.079634,
+        "seeking": false,
+        "readyState": 4,
+        "targetDrawCount": 6,
+        "targetReadyMs": 189,
+        "firstTargetDrawMs": 673,
+        "stableAtMs": null,
+        "stableConfirmedAtMs": null,
+        "statsBefore": {
+          "filtered": 218,
+          "missed": 0,
+          "degraded": 28,
+          "discontinuities": 8,
+          "late": 2,
+          "queueResetted": 1,
+          "dropped": 0,
+          "fps": 19.709729438326615,
+          "frameMs": 3.2153846483964186,
+          "maxQueuedFields": 3,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 21.501523023629034,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "statsAfter": {
+          "filtered": 312,
+          "missed": 0,
+          "degraded": 31,
+          "discontinuities": 9,
+          "late": 70,
+          "queueResetted": 2,
+          "dropped": 1,
+          "fps": 0,
+          "frameMs": 1.0354838640459123,
+          "maxQueuedFields": 5,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 0,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "qualityDelta": {
+          "totalVideoFrames": 67,
+          "droppedVideoFrames": 1
+        },
+        "audioDecodedBytesDelta": 61270,
+        "canvasVisibility": "visible",
+        "canvasOpacity": "1"
+      }
+    ],
+    "userInteractionEvents": [],
+    "pageStateChanges": [],
+    "paused": false,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}
