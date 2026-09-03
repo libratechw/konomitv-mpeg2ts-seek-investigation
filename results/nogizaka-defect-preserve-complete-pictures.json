@@ -8,14 +8,14 @@
     "windowSha256": "c31cfc79cb38b2ec2f1e740031fa9b898f309179f3e21f099d8a323ee5a27f94"
   },
   "converter": {
-    "sourceRevisionDeclared": "44e06a4",
-    "binarySha256": "927ab6054480ef5cae4e6a4b313cba0bba9eb6abd7cc297fe0baf5ba189f8110",
-    "outputSha256": "e093e793c98c2ffa0a59667adee3a91a4639b084c1e5d8068e4c55e2c0e5d7bd",
+    "sourceRevisionDeclared": "f27442d",
+    "binarySha256": "93bcad6af6a0e79b158684cde1f3c9faabae926805bf10a65bd35260c2bcc4ff",
+    "outputSha256": "933e586061fbc4d5d2ea4fc5479b4bbb16d25446460316b0f6299e614b944d48",
     "summary": {
-      "mediaFragments": 3,
-      "videoSamples": 34,
+      "mediaFragments": 4,
+      "videoSamples": 41,
       "audioSamples": 92,
-      "bytes": 4846002
+      "bytes": 6224998
     }
   },
   "sourceTimeline": {
@@ -36,21 +36,21 @@
     }
   },
   "convertedTimeline": {
-    "decodedFrameCountInWindow": 34,
+    "decodedFrameCountInWindow": 41,
     "maximumPresentationInterval": {
-      "beforeFrameIndex": 14,
-      "beforePtsSeconds": 0.987356,
-      "afterFrameIndex": 15,
+      "beforeFrameIndex": 21,
+      "beforePtsSeconds": 1.254289,
+      "afterFrameIndex": 22,
       "afterPtsSeconds": 1.554589,
-      "intervalMs": 567.233
+      "intervalMs": 300.3
     }
   },
   "browserCrossCheck": {
     "analysisFile": "galaxy-integration-current-v3-anomalous-recovery-analysis.json",
     "inputMediaTimeDeltaMs": 567.2330000000017,
-    "absoluteDifferenceMs": 1.7053025658242404e-12,
+    "absoluteDifferenceMs": 266.93300000000164,
     "matchToleranceMs": 0.002,
-    "matchesWithinTolerance": true
+    "matchesWithinTolerance": false
   },
   "ffprobe": {
     "version": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",

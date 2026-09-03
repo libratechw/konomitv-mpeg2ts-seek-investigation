@@ -180,7 +180,7 @@ def main():
         "limitations": [
             "The converter source revision is a caller declaration; the binary SHA-256 is authoritative for this run.",
             "The fixed byte window starts and ends mid-stream, so input and output frame counts do not by themselves measure discarded pictures.",
-            "The matching 567.233 ms timeline gap locates the observed browser jump in converter output, but does not identify every discarded source picture.",
+            "A timeline gap that matches the browser measurement within the recorded tolerance locates that browser jump in converter output; a mismatch requires a browser run of the measured converter before drawing the same conclusion.",
             "Decoded frame metadata does not prove which damaged pixels could have been displayed safely.",
             "This offline conversion does not measure audible A/V synchronization or browser rendering.",
         ],

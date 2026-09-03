@@ -152,6 +152,7 @@ tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdis
 | P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | tsukumijima | `2d072f3` | `f3ba99d` |
 | P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | otya128 | `f8ab9c7` | — |
 | P1 | 8 | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | Kludex/starlette | `d70956b` | — |
+| P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | tsukumijima | `f27442d` | `f80154f` |
 
 順位1〜7の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
 
@@ -163,9 +164,14 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 
 順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 
+順位9はTS packet欠落時に、完了を確認できない末尾pictureだけでなく、同じ蓄積中GOPの正常な先行pictureまで破棄する範囲を縮めます。
+実在する破損区間のオフライン変換では、出力sampleが34→41へ増え、最大表示間隔が567.233→300.300msへ短縮しました。
+実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
+field pair、open GOP、画素の正常性、ブラウザー上のA/V同期は未確認なので、integrationにはまだ含めていません。[条件と結果](results/nogizaka-defect-preserve-complete-pictures.json)を参照してください。
+
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。
-順位1、6、7は他と修正箇所が重ならず、いつでも並行して提出できます。
+順位1、6、7、9は他と修正箇所が重ならず、いつでも並行して提出できます。
 提出先ごとに整理した依存の図は[レビューの順序](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
 
 tsukumijimaフォーク固有のYADIF変更は、otya128向けの変更へ混ぜません。
