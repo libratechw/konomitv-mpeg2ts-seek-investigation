@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "fixture": {
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "sizeBytes": 3066534364,
+    "windowByteStart": 200484140,
+    "windowByteLength": 3760000,
+    "windowSha256": "c31cfc79cb38b2ec2f1e740031fa9b898f309179f3e21f099d8a323ee5a27f94"
+  },
+  "converter": {
+    "sourceRevisionDeclared": "44e06a4",
+    "binarySha256": "927ab6054480ef5cae4e6a4b313cba0bba9eb6abd7cc297fe0baf5ba189f8110",
+    "outputSha256": "e093e793c98c2ffa0a59667adee3a91a4639b084c1e5d8068e4c55e2c0e5d7bd",
+    "summary": {
+      "mediaFragments": 3,
+      "videoSamples": 34,
+      "audioSamples": 92,
+      "bytes": 4846002
+    }
+  },
+  "sourceTimeline": {
+    "decodedFrameCountInWindow": 50,
+    "defectPicture": {
+      "pts90k": 502108869,
+      "ptsSeconds": 5578.987433333334,
+      "type": "B",
+      "frameIndexInWindow": 20
+    },
+    "enclosingKeyframeInterval": {
+      "firstFrameIndex": 15,
+      "firstPtsSeconds": 5578.8206,
+      "nextKeyframeIndex": 30,
+      "nextKeyframePtsSeconds": 5579.3211,
+      "frameCountBeforeNextKeyframe": 15,
+      "durationMs": 500.5
+    }
+  },
+  "convertedTimeline": {
+    "decodedFrameCountInWindow": 34,
+    "maximumPresentationInterval": {
+      "beforeFrameIndex": 14,
+      "beforePtsSeconds": 0.987356,
+      "afterFrameIndex": 15,
+      "afterPtsSeconds": 1.554589,
+      "intervalMs": 567.233
+    }
+  },
+  "browserCrossCheck": {
+    "analysisFile": "galaxy-integration-current-v3-anomalous-recovery-analysis.json",
+    "inputMediaTimeDeltaMs": 567.2330000000017,
+    "absoluteDifferenceMs": 1.7053025658242404e-12,
+    "matchesWithinMs": 0.002
+  },
+  "ffprobe": {
+    "version": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "sourceWarnings": "[aac] Sample rate index in program config element does not match the sample rate index configured by the container.\n[aac] channel element 3.6 is not allocated\n[mpeg2video] Invalid frame dimensions 0x0.\n    Last message repeated 7 times\n[mpegts] Packet corrupt (stream = 1, dts = 502108869).\n[mpegts] start time for stream 0 is not set in estimate_timings_from_pts\n[mpegts] start time for stream 4 is not set in estimate_timings_from_pts\nUnsupported codec with id 98306 for input stream 0\nUnsupported codec with id 98314 for input stream 4\n[mpegts] Packet corrupt (stream = 1, dts = 502108869).\n[mpeg2video] 00 motion_type at 49 28\n[mpeg2video] Warning MVs not available\n[mpeg2video] ac-tex damaged at 15 30\n[mpeg2video] Warning MVs not available\n",
+    "outputWarnings": ""
+  },
+  "limitations": [
+    "The converter source revision is a caller declaration; the binary SHA-256 is authoritative for this run.",
+    "The fixed byte window starts and ends mid-stream, so input and output frame counts do not by themselves measure discarded pictures.",
+    "The matching 567.233 ms timeline gap locates the observed browser jump in converter output, but does not identify every discarded source picture.",
+    "Decoded frame metadata does not prove which damaged pixels could have been displayed safely.",
+    "This offline conversion does not measure audible A/V synchronization or browser rendering."
+  ]
+}

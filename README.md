@@ -87,6 +87,8 @@ blockごとにブラウザーとplayer各層を作り直す別の1時間試験�
 復帰途中を除いた末尾5秒のcanvas描画は60.01fpsで、期待する59.94fpsの±1%へ戻り、40ms超の間隔は0回でした。
 一方、同じ窓でChromeのdrop counterが2、YADIFの`late`が1増えています。canvasのdraw呼出しはcompositorの表示そのものではないため、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未証明です。[単発の異常区間解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)を保存しています。
 
+同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
+
 `autoFilm`のcadence維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 
@@ -200,7 +202,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 | データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
 | 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
 | 機械可読な集計値と生値 | [`results/`](results/) |
-| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[異常TSのpacketとpictureの照合](scripts/inspect-nogizaka-transport-defect.py)を含む） |
+| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[異常TSのpacketとpictureの照合](scripts/inspect-nogizaka-transport-defect.py)、[破損区間の変換時刻列](scripts/measure-nogizaka-defect-conversion.py)を含む） |
 
 録画ファイル、認証情報、実際のLAN内アドレス、ローカルパス、アクセスログは含みません。
 番組名は素材の識別用であり、録画データ自体は配布しません。

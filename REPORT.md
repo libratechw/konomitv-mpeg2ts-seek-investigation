@@ -733,6 +733,8 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを破棄する。今回の損傷対象は後続pictureの参照元にならないB-pictureなので、正常なpictureまで破棄している可能性がある。ただし、変換後の各pictureとの対応と画素の正常性は未検証であり、「1 pictureだけ落とせば十分」とはまだ判定しない。
 
+同じ固定byte windowを、integration `44e06a4`由来として記録したconverter binaryでオフライン変換した。source revisionは呼び出し側の宣言であり、実行したbinaryは結果JSONのSHA-256で識別する。出力fMP4をFFprobeで復号すると、隣接frameの表示時刻に最大567.233msの間隔があり、GalaxyのrVFCで観測したmedia timeの567.233ms飛びと0.002ms以内で一致した。したがって、Galaxyで見えた時刻の飛びはAndroid decoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれる。破損B-pictureを含む入力のkeyframe間隔は15 frame・500.5msだったが、固定windowは先頭と末尾がstream途中なので、入出力frame数の差から破棄picture数を決めない。画素の正常性、表示可能だった最小picture集合、A/V同期は引き続き未証明である。[変換結果](results/nogizaka-defect-conversion-timeline.json)と[再現スクリプト](scripts/measure-nogizaka-defect-conversion.py)を公開した。
+
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
 初期video fieldを2 field先から1 field先へ置く比較は、従来presentation policyの3走行で8秒窓59.64〜59.84fpsから59.98〜60.00fpsへ上がったが、短窓かつ開始前resetが両群に混在した。
