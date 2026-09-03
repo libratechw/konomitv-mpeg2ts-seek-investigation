@@ -77,5 +77,25 @@
     "primaryAudioDecodeErrors": 0,
     "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
     "compressedVideoPayloadSha256": "7a5b2d73b52cabb5b6e78cf3fbce40c6ab8561f709955ebcc248174d97e5562e"
+  },
+  "konomiTVScan": {
+    "scope": "An isolated local KonomiTV runtime scanned the fixed fixture. This records only how KonomiTV classified the file; cadence was validated separately above.",
+    "imageRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "imageDigest": "sha256:4220e7ad65f877921b880eaa81822297e3694f83a6b3815b3569328398a740e4",
+    "databaseSha256": "69addc2ea498c6967f47a16e65f6332dd6c7ed8eec6911bab5b32878c44229f3",
+    "videoId": 3,
+    "title": "madder-24p-clean",
+    "status": "Recorded",
+    "durationSeconds": 172.705867,
+    "fileSizeBytes": 294843408,
+    "containerFormat": "MPEG-TS",
+    "videoCodec": "MPEG-2",
+    "videoScanType": "Interlaced",
+    "encodedFrameRate": 29.97,
+    "videoResolution": "1440x1080",
+    "primaryAudioCodec": "AAC-LC",
+    "primaryAudioSamplingRate": 48000,
+    "keyFrameEntries": 0,
+    "segmentMapEntries": 0
   }
 }
