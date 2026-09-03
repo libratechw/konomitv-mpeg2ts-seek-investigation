@@ -597,7 +597,7 @@ Windowsは全走行で電源モードが「最適な電力効率」だったこ�
 
 その後、最新integrationからこのpolicyだけを外した対照を作り、Galaxy、60Hz、全画面、LAN直結、同じ188秒以降を軽量collectorで各600秒測った。policyありは3分後からrAFと入力callbackが徐々に低下し、全体rAF 56.662回/秒、入力callback 29.070回/秒、YADIFの`missed` 541、最大rAF間隔116.7msとなった。policyなしはrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0、最大rAF間隔33.3msを維持した。固定済みcallback traceだけをoffline replayするとpolicyありは163 field多く表示できるため、局所的なcatch-up判断自体は有利だったが、実再生では追加処理とcallback低下のfeedbackがその利点を上回った。両版の`droppedVideoFrames`増分は198で同じで、このcounterも長時間劣化を区別しなかった。[600秒A/B、分ごとの値、raw hash](results/galaxy-present-one-field-long-run-ab.json)を保存した。
 
-policyなし版の40 seekは表示復帰時間の中央値159.7ms、p95 193.6ms、最大246.8msで40/40が250ms以下だった。シーク目標を維持したまま長時間退行だけを除けるため、`fix/present-one-field-per-refresh`はPR候補とintegrationから外す。[40回の生値](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
+policyなし版の40 seekは表示復帰時間の中央値159.7ms、p95 193.6ms、最大246.8msで40/40が当時の250ms判定以下だった。当時の判定を維持したまま長時間退行だけを除けるため、`fix/present-one-field-per-refresh`はPR候補とintegrationから外す。[40回の生値](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
 
 同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。
 rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callbackに1 frame分の飛びはなかった。
@@ -641,7 +641,7 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 overflow時刻圧縮の`autoFilm`回帰は、MADDER #04〜#07の別録画から無劣化で切り出した4本の固定3:2素材、通常60i対照、film↔video境界で確認した。60秒の3:2走行は`konomi/main`が24.21〜24.52fps、正式候補が24.17〜24.44fpsで、queue全resetは全走行0だった。境界30秒では両版ともfilm→videoとvideo→filmを観測し、通常60iは49.57 / 50.36fpsだった。候補固有の一貫した退行は観測しなかったが、3:2走行の描画間隔p95は両版とも約68〜71ms、通常60iも理論値60000/1001fpsを維持していないため、`autoFilm`の表示間隔は別の未解決問題である。[素材、build、全走行、除外理由](results/galaxy-autofilm-multi-fixture-regression.json)を保存した。
 
-致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象として別に数える。上の1.8秒複合異常は、この判定には使わない。合格条件は、試行条件を記録した1時間の自動試験で0件とする。これは再現可能な回帰試験の範囲を定める基準であり、一般的な発生率が0であることや統計的なppm上限の根拠には使わない。
+致命的な表示停止の定義と合格条件は、[READMEの現行基準](README.md#何を測ったか)を使う。上の1.8秒複合異常は、この判定には使わない。
 
 この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
 
@@ -942,7 +942,7 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 | 仮説 | 評価 |
 | --- | --- |
-| 1. indexなしの探索が最大要因 | 単独の最大要因ではない。永続GOP indexはないが、メモリ内PTS indexと最大4回の小Rangeがある。43GB素材でも2 probe、約0.1秒で収束した。ただしprobe標本を後のfragment時刻で上書きする欠陥は、最新のGalaxy B-F-F-Bで追加probe 14/40→0/40、browser提示と可視canvasのtarget対応中央値−71.3msとなった。修正版canvas中央値244.3msは目標内だがp90 280.7msなので、探索後のdecoder tailも残る |
+| 1. indexなしの探索が最大要因 | 単独の最大要因ではない。永続GOP indexはないが、メモリ内PTS indexと最大4回の小Rangeがある。43GB素材でも2 probe、約0.1秒で収束した。ただしprobe標本を後のfragment時刻で上書きする欠陥は、最新のGalaxy B-F-F-Bで追加probe 14/40→0/40、browser提示と可視canvasのtarget対応中央値−71.3msとなった。修正版canvas中央値244.3msは当時の250ms判定内だが、現行の200ms目標は満たさず、p90も280.7msなので、探索後のdecoder tailも残る |
 | 2. RAP不一致の余分な読み込み | 確認。offsetはRAP未整列。本体Rangeは初画までに数十MiBを読み、tables/PES/GOP再取得とA/V条件を含む。RAP indexで短縮余地はあるが後段は消えない |
 | 3. MSE remove/flushが支配的 | 通常時の単独支配は否定寄り。clearとprobeは並行し、append markまで数ms〜十数msの点が多い。別途init喪失のqueue競合は再現・修正済み |
 | 4. PAT/PMTの毎回再探索 | 確認。sessionを作り直すため。ただしWASMとWorker poolは再利用 |
@@ -1073,8 +1073,8 @@ I-pictureの途中byteだけを返さない。
 録画中やfile変更でstaleなindexを黙って適用しない。
 録画完了後のscan、既存scanとの統合、初回再生と並行するindex生成を比較し、初回再生前に全ファイルscanを必須にしない。
 
-「ほぼ瞬時」は、要求位置と一致する初画、音声再開、定常frame cadenceまでを別の受け入れ条件にする。
-例えば初画200 ms以内という値は候補となるが、合意済みの達成基準や現在の達成値ではない。
+「ほぼ瞬時」は、要求位置と一致する表示復帰、音声再開、定常frame cadenceまでを別の受け入れ条件にする。
+表示復帰時間200ms以下を現行のシーク目標とし、要求位置との一致、音声再開、定常frame cadenceとは別々に確認する。
 同じ端末、同じ表示更新頻度、同じ素材/target、同じcache条件で変更前後を比較する。
 一時的なraw video表示だけを初画成功と数えず、deinterlaced frameの時刻と継続再生も確認する。
 
