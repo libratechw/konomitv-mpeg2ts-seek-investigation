@@ -31,7 +31,6 @@
       "device": "windows",
       "variant": "baseline",
       "run": 1,
-      "source_sha256": "e3131da6a747c909b09b560b3505d659e4a39fc1a34c9eaa77fdd4a070cb06b3",
       "duration_ms": 12000.5,
       "media_time_delta_s": 12.000646999999958,
       "canvas_draws": 661,
@@ -73,13 +72,13 @@
       },
       "cleanup": {
         "manual_cleanup_verified": true
-      }
+      },
+      "result_sha256": "e3131da6a747c909b09b560b3505d659e4a39fc1a34c9eaa77fdd4a070cb06b3"
     },
     {
       "device": "windows",
       "variant": "baseline",
       "run": 2,
-      "source_sha256": "21c582177b70ad3d37dfa555f009e1d1a40cc3fa24f95c16754e309e895b0ec7",
       "duration_ms": 12002,
       "media_time_delta_s": 12.00074799999993,
       "canvas_draws": 660,
@@ -127,13 +126,13 @@
         "scheduledTaskRemoved": true,
         "sshCdpTunnelRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "21c582177b70ad3d37dfa555f009e1d1a40cc3fa24f95c16754e309e895b0ec7"
     },
     {
       "device": "windows",
       "variant": "baseline",
       "run": 3,
-      "source_sha256": "768c988b028cbf71c91ba03db0a63fcba79d46be13ad661c715983ea19b41996",
       "duration_ms": 12003.199999999255,
       "media_time_delta_s": 12.002767999999946,
       "canvas_draws": 661,
@@ -181,13 +180,13 @@
         "scheduledTaskRemoved": true,
         "sshCdpTunnelRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "768c988b028cbf71c91ba03db0a63fcba79d46be13ad661c715983ea19b41996"
     },
     {
       "device": "windows",
       "variant": "compressed",
       "run": 1,
-      "source_sha256": "949a95be3b5d38925f8fbac0f04e9d254c2f55b72e485c471b442fd859e3f6d2",
       "duration_ms": 12002.5,
       "media_time_delta_s": 12.001870999999937,
       "canvas_draws": 662,
@@ -229,13 +228,13 @@
       },
       "cleanup": {
         "manual_cleanup_verified": true
-      }
+      },
+      "result_sha256": "949a95be3b5d38925f8fbac0f04e9d254c2f55b72e485c471b442fd859e3f6d2"
     },
     {
       "device": "windows",
       "variant": "compressed",
       "run": 2,
-      "source_sha256": "e478ba194e73e16a9b748d1ba67707b409c80d9363e961f8b7f5ddbf543d457a",
       "duration_ms": 12008.39999999851,
       "media_time_delta_s": 12.007436000000098,
       "canvas_draws": 661,
@@ -283,13 +282,13 @@
         "scheduledTaskRemoved": true,
         "sshCdpTunnelRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "e478ba194e73e16a9b748d1ba67707b409c80d9363e961f8b7f5ddbf543d457a"
     },
     {
       "device": "windows",
       "variant": "compressed",
       "run": 3,
-      "source_sha256": "7e4b74bd54c1347b34aaf5a2937c5585b3af0c8fd4f3cca583018e8eb345161e",
       "duration_ms": 12001.10000000149,
       "media_time_delta_s": 12.000733000000082,
       "canvas_draws": 661,
@@ -337,13 +336,13 @@
         "scheduledTaskRemoved": true,
         "sshCdpTunnelRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "7e4b74bd54c1347b34aaf5a2937c5585b3af0c8fd4f3cca583018e8eb345161e"
     },
     {
       "device": "galaxy",
       "variant": "baseline",
       "run": 1,
-      "source_sha256": "762041470dc52836441b709233da9ce52383ea7bccaae5cf8045831d679c5990",
       "duration_ms": 12000.799999952316,
       "media_time_delta_s": 11.999747999999954,
       "canvas_draws": 387,
@@ -391,13 +390,13 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "762041470dc52836441b709233da9ce52383ea7bccaae5cf8045831d679c5990"
     },
     {
       "device": "galaxy",
       "variant": "baseline",
       "run": 2,
-      "source_sha256": "f0b26ebacd1de06c7e9cdd175fe411981167f2021cf5cfc09b3381f35cb72a10",
       "duration_ms": 12000.5,
       "media_time_delta_s": 12.00005699999997,
       "canvas_draws": 660,
@@ -445,13 +444,13 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "f0b26ebacd1de06c7e9cdd175fe411981167f2021cf5cfc09b3381f35cb72a10"
     },
     {
       "device": "galaxy",
       "variant": "baseline",
       "run": 3,
-      "source_sha256": "0c9dfcba724004bf265e913422eb108bf0d51dc0eeb8f7ae7bb3a79ab8f62a08",
       "duration_ms": 12000.399999976158,
       "media_time_delta_s": 12.000705000000039,
       "canvas_draws": 455,
@@ -499,13 +498,13 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "0c9dfcba724004bf265e913422eb108bf0d51dc0eeb8f7ae7bb3a79ab8f62a08"
     },
     {
       "device": "galaxy",
       "variant": "compressed",
       "run": 1,
-      "source_sha256": "da90729548b3a7f34b56503a3d469699e2205a40b83a0b2f0963ec099d186928",
       "duration_ms": 12000.900000095367,
       "media_time_delta_s": 12.00195199999996,
       "canvas_draws": 660,
@@ -553,13 +552,13 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "da90729548b3a7f34b56503a3d469699e2205a40b83a0b2f0963ec099d186928"
     },
     {
       "device": "galaxy",
       "variant": "compressed",
       "run": 2,
-      "source_sha256": "98a2ea686f13b2f9fc9db9890d68124442ad88b652c0a8f5a31d0ab6c475dfa2",
       "duration_ms": 12000.5,
       "media_time_delta_s": 12.001359999999977,
       "canvas_draws": 660,
@@ -607,13 +606,13 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "98a2ea686f13b2f9fc9db9890d68124442ad88b652c0a8f5a31d0ab6c475dfa2"
     },
     {
       "device": "galaxy",
       "variant": "compressed",
       "run": 3,
-      "source_sha256": "a8e639d6ba814e68a122720de55c8832ec80fb084f5213471f3a0aa61ee7368d",
       "duration_ms": 12000.600000023842,
       "media_time_delta_s": 12.00059299999998,
       "canvas_draws": 660,
@@ -661,7 +660,8 @@
         "webapkStopped": true,
         "adbForwardRemoved": true,
         "containerStopped": true
-      }
+      },
+      "result_sha256": "a8e639d6ba814e68a122720de55c8832ec80fb084f5213471f3a0aa61ee7368d"
     }
   ],
   "aggregates": {
