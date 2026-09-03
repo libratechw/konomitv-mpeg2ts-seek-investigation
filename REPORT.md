@@ -635,6 +635,8 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 このqueue処理だけを`konomi/main`へ適用した正式候補をsource `26484fd`、生成済みdist `27b327e`の別コミットで公開した。正式な基準版との540/900秒交互90 seekでは、描画10fps未満18/90→0/90、複合異常35/90→1/90、`late`増分合計1859→294、最低draw 1.67→29.98fpsだった。候補のqueue全resetは51回で、`konomi/main`で加算されず常に0だった`queueResetted`が実際の再同期を再び表す。通常30秒では前身/正式候補が59.758/59.768fps、reset増分はいずれも0で、正式候補のMADDER確認区間3走行も23.7〜23.9fps、reset増分0だった。
 
+overflow時刻圧縮の`autoFilm`回帰は、MADDER #04〜#07の別録画から無劣化で切り出した4本の固定3:2素材、通常60i対照、film↔video境界で確認した。60秒の3:2走行は`konomi/main`が24.21〜24.52fps、正式候補が24.17〜24.44fpsで、queue全resetは全走行0だった。境界30秒では両版ともfilm→videoとvideo→filmを観測し、通常60iは49.57 / 50.36fpsだった。候補固有の一貫した退行は観測しなかったが、3:2走行の描画間隔p95は両版とも約68〜71ms、通常60iも理論値60000/1001fpsを維持していないため、`autoFilm`の表示間隔は別の未解決問題である。[素材、build、全走行、除外理由](results/galaxy-autofilm-multi-fixture-regression.json)を保存した。
+
 致命的な表示停止は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象として別に数える。上の1.8秒複合異常は、この発生率の根拠には使わない。発生率50ppm以下の判定には片側95%信頼上限を使い、0件の場合も最低59,914回のseekを必要とする。
 
 この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
@@ -1014,7 +1016,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | 入力queueのhigh/low waterを32/8 MiBから下げる | seek後の不要な読取量と、直後の再seekとの競合を削減 | Galaxyの8/2 MiB試作は初画を一貫して短縮しなかった。一方、canplay/playingまでの本体読込量は約38.4→11.4 MiB、別走行で約19.5→11.0 MiBへ減った。同じindex・probe数・decoder状態を揃えた連続seekで再評価する |
 | MSE clearを全削除でなく対象範囲に限定する | 再seekで変換を省ける可能性 | 今回clear単独は支配的でない。RAPとbuffer overlap設計が先 |
 | KonomiTV downloadのDB/stat/openを短縮・handle再利用する | NASのcold seekで数ms〜数十msの可能性 | warmな全backend計測では約0.3秒以内に復帰。cold cacheでDB/stat/open/first bodyを分離してから変更する |
-| `autoFilm`のseek後lock/hysteresisを調整する | 24fps区間のモード安定を早める可能性 | 単一タブ初画A/Bでは改善余地を確認できず優先度を下げる。定常cadence、誤lock、CM境界の評価候補として残す |
+| `autoFilm`のseek後lock/hysteresisを調整する | 3:2区間のmode安定を早める可能性 | 位相保持の試作は通常走行で23.97〜24.18fpsへ安定したが、MADDER #04の4走行中1回は58標本中57標本をvideo modeで処理し、47.45fpsのまま60秒以内にfilmへ復帰しなかった。誤lockを解消するまで採用しない。[複数素材の結果](results/galaxy-autofilm-multi-fixture-regression.json) |
 | seek直後だけ簡易deinterlaceにする | 初画数msの可能性 | 1〜2frame不足時の複製/直接描画は既に実装済み。通常は追加変更不要 |
 | periodic IDR recovery copyをnon-IDR recovery pointへ変える | Galaxyでは120秒の`droppedVideoFrames`が40→0になり、YADIF 59.925fpsとmedia timeを維持 | counterは元TSの新しい表示画像に対応しない1 tick sampleをChromeが表示しないことを数え、可視40ms超間隔は1回残った。40 seekも既定IDRより安定して速くならず、hardware decoder互換性の広い検証なしには変更しない |
 | queueが空のとき1入力frame分の固定reserveを置く | 120秒では40ms超1〜2回→0回、20 seekも20/20が250ms以内 | 600秒でclock差が蓄積し、`late` 2071、reset 2、最大11.15秒停止へ退行したため、この式は棄却。長窓とライブ追従を必須試験にする |

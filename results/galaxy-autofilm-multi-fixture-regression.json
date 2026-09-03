@@ -1,0 +1,1044 @@
+{
+  "schema": 1,
+  "purpose": "Check autoFilm cadence and regressions across four independent 24000/1001 fixtures, a 60000/1001 video control, and a mixed-cadence boundary.",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "transport": "LAN direct",
+    "fullscreen": true,
+    "singleTestPage": true,
+    "autoFilm": true,
+    "doubleRate": true,
+    "filmExpectedFps": 23.976023976023978,
+    "videoExpectedFps": 59.94005994005994,
+    "filmRunDurationSeconds": 60,
+    "controlRunDurationSeconds": {
+      "video60i": 60,
+      "filmVideoBoundary": 30
+    }
+  },
+  "fixtures": {
+    "e04": {
+      "videoId": 4,
+      "sha256": "405903b605da0818a0dc60001f5ad1c948722fd0da32175bf10e5ba46f03904b"
+    },
+    "e05": {
+      "videoId": 6,
+      "sha256": "7966eef616becf5b4fdc82d40ea5df86a702ba86eb816617fcf5151288abd287"
+    },
+    "e06": {
+      "videoId": 7,
+      "sha256": "12f8860bc5a7ae12b164399792a2a7cca7501737ed914cc9ad848278d6d8da72"
+    },
+    "e07": {
+      "videoId": 5,
+      "sha256": "0cddbb554a3dd958dd7e8ee6357aef6e828ea06072978fd436f01e2569234914"
+    }
+  },
+  "builds": {
+    "tsukumijimaMain": {
+      "asset": "PlayerController-CiwOYqi0.js",
+      "measuredSourceSha256": [
+        "9c4b5f2f061bbafd9c6f9e90df03aa0b047e04d9c4186fbee059c84ca959da5f",
+        "fdf5a1050b0be0c17d5818f2648c8c98dff23850818e42c7660419899142b75e"
+      ],
+      "sourceHashNote": "The runner hashes the source file under direct test; film and control runs may therefore name different files from the same browser asset."
+    },
+    "ivtcPhaseCandidate": {
+      "asset": "PlayerController-OZUyNkUV.js",
+      "measuredSourceSha256": [
+        "0c98dddf6e47eba0787cd2a673d0f8e1359dcf68ebede863d1ad780e4b8d7943"
+      ],
+      "sourceHashNote": "The runner hashes the source file under direct test; film and control runs may therefore name different files from the same browser asset."
+    },
+    "overflowDeadlineCompression": {
+      "asset": "PlayerController-DNoDCdBW.js",
+      "measuredSourceSha256": [
+        "47c1faba14a82ee5a90e107a4bd97ea582ab46906404fac9f1fe325bcafd093a"
+      ],
+      "sourceHashNote": "The runner hashes the source file under direct test; film and control runs may therefore name different files from the same browser asset."
+    }
+  },
+  "measurements": {
+    "tsukumijimaMain": {
+      "filmFixtures": {
+        "e04": [
+          {
+            "sourceFile": "e04-run2.json",
+            "variant": "konomi-main-e04-run2",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60003.60000002384,
+            "mediaTimeStart": 12.613346,
+            "mediaTimeEnd": 72.617687,
+            "mediaTimeDelta": 60.004341000000004,
+            "draws": 1456,
+            "drawFps": 24.265210754011783,
+            "drawIntervalMs": {
+              "p95": 70.89999997615814,
+              "p99": 87.80000007152557,
+              "max": 101.69999992847443,
+              "over40": 729
+            },
+            "modeSamples": {
+              "film": 58,
+              "video": 1,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 3
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 4
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 74,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 5,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          },
+          {
+            "sourceFile": "e04-run3.json",
+            "variant": "konomi-main-e04-run3",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60000.700000047684,
+            "mediaTimeStart": 12.619319,
+            "mediaTimeEnd": 72.619485,
+            "mediaTimeDelta": 60.00016599999999,
+            "draws": 1464,
+            "drawFps": 24.399715336635015,
+            "drawIntervalMs": {
+              "p95": 69.89999997615814,
+              "p99": 81.60000002384186,
+              "max": 108.5,
+              "over40": 718
+            },
+            "modeSamples": {
+              "film": 57,
+              "video": 2,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 3
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 4
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 57
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 58
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 74,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          },
+          {
+            "sourceFile": "e04.json",
+            "variant": "konomi-main-e04",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60046.200000047684,
+            "mediaTimeStart": 12.616861,
+            "mediaTimeEnd": 72.663697,
+            "mediaTimeDelta": 60.046836,
+            "draws": 1454,
+            "drawFps": 24.214688023535967,
+            "drawIntervalMs": {
+              "p95": 70.5,
+              "p99": 82,
+              "max": 98.60000002384186,
+              "over40": 691
+            },
+            "modeSamples": {
+              "film": 56,
+              "video": 3,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 7
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 8
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 31
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 32
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 35
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 36
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 74,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 7,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e05": [
+          {
+            "sourceFile": "e05.json",
+            "variant": "konomi-main-e05-clean",
+            "videoId": 6,
+            "frameMode": "24fps",
+            "durationMs": 60001.60000002384,
+            "mediaTimeStart": 12.676835,
+            "mediaTimeEnd": 72.677395,
+            "mediaTimeDelta": 60.00056000000001,
+            "draws": 1471,
+            "drawFps": 24.516012906312756,
+            "drawIntervalMs": {
+              "p95": 70.70000004768372,
+              "p99": 80.5,
+              "max": 107.79999995231628,
+              "over40": 714
+            },
+            "modeSamples": {
+              "film": 57,
+              "video": 2,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 7
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 8
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 45
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 46
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 132,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 5,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e06": [
+          {
+            "sourceFile": "e06.json",
+            "variant": "konomi-main-e06",
+            "videoId": 7,
+            "frameMode": "24fps",
+            "durationMs": 60026.300000071526,
+            "mediaTimeStart": 12.666401,
+            "mediaTimeEnd": 72.693464,
+            "mediaTimeDelta": 60.027063000000005,
+            "draws": 1456,
+            "drawFps": 24.256034438209003,
+            "drawIntervalMs": {
+              "p95": 70.60000002384186,
+              "p99": 79.20000004768372,
+              "max": 122.70000004768372,
+              "over40": 691
+            },
+            "modeSamples": {
+              "film": 58,
+              "video": 1,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 48
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 49
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 58,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 2,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e07": [
+          {
+            "sourceFile": "e07.json",
+            "variant": "konomi-main-e07",
+            "videoId": 5,
+            "frameMode": "24fps",
+            "durationMs": 60020.39999997616,
+            "mediaTimeStart": 12.678676,
+            "mediaTimeEnd": 72.699398,
+            "mediaTimeDelta": 60.020722000000006,
+            "draws": 1458,
+            "drawFps": 24.291740808134886,
+            "drawIntervalMs": {
+              "p95": 70.19999992847443,
+              "p99": 79.60000002384186,
+              "max": 92.90000009536743,
+              "over40": 711
+            },
+            "modeSamples": {
+              "film": 57,
+              "video": 2,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 41
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 42
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 54
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 55
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 76,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 5,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ]
+      },
+      "controls": {
+        "filmVideoBoundary": {
+          "sourceFile": "boundary-30s.json",
+          "variant": "konomi-main-boundary",
+          "videoId": 2,
+          "frameMode": "24fps",
+          "durationMs": 30002.100000023842,
+          "mediaTimeStart": 1500.308112,
+          "mediaTimeEnd": 1530.310936,
+          "mediaTimeDelta": 30.002824000000146,
+          "draws": 1047,
+          "drawFps": 34.897557170970295,
+          "drawIntervalMs": {
+            "p95": 67.39999997615814,
+            "p99": 93.20000004768372,
+            "max": 141.10000002384186,
+            "over40": 217
+          },
+          "modeSamples": {
+            "film": 17,
+            "video": 12,
+            "transitions": [
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 2
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 11
+              },
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 19
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 20
+              },
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 22
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 24
+              }
+            ]
+          },
+          "counterDelta": {
+            "filtered": 958,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 158,
+            "queueResetted": 0
+          },
+          "cleanupVerified": true
+        },
+        "video60i": {
+          "sourceFile": "video-control-60s.json",
+          "variant": "konomi-main-video-control",
+          "videoId": 1,
+          "frameMode": "24fps",
+          "durationMs": 60000.59999990463,
+          "mediaTimeStart": 207.62648,
+          "mediaTimeEnd": 267.627553,
+          "mediaTimeDelta": 60.00107299999999,
+          "draws": 2974,
+          "drawFps": 49.5661710050354,
+          "drawIntervalMs": {
+            "p95": 37.700000047683716,
+            "p99": 42.89999997615814,
+            "max": 99.20000004768372,
+            "over40": 74
+          },
+          "modeSamples": {
+            "film": 0,
+            "video": 59,
+            "transitions": []
+          },
+          "counterDelta": {
+            "filtered": 3532,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 600,
+            "queueResetted": 0
+          },
+          "cleanupVerified": true
+        }
+      }
+    },
+    "ivtcPhaseCandidate": {
+      "filmFixtures": {
+        "e04": [
+          {
+            "sourceFile": "e04-run2.json",
+            "variant": "ivtc-phase-e04-run2",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60021.39999997616,
+            "mediaTimeStart": 12.652064,
+            "mediaTimeEnd": 72.674707,
+            "mediaTimeDelta": 60.022643,
+            "draws": 1439,
+            "drawFps": 23.974782327646,
+            "drawIntervalMs": {
+              "p95": 70.69999992847443,
+              "p99": 82.89999997615814,
+              "max": 109.5,
+              "over40": 720
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 0,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          },
+          {
+            "sourceFile": "e04-run3.json",
+            "variant": "ivtc-phase-e04-run3",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60000.5,
+            "mediaTimeStart": 12.6127,
+            "mediaTimeEnd": 72.613225,
+            "mediaTimeDelta": 60.000524999999996,
+            "draws": 1438,
+            "drawFps": 23.96646694610878,
+            "drawIntervalMs": {
+              "p95": 70.20000004768372,
+              "p99": 81.69999992847443,
+              "max": 96.30000007152557,
+              "over40": 698
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 0,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          },
+          {
+            "sourceFile": "e04-run4.json",
+            "variant": "ivtc-phase-e04-run4",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60000.39999997616,
+            "mediaTimeStart": 12.650869,
+            "mediaTimeEnd": 72.650354,
+            "mediaTimeDelta": 59.99948499999999,
+            "draws": 1438,
+            "drawFps": 23.96650688996359,
+            "drawIntervalMs": {
+              "p95": 69.70000004768372,
+              "p99": 79.69999992847443,
+              "max": 94.30000007152557,
+              "over40": 732
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 0,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 1,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          },
+          {
+            "sourceFile": "e04.json",
+            "variant": "ivtc-phase-e04",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60015.39999997616,
+            "mediaTimeStart": 12.569749,
+            "mediaTimeEnd": 72.585332,
+            "mediaTimeDelta": 60.01558299999999,
+            "draws": 2848,
+            "drawFps": 47.45448668177053,
+            "drawIntervalMs": {
+              "p95": 50.40000009536743,
+              "p99": 57.10000002384186,
+              "max": 103.60000002384186,
+              "over40": 324
+            },
+            "modeSamples": {
+              "film": 1,
+              "video": 57,
+              "transitions": [
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 18
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 19
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 1546,
+              "missed": 302,
+              "degraded": 1208,
+              "discontinuities": 0,
+              "late": 4,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e05": [
+          {
+            "sourceFile": "e05.json",
+            "variant": "ivtc-phase-e05",
+            "videoId": 6,
+            "frameMode": "24fps",
+            "durationMs": 60007.699999928474,
+            "mediaTimeStart": 12.667743,
+            "mediaTimeEnd": 72.675911,
+            "mediaTimeDelta": 60.008168,
+            "draws": 1442,
+            "drawFps": 24.030249451349057,
+            "drawIntervalMs": {
+              "p95": 67.89999997615814,
+              "p99": 76.29999995231628,
+              "max": 92.39999997615814,
+              "over40": 734
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 16,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 2,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e06": [
+          {
+            "sourceFile": "e06.json",
+            "variant": "ivtc-phase-e06",
+            "videoId": 7,
+            "frameMode": "24fps",
+            "durationMs": 60004,
+            "mediaTimeStart": 12.656481,
+            "mediaTimeEnd": 72.660539,
+            "mediaTimeDelta": 60.004058,
+            "draws": 1451,
+            "drawFps": 24.181721218585427,
+            "drawIntervalMs": {
+              "p95": 69,
+              "p99": 80.39999997615814,
+              "max": 93.20000004768372,
+              "over40": 707
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 28,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 1,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e07": [
+          {
+            "sourceFile": "e07.json",
+            "variant": "ivtc-phase-e07",
+            "videoId": 5,
+            "frameMode": "24fps",
+            "durationMs": 60006.40000009537,
+            "mediaTimeStart": 12.651714,
+            "mediaTimeEnd": 72.658419,
+            "mediaTimeDelta": 60.006705,
+            "draws": 1445,
+            "drawFps": 24.080764718391762,
+            "drawIntervalMs": {
+              "p95": 69.70000004768372,
+              "p99": 79.29999995231628,
+              "max": 94.70000004768372,
+              "over40": 730
+            },
+            "modeSamples": {
+              "film": 59,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 14,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 0,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ]
+      },
+      "controls": {}
+    },
+    "overflowDeadlineCompression": {
+      "filmFixtures": {
+        "e04": [
+          {
+            "sourceFile": "e04.json",
+            "variant": "queue-compress-e04",
+            "videoId": 4,
+            "frameMode": "24fps",
+            "durationMs": 60000.700000047684,
+            "mediaTimeStart": 12.629592,
+            "mediaTimeEnd": 72.630537,
+            "mediaTimeDelta": 60.000945,
+            "draws": 1450,
+            "drawFps": 24.166384725492332,
+            "drawIntervalMs": {
+              "p95": 70.39999997615814,
+              "p99": 81.89999997615814,
+              "max": 109.60000002384186,
+              "over40": 702
+            },
+            "modeSamples": {
+              "film": 58,
+              "video": 0,
+              "transitions": []
+            },
+            "counterDelta": {
+              "filtered": 74,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 4,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e05": [
+          {
+            "sourceFile": "e05.json",
+            "variant": "queue-compress-e05",
+            "videoId": 6,
+            "frameMode": "24fps",
+            "durationMs": 60012.299999952316,
+            "mediaTimeStart": 12.640934,
+            "mediaTimeEnd": 72.653934,
+            "mediaTimeDelta": 60.013000000000005,
+            "draws": 1464,
+            "drawFps": 24.394999025219217,
+            "drawIntervalMs": {
+              "p95": 69.39999997615814,
+              "p99": 79.79999995231628,
+              "max": 123.69999992847443,
+              "over40": 711
+            },
+            "modeSamples": {
+              "film": 55,
+              "video": 3,
+              "transitions": [
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 1
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 7
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 8
+                },
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 9
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 10
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 128,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 5,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e06": [
+          {
+            "sourceFile": "e06.json",
+            "variant": "queue-compress-e06",
+            "videoId": 7,
+            "frameMode": "24fps",
+            "durationMs": 60001.700000047684,
+            "mediaTimeStart": 12.644572,
+            "mediaTimeEnd": 72.645269,
+            "mediaTimeDelta": 60.000697,
+            "draws": 1458,
+            "drawFps": 24.299311519487638,
+            "drawIntervalMs": {
+              "p95": 68.29999995231628,
+              "p99": 75.79999995231628,
+              "max": 94.5,
+              "over40": 708
+            },
+            "modeSamples": {
+              "film": 58,
+              "video": 1,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 47
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 48
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 58,
+              "missed": 0,
+              "degraded": 0,
+              "discontinuities": 0,
+              "late": 2,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ],
+        "e07": [
+          {
+            "sourceFile": "e07.json",
+            "variant": "queue-compress-e07",
+            "videoId": 5,
+            "frameMode": "24fps",
+            "durationMs": 60025.700000047684,
+            "mediaTimeStart": 12.671049,
+            "mediaTimeEnd": 72.698795,
+            "mediaTimeDelta": 60.02774600000001,
+            "draws": 1467,
+            "drawFps": 24.439531733887897,
+            "drawIntervalMs": {
+              "p95": 70.69999992847443,
+              "p99": 89.5,
+              "max": 129.10000002384186,
+              "over40": 702
+            },
+            "modeSamples": {
+              "film": 58,
+              "video": 1,
+              "transitions": [
+                {
+                  "from": "film",
+                  "to": "video",
+                  "sampleIndex": 19
+                },
+                {
+                  "from": "video",
+                  "to": "film",
+                  "sampleIndex": 20
+                }
+              ]
+            },
+            "counterDelta": {
+              "filtered": 100,
+              "missed": 1,
+              "degraded": 4,
+              "discontinuities": 0,
+              "late": 4,
+              "queueResetted": 0
+            },
+            "cleanupVerified": true
+          }
+        ]
+      },
+      "controls": {
+        "filmVideoBoundary": {
+          "sourceFile": "boundary-30s.json",
+          "variant": "queue-compress-boundary",
+          "videoId": 2,
+          "frameMode": "24fps",
+          "durationMs": 30000.800000071526,
+          "mediaTimeStart": 1500.254192,
+          "mediaTimeEnd": 1530.255133,
+          "mediaTimeDelta": 30.000940999999784,
+          "draws": 1089,
+          "drawFps": 36.299032025726106,
+          "drawIntervalMs": {
+            "p95": 66.5,
+            "p99": 85.59999990463257,
+            "max": 116.70000004768372,
+            "over40": 216
+          },
+          "modeSamples": {
+            "film": 15,
+            "video": 14,
+            "transitions": [
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 2
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 11
+              },
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 14
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 16
+              },
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 18
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 19
+              },
+              {
+                "from": "film",
+                "to": "video",
+                "sampleIndex": 22
+              },
+              {
+                "from": "video",
+                "to": "film",
+                "sampleIndex": 24
+              }
+            ]
+          },
+          "counterDelta": {
+            "filtered": 1004,
+            "missed": 1,
+            "degraded": 4,
+            "discontinuities": 0,
+            "late": 130,
+            "queueResetted": 0
+          },
+          "cleanupVerified": true
+        },
+        "video60i": {
+          "sourceFile": "video-control-60s.json",
+          "variant": "queue-compress-video-control",
+          "videoId": 1,
+          "frameMode": "24fps",
+          "durationMs": 60003.300000071526,
+          "mediaTimeStart": 207.672529,
+          "mediaTimeEnd": 267.674171,
+          "mediaTimeDelta": 60.001642000000004,
+          "draws": 3022,
+          "drawFps": 50.363896652290755,
+          "drawIntervalMs": {
+            "p95": 37.199999928474426,
+            "p99": 42,
+            "max": 73.70000004768372,
+            "over40": 65
+          },
+          "modeSamples": {
+            "film": 0,
+            "video": 59,
+            "transitions": []
+          },
+          "counterDelta": {
+            "filtered": 3534,
+            "missed": 0,
+            "degraded": 0,
+            "discontinuities": 0,
+            "late": 557,
+            "queueResetted": 0
+          },
+          "cleanupVerified": true
+        }
+      }
+    }
+  },
+  "excluded": [
+    {
+      "group": "tsukumijimaMain",
+      "file": "e05.json.contaminated-host-sha",
+      "reason": "A concurrent full-file SHA-256 calculation added host load; the clean rerun e05.json replaces it."
+    },
+    {
+      "group": "ivtcPhaseCandidate",
+      "file": "e04-analysis.json",
+      "reason": "Zero-byte interrupted output."
+    }
+  ],
+  "interpretation": [
+    "Overflow deadline compression did not add a queue reset or a consistent frame-rate regression on any of the four film fixtures.",
+    "Both the baseline and overflow deadline compression switched in both directions in the mixed-cadence boundary run.",
+    "Average film output near 24000/1001 does not establish smooth playback: film-run p95 draw intervals remained about 68 to 71 ms.",
+    "The 60000/1001 control remained near 50 fps with autoFilm enabled, so autoFilm processing still fails the steady-display target independently of overflow recovery.",
+    "The IVTC phase candidate is rejected in its measured form because one of four e04 starts stayed in video mode for 57 of 58 samples instead of recovering to film mode."
+  ]
+}
