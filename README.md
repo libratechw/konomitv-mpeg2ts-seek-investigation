@@ -154,7 +154,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 - 既存`presented` eventは`video.seeking`解除後のbuffered frameを示し、表示復帰時間とは一致しません。前景再生中の体感レイテンシには使いません。
 - `droppedVideoFrames`はpredecodeまたは表示期限超過のdropを数え、最終YADIF canvasの可視コマ落ち数ではありません。Originalで数えた極短IDR recovery sampleのdropと、YADIF出力の表示間隔を分けて評価します。
 - Windowsの値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った補助条件です。同一モード内のbranch A/Bに使い、通常設定のWindowsやGalaxyとの絶対性能比較には使いません。
-- 「乃木坂工事中」は確認区間だけを60 field候補、「MADDER」は確認区間だけを3:2候補として扱います。番組全体のcadenceを番組名から決めません。
+- 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。今後の`autoFilm`回帰では、期待値を24000/1001fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。
 
 ## 長時間再生と反復シーク
 

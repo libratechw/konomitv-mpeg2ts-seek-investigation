@@ -651,6 +651,12 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`のまま、1500秒では`video`から`film`への切替過渡を観測した。
 番組全体を24fpsと扱わず、初画、mode lock、定常cadenceを別々に評価する。
 
+固定した`autoFilm`回帰素材を作るため、MADDER全編をFFmpeg 8.1.2の`fieldmatch=mode=pc_n:combmatch=full:mchroma=0,decimate=cycle=5:mixed=1`で解析した。5入力frameごとにduplicateが1枚選ばれ、`fieldmatch`が残留インターレースを報告しない完全cycleの最長連続区間は、録画先頭から約1320.986〜1502.334秒の181.348秒だった。
+
+キーフレーム境界のずれを吸収する余裕を取り、1325秒から172.8秒分を映像と主音声だけ`-c copy`で切り出した。実際のvideo packet範囲は1324.824〜1497.463秒、出力TSは約172.853秒である。1035個の完全cycleはすべて1 duplicateを除き、残留インターレース、40msを超えるvideo PTS間隔、映像・主音声のdecode errorは0だった。末尾の1 frameは5-frame cycleを作れないため、cadenceの主張から除外する。
+
+この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ファイルは`/data/ssd/konomitv-seek-fixtures/madder-24p-clean.ts`、SHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
+
 ## 連続 seek とキャンセル
 
 通常のドラッグmoveはseekを送らず、指を離した時点で確定する。

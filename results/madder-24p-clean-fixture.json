@@ -1,0 +1,81 @@
+{
+  "purpose": "Stable 24000/1001 fps autoFilm regression fixture cut without transcoding from a mixed-cadence terrestrial MPEG-2 TS recording",
+  "createdAt": "2026-09-03",
+  "ffmpeg": "8.1.2",
+  "source": {
+    "name": "2026-08-28_MADDER(マダー) #08 乃木坂46五百城茉央、flumpool山村隆太.ts",
+    "localPath": "/data/ssd/konomitv-seek-fixtures/madder.ts",
+    "sizeBytes": 3115609884,
+    "sha256": "894c063b789a5bff24ec6441883ec6b11a024e553d62c2d367ef8123cfe9178e",
+    "copyVerification": "The local SSD copy and the read-only mounted source produced the same SHA-256 in this run.",
+    "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+    "scope": "The recording has mixed cadence and is not treated as film throughout."
+  },
+  "scan": {
+    "command": "ffmpeg -hide_banner -loglevel debug -threads 2 -filter_threads 1 -i SOURCE -map 0:v:0 -an -vf fieldmatch=mode=pc_n:combmatch=full:mchroma=0,decimate=cycle=5:mixed=1 -f null -",
+    "cleanCycleDefinition": "A complete five-input-frame cycle for which decimate selected a duplicate frame and fieldmatch reported no still-interlaced frame.",
+    "cycleBlocksObserved": 10880,
+    "duplicateDropCycles": 9148,
+    "stillInterlacedFrames": 2845,
+    "longestCleanIntervals": [
+      {
+        "approximateSourceStartSeconds": 1320.986333,
+        "approximateSourceEndSeconds": 1502.334167,
+        "durationSeconds": 181.347833,
+        "completeCycles": 1087
+      },
+      {
+        "approximateSourceStartSeconds": 396.062333,
+        "approximateSourceEndSeconds": 554.220333,
+        "durationSeconds": 158.158,
+        "completeCycles": 948
+      },
+      {
+        "approximateSourceStartSeconds": 1595.760833,
+        "approximateSourceEndSeconds": 1719.551167,
+        "durationSeconds": 123.790333,
+        "completeCycles": 742
+      }
+    ],
+    "sourceVideoDamage": "One corrupt decoded video frame was observed near 1814.846 seconds, outside the selected interval."
+  },
+  "fixture": {
+    "name": "madder-24p-clean.ts",
+    "path": "/data/ssd/konomitv-seek-fixtures/madder-24p-clean.ts",
+    "cutCommand": "ffmpeg -hide_banner -loglevel warning -i SOURCE -ss 1325 -t 172.8 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+    "requestedSourceStartSeconds": 1325,
+    "requestedSourceEndSeconds": 1497.8,
+    "actualFirstVideoPacketSourceSeconds": 1324.8235,
+    "actualLastVideoPacketSourceSeconds": 1497.462633,
+    "sizeBytes": 294843408,
+    "sha256": "163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb",
+    "formatDurationSeconds": 172.853223,
+    "videoDurationSeconds": 172.705867,
+    "audioDurationSeconds": 172.8,
+    "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+    "audio": "AAC, 48000 Hz, stereo",
+    "streamsKept": [
+      "primary video",
+      "primary audio"
+    ],
+    "transcoded": false
+  },
+  "fixtureValidation": {
+    "inputVideoFrames": 5176,
+    "completeFiveFrameCycles": 1035,
+    "duplicateDropCycles": 1035,
+    "outputFilmFrames": 4141,
+    "expectedOutputRate": "24000/1001 fps",
+    "stillInterlacedFramesInCompleteCycles": 0,
+    "stillInterlacedFramesTotal": 0,
+    "incompleteTailFrames": 1,
+    "incompleteTailNote": "The final single frame cannot form a complete five-frame cycle. It is excluded from cadence claims.",
+    "videoPtsGapCountOver40ms": 0,
+    "videoPtsMinimumDeltaSeconds": 0.033366,
+    "videoPtsMaximumDeltaSeconds": 0.033367,
+    "videoDecodeErrors": 0,
+    "primaryAudioDecodeErrors": 0,
+    "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
+    "compressedVideoPayloadSha256": "7a5b2d73b52cabb5b6e78cf3fbce40c6ab8561f709955ebcc248174d97e5562e"
+  }
+}
