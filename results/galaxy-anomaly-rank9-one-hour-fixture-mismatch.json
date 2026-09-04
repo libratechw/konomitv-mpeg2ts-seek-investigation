@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "status": "invalid",
+  "reason": "fixture-id-mismatch",
+  "affectedResults": [
+    {
+      "summary": "galaxy-anomaly-rank9-one-hour-summary.json",
+      "blocks": "galaxy-anomaly-rank9-one-hour-block-000.json through block-011.json",
+      "startedAt": "2026-09-04T04:37:34.738+09:00",
+      "videoId": 1,
+      "declaredFixture": {
+        "name": "nogizaka.ts",
+        "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+      }
+    },
+    {
+      "summary": "galaxy-anomaly-integration-rank9-one-hour-summary.json",
+      "blocks": "galaxy-anomaly-integration-rank9-one-hour-block-000.json through block-011.json",
+      "startedAt": "2026-09-04T06:19:03.723+09:00",
+      "videoId": 1,
+      "declaredFixture": {
+        "name": "nogizaka.ts",
+        "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+      }
+    }
+  ],
+  "preservedRuntimeDatabaseEvidence": {
+    "recordedVideosCreatedAt": "2026-09-04T03:10:49+09:00",
+    "mappingMatchedInBothCandidateAndIntegrationContainers": true,
+    "rows": [
+      {
+        "id": 1,
+        "filename": "madder-24p-clean.ts",
+        "fileSize": 294843408,
+        "durationSeconds": 172.705867,
+        "sha256": "163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb"
+      },
+      {
+        "id": 2,
+        "filename": "nogizaka.ts",
+        "fileSize": 3066534364,
+        "durationSeconds": 1815.2134,
+        "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+      }
+    ]
+  },
+  "runnerEvidence": {
+    "blockResultsContainVerifiedFixtureSize": false,
+    "blockResultsContainVerifiedRecordedDuration": false,
+    "blockResultsContainVerifiedDownloadFilename": false,
+    "interpretation": "The old runner copied the declared fixture name and SHA-256 into each result but did not verify the API row or Range response."
+  },
+  "conclusion": {
+    "declaredNogizakaFixtureWasNotServed": true,
+    "actualServedFixture": "madder-24p-clean.ts",
+    "usableAsNogizakaDefectCrossingEvidence": false,
+    "usableForRank9OrIntegrationComparison": false,
+    "rawResultsPreserved": true,
+    "requiredReplacement": "Repeat with the fail-closed runner after API metadata, download filename, Content-Range total size, fixture SHA-256, and video ID all agree."
+  }
+}

@@ -790,17 +790,9 @@ fMP4の`tfdt`と`trun`を直接解析すると、映像trackの先頭decode時�
 
 公開branchには、interlaced `hd1080i.m2v`とcomplementary B fieldを含む`open_gop_leading_bb.m2v`へ2種類のpacket欠落位置を与えるSession回帰試験を`27eed22`で追加した。現在のtip `e36dd0b`で`cargo fmt --check`と`cargo test --release`を実行し、239件が成功、失敗0件だった。現在のdist `e36dd0b`はGalaxyで測った`f80154f`とruntime source・distがバイト一致し、差分は試験だけである。この固定fixtureは通常のfield pair・open-GOP filterを通るが、実在するfield pair・open GOP破損のブラウザー挙動を一般化しない。
 
-候補tip `e36dd0b`単独を最新KonomiTV `7307e0e`へ組み込み、同じ固定欠損を反復通過する1時間上限の自動試験を行った。20回ごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、12 sessionで223回すべてが2秒以内に安定復帰した。致命的な表示停止は0件で、欠損後の初回描画は中央値48.5ms、安定確認は中央値168.6msだった。判定器が欠陥時刻を最初にまたいだ映像時刻間隔は全試行33.366msだったが、この値は破損影響区間全体の最大値ではない。
+順位9単独と、公開integration `44e06a4`へ順位9を重ねた検証build `be568d8`で実施した2本の1時間走行は、素材の不一致が判明したため採用しない。結果は`videoId=1`を乃木坂fixtureとして記録していたが、走行前から保存されていた両コンテナのDBでは、ID 1は`madder-24p-clean.ts`、乃木坂fixtureはID 2だった。旧runnerは宣言したfixture名とSHA-256を結果へ転記するだけで、APIのfile size、録画時間、download filename、`Content-Range`の総byte数を照合していなかった。
 
-一方、安定復帰後の約3秒間を60000/1001fpsの±1%かつ40ms超の描画間隔0回で判定すると、223回中9回が不合格だった。8回は58.936〜59.340fps、1回は60.058fpsまで追いついたものの40.4msの描画間隔を1回含んだ。このため異常TSの1時間条件は満たさない。
-
-このbuildは順位4・5のYADIF修正を含まず、直接の親`52a3db5`へ順位9だけを適用している。したがって9回の異常区間通過後のFPS安定復帰失敗をtransport loss修正の副作用とは判定せず、同条件の親buildとintegrationへ順位9を重ねたbuildを比較する。各blockの終了処理は成功し、走行終了後にもChrome、WebAPK、ADB forward、隔離KonomiTVが残っていないことを確認した。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-rank9-one-hour-summary.json)を保存した。
-
-公開integration `44e06a4`と順位9 `e36dd0b`の両方を祖先に持つ検証build `be568d8`でも、同じKonomiTV、Galaxy、fixture、runner、base seedで1時間試験を行った。collectorの判定処理は同じで、検証build側だけが各試行の全描画間隔を結果へ追加保存した。12 sessionで固定欠損を224回通過し、すべて2秒以内に安定復帰した。致命的な表示停止は0件で、安定確認は中央値168.9ms、最大217.1msだった。
-
-異常区間通過後のFPS安定復帰失敗は224回中4回だった。4回は58.676〜59.106fpsで、最大描画間隔は32.7〜35.6ms、40ms超はなかった。同じseedで20回ずつ完了した先頭11 blockに限ると、順位9単独は9/220、統合版へ重ねたbuildは4/220だった。統合版を重ねると発生数は減ったが、不合格の試行位置は一致せず、順位4・5を含むどの修正が差を生んだかは未確定である。
-
-全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止に成功した。714回のhost負荷sampleでffmpegは0、load1は最大1.06だった。検証buildは正式なintegrationではなく、FPS安定復帰失敗が残るため順位9をintegrationへ追加しない。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を保存した。
+したがって、順位9単独の223回とintegrationへ重ねた224回から得た致命的停止件数、FPS安定復帰失敗件数、復帰時間を、乃木坂の固定欠損または順位9の効果の根拠には使わない。生のsummaryとblockは測定履歴として残し、[不一致の根拠と影響範囲](results/galaxy-anomaly-rank9-one-hour-fixture-mismatch.json)を別に記録した。再測定では、現行runnerのfail-closed preflightにより、API metadata、download filename、`Content-Range`、fixture SHA-256、video IDがすべて一致した場合だけ走行を開始する。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
