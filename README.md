@@ -31,7 +31,7 @@ KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補は
 
 ## 測定専用コード
 
-[`codex/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/worker-presentation-observability)は、`faf1464`のOffscreenCanvas Worker内でrAF、描画submit、backend切替を記録する診断branchです。source `2348434`とdist `5d588dc`で構成し、製品APIや採用候補にはしません。
+[`codex/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/worker-presentation-observability)は、`faf1464`の描画backend、rAF、描画submit、frame取込、presentation queue、output poolを同じ時系列で記録する診断branchです。source `24f9d98`とdist `3825261`で構成し、製品APIや採用候補にはしません。
 
 [`codex/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや採用候補にはせず、branch全体の取り込みも想定しません。
 
