@@ -1,0 +1,89 @@
+{
+  "scope": "Android ChromeのPC版サイト表示を識別し、YADIFをメインスレッドで描画する候補",
+  "revisions": {
+    "konomiTvBase": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "dependencyCommit": "51aceaf",
+    "candidateCommit": "0f496f61de450c4ffe7e0198e74fb82f202ac328",
+    "playerAssetSha256": "787a667ea39fb47cf2f68eb6dee024882bf95fe989348ad2a98a9c66ea6f3d66"
+  },
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151 desktop mode",
+    "browserIdentity": {
+      "userAgentDataMobile": false,
+      "userAgentDataPlatform": "Linux",
+      "platform": "Linux armv81",
+      "maxTouchPoints": 5
+    },
+    "material": "検証済み正常60i fixture",
+    "fixtureSha256": "894c063b789a5bff24ec6441883ec6b11a024e553d62c2d367ef8123cfe9178e",
+    "quality": "Original (MPEG-2)",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "sourceDiffOutsideGeneratedDistSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "steadyPlayback": {
+    "durationMsPerRun": 10000,
+    "runs": [
+      {
+        "outputFpsMedian": 59.95203836501988,
+        "missedDelta": 0,
+        "lateDelta": 3,
+        "rawResultSha256": "be798cc9a920eae754241e775d491c0d05ea6d344aa9269c7ac881d5a33bd076"
+      },
+      {
+        "outputFpsMedian": 59.95085995085995,
+        "missedDelta": 0,
+        "lateDelta": 1,
+        "rawResultSha256": "6d3e32bdf25b3e97f6f973aa77757e229e4d93123d445e0aae5b571fc88d5338"
+      },
+      {
+        "outputFpsMedian": 59.93407251880038,
+        "missedDelta": 0,
+        "lateDelta": 0,
+        "rawResultSha256": "6ed6d29c20dd68f08aa008bd41b0d7d32221c63668d339d1af7afd6652ee3792"
+      }
+    ]
+  },
+  "directSeek": {
+    "warmupCount": 2,
+    "measuredCount": 20,
+    "targetBasesSeconds": [600, 900],
+    "firstDurableCanvasMs": {
+      "min": 119.89990234375,
+      "median": 146.199951171875,
+      "p95": 179.800048828125,
+      "p99": 180.800048828125,
+      "max": 180.800048828125
+    },
+    "maximumAbsolutePositionErrorSeconds": 0.018712000000050466,
+    "allUnder200ms": true,
+    "rawResultSha256": "f6779853ccb8a422d8d4aeb747ce7833476d3edf28e7986f43213e2f00e3280f"
+  },
+  "postSeekSteadyPlayback": {
+    "targetSeconds": 900,
+    "settleSeconds": 5,
+    "durationMs": 10002,
+    "mediaTimeDeltaSeconds": 10.000290999999947,
+    "outputFpsMedian": 59.922101271204745,
+    "missedDelta": 0,
+    "lateDelta": 0,
+    "queueResettedDelta": 0,
+    "rawResultSha256": "2c04afae144db35f0e0e0931fb226144ffe838620027fe90be5aaf97c83d58a9"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  },
+  "limitations": [
+    "シークはDPlayer UIではなくvideo.currentTimeから要求した。",
+    "Galaxy 1台の正常60i短時間走行だけを測定した。",
+    "可聴A/V同期と1時間安定性は未確認。"
+  ]
+}

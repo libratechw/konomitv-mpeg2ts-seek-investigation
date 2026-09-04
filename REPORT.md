@@ -43,6 +43,14 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 
 ## 採否判断に残る証拠
 
+### Android ChromeのYADIF描画先
+
+GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktopを示しますが、`navigator.platform`はARM Linux、`maxTouchPoints`は5を返します。KonomiTV側でmpeg2toh264を`faf1464`へ更新し、YADIF生成箇所だけでこの端末条件を補足してmain-thread描画を選ぶcandidateを作成しました。
+
+正常60iの10秒測定3回は`outputFps`中央値59.934〜59.952、`missed`増分0、`late`増分0〜3でした。600秒台と900秒台を往復する20回の直接シークでは、対象位置の永続canvas表示が最大180.8ms、p95 179.8ms、位置の絶対誤差が最大18.8msでした。900秒へシークして5秒後から測った10秒間も`outputFps`中央値59.922、`missed`・`late`増分0、media time進行10.000秒でした。[条件と結果](results/galaxy-android-yadif-main-thread-candidate.json)を公開しています。
+
+これはGalaxy 1台、正常60i、短時間、`video.currentTime`によるシークの結果です。実DPlayer UI、他のAndroid端末、1時間条件、可聴A/V同期は未確認です。
+
 ### 異常TSで完成済みpictureを保つ案
 
 `fix/preserve-complete-pictures-before-loss`は、transport lossより前に完成していたpictureを残す案です。2種類の実在欠損をオフライン変換すると、旧基準版に対して次の差がありました。
