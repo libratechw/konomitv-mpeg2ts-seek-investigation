@@ -55,7 +55,7 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 同じcandidateとGalaxyで、正常3:2の3素材を24fps modeで10秒ずつ測ると、`outputFps`中央値は46.570〜47.833、`missed`増分は38〜47、film modeは各stats窓の0〜2回だけでした。同じキッズアワー素材で24fps modeだけを無効にすると、中央値59.958、`missed`・`degraded`増分0になり、1 frame当たりの処理時間中央値も11.627msから2.042msへ下がりました。[素材別の結果](results/galaxy-autofilm-normal-fixture-comparison.json)を公開しています。
 
-正常素材の輸送欠損や通常YADIFでは再現しないため、`autoFilm`解析経路の負荷と、callback欠落後にfilm履歴を捨てる処理が連鎖している可能性があります。同期readback、CPU fieldmatch、履歴resetを分けた計測は未実施であり、原因箇所と修正方法はまだ確定していません。
+同じキッズアワーのrVFCを直接比較すると、autoFilm ONは映像が299 frame進む間に50 callbackを取り逃し、OFFは298 frameに対して欠落0でした。callback間隔中央値は42.0ms対33.4ms、decoderの`processingDuration`中央値は17.2ms対17.1ms、canvas draw呼び出しは両方とも中央値0msでした。decoderや最終描画ではなくautoFilmの同期解析がmain threadを塞ぐ層まで絞れています。同期readbackとCPU fieldmatchの内訳、修正方法は未確定です。
 
 ### 異常TSで完成済みpictureを保つ案
 

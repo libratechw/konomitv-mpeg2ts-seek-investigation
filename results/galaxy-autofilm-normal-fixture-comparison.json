@@ -57,8 +57,34 @@
     "frameMsMedian": 2.0419354823327835,
     "rawResultSha256": "6555eea7c53a18fd90f1d91d82bc3c11646cd1089b7376ff07412f4daa5f11b5"
   },
+  "callbackDiagnostic": {
+    "autoFilm": {
+      "durationMs": 10018,
+      "presentedFrameDelta": 299,
+      "videoFrameCallbacks": 250,
+      "presentedFrameGapsOverOne": 50,
+      "maximumPresentedFrameGap": 2,
+      "callbackIntervalMsMedian": 42.0,
+      "callbackIntervalMsP95": 53.10000002384186,
+      "decoderProcessingDurationMsMedian": 17.2,
+      "canvasDrawCallMsMedian": 0.0,
+      "rawResultSha256": "0602ec02f6f590a0acfd7ccca9fcf1fa300d2a295cbd0418f990c6106dda93b7"
+    },
+    "videoMode": {
+      "durationMs": 10000.600000023842,
+      "presentedFrameDelta": 298,
+      "videoFrameCallbacks": 299,
+      "presentedFrameGapsOverOne": 0,
+      "maximumPresentedFrameGap": 1,
+      "callbackIntervalMsMedian": 33.40000009536743,
+      "callbackIntervalMsP95": 36.39999997615814,
+      "decoderProcessingDurationMsMedian": 17.1,
+      "canvasDrawCallMsMedian": 0.0,
+      "rawResultSha256": "ce947fafa8e8607990cccd30c9602a61ff8ef2ab99478cffb227e33152429ed7"
+    }
+  },
   "limitations": [
-    "同期readback、CPU fieldmatch、履歴resetの負荷はまだ分離していない。",
+    "同期readbackとCPU fieldmatchの負荷はまだ分離していない。",
     "サンダー3と入間くんは短いfixtureがKonomiTVの録画スキャンに登録されず、単体demoでの測定が残る。",
     "1時間安定性、可聴A/V同期、他端末は未確認。"
   ]
