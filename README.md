@@ -2,7 +2,7 @@
 
 KonomiTVの録画再生について、シーク後の表示復帰時間、定常再生のFPS、コマ落ち、短いカクつき、長時間stallをコードと実機で調べた記録です。
 主対象はMPEG-2 TSのOriginal直接再生ですが、サーバーエンコードHLSとの違いも同じ指標で確認します。
-リポジトリ名には調査開始時の`seek-investigation`が残っていますが、素材本来のcadenceを維持し、負荷やシークの後も安定した表示へ戻るまでを対象とします。
+リポジトリ名には調査開始時の`seek-investigation`が残っていますが、素材本来のFPSを安定して維持し、負荷やシークの後も安定した表示へ戻るまでを対象とします。
 
 各修正が何をして、どれだけ効いたかは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
 この文書は、何をどう測り、その数値をどこまで信じてよいか、どの順で提出するかを扱います。
@@ -24,6 +24,14 @@ YADIFの待ち行列を空にして時刻同期をやり直す処理は、**queu
 **致命的な表示停止**は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象です。
 合格条件は、正常TSと異常TSのそれぞれについて、試行条件を記録した1時間の自動試験で0件です。
 これは再現可能な回帰試験の基準であり、一般的な発生率が0であることを示す統計的な推定ではありません。
+
+**FPS安定復帰**は、シーク、異常区間の通過、再生モードの切り替えなど、表示周期を乱し得る基準事象の後に評価します。
+安定した表示進行へ復帰した直後から可視YADIF canvasへの直接描画を3秒間測り、素材と再生モードから決まる期待FPSの±1%以内かつ40msを超える描画間隔0回となることです。
+端点の計測誤差を考慮して2.9秒以上を有効な評価窓とし、窓が短い試行は評価不能として再測定します。
+十分な評価窓がこの条件を満たさない事象を**FPS安定復帰失敗**と呼びます。
+個々の結果には「シーク後」「異常区間通過後」のように基準事象を付けます。
+基準事象のない定常再生は**FPS安定維持**として、走行全体のFPS、描画間隔、dropを評価します。
+FPS安定復帰はcanvasへの直接描画を観測する回帰判定であり、compositorへのscanout、可視コマ落ち0、画素の正常性、避けられない最小drop、A/V同期は別に確認します。
 
 正常TSの目標は、1時間連続再生でコマ落ち0件、40ms超の描画間隔0回、理論上の表示FPSの安定維持、シークの表示復帰時間200ms以下です。
 番組1本を通して見ても、コマ落ち0件を目標とします。
@@ -89,12 +97,12 @@ KonomiTV client `7307e0e`へ基準版`52a3db5`と現在のintegrationをそれ�
 integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、最大1,088.1msでした。
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fpsでした。
-integrationも期待59.94fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たしていません。
-停止は改善しましたが、cadence回復、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未達または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
+integrationは、異常区間通過後のFPS安定復帰に20回すべてで失敗しました。
+停止は改善しましたが、FPS安定復帰、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未達または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
 
 同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
 
-`autoFilm`のcadence維持も目標を達成していません。
+`autoFilm`のFPS安定維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 
 ### サーバーエンコードHLS
@@ -174,14 +182,14 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから33.367msへ縮まり、Chromeのdrop counterは17から6へ減りました。
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
-候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、復帰後の約3秒間に9回のcadence不合格を検出しました。
-この候補は順位4・5を含まないため、cadence不合格が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
+候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗を9回検出しました。
+この候補は順位4・5を含まないため、FPS安定復帰失敗が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
 
 順位1〜7の統合版へ順位9を重ねた検証buildでも、同じ固定欠損を1時間反復しました。
-224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、復帰後のcadence不合格は4件残りました。
+224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗は4件残りました。
 同じseedの先頭11 blockでは、順位9単独の9/220から4/220へ減りましたが、統合版のどの修正が差を生んだかは未確定です。[集計と全block](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を公開しています。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもcadence不合格が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。

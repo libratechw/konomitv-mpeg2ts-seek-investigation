@@ -772,13 +772,13 @@ fMP4の`tfdt`と`trun`を直接解析すると、映像trackの先頭decode時�
 
 一方、安定復帰後の約3秒間を60000/1001fpsの±1%かつ40ms超の描画間隔0回で判定すると、223回中9回が不合格だった。8回は58.936〜59.340fps、1回は60.058fpsまで追いついたものの40.4msの描画間隔を1回含んだ。このため異常TSの1時間条件は満たさない。
 
-このbuildは順位4・5のYADIF修正を含まず、直接の親`52a3db5`へ順位9だけを適用している。したがって9回のcadence不合格をtransport loss修正の副作用とは判定せず、同条件の親buildとintegrationへ順位9を重ねたbuildを比較する。各blockの終了処理は成功し、走行終了後にもChrome、WebAPK、ADB forward、隔離KonomiTVが残っていないことを確認した。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-rank9-one-hour-summary.json)を保存した。
+このbuildは順位4・5のYADIF修正を含まず、直接の親`52a3db5`へ順位9だけを適用している。したがって9回の異常区間通過後のFPS安定復帰失敗をtransport loss修正の副作用とは判定せず、同条件の親buildとintegrationへ順位9を重ねたbuildを比較する。各blockの終了処理は成功し、走行終了後にもChrome、WebAPK、ADB forward、隔離KonomiTVが残っていないことを確認した。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-rank9-one-hour-summary.json)を保存した。
 
 公開integration `44e06a4`と順位9 `e36dd0b`の両方を祖先に持つ検証build `be568d8`でも、同じKonomiTV、Galaxy、fixture、runner、base seedで1時間試験を行った。collectorの判定処理は同じで、検証build側だけが各試行の全描画間隔を結果へ追加保存した。12 sessionで固定欠損を224回通過し、すべて2秒以内に安定復帰した。致命的な表示停止は0件で、安定確認は中央値168.9ms、最大217.1msだった。
 
-復帰後のcadence不合格は224回中4回だった。4回は58.676〜59.106fpsで、最大描画間隔は32.7〜35.6ms、40ms超はなかった。同じseedで20回ずつ完了した先頭11 blockに限ると、順位9単独は9/220、統合版へ重ねたbuildは4/220だった。統合版を重ねると発生数は減ったが、不合格の試行位置は一致せず、順位4・5を含むどの修正が差を生んだかは未確定である。
+異常区間通過後のFPS安定復帰失敗は224回中4回だった。4回は58.676〜59.106fpsで、最大描画間隔は32.7〜35.6ms、40ms超はなかった。同じseedで20回ずつ完了した先頭11 blockに限ると、順位9単独は9/220、統合版へ重ねたbuildは4/220だった。統合版を重ねると発生数は減ったが、不合格の試行位置は一致せず、順位4・5を含むどの修正が差を生んだかは未確定である。
 
-全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止に成功した。714回のhost負荷sampleでffmpegは0、load1は最大1.06だった。検証buildは正式なintegrationではなく、cadence不合格が残るため順位9をintegrationへ追加しない。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を保存した。
+全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止に成功した。714回のhost負荷sampleでffmpegは0、load1は最大1.06だった。検証buildは正式なintegrationではなく、FPS安定復帰失敗が残るため順位9をintegrationへ追加しない。[1時間集計と12 blockへのリンク](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を保存した。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
