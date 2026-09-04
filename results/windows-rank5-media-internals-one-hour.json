@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "sourceSummarySha256": "fe6cf80729844ae9bdfcb1dd7a6cb4535bc23ece8b143a5d04f836608b3b6df7",
+  "status": "failed",
+  "variant": "rank5-provenance-v2",
+  "conditions": {
+    "durationSeconds": 3600,
+    "cleanupReserveSeconds": 45,
+    "minimumFinalBlockSeconds": 30,
+    "blockSize": 20,
+    "baseSeed": 20260918,
+    "captureMediaInternals": true,
+    "captureSeekDiagnostics": false,
+    "browser": "Chrome/152.0.7977.77",
+    "frameMode": "normal",
+    "quality": "Original (MPEG-2)",
+    "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block."
+  },
+  "provenance": {
+    "sourceCommit": "acfce36666d28271681f1bb56ad8b809b5c9de37",
+    "distCommit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
+    "sourceHash": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+    "distHash": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+    "asset": "PlayerController-Buc-P0iB.js",
+    "assetSha256": "723c5e70369412baae82909225c0ca8edf45950d92a892ace29424c8e0503e77",
+    "fixtureName": "nogizaka.ts",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "konomiCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "clientRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "runnerSha256": "273881b2306567a22432506a7c17773a67a9a58f8aa61a129c153e19f93a1a11",
+    "collectorSha256": "a8813873f68de124f8687ce74288696b89e4c00480c903655d97ea7ce829d976",
+    "validatorSha256": "a446a5c9ca3ea736d910fdf8a5a1f97dce7b0337470bb42d31901ea32c75043d",
+    "summarizerSha256": "52ebee973a32a8f9c58482f1a79f96920c67e7d7abe781b23b8e26ddbb77e3ad"
+  },
+  "coverage": {
+    "wallClockElapsedSeconds": 3568.043,
+    "measurementSeconds": 3339.7990000000004,
+    "coverageSatisfied": true,
+    "blockCount": 11,
+    "clientSessionCount": 11,
+    "betweenBlockResetCount": 10,
+    "attemptedCrossings": 217,
+    "completedCrossings": 217
+  },
+  "results": {
+    "fatalStops": 0,
+    "cadenceFailures": 217,
+    "seekStableMs": {
+      "count": 217,
+      "minimum": 60.29999999701977,
+      "median": 128.19999999552965,
+      "p90": 161,
+      "p95": 286.1000000014901,
+      "p99": 346.90000000596046,
+      "maximum": 407.79999999701977,
+      "mean": 131.8345622114734
+    },
+    "postDefectFirstDrawMs": {
+      "count": 217,
+      "minimum": 599.3999999985099,
+      "median": 666.7000000029802,
+      "p90": 966.5,
+      "p95": 1069.2000000029802,
+      "p99": 1316.8000000044703,
+      "maximum": 1467.3999999910593,
+      "mean": 739.4981566822062
+    },
+    "postDefectStableConfirmationMs": {
+      "count": 217,
+      "minimum": 766.3000000044703,
+      "median": 866.7999999970198,
+      "p90": 1116.1000000089407,
+      "p95": 1216.5,
+      "p99": 1466.5,
+      "maximum": 1616.699999988079,
+      "mean": 919.3294930875919
+    },
+    "postRecoveryDrawFps": {
+      "count": 217,
+      "minimum": 39.009102123867656,
+      "median": 39.776174745579816,
+      "p90": 40.56183165151599,
+      "p95": 40.57271233615697,
+      "p99": 40.628567591121794,
+      "maximum": 40.799811174386626,
+      "mean": 39.96387723695811
+    },
+    "postRecoveryMaximumDrawIntervalMs": {
+      "count": 217,
+      "minimum": 34.20000000298023,
+      "median": 50.5,
+      "p90": 51.599999994039536,
+      "p95": 51.900000005960464,
+      "p99": 52.100000001490116,
+      "maximum": 54.5,
+      "mean": 46.97834101367381
+    },
+    "browserDroppedFramesPerCrossing": {
+      "count": 217,
+      "minimum": 12,
+      "median": 13,
+      "p90": 14,
+      "p95": 14,
+      "p99": 14,
+      "maximum": 14,
+      "mean": 13.15668202764977
+    }
+  },
+  "cleanup": {
+    "success": true,
+    "chromeRunning": false,
+    "chromeCdpAvailable": false,
+    "chromeTargetCount": 0,
+    "chromeProcessCount": 0,
+    "runtimeSuccess": true,
+    "remainingPorts": []
+  },
+  "hostLoad": {
+    "sampleCount": 11,
+    "samplesWithSearchIndexer": 0,
+    "samplesWithFfmpeg": 0
+  },
+  "acceptanceCriterion": "No fatal display stop and no post-recovery cadence failure during one bounded hour of repeated crossings.",
+  "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
+  "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
+  "cadenceCriterion": "At least 2.9 seconds within 1% of 60000/1001 fps with no direct canvas draw interval over 40 ms.",
+  "scope": "Windows-local KonomiTV and TS, physical Chrome fullscreen, display configured 60 Hz, Best power efficiency.",
+  "interpretation": "The one-hour diagnostic observed no fatal display stop, but every crossing failed the post-recovery cadence criterion. It is not a same-condition causal comparison with the earlier Windows fatal run."
+}

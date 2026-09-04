@@ -770,6 +770,8 @@ Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の�
 
 campaign内のruntime終了commandは時間切れになったが、直後の確認では対象portとprocessは残っておらず、再度の停止commandは全processを停止済みと報告した。Chrome、視聴tab、fullscreen、scheduled taskも残っていなかった。Search IndexerとFFmpegは全7回のhost負荷sampleで0だった。[条件、provenance、停止trace、後片付け](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存した。このWindows値は同一電源モード内の比較用であり、Galaxyとの絶対性能比較には使わない。
 
+同じWindows補助条件で、overflow時刻圧縮 source `acfce36` / dist `63a5708`をmedia-internals計測付きで1時間走行した。11 session、217回すべてが2秒以内に復帰し、致命的停止は0件だった。一方、FPS安定復帰は217回すべて不合格で、復帰後の描画FPSは中央値39.776、最大描画間隔は中央値50.5msだった。1時間のcoverageと後片付けは成立し、Search IndexerとFFmpegも検出しなかった。この走行は以前のWindows停止走行とclient revisionと計装が異なるため修正効果の同条件比較には使わないが、致命的停止を観測しなかった状態でもcadence問題が独立して残ることを示す。[集計値とprovenance](results/windows-rank5-media-internals-one-hour.json)を保存した。
+
 同じWindows buildへ診断計装を加え、停止時と同じseed `26260932`、同じ31.566msのシーク前待ち時間を、新しいclient sessionの先頭試行で再実行した。今回はシーク完了時間574.0ms、異常区間のrVFC gap 565.3ms、安定確認743.4msで復帰し、致命的停止は再現しなかった。したがって、停止はseedとシーク前待ち時間だけでは決まらず、client sessionやdecoder状態など別の状態変数を切り分ける必要がある。診断計装付き3試行は致命的停止0件、FPS安定復帰失敗1件だったが、発生率や正式なシーク完了時間には使わない。[同seedの診断結果](results/windows-anomaly-fatal-seed-diagnostic.json)を保存した。
 
 Windows Chromeのdecoder状態を取得するため、測定終了後に`chrome://media-internals`の再生中playerを一意に選ぶ2試行の診断も行った。このsessionではChromeが最初に`D3D11VideoDecoder`を選び、試験用seekより前の初回decode errorで`FFmpegVideoDecoder`へfallbackしていた。したがって、この診断sessionの表示性能はsoftware decodeを含む。以前の長時間走行では同じ内部logを取得していないため、過去のWindows結果もsoftware decodeだったとは断定しない。[decoder event列、build hash、後片付け](results/windows-anomaly-decoder-fallback-smoke.json)を保存した。
