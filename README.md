@@ -13,7 +13,7 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 
 このREADMEでは、現在分かっていること、公開branch、提出先、優先順位だけを扱います。各数値のbuild、条件、生値、採用・除外理由は[`REPORT.md`](REPORT.md)と`results/`を参照してください。
 
-現在のintegration候補は`21e6917`です。clean YADIF候補`8b1f66b`を含む最新tipから再構築し、静的検証と自動試験を完了しました。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新しています。実機再測定前のため、以下のintegration実測値は履歴上の`44e06a4`に対する結果であり、現行コードの値には使いません。
+現在のintegration候補は`21e6917`です。clean YADIF候補`8b1f66b`を含む最新tipから再構築し、静的検証と自動試験を完了しました。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新しています。現行コードの異常TS 1時間試験では致命的停止は0/229でしたが、FPS安定復帰失敗は229/229で、異常TSの総合条件は不合格でした。正常TSの1時間連続再生と他の実機条件は未測定です。
 
 ## 分かったこと
 
@@ -63,6 +63,10 @@ integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fpsでした。
 integrationは、異常区間通過後のFPS安定復帰に20回すべてで失敗しました。
 停止は改善しましたが、FPS安定復帰、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未達または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
+
+現行integrationのコード`84e916b`を同じ既知欠損へ1時間反復した試験では、229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件でした。
+一方、復帰直後約3秒のcanvas FPSは中央値53.95fpsで、229回すべてがFPS安定復帰に失敗しました。
+試験時間、fixture、build、負荷、後片付けの条件は成立しているため、現行integrationは異常TSの致命的停止条件を今回の1時間走行で満たしましたが、異常TSの総合合格条件は満たしません。[現行integrationの1時間結果と各試行](results/galaxy-formal-anomaly-integration-84e916b-one-hour-summary.json)を公開しています。
 
 補助条件のWindowsでは、同じintegrationと破損区間で1時間試験を開始しましたが、121回目に致命的停止を検出して終了しました。
 先行する120回のうちFPS安定復帰失敗は39回でした。
@@ -163,7 +167,7 @@ fork固有のYADIFに対する修正です。otya128向けの変更へ混ぜま�
 
 | | 順位 | branch | source | dist | 状態 |
 | --- | ---: | --- | --- | --- | --- |
-| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `e7e3ea2` | `8b1f66b` | PR草案レビュー済み。最終treeの実機再測定前 |
+| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `e7e3ea2` | `8b1f66b` | PR草案レビュー済み。現行integrationの異常TS 1時間試験は停止0/229、FPS安定復帰は未達。候補単独の再測定前 |
 | P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | `2d072f3` | `f3ba99d` | 未提出。他と修正箇所が重ならない |
 | P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | `f27442d` | `e36dd0b` | 保留。異常TSの1時間条件が未達 |
 

@@ -1,0 +1,6344 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Public compact projection of the validated one-hour anomalous-TS campaign; full draw histories remain identified by their hashes.",
+  "identity": {
+    "variant": "integration-84e916b-anomaly-v2",
+    "sourceCommit": "84e916b28ac1e63d53c531c1fdd61f21a39dd531",
+    "distCommit": "84e916b28ac1e63d53c531c1fdd61f21a39dd531",
+    "sourceHash": "8d1f3d96d5235255781a9e90a037fbc2a5c732afe1b55a4e848a5e26a2d1faef",
+    "distHash": "20cbdd674b3085359cbb63da76ea336c7bc3f91ff4e14d9726202389046459f6",
+    "provenanceSha256": "67380d2be8c5100a674aa74b98e50c38bb157fb4d502ba3055c0ad99f279d759",
+    "asset": "PlayerController-BI7xskku.js",
+    "assetSha256": "21aa52c01099ea3f2551338db366a84108cc6b93ff814c03ec7e3407424a644f",
+    "fixtureName": "nogizaka.ts",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "videoId": 2,
+    "frameMode": "normal",
+    "campaignMode": "anomaly",
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "containerImageId": "sha256:7f235dfc29892f13af65c800d505594206892fd0c4700a4bf24ca77408cd09c5",
+    "containerImageRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "runnerSha256": "c65deee0b51a62e9a93dfd1ba72ab74e44f6f12c67fb36b7558dbd1dc9502237",
+    "collectorSha256": "cf52b253d5d9f1f8dcab22ce912bef8fb70de2b8a2f480f29e1d39b06d591a3c",
+    "validatorSha256": "300cbe1bf441c1e4261be6e7d17bb6ef470ea1a7077324a25c9498fb4ca92bc0",
+    "summarizerSha256": "672684214dd85457399db25ed1b2e1fb1f7037d1b3eef04ea495b28c6f549718",
+    "toolsSnapshotSha256": "35fc6480a51d61e1310f250dae11f951c11f706a63d30fe444fd9eefa49f3fa6",
+    "wsDependencySha256": "45f0ef50305949cd0d6378434022f8a7122979da6a32df77089c48ebce7a9330"
+  },
+  "result": {
+    "status": "failed",
+    "durationSeconds": 3600,
+    "scheduledMeasurementWindowSeconds": 3570,
+    "wallClockElapsedSeconds": 3579.78,
+    "measurementSeconds": 3557.11,
+    "coverageSatisfied": true,
+    "attemptedCrossings": 229,
+    "completedCrossings": 229,
+    "fatalStops": 0,
+    "cadenceFailures": 229,
+    "blockCount": 1,
+    "clientSessionCount": 1,
+    "betweenBlockResetCount": 0,
+    "seekStableMs": {
+      "count": 229,
+      "minimum": 244.10000002384186,
+      "median": 291.5,
+      "p90": 320.5,
+      "p95": 325.10000002384186,
+      "p99": 347.2000000476837,
+      "maximum": 442.6999999284744,
+      "mean": 292.0021834092369
+    },
+    "postDefectFirstDrawMs": {
+      "count": 229,
+      "minimum": 614.8999999761581,
+      "median": 712.5,
+      "p90": 744.4000000953674,
+      "p95": 837.5,
+      "p99": 986.5,
+      "maximum": 1080.1000000238419,
+      "mean": 718.6991266418232
+    },
+    "postDefectStableConfirmationMs": {
+      "count": 229,
+      "minimum": 775.7000000476837,
+      "median": 925.1000000238419,
+      "p90": 956.3999999761581,
+      "p95": 1004.5,
+      "p99": 1156.2000000476837,
+      "maximum": 1246.6000000238419,
+      "mean": 916.6318777336304
+    },
+    "defectMediaGapMs": {
+      "count": 229,
+      "minimum": 567.2330000000017,
+      "median": 600.6,
+      "p90": 600.6,
+      "p95": 600.6,
+      "p99": 600.6,
+      "maximum": 600.6,
+      "mean": 589.9633580786032
+    },
+    "defectCallbackGapMs": {
+      "count": 229,
+      "minimum": 514,
+      "median": 599.5999999046326,
+      "p90": 621.1999999284744,
+      "p95": 625.5,
+      "p99": 627.7000000476837,
+      "maximum": 631.3999999761581,
+      "mean": 591.7720524062236
+    },
+    "postRecoveryDrawFps": {
+      "count": 229,
+      "minimum": 52.633343391080786,
+      "median": 53.95080758576081,
+      "p90": 54.97636686624292,
+      "p95": 55.69348453509741,
+      "p99": 56.37773079678652,
+      "maximum": 56.98578707564895,
+      "mean": 54.10571566787417
+    },
+    "postRecoveryMaximumDrawIntervalMs": {
+      "count": 229,
+      "minimum": 34.5,
+      "median": 38.59999990463257,
+      "p90": 52.10000002384186,
+      "p95": 54.200000047683716,
+      "p99": 71.39999997615814,
+      "maximum": 72.59999990463257,
+      "mean": 43.13231440923099
+    },
+    "browserDroppedFramesPerCrossing": {
+      "count": 229,
+      "minimum": 12,
+      "median": 14,
+      "p90": 14,
+      "p95": 14,
+      "p99": 14,
+      "maximum": 14,
+      "mean": 13.51528384279476
+    },
+    "hostLoad": {
+      "sampleCount": 713,
+      "load1Minimum": 0.08,
+      "load1Maximum": 1.56,
+      "load1P95": 1.18,
+      "samplesWithFfmpeg": 0
+    },
+    "cleanup": {
+      "success": true,
+      "validatedBlockCount": 1
+    },
+    "acceptanceCriterion": "No fatal display stop and no post-recovery cadence failure are detected during one bounded hour of repeated crossings of the fixed transport defect.",
+    "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
+    "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
+    "cadenceCriterion": "After stable recovery is confirmed, at least 2.9 seconds within 1% of 60000/1001 fps with no direct canvas draw interval over 40 ms.",
+    "scope": "This gate proves repeated browser recovery at the instrumented canvas boundary. It does not prove compositor scanout, audible A/V synchronization, pixel correctness, or that every dropped frame is unavoidable from the damaged input."
+  },
+  "trials": [
+    {
+      "index": 0,
+      "jitterMs": 4.463705618555347,
+      "seekStableMs": 442.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 655,
+        "confirmedMs": 863.7000000476837,
+        "maximumDrawGapMs": 37.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2999.5,
+        "drawCount": 162,
+        "drawFps": 53.67561260210035,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10451186308829247,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 1,
+      "jitterMs": 14.933188822461913,
+      "seekStableMs": 276.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.5
+      },
+      "recovery": {
+        "firstDrawMs": 707.8000000715256,
+        "confirmedMs": 909.1000000238419,
+        "maximumDrawGapMs": 37.5
+      },
+      "cadence": {
+        "durationMs": 2996.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.725765007320774,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10367515379453174,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 54.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 2,
+      "jitterMs": 16.307242619331618,
+      "seekStableMs": 262.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 545.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 779.1000000238419,
+        "confirmedMs": 927.2000000476837,
+        "maximumDrawGapMs": 34
+      },
+      "cadence": {
+        "durationMs": 2999.6999999284744,
+        "drawCount": 165,
+        "drawFps": 54.672133881358285,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0878865664126726,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 53.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 3,
+      "jitterMs": 6.969111941832428,
+      "seekStableMs": 273.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 723.1999999284744,
+        "confirmedMs": 939.2999999523163,
+        "maximumDrawGapMs": 34.5
+      },
+      "cadence": {
+        "durationMs": 2987.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.898429914872274,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10079452758688087,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 4,
+      "jitterMs": 1.5645515992383783,
+      "seekStableMs": 281.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 606.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 685.5,
+        "confirmedMs": 853.7000000476837,
+        "maximumDrawGapMs": 49.5
+      },
+      "cadence": {
+        "durationMs": 2982.899999976158,
+        "drawCount": 165,
+        "drawFps": 54.980052969027064,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08274944963339848,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51.09999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 5,
+      "jitterMs": 9.004963721917012,
+      "seekStableMs": 291.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 551.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 666.6000000238419,
+        "confirmedMs": 881.5,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2983.399999976158,
+        "drawCount": 161,
+        "drawFps": 53.630086478943035,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10527139057630035,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 6,
+      "jitterMs": 2.843252735064986,
+      "seekStableMs": 291.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 603.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 702,
+        "confirmedMs": 900.6000000238419,
+        "maximumDrawGapMs": 36.5
+      },
+      "cadence": {
+        "durationMs": 2987.8000000715256,
+        "drawCount": 162,
+        "drawFps": 53.88580226124432,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10100519894157388,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 34.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 7,
+      "jitterMs": 9.612571052399774,
+      "seekStableMs": 274.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 722.8999999761581,
+        "confirmedMs": 940.1999999284744,
+        "maximumDrawGapMs": 39.5
+      },
+      "cadence": {
+        "durationMs": 2986.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.907453290937774,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10064398759618813,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 8,
+      "jitterMs": 21.783537980425173,
+      "seekStableMs": 292.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 721.6000000238419,
+        "confirmedMs": 939.1999999284744,
+        "maximumDrawGapMs": 37.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2986.9000000953674,
+        "drawCount": 162,
+        "drawFps": 53.902038901489675,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10073431766014723,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 9,
+      "jitterMs": 33.09894373267889,
+      "seekStableMs": 279.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 593.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 706,
+        "confirmedMs": 921.3000000715256,
+        "maximumDrawGapMs": 34.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2983.1999999284744,
+        "drawCount": 162,
+        "drawFps": 53.96889246576165,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09961897736287649,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 51.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 10,
+      "jitterMs": 21.32094902859535,
+      "seekStableMs": 291.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610.5999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 726.3999999761581,
+        "confirmedMs": 939.5999999046326,
+        "maximumDrawGapMs": 36.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2987.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.89662560171063,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10082462954479428,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 11,
+      "jitterMs": 1.1938690687762574,
+      "seekStableMs": 277.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 603.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 684.5999999046326,
+        "confirmedMs": 853.2999999523163,
+        "maximumDrawGapMs": 33.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2981.7000000476837,
+        "drawCount": 165,
+        "drawFps": 55.00217996357021,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08238029760777037,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 12,
+      "jitterMs": 21.667197976827932,
+      "seekStableMs": 272.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 547
+      },
+      "recovery": {
+        "firstDrawMs": 676.5,
+        "confirmedMs": 845.6000000238419,
+        "maximumDrawGapMs": 50
+      },
+      "cadence": {
+        "durationMs": 2981.100000023842,
+        "drawCount": 163,
+        "drawFps": 54.34235684770869,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09338834659072662,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 13,
+      "jitterMs": 14.703345469657021,
+      "seekStableMs": 313.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 835.2000000476837,
+        "confirmedMs": 1001.6000000238419,
+        "maximumDrawGapMs": 50
+      },
+      "cadence": {
+        "durationMs": 2986.8000000715256,
+        "drawCount": 168,
+        "drawFps": 55.91268246819366,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.06719008082230245,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 51.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 14,
+      "jitterMs": 25.991055403618763,
+      "seekStableMs": 293.1999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608
+      },
+      "recovery": {
+        "firstDrawMs": 722.8999999761581,
+        "confirmedMs": 939.2999999523163,
+        "maximumDrawGapMs": 40.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2999.7000000476837,
+        "drawCount": 163,
+        "drawFps": 54.00540053919553,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09900990100442127,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 15,
+      "jitterMs": 25.417121068364942,
+      "seekStableMs": 291,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 571.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 686,
+        "confirmedMs": 902.1000000238419,
+        "maximumDrawGapMs": 34.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2984,
+        "drawCount": 162,
+        "drawFps": 53.9544235924933,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09986036639857011,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 16,
+      "jitterMs": 9.564524807416213,
+      "seekStableMs": 323.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 538.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 637.6999999284744,
+        "confirmedMs": 788.1000000238419,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2982.6999999284744,
+        "drawCount": 161,
+        "drawFps": 53.64267274745594,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10506140966327672,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 67.80000007152557,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 17,
+      "jitterMs": 1.1411156019583966,
+      "seekStableMs": 294.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 601.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 717.5,
+        "confirmedMs": 931.8999999761581,
+        "maximumDrawGapMs": 36.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2989,
+        "drawCount": 162,
+        "drawFps": 53.86416861826698,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1013661202185792,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 18,
+      "jitterMs": 3.640803588593068,
+      "seekStableMs": 278.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 571.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 685.2000000476837,
+        "confirmedMs": 901.5,
+        "maximumDrawGapMs": 37.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2999,
+        "drawCount": 163,
+        "drawFps": 54.01800600200067,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09879959986662218,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 19,
+      "jitterMs": 14.558131845962878,
+      "seekStableMs": 299.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 620.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 718.2000000476837,
+        "confirmedMs": 933.6000000238419,
+        "maximumDrawGapMs": 36.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2983.7000000476837,
+        "drawCount": 163,
+        "drawFps": 54.29500284794417,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09417836915346478,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 20,
+      "jitterMs": 26.63948528546219,
+      "seekStableMs": 275.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 705,
+        "confirmedMs": 927.9000000953674,
+        "maximumDrawGapMs": 38.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2998.899999976158,
+        "drawCount": 162,
+        "drawFps": 53.68635166270298,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1043326997605719,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 21,
+      "jitterMs": 0.5458637508951748,
+      "seekStableMs": 287.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 598.5
+      },
+      "recovery": {
+        "firstDrawMs": 696.5,
+        "confirmedMs": 915.7000000476837,
+        "maximumDrawGapMs": 37.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2981,
+        "drawCount": 162,
+        "drawFps": 54.008721905400876,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09895448954489537,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 42.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 22,
+      "jitterMs": 1.2099577045456196,
+      "seekStableMs": 288.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 599.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 714.6000000238419,
+        "confirmedMs": 929.1000000238419,
+        "maximumDrawGapMs": 34.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2989.2000000476837,
+        "drawCount": 164,
+        "drawFps": 54.52964003659836,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0902638387227507,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 23,
+      "jitterMs": 27.46649033573922,
+      "seekStableMs": 327.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 718.3999999761581,
+        "confirmedMs": 937.1999999284744,
+        "maximumDrawGapMs": 36.5
+      },
+      "cadence": {
+        "durationMs": 2980.5,
+        "drawCount": 162,
+        "drawFps": 54.01778225130012,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.098803332774143,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 24,
+      "jitterMs": 19.401036685914733,
+      "seekStableMs": 273.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607
+      },
+      "recovery": {
+        "firstDrawMs": 721,
+        "confirmedMs": 936.9000000953674,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.6999999284744,
+        "drawCount": 163,
+        "drawFps": 54.00540054134172,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0990099009686156,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 25,
+      "jitterMs": 24.266935948911122,
+      "seekStableMs": 256.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594
+      },
+      "recovery": {
+        "firstDrawMs": 709.1000000238419,
+        "confirmedMs": 908.5,
+        "maximumDrawGapMs": 33.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2986.5,
+        "drawCount": 163,
+        "drawFps": 54.24409844299347,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09502762430939228,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 26,
+      "jitterMs": 10.629708950951075,
+      "seekStableMs": 307.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 556.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 688.6999999284744,
+        "confirmedMs": 855,
+        "maximumDrawGapMs": 49.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2983.5,
+        "drawCount": 163,
+        "drawFps": 54.29864253393665,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09411764705882353,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 27,
+      "jitterMs": 6.888590158444519,
+      "seekStableMs": 293.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 724.1999999284744,
+        "confirmedMs": 934.3999999761581,
+        "maximumDrawGapMs": 34.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2990.5,
+        "drawCount": 162,
+        "drawFps": 53.837150978097306,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10181686451540993,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 28,
+      "jitterMs": 13.208056357363239,
+      "seekStableMs": 270.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 544.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 643.6000000238419,
+        "confirmedMs": 843.3000000715256,
+        "maximumDrawGapMs": 33.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2982.5,
+        "drawCount": 160,
+        "drawFps": 53.310980720871754,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11059513830678955,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 29,
+      "jitterMs": 19.750002462835983,
+      "seekStableMs": 311.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625.5
+      },
+      "recovery": {
+        "firstDrawMs": 722.2999999523163,
+        "confirmedMs": 941.2999999523163,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2998.600000023842,
+        "drawCount": 161,
+        "drawFps": 53.35823384203557,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10980679873537327,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 30,
+      "jitterMs": 21.19082958213209,
+      "seekStableMs": 292.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 602.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 717,
+        "confirmedMs": 929.8000000715256,
+        "maximumDrawGapMs": 33.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2999.399999976158,
+        "drawCount": 163,
+        "drawFps": 54.01080216086141,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0989197839496288,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 51,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 31,
+      "jitterMs": 22.57726787482388,
+      "seekStableMs": 260.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 563.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 629.7000000476837,
+        "confirmedMs": 799.4000000953674,
+        "maximumDrawGapMs": 33.5
+      },
+      "cadence": {
+        "durationMs": 2997.6999999284744,
+        "drawCount": 163,
+        "drawFps": 54.04143176564211,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09840878004320414,
+        "intervalsOver40Ms": 8,
+        "maximumIntervalMs": 50.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 32,
+      "jitterMs": 15.996751512330958,
+      "seekStableMs": 294.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 606.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 722.6000000238419,
+        "confirmedMs": 935.9000000953674,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2988.0999999046326,
+        "drawCount": 162,
+        "drawFps": 53.88039222420215,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10109545639289416,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 43,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 33,
+      "jitterMs": 21.88154189386405,
+      "seekStableMs": 262.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 726,
+        "confirmedMs": 940.1000000238419,
+        "maximumDrawGapMs": 38
+      },
+      "cadence": {
+        "durationMs": 2985.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.923702983363604,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10037288856088385,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 34,
+      "jitterMs": 31.104892127541827,
+      "seekStableMs": 279.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 572.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 704.6000000238419,
+        "confirmedMs": 920.1000000238419,
+        "maximumDrawGapMs": 37.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2987.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.89662560171063,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10082462954479428,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 42.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 35,
+      "jitterMs": 32.699053338022594,
+      "seekStableMs": 268.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 724.5,
+        "confirmedMs": 938.7999999523163,
+        "maximumDrawGapMs": 38.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2988.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.869575399816405,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10127591707972963,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 36,
+      "jitterMs": 11.755884438403882,
+      "seekStableMs": 273.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 725.2999999523163,
+        "confirmedMs": 939.2999999523163,
+        "maximumDrawGapMs": 36.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2997.7999999523163,
+        "drawCount": 161,
+        "drawFps": 53.372473147823406,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10956923965047949,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 37,
+      "jitterMs": 18.25434514909672,
+      "seekStableMs": 260.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 707.8000000715256,
+        "confirmedMs": 925.6000000238419,
+        "maximumDrawGapMs": 35.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2981.8000000715256,
+        "drawCount": 162,
+        "drawFps": 53.99423167084916,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09919623495799983,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 38,
+      "jitterMs": 4.384765862262187,
+      "seekStableMs": 292.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 739.5999999046326,
+        "confirmedMs": 952.3999999761581,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2990.5,
+        "drawCount": 162,
+        "drawFps": 53.837150978097306,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10181686451540993,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 39,
+      "jitterMs": 10.933417289347078,
+      "seekStableMs": 256.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 707.1000000238419,
+        "confirmedMs": 924.5,
+        "maximumDrawGapMs": 35.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2980.2999999523163,
+        "drawCount": 162,
+        "drawFps": 54.02140724174611,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09874285585020236,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 40,
+      "jitterMs": 20.699398667993954,
+      "seekStableMs": 274.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 735.7000000476837,
+        "confirmedMs": 901.8999999761581,
+        "maximumDrawGapMs": 49.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2989.7000000476837,
+        "drawCount": 166,
+        "drawFps": 55.18948389382492,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07925544370468755,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 41,
+      "jitterMs": 11.264161884171578,
+      "seekStableMs": 305.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 598.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 716.8999999761581,
+        "confirmedMs": 931.1000000238419,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2997.5,
+        "drawCount": 163,
+        "drawFps": 54.045037531276066,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09834862385321096,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 48,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 42,
+      "jitterMs": 12.7853301238191,
+      "seekStableMs": 269.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 603.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 720.7999999523163,
+        "confirmedMs": 933.7999999523163,
+        "maximumDrawGapMs": 34.59999990463257
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 163,
+        "drawFps": 54,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09909999999999998,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 43,
+      "jitterMs": 21.106301251170226,
+      "seekStableMs": 325.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 556
+      },
+      "recovery": {
+        "firstDrawMs": 620.4000000953674,
+        "confirmedMs": 804.3000000715256,
+        "maximumDrawGapMs": 49.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 163,
+        "drawFps": 54.016204861029024,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09882964890183243,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 55.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 44,
+      "jitterMs": 20.042865464362936,
+      "seekStableMs": 258.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609
+      },
+      "recovery": {
+        "firstDrawMs": 724.5,
+        "confirmedMs": 938.9000000953674,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2989.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.18241412799485,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0960567242979525,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.09999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 45,
+      "jitterMs": 16.151307485392316,
+      "seekStableMs": 300.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.5
+      },
+      "recovery": {
+        "firstDrawMs": 724,
+        "confirmedMs": 938.2999999523163,
+        "maximumDrawGapMs": 35.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2989.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.86056469872599,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1014262456095881,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 46,
+      "jitterMs": 10.333231134937765,
+      "seekStableMs": 256.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 627.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 744,
+        "confirmedMs": 944,
+        "maximumDrawGapMs": 39.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2987.8000000715256,
+        "drawCount": 161,
+        "drawFps": 53.55110783726144,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10658901758168829,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 47,
+      "jitterMs": 32.04280754826808,
+      "seekStableMs": 320.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 627.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 743.8999999761581,
+        "confirmedMs": 956.3999999761581,
+        "maximumDrawGapMs": 39
+      },
+      "cadence": {
+        "durationMs": 2983.399999976158,
+        "drawCount": 161,
+        "drawFps": 53.630086478943035,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10527139057630035,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 48,
+      "jitterMs": 18.79487691267083,
+      "seekStableMs": 296.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 583.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 717.5999999046326,
+        "confirmedMs": 932.2999999523163,
+        "maximumDrawGapMs": 36.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.00180006043118,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09906996899180648,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 49,
+      "jitterMs": 24.98099200699168,
+      "seekStableMs": 292.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 611
+      },
+      "recovery": {
+        "firstDrawMs": 730.1000000238419,
+        "confirmedMs": 938.6000000238419,
+        "maximumDrawGapMs": 35.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2988.399999976158,
+        "drawCount": 160,
+        "drawFps": 53.20572881852112,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11235109087767257,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 50,
+      "jitterMs": 7.322780217168232,
+      "seekStableMs": 275.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625.5
+      },
+      "recovery": {
+        "firstDrawMs": 740.5,
+        "confirmedMs": 956.6000000238419,
+        "maximumDrawGapMs": 38.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.00180006043118,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09906996899180648,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 51,
+      "jitterMs": 25.4356639324377,
+      "seekStableMs": 289.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 600
+      },
+      "recovery": {
+        "firstDrawMs": 718.8000000715256,
+        "confirmedMs": 931,
+        "maximumDrawGapMs": 36.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2990.399999976158,
+        "drawCount": 162,
+        "drawFps": 53.83895131129067,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10178682895663395,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 40.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 52,
+      "jitterMs": 5.325259151464949,
+      "seekStableMs": 259.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 719.6000000238419,
+        "confirmedMs": 934.3999999761581,
+        "maximumDrawGapMs": 39
+      },
+      "cadence": {
+        "durationMs": 2986.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.916479688796265,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10049339719191562,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 53,
+      "jitterMs": 30.531920041454335,
+      "seekStableMs": 286.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 589.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 708.0999999046326,
+        "confirmedMs": 920,
+        "maximumDrawGapMs": 35.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.7999999523163,
+        "drawCount": 163,
+        "drawFps": 54.00360024087442,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993598141175,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 54,
+      "jitterMs": 10.392860681206608,
+      "seekStableMs": 286.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 592.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 705.3999999761581,
+        "confirmedMs": 920.8999999761581,
+        "maximumDrawGapMs": 35.40000009536743
+      },
+      "cadence": {
+        "durationMs": 2999.3000000715256,
+        "drawCount": 163,
+        "drawFps": 54.0126029393981,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09888974096104168,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 46.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 55,
+      "jitterMs": 0.08783467817120254,
+      "seekStableMs": 346.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 597.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 713.8000000715256,
+        "confirmedMs": 929.6000000238419,
+        "maximumDrawGapMs": 34
+      },
+      "cadence": {
+        "durationMs": 2999.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.68098159423856,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10442229040278668,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.09999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 56,
+      "jitterMs": 19.331855305059193,
+      "seekStableMs": 262.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 591.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 705.6000000238419,
+        "confirmedMs": 921.2000000476837,
+        "maximumDrawGapMs": 35.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2987.399999976158,
+        "drawCount": 162,
+        "drawFps": 53.89301733992264,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10088482737895722,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 57,
+      "jitterMs": 11.739850844458367,
+      "seekStableMs": 269.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 689.2000000476837,
+        "confirmedMs": 905.8999999761581,
+        "maximumDrawGapMs": 35.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2998.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.698885997411594,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10412358527651656,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 58,
+      "jitterMs": 29.22482851156965,
+      "seekStableMs": 318.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 688.6000000238419,
+        "confirmedMs": 887.1999999284744,
+        "maximumDrawGapMs": 35.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2984.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.94357702831665,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10004132324425048,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 59,
+      "jitterMs": 7.036523656190063,
+      "seekStableMs": 273.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 612.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 729.2999999523163,
+        "confirmedMs": 940,
+        "maximumDrawGapMs": 34.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2987,
+        "drawCount": 162,
+        "drawFps": 53.900234348845,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10076442361343596,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 60,
+      "jitterMs": 5.591990944184363,
+      "seekStableMs": 278,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 620
+      },
+      "recovery": {
+        "firstDrawMs": 733.5999999046326,
+        "confirmedMs": 949.7999999523163,
+        "maximumDrawGapMs": 34.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2986.899999976158,
+        "drawCount": 162,
+        "drawFps": 53.90203890364094,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10073431762425693,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 61,
+      "jitterMs": 28.388382347393783,
+      "seekStableMs": 322.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 638.2999999523163,
+        "confirmedMs": 787.2999999523163,
+        "maximumDrawGapMs": 33.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2983.9000000953674,
+        "drawCount": 161,
+        "drawFps": 53.62109990109799,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10542131665001515,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 62,
+      "jitterMs": 13.578861370449886,
+      "seekStableMs": 281.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 602.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 720.4000000953674,
+        "confirmedMs": 932.7000000476837,
+        "maximumDrawGapMs": 34.5
+      },
+      "cadence": {
+        "durationMs": 2999.600000023842,
+        "drawCount": 163,
+        "drawFps": 54.00720095969875,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09897986398902583,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 63,
+      "jitterMs": 15.510630180345228,
+      "seekStableMs": 301.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 597.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 697,
+        "confirmedMs": 896.2999999523163,
+        "maximumDrawGapMs": 35.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2999.399999976158,
+        "drawCount": 161,
+        "drawFps": 53.34400213418411,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11004423106136177,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 64,
+      "jitterMs": 6.4974183109976975,
+      "seekStableMs": 277.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 619.5999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 720,
+        "confirmedMs": 921.0999999046326,
+        "maximumDrawGapMs": 35.5
+      },
+      "cadence": {
+        "durationMs": 2997.100000023842,
+        "drawCount": 161,
+        "drawFps": 53.38493877372367,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10936127145837679,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 65,
+      "jitterMs": 17.448617807387684,
+      "seekStableMs": 299.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 595.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 709.2000000476837,
+        "confirmedMs": 925.1000000238419,
+        "maximumDrawGapMs": 35.300000071525574
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 163,
+        "drawFps": 54,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09909999999999998,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 66,
+      "jitterMs": 23.028134821526084,
+      "seekStableMs": 293.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 726.7999999523163,
+        "confirmedMs": 939,
+        "maximumDrawGapMs": 36
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 163,
+        "drawFps": 54,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09909999999999998,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 67,
+      "jitterMs": 22.298275669276094,
+      "seekStableMs": 294.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 550.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 614.8999999761581,
+        "confirmedMs": 780.2999999523163,
+        "maximumDrawGapMs": 49.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2985.2000000476837,
+        "drawCount": 161,
+        "drawFps": 53.597748893690294,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10581088929026691,
+        "intervalsOver40Ms": 7,
+        "maximumIntervalMs": 51.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 68,
+      "jitterMs": 27.610123765771277,
+      "seekStableMs": 272,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 595.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 692.1000000238419,
+        "confirmedMs": 910.1000000238419,
+        "maximumDrawGapMs": 35
+      },
+      "cadence": {
+        "durationMs": 2985.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.923702983363604,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10037288856088385,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 69,
+      "jitterMs": 30.263040778576396,
+      "seekStableMs": 302,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 669,
+        "confirmedMs": 880.1000000238419,
+        "maximumDrawGapMs": 36.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2983.2999999523163,
+        "drawCount": 162,
+        "drawFps": 53.96708343196237,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09964915807676107,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 70,
+      "jitterMs": 19.2935323905355,
+      "seekStableMs": 309.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 584.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 684.3000000715256,
+        "confirmedMs": 834.8000000715256,
+        "maximumDrawGapMs": 32.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 165,
+        "drawFps": 54.668488950066134,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08794737601639664,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51.40000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 71,
+      "jitterMs": 5.819201145856641,
+      "seekStableMs": 277.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 721.5,
+        "confirmedMs": 934.6999999284744,
+        "maximumDrawGapMs": 35.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2999.8000000715256,
+        "drawCount": 163,
+        "drawFps": 54.00360023872837,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993601721506,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 72,
+      "jitterMs": 12.227958351140842,
+      "seekStableMs": 306.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 589.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 705.3000000715256,
+        "confirmedMs": 922.9000000953674,
+        "maximumDrawGapMs": 34
+      },
+      "cadence": {
+        "durationMs": 2988.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.86777302013136,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10130598678080847,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 42.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 73,
+      "jitterMs": 8.557957673654892,
+      "seekStableMs": 275.1999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 571.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 708.5,
+        "confirmedMs": 908.1000000238419,
+        "maximumDrawGapMs": 34.40000009536743
+      },
+      "cadence": {
+        "durationMs": 2999.8000000715256,
+        "drawCount": 164,
+        "drawFps": 54.336955795757554,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09347845414077813,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 74,
+      "jitterMs": 5.047251732321456,
+      "seekStableMs": 309.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 559.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 621.7999999523163,
+        "confirmedMs": 788.3999999761581,
+        "maximumDrawGapMs": 50
+      },
+      "cadence": {
+        "durationMs": 2983.899999976158,
+        "drawCount": 161,
+        "drawFps": 53.6210999032402,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10542131661427598,
+        "intervalsOver40Ms": 7,
+        "maximumIntervalMs": 55.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 75,
+      "jitterMs": 10.611102359555662,
+      "seekStableMs": 292.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 662.2000000476837,
+        "confirmedMs": 879.3000000715256,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2986.5,
+        "drawCount": 162,
+        "drawFps": 53.90925832914783,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10061387354205031,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 76,
+      "jitterMs": 30.83037926213195,
+      "seekStableMs": 302.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 622.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 738.0999999046326,
+        "confirmedMs": 951.2999999523163,
+        "maximumDrawGapMs": 39.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.5,
+        "drawCount": 163,
+        "drawFps": 54.009001500250044,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09894982497082842,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 77,
+      "jitterMs": 31.793966624552073,
+      "seekStableMs": 317.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 723.4000000953674,
+        "confirmedMs": 936,
+        "maximumDrawGapMs": 35
+      },
+      "cadence": {
+        "durationMs": 2991.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.826351509049076,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10199703565736458,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 78,
+      "jitterMs": 9.990538074976454,
+      "seekStableMs": 274.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 574.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 685.6999999284744,
+        "confirmedMs": 903,
+        "maximumDrawGapMs": 37.5
+      },
+      "cadence": {
+        "durationMs": 2983,
+        "drawCount": 162,
+        "drawFps": 53.97251089507208,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0995586099005475,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 79,
+      "jitterMs": 9.164338639673467,
+      "seekStableMs": 321.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 591.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 705.7999999523163,
+        "confirmedMs": 922.3999999761581,
+        "maximumDrawGapMs": 34.40000009536743
+      },
+      "cadence": {
+        "durationMs": 2989.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.86236659821211,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10139618391982791,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 80,
+      "jitterMs": 8.236204092778886,
+      "seekStableMs": 271.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549
+      },
+      "recovery": {
+        "firstDrawMs": 662.6000000238419,
+        "confirmedMs": 879.2000000476837,
+        "maximumDrawGapMs": 35
+      },
+      "cadence": {
+        "durationMs": 2983.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.970701618689695,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09958879466152691,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 81,
+      "jitterMs": 22.645658323704264,
+      "seekStableMs": 313.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 920.8000000715256,
+        "confirmedMs": 1086.8000000715256,
+        "maximumDrawGapMs": 49
+      },
+      "cadence": {
+        "durationMs": 2983.5,
+        "drawCount": 169,
+        "drawFps": 56.3097033685269,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.060566448801742924,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 51.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 82,
+      "jitterMs": 0.7600731048500166,
+      "seekStableMs": 244.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604
+      },
+      "recovery": {
+        "firstDrawMs": 723.6999999284744,
+        "confirmedMs": 934.1999999284744,
+        "maximumDrawGapMs": 38.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2990,
+        "drawCount": 162,
+        "drawFps": 53.84615384615385,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10166666666666664,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 83,
+      "jitterMs": 11.497395556955599,
+      "seekStableMs": 267.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 593.5
+      },
+      "recovery": {
+        "firstDrawMs": 705.3999999761581,
+        "confirmedMs": 921.5,
+        "maximumDrawGapMs": 37.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2985.899999976158,
+        "drawCount": 162,
+        "drawFps": 53.920091095242825,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10043314689436553,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 84,
+      "jitterMs": 9.188244931329972,
+      "seekStableMs": 272.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 589.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 683.7000000476837,
+        "confirmedMs": 900.5,
+        "maximumDrawGapMs": 35.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2982.7999999523163,
+        "drawCount": 161,
+        "drawFps": 53.64087434710936,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1050914129757255,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 85,
+      "jitterMs": 10.060701965983025,
+      "seekStableMs": 283,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 561.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 642.7000000476837,
+        "confirmedMs": 792,
+        "maximumDrawGapMs": 34.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2984,
+        "drawCount": 161,
+        "drawFps": 53.61930294906166,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10545129579982125,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 72.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 86,
+      "jitterMs": 14.427983049039419,
+      "seekStableMs": 303.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 821.6000000238419,
+        "confirmedMs": 991.5,
+        "maximumDrawGapMs": 48.5
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 169,
+        "drawFps": 56.01680504106714,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.06545296923152992,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 50.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 87,
+      "jitterMs": 2.5650596109451724,
+      "seekStableMs": 311.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 613.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 707.8999999761581,
+        "confirmedMs": 924.3999999761581,
+        "maximumDrawGapMs": 36.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2984.2000000476837,
+        "drawCount": 162,
+        "drawFps": 53.95080758576081,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09992069344422375,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 88,
+      "jitterMs": 30.253767734517655,
+      "seekStableMs": 271.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.5
+      },
+      "recovery": {
+        "firstDrawMs": 736,
+        "confirmedMs": 885.1999999284744,
+        "maximumDrawGapMs": 33.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2983.600000023842,
+        "drawCount": 165,
+        "drawFps": 54.9671537735251,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0829646512116896,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 89,
+      "jitterMs": 26.17793517522514,
+      "seekStableMs": 274.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 712.5,
+        "confirmedMs": 925.6000000238419,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.00180006043118,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09906996899180648,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 90,
+      "jitterMs": 4.485281120093229,
+      "seekStableMs": 280.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 587.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 700.6000000238419,
+        "confirmedMs": 917.5,
+        "maximumDrawGapMs": 35.5
+      },
+      "cadence": {
+        "durationMs": 2982.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.97793944997021,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09946804350966368,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 91,
+      "jitterMs": 6.042284515895881,
+      "seekStableMs": 322.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 544.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 825.0999999046326,
+        "confirmedMs": 974.2999999523163,
+        "maximumDrawGapMs": 49.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2985,
+        "drawCount": 165,
+        "drawFps": 54.94137353433836,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.083394751535455,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 92,
+      "jitterMs": 14.354835106533331,
+      "seekStableMs": 321.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 606.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 719.3999999761581,
+        "confirmedMs": 934.6999999284744,
+        "maximumDrawGapMs": 35.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2983.8000000715256,
+        "drawCount": 162,
+        "drawFps": 53.95804008182205,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09980003130160214,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 93,
+      "jitterMs": 25.87838298007846,
+      "seekStableMs": 302.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 685.5,
+        "confirmedMs": 852.8999999761581,
+        "maximumDrawGapMs": 49.5
+      },
+      "cadence": {
+        "durationMs": 2983.100000023842,
+        "drawCount": 165,
+        "drawFps": 54.97636686624292,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08281094611484727,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51.09999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 94,
+      "jitterMs": 0.14290815203761062,
+      "seekStableMs": 277.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 622.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 739.3000000715256,
+        "confirmedMs": 950.7000000476837,
+        "maximumDrawGapMs": 39.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2986.6999999284744,
+        "drawCount": 162,
+        "drawFps": 53.90564837575104,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10067409959788677,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 95,
+      "jitterMs": 31.897462134948,
+      "seekStableMs": 320.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 638.3999999761581,
+        "confirmedMs": 804.2000000476837,
+        "maximumDrawGapMs": 34.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.600000023842,
+        "drawCount": 163,
+        "drawFps": 54.00720095969875,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09897986398902583,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 67.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 96,
+      "jitterMs": 2.8086296643518534,
+      "seekStableMs": 347.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 564.5
+      },
+      "recovery": {
+        "firstDrawMs": 678.6000000238419,
+        "confirmedMs": 894.1000000238419,
+        "maximumDrawGapMs": 34.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2988.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.87137790226715,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10124584533050972,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 42.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 97,
+      "jitterMs": 26.932509939814917,
+      "seekStableMs": 306.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 739,
+        "confirmedMs": 955.4000000953674,
+        "maximumDrawGapMs": 38.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2986.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.90384357927224,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10070420961914144,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 98,
+      "jitterMs": 0.13005265824031084,
+      "seekStableMs": 256.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 533.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 813.6999999284744,
+        "confirmedMs": 978.5,
+        "maximumDrawGapMs": 48.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2988.7999999523163,
+        "drawCount": 166,
+        "drawFps": 55.20610278460668,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07897818521014524,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 72.29999995231628,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 99,
+      "jitterMs": 6.266306362627074,
+      "seekStableMs": 305.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 711.3999999761581,
+        "confirmedMs": 920.5,
+        "maximumDrawGapMs": 34.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2983.5,
+        "drawCount": 161,
+        "drawFps": 53.62828892240657,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10530137981118373,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 100,
+      "jitterMs": 9.84471840079253,
+      "seekStableMs": 307.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 890.1000000238419,
+        "confirmedMs": 1058.2000000476837,
+        "maximumDrawGapMs": 49.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2980.5999999046326,
+        "drawCount": 167,
+        "drawFps": 55.69348453509741,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07084703300612484,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 101,
+      "jitterMs": 19.293792403916207,
+      "seekStableMs": 272.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 586.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 684.1999999284744,
+        "confirmedMs": 900,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2983,
+        "drawCount": 162,
+        "drawFps": 53.97251089507208,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0995586099005475,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 41.40000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 102,
+      "jitterMs": 1.4113637476150567,
+      "seekStableMs": 295.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 719.2000000476837,
+        "confirmedMs": 936,
+        "maximumDrawGapMs": 34.5
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.00180006043118,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09906996899180648,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 47.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 103,
+      "jitterMs": 16.83666869859832,
+      "seekStableMs": 296.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 559.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 640.1000000238419,
+        "confirmedMs": 806.6000000238419,
+        "maximumDrawGapMs": 34.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2987.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.8858022633943,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10100519890570514,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 104,
+      "jitterMs": 22.62283398261449,
+      "seekStableMs": 262,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.5
+      },
+      "recovery": {
+        "firstDrawMs": 726.8999999761581,
+        "confirmedMs": 926.3999999761581,
+        "maximumDrawGapMs": 37
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.682771497689345,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10439242884688275,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.09999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 105,
+      "jitterMs": 11.9932205333064,
+      "seekStableMs": 270,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 709.1000000238419,
+        "confirmedMs": 925.3999999761581,
+        "maximumDrawGapMs": 37.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2987.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.898429914872274,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10079452758688087,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 106,
+      "jitterMs": 2.369506257842295,
+      "seekStableMs": 293.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 540.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 640.2000000476837,
+        "confirmedMs": 789.3000000715256,
+        "maximumDrawGapMs": 32.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2986.1999999284744,
+        "drawCount": 161,
+        "drawFps": 53.5798004165268,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10611032971761118,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 50.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 107,
+      "jitterMs": 3.2059357968236633,
+      "seekStableMs": 291.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 576.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 711.1000000238419,
+        "confirmedMs": 925,
+        "maximumDrawGapMs": 34.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2987.3000000715256,
+        "drawCount": 162,
+        "drawFps": 53.894821409347955,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10085472948737827,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 108,
+      "jitterMs": 8.38895030465598,
+      "seekStableMs": 274.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 598.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 696.8000000715256,
+        "confirmedMs": 912.6000000238419,
+        "maximumDrawGapMs": 36.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2983.7000000476837,
+        "drawCount": 161,
+        "drawFps": 53.62469417080906,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10536135225033555,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 41.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 109,
+      "jitterMs": 22.33743779875804,
+      "seekStableMs": 310.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 622.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 719.6999999284744,
+        "confirmedMs": 938.6999999284744,
+        "maximumDrawGapMs": 36.5
+      },
+      "cadence": {
+        "durationMs": 2997,
+        "drawCount": 162,
+        "drawFps": 53.72038705372039,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1037648759870982,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 110,
+      "jitterMs": 22.76086156020562,
+      "seekStableMs": 278.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 546.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 629.5,
+        "confirmedMs": 776.8999999761581,
+        "maximumDrawGapMs": 33.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.682771497689345,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10439242884688275,
+        "intervalsOver40Ms": 7,
+        "maximumIntervalMs": 50.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 111,
+      "jitterMs": 17.300759029792,
+      "seekStableMs": 348.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 722.5,
+        "confirmedMs": 935.3999999761581,
+        "maximumDrawGapMs": 35.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2987.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.887605849794305,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10097510907259832,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 112,
+      "jitterMs": 10.065259522222913,
+      "seekStableMs": 273.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.0999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 626.7999999523163,
+        "confirmedMs": 793.8999999761581,
+        "maximumDrawGapMs": 34.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2998.6999999284744,
+        "drawCount": 163,
+        "drawFps": 54.02341014568448,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09870944073616392,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 113,
+      "jitterMs": 19.938095881409634,
+      "seekStableMs": 331.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 679.8000000715256,
+        "confirmedMs": 847.2000000476837,
+        "maximumDrawGapMs": 49.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2982.2999999523163,
+        "drawCount": 163,
+        "drawFps": 54.320490897156624,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09375314353243697,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 114,
+      "jitterMs": 16.272731131641194,
+      "seekStableMs": 309.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 626.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 743.7999999523163,
+        "confirmedMs": 956.7000000476837,
+        "maximumDrawGapMs": 36.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2988.0999999046326,
+        "drawCount": 162,
+        "drawFps": 53.88039222420215,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10109545639289416,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.199999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 115,
+      "jitterMs": 26.258539331013647,
+      "seekStableMs": 287.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 556.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 654.6999999284744,
+        "confirmedMs": 856.8999999761581,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2980.7000000476837,
+        "drawCount": 160,
+        "drawFps": 53.343174421262255,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11005804007194137,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 116,
+      "jitterMs": 16.176242045328642,
+      "seekStableMs": 316.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 631.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 743.3999999761581,
+        "confirmedMs": 957.2000000476837,
+        "maximumDrawGapMs": 36.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2988.399999976158,
+        "drawCount": 162,
+        "drawFps": 53.87498326906856,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10118569579437288,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 117,
+      "jitterMs": 14.8145715168134,
+      "seekStableMs": 301.1999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 595.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 692.5,
+        "confirmedMs": 912.8999999761581,
+        "maximumDrawGapMs": 36.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2979.7000000476837,
+        "drawCount": 162,
+        "drawFps": 54.03228512851077,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09856137643934527,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 118,
+      "jitterMs": 10.643022927215013,
+      "seekStableMs": 279.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 599.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 698.2000000476837,
+        "confirmedMs": 916.1000000238419,
+        "maximumDrawGapMs": 36.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2998.100000023842,
+        "drawCount": 163,
+        "drawFps": 54.034221673297,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09852906841716175,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 119,
+      "jitterMs": 29.848225628297467,
+      "seekStableMs": 297.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 743.1999999284744,
+        "confirmedMs": 956,
+        "maximumDrawGapMs": 38.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2988.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.880392222052606,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10109545642875567,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 120,
+      "jitterMs": 2.3228313971854124,
+      "seekStableMs": 282.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 606.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 687.6000000238419,
+        "confirmedMs": 837.6000000238419,
+        "maximumDrawGapMs": 33.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2988.600000023842,
+        "drawCount": 164,
+        "drawFps": 54.54058756564935,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0900811974464166,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 121,
+      "jitterMs": 12.38721131454998,
+      "seekStableMs": 305.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 514
+      },
+      "recovery": {
+        "firstDrawMs": 1012.3000000715256,
+        "confirmedMs": 1162.9000000953674,
+        "maximumDrawGapMs": 33.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2988.5999999046326,
+        "drawCount": 169,
+        "drawFps": 56.213611726347104,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.062169577698775805,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 50.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 122,
+      "jitterMs": 6.237397503332856,
+      "seekStableMs": 296.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 620.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 738.2000000476837,
+        "confirmedMs": 950.2999999523163,
+        "maximumDrawGapMs": 35
+      },
+      "cadence": {
+        "durationMs": 2987.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.898429914872274,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10079452758688087,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.40000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 123,
+      "jitterMs": 13.71837553564304,
+      "seekStableMs": 292.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 586.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 704.9000000953674,
+        "confirmedMs": 918.1000000238419,
+        "maximumDrawGapMs": 39
+      },
+      "cadence": {
+        "durationMs": 2986.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.916479688796265,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10049339719191562,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 124,
+      "jitterMs": 21.483009396928054,
+      "seekStableMs": 331.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 703.9000000953674,
+        "confirmedMs": 904.9000000953674,
+        "maximumDrawGapMs": 37.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2998.1999999284744,
+        "drawCount": 160,
+        "drawFps": 53.031819092720006,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11525248480312121,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 125,
+      "jitterMs": 5.1544073880494885,
+      "seekStableMs": 274.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 571
+      },
+      "recovery": {
+        "firstDrawMs": 686.1000000238419,
+        "confirmedMs": 902.8999999761581,
+        "maximumDrawGapMs": 35.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2999.4000000953674,
+        "drawCount": 163,
+        "drawFps": 54.01080215871479,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09891978398544159,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 126,
+      "jitterMs": 25.588212801702323,
+      "seekStableMs": 288.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 620.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 733.6000000238419,
+        "confirmedMs": 950.6000000238419,
+        "maximumDrawGapMs": 34.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2988.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.87137790226715,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10124584533050972,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 127,
+      "jitterMs": 27.713101657728355,
+      "seekStableMs": 320.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557
+      },
+      "recovery": {
+        "firstDrawMs": 787.9000000953674,
+        "confirmedMs": 937.2000000476837,
+        "maximumDrawGapMs": 32.5
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 165,
+        "drawFps": 54.666666666666664,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08797777777777781,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 52.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 128,
+      "jitterMs": 9.597357562207616,
+      "seekStableMs": 271.90000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 548.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 726.5,
+        "confirmedMs": 893.1000000238419,
+        "maximumDrawGapMs": 49.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2988.6999999284744,
+        "drawCount": 164,
+        "drawFps": 54.538762674039184,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09011164272144627,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 53.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 129,
+      "jitterMs": 16.368364160275085,
+      "seekStableMs": 300.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 591.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 687.5,
+        "confirmedMs": 905.2000000476837,
+        "maximumDrawGapMs": 34.5
+      },
+      "cadence": {
+        "durationMs": 2984.5,
+        "drawCount": 162,
+        "drawFps": 53.94538448651365,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10001116881666387,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 130,
+      "jitterMs": 2.1331227943534032,
+      "seekStableMs": 275,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 735.3999999761581,
+        "confirmedMs": 953.1000000238419,
+        "maximumDrawGapMs": 34.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2998.1999999284744,
+        "drawCount": 162,
+        "drawFps": 53.698885999546675,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10412358524089628,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 131,
+      "jitterMs": 12.596273461674961,
+      "seekStableMs": 268.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 724.7999999523163,
+        "confirmedMs": 939.1999999284744,
+        "maximumDrawGapMs": 37.5
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 163,
+        "drawFps": 54,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09909999999999998,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 132,
+      "jitterMs": 26.678928823551786,
+      "seekStableMs": 290.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 726.3999999761581,
+        "confirmedMs": 940.2999999523163,
+        "maximumDrawGapMs": 36.40000009536743
+      },
+      "cadence": {
+        "durationMs": 2982.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.979749211665336,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09943785065204996,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 133,
+      "jitterMs": 8.731608304101973,
+      "seekStableMs": 308.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 611.5
+      },
+      "recovery": {
+        "firstDrawMs": 725.7000000476837,
+        "confirmedMs": 941.3000000715256,
+        "maximumDrawGapMs": 33.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2999.7999999523163,
+        "drawCount": 163,
+        "drawFps": 54.00360024087442,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993598141175,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 134,
+      "jitterMs": 6.094112627495391,
+      "seekStableMs": 274.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 622.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 720.1000000238419,
+        "confirmedMs": 937.5,
+        "maximumDrawGapMs": 36.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2985.7999999523163,
+        "drawCount": 159,
+        "drawFps": 52.917141135549365,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11716569538858475,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 135,
+      "jitterMs": 30.74703480039413,
+      "seekStableMs": 330,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 599.5999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 718.2999999523163,
+        "confirmedMs": 931.0999999046326,
+        "maximumDrawGapMs": 34
+      },
+      "cadence": {
+        "durationMs": 2988.3000000715256,
+        "drawCount": 162,
+        "drawFps": 53.87678613129419,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1011556180429086,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 136,
+      "jitterMs": 23.678493326925672,
+      "seekStableMs": 325.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 738.5,
+        "confirmedMs": 951.1000000238419,
+        "maximumDrawGapMs": 34.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2989.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.851557011550376,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1015765238573012,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 137,
+      "jitterMs": 10.574875641226148,
+      "seekStableMs": 271.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 986.5,
+        "confirmedMs": 1153.3000000715256,
+        "maximumDrawGapMs": 50
+      },
+      "cadence": {
+        "durationMs": 2983.1999999284744,
+        "drawCount": 171,
+        "drawFps": 56.98578707564895,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.049287118954589995,
+        "intervalsOver40Ms": 2,
+        "maximumIntervalMs": 49.90000009536743,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 138,
+      "jitterMs": 4.486960505569975,
+      "seekStableMs": 297.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 549.5999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 666.7999999523163,
+        "confirmedMs": 879.8999999761581,
+        "maximumDrawGapMs": 37.40000009536743
+      },
+      "cadence": {
+        "durationMs": 2988.100000023842,
+        "drawCount": 161,
+        "drawFps": 53.54573140079762,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10667871446335968,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 139,
+      "jitterMs": 11.286694693930137,
+      "seekStableMs": 285.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 689,
+        "confirmedMs": 892.6000000238419,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2994.7000000476837,
+        "drawCount": 163,
+        "drawFps": 54.09556883741961,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09750559322904945,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 140,
+      "jitterMs": 1.1440557520681371,
+      "seekStableMs": 277.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 726.3999999761581,
+        "confirmedMs": 940.5999999046326,
+        "maximumDrawGapMs": 36.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2999.5,
+        "drawCount": 162,
+        "drawFps": 53.67561260210035,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10451186308829247,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 141,
+      "jitterMs": 26.3996331072102,
+      "seekStableMs": 288,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610
+      },
+      "recovery": {
+        "firstDrawMs": 722.5999999046326,
+        "confirmedMs": 939.5999999046326,
+        "maximumDrawGapMs": 37.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2989.8000000715256,
+        "drawCount": 162,
+        "drawFps": 53.849755835222545,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10160657348237052,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 34.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 142,
+      "jitterMs": 4.784293314938744,
+      "seekStableMs": 278.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 600.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 714.6999999284744,
+        "confirmedMs": 930.2999999523163,
+        "maximumDrawGapMs": 35.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2982.899999976158,
+        "drawCount": 158,
+        "drawFps": 52.633343391080786,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.12190038775880221,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 143,
+      "jitterMs": 18.687379236294266,
+      "seekStableMs": 294.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 585.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 684.6000000238419,
+        "confirmedMs": 855.5,
+        "maximumDrawGapMs": 49.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2982.2000000476837,
+        "drawCount": 165,
+        "drawFps": 54.992958217885366,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08253414706494579,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 144,
+      "jitterMs": 27.169509887268458,
+      "seekStableMs": 299,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.5
+      },
+      "recovery": {
+        "firstDrawMs": 709.3000000715256,
+        "confirmedMs": 925,
+        "maximumDrawGapMs": 37.5
+      },
+      "cadence": {
+        "durationMs": 2986.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.907453290937774,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10064398759618813,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 145,
+      "jitterMs": 4.095042746242446,
+      "seekStableMs": 295.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 564.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 693.5,
+        "confirmedMs": 860.6000000238419,
+        "maximumDrawGapMs": 49.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2983,
+        "drawCount": 163,
+        "drawFps": 54.307743881997986,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09396580623533358,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 71.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 146,
+      "jitterMs": 3.609957746532746,
+      "seekStableMs": 296.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 637.7000000476837,
+        "confirmedMs": 789.3000000715256,
+        "maximumDrawGapMs": 34.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2984.6999999284744,
+        "drawCount": 161,
+        "drawFps": 53.606727645603996,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1056610937791733,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 147,
+      "jitterMs": 21.068930486395644,
+      "seekStableMs": 279.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 702.8999999761581,
+        "confirmedMs": 922.5999999046326,
+        "maximumDrawGapMs": 37.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.8000000715256,
+        "drawCount": 163,
+        "drawFps": 54.00360023872837,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993601721506,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 148,
+      "jitterMs": 13.54287025598654,
+      "seekStableMs": 280.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 548.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 879.8000000715256,
+        "confirmedMs": 1045.4000000953674,
+        "maximumDrawGapMs": 49.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2982.7999999523163,
+        "drawCount": 167,
+        "drawFps": 55.65240713512596,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07153234096231519,
+        "intervalsOver40Ms": 2,
+        "maximumIntervalMs": 70.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 149,
+      "jitterMs": 15.044480570211697,
+      "seekStableMs": 276.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558
+      },
+      "recovery": {
+        "firstDrawMs": 689.8000000715256,
+        "confirmedMs": 855.5,
+        "maximumDrawGapMs": 49.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2983.600000023842,
+        "drawCount": 163,
+        "drawFps": 54.296822629945524,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09414800912374216,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 52.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 150,
+      "jitterMs": 27.657668341626415,
+      "seekStableMs": 308.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604
+      },
+      "recovery": {
+        "firstDrawMs": 734.8000000715256,
+        "confirmedMs": 901,
+        "maximumDrawGapMs": 33.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2988.399999976158,
+        "drawCount": 166,
+        "drawFps": 55.21349217016343,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07885490562777348,
+        "intervalsOver40Ms": 2,
+        "maximumIntervalMs": 51.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 151,
+      "jitterMs": 16.64168320465057,
+      "seekStableMs": 265.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 555.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 986.3000000715256,
+        "confirmedMs": 1156.2000000476837,
+        "maximumDrawGapMs": 49.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2979.899999976158,
+        "drawCount": 169,
+        "drawFps": 56.37773079678652,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.05943152454027816,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 54.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 152,
+      "jitterMs": 18.072323173866607,
+      "seekStableMs": 305.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 606
+      },
+      "recovery": {
+        "firstDrawMs": 702.7000000476837,
+        "confirmedMs": 904.3000000715256,
+        "maximumDrawGapMs": 35.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2996.600000023842,
+        "drawCount": 163,
+        "drawFps": 54.06126943826706,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09807782153824451,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 153,
+      "jitterMs": 11.409989614582932,
+      "seekStableMs": 269.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 612.5
+      },
+      "recovery": {
+        "firstDrawMs": 708.8999999761581,
+        "confirmedMs": 927.0999999046326,
+        "maximumDrawGapMs": 36.5
+      },
+      "cadence": {
+        "durationMs": 2997.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.709634373738815,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10394426653145741,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 154,
+      "jitterMs": 28.848322579450905,
+      "seekStableMs": 294.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 709.5,
+        "confirmedMs": 925.2999999523163,
+        "maximumDrawGapMs": 37.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2982.600000023842,
+        "drawCount": 161,
+        "drawFps": 53.644471266251266,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10503140437470804,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 155,
+      "jitterMs": 2.4474767264521993,
+      "seekStableMs": 306.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 591.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 710.6000000238419,
+        "confirmedMs": 920.5,
+        "maximumDrawGapMs": 39.5
+      },
+      "cadence": {
+        "durationMs": 2983.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.95984850937661,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09976986070190016,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 50,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 156,
+      "jitterMs": 5.83659795136967,
+      "seekStableMs": 278.1999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 598.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 696.7000000476837,
+        "confirmedMs": 912.2000000476837,
+        "maximumDrawGapMs": 35.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2985.6999999284744,
+        "drawCount": 162,
+        "drawFps": 53.923702985516606,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1003728885249646,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 48.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 157,
+      "jitterMs": 9.486272891354748,
+      "seekStableMs": 283.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 563.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 643.3000000715256,
+        "confirmedMs": 810.6000000238419,
+        "maximumDrawGapMs": 34.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2989,
+        "drawCount": 162,
+        "drawFps": 53.86416861826698,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1013661202185792,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 158,
+      "jitterMs": 28.560613621282393,
+      "seekStableMs": 322.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 703.0999999046326,
+        "confirmedMs": 900.3999999761581,
+        "maximumDrawGapMs": 36.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2989.899999976158,
+        "drawCount": 161,
+        "drawFps": 53.51349543505665,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10721651782513825,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 42.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 159,
+      "jitterMs": 29.07837906880304,
+      "seekStableMs": 287.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 592.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 708.9000000953674,
+        "confirmedMs": 920.8000000715256,
+        "maximumDrawGapMs": 36.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2987.899999976158,
+        "drawCount": 162,
+        "drawFps": 53.88399879557036,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10103528676056775,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 40.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 160,
+      "jitterMs": 5.78534156777896,
+      "seekStableMs": 277.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 613
+      },
+      "recovery": {
+        "firstDrawMs": 723.1000000238419,
+        "confirmedMs": 939.2000000476837,
+        "maximumDrawGapMs": 38
+      },
+      "cadence": {
+        "durationMs": 2999.7999999523163,
+        "drawCount": 163,
+        "drawFps": 54.00360024087442,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993598141175,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 161,
+      "jitterMs": 18.98285282064074,
+      "seekStableMs": 297.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 545.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 628.2999999523163,
+        "confirmedMs": 776.8999999761581,
+        "maximumDrawGapMs": 34.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2985.5,
+        "drawCount": 161,
+        "drawFps": 53.59236308825992,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10590074247753027,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 70.80000007152557,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 162,
+      "jitterMs": 4.530439428954075,
+      "seekStableMs": 291.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 595
+      },
+      "recovery": {
+        "firstDrawMs": 714.2999999523163,
+        "confirmedMs": 924.2999999523163,
+        "maximumDrawGapMs": 34.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2988.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.86777302013136,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10130598678080847,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 163,
+      "jitterMs": 1.0623444593201081,
+      "seekStableMs": 294.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 837.5,
+        "confirmedMs": 1004.5,
+        "maximumDrawGapMs": 49.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2999.600000023842,
+        "drawCount": 167,
+        "drawFps": 55.340712094506124,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.07673245322332282,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 68.19999992847443,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 164,
+      "jitterMs": 20.277552637504414,
+      "seekStableMs": 293.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 720.6999999284744,
+        "confirmedMs": 935.8999999761581,
+        "maximumDrawGapMs": 34.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2987.2000000476837,
+        "drawCount": 163,
+        "drawFps": 54.2313872514107,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09523968935563144,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 165,
+      "jitterMs": 12.182729649341976,
+      "seekStableMs": 288.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 544.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 675.3999999761581,
+        "confirmedMs": 844.2000000476837,
+        "maximumDrawGapMs": 48.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2981.6999999284744,
+        "drawCount": 163,
+        "drawFps": 54.33142167350373,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09357078174704603,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 166,
+      "jitterMs": 27.234001751344962,
+      "seekStableMs": 292.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 599.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 715.2000000476837,
+        "confirmedMs": 931.2999999523163,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 163,
+        "drawFps": 54.016204861029024,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09882964890183243,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 167,
+      "jitterMs": 13.580476080812515,
+      "seekStableMs": 300.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 626.5
+      },
+      "recovery": {
+        "firstDrawMs": 744.1000000238419,
+        "confirmedMs": 944.3000000715256,
+        "maximumDrawGapMs": 39.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2982.7999999523163,
+        "drawCount": 161,
+        "drawFps": 53.64087434710936,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1050914129757255,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 43,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 168,
+      "jitterMs": 28.413458136026748,
+      "seekStableMs": 317.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 589.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 705,
+        "confirmedMs": 920.6000000238419,
+        "maximumDrawGapMs": 33.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2986.8000000715256,
+        "drawCount": 162,
+        "drawFps": 53.90384357712083,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10070420965503411,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 169,
+      "jitterMs": 8.380334569513797,
+      "seekStableMs": 306.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 789.7000000476837,
+        "confirmedMs": 959.8000000715256,
+        "maximumDrawGapMs": 49.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2998.5999999046326,
+        "drawCount": 166,
+        "drawFps": 55.02567865178672,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08198826115935821,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 55,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 170,
+      "jitterMs": 32.90148621214709,
+      "seekStableMs": 260.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 599.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 717.8999999761581,
+        "confirmedMs": 930.8999999761581,
+        "maximumDrawGapMs": 35.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2989.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.84975583736964,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10160657344654979,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 47.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 171,
+      "jitterMs": 30.31929834696154,
+      "seekStableMs": 251.80000007152557,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 688,
+        "confirmedMs": 907.1000000238419,
+        "maximumDrawGapMs": 36.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2999.5,
+        "drawCount": 164,
+        "drawFps": 54.342390398399736,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09338778685336438,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 172,
+      "jitterMs": 12.347796388886248,
+      "seekStableMs": 314.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 640.1000000238419,
+        "confirmedMs": 788.7999999523163,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2987.3000000715256,
+        "drawCount": 161,
+        "drawFps": 53.56007096581163,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10643948272037591,
+        "intervalsOver40Ms": 7,
+        "maximumIntervalMs": 52.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 173,
+      "jitterMs": 3.4055181725881996,
+      "seekStableMs": 293.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 611.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 707.1000000238419,
+        "confirmedMs": 924.8999999761581,
+        "maximumDrawGapMs": 35.90000009536743
+      },
+      "cadence": {
+        "durationMs": 2997.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.03782647896473,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09846892824260504,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 174,
+      "jitterMs": 2.187752701815528,
+      "seekStableMs": 295.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 719.7999999523163,
+        "confirmedMs": 919.0999999046326,
+        "maximumDrawGapMs": 36.5
+      },
+      "cadence": {
+        "durationMs": 2990.100000023842,
+        "drawCount": 161,
+        "drawFps": 53.50991605589252,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10727623380085981,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 44.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 175,
+      "jitterMs": 30.497861745689686,
+      "seekStableMs": 269,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.5
+      },
+      "recovery": {
+        "firstDrawMs": 724.6000000238419,
+        "confirmedMs": 937.7999999523163,
+        "maximumDrawGapMs": 37.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2987.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.898429914872274,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10079452758688087,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 48.199999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 176,
+      "jitterMs": 5.522183414998775,
+      "seekStableMs": 280.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625
+      },
+      "recovery": {
+        "firstDrawMs": 735.4000000953674,
+        "confirmedMs": 951.5,
+        "maximumDrawGapMs": 38.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2986.5,
+        "drawCount": 162,
+        "drawFps": 53.90925832914783,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10061387354205031,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 177,
+      "jitterMs": 14.870504855061881,
+      "seekStableMs": 325,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.2999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 637.2000000476837,
+        "confirmedMs": 789.6000000238419,
+        "maximumDrawGapMs": 33.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2981.899999976158,
+        "drawCount": 161,
+        "drawFps": 53.65706428829917,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10482131079020887,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 178,
+      "jitterMs": 9.394691282782393,
+      "seekStableMs": 285.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 564.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 683.8000000715256,
+        "confirmedMs": 896.6000000238419,
+        "maximumDrawGapMs": 36.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2980.899999976158,
+        "drawCount": 160,
+        "drawFps": 53.33959542462737,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11011774966580004,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 52,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 179,
+      "jitterMs": 26.895119116043983,
+      "seekStableMs": 302.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621
+      },
+      "recovery": {
+        "firstDrawMs": 738.6999999284744,
+        "confirmedMs": 951.1999999284744,
+        "maximumDrawGapMs": 39
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 163,
+        "drawFps": 54,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09909999999999998,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.300000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 180,
+      "jitterMs": 21.449721842072904,
+      "seekStableMs": 324.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 558.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 789.6000000238419,
+        "confirmedMs": 938.8999999761581,
+        "maximumDrawGapMs": 33.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2986.600000023842,
+        "drawCount": 164,
+        "drawFps": 54.57711109579414,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08947186321850112,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 181,
+      "jitterMs": 31.822170715437583,
+      "seekStableMs": 279.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 638.1000000238419,
+        "confirmedMs": 787.8000000715256,
+        "maximumDrawGapMs": 33.5
+      },
+      "cadence": {
+        "durationMs": 2984.5,
+        "drawCount": 161,
+        "drawFps": 53.61031998659742,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10560116155693307,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 182,
+      "jitterMs": 0.5797274464275688,
+      "seekStableMs": 297.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 722.5999999046326,
+        "confirmedMs": 936.5999999046326,
+        "maximumDrawGapMs": 36
+      },
+      "cadence": {
+        "durationMs": 2999.600000023842,
+        "drawCount": 161,
+        "drawFps": 53.34044539229506,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1101035693718774,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 183,
+      "jitterMs": 9.053994326021833,
+      "seekStableMs": 305.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 704.8999999761581,
+        "confirmedMs": 923.7999999523163,
+        "maximumDrawGapMs": 36.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2997.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.70784267853321,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10397415797980425,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 184,
+      "jitterMs": 13.657319337928978,
+      "seekStableMs": 280.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 625.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 744.9000000953674,
+        "confirmedMs": 956.7000000476837,
+        "maximumDrawGapMs": 35.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.899999976158,
+        "drawCount": 163,
+        "drawFps": 54.00180006043118,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09906996899180648,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 185,
+      "jitterMs": 11.890899258844245,
+      "seekStableMs": 287.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.5
+      },
+      "recovery": {
+        "firstDrawMs": 726.1000000238419,
+        "confirmedMs": 940.2000000476837,
+        "maximumDrawGapMs": 38.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2990.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.84435303124185,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10169671026211509,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 186,
+      "jitterMs": 6.982890079542995,
+      "seekStableMs": 307.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 704.2000000476837,
+        "confirmedMs": 924.5,
+        "maximumDrawGapMs": 37.09999990463257
+      },
+      "cadence": {
+        "durationMs": 2980,
+        "drawCount": 162,
+        "drawFps": 54.02684563758389,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0986521252796421,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 187,
+      "jitterMs": 6.664956199253599,
+      "seekStableMs": 287.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 578
+      },
+      "recovery": {
+        "firstDrawMs": 695.5999999046326,
+        "confirmedMs": 915.0999999046326,
+        "maximumDrawGapMs": 35.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2982,
+        "drawCount": 162,
+        "drawFps": 53.990610328638496,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09925665101721441,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 188,
+      "jitterMs": 32.95179217842718,
+      "seekStableMs": 295.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 599.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 715,
+        "confirmedMs": 929.7000000476837,
+        "maximumDrawGapMs": 35.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2983.1999999284744,
+        "drawCount": 160,
+        "drawFps": 53.29847144134225,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1108038347869401,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 189,
+      "jitterMs": 27.0242034343925,
+      "seekStableMs": 288,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 591.2000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 671.2000000476837,
+        "confirmedMs": 821,
+        "maximumDrawGapMs": 49.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2982.7000000476837,
+        "drawCount": 164,
+        "drawFps": 54.648472859286606,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08828131113090176,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 190,
+      "jitterMs": 11.978796887459854,
+      "seekStableMs": 299.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 608.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 725.8999999761581,
+        "confirmedMs": 924.3000000715256,
+        "maximumDrawGapMs": 37.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2988.2999999523163,
+        "drawCount": 163,
+        "drawFps": 54.21142455663254,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09557273364684717,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.39999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 191,
+      "jitterMs": 5.720612639305182,
+      "seekStableMs": 313,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 589.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 706.6000000238419,
+        "confirmedMs": 920.8000000715256,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2998.7999999523163,
+        "drawCount": 165,
+        "drawFps": 54.688542084369665,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08761282289243275,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 192,
+      "jitterMs": 29.327262278002067,
+      "seekStableMs": 315.6999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 600.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 932.5,
+        "confirmedMs": 1081.7000000476837,
+        "maximumDrawGapMs": 33.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2984.0999999046326,
+        "drawCount": 169,
+        "drawFps": 56.298381423333346,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.06075533658738866,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 193,
+      "jitterMs": 2.712683825691541,
+      "seekStableMs": 277.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 598.1999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 719.1999999284744,
+        "confirmedMs": 930.3999999761581,
+        "maximumDrawGapMs": 36.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2999.7999999523163,
+        "drawCount": 163,
+        "drawFps": 54.00360024087442,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09903993598141175,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 194,
+      "jitterMs": 19.290924550096193,
+      "seekStableMs": 293.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 587.5
+      },
+      "recovery": {
+        "firstDrawMs": 685.5,
+        "confirmedMs": 852.1000000238419,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2982.7999999523163,
+        "drawCount": 165,
+        "drawFps": 54.981896205787095,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08271869830011862,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 195,
+      "jitterMs": 11.164386843703687,
+      "seekStableMs": 283.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 603.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 722.6000000238419,
+        "confirmedMs": 933.8000000715256,
+        "maximumDrawGapMs": 36.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2990,
+        "drawCount": 163,
+        "drawFps": 54.180602006688964,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0960869565217391,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 196,
+      "jitterMs": 16.325319931345682,
+      "seekStableMs": 301.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 694.8999999761581,
+        "confirmedMs": 823.2999999523163,
+        "maximumDrawGapMs": 32.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2983,
+        "drawCount": 163,
+        "drawFps": 54.307743881997986,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09396580623533358,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 197,
+      "jitterMs": 17.793077737085213,
+      "seekStableMs": 281.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 627.5
+      },
+      "recovery": {
+        "firstDrawMs": 744.4000000953674,
+        "confirmedMs": 958.7000000476837,
+        "maximumDrawGapMs": 35.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2999.2999999523163,
+        "drawCount": 162,
+        "drawFps": 53.67919181227607,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10445214993186083,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 198,
+      "jitterMs": 9.27936153942719,
+      "seekStableMs": 274.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 885.5,
+        "confirmedMs": 1054,
+        "maximumDrawGapMs": 49.5
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 170,
+        "drawFps": 56.333333333333336,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.06017222222222217,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 50.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 199,
+      "jitterMs": 12.712439933978022,
+      "seekStableMs": 317,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 688.8000000715256,
+        "confirmedMs": 889.5,
+        "maximumDrawGapMs": 36.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2997.8000000715256,
+        "drawCount": 161,
+        "drawFps": 53.372473145701015,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10956923968588805,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 200,
+      "jitterMs": 19.310691347004227,
+      "seekStableMs": 309.1999999284744,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 585.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 685.2999999523163,
+        "confirmedMs": 854,
+        "maximumDrawGapMs": 33.699999928474426
+      },
+      "cadence": {
+        "durationMs": 2983.5,
+        "drawCount": 165,
+        "drawFps": 54.96899614546673,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08293391430646332,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 50.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 201,
+      "jitterMs": 21.219117777856688,
+      "seekStableMs": 275.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 568.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 681.8999999761581,
+        "confirmedMs": 848.2000000476837,
+        "maximumDrawGapMs": 33.799999952316284
+      },
+      "cadence": {
+        "durationMs": 2983.1999999284744,
+        "drawCount": 165,
+        "drawFps": 54.97452400239075,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08284169122678095,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 50.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 12
+    },
+    {
+      "index": 202,
+      "jitterMs": 11.891194107445578,
+      "seekStableMs": 287.8000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 724.5,
+        "confirmedMs": 938.2999999523163,
+        "maximumDrawGapMs": 35.299999952316284
+      },
+      "cadence": {
+        "durationMs": 2999.5,
+        "drawCount": 161,
+        "drawFps": 53.34222370395066,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.1100739012057565,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 203,
+      "jitterMs": 31.567151100335952,
+      "seekStableMs": 318.59999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 674.8000000715256,
+        "confirmedMs": 895,
+        "maximumDrawGapMs": 35.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2981.2000000476837,
+        "drawCount": 163,
+        "drawFps": 54.3405340122799,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09341875756179693,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 204,
+      "jitterMs": 22.776602076832205,
+      "seekStableMs": 303,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 607
+      },
+      "recovery": {
+        "firstDrawMs": 725.6000000238419,
+        "confirmedMs": 937.9000000953674,
+        "maximumDrawGapMs": 37.10000002384186
+      },
+      "cadence": {
+        "durationMs": 3000,
+        "drawCount": 165,
+        "drawFps": 54.666666666666664,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08797777777777781,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.799999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 205,
+      "jitterMs": 1.8487889915006235,
+      "seekStableMs": 279.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 600.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 697.2000000476837,
+        "confirmedMs": 898.4000000953674,
+        "maximumDrawGapMs": 36
+      },
+      "cadence": {
+        "durationMs": 2999.6999999284744,
+        "drawCount": 160,
+        "drawFps": 53.00530053131688,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.11569490280253009,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 206,
+      "jitterMs": 28.83013359895752,
+      "seekStableMs": 282.2000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610.8999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 725.7000000476837,
+        "confirmedMs": 940.1000000238419,
+        "maximumDrawGapMs": 36.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2988.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.880392222052606,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10109545642875567,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 207,
+      "jitterMs": 21.975235593559532,
+      "seekStableMs": 293.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 610
+      },
+      "recovery": {
+        "firstDrawMs": 707.8000000715256,
+        "confirmedMs": 925.5,
+        "maximumDrawGapMs": 37.5
+      },
+      "cadence": {
+        "durationMs": 2999.100000023842,
+        "drawCount": 162,
+        "drawFps": 53.682771497689345,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10439242884688275,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 208,
+      "jitterMs": 4.908575616769182,
+      "seekStableMs": 293.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 602.0999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 718.5,
+        "confirmedMs": 930.5,
+        "maximumDrawGapMs": 38.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2988.7999999523163,
+        "drawCount": 162,
+        "drawFps": 53.86777302013136,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10130598678080847,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 209,
+      "jitterMs": 24.41092706922597,
+      "seekStableMs": 294.40000009536743,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 590.3000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 671,
+        "confirmedMs": 837,
+        "maximumDrawGapMs": 33.800000071525574
+      },
+      "cadence": {
+        "durationMs": 2984.3000000715256,
+        "drawCount": 165,
+        "drawFps": 54.95426062931654,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08317975183423565,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 50.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 210,
+      "jitterMs": 12.641828988383836,
+      "seekStableMs": 290.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 546.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 626.5,
+        "confirmedMs": 776,
+        "maximumDrawGapMs": 34.700000047683716
+      },
+      "cadence": {
+        "durationMs": 2983.5999999046326,
+        "drawCount": 161,
+        "drawFps": 53.626491488508584,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10533136700004843,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 51.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 211,
+      "jitterMs": 22.703661405442592,
+      "seekStableMs": 296.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 935,
+        "confirmedMs": 1085.0999999046326,
+        "maximumDrawGapMs": 49.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2983.9000000953674,
+        "drawCount": 169,
+        "drawFps": 56.30215489615289,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.0606923824825159,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 50.800000071525574,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 212,
+      "jitterMs": 0.9304993953555822,
+      "seekStableMs": 278.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 737.7999999523163,
+        "confirmedMs": 885.3999999761581,
+        "maximumDrawGapMs": 33.09999990463257
+      },
+      "cadence": {
+        "durationMs": 2985,
+        "drawCount": 165,
+        "drawFps": 54.94137353433836,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.083394751535455,
+        "intervalsOver40Ms": 4,
+        "maximumIntervalMs": 51.200000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 213,
+      "jitterMs": 33.29213902723665,
+      "seekStableMs": 296.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 557.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 789,
+        "confirmedMs": 937.6000000238419,
+        "maximumDrawGapMs": 32.39999997615814
+      },
+      "cadence": {
+        "durationMs": 2985.0999999046326,
+        "drawCount": 164,
+        "drawFps": 54.604535863189675,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.08901432668245224,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 214,
+      "jitterMs": 28.269839311305745,
+      "seekStableMs": 290.3000000715256,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 604.5
+      },
+      "recovery": {
+        "firstDrawMs": 722.7999999523163,
+        "confirmedMs": 935.1000000238419,
+        "maximumDrawGapMs": 35
+      },
+      "cadence": {
+        "durationMs": 2987.399999976158,
+        "drawCount": 162,
+        "drawFps": 53.89301733992264,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10088482737895722,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 35.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 215,
+      "jitterMs": 19.518655586483266,
+      "seekStableMs": 331.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 547.4000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 624.8000000715256,
+        "confirmedMs": 775.7000000476837,
+        "maximumDrawGapMs": 34.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2982.5,
+        "drawCount": 161,
+        "drawFps": 53.64626990779547,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10500139703827888,
+        "intervalsOver40Ms": 8,
+        "maximumIntervalMs": 53.59999990463257,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 216,
+      "jitterMs": 22.1657204531366,
+      "seekStableMs": 271.39999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 609.8000000715256
+      },
+      "recovery": {
+        "firstDrawMs": 726,
+        "confirmedMs": 940.5,
+        "maximumDrawGapMs": 38.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2986.7000000476837,
+        "drawCount": 162,
+        "drawFps": 53.90564837359948,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10067409963378195,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 36.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 217,
+      "jitterMs": 25.784081777130876,
+      "seekStableMs": 289,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 597.5
+      },
+      "recovery": {
+        "firstDrawMs": 692.5,
+        "confirmedMs": 911.5,
+        "maximumDrawGapMs": 36.199999928474426
+      },
+      "cadence": {
+        "durationMs": 2980.3000000715256,
+        "drawCount": 162,
+        "drawFps": 54.02140723958531,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09874285588625176,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.10000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 218,
+      "jitterMs": 18.876978858645696,
+      "seekStableMs": 309.09999990463257,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 597.6000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 709.1000000238419,
+        "confirmedMs": 925.3999999761581,
+        "maximumDrawGapMs": 36.10000002384186
+      },
+      "cadence": {
+        "durationMs": 2992.2000000476837,
+        "drawCount": 163,
+        "drawFps": 54.140765990715316,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09675155405489946,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 38.5,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 219,
+      "jitterMs": 10.926300991373136,
+      "seekStableMs": 309.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 532.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 963,
+        "confirmedMs": 1112.5,
+        "maximumDrawGapMs": 34.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2987.6999999284744,
+        "drawCount": 168,
+        "drawFps": 55.89583961040198,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.06747107583312698,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 51.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 220,
+      "jitterMs": 22.450172745459714,
+      "seekStableMs": 293.2999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 619.3999999761581
+      },
+      "recovery": {
+        "firstDrawMs": 733.8999999761581,
+        "confirmedMs": 949.6000000238419,
+        "maximumDrawGapMs": 37.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2999.6999999284744,
+        "drawCount": 162,
+        "drawFps": 53.67203387133344,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10457156824658709,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.699999928474426,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 221,
+      "jitterMs": 1.4296144433164348,
+      "seekStableMs": 279.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 596.7999999523163
+      },
+      "recovery": {
+        "firstDrawMs": 693.1999999284744,
+        "confirmedMs": 911.7999999523163,
+        "maximumDrawGapMs": 35.5
+      },
+      "cadence": {
+        "durationMs": 2981.5,
+        "drawCount": 162,
+        "drawFps": 53.99966459835653,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09910559561741851,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.299999952316284,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 222,
+      "jitterMs": 4.044870037888177,
+      "seekStableMs": 289.5,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 548.6999999284744
+      },
+      "recovery": {
+        "firstDrawMs": 1080.1000000238419,
+        "confirmedMs": 1246.6000000238419,
+        "maximumDrawGapMs": 33.09999990463257
+      },
+      "cadence": {
+        "durationMs": 2983.7999999523163,
+        "drawCount": 171,
+        "drawFps": 56.974328038982755,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.04947829388297103,
+        "intervalsOver40Ms": 3,
+        "maximumIntervalMs": 50.60000002384186,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 223,
+      "jitterMs": 23.377096714056098,
+      "seekStableMs": 260.89999997615814,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 605.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 699.3999999761581,
+        "confirmedMs": 917.7999999523163,
+        "maximumDrawGapMs": 35.89999997615814
+      },
+      "cadence": {
+        "durationMs": 2980.8000000715256,
+        "drawCount": 162,
+        "drawFps": 54.0123456777163,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09889403294343309,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 224,
+      "jitterMs": 32.926000962615944,
+      "seekStableMs": 327.7000000476837,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 559.1000000238419
+      },
+      "recovery": {
+        "firstDrawMs": 689.3000000715256,
+        "confirmedMs": 860.7000000476837,
+        "maximumDrawGapMs": 49.200000047683716
+      },
+      "cadence": {
+        "durationMs": 2995.1999999284744,
+        "drawCount": 164,
+        "drawFps": 54.420405984205544,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09208622683017081,
+        "intervalsOver40Ms": 5,
+        "maximumIntervalMs": 51,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 225,
+      "jitterMs": 10.063731472628811,
+      "seekStableMs": 285.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.586588,
+        "mediaTimeGapMs": 567.2330000000017,
+        "callbackGapMs": 563.5999999046326
+      },
+      "recovery": {
+        "firstDrawMs": 644.1999999284744,
+        "confirmedMs": 815.5,
+        "maximumDrawGapMs": 35.09999990463257
+      },
+      "cadence": {
+        "durationMs": 2996,
+        "drawCount": 163,
+        "drawFps": 54.0720961281709,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09789719626168217,
+        "intervalsOver40Ms": 6,
+        "maximumIntervalMs": 52,
+        "passed": false
+      },
+      "browserDroppedFrames": 13
+    },
+    {
+      "index": 226,
+      "jitterMs": 15.593707955318193,
+      "seekStableMs": 280.10000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 628
+      },
+      "recovery": {
+        "firstDrawMs": 724.6000000238419,
+        "confirmedMs": 944,
+        "maximumDrawGapMs": 36.59999990463257
+      },
+      "cadence": {
+        "durationMs": 2980.2000000476837,
+        "drawCount": 161,
+        "drawFps": 53.68767196746526,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10431067267612118,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 37.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 227,
+      "jitterMs": 20.474974491555866,
+      "seekStableMs": 275.60000002384186,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 621.7000000476837
+      },
+      "recovery": {
+        "firstDrawMs": 718,
+        "confirmedMs": 932.8000000715256,
+        "maximumDrawGapMs": 35.60000002384186
+      },
+      "cadence": {
+        "durationMs": 2984.1999999284744,
+        "drawCount": 162,
+        "drawFps": 53.95080758791598,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.09992069340826835,
+        "intervalsOver40Ms": 0,
+        "maximumIntervalMs": 39.89999997615814,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    },
+    {
+      "index": 228,
+      "jitterMs": 7.69836419679535,
+      "seekStableMs": 289.7999999523163,
+      "defect": {
+        "beforeMediaTime": 125.019355,
+        "afterMediaTime": 125.619955,
+        "mediaTimeGapMs": 600.6,
+        "callbackGapMs": 594.9000000953674
+      },
+      "recovery": {
+        "firstDrawMs": 708.6000000238419,
+        "confirmedMs": 926,
+        "maximumDrawGapMs": 34.300000071525574
+      },
+      "cadence": {
+        "durationMs": 2999.600000023842,
+        "drawCount": 162,
+        "drawFps": 53.67382317599691,
+        "expectedFps": 59.94005994005994,
+        "fpsErrorRatio": 0.10454171668045156,
+        "intervalsOver40Ms": 1,
+        "maximumIntervalMs": 52.700000047683716,
+        "passed": false
+      },
+      "browserDroppedFrames": 14
+    }
+  ],
+  "rawEvidence": {
+    "summary": {
+      "file": "summary.json",
+      "sizeBytes": 7941278,
+      "sha256": "88edf4d9e01d0afe5949f216bad7b387b44748080e4949dab41b6ddbbd5a751d"
+    },
+    "block": {
+      "file": "block-000.json",
+      "sizeBytes": 9935167,
+      "sha256": "5d78afdd591b8a7b85a81e3398e6c37ce2240acac901b11ee0cc27e0c0cf12fe"
+    }
+  },
+  "limitations": [
+    "The compact trial projection omits individual draw intervals and diagnostic contexts.",
+    "Direct canvas draws do not prove compositor scanout, audible A/V synchronization, pixel correctness, or unavoidable minimum loss.",
+    "The campaign repeats one real B-picture transport defect and does not generalize to other defect structures."
+  ]
+}

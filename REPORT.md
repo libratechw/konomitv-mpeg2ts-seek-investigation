@@ -1,6 +1,6 @@
 # KonomiTV 録画再生のシーク遅延と表示品質
 
-現行integration候補は`21e6917`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新した。静的検証と自動試験は完了し、実機再測定は未実施である。この文書にある`44e06a4`など従来integrationの測定値を現行コードの結果へ流用しない。
+現行integration候補は`21e6917`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新した。静的検証と自動試験に加え、現行コードの異常TS 1時間試験を完了した。致命的停止は0/229だったが、FPS安定復帰失敗は229/229であり、異常TSの総合条件は満たさなかった。正常TSの1時間連続再生と他の実機条件は未測定であり、`44e06a4`など従来integrationの測定値を現行コードの結果へ流用しない。
 
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
@@ -20,7 +20,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue容量・時刻同期 | 旧測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。最終候補source `e7e3ea2` / dist `8b1f66b`は`konomi/main` `52a3db5`から、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを構成し、独立した必要性を示せない閾値resetを履歴から外した。最終treeの実機再測定は未実施 |
+| YADIF queue容量・時刻同期 | 旧測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。最終候補source `e7e3ea2` / dist `8b1f66b`は`konomi/main` `52a3db5`から、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを構成し、独立した必要性を示せない閾値resetを履歴から外した。現行integrationの異常TS 1時間試験は停止0/229、FPS安定復帰失敗229/229。候補単独の実機再測定は未実施 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -769,6 +769,12 @@ queue全reset単独の必要性は別に評価した。診断traceでは、末�
 最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、seek時刻、欠陥時刻、各試行のシーク前待ち時間の列でこの破損packetを直接比較した。基準版は2回目に致命的な表示停止を検出し、1回の成功後に試験を終了した。integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、p95 940.2ms、最大1,088.1msだった。同じ先頭2回では、基準版の2回目だけが停止し、integrationの対応する試行は920.1msで復帰した。
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。integrationも期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかった。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
+
+clean YADIF候補を含む現行integration source / dist `84e916b28ac1e63d53c531c1fdd61f21a39dd531`でも、同じ既知欠損を反復する1時間試験を行った。KonomiTV clientは`7307e0ec39aed6a4772908cdbfb44223da42be6d`、fixtureはSHA-256 `2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845`の乃木坂工事中である。source、dist、provenance、client assetは実ファイルとGit blobを照合し、Chrome、page、player、Worker、decoder、MSE、YADIFはこの1 blockの開始前に作り直した。
+
+実測3,557.110秒で229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件だった。表示進行の安定確認は中央値925.1ms、最大1,246.6msで、1時間のcoverageと後片付けも成立した。同一ホストの負荷記録713件ではFFmpeg processを検出しなかった。
+
+一方、安定確認直後の約3秒窓は229回すべてがFPS安定復帰に失敗した。canvas FPSは中央値53.951、範囲52.633〜56.986fps、最大描画間隔は中央値38.6ms、最大72.6msだった。旧integration `44e06a4`の20回も52.94〜55.62fpsだったため、clean YADIF候補で新たに生じた退行とはみなさず、既知の未解決問題が現行buildでも反復した結果として扱う。この試験は致命的停止0件の条件を満たすが、FPS安定復帰失敗も0件という異常TSの総合条件は満たさない。[provenance、全229試行、元summaryとblockのhash](results/galaxy-formal-anomaly-integration-84e916b-one-hour-summary.json)を保存した。
 
 Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の補助条件でも、integration `44e06a4`と同じfixtureをWindows内の隔離KonomiTVから配信し、同じ破損位置を反復通過した。1時間を予定した走行は121回目で致命的停止を検出し、120回成功、停止1回で終了した。実測は1,867.642秒、壁時計は2,048.063秒なので、1時間条件を満たした走行ではない。成功した120回の安定確認は中央値734.2ms、最大1,733.1msで、FPS安定復帰失敗は39回だった。
 
