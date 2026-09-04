@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "summarySha256": "ac33e5242505f203a02179a1477e2caf038dbaea1fefeb67b59a6af3ebb157cf",
+    "blockHashesVerified": true
+  },
+  "build": {
+    "variant": "integration-current-44e06a4-anomaly-v1",
+    "sourceHash": "e5f54726cc72d6d5a8d2d3aba2db15cbd2ac994cf8b63dd056e4561566570585",
+    "distHash": "488d25ecbdac6bf2e7624773728c57a0f28728418297f29e04f4adff856063f5",
+    "distTreeSha256": "ff59b41b6f178e628e76380ece49616b9c0cf8750d546861169a5b1073eaa580",
+    "asset": "PlayerController-DJki7T6W.js",
+    "assetSha256": "55fa02bf0df9fe8cc9acf8a34e0979729bd7beb4706366363d127f7228248ead",
+    "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "konomiCommit": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845"
+  },
+  "conditions": {
+    "scope": "Windows-local KonomiTV and TS, physical Chrome fullscreen, display configured 60 Hz, Best power efficiency.",
+    "captureSeekDiagnostics": true,
+    "durationSeconds": 3600,
+    "cleanupReserveSeconds": 30,
+    "blockSize": 20,
+    "baseSeed": 20260914,
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block.",
+    "toolsSnapshot": {
+      "manifestSha256": "b13bceb1e2d5b713e91e035ed0141c5e7ab2fe540a10e683fed8a01a1382b582",
+      "files": [
+        {
+          "path": "Start-WindowsFatalCampaign.ps1",
+          "sourceSha256": "27488e0f08ba55c634070b069bbce23a7675e8d78e6b2a0de55f714f6b04781c",
+          "sha256": "27488e0f08ba55c634070b069bbce23a7675e8d78e6b2a0de55f714f6b04781c"
+        },
+        {
+          "path": "Run-WindowsFatalCampaign.ps1",
+          "sourceSha256": "2d44a76a4055f5ece8c936adb28bca9dab207713b2ec9bc05ca5f42995d06d43",
+          "sha256": "2d44a76a4055f5ece8c936adb28bca9dab207713b2ec9bc05ca5f42995d06d43"
+        },
+        {
+          "path": "Run-WindowsFatalBlock.ps1",
+          "sourceSha256": "28811067f1a633f67121aaba44df22c18f898c6cf4534f23acf7736a1bc01f36",
+          "sha256": "28811067f1a633f67121aaba44df22c18f898c6cf4534f23acf7736a1bc01f36"
+        },
+        {
+          "path": "Run-WindowsStarletteCandidateCampaign.ps1",
+          "sourceSha256": "b95e5795910705bb40450f7cbe554aa90a5609b1e5dac61b8565e1c2d60455e0",
+          "sha256": "b95e5795910705bb40450f7cbe554aa90a5609b1e5dac61b8565e1c2d60455e0"
+        },
+        {
+          "path": "Get-WindowsFatalCampaignStatus.ps1",
+          "sourceSha256": "86a609dabe907468ae1214f38bbf7c93819c2187fa30df9f1518f9f98dc446be",
+          "sha256": "86a609dabe907468ae1214f38bbf7c93819c2187fa30df9f1518f9f98dc446be"
+        },
+        {
+          "path": "Start-WindowsLongTest.ps1",
+          "sourceSha256": "991a167d4f58ceed886a5ee424638482d0cd22a17d06356e1c20a404bb823291",
+          "sha256": "991a167d4f58ceed886a5ee424638482d0cd22a17d06356e1c20a404bb823291"
+        },
+        {
+          "path": "Stop-WindowsLongTest.ps1",
+          "sourceSha256": "bcd16c827eabb13c6e13ff6dec03b0f45be60056f9874d035a5d455a6cc03325",
+          "sha256": "bcd16c827eabb13c6e13ff6dec03b0f45be60056f9874d035a5d455a6cc03325"
+        },
+        {
+          "path": "WindowsLongTest.Common.ps1",
+          "sourceSha256": "401abdd0bba9522fd89c7bcd5f088ea37790cc0d3ecb9950518b7a78fa26702f",
+          "sha256": "401abdd0bba9522fd89c7bcd5f088ea37790cc0d3ecb9950518b7a78fa26702f"
+        },
+        {
+          "path": "prepare-windows-seek-demo.mjs",
+          "sourceSha256": "8689e0667fbdc15c09276a88ce03576d96f2e2c336ca1c0e3464d1a0816a8e49",
+          "sha256": "8689e0667fbdc15c09276a88ce03576d96f2e2c336ca1c0e3464d1a0816a8e49"
+        },
+        {
+          "path": "prepare-galaxy-seek-demo.mjs",
+          "sourceSha256": "0a0f9e8cf25384d257defd65e97bf9be43cd51356aca39fafdf7f726a3e1507a",
+          "sha256": "1c2bb9c111014bf8b19842cfaf0eafff9259fede904d28a21ab0e70634693a52"
+        },
+        {
+          "path": "collect-galaxy-seek-fatal-rate.mjs",
+          "sourceSha256": "a91240311b110ab4ffb26fdbad28b321b79f1424033c6a96000769497d9446ee",
+          "sha256": "0ad322d4b7c4c3d48e99715b6749d5aacc2c82904f18a8fa6326f416cd35a412"
+        },
+        {
+          "path": "cdp-call.mjs",
+          "sourceSha256": "7967cdb377f9d56dce5144523ca9f65f42482b684426c2f8d7f452a1f7ee701c",
+          "sha256": "466099da907efcf324db3cfa0fbd7fd78b96a03d0649a88ff4810df96b3edcaa"
+        },
+        {
+          "path": "chrome/Common.ps1",
+          "sourceSha256": "d2c66555b3d8e506db51b9af882ba13e30339682ec4a480bb83a5d0e857adb97",
+          "sha256": "d2c66555b3d8e506db51b9af882ba13e30339682ec4a480bb83a5d0e857adb97"
+        },
+        {
+          "path": "chrome/Start-TestChrome.ps1",
+          "sourceSha256": "14ecd45b69f0b15fb9cfbbd8babaaa81ca1bffc7c5d6470c0d7a86577dfeefe5",
+          "sha256": "14ecd45b69f0b15fb9cfbbd8babaaa81ca1bffc7c5d6470c0d7a86577dfeefe5"
+        },
+        {
+          "path": "chrome/Launch-TestChrome.ps1",
+          "sourceSha256": "b258689d916c49b2654b22022a7d41f0befe13a949a70578c1b4b3366d01779d",
+          "sha256": "b258689d916c49b2654b22022a7d41f0befe13a949a70578c1b4b3366d01779d"
+        },
+        {
+          "path": "chrome/Stop-TestChrome.ps1",
+          "sourceSha256": "13c8a6df561af038497b6dfc010db56620e7b0bcf416a7ec58ca7399ee410be7",
+          "sha256": "13c8a6df561af038497b6dfc010db56620e7b0bcf416a7ec58ca7399ee410be7"
+        },
+        {
+          "path": "chrome/Get-TestChromeStatus.ps1",
+          "sourceSha256": "e559ba8e1c1a19c3aafb95bea8c9f1925961485e3af988517e011ae124608618",
+          "sha256": "e559ba8e1c1a19c3aafb95bea8c9f1925961485e3af988517e011ae124608618"
+        },
+        {
+          "path": "chrome/Get-BenchmarkPreflight.ps1",
+          "sourceSha256": "7f902971041e4dc11de013471f86a839bcb4860d04be88c483bb2feab992e182",
+          "sha256": "7f902971041e4dc11de013471f86a839bcb4860d04be88c483bb2feab992e182"
+        },
+        {
+          "path": "collect-galaxy-anomaly-rate.mjs",
+          "sourceSha256": "524434ef061ca2a6b088e65420f468b0ddc86b18a2a98124e2129d1ffe1ebc34",
+          "sha256": "a8813873f68de124f8687ce74288696b89e4c00480c903655d97ea7ce829d976"
+        },
+        {
+          "path": "validate-windows-anomaly-duration-block.py",
+          "sourceSha256": "a446a5c9ca3ea736d910fdf8a5a1f97dce7b0337470bb42d31901ea32c75043d",
+          "sha256": "a446a5c9ca3ea736d910fdf8a5a1f97dce7b0337470bb42d31901ea32c75043d"
+        },
+        {
+          "path": "summarize-windows-anomaly-duration-campaign.py",
+          "sourceSha256": "52ebee973a32a8f9c58482f1a79f96920c67e7d7abe781b23b8e26ddbb77e3ad",
+          "sha256": "52ebee973a32a8f9c58482f1a79f96920c67e7d7abe781b23b8e26ddbb77e3ad"
+        },
+        {
+          "path": "galaxy_anomaly_duration.py",
+          "sourceSha256": "446130a85e4d99d373ff94b29657e8c3b2614129c5b424fc2157f0cb3f69ae94",
+          "sha256": "446130a85e4d99d373ff94b29657e8c3b2614129c5b424fc2157f0cb3f69ae94"
+        },
+        {
+          "path": "galaxy_fatal_duration.py",
+          "sourceSha256": "59d98fb605761f560343ff3beeb814f109a57027084378aabd02b34459fb2cd3",
+          "sha256": "59d98fb605761f560343ff3beeb814f109a57027084378aabd02b34459fb2cd3"
+        },
+        {
+          "path": "node_modules/ws/browser.js",
+          "sourceSha256": "010da44addea1d88b2b732540c3f1fd0cbcb28926b96623d4c64222e0ead2d0e",
+          "sha256": "010da44addea1d88b2b732540c3f1fd0cbcb28926b96623d4c64222e0ead2d0e"
+        },
+        {
+          "path": "node_modules/ws/index.js",
+          "sourceSha256": "c2b0c9905540a51acb276523bb024ef3c11bd118b03a90d92962080ebd07fec9",
+          "sha256": "c2b0c9905540a51acb276523bb024ef3c11bd118b03a90d92962080ebd07fec9"
+        },
+        {
+          "path": "node_modules/ws/LICENSE",
+          "sourceSha256": "3de284c8e6fa7e8437eff6f53695471e0332129a5b42a79361e17b7637de94b3",
+          "sha256": "3de284c8e6fa7e8437eff6f53695471e0332129a5b42a79361e17b7637de94b3"
+        },
+        {
+          "path": "node_modules/ws/package.json",
+          "sourceSha256": "24a2b36dc40f8a965fbbbd8e1a95d5723645273147865e5aa024be7a632871ce",
+          "sha256": "24a2b36dc40f8a965fbbbd8e1a95d5723645273147865e5aa024be7a632871ce"
+        },
+        {
+          "path": "node_modules/ws/README.md",
+          "sourceSha256": "11509f77b958b378281ac6dc8469d8637dee4aa73935eb3f80c67524fde55513",
+          "sha256": "11509f77b958b378281ac6dc8469d8637dee4aa73935eb3f80c67524fde55513"
+        },
+        {
+          "path": "node_modules/ws/lib/buffer-util.js",
+          "sourceSha256": "da2088dcfa847be2b26a0c4fd46480e2a787b3120bcaceb98555654bbba53631",
+          "sha256": "da2088dcfa847be2b26a0c4fd46480e2a787b3120bcaceb98555654bbba53631"
+        },
+        {
+          "path": "node_modules/ws/lib/constants.js",
+          "sourceSha256": "2c2e8f6abbb7c2314d5736ef0a8d11f04ddc3cf4faf1c710df5d75c4170e937e",
+          "sha256": "2c2e8f6abbb7c2314d5736ef0a8d11f04ddc3cf4faf1c710df5d75c4170e937e"
+        },
+        {
+          "path": "node_modules/ws/lib/event-target.js",
+          "sourceSha256": "6bad3e83c4a8f113cfc40ef2757ecbc727e67c5e16ea8447cdc6e12af2b1554a",
+          "sha256": "6bad3e83c4a8f113cfc40ef2757ecbc727e67c5e16ea8447cdc6e12af2b1554a"
+        },
+        {
+          "path": "node_modules/ws/lib/extension.js",
+          "sourceSha256": "13b228a92d2dad9d1bffd09faaae6b64bfc1f713dd966010ad479a901c243a86",
+          "sha256": "13b228a92d2dad9d1bffd09faaae6b64bfc1f713dd966010ad479a901c243a86"
+        },
+        {
+          "path": "node_modules/ws/lib/limiter.js",
+          "sourceSha256": "e0469d4b83f6ba764b15f80e1766b75c136fbff68f048f4c050f0b1c7f065f69",
+          "sha256": "e0469d4b83f6ba764b15f80e1766b75c136fbff68f048f4c050f0b1c7f065f69"
+        },
+        {
+          "path": "node_modules/ws/lib/permessage-deflate.js",
+          "sourceSha256": "3bf41b9b2d3b9315f1f58b732d27ca48840b50f7991d4f90bd5d765cee92b216",
+          "sha256": "3bf41b9b2d3b9315f1f58b732d27ca48840b50f7991d4f90bd5d765cee92b216"
+        },
+        {
+          "path": "node_modules/ws/lib/receiver.js",
+          "sourceSha256": "1e4b5b4e5bbf5566a96af4458d8f70d488e9d424070dbd157b99afe36c60a5df",
+          "sha256": "1e4b5b4e5bbf5566a96af4458d8f70d488e9d424070dbd157b99afe36c60a5df"
+        },
+        {
+          "path": "node_modules/ws/lib/sender.js",
+          "sourceSha256": "6a712c13b94ba77bf33a06859a86f3db5513943cef65997587f096796822e627",
+          "sha256": "6a712c13b94ba77bf33a06859a86f3db5513943cef65997587f096796822e627"
+        },
+        {
+          "path": "node_modules/ws/lib/stream.js",
+          "sourceSha256": "b766b7ff30b15c8c8dac84b31469fe4aea72ee9cdd25e5319197174111919d11",
+          "sha256": "b766b7ff30b15c8c8dac84b31469fe4aea72ee9cdd25e5319197174111919d11"
+        },
+        {
+          "path": "node_modules/ws/lib/validation.js",
+          "sourceSha256": "257923e54135f38ba66cf9129c02765c448efa2272e710844b3923b879605e18",
+          "sha256": "257923e54135f38ba66cf9129c02765c448efa2272e710844b3923b879605e18"
+        },
+        {
+          "path": "node_modules/ws/lib/websocket-server.js",
+          "sourceSha256": "517a6d4571ea55078380fb3e516b00babc65c7c35be856b71da172c056c80cb8",
+          "sha256": "517a6d4571ea55078380fb3e516b00babc65c7c35be856b71da172c056c80cb8"
+        },
+        {
+          "path": "node_modules/ws/lib/websocket.js",
+          "sourceSha256": "5276902c6ab9c198c713e24e1538dc78eb49da8c3707b19ec0f7e3f5f5a4291a",
+          "sha256": "5276902c6ab9c198c713e24e1538dc78eb49da8c3707b19ec0f7e3f5f5a4291a"
+        }
+      ]
+    },
+    "runnerSha256": "28811067f1a633f67121aaba44df22c18f898c6cf4534f23acf7736a1bc01f36",
+    "collectorSha256": "a8813873f68de124f8687ce74288696b89e4c00480c903655d97ea7ce829d976",
+    "validatorSha256": "a446a5c9ca3ea736d910fdf8a5a1f97dce7b0337470bb42d31901ea32c75043d",
+    "summarizerSha256": "52ebee973a32a8f9c58482f1a79f96920c67e7d7abe781b23b8e26ddbb77e3ad"
+  },
+  "result": {
+    "status": "failed",
+    "attemptedCrossings": 219,
+    "completedCrossings": 219,
+    "fatalStops": 0,
+    "cadenceFailures": 85,
+    "measurementSeconds": 3370.5249999999996,
+    "wallClockElapsedSeconds": 3586.251,
+    "coverageSatisfied": true,
+    "hostLoad": {
+      "sampleCount": 11,
+      "samplesWithSearchIndexer": 0,
+      "samplesWithFfmpeg": 0
+    },
+    "cleanup": {
+      "chrome": {
+        "running": false,
+        "cdpAvailable": false,
+        "targetCount": 0,
+        "processCount": 0
+      },
+      "runtime": {
+        "success": true,
+        "processes": [
+          {
+            "name": "backend",
+            "success": true,
+            "status": "stopped"
+          },
+          {
+            "name": "akebi",
+            "success": true,
+            "status": "stopped"
+          },
+          {
+            "name": "launcher",
+            "success": true,
+            "status": "already-stopped"
+          },
+          {
+            "name": "stub",
+            "success": true,
+            "status": "stopped"
+          }
+        ],
+        "remainingPorts": [],
+        "checkedAt": "2026-09-04T12:50:44.9853011+09:00"
+      },
+      "success": true,
+      "chromeFinalization": {
+        "PagesSeen": 0,
+        "PagesPaused": 0,
+        "PagesExitedFullscreen": 0,
+        "PagesClosed": 0,
+        "CleanupErrors": [],
+        "UnexpectedDedicatedChromeSessions": [],
+        "RemainingDedicatedChromeProcesses": 0,
+        "TaskRemoved": true
+      }
+    }
+  },
+  "blocks": [
+    {
+      "file": "block-000.json",
+      "seed": 20260914,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 3,
+      "measurementSeconds": 306.516,
+      "sha256": "2c463c6f4a981640dde4d44522bd31754b6a325b59961f067feb2fda2b7cada8",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 3,
+          "minimum": 29.008438818551152,
+          "median": 29.67167644970515,
+          "maximum": 29.6726229293946
+        },
+        "canvasDrawFps": {
+          "count": 3,
+          "minimum": 57.42676474381031,
+          "median": 59.32890257740314,
+          "maximum": 59.34143902983944
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-001.json",
+      "seed": 21260917,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 7,
+      "measurementSeconds": 306.929,
+      "sha256": "462d8a85e45ed1d0a7159d13e4c6b568dacc09088b9eb8a44cf3d5b9f47bacf6",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 7,
+          "minimum": 28.852459016393443,
+          "median": 29.508196721311474,
+          "maximum": 30.09978733845902
+        },
+        "canvasDrawFps": {
+          "count": 7,
+          "minimum": 57.726609372466356,
+          "median": 58.69952975514837,
+          "maximum": 59.03035385966641
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-002.json",
+      "seed": 22260920,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 3,
+      "measurementSeconds": 306.942,
+      "sha256": "6652ac9fee828ea2e3840baa5e1ba641f3a12d3f439d9d9346c5f94f71b3fcec",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 3,
+          "minimum": 28.526460751482876,
+          "median": 29.508196721311474,
+          "maximum": 30.017292570734682
+        },
+        "canvasDrawFps": {
+          "count": 3,
+          "minimum": 57.07984692211837,
+          "median": 58.443455956390494,
+          "maximum": 59.34137593739811
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-003.json",
+      "seed": 23260923,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 20,
+      "measurementSeconds": 311.54,
+      "sha256": "7841b6ac303d9726e31d40c5b441775d6648dd6d74876db4afa1b152dd23dd19",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 20,
+          "minimum": 19.889142484512554,
+          "median": 19.99836079547275,
+          "maximum": 20.0133422281521
+        },
+        "canvasDrawFps": {
+          "count": 20,
+          "minimum": 39.676139479352564,
+          "median": 39.94225402071429,
+          "maximum": 40.43434310502519
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": true
+    },
+    {
+      "file": "block-004.json",
+      "seed": 24260926,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 0,
+      "measurementSeconds": 306.709,
+      "sha256": "79164924e255de145bfed1f3da9ecb6682c69566dacb01db8082c95268f9e0b2",
+      "cadenceFailureContext": {
+        "videoCallbackFps": null,
+        "canvasDrawFps": null,
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-005.json",
+      "seed": 25260929,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 20,
+      "measurementSeconds": 310.342,
+      "sha256": "1a55ab79d9190d91a120a465152914a062570f1cfeca28d2596d6cc65249bd88",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 20,
+          "minimum": 19.889142484512554,
+          "median": 20.0,
+          "maximum": 20.00327922610264
+        },
+        "canvasDrawFps": {
+          "count": 20,
+          "minimum": 39.56414580368265,
+          "median": 39.890382620429094,
+          "maximum": 40.45017126080574
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": true
+    },
+    {
+      "file": "block-006.json",
+      "seed": 26260932,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 4,
+      "measurementSeconds": 306.972,
+      "sha256": "8880291d0d1302a78c9af2d3a53a2b3f2d59b89475f0b004ce3e0df148f171e2",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 4,
+          "minimum": 29.021423680219694,
+          "median": 29.42456811497897,
+          "maximum": 29.83719270928915
+        },
+        "canvasDrawFps": {
+          "count": 4,
+          "minimum": 58.070135819679194,
+          "median": 58.7004659655114,
+          "maximum": 59.345266892436705
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-007.json",
+      "seed": 27260935,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 2,
+      "measurementSeconds": 306.926,
+      "sha256": "a73b3dfb211b54d13bb859ab9923c9ae45b0a7ce004b1bc39764dd3cc7742710",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 2,
+          "minimum": 29.504327301351942,
+          "median": 29.6025177745123,
+          "maximum": 29.700708247672658
+        },
+        "canvasDrawFps": {
+          "count": 2,
+          "minimum": 58.77005000330384,
+          "median": 58.89311540667282,
+          "maximum": 59.01618081004181
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-008.json",
+      "seed": 28260938,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 20,
+      "measurementSeconds": 309.323,
+      "sha256": "5780ed58a97defbfd34c8a8a5085d010cd810faa810501d1b5f325c9c9266e54",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 20,
+          "minimum": 19.889790994124834,
+          "median": 19.999016447173787,
+          "maximum": 20.108122362859323
+        },
+        "canvasDrawFps": {
+          "count": 20,
+          "minimum": 39.361187288272305,
+          "median": 40.00063468963685,
+          "maximum": 40.661070304381674
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": true
+    },
+    {
+      "file": "block-009.json",
+      "seed": 29260941,
+      "stopReason": "count-complete",
+      "attempted": 20,
+      "completed": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 3,
+      "measurementSeconds": 306.918,
+      "sha256": "efcd76e09d438a5f0b79022c9a55d5c9589e02b117d5e3e610fce1d6c10e4b3a",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 3,
+          "minimum": 29.18032786885246,
+          "median": 29.507229271157023,
+          "maximum": 29.681249193430045
+        },
+        "canvasDrawFps": {
+          "count": 3,
+          "minimum": 58.377116170489394,
+          "median": 59.030353859524546,
+          "maximum": 59.36441361509921
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    },
+    {
+      "file": "block-010.json",
+      "seed": 30260944,
+      "stopReason": "time-limit",
+      "attempted": 19,
+      "completed": 19,
+      "fatalStops": 0,
+      "cadenceFailures": 3,
+      "measurementSeconds": 291.408,
+      "sha256": "ff7dc94b847b3eb04d1784a6af249fb5ddd19379febd429afd1b0527d45e494b",
+      "cadenceFailureContext": {
+        "videoCallbackFps": {
+          "count": 3,
+          "minimum": 29.624753127057275,
+          "median": 29.835087374169877,
+          "maximum": 29.835087374169877
+        },
+        "canvasDrawFps": {
+          "count": 3,
+          "minimum": 59.267943207039416,
+          "median": 59.33467349726517,
+          "maximum": 59.358668301095115
+        },
+        "uniqueAnimationFrameFps": null
+      },
+      "lowVideoPresentationSession": false
+    }
+  ],
+  "layerAnalysis": {
+    "lowVideoPresentationBlocks": [
+      "block-003.json",
+      "block-005.json",
+      "block-008.json"
+    ],
+    "lowVideoPresentation": {
+      "count": 60,
+      "videoCallbackFps": {
+        "count": 60,
+        "minimum": 19.889142484512554,
+        "median": 19.999344283808632,
+        "maximum": 20.108122362859323
+      },
+      "canvasDrawFps": {
+        "count": 60,
+        "minimum": 39.361187288272305,
+        "median": 39.9960659607154,
+        "maximum": 40.661070304381674
+      },
+      "uniqueAnimationFrameFps": null,
+      "mediaTimeIntervals": {
+        "count": 3654,
+        "oneSourceFrame": 1852,
+        "twoSourceFrames": 1802
+      },
+      "presentedFrameStepCounts": {
+        "1": 3654
+      },
+      "videoStates": []
+    },
+    "otherCadenceFailures": {
+      "count": 25,
+      "videoCallbackFps": {
+        "count": 25,
+        "minimum": 28.526460751482876,
+        "median": 29.508196721311474,
+        "maximum": 30.09978733845902
+      },
+      "canvasDrawFps": {
+        "count": 25,
+        "minimum": 57.07984692211837,
+        "median": 59.01618081004181,
+        "maximum": 59.36441361509921
+      },
+      "uniqueAnimationFrameFps": null,
+      "mediaTimeIntervals": {
+        "count": 2256,
+        "oneSourceFrame": 2225,
+        "twoSourceFrames": 31
+      },
+      "presentedFrameStepCounts": {
+        "1": 2225,
+        "2": 31
+      },
+      "videoStates": []
+    },
+    "animationFrameHistoryAvailable": false
+  },
+  "interpretation": [
+    "A block is classified as a low-video-presentation session only when every trial fails cadence, median rVFC is 18-22 fps, and median canvas draw rate is 38-42 fps.",
+    "A one-source-frame media interval is 1001/30 ms; a two-source-frame interval is 1001/15 ms, each with 0.01 ms tolerance.",
+    "A presentedFrames step of one with alternating one- and two-source-frame media intervals means callbacks themselves were not skipped by the collector; Chrome presented a reduced subset of source media times.",
+    "Diagnostic instrumentation invalidates this run for formal latency or failure-rate claims.",
+    "Absent animation-frame history cannot distinguish a reduced compositor/rAF rate from video presentation reduction upstream of rVFC."
+  ]
+}

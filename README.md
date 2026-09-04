@@ -107,6 +107,11 @@ integrationは、異常区間通過後のFPS安定復帰に20回すべてで失�
 停止時はvideo callbackが3.791秒と5.731秒途切れ、YADIFのqueue全resetは0回でした。
 1時間を完走していないため合格判定には使わず、converter、MSE、decoderのどこで進行が止まったかを診断します。[Windows補助条件の結果](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存しています。
 
+同じbuildの計装付き1時間診断では、219回すべてが2秒以内に復帰し、致命的停止は0件でしたが、FPS安定復帰失敗を85回検出しました。
+11回作り直したclient sessionのうち3回は、そのsessionの20試行すべてでvideo callbackが中央値20.00fps、canvasが中央値40.00fpsでした。
+この60試行では`presentedFrames`が常に1ずつ進み、映像時刻だけが1 frame分と2 frame分の間隔を交互に進んだため、YADIFより前のvideo presentationで表示対象が減っています。
+この診断には同じ窓のrAF履歴がなく、compositorの更新頻度低下とvideo presentation固有の低下はまだ分離できません。追加計装を含むため、正式な発生率やシーク完了時間には使いません。[1時間診断の層別集計](results/windows-anomaly-diagnostic-one-hour-layer-analysis.json)を保存しています。
+
 同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
 
 耐障害性を1種類の欠損だけで判断しないため、「キッズアワー」の別録画から2本の固定fixtureを追加しました。

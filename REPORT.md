@@ -749,6 +749,12 @@ campaign内のruntime終了commandは時間切れになったが、直後の確�
 
 同じWindows buildへ診断計装を加え、停止時と同じseed `26260932`、同じ31.566msのシーク前待ち時間を、新しいclient sessionの先頭試行で再実行した。今回はシーク完了時間574.0ms、異常区間のrVFC gap 565.3ms、安定確認743.4msで復帰し、致命的停止は再現しなかった。したがって、停止はseedとシーク前待ち時間だけでは決まらず、client sessionやdecoder状態など別の状態変数を切り分ける必要がある。診断計装付き3試行は致命的停止0件、FPS安定復帰失敗1件だったが、発生率や正式なシーク完了時間には使わない。[同seedの診断結果](results/windows-anomaly-fatal-seed-diagnostic.json)を保存した。
 
+同じbuildと欠陥を使い、Chrome、page、player、Worker、decoder、MSE、YADIFを20回ごとに作り直す計装付き1時間診断も行った。11 session、219回すべてが2秒以内に安定復帰し、致命的停止は0件だった。FPS安定復帰失敗は85回で、走行全体は不合格だった。Search IndexerとFFmpegは11回のhost負荷標本で0回、全sessionと最終cleanupは成功した。追加計装を含むため、この0/219を正式な発生率やシーク完了時間には使わない。
+
+block 3、5、8は各20試行すべてが同じ低FPS状態になった。この60試行の3秒窓ではrVFCが中央値19.999fps、canvas直接描画が中央値39.996fpsだった。3,654個の隣接rVFCは`presentedFrames`がすべて1ずつ進んだが、映像時刻は1 frame分が1,852区間、2 frame分が1,802区間だった。他のFPS安定復帰失敗25回ではrVFC中央値29.508fps、canvas中央値59.016fpsだった。したがって約40fpsのsessionでは、YADIFが独立に描画を減らしたのではなく、Chromeが約20fpsでpresentationした映像をYADIFが2 fieldへ展開している。
+
+この走行のFPS失敗contextにはrAF履歴がなく、compositor/rAF自体が約40fpsへ落ちた結果なのか、rAFが約60fpsのままvideo presentationだけが約20fpsへ落ちたのかは分離できない。次の診断では失敗窓のrAF、rVFC、canvas直接描画とvideo要素の`playbackRate`を同時に保存する。[summaryと全blockのhashを照合した層別集計](results/windows-anomaly-diagnostic-one-hour-layer-analysis.json)および[集計スクリプト](scripts/analyze-windows-anomaly-diagnostic.py)を公開した。
+
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 
 元TSの不連続は、映像PID 256のbyte位置202,401,364でcontinuity counterが1から6へ飛んだ箇所だった。discontinuityの通知はなく、欠落数は16を法として4 packetに相当する。この位置はB-picture（temporal reference 7、PTS 502108869）のPES内にあり、FFprobeのcorrupt表示が指した直前のPES位置とは異なる。独立に読んだ周辺24 pictureの種類・PTS・PES位置はFFprobeと一致した。[TS byte解析・照合結果](results/nogizaka-transport-defect-localization.json)と[固定fixture用の再現スクリプト](scripts/inspect-nogizaka-transport-defect.py)を公開している。
