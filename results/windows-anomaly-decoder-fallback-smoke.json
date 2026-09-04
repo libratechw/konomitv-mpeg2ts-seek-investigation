@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Confirm the actual Chrome video decoder and its fallback sequence after an anomalous MPEG-2 TS seek. This is a two-crossing diagnostic smoke, not a performance or failure-rate result.",
+  "conditions": {
+    "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+    "os": "Windows 11",
+    "browser": "Chrome/152.0.7977.77",
+    "displayModeConfiguredByUser": "60 Hz",
+    "powerModeConfiguredByUser": "Best power efficiency",
+    "transport": "Windows-local",
+    "fullscreen": true,
+    "variant": "rank5-provenance-v2",
+    "sourceCommit": "acfce36666d28271681f1bb56ad8b809b5c9de37",
+    "distCommit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
+    "sourceHash": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+    "distHash": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+    "konomiCommit": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00",
+    "asset": "PlayerController-Buc-P0iB.js",
+    "playerAssetHash": "723c5e70369412baae82909225c0ca8edf45950d92a892ace29424c8e0503e77",
+    "fixtureName": "nogizaka.ts",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "seekTimeSeconds": 113.67,
+    "defectMediaTimeSeconds": 125.0249,
+    "completedCrossings": 2,
+    "fatalStops": 0,
+    "fpsStableRecoveryFailures": 2
+  },
+  "selection": {
+    "frameProperty": "kFrameUrl",
+    "requiredPipelineState": "kPlaying",
+    "selectedPlayerId": "6:1",
+    "decoderProperty": "kVideoDecoderName",
+    "finalDecoderName": "FFmpegVideoDecoder",
+    "matchedPagePlayerCount": 1
+  },
+  "decoderTimeline": [
+    {
+      "time": 0.8990000039339066,
+      "key": "pipeline_state",
+      "value": "kStarting"
+    },
+    {
+      "time": 323.2520000040531,
+      "key": "kVideoDecoderName",
+      "value": "D3D11VideoDecoder"
+    },
+    {
+      "time": 323.2529999986291,
+      "key": "kIsPlatformVideoDecoder",
+      "value": true
+    },
+    {
+      "time": 323.3550000041723,
+      "key": "pipeline_state",
+      "value": "kPlaying"
+    },
+    {
+      "time": 329.8919999971986,
+      "key": "pipeline_state",
+      "value": "kSeeking"
+    },
+    {
+      "time": 485.7939999997616,
+      "key": "pipeline_state",
+      "value": "kPlaying"
+    },
+    {
+      "time": 499.1719999983907,
+      "key": "warning",
+      "value": "video decoder fallback after initial decode error."
+    },
+    {
+      "time": 503.5710000023246,
+      "key": "kVideoDecoderName",
+      "value": "FFmpegVideoDecoder"
+    },
+    {
+      "time": 503.5740000009537,
+      "key": "kIsPlatformVideoDecoder",
+      "value": false
+    },
+    {
+      "time": 3690.167999997735,
+      "key": "pipeline_state",
+      "value": "kSeeking"
+    },
+    {
+      "time": 3920.1869999989867,
+      "key": "pipeline_state",
+      "value": "kPlaying"
+    },
+    {
+      "time": 19206.259000003338,
+      "key": "pipeline_state",
+      "value": "kSeeking"
+    },
+    {
+      "time": 19206.381999999285,
+      "key": "pipeline_state",
+      "value": "kPlaying"
+    }
+  ],
+  "observation": {
+    "initialDecoder": "D3D11VideoDecoder",
+    "initialPlatformDecoder": true,
+    "fallbackReason": "video decoder fallback after initial decode error.",
+    "finalDecoder": "FFmpegVideoDecoder",
+    "finalPlatformDecoder": false,
+    "audioDecoder": "FFmpegAudioDecoder"
+  },
+  "cleanup": {
+    "pagesSeen": true,
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "dedicatedChromeStopped": true,
+    "scheduledTaskRemoved": true,
+    "success": true
+  },
+  "limitations": [
+    "The diagnostic captured Chrome media-internals after the crossings, so it establishes the retained decoder event sequence but not the exact frame that triggered the initial decode error.",
+    "Two crossings are insufficient for a performance or failure-rate comparison."
+  ]
+}
