@@ -73,7 +73,7 @@ Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は
 
 ### 異常TSで完成済みpictureを保つ案
 
-`fix/preserve-complete-pictures-before-loss`は、transport lossより前に完成していたpictureを残す案です。2種類の実在欠損をオフライン変換すると、旧基準版に対して次の差がありました。
+`52a3db5`を基点とした実験では、transport lossより前に完成していたpictureを残しました。2種類の実在欠損をオフライン変換すると、旧基準版に対して次の差がありました。
 
 | 欠損 | 映像sample増加 | 最大映像時刻間隔 |
 | --- | ---: | ---: |

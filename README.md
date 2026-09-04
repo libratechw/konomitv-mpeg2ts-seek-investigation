@@ -22,7 +22,6 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 | --- | --- | --- |
 | `tsukumijima/KonomiTV` | [`fix/android-yadif-main-thread`](https://github.com/libratechw/KonomiTV/tree/fix/android-yadif-main-thread) | Android Chromeのデスクトップ表示でも端末を識別し、YADIF描画をメインスレッドへ切り替える候補。先行commitでmpeg2toh264を`faf1464`へ更新する |
 | `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) | `autoFilm`のcomb判定で行参照をpixel loopの外へ移し、判定を変えずにCPU負荷を下げる候補 |
-| `tsukumijima/mpeg2toh264` | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | 異常TSで完成済みpictureを保つ実験。`main`での再現と実機効果を確認するまで採用候補にしない |
 | `Kludex/starlette` | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | ASGI切断後のfile送信を止める独立候補 |
 
 KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補はまずfork branchとして公開します。数日間取り込まれず、fetch後の`main`にも必要な場合だけPRを作成します。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
