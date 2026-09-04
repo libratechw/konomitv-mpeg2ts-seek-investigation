@@ -59,6 +59,16 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 位相計測では、1 frame当たりの中央値は2回のGPU readbackが合計約8.8ms、CPU側のfield matchとdecimateが合計約7.6msでした。comb scoreの行参照をpixel loop外へ移す候補では、Galaxyの1走行でcomb scoreが3.4msから3.0ms、field matchが4.6msから4.1ms、同期解析全体が17.7msから16.8msへ短縮しました。4素材のオフライン解析でも処理時間が約6〜9%短くなり、判定結果は一致しました。[位相別の条件と結果](results/galaxy-autofilm-analysis-phase-comparison.json)を公開しています。診断build各1走行の比較であり、長時間の欠落率や他端末での効果は未確認です。
 
+### YADIFのqueue recovery fallback
+
+`faf1464`には、queue末尾の表示予定が時刻差の上限を超えたときにqueue全体を空にする処理と、空き出力slotがないときに最古のqueued slotを上書きするfallbackがあります。前者は一時的な予定時刻のずれをqueue破棄として扱い、後者は表示待ちのpictureを暗黙に失わせます。
+
+候補では両方を削除し、容量超過時に先頭だけを破棄して残りの表示時刻を詰める既存処理を残しました。公開statsの`queueResetted`は互換性のため残しています。出力pool 6、queue上限5、1回に必要な出力1または2の全6386状態を列挙し、容量整理後のslot割り当て失敗が0件であることを確認しました。WASM・YADIF build、workspace typecheck、IVTC・MSE test、Rust release test 247件も成功しています。
+
+Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は59.793fpsと59.697fpsで、双方とも40ms超の描画間隔、`missed`・`late`・`queueResetted`増分は0でした。「NHK高校講座 情報Ⅰ」から固定した映像・主音声のburst欠損を跨ぐ走行も、双方とも致命的な表示停止はなく、約0.45秒で安定した表示進行を確認し、末尾は約59.5fpsでした。[条件と結果](results/galaxy-yadif-queue-recovery-removal.json)を公開しています。
+
+この異常TS走行では削除対象の処理自体は発火していません。したがって候補固有の効果量ではなく、正常60iと強い欠損の短時間条件で退行が見られなかった範囲を示します。1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
+
 ### 異常TSで完成済みpictureを保つ案
 
 `fix/preserve-complete-pictures-before-loss`は、transport lossより前に完成していたpictureを残す案です。2種類の実在欠損をオフライン変換すると、旧基準版に対して次の差がありました。
@@ -88,7 +98,7 @@ KonomiTV `e92fba8`を基点とする隔離buildで、Galaxy Chrome、LAN直結�
 
 正常3:2区間は、実写とアニメを含む4素材を固定しました。[scan結果](results/anime-autofilm-clean-fixtures.json)にcadence、decode error、transport error、SHA-256を記録しています。
 
-異常TSは、乃木坂工事中の既知欠損に加え、キッズアワーからopen GOP内P-picture欠損とB-picture欠損を独立fixtureとして固定しました。単一素材の成功を耐障害性全体へ一般化しません。
+異常TSは、乃木坂工事中の既知欠損に加え、キッズアワーからopen GOP内P-picture欠損とB-picture欠損、「NHK高校講座 情報Ⅰ」から映像・主音声が同時に複数欠損する2区間を独立fixtureとして固定しました。単一素材の成功を耐障害性全体へ一般化しません。
 
 ## 測定経路
 

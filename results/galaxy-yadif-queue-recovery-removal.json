@@ -1,0 +1,98 @@
+{
+  "scope": "YADIFのqueue全resetとqueued slot再利用fallbackを削除する候補の回帰確認",
+  "revisions": {
+    "konomiTvCandidate": "0f496f61de450c4ffe7e0198e74fb82f202ac328",
+    "mpeg2toh264Base": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "candidateSource": "8b6fe78a37720d27170a1736c5260a6360c810db",
+    "candidateDist": "f287e236fff411f482b7e915d26ed70611304218",
+    "baseSourceSha256": "0cc201daee8dfe3777a304e3c7aefdbabb8c28a772e3f6ce6388ed92a5aaccf2",
+    "baseDistSha256": "338389706f3098a0978eaaa71414091011f8fc2d6cce98908a849de3792cca2c",
+    "candidateSourceSha256": "d56ee656a3295dcd47fc2276e0b4f2e3868eb5a4ccba2cef54eaff55f5287b01",
+    "candidateDistSha256": "53f3cb79c0e64bbc03aac0dc24dfe0dfdf1aae86b5bc0dd5ac810370450097fc"
+  },
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151 desktop mode",
+    "quality": "Original (MPEG-2)",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "durationMsPerRun": 10000,
+    "runsPerCondition": 1
+  },
+  "normal60i": {
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "base": {
+      "mediaTimeDeltaSeconds": 10.000410000000045,
+      "drawFps": 59.79342272407059,
+      "maximumDrawIntervalMs": 35.40000009536743,
+      "drawIntervalsOver40Ms": 0,
+      "missedDelta": 0,
+      "lateDelta": 0,
+      "queueResettedDelta": 0,
+      "rawResultSha256": "32ae9b10268af796400a19a4e1e042587b04ec5d60630467f3dbc9938b13a462"
+    },
+    "candidate": {
+      "mediaTimeDeltaSeconds": 10.003125999999952,
+      "drawFps": 59.69701514924254,
+      "maximumDrawIntervalMs": 34,
+      "drawIntervalsOver40Ms": 0,
+      "missedDelta": 0,
+      "lateDelta": 0,
+      "queueResettedDelta": 0,
+      "rawResultSha256": "09efe4a763089d47800bb8fa73735ffd56489bd5ad5c641b3f4f037bd21ea256"
+    }
+  },
+  "anomalousTransportBurst": {
+    "fixture": "NHK高校講座 情報Ⅰから固定した映像・主音声burst欠損2",
+    "fixtureSha256": "9833473a379253b2dacf1b5e361729adebcccaad2c75362d917de467d1369813",
+    "knownDefectMediaTimeSeconds": 9.7097,
+    "missingContinuityEvents": {
+      "video": 3,
+      "primaryAudio": 3
+    },
+    "base": {
+      "fatalStop": false,
+      "stableDisplayConfirmationMs": 449.7000000476837,
+      "maximumDrawIntervalInRecoveryMs": 247.89999997615814,
+      "trailingDrawFps": 59.4771635831483,
+      "trailingDrawIntervalsOver40Ms": 0,
+      "queueResettedDelta": 0,
+      "browserDroppedFrames": 15,
+      "audioDecodedBytesAdvanced": true,
+      "rawResultSha256": "c9247d1ace199b85a16d32bbdff6accf73e6dc386e2e85e8491eb4bf56187ba6"
+    },
+    "candidate": {
+      "fatalStop": false,
+      "stableDisplayConfirmationMs": 449.39999997615814,
+      "maximumDrawIntervalInRecoveryMs": 262.10000002384186,
+      "trailingDrawFps": 59.45924229584283,
+      "trailingDrawIntervalsOver40Ms": 0,
+      "queueResettedDelta": 0,
+      "browserDroppedFrames": 15,
+      "audioDecodedBytesAdvanced": true,
+      "rawResultSha256": "48bbed3fc6c50cdb69da2a678147c5d6fe4f6847e0443f4af0f1e105efcace6f"
+    }
+  },
+  "invariantCheck": {
+    "outputPoolLength": 6,
+    "queueCapacity": 5,
+    "requiredOutputs": [1, 2],
+    "enumeratedStates": 6386,
+    "allocationFailures": 0
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  },
+  "limitations": [
+    "正常60iと異常TSは各条件1走行の短時間回帰確認であり、1時間安定性を示さない。",
+    "異常TS走行では削除対象のqueue全resetとslot再利用fallbackが発火していないため、候補固有の効果量ではなく退行が見られない範囲を示す。",
+    "browserのdroppedVideoFramesは可視canvasのdrop数を示さず、入力欠損から避けられない最小dropも未確定。",
+    "可聴A/V同期とcompositor scanoutは未確認。"
+  ]
+}
