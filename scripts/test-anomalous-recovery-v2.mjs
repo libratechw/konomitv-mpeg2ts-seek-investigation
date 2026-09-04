@@ -61,6 +61,8 @@ try {
   const result = JSON.parse(success.stdout);
   assert.equal(result.schemaVersion, 2);
   assert.equal(result.detectedInputGap.spansKnownDefect, true);
+  assert.equal(result.recoveryRegion.maximumVideoInterval.mediaTimeDeltaMs, 500);
+  assert.equal(result.recoveryRegion.maximumCanvasDrawIntervalMs, 593);
   assert.equal(result.displayRecovery.fatalStop, false);
   assert.equal(result.cadenceRecovery.found, true);
   assert.equal(result.cadenceRecovery.trailingWindowSufficient, true);
@@ -70,6 +72,41 @@ try {
   assert.equal(result.cleanup.verified, true);
   assert.equal(result.audioSync.proven, false);
   assert.equal(result.streamRecovery.minimumUnavoidableDropProven, false);
+
+  const delayedLargerGap = structuredClone(valid);
+  delayedLargerGap.sample.videoFrames = [
+    {at: 900, mediaTime: 9.9},
+    {at: 1000, mediaTime: 10},
+    {at: 1030, mediaTime: 10.25},
+    {at: 1380, mediaTime: 10.6},
+    {at: 1413, mediaTime: 10.633},
+  ];
+  delayedLargerGap.sample.draws = [
+    {at: 900}, {at: 917}, {at: 1010}, {at: 1027}, {at: 1044}, {at: 1061},
+    {at: 1390}, ...Array.from({length: 330}, (_, index) => ({at: 1407 + index * frameIntervalMs})),
+  ];
+  const delayed = analyze('delayed-larger-gap', delayedLargerGap);
+  assert.equal(delayed.status, 0, delayed.stderr);
+  const delayedResult = JSON.parse(delayed.stdout);
+  assert.equal(delayedResult.detectedInputGap.mediaTimeDeltaMs, 250);
+  assert.ok(Math.abs(
+    delayedResult.recoveryRegion.maximumVideoInterval.mediaTimeDeltaMs - 350,
+  ) < 1e-9);
+  assert.equal(delayedResult.recoveryRegion.maximumCanvasDrawIntervalMs, 329);
+
+  const earlyStableThenFatalGap = structuredClone(delayedLargerGap);
+  earlyStableThenFatalGap.sample.draws = [
+    {at: 900}, {at: 917},
+    ...Array.from({length: 10}, (_, index) => ({at: 1010 + index * frameIntervalMs})),
+    {at: 3300},
+    ...Array.from({length: 330}, (_, index) => ({at: 3300 + (index + 1) * frameIntervalMs})),
+  ];
+  const lateFatal = analyze('early-stable-then-fatal-gap', earlyStableThenFatalGap);
+  assert.equal(lateFatal.status, 0, lateFatal.stderr);
+  const lateFatalResult = JSON.parse(lateFatal.stdout);
+  assert.ok(lateFatalResult.displayRecovery.stableConfirmationMs < 2000);
+  assert.ok(lateFatalResult.recoveryRegion.maximumCanvasDrawIntervalMs > 2000);
+  assert.equal(lateFatalResult.displayRecovery.fatalStop, true);
 
   const noPostDraw = structuredClone(valid);
   noPostDraw.sample.draws = Array.from({length: 8}, (_, index) => ({at: 800 + index * 17}));

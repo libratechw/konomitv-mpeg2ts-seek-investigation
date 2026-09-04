@@ -779,18 +779,18 @@ fMP4の`tfdt`と`trun`を直接解析すると、映像trackの先頭decode時�
 
 修正単独の差を確認するため、最新KonomiTV `7307e0e`へ直接の親`52a3db5`と候補`f80154f`を組み込み、Galaxy、LAN直結、全画面、同じfixture、同じ113.67秒seekでB-C-C-Bの順に各2回測った。15秒traceはすべて既知の欠陥125.0249秒を横切り、利用者操作、playback error、visibility変更、致命的停止はなかった。
 
-| build | rVFCの映像時刻間隔 | canvas最大描画間隔 | Chrome drop | YADIF degraded | discontinuity | 期待表示FPSへ復帰 |
+| build | FPS安定復帰までの最大映像時刻間隔 | FPS安定復帰までのcanvas最大描画間隔 | Chrome drop | YADIF degraded | discontinuity | 期待表示FPSへ復帰 |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | 基準1 | 600.600 ms | 569.6 ms | 17 | 3 | 1 | はい |
-| 候補1 | 33.367 ms | 23.1 ms | 6 | 0 | 0 | はい |
-| 候補2 | 33.367 ms | 20.7 ms | 6 | 0 | 0 | はい |
+| 候補1 | 333.666 ms | 317.6 ms | 6 | 0 | 0 | はい |
+| 候補2 | 333.666 ms | 318.1 ms | 6 | 0 | 0 | はい |
 | 基準2 | 567.233 ms | 522.4 ms | 17 | 3 | 1 | いいえ |
 
-候補のrVFC映像時刻間隔は2走行とも30000/1001fpsの1 frame分まで縮まり、基準版にあったYADIFのdegradedとdiscontinuityも起きなかった。この直接A/Bは、この固定欠陥に対するブラウザー上の効果を示す。欠損したB pictureは`picture_structure=frame`で、`closed_gop=0`かつintra pictureより表示順が前のB pictureを2枚持つopen GOP内にある。したがって実在するopen GOP内の欠損はA/Bの対象だが、field picture欠損ではない。2走行では異常TSの1時間条件、可視scanout、最小限の不可避drop、可聴A/V同期、field picture、画素の正常性を証明しない。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[A/B集計・全trace](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を保存した。
+候補は欠陥時刻を最初にまたぐrVFC映像時刻間隔を1 frame分へ縮めたが、その約200ms後に333.666msの映像時刻間隔が残った。FPS安定復帰までの最大値は基準版の567.233〜600.600msから333.666msへ、canvas最大描画間隔は522.4〜569.6msから317.6〜318.1msへ縮まった。基準版にあったYADIFのdegradedとdiscontinuityも起きなかった。この直接A/Bは同じ詳細計装を使った相対比較であり、絶対時間は低負荷の走行と分けて扱う。欠損したB pictureは`picture_structure=frame`で、`closed_gop=0`かつintra pictureより表示順が前のB pictureを2枚持つopen GOP内にある。したがって実在するopen GOP内の欠損はA/Bの対象だが、field picture欠損ではない。2走行では異常TSの1時間条件、可視scanout、最小限の不可避drop、可聴A/V同期、field picture、画素の正常性を証明しない。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[A/B集計・全trace](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を保存した。
 
 公開branchには、interlaced `hd1080i.m2v`とcomplementary B fieldを含む`open_gop_leading_bb.m2v`へ2種類のpacket欠落位置を与えるSession回帰試験を`27eed22`で追加した。現在のtip `e36dd0b`で`cargo fmt --check`と`cargo test --release`を実行し、239件が成功、失敗0件だった。現在のdist `e36dd0b`はGalaxyで測った`f80154f`とruntime source・distがバイト一致し、差分は試験だけである。この固定fixtureは通常のfield pair・open-GOP filterを通るが、実在するfield pair・open GOP破損のブラウザー挙動を一般化しない。
 
-候補tip `e36dd0b`単独を最新KonomiTV `7307e0e`へ組み込み、同じ固定欠損を反復通過する1時間上限の自動試験を行った。20回ごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、12 sessionで223回すべてが2秒以内に安定復帰した。致命的な表示停止は0件で、欠損後の初回描画は中央値48.5ms、安定確認は中央値168.6ms、映像時刻の間隔は全試行33.366msだった。
+候補tip `e36dd0b`単独を最新KonomiTV `7307e0e`へ組み込み、同じ固定欠損を反復通過する1時間上限の自動試験を行った。20回ごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、12 sessionで223回すべてが2秒以内に安定復帰した。致命的な表示停止は0件で、欠損後の初回描画は中央値48.5ms、安定確認は中央値168.6msだった。判定器が欠陥時刻を最初にまたいだ映像時刻間隔は全試行33.366msだったが、この値は破損影響区間全体の最大値ではない。
 
 一方、安定復帰後の約3秒間を60000/1001fpsの±1%かつ40ms超の描画間隔0回で判定すると、223回中9回が不合格だった。8回は58.936〜59.340fps、1回は60.058fpsまで追いついたものの40.4msの描画間隔を1回含んだ。このため異常TSの1時間条件は満たさない。
 
@@ -1160,7 +1160,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
-| packet欠落前に完了を確認できるpictureを保持する | Galaxyの同条件各2走行で、欠陥をまたぐ映像時刻間隔が567.233〜600.600→33.367ms、Chrome dropが17→6 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は、次のpicture開始位置を受信済みのprefixだけをtranscoderへ渡す。実在するopen GOP内のframe picture欠損と、固定interlaced・open-GOP fixtureのSession試験は確認済み。実在するfield picture破損、画素、A/V同期、異常TSの1時間条件を確認してからintegrationへ入れる。[A/B結果](results/galaxy-anomaly-preserve-complete-pictures-ab.json) |
+| packet欠落前に完了を確認できるpictureを保持する | Galaxyの同条件各2走行で、FPS安定復帰までの最大映像時刻間隔が567.233〜600.600→333.666ms、Chrome dropが17→6 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は、次のpicture開始位置を受信済みのprefixだけをtranscoderへ渡す。実在するopen GOP内のframe picture欠損と、固定interlaced・open-GOP fixtureのSession試験は確認済み。実在するfield picture破損、画素、A/V同期、異常TSの1時間条件を確認してからintegrationへ入れる。[A/B結果](results/galaxy-anomaly-preserve-complete-pictures-ab.json) |
 | AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
 | 録画TSの`FileResponse` body chunkを64KiBから増やす | Galaxyの一部条件で最大15.4msの対応付き差が出た | 64〜1024KiBで単調性がなく、Windows各40 seekは−2.4〜+1.7msで中立だったため採用しない。別transport/storageで再現した場合だけ再評価する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |

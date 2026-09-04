@@ -84,6 +84,18 @@
           "startsAtMs": 3587.600000023842,
           "endsAtMs": 4190
         },
+        "recoveryRegion": {
+          "startsAtMs": 3587.600000023842,
+          "endsAtMs": 6102.800000071526,
+          "endReason": "stable-cadence-started",
+          "maximumVideoInterval": {
+            "beforeMediaTime": 125.019355,
+            "afterMediaTime": 125.619955,
+            "mediaTimeDeltaMs": 600.6,
+            "callbackIntervalMs": 602.3999999761581
+          },
+          "maximumCanvasDrawIntervalMs": 569.5999999046326
+        },
         "displayRecovery": {
           "fatalDefinitionMs": 2000,
           "fatalStop": false,
@@ -205,6 +217,18 @@
           "startsAtMs": 3596.100000023842,
           "endsAtMs": 3626.100000023842
         },
+        "recoveryRegion": {
+          "startsAtMs": 3596.100000023842,
+          "endsAtMs": 4192.700000047684,
+          "endReason": "stable-cadence-started",
+          "maximumVideoInterval": {
+            "beforeMediaTime": 125.252922,
+            "afterMediaTime": 125.586588,
+            "mediaTimeDeltaMs": 333.666000000008,
+            "callbackIntervalMs": 336.2000000476837
+          },
+          "maximumCanvasDrawIntervalMs": 317.60000002384186
+        },
         "displayRecovery": {
           "fatalDefinitionMs": 2000,
           "fatalStop": false,
@@ -226,7 +250,7 @@
             "drawCount": 182,
             "durationMs": 3019.5,
             "drawFps": 59.943699287961586,
-            "fpsErrorRatio": 0.00006071645415914032,
+            "fpsErrorRatio": 6.071645415914032e-05,
             "intervalsOver40Ms": 0,
             "maximumIntervalMs": 22.299999952316284
           },
@@ -325,6 +349,18 @@
           "callbackIntervalMs": 36.60000002384186,
           "startsAtMs": 3611.0999999046326,
           "endsAtMs": 3647.6999999284744
+        },
+        "recoveryRegion": {
+          "startsAtMs": 3611.0999999046326,
+          "endsAtMs": 4196.799999952316,
+          "endReason": "stable-cadence-started",
+          "maximumVideoInterval": {
+            "beforeMediaTime": 125.252922,
+            "afterMediaTime": 125.586588,
+            "mediaTimeDeltaMs": 333.666000000008,
+            "callbackIntervalMs": 337.3000000715256
+          },
+          "maximumCanvasDrawIntervalMs": 318.10000002384186
         },
         "displayRecovery": {
           "fatalDefinitionMs": 2000,
@@ -447,6 +483,18 @@
           "startsAtMs": 3599,
           "endsAtMs": 4153.399999976158
         },
+        "recoveryRegion": {
+          "startsAtMs": 3599,
+          "endsAtMs": 15000.899999976158,
+          "endReason": "trace-ended-before-stable-cadence",
+          "maximumVideoInterval": {
+            "beforeMediaTime": 125.019355,
+            "afterMediaTime": 125.586588,
+            "mediaTimeDeltaMs": 567.2330000000017,
+            "callbackIntervalMs": 554.3999999761581
+          },
+          "maximumCanvasDrawIntervalMs": 522.3999999761581
+        },
         "displayRecovery": {
           "fatalDefinitionMs": 2000,
           "fatalStop": false,
@@ -538,14 +586,14 @@
     }
   ],
   "comparison": {
-    "videoMediaTimeGapMs": {
+    "maximumRecoveryRegionVideoMediaTimeGapMs": {
       "baseline": [
         600.6,
         567.2330000000017
       ],
       "candidate": [
-        33.36699999999837,
-        33.36699999999837
+        333.666000000008,
+        333.666000000008
       ]
     },
     "largestCanvasDrawGapMs": {
@@ -554,8 +602,8 @@
         522.3999999761581
       ],
       "candidate": [
-        23.100000023841858,
-        20.700000047683716
+        317.60000002384186,
+        318.10000002384186
       ]
     },
     "browserDroppedFrames": {
@@ -599,9 +647,10 @@
       ]
     }
   },
-  "conclusion": "In both runs the candidate reduced the known-defect media-time gap to one 30000/1001 frame interval, reduced Chrome droppedVideoFrames from 17 to 6, and avoided YADIF degraded/discontinuity events. This is a direct branch-only A/B result for this fixed defect.",
+  "conclusion": "Across both runs, the candidate reduced the largest media-time gap observed before stable cadence from 567.233-600.600 ms to 333.666 ms, reduced the largest canvas draw gap from 522.4-569.6 ms to 317.6-318.1 ms, reduced Chrome droppedVideoFrames from 17 to 6, and avoided YADIF degraded/discontinuity events. This is a direct branch-only A/B result for this fixed defect.",
   "limitations": [
     "Two runs per build do not prove the one-hour anomalous-TS acceptance condition.",
+    "The direct A/B collector records detailed frame and draw timelines. The same instrumentation is used for both builds, so the relative comparison is controlled, but its absolute presentation timing must be checked against a lower-overhead run.",
     "The trace does not prove compositor scanout or audible A/V synchronization.",
     "The minimum unavoidable drop set is not identified.",
     "Fixed interlaced and open-GOP fixtures pass Session regression tests, and this real damaged frame picture is inside a confirmed open GOP. Real damaged field-picture browser cases, pixel integrity, and other defect patterns remain unverified."

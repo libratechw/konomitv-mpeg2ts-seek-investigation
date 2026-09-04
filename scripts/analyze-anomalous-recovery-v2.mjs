@@ -58,7 +58,6 @@ for (let index = firstDrawIndex; index >= 0 && index + stableDrawCount <= sample
 
 const fatalDeadlineMs = 2000;
 const stableConfirmationMs = stable ? stable.confirmedAt - defectInterval.before.at : null;
-const fatalStop = stableConfirmationMs === null || stableConfirmationMs > fatalDeadlineMs;
 const surroundingDrawIntervals = drawIntervals.filter(interval =>
   interval.before.at <= defectInterval.after.at && interval.after.at >= defectInterval.before.at
 );
@@ -118,6 +117,31 @@ const trailingDraws = sample.draws.filter(draw =>
 const trailing = summarizeDrawWindow(trailingDraws);
 const trailingWindowSufficient = trailing.durationMs >= cadenceWindowMs;
 
+// A transport loss can affect pictures presented after the first interval that
+// crosses its media time, especially in an open GOP.  Keep the trigger interval
+// separate from the whole recovery region so a later, larger gap is not hidden.
+const recoveryRegionEndAt = cadence?.startsAt ?? sample.performanceTimeRange.endedAt;
+const recoveryVideoIntervals = videoIntervals.filter(interval =>
+  interval.before.at <= recoveryRegionEndAt && interval.after.at >= defectInterval.before.at
+);
+const recoveryDrawIntervals = drawIntervals.filter(interval =>
+  interval.before.at <= recoveryRegionEndAt && interval.after.at >= defectInterval.before.at
+);
+const largest = (entries, value) => entries.reduce(
+  (current, entry) => current === null || value(entry) > value(current) ? entry : current,
+  null,
+);
+const largestRecoveryVideoInterval = largest(
+  recoveryVideoIntervals,
+  interval => interval.mediaTimeDeltaMs,
+);
+const largestRecoveryDrawInterval = largest(
+  recoveryDrawIntervals,
+  interval => interval.intervalMs,
+);
+const fatalStop = stableConfirmationMs === null || stableConfirmationMs > fatalDeadlineMs ||
+  (largestRecoveryDrawInterval?.intervalMs ?? 0) > fatalDeadlineMs;
+
 const decoderSamples = sample.decoderSamples ?? [];
 const lastDecoderBefore = decoderSamples.filter(entry => entry.at <= defectInterval.before.at).at(-1) ?? null;
 const firstAudioProgress = lastDecoderBefore?.audioDecodedBytes === null ||
@@ -172,6 +196,18 @@ const output = {
     callbackIntervalMs: defectInterval.intervalMs,
     startsAtMs: defectInterval.before.at - startedAt,
     endsAtMs: defectInterval.after.at - startedAt,
+  },
+  recoveryRegion: {
+    startsAtMs: defectInterval.before.at - startedAt,
+    endsAtMs: recoveryRegionEndAt - startedAt,
+    endReason: cadence === null ? 'trace-ended-before-stable-cadence' : 'stable-cadence-started',
+    maximumVideoInterval: largestRecoveryVideoInterval === null ? null : {
+      beforeMediaTime: largestRecoveryVideoInterval.before.mediaTime,
+      afterMediaTime: largestRecoveryVideoInterval.after.mediaTime,
+      mediaTimeDeltaMs: largestRecoveryVideoInterval.mediaTimeDeltaMs,
+      callbackIntervalMs: largestRecoveryVideoInterval.intervalMs,
+    },
+    maximumCanvasDrawIntervalMs: largestRecoveryDrawInterval?.intervalMs ?? null,
   },
   displayRecovery: {
     fatalDefinitionMs: fatalDeadlineMs,

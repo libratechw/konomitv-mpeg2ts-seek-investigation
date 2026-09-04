@@ -19,6 +19,18 @@
     "startsAtMs": 3596.100000023842,
     "endsAtMs": 3626.100000023842
   },
+  "recoveryRegion": {
+    "startsAtMs": 3596.100000023842,
+    "endsAtMs": 4192.700000047684,
+    "endReason": "stable-cadence-started",
+    "maximumVideoInterval": {
+      "beforeMediaTime": 125.252922,
+      "afterMediaTime": 125.586588,
+      "mediaTimeDeltaMs": 333.666000000008,
+      "callbackIntervalMs": 336.2000000476837
+    },
+    "maximumCanvasDrawIntervalMs": 317.60000002384186
+  },
   "displayRecovery": {
     "fatalDefinitionMs": 2000,
     "fatalStop": false,
