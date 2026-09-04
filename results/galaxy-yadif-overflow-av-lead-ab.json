@@ -26,7 +26,7 @@
     "leadMs": "(fieldMediaTime - video.currentTime) * 1000 at direct canvas draw; positive means field content leads the media element clock",
     "fieldMediaTime": "rVFC metadata.mediaTime for the first field and metadata.mediaTime plus half-frame media duration for the second field",
     "retirementAffected": "field remained queued across at least one capacity retirement",
-    "oneFieldThresholdMs": 8.333333333333334
+    "oneFieldThresholdMs": 16.683333333333334
   },
   "scheduleAnalysis": {
     "recurrence": "a[i+1] = a[i] + d[i]",

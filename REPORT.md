@@ -18,7 +18,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue容量・時刻同期 | 公開済みの測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを残し、独立した必要性を示せない閾値resetを外した候補を再測定中 |
+| YADIF queue容量・時刻同期 | 旧測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。最終候補source `e7e3ea2` / dist `8b1f66b`は`konomi/main` `52a3db5`から、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを構成し、独立した必要性を示せない閾値resetを履歴から外した。最終treeの実機再測定は未実施 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -704,7 +704,7 @@ Galaxy変更前の3走行目では、計測開始8.1ms後にqueue容量5から2 
 
 この診断buildには計測開始後に有効化する人工負荷フックが含まれる。負荷開始前から停止していたことは確認できるが、正式候補そのものに診断だけを加えた自然発生traceは別に取得し、branch単位の最終根拠とする。
 
-正式候補は`fix/separate-yadif-queue-recovery`を親とする`fix/compress-yadif-overflow-schedule`で、source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにした。長時間退行したpresentation policyを含まず、容量破棄後の時刻整合性だけを直す。
+この時点の候補は`fix/separate-yadif-queue-recovery`を親とする`fix/compress-yadif-overflow-schedule`で、source `7ef6696`と生成済みdist `ac2a2a9`を別コミットにしていた。これは下記測定の対象を示す履歴上の版であり、現在の提出branchではない。
 
 通常負荷の退行確認では、乃木坂工事中fixtureの既知の破損video packetより後にある187.845〜787.846秒を、Galaxy Chrome、LAN直結、全画面、単一タブ、60Hzで600秒測った。入力video callbackは29.972fps、media time差は600.001秒で、全17,982個のmedia time差が約33.367msだった。地デジのインターレース映像1 frameごとの入力callbackなので約30Hzは正常であり、double-rate YADIF canvasは59.942fpsだった。canvas描画間隔はp95 21.8ms、p99 23.2ms、最大39.7msで40ms超0回、WebGL drawは最大0.8msだった。YADIFの`late`、`degraded`、`discontinuities`、全reset、overflow破棄はすべて0だった。[正常負荷600秒の条件、統計、証拠hash、後片付け結果](results/galaxy-overflow-compression-clean-600s-summary.json)を保存した。
 
@@ -752,7 +752,7 @@ queue全reset単独の必要性は別に評価した。診断traceでは、末�
 
 同じ正式buildでChrome、page、player、Worker、decoder、MSE、YADIFを1,000 seekごとに作り直す1時間試験は、5 session、実測3491.416秒で4,399 seekすべてが復帰した。ただし最初のblock中に、同じLinuxホストで上の順位5診断buildを実行した。発生した追加負荷を分離できないため、[高負荷を含む参考結果](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)として残し、無負荷の1時間合格根拠には使わない。
 
-順位5の正式build source `7ef6696` / dist `ac2a2a9`を最新KonomiTV `7307e0ec39aed6a4772908cdbfb44223da42be6d`へ組み込み、同じrunner、collector、fixture、各試行のシーク前待ち時間の列、block再生成条件で無負荷の1時間試験を行った。5 session、実測3,486.728秒で4,415回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。安定復帰時間は中央値661.2ms、p95 804.0ms、最大1,213.5msだった。全blockの終了後に動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-yadif-rank5-latest-one-hour-summary.json)および[5 blockの生値](results/galaxy-yadif-rank5-latest-one-hour-block-000.json)を保存した。
+順位5の正式build source `acfce36` / dist `63a5708`を最新KonomiTV `7307e0ec39aed6a4772908cdbfb44223da42be6d`へ組み込み、同じrunner、collector、fixture、各試行のシーク前待ち時間の列、block再生成条件で無負荷の1時間試験を行った。5 session、実測3,486.728秒で4,415回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。安定復帰時間は中央値661.2ms、p95 804.0ms、最大1,213.5msだった。全blockの終了後に動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-yadif-rank5-latest-one-hour-summary.json)および[5 blockの生値](results/galaxy-yadif-rank5-latest-one-hour-block-000.json)を保存した。
 
 順位4の1時間試験はKonomiTV `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`、順位5の上記試験は`7307e0e`であり、runner、collector、fixtureは一致するがKonomiTV revisionは一致しない。このため、順位5が現行の1時間条件を満たす根拠には使うが、3,008回目の停止が0件になった差を順位5だけの効果とは扱わない。順位5の因果効果は、同一計装、同一seed、同一目的時刻でFIFO破棄104→4 field、致命的停止→508.5msからの安定描画となった比較で評価する。
 
@@ -1124,9 +1124,9 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 ## 実装済み変更と提出先
 
-upstream向けに分離した候補に加え、フォーク固有YADIFのqueue容量確保と時刻再同期を分ける変更を別branchにした。
-公開`fix/separate-yadif-queue-recovery`は、stall防止を立証した前身の全resetを、容量不足時の最小FIFO破棄と時刻同期破綻時の全resetへ分けた後継候補である。
-後継の公開後、前身`fix/restore-yadif-queue-reset`は誤取り込みを防ぐためremoteとlocalから削除し、commit IDと測定結果だけを本調査記録へ残した。
+upstream向けに分離した候補に加え、フォーク固有YADIFのqueue容量確保とdeadline圧縮を1本のbranchにした。
+公開`fix/compress-yadif-overflow-schedule`は`konomi/main` `52a3db5`から構成し、容量不足時の必要最小限のFIFO破棄と、捨てた`duration`分のdeadline圧縮だけを持つ。閾値によるqueue全resetは独立した必要性を示せなかったため、sourceと公開branch履歴から外した。
+旧`fix/separate-yadif-queue-recovery`と前身`fix/restore-yadif-queue-reset`は誤取り込みを防ぐため削除し、commit IDと測定結果だけを本調査記録へ残す。
 YADIF opacity変更は棄却した実験である。
 upstream向け候補branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
@@ -1285,8 +1285,7 @@ I-pictureの途中byteだけを返さない。
 - 初回field leadを2から1へ戻す変更。短窓では良い値が出たが、現行`d4ccb98`と競合し、独立A/Bで必然性を示せていない。
 
 設計レビューの8項目では、MSE世代修正はすべてYesとする。
-YADIF後継`26484fd`はstall原因のownerであるqueue時刻へ届き、新しいscheduler層を足さず、同じqueue ownerで容量確保を最小FIFO破棄、表示不能な未来時刻列を全resetとして分ける。前身`f7b89eb`で不足していたinteraction reductionを満たす。
-overflow時刻圧縮`7ef6696`も同じ`#prepareQueue()`で、破棄済みfieldと残存deadlineの不整合だけを直す。新しい状態、閾値、fallbackを増やさず、捨てたdurationという既存値から時刻列を修復するため、原因に対して局所的である。
+最終YADIF候補`e7e3ea2`はstall原因のownerである同じqueue処理へ届き、新しいscheduler層を足さない。必要数だけ最小FIFO破棄し、捨てたduration合計だけ残存deadlineを詰める。新しい状態、閾値、fallbackを増やさず、queue内slotのsilent reuseも禁止するため、原因に対して局所的である。
 presentation policyは容量回復とは別の判断として独立A/Bにしたが、600秒で長時間退行したため採用しない。
 YADIF opacity実験は描画ownerに置いてGalaxyで比較したが、cleanな変更前対照が約60fpsだったため採用しない。
 MSE修正は`MseSink`に置き、修正前に失敗する外部動作の回帰試験とGalaxyの通常seekを確認した。

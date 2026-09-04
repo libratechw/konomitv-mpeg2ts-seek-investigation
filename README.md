@@ -162,24 +162,19 @@ fork固有のYADIFに対する修正です。otya128向けの変更へ混ぜま�
 
 | | 順位 | branch | source | dist | 状態 |
 | --- | ---: | --- | --- | --- | --- |
-| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `acfce36` | `63a5708` | 提出保留。保存traceに合わせた候補を再測定中 |
+| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `e7e3ea2` | `8b1f66b` | PR草案レビュー済み。最終treeの実機再測定前 |
 | P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | `2d072f3` | `f3ba99d` | 未提出。他と修正箇所が重ならない |
 | P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | `f27442d` | `e36dd0b` | 保留。異常TSの1時間条件が未達 |
 
-順位4・5のPRは、保存済みtraceと実装の説明を一致させるため保留しています。
+順位4・5は、保存済みtraceで原因が立証された範囲だけを1本のPR候補にしています。
 観測した停止は、容量確保で古いfieldを捨てた後も残る表示予定を動かさず、次の入力でも同じ破棄を繰り返す循環でした。
-順位4の閾値resetはこの循環から一度描画を戻しましたが、停止全体は解消せず、時刻圧縮と独立して必要になる状態も保存済みtraceにはありません。
-現在は、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを残し、根拠を示せない閾値resetを外した候補を同条件で再測定しています。
+旧順位4の閾値resetはこの循環から一度描画を戻しましたが、停止全体は解消せず、時刻圧縮と独立して必要になる状態も保存済みtraceにはありません。
+最終候補は、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを残し、根拠を示せない閾値resetをsourceと履歴から外しました。output poolが完全なのに利用可能slotがない場合は、queue内slotを暗黙に再利用せずinvariant errorにします。
 
-公開中の`fix/compress-yadif-overflow-schedule`は、`fix/separate-yadif-queue-recovery`を祖先に含みます。
-source commitは分かれているため、順位4の`26484fd`を中間点として追えます。
-提出するcommit構成は、再測定後の候補に合わせて決めます。
+旧`fix/separate-yadif-queue-recovery`は棄却した閾値resetを含むため削除します。3,007 seekの測定点はcommit `26484fd`と下記の結果fileで追跡し、取り込み可能な公開branchとして残しません。
 
 順位4単独の1時間試験は、3,007 seekで致命的な表示停止を1件検出しました。
-この結果は、公開中の中間点`26484fd`だけでは残る問題を示します。
-
-順位4の[`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery)は提出後も公開したままにします。
-`26484fd`は、順位4だけを取り込んだ場合に何が残るかを示す測定と対応づけられる唯一の公開点です。
+この結果は、旧中間点`26484fd`だけでは残る問題を示します。最終候補`e7e3ea2` / `8b1f66b`では旧中間点の履歴を使わず、`konomi/main` `52a3db5`からa＋cだけを構成しています。
 
 ### Kludex/starlette へ出すもの
 
