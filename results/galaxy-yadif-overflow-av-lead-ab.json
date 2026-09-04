@@ -28,6 +28,45 @@
     "retirementAffected": "field remained queued across at least one capacity retirement",
     "oneFieldThresholdMs": 8.333333333333334
   },
+  "scheduleAnalysis": {
+    "recurrence": "a[i+1] = a[i] + d[i]",
+    "retiredDuration": "sum(d[0:k]) = a[k] - a[0]",
+    "compressedHead": "a[k] - (a[k] - a[0]) = a[0]",
+    "invariant": "capacity retirement and deadline compression cannot schedule the surviving head before the original head deadline",
+    "example": {
+      "headLeadBeforeCompressionMs": -30,
+      "headLeadAfterCompressionMs": -30
+    },
+    "horizon": {
+      "normalMaximumLead": "6 * outputDuration",
+      "formula": "6 * max(refreshMs, outputDuration)",
+      "at60Hz": {
+        "normalMaximumLeadMs": 50.05,
+        "horizonMs": 100,
+        "slackMs": 49.95
+      },
+      "at120Hz": {
+        "normalMaximumLeadMs": 50.05,
+        "horizonMs": 50.05,
+        "slackMs": 0
+      },
+      "at144Hz": {
+        "normalMaximumLeadMs": 50.05,
+        "horizonMs": 50.05,
+        "slackMs": 0
+      },
+      "comparison": ">",
+      "interpretation": "equality does not reset the queue, but 120 Hz and higher have no positive margin and need a dedicated regression condition"
+    }
+  },
+  "distReproducibility": {
+    "commit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
+    "command": "npm run build --workspace @mpeg2toh264/yadif",
+    "nodeVersion": "24.19.0",
+    "generatedIndexSha256": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+    "committedIndexSha256": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+    "byteIdentical": true
+  },
   "variants": {
     "rank4": {
       "runs": [

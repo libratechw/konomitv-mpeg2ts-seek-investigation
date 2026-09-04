@@ -696,6 +696,8 @@ WindowsではFIFO破棄fieldが平均21.67→0.67、40ms超間隔が平均0.33�
 
 正の値は映像内容がmedia clockより先に出たことを表す。全3,947描画で正の値は0件で、順位5は遅れていた映像を順位4よりゼロ側へ近づけたが、media clockを追い越さなかった。音声decode byteも全6走行で増えた。順位5のFIFO破棄後の標本は3描画だけなので、この部分集合の差は均衡した効果推定には使わない。可聴音声とscan-outは測っていない。[定義、各走行、hash、集計](results/galaxy-yadif-overflow-av-lead-ab.json)と[6本の生trace](results/galaxy-yadif-overflow-av-lead-rank4-run-1.json)を保存した。
 
+順位5のdist commit `63a5708`では、同commitの作業ツリーから`npm run build --workspace @mpeg2toh264/yadif`で再生成した`packages/yadif/dist/index.js`がcommit済み生成物とbyte単位で一致し、SHA-256はいずれも`6d94e0c…`だった。
+
 `#prepareQueue()`が未来時刻列の破綻を判定するhorizonには、60Hzでは正常列に約50msの余裕がある。120Hz以上では正常列の最大先読みとhorizonがともに`6 × outputDuration`となり、比較が`>`なので一致時にはresetしないが余裕は0になる。高リフレッシュ端末では、この境界を独立した回帰条件にする。
 
 Galaxy変更前の3走行目では、計測開始8.1ms後にqueue容量5から2 fieldをFIFO破棄した直後、残った先頭fieldが53.5ms先、末尾が120.2ms先となった。rVFC 133回、rAF 265回、video media time 4.404秒分が進む間もcanvas直接描画は0回で、計測開始4391.5ms後のqueue全resetに続き4419.0ms後に最初のcanvas描画が行われた。人工的なpresentation不足は計測開始2000ms後に始まるため、少なくともその前の1991.9msは人工負荷なしでfuture deadline待ちが継続していた。これにより、decoderやrAFの停止ではなく、FIFO破棄後のdeadline列が次の入力へ引き継がれる循環が4秒超の表示停止を維持したことを確認した。[元trace](results/galaxy-yadif-pre-injection-future-queue-stall-trace.json)と[機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)を保存した。
