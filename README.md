@@ -173,22 +173,51 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 **P0**は効果を実測で確認し、変更範囲が原因に届いているものです。
 **P1**は正しさを守る修正ですが、実利用での改善量を立証できていないものです。
 
-提出先は[`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264)、[`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264)、ファイル配信を所有する[`Kludex/starlette`](https://github.com/Kludex/starlette)です。
+提出先は[`otya128/mpeg2toh264`](https://github.com/otya128/mpeg2toh264)、[`tsukumijima/mpeg2toh264`](https://github.com/tsukumijima/mpeg2toh264)、ファイル配信を所有する[`Kludex/starlette`](https://github.com/Kludex/starlette)の3つです。
+レビュアーが異なるため、提出先ごとに独立した列として扱います。
+表の順位番号は候補を指す識別子で、測定結果のファイル名にも同じ番号を使っています。提出先が異なる候補どうしの順位の大小は、提出順を意味しません。
 tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdistを別コミットにしています。
 
-| | 順位 | branch | 提出先 | source | dist |
-| --- | ---: | --- | --- | --- | --- |
-| P0 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) | otya128 | `a10253e` | — |
-| P0 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) | otya128 | `787c7ba` | — |
-| P0 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) | otya128 | `ac4f879` | — |
-| P0 | 4 | [`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery) | tsukumijima | `26484fd` | `27b327e` |
-| P0 | 5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | tsukumijima | `7ef6696` | `ac2a2a9` |
-| P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | tsukumijima | `2d072f3` | `f3ba99d` |
-| P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | otya128 | `f8ab9c7` | — |
-| P1 | 8 | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | Kludex/starlette | `d70956b` | — |
-| P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | tsukumijima | `f27442d` | `e36dd0b` |
+各候補の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
+提出先ごとに整理した依存の図は[レビューの順序](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
 
-順位1〜7の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
+### otya128/mpeg2toh264 へ出すもの
+
+| | 順位 | branch | source | 状態 |
+| --- | ---: | --- | --- | --- |
+| P0 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) | `a10253e` | [PR #1](https://github.com/otya128/mpeg2toh264/pull/1)を提出済み |
+| P0 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) | `787c7ba` | 未提出。順位3の前提 |
+| P0 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) | `ac4f879` | 未提出。順位2のレビュー後 |
+| P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | `f8ab9c7` | 未提出。他と修正箇所が重ならない |
+
+順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
+
+### tsukumijima/mpeg2toh264 へ出すもの
+
+fork固有のYADIFに対する修正です。otya128向けの変更へ混ぜません。
+
+| | 順位 | branch | source | dist | 状態 |
+| --- | ---: | --- | --- | --- | --- |
+| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `acfce36` | `63a5708` | 未提出。2件を1本のPRで出す |
+| P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | `2d072f3` | `f3ba99d` | 未提出。他と修正箇所が重ならない |
+| P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | `f27442d` | `e36dd0b` | 保留。異常TSの1時間条件が未達 |
+
+順位4のqueue policyと順位5のoverflow時刻圧縮は、**1本のPRとして出します**。
+順位5の`fix/compress-yadif-overflow-schedule`は順位4の`fix/separate-yadif-queue-recovery`を祖先に含むため、順位5のtipを出せば両方が入ります。
+commitは分けたままにするので、順位4の`26484fd`は履歴上の中間点として追えます。
+
+1本にするのは、順位4だけでは1時間条件を満たさないと測定で分かっているからです。
+順位4単独の1時間試験は3,007 seekで致命的な表示停止を1件検出しました。
+順位4だけを取り込むと、この状態が残ります。
+
+順位4の[`fix/separate-yadif-queue-recovery`](https://github.com/libratechw/mpeg2toh264/tree/fix/separate-yadif-queue-recovery)は提出後も公開したままにします。
+`26484fd`は、順位4だけを取り込んだ場合に何が残るかを示す測定と対応づけられる唯一の公開点です。
+
+### Kludex/starlette へ出すもの
+
+| | 順位 | branch | source | 状態 |
+| --- | ---: | --- | --- | --- |
+| P1 | 8 | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | `d70956b` | 未提出。他の候補と依存しない |
 
 順位8は、client切断後もファイル応答が末尾まで読み続ける問題を止めます。
 Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正前は受信時間が76.1→1,083.1msへ悪化し、修正後は26.1→24.8msで推移しました（最初・最後の20回の中央値）。
@@ -199,10 +228,14 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 
 順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 
+### 順位9を保留している理由
+
 順位9はTS packet欠落時に、完了を確認できない末尾pictureだけでなく、同じ蓄積中GOPの正常な先行pictureまで破棄する範囲を縮めます。
-同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから33.367msへ縮まり、Chromeのdrop counterは17から6へ減りました。
+同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから333.666msへ縮まり、Chromeのdrop counterは17から6へ減りました。
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
+
+保留しているのは、異常TSの1時間条件を満たさないためです。
 候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗を9回検出しました。
 この候補は順位4・5を含まないため、FPS安定復帰失敗が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
 
@@ -210,14 +243,7 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗は4件残りました。
 同じseedの先頭11 blockでは、順位9単独の9/220から4/220へ減りましたが、統合版のどの修正が差を生んだかは未確定です。[集計と全block](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を公開しています。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
-
-順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
-順位4はqueue policyの土台で、順位5はその子PRです。
-順位1、6、7、9は他と修正箇所が重ならず、いつでも並行して提出できます。
-提出先ごとに整理した依存の図は[レビューの順序](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
-
-tsukumijimaフォーク固有のYADIF変更は、otya128向けの変更へ混ぜません。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残るため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
 
 ### まだ提出しないもの
 
@@ -226,7 +252,7 @@ player、worker、transcoder、picture pool、MSEへ同じseek IDのtiming conte
 直接の速度改善はなく、10ファイルにわたる横断と公開event契約の保守が必要なため、効果が立証できるまで提出を急ぎません。
 
 [`fix/deliver-completed-fragments-early`](https://github.com/libratechw/mpeg2toh264/tree/fix/deliver-completed-fragments-early) `30ad508`は効果が確認できていません。
-transcoderから完成fragmentを逐次通知しますが、初回fragmentと表示復帰のどちらも一貫して短縮しませんでした。
+transcoderから完成fragmentを逐次通知しますが、初回fragmentとシーク完了時間のどちらも一貫して短縮しませんでした。
 transcoderとworkerの順序、cancel、backpressureのレビューが必要な規模でもあるため、後続throughputの候補としてのみ残します。
 
 ## 採らなかった案と理由
