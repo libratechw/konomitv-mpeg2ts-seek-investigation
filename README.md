@@ -51,6 +51,7 @@ FPS安定復帰はcanvasへの直接描画を観測する回帰判定であり�
 - `droppedVideoFrames`はpredecodeまたは表示期限超過のdropを数え、最終YADIF canvasの可視コマ落ち数ではありません。Originalで数えた極短IDR recovery sampleのdropと、YADIF出力の表示間隔を分けて評価します。
 - Windowsの値は、Ryzen 7 4700Uを電源モード「最適な電力効率」で測った補助条件です。同一モード内のbranch A/Bに使い、通常設定のWindowsやGalaxyとの絶対性能比較には使いません。
 - 「乃木坂工事中」は確認区間だけを60 field候補として扱います。MADDER全編のFFmpeg解析で最長だった連続3:2区間から、映像と主音声を再エンコードせず約173秒切り出しました。`autoFilm`回帰では、期待値を`24000/1001`fps（約23.976fps）とする[固定素材](results/madder-24p-clean-fixture.json)を使います。24fpsは略称に限り、判定と誤差計算には使いません。
+- アニメの`autoFilm`回帰には、別録画の「サンダー3」と「ワールド イズ ダンシング」から無劣化で切り出した[2本の固定素材](results/anime-autofilm-clean-fixtures.json)も使います。検証できた連続3:2区間は約35.5秒と約189.5秒で、combed cycle、40msを超えるvideo PTS間隔、映像・主音声のdecode警告は0です。
 
 ## 分かったこと
 

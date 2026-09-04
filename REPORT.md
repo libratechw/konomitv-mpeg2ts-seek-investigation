@@ -800,9 +800,13 @@ MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`
 
 この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ローカルSSD上の固定素材のSHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
 
+実写1本だけで`autoFilm`の改善を判断しないため、アニメの「サンダー3」と「ワールド イズ ダンシング」も全編を同じ`fieldmatch`・`decimate`条件で解析した。最長の連続3:2区間は、それぞれ477.477〜520.687秒の259 cycleと、1237.737〜1439.438秒の1209 cycleだった。
+
+各区間の内側を映像と主音声だけ`-c copy`で切り出した。固定素材内で検証できた完全cycleは213個と1136個で、combed cycle、40msを超えるvideo DTS・PTS間隔、40msを超えるaudio PTS間隔、映像・主音声のdecode警告は0だった。末尾の不完全cycleはcadenceの主張から除外する。素材のSHA-256、切り出し条件、source packet位置の包絡、検証値は[アニメ固定素材の記録](results/anime-autofilm-clean-fixtures.json)に保存した。
+
 KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と現在のintegrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
 
-基準版のcanvas描画は27.641 / 27.774fps、integrationは27.181 / 26.971fpsだった。film/video判定の遷移は基準版28 / 28回、integration 38 / 33回で、両版とも期待するfilm cadenceを維持しなかった。YADIFの`missed`とqueue全resetは全走行0なので、入力停止やqueue全resetではなく、固定3:2区間で`autoFilm`判定を維持できないことがcadence未達の直接の観測である。integrationの方が低い差は観測したが、各2走行だけなので個別修正の退行量とは断定しない。Chromeの`droppedVideoFrames`増分40はcanvasの可視drop数とは扱わない。[4走行の集計、build hash、生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を保存した。
+基準版のcanvas描画は27.641 / 27.774fps、integrationは27.181 / 26.971fpsだった。film/video判定の遷移は基準版28 / 28回、integration 38 / 33回で、両版とも期待するfilm cadenceを維持しなかった。YADIFの`missed`とqueue全resetは全走行0なので、入力停止やqueue全resetではなく、固定3:2区間で`autoFilm`判定を維持できないことが、期待するFPSを安定維持できない直接の観測である。integrationの方が低い差は観測したが、各2走行だけなので個別修正の退行量とは断定しない。Chromeの`droppedVideoFrames`増分40はcanvasの可視drop数とは扱わない。[4走行の集計、build hash、生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を保存した。
 
 位相保持の試作がMADDER #04でfilmを維持できなかった走行では、YADIFの`missed`が302増え、毎秒statsの隣り合う標本間57区間すべてで増加していた。
 同じ試作の他3走行は`missed`増分0で、毎秒statsのmodeがすべてfilmだった。Chromeのdrop counterは4走行とも20増えており、この不調を単独では区別できない。

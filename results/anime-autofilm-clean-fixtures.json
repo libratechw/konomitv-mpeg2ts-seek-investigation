@@ -1,0 +1,128 @@
+{
+  "purpose": "Two independently recorded anime fixtures for autoFilm regression at the terrestrial 3:2 cadence of 24000/1001 fps",
+  "createdAt": "2026-09-04",
+  "ffmpeg": "8.0.1-3ubuntu2+esm1",
+  "scanCommand": "ffmpeg -hide_banner -nostdin -nostats -loglevel debug -threads 2 -filter_threads 1 -i INPUT -map 0:v:0 -an -vf fieldmatch=mode=pc_n:combmatch=full:mchroma=0,decimate=cycle=5:mixed=1 -f null -",
+  "cleanCycleDefinition": "A complete five-input-frame cycle in which decimate selected one duplicate and fieldmatch reported no combed frame.",
+  "expectedDisplayRate": "24000/1001 fps",
+  "scope": "Each source recording has mixed cadence. Only the verified fixture interval is treated as continuous 3:2 material. The terminal incomplete cycle is excluded.",
+  "fixtures": [
+    {
+      "id": "thunder3",
+      "source": {
+        "name": "2026-09-04_サンダー3 #09.ts",
+        "sizeBytes": 3115100592,
+        "sha256": "1b0505ce4643f0fc1a4a57700d8301a9d26a0b17c82b9ddc2089fdb73a2cab37",
+        "scope": "The complete recording has mixed cadence and is not treated as film throughout.",
+        "longestCleanThreeTwoInterval": {
+          "approximateSourceStartSeconds": 477.47700000000003,
+          "approximateSourceEndSeconds": 520.6868333333333,
+          "durationSeconds": 43.209833333333336,
+          "completeCycles": 259
+        }
+      },
+      "fixture": {
+        "name": "thunder3-autofilm-23.976.ts",
+        "sizeBytes": 61123500,
+        "sha256": "a8d1553dd8e89b065c880dbc337ce4d61fcab12d4f42e9e86e5e4d25063b945f",
+        "cutCommand": "ffmpeg -hide_banner -nostdin -loglevel warning -i SOURCE -ss 481 -t 36.0 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+        "requestedSourceStartSeconds": 481,
+        "requestedDurationSeconds": 36.0,
+        "formatDurationSeconds": 36.046156,
+        "videoDurationSeconds": 35.668967,
+        "audioDurationSeconds": 36.010667,
+        "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+        "audio": "AAC, 48000 Hz, stereo",
+        "streamsKept": [
+          "primary video",
+          "primary audio"
+        ],
+        "transcoded": false,
+        "sourcePrimaryStreamPacketEnvelope": {
+          "minimumBytePosition": 823105924,
+          "maximumBytePosition": 885713872,
+          "definition": "Envelope of primary video/audio source packets whose DTS is inside the requested cut window; it is not a byte-for-byte reconstruction of remux input reads."
+        }
+      },
+      "fixtureValidation": {
+        "completeFiveFrameCycles": 213,
+        "duplicateDropCycles": 213,
+        "verifiedThreeTwoStartSeconds": 0.0,
+        "verifiedThreeTwoEndSeconds": 35.5355,
+        "verifiedThreeTwoDurationSeconds": 35.5355,
+        "combedCycles": 0,
+        "terminalIncompleteCycleExcluded": true,
+        "videoPacketCount": 1071,
+        "videoDtsMinimumDeltaSeconds": 0.033366,
+        "videoDtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsMinimumDeltaSeconds": 0.033366,
+        "videoPtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsGapsOver40ms": 0,
+        "audioPacketCount": 1688,
+        "audioPtsMinimumDeltaSeconds": 0.021333,
+        "audioPtsMaximumDeltaSeconds": 0.021334,
+        "audioPtsGapsOver40ms": 0,
+        "fullAudioVideoDecodeLogLinesAtWarningLevel": 0
+      }
+    },
+    {
+      "id": "world-is-dancing",
+      "source": {
+        "name": "2026-09-04_ワールド イズ ダンシング 第十番.ts",
+        "sizeBytes": 3214301988,
+        "sha256": "baa38a192d831ae1cc2cf1819c81794ed0b167297a8d5e87355cdc50ccebc821b",
+        "scope": "The complete recording has mixed cadence and is not treated as film throughout.",
+        "longestCleanThreeTwoInterval": {
+          "approximateSourceStartSeconds": 1237.7365,
+          "approximateSourceEndSeconds": 1439.438,
+          "durationSeconds": 201.7015,
+          "completeCycles": 1209
+        }
+      },
+      "fixture": {
+        "name": "world-is-dancing-autofilm-23.976.ts",
+        "sizeBytes": 335498408,
+        "sha256": "99d78bc6415e9f6380463769df6416c6061141e846a443dd7336a70b5ea1af16",
+        "cutCommand": "ffmpeg -hide_banner -nostdin -loglevel warning -i SOURCE -ss 1242 -t 190.03 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+        "requestedSourceStartSeconds": 1242,
+        "requestedDurationSeconds": 190.03,
+        "formatDurationSeconds": 190.062923,
+        "videoDurationSeconds": 189.622767,
+        "audioDurationSeconds": 190.037333,
+        "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+        "audio": "AAC, 48000 Hz, stereo",
+        "streamsKept": [
+          "primary video",
+          "primary audio"
+        ],
+        "transcoded": false,
+        "sourcePrimaryStreamPacketEnvelope": {
+          "minimumBytePosition": 2194708804,
+          "maximumBytePosition": 2534098812,
+          "definition": "Envelope of primary video/audio source packets whose DTS is inside the requested cut window; it is not a byte-for-byte reconstruction of remux input reads."
+        }
+      },
+      "fixtureValidation": {
+        "completeFiveFrameCycles": 1136,
+        "duplicateDropCycles": 1136,
+        "verifiedThreeTwoStartSeconds": 0.0,
+        "verifiedThreeTwoEndSeconds": 189.52266666666668,
+        "verifiedThreeTwoDurationSeconds": 189.52266666666668,
+        "combedCycles": 0,
+        "terminalIncompleteCycleExcluded": true,
+        "videoPacketCount": 5685,
+        "videoDtsMinimumDeltaSeconds": 0.033366,
+        "videoDtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsMinimumDeltaSeconds": 0.033366,
+        "videoPtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsGapsOver40ms": 0,
+        "audioPacketCount": 8908,
+        "audioPtsMinimumDeltaSeconds": 0.021333,
+        "audioPtsMaximumDeltaSeconds": 0.021334,
+        "audioPtsGapsOver40ms": 0,
+        "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
+        "cutBoundaryNote": "A 190.000 s trial cut omitted one reordered terminal B-picture and produced one 66.733 ms sorted-PTS gap. The final 190.030 s cut includes that picture and has continuous video DTS and sorted PTS."
+      }
+    }
+  ]
+}
