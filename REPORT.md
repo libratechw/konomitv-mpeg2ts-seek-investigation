@@ -741,6 +741,12 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。integrationも期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかった。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
 
+Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の補助条件でも、integration `44e06a4`と同じfixtureをWindows内の隔離KonomiTVから配信し、同じ破損位置を反復通過した。1時間を予定した走行は121回目で致命的停止を検出し、120回成功、停止1回で終了した。実測は1,867.642秒、壁時計は2,048.063秒なので、1時間条件を満たした走行ではない。成功した120回の安定確認は中央値734.2ms、最大1,733.1msで、FPS安定復帰失敗は39回だった。
+
+停止時のrVFCはmedia time 123.284288秒から126.887888秒まで壁時計3,791.0ms途切れ、その後127.722055秒から131.892888秒まで5,730.9ms途切れた。media timeの飛びはそれぞれ3,603.6msと4,170.833msで、成功した120回の567.233〜600.600msより大きい。終了時のYADIFはqueue全reset 0、`late` 72、playerは映像649 frame、音声1,060 frameを処理していた。以前確認したYADIF未来時刻列の循環ではrVFCが進み続けていたため、今回の停止は同じ現象ではない。converter、MSE、decoder、Windowsの表示scheduleのどこがrVFC停止を作ったかは未確定である。
+
+campaign内のruntime終了commandは時間切れになったが、直後の確認では対象portとprocessは残っておらず、再度の停止commandは全processを停止済みと報告した。Chrome、視聴tab、fullscreen、scheduled taskも残っていなかった。Search IndexerとFFmpegは全7回のhost負荷sampleで0だった。[条件、provenance、停止trace、後片付け](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存した。このWindows値は同一電源モード内の比較用であり、Galaxyとの絶対性能比較には使わない。
+
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 
 元TSの不連続は、映像PID 256のbyte位置202,401,364でcontinuity counterが1から6へ飛んだ箇所だった。discontinuityの通知はなく、欠落数は16を法として4 packetに相当する。この位置はB-picture（temporal reference 7、PTS 502108869）のPES内にあり、FFprobeのcorrupt表示が指した直前のPES位置とは異なる。独立に読んだ周辺24 pictureの種類・PTS・PES位置はFFprobeと一致した。[TS byte解析・照合結果](results/nogizaka-transport-defect-localization.json)と[固定fixture用の再現スクリプト](scripts/inspect-nogizaka-transport-defect.py)を公開している。

@@ -102,6 +102,11 @@ integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間
 integrationは、異常区間通過後のFPS安定復帰に20回すべてで失敗しました。
 停止は改善しましたが、FPS安定復帰、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未達または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
 
+補助条件のWindowsでは、同じintegrationと破損区間で1時間試験を開始しましたが、121回目に致命的停止を検出して終了しました。
+先行する120回のうちFPS安定復帰失敗は39回でした。
+停止時はvideo callbackが3.791秒と5.731秒途切れ、YADIFのqueue全resetは0回でした。
+1時間を完走していないため合格判定には使わず、converter、MSE、decoderのどこで進行が止まったかを診断します。[Windows補助条件の結果](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存しています。
+
 同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
 
 `autoFilm`のFPS安定維持も目標を達成していません。

@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "sourceFiles": {
+    "privateWindowsSummary": {
+      "sha256": "e3feb7ba488bff92f4c1fa7504f601d0667c3f094afc3dd00d455cc23ce7eedf"
+    },
+    "privateWindowsManifest": {
+      "sha256": "5abacf8b6d0019eed7df23d0867cd1bd4477a42061e830b900e35b9fbca0861c"
+    },
+    "privateFatalBlock": {
+      "file": "block-006.json",
+      "sha256": "e232b10fbd2bccf0b233c36d1762898149d2f59b7647c0316225855cddbe9f45"
+    }
+  },
+  "build": {
+    "variant": "integration-current-44e06a4-anomaly-v1",
+    "sourceHash": "e5f54726cc72d6d5a8d2d3aba2db15cbd2ac994cf8b63dd056e4561566570585",
+    "distHash": "488d25ecbdac6bf2e7624773728c57a0f28728418297f29e04f4adff856063f5",
+    "distTreeSha256": "ff59b41b6f178e628e76380ece49616b9c0cf8750d546861169a5b1073eaa580",
+    "asset": "PlayerController-DJki7T6W.js",
+    "assetSha256": "55fa02bf0df9fe8cc9acf8a34e0979729bd7beb4706366363d127f7228248ead",
+    "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "konomiCommit": "7307e0ec39aed6a4772908cdbfb44223da42be6d"
+  },
+  "tools": {
+    "runnerSha256": "38e4039d29cffd8803ece2599fed0bcee431476595afea348897387d596f5188",
+    "collectorSha256": "26838cac0bc910ec0d6874e4bae923dbf5ccb3547dd06b18feba1cf22186f8ad",
+    "validatorSha256": "a446a5c9ca3ea736d910fdf8a5a1f97dce7b0337470bb42d31901ea32c75043d",
+    "summarizerSha256": "12a1017ac01ffdc27e36938117a78dc19f580147184b8947820a13de4a44b61b"
+  },
+  "conditions": {
+    "device": "Lenovo IdeaPad Flex 5 14ARE05 (81X2)",
+    "os": "Windows 11",
+    "browser": "Chrome/152.0.7977.65",
+    "displayRefreshRate": "60 Hz",
+    "powerMode": "Best power efficiency",
+    "transport": "Windows-local",
+    "fullscreen": true,
+    "singlePlaybackPage": true,
+    "fixtureName": "nogizaka.ts",
+    "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "baseSeed": 20260914,
+    "blockSize": 20,
+    "clientReset": "Chrome, page, player, Worker, decoder, MSE, and YADIF are recreated before every block."
+  },
+  "campaign": {
+    "plannedDurationSeconds": 3600,
+    "wallClockElapsedSeconds": 2048.063,
+    "measurementSeconds": 1867.6419999999998,
+    "attemptedCrossings": 121,
+    "completedCrossings": 120,
+    "fatalStops": 1,
+    "fpsStabilityRecoveryFailures": 39,
+    "blockCount": 7,
+    "coverageSatisfied": false,
+    "hostLoad": {
+      "sampleCount": 7,
+      "samplesWithSearchIndexer": 0,
+      "samplesWithFfmpeg": 0
+    }
+  },
+  "successfulCrossings": {
+    "seekCompletionMs": {
+      "count": 120,
+      "minimum": 157.39999999850988,
+      "median": 202.79999999701977,
+      "p90": 236.60000000149012,
+      "p95": 331.79999999701977,
+      "p99": 614.2000000029802,
+      "maximum": 622.8999999985099,
+      "mean": 222.631666666766
+    },
+    "postDefectFirstDrawMs": {
+      "count": 120,
+      "minimum": 599.2999999970198,
+      "median": 617.1499999985099,
+      "p90": 699.6000000014901,
+      "p95": 916.6999999955297,
+      "p99": 1268.1000000014901,
+      "maximum": 1566.8999999985099,
+      "mean": 659.767499999764
+    },
+    "postDefectStableConfirmationMs": {
+      "count": 120,
+      "minimum": 723.8999999985099,
+      "median": 734.1999999955297,
+      "p90": 916.1000000014901,
+      "p95": 1066.3999999985099,
+      "p99": 1433.4000000059605,
+      "maximum": 1733.0999999940395,
+      "mean": 794.063333332787
+    },
+    "defectMediaGapMs": {
+      "count": 120,
+      "minimum": 567.2330000000017,
+      "median": 567.2330000000017,
+      "p90": 600.6,
+      "p95": 600.6,
+      "p99": 600.6,
+      "maximum": 600.6,
+      "mean": 571.1258166666681
+    },
+    "defectCallbackGapMs": {
+      "count": 120,
+      "minimum": 532.8999999985099,
+      "median": 566.8000000007451,
+      "p90": 584.3000000044703,
+      "p95": 599.8999999985099,
+      "p99": 601.0999999940395,
+      "maximum": 616.3999999985099,
+      "mean": 566.6433333330477
+    },
+    "postRecoveryDrawFps": {
+      "count": 120,
+      "minimum": 39.66931128745857,
+      "median": 59.999329623934,
+      "p90": 60.008716349740965,
+      "p95": 60.01200240050991,
+      "p99": 60.01800540159066,
+      "maximum": 60.018776824064325,
+      "mean": 55.35593927751151
+    },
+    "postRecoveryMaximumDrawIntervalMs": {
+      "count": 120,
+      "minimum": 17.69999999552965,
+      "median": 18.200000002980232,
+      "p90": 50.5,
+      "p95": 50.79999999701977,
+      "p99": 51.69999999552965,
+      "maximum": 51.900000005960464,
+      "mean": 27.97583333378037
+    }
+  },
+  "fatalStop": {
+    "block": 6,
+    "trialIndex": 0,
+    "seed": 26260932,
+    "phase": "defect-not-approached",
+    "jitterMs": 31.566342315698662,
+    "elapsedMs": 20458.20000000298,
+    "videoCallbackGapsOverTwoSeconds": [
+      {
+        "beforeSequence": 311,
+        "afterSequence": 312,
+        "wallClockGapMs": 3791.0,
+        "mediaTimeGapMs": 3603.6000000000004,
+        "presentedFrameIncrease": 14,
+        "beforeMediaTime": 123.284288,
+        "afterMediaTime": 126.887888
+      },
+      {
+        "beforeSequence": 333,
+        "afterSequence": 334,
+        "wallClockGapMs": 5730.89999999851,
+        "mediaTimeGapMs": 4170.833000000001,
+        "presentedFrameIncrease": 44,
+        "beforeMediaTime": 127.722055,
+        "afterMediaTime": 131.892888
+      }
+    ],
+    "finalYadifStats": {
+      "filtered": 726,
+      "missed": 6,
+      "degraded": 6,
+      "discontinuities": 2,
+      "late": 72,
+      "queueResetted": 0,
+      "dropped": 13,
+      "fps": 59.988002399341354,
+      "frameMs": 0.5299999999503294,
+      "maxQueuedFields": 4,
+      "mode": "video",
+      "match": "c",
+      "combScore": 0,
+      "outputFps": 59.988002399341354,
+      "duplicateScore": null,
+      "duplicateRunnerUp": null
+    },
+    "finalPlayerStats": {
+      "instantFps": 146.80483591833965,
+      "totalFps": 66.53475903003216,
+      "videoFrames": 649,
+      "audioFrames": 1060,
+      "convertingMs": 115.80000000447035,
+      "readingMs": 118.90000000596046,
+      "waitingMs": 6.6999999806284904,
+      "dropped": 4,
+      "scrambled": 0,
+      "errors": 0
+    },
+    "interpretation": "Video callbacks stopped twice for more than two seconds while crossing the fixed transport defect. queueResetted remained zero. The trace separates this event from the previously confirmed YADIF future-deadline retirement loop, but does not yet distinguish converter, MSE, decoder, and browser scheduling causes."
+  },
+  "cleanup": {
+    "campaignRecord": {
+      "chrome": {
+        "running": false,
+        "cdpAvailable": false,
+        "targetCount": 0,
+        "processCount": 0
+      },
+      "runtime": {
+        "success": false,
+        "error": "runtime cleanup process failed"
+      },
+      "success": false,
+      "chromeFinalization": {
+        "PagesSeen": 0,
+        "PagesPaused": 0,
+        "PagesExitedFullscreen": 0,
+        "PagesClosed": 0,
+        "CleanupErrors": [],
+        "UnexpectedDedicatedChromeSessions": [],
+        "RemainingDedicatedChromeProcesses": 0,
+        "TaskRemoved": true
+      }
+    },
+    "postRunVerification": {
+      "checkedAt": "2026-09-04T10:55:26.4885583+09:00",
+      "listeners": [],
+      "processes": [],
+      "stopResult": "all runtime processes were already stopped",
+      "success": true
+    }
+  },
+  "criteria": {
+    "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
+    "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
+    "fpsStabilityRecoveryCriterion": "At least 2.9 seconds within 1% of 60000/1001 fps with no direct canvas draw interval over 40 ms."
+  },
+  "limitations": [
+    "The run stopped at the first fatal event and therefore did not cover one full hour.",
+    "The in-campaign runtime cleanup command missed its deadline; a post-run process and listener check found no remaining runtime, and a second stop command reported every process already stopped.",
+    "This Windows result is an auxiliary low-power condition and is not an absolute performance comparison with Galaxy.",
+    "The trace did not capture audible audio synchronization or compositor scanout."
+  ]
+}
