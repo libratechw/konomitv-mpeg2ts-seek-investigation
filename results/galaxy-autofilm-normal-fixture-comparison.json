@@ -84,7 +84,6 @@
     }
   },
   "limitations": [
-    "同期readbackとCPU fieldmatchの負荷はまだ分離していない。",
     "サンダー3と入間くんは短いfixtureがKonomiTVの録画スキャンに登録されず、単体demoでの測定が残る。",
     "1時間安定性、可聴A/V同期、他端末は未確認。"
   ]

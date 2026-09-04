@@ -21,6 +21,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 | 提出先 | branch | 役割 |
 | --- | --- | --- |
 | `tsukumijima/KonomiTV` | [`fix/android-yadif-main-thread`](https://github.com/libratechw/KonomiTV/tree/fix/android-yadif-main-thread) | Android Chromeのデスクトップ表示でも端末を識別し、YADIF描画をメインスレッドへ切り替える候補。先行commitでmpeg2toh264を`faf1464`へ更新する |
+| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) | `autoFilm`のcomb判定で行参照をpixel loopの外へ移し、判定を変えずにCPU負荷を下げる候補 |
 | `tsukumijima/mpeg2toh264` | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | 異常TSで完成済みpictureを保つ実験。`main`での再現と実機効果を確認するまで採用候補にしない |
 | `Kludex/starlette` | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | ASGI切断後のfile送信を止める独立候補 |
 
@@ -31,6 +32,8 @@ KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補は
 ## 測定専用コード
 
 [`codex/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/worker-presentation-observability)は、`faf1464`のOffscreenCanvas Worker内でrAF、描画submit、backend切替を記録する診断branchです。source `2348434`とdist `5d588dc`で構成し、製品APIや採用候補にはしません。
+
+[`codex/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや採用候補にはせず、branch全体の取り込みも想定しません。
 
 branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEに採用候補として記載していないfork branchは、履歴・診断・棄却実験として扱います。
 

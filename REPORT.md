@@ -55,7 +55,9 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 同じcandidateとGalaxyで、正常3:2の3素材を24fps modeで10秒ずつ測ると、`outputFps`中央値は46.570〜47.833、`missed`増分は38〜47、film modeは各stats窓の0〜2回だけでした。同じキッズアワー素材で24fps modeだけを無効にすると、中央値59.958、`missed`・`degraded`増分0になり、1 frame当たりの処理時間中央値も11.627msから2.042msへ下がりました。[素材別の結果](results/galaxy-autofilm-normal-fixture-comparison.json)を公開しています。
 
-同じキッズアワーのrVFCを直接比較すると、autoFilm ONは映像が299 frame進む間に50 callbackを取り逃し、OFFは298 frameに対して欠落0でした。callback間隔中央値は42.0ms対33.4ms、decoderの`processingDuration`中央値は17.2ms対17.1ms、canvas draw呼び出しは両方とも中央値0msでした。decoderや最終描画ではなくautoFilmの同期解析がmain threadを塞ぐ層まで絞れています。同期readbackとCPU fieldmatchの内訳、修正方法は未確定です。
+同じキッズアワーのrVFCを直接比較した1走行では、autoFilm ONは映像が299 frame進む間に50 callbackを取り逃し、OFFは298 frameに対して欠落0でした。callback間隔中央値は42.0ms対33.4ms、decoderの`processingDuration`中央値は17.2ms対17.1ms、canvas draw呼び出しは両方とも中央値0msでした。decoderや最終描画ではなくautoFilmの同期解析がmain threadを塞ぐ層まで絞れています。一方、同じ未計装buildの再走行では欠落0だったため、欠落の発生率は未確定です。
+
+位相計測では、1 frame当たりの中央値は2回のGPU readbackが合計約8.8ms、CPU側のfield matchとdecimateが合計約7.6msでした。comb scoreの行参照をpixel loop外へ移す候補では、Galaxyの1走行でcomb scoreが3.4msから3.0ms、field matchが4.6msから4.1ms、同期解析全体が17.7msから16.8msへ短縮しました。4素材のオフライン解析でも処理時間が約6〜9%短くなり、判定結果は一致しました。[位相別の条件と結果](results/galaxy-autofilm-analysis-phase-comparison.json)を公開しています。診断build各1走行の比較であり、長時間の欠落率や他端末での効果は未確認です。
 
 ### 異常TSで完成済みpictureを保つ案
 

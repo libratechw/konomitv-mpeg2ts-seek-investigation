@@ -1,0 +1,92 @@
+{
+  "scope": "GalaxyにおけるautoFilm同期解析の位相別負荷とcomb score行参照候補",
+  "revisions": {
+    "konomiTvCandidate": "0f496f61de450c4ffe7e0198e74fb82f202ac328",
+    "mpeg2toh264Base": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "baseDiagnosticSource": "2e41c93db9849afbf78fa3ec1e68b3664caa2a66",
+    "candidateSource": "625eddcf422cb240b89a735592f48a8b4c6956ec",
+    "candidateDist": "dcfe5716e8db5f6dcde5d3e67bf49a234fdf426a",
+    "candidateDiagnosticSource": "791e7ab923f8fc0154422cb66218569f04476079",
+    "candidateDiagnosticDist": "89e2e04941212f76349f0a32c78de54314abc908",
+    "collector": "9b037500835884a2cf8311ae9c4ef8e97a23259f"
+  },
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151 desktop mode",
+    "quality": "Original (MPEG-2)",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "durationMsPerRun": 10000,
+    "fixture": "キッズアワー正常区間",
+    "fixtureSha256": "98bf2b6581c49d294ce8fab7fb18723eadb1f618e79d2a7e570650a033788320"
+  },
+  "galaxyPhaseTimingMs": {
+    "base": {
+      "sampleCount": 301,
+      "analysisReadback": { "p50": 5.199999928474426, "p95": 8.799999952316284 },
+      "unpackLuma": { "p50": 0.30000007152557373, "p95": 0.5999999046325684 },
+      "fieldMatch": { "p50": 4.600000023841858, "p95": 6.5 },
+      "combScore": { "p50": 3.4000000953674316, "p95": 4.899999976158142 },
+      "sampleReadback": { "p50": 3.600000023841858, "p95": 5.899999976158142 },
+      "decimate": { "p50": 3, "p95": 4.199999928474426 },
+      "total": { "p50": 17.699999928474426, "p95": 22.59999990463257 },
+      "presentedFrameCallbackMisses": 0,
+      "rawResultSha256": "9ee70ed9c5ed266762521f795634a98fdd0a51027d0ba191e9c07264c912403e"
+    },
+    "candidate": {
+      "sampleCount": 300,
+      "analysisReadback": { "p50": 5.100000023841858, "p95": 9 },
+      "unpackLuma": { "p50": 0.30000007152557373, "p95": 0.6000000238418579 },
+      "fieldMatch": { "p50": 4.100000023841858, "p95": 6.099999904632568 },
+      "combScore": { "p50": 3, "p95": 4.200000047683716 },
+      "sampleReadback": { "p50": 3.5999999046325684, "p95": 5.699999928474426 },
+      "decimate": { "p50": 3.100000023841858, "p95": 4.200000047683716 },
+      "total": { "p50": 16.799999952316284, "p95": 22.300000071525574 },
+      "presentedFrameCallbackMisses": 0,
+      "rawResultSha256": "8e3960a56e40b0457f869ed0effbe1b1c20c0b7c21f3207f4f6861182356a2d1"
+    }
+  },
+  "offlineAnalysisSeconds": [
+    {
+      "fixture": "キッズアワー正常区間 1回目",
+      "base": 1.7704,
+      "candidate": 1.6301,
+      "resultFingerprint": "40dbe3a0921533f9ae60ca5407df70c3ac08d7dc2b2ef0b2bb4e276d01b3751b"
+    },
+    {
+      "fixture": "キッズアワー正常区間 2回目",
+      "base": 1.7661,
+      "candidate": 1.6076,
+      "resultFingerprint": "40dbe3a0921533f9ae60ca5407df70c3ac08d7dc2b2ef0b2bb4e276d01b3751b"
+    },
+    {
+      "fixture": "ワールド イズ ダンシング",
+      "base": 2.1004,
+      "candidate": 1.9214,
+      "resultFingerprint": "e25c6e3a7a556e0003b991b5b9f1f9e35d9c77203cfefe93c1bc1fded6a069f4"
+    },
+    {
+      "fixture": "魔入りました！入間くん4",
+      "base": 2.3153,
+      "candidate": 2.129,
+      "resultFingerprint": "d77c0626e6d88ed81dca017d051e9197a0ec47d2c03a9d087a5de173d92efbb8"
+    },
+    {
+      "fixture": "サンダー3",
+      "base": 2.1152,
+      "candidate": 1.9944,
+      "resultFingerprint": "865c39454e61bf030fbeb0024e44dcf9ace017f3998c72b279af172e7b8ba4a5"
+    }
+  ],
+  "reproducibility": {
+    "baseDiagnosticDistSha256": "e147447e07aa4804112f9f36395f843c31760f6168027c6045d917ce029a590a",
+    "candidateDiagnosticDistSha256": "918576715269bf5d8b40a8c63005f21ef36a9e3116f948955d9ca60b69d03388",
+    "uninstrumentedRepeatCallbackMisses": 0,
+    "uninstrumentedRepeatRawResultSha256": "1758c96651f420ac4d2f6e70760ab17122b309b584e0d5b6838259df68b486c9"
+  },
+  "limitations": [
+    "Galaxyの位相比較は診断build各1走行であり、計装自体の負荷を含む。",
+    "過去に同じfixtureで観測したcallback欠落50回は未計装buildの再走行では再現せず、発生率は未確定。",
+    "長時間安定性、他端末、filmとvideoの境界、60iへの復帰は未確認。"
+  ]
+}
