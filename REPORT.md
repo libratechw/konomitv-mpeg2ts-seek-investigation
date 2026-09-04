@@ -770,7 +770,7 @@ queue全reset単独の必要性は別に評価した。診断traceでは、末�
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。integrationも期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかった。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
 
-clean YADIF候補を含む現行integration source / dist `84e916b28ac1e63d53c531c1fdd61f21a39dd531`でも、同じ既知欠損を反復する1時間試験を行った。KonomiTV clientは`7307e0ec39aed6a4772908cdbfb44223da42be6d`、fixtureはSHA-256 `2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845`の乃木坂工事中である。source、dist、provenance、client assetは実ファイルとGit blobを照合し、Chrome、page、player、Worker、decoder、MSE、YADIFはこの1 blockの開始前に作り直した。
+clean YADIF候補を含む現行integration source / dist `84e916b28ac1e63d53c531c1fdd61f21a39dd531`でも、同じ既知欠損を反復する1時間試験を行った。KonomiTV clientは`7307e0ec39aed6a4772908cdbfb44223da42be6d`、fixtureはSHA-256 `2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845`の乃木坂工事中である。sourceとdistは実ファイルとGit blobを照合し、provenanceと生成client assetは走行snapshotの実ファイルhashを照合した。Chrome、page、player、Worker、decoder、MSE、YADIFはこの1 blockの開始前に作り直した。
 
 実測3,557.110秒で229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件だった。表示進行の安定確認は中央値925.1ms、最大1,246.6msで、1時間のcoverageと後片付けも成立した。同一ホストの負荷記録713件ではFFmpeg processを検出しなかった。
 
@@ -853,9 +853,9 @@ MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`
 
 この素材の期待表示速度は24.000fpsではなく、地上波の30000/1001fpsの3:2プルダウンから戻る24000/1001fpsである。ローカルSSD上の固定素材のSHA-256は`163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb`で、[全編scan、上位区間、切り出し条件、検証値](results/madder-24p-clean-fixture.json)を保存した。
 
-実写1本だけで`autoFilm`の改善を判断しないため、アニメの「サンダー3」と「ワールド イズ ダンシング」も全編を同じ`fieldmatch`・`decimate`条件で解析した。最長の連続3:2区間は、それぞれ477.477〜520.687秒の259 cycleと、1237.737〜1439.438秒の1209 cycleだった。
+実写1本だけで`autoFilm`の改善を判断しないため、独立したアニメ録画の「サンダー3」「ワールド イズ ダンシング」「魔入りました!入間くん4」「キッズアワー」も全編を同じ`fieldmatch`・`decimate`条件で解析した。最長の連続3:2区間は、それぞれ477.477〜520.687秒の259 cycle、1237.737〜1439.438秒の1209 cycle、203.370〜230.897秒の165 cycle、1193.359〜1321.654秒の769 cycleだった。
 
-各区間の内側を映像と主音声だけ`-c copy`で切り出した。固定素材内で検証できた完全cycleは213個と1136個で、combed cycle、40msを超えるvideo DTS・PTS間隔、40msを超えるaudio PTS間隔、映像・主音声のdecode警告は0だった。末尾の不完全cycleはcadenceの主張から除外する。素材のSHA-256、切り出し条件、source packet位置の包絡、検証値は[アニメ固定素材の記録](results/anime-autofilm-clean-fixtures.json)に保存した。
+各区間の内側を映像と主音声だけ`-c copy`で切り出した。固定素材内で検証できた完全cycleは213、1136、135、712個で、combed cycle、40msを超えるvideo DTS・PTS間隔、40msを超えるaudio PTS間隔、映像・主音声のdecode警告はすべて0だった。今回追加した2素材は、出力TS全体の輸送異常も0件だった。末尾の不完全cycleはcadenceの主張から除外する。「キッズアワー」の元録画全体には867.433秒と3277.875秒に既知の映像欠損があるが、正常素材は両方から離れた1198秒から切り出した。素材のSHA-256、切り出し条件、source packet位置の包絡、検証値は[アニメ固定素材の記録](results/anime-autofilm-clean-fixtures.json)に保存した。
 
 KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と測定対象integrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
 

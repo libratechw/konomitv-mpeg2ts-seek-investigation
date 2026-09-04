@@ -1,5 +1,5 @@
 {
-  "purpose": "Two independently recorded anime fixtures for autoFilm regression at the terrestrial 3:2 cadence of 24000/1001 fps",
+  "purpose": "Four independently recorded anime fixtures for autoFilm regression at the terrestrial 3:2 cadence of 24000/1001 fps",
   "createdAt": "2026-09-04",
   "ffmpeg": "8.0.1-3ubuntu2+esm1",
   "scanCommand": "ffmpeg -hide_banner -nostdin -nostats -loglevel debug -threads 2 -filter_threads 1 -i INPUT -map 0:v:0 -an -vf fieldmatch=mode=pc_n:combmatch=full:mchroma=0,decimate=cycle=5:mixed=1 -f null -",
@@ -122,6 +122,138 @@
         "audioPtsGapsOver40ms": 0,
         "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
         "cutBoundaryNote": "A 190.000 s trial cut omitted one reordered terminal B-picture and produced one 66.733 ms sorted-PTS gap. The final 190.030 s cut includes that picture and has continuous video DTS and sorted PTS."
+      }
+    },
+    {
+      "id": "iruma",
+      "source": {
+        "name": "2026-09-04_アニメ 魔入りました!入間くん4(20)「チームデビムス」.ts",
+        "sizeBytes": 2420996696,
+        "sha256": "9658ed08531293d7c41b67e2f0843d8ac7923813162558fa6c5bd4b81b1926c9",
+        "scope": "The complete recording has mixed cadence and is not treated as film throughout. Its 12,877,642 TS packets contain no transport anomaly detected by the recorded inspection.",
+        "longestCleanThreeTwoInterval": {
+          "approximateSourceStartSeconds": 203.36983333333333,
+          "approximateSourceEndSeconds": 230.89733333333334,
+          "durationSeconds": 27.5275,
+          "completeCycles": 165
+        }
+      },
+      "fixture": {
+        "name": "iruma-autofilm-23.976.ts",
+        "sizeBytes": 38753944,
+        "sha256": "fceec0fe03dae1380f6643c767ad6649f661824609077b01bb627feb2aea1284",
+        "cutCommand": "ffmpeg -hide_banner -nostdin -loglevel warning -i SOURCE -ss 205 -t 23.03 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+        "requestedSourceStartSeconds": 205,
+        "requestedDurationSeconds": 23.03,
+        "formatDurationSeconds": 23.080245,
+        "videoDurationSeconds": 22.655967,
+        "audioDurationSeconds": 23.018667,
+        "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+        "audio": "AAC, 48000 Hz, stereo",
+        "streamsKept": [
+          "primary video",
+          "primary audio"
+        ],
+        "transcoded": false,
+        "sourcePrimaryStreamPacketEnvelope": {
+          "minimumBytePosition": 329620588,
+          "maximumBytePosition": 369626236,
+          "definition": "Envelope of primary video/audio source packets whose DTS is inside the requested cut window; it is not a byte-for-byte reconstruction of remux input reads."
+        }
+      },
+      "fixtureValidation": {
+        "completeFiveFrameCycles": 135,
+        "duplicateDropCycles": 135,
+        "verifiedThreeTwoStartSeconds": 0.0,
+        "verifiedThreeTwoEndSeconds": 22.5225,
+        "verifiedThreeTwoDurationSeconds": 22.5225,
+        "combedCycles": 0,
+        "terminalIncompleteCycleExcluded": true,
+        "transportAnomalies": 0,
+        "videoPacketCount": 681,
+        "videoDtsMinimumDeltaSeconds": 0.033366,
+        "videoDtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsMinimumDeltaSeconds": 0.033366,
+        "videoPtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsGapsOver40ms": 0,
+        "audioPacketCount": 1079,
+        "audioPtsMinimumDeltaSeconds": 0.021333,
+        "audioPtsMaximumDeltaSeconds": 0.021334,
+        "audioPtsGapsOver40ms": 0,
+        "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
+        "cutBoundaryNote": "A 23.000 s trial cut omitted one reordered terminal B-picture and produced one 66.733 ms sorted-PTS gap. The final 23.030 s cut includes that picture and has continuous video DTS and sorted PTS."
+      }
+    },
+    {
+      "id": "kids-hour-clean",
+      "source": {
+        "name": "2026-09-04_キッズアワー「アンパンマン／いろりろ／ピノ&シノビー」.ts",
+        "sizeBytes": 5260616188,
+        "sha256": "5c2976376291d0be0b86c764aa68d3112d9d2d30478d57f73e7a04b98d9f90cb",
+        "scope": "The complete recording has mixed cadence and two independent video transport defects at approximately 867.433 s and 3277.875 s. Only the separately validated clean interval is used as this normal fixture.",
+        "longestCleanThreeTwoInterval": {
+          "approximateSourceStartSeconds": 1193.3588333333335,
+          "approximateSourceEndSeconds": 1321.6536666666666,
+          "durationSeconds": 128.29483333333334,
+          "completeCycles": 769
+        },
+        "knownVideoDefects": [
+          {
+            "mediaTimeFromFirstVideoPtsSeconds": 867.4332333333333,
+            "byteOffset": 1028952388,
+            "pictureType": "P"
+          },
+          {
+            "mediaTimeFromFirstVideoPtsSeconds": 3277.8746,
+            "byteOffset": 4838639848,
+            "pictureType": "B"
+          }
+        ]
+      },
+      "fixture": {
+        "name": "kids-hour-clean-autofilm-23.976.ts",
+        "sizeBytes": 117482892,
+        "sha256": "98bf2b6581c49d294ce8fab7fb18723eadb1f618e79d2a7e570650a033788320",
+        "cutCommand": "ffmpeg -hide_banner -nostdin -loglevel warning -i SOURCE -ss 1198 -t 119.16 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+        "requestedSourceStartSeconds": 1198,
+        "requestedDurationSeconds": 119.16,
+        "formatDurationSeconds": 119.181545,
+        "videoDurationSeconds": 118.852067,
+        "audioDurationSeconds": 119.146667,
+        "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+        "audio": "AAC, 48000 Hz, stereo",
+        "streamsKept": [
+          "primary video",
+          "primary audio"
+        ],
+        "transcoded": false,
+        "sourcePrimaryStreamPacketEnvelope": {
+          "minimumBytePosition": 1517397444,
+          "maximumBytePosition": 1640241344,
+          "definition": "Envelope of primary video/audio source packets whose DTS is inside the requested cut window; it is not a byte-for-byte reconstruction of remux input reads."
+        }
+      },
+      "fixtureValidation": {
+        "completeFiveFrameCycles": 712,
+        "duplicateDropCycles": 712,
+        "verifiedThreeTwoStartSeconds": 0.0,
+        "verifiedThreeTwoEndSeconds": 118.78533333333334,
+        "verifiedThreeTwoDurationSeconds": 118.78533333333334,
+        "combedCycles": 0,
+        "terminalIncompleteCycleExcluded": true,
+        "transportAnomalies": 0,
+        "videoPacketCount": 3564,
+        "videoDtsMinimumDeltaSeconds": 0.033366,
+        "videoDtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsMinimumDeltaSeconds": 0.033366,
+        "videoPtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsGapsOver40ms": 0,
+        "audioPacketCount": 5585,
+        "audioPtsMinimumDeltaSeconds": 0.021333,
+        "audioPtsMaximumDeltaSeconds": 0.021334,
+        "audioPtsGapsOver40ms": 0,
+        "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
+        "cutBoundaryNote": "Trial cuts through 119.100 s omitted one reordered terminal B-picture and produced one 66.734 ms sorted-PTS gap. The final 119.160 s cut ends on a continuous DTS and sorted-PTS boundary."
       }
     }
   ]
