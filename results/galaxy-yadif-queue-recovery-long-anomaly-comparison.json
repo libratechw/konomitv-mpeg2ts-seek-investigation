@@ -64,7 +64,7 @@
     }
   ],
   "conclusion": {
-    "bothMeetFatalStopCriterion": false,
+    "bothMeetZeroFatalStopCriterion": false,
     "candidateSpecificRegressionEstablished": false,
     "mainResetTriggeredInFatalTrial": false,
     "queuedSlotFallbackTriggered": "unknown; no dedicated counter was recorded",

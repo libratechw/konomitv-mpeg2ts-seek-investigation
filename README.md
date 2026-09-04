@@ -30,7 +30,11 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ### 暫定候補
 
-該当する公開branchはありません。暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
+| 提出先 | branch | 役割 |
+| --- | --- | --- |
+| `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) | YADIFのqueue全消去とqueued slot再利用を削除する暫定候補。slot不変条件と自動testは確認済みだが、削除経路の実機効果、長時間復帰、A/V同期は採用前に検証が必要 |
+
+暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
 
 KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補はまずfork branchとして公開します。数日間取り込まれず、fetch後の`main`にも必要な場合だけPRを作成します。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 

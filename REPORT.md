@@ -63,13 +63,13 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 `faf1464`には、queue末尾の表示予定が時刻差の上限を超えたときにqueue全体を空にする処理と、空き出力slotがないときに最古のqueued slotを上書きするfallbackがあります。前者は一時的な予定時刻のずれをqueue破棄として扱い、後者は表示待ちのpictureを暗黙に失わせます。
 
-候補では両方を削除し、容量超過時に先頭だけを破棄して残りの表示時刻を詰める既存処理を残しました。公開statsの`queueResetted`は互換性のため残しています。出力pool 6、queue上限5、1回に必要な出力1または2の全6386状態を列挙し、容量整理後のslot割り当て失敗が0件であることを確認しました。WASM・YADIF build、workspace typecheck、IVTC・MSE test、Rust release test 247件も成功しています。
+候補では両方を削除し、容量超過時に先頭だけを破棄して残りの表示時刻を詰める既存処理を残しました。公開statsの`queueResetted`は互換性のため残しています。出力pool 6、queue上限5、1回に必要な出力1または2の全6386状態を列挙し、容量整理後のslot割り当て失敗が0件であることを確認しました。WASM・YADIF build、workspace typecheck、IVTC・MSE test、Rust release test 247件も成功しています。公開branchのsource `0c5d12a`とdist `2bc48a0`は、実機測定に使ったsource `8b6fe78`とdist `f287e23`にREADMEだけを加えた同一コードです。
 
 Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は59.793fpsと59.697fpsで、双方とも40ms超の描画間隔、`missed`・`late`・`queueResetted`増分は0でした。「NHK高校講座 情報Ⅰ」から固定した映像・主音声のburst欠損を跨ぐ走行も、双方とも致命的な表示停止はなく、約0.45秒で安定した表示進行を確認し、末尾は約59.5fpsでした。[条件と結果](results/galaxy-yadif-queue-recovery-removal.json)を公開しています。
 
 同じ欠損を1 client sessionで繰り返す長時間走行では、候補が144回目、`faf1464`が228回目の通過で、どちらも2秒以内に安定表示へ復帰できませんでした。`faf1464`の失敗trialでは`queueResetted`増分0、最終statsの`maxQueuedFields`は2であり、時刻差による全resetは発火していません。queued slot再利用fallbackには専用counterがないため、発火有無は未確認です。[長時間比較](results/galaxy-yadif-queue-recovery-long-anomaly-comparison.json)を公開しています。
 
-両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が致命的停止0件の必須条件を満たさず、削除の実機効果も確認できていないため、取り込み候補から外します。今回のclientはGalaxyでmain-thread描画を選ぶ実装ですが、各長時間走行ではbackend traceを採取していません。可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropも未確認です。
+両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が致命的停止0件の必須条件を満たさず、削除の実機効果も確認できていないため、採用候補にはしません。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もないため、取り込み側で追加検証する暫定候補として公開します。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
 
 ### 異常TSで完成済みpictureを保つ案
 
