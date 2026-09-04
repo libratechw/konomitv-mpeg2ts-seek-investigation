@@ -747,6 +747,8 @@ Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の�
 
 campaign内のruntime終了commandは時間切れになったが、直後の確認では対象portとprocessは残っておらず、再度の停止commandは全processを停止済みと報告した。Chrome、視聴tab、fullscreen、scheduled taskも残っていなかった。Search IndexerとFFmpegは全7回のhost負荷sampleで0だった。[条件、provenance、停止trace、後片付け](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存した。このWindows値は同一電源モード内の比較用であり、Galaxyとの絶対性能比較には使わない。
 
+同じWindows buildへ診断計装を加え、停止時と同じseed `26260932`、同じ31.566msの位相を、新しいclient sessionの先頭試行で再実行した。今回はシーク完了時間574.0ms、異常区間のrVFC gap 565.3ms、安定確認743.4msで復帰し、致命的停止は再現しなかった。したがって、停止はseedと位相だけでは決まらず、client sessionやdecoder状態など別の状態変数を切り分ける必要がある。診断計装付き3試行は致命的停止0件、FPS安定復帰失敗1件だったが、発生率や正式なシーク完了時間には使わない。[同seedの診断結果](results/windows-anomaly-fatal-seed-diagnostic.json)を保存した。
+
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 
 元TSの不連続は、映像PID 256のbyte位置202,401,364でcontinuity counterが1から6へ飛んだ箇所だった。discontinuityの通知はなく、欠落数は16を法として4 packetに相当する。この位置はB-picture（temporal reference 7、PTS 502108869）のPES内にあり、FFprobeのcorrupt表示が指した直前のPES位置とは異なる。独立に読んだ周辺24 pictureの種類・PTS・PES位置はFFprobeと一致した。[TS byte解析・照合結果](results/nogizaka-transport-defect-localization.json)と[固定fixture用の再現スクリプト](scripts/inspect-nogizaka-transport-defect.py)を公開している。

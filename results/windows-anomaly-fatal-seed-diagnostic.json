@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-only",
+  "build": {
+    "variant": "integration-current-44e06a4-anomaly-v1",
+    "sourceHash": "e5f54726cc72d6d5a8d2d3aba2db15cbd2ac994cf8b63dd056e4561566570585",
+    "distHash": "488d25ecbdac6bf2e7624773728c57a0f28728418297f29e04f4adff856063f5",
+    "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d"
+  },
+  "conditions": {
+    "device": "Windows validation host",
+    "browser": "Chrome 152.0.7977.77",
+    "displayRefreshHz": 60,
+    "powerMode": "Best power efficiency",
+    "campaignMode": "anomaly",
+    "durationSeconds": 180,
+    "cleanupReserveSeconds": 30,
+    "minimumFinalBlockSeconds": 45,
+    "blockSize": 1,
+    "baseSeed": 26260932,
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "captureDiagnostics": true,
+    "toolsSnapshotManifestSha256": "b13bceb1e2d5b713e91e035ed0141c5e7ab2fe540a10e683fed8a01a1382b582"
+  },
+  "campaign": {
+    "blockCount": 3,
+    "attemptedCrossings": 3,
+    "completedCrossings": 3,
+    "fatalStops": 0,
+    "fpsStabilityRecoveryFailures": 1,
+    "coverageSatisfied": true,
+    "measurementSeconds": 48.629,
+    "wallClockElapsedSeconds": 126.294
+  },
+  "matchingSeed": {
+    "seed": 26260932,
+    "jitterMs": 31.566342315698662,
+    "completedCrossings": 1,
+    "fatalStops": 0,
+    "seekCompletionMs": 574.0,
+    "defect": {
+      "beforeMediaTime": 125.019355,
+      "afterMediaTime": 125.586588,
+      "mediaTimeGapMs": 567.2330000000017,
+      "callbackGapMs": 565.2999999970198
+    },
+    "recovery": {
+      "firstDrawMs": 617.6000000014901,
+      "stableConfirmationMs": 743.3999999985099,
+      "maximumDrawGapMs": 28.30000000447035
+    },
+    "fpsStability": {
+      "durationMs": 2990.39999999851,
+      "drawCount": 180,
+      "drawFps": 59.858212948130415,
+      "expectedFps": 59.94005994005994,
+      "intervalsOver40Ms": 0,
+      "maximumIntervalMs": 28.399999998509884,
+      "passed": true
+    }
+  },
+  "otherFailure": {
+    "seed": 28260938,
+    "type": "fps-stability-recovery-failure",
+    "drawFps": 59.33822789905408,
+    "expectedFps": 59.94005994005994,
+    "intervalsOver40Ms": 0,
+    "maximumIntervalMs": 32.600000001490116
+  },
+  "comparisonToOriginalFatal": {
+    "originalSeed": 26260932,
+    "originalJitterMs": 31.566342315698662,
+    "originalFatalPhase": "defect-not-approached",
+    "originalCallbackGapsMs": [
+      3791.0,
+      5730.9
+    ],
+    "originalMediaTimeGapsMs": [
+      3603.6,
+      4170.833
+    ],
+    "conclusion": "The same seed and phase did not reproduce the fatal stop in a fresh client session, so they are insufficient to determine the outcome. The remaining state variable and owner layer are not yet identified."
+  },
+  "cleanup": {
+    "allBlocks": true,
+    "campaign": true,
+    "videoPaused": true,
+    "fullscreenExited": true,
+    "testPagesClosed": true,
+    "dedicatedChromeStopped": true,
+    "scheduledTaskRemoved": true,
+    "campaignManagerStopped": true,
+    "runtimeStopped": true,
+    "listenersRemaining": 0
+  },
+  "limitations": [
+    "This run used additional diagnostics and is not a formal latency or occurrence-rate measurement.",
+    "One non-reproduction does not identify the owner layer or prove that the fatal stop was fixed.",
+    "The FPS stability failure in another block is recorded separately and is not attributed to the original fatal stop."
+  ]
+}
