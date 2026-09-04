@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "scope": "Offline converter comparison for two independent transport continuity gaps in one Kids Hour recording. The damaged pictures are an open-GOP P frame and an open-GOP B frame.",
+  "measurements": [
+    {
+      "schemaVersion": 1,
+      "fixture": {
+        "label": "kids-hour-p-picture-loss",
+        "fileName": "kids-hour-defect-1.ts",
+        "sha256": "de453e5acd06b7072da20f38ed1a6b80ddf3dcf8332648fe6175a74a5e1bbef3",
+        "sizeBytes": 67108856
+      },
+      "variants": {
+        "baseline": {
+          "sourceRevisionDeclared": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "6de646cc125858ee2589fec388a914170b168fc4b87177ef28f10ab80c68f6d3",
+          "outputSha256": "db259a21be337ffc440b278954d23c713962c84d19a33a8e1e4bf389ee2d7168",
+          "summary": {
+            "mediaFragments": 109,
+            "videoSamples": 1641,
+            "audioSamples": 2590,
+            "bytes": 178844659
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 109,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 109,
+                "sampleCount": 1641,
+                "firstDecodeTime": 59554,
+                "lastDecodeEnd": 5002492,
+                "firstPresentationTime": 62557,
+                "lastPresentationEnd": 5008498,
+                "maximumPresentationInterval": 51051,
+                "maximumPresentationIntervalMs": 567.2333333333333,
+                "sampleTimingSha256": "7f1a05d80b0265f00374f1adcf5f0dc4d5f4a302ac6c903ea72751fadb0cc910"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 108,
+                "sampleCount": 2590,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2652160,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2652160,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "e2f979b64ac7cf191e9f2ef1119be55757d41ce25490d4d8009d15efbf59cf05"
+              }
+            }
+          }
+        },
+        "candidate": {
+          "sourceRevisionDeclared": "e36dd0b521efe4c64574fcd89ed44f3bfb8c15db",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "93bcad6af6a0e79b158684cde1f3c9faabae926805bf10a65bd35260c2bcc4ff",
+          "outputSha256": "bd9032f5347ea51458e952fe7e9a5328e3dd3561596442ed6f0ff539312e96aa",
+          "summary": {
+            "mediaFragments": 110,
+            "videoSamples": 1651,
+            "audioSamples": 2590,
+            "bytes": 180079038
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 110,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 110,
+                "sampleCount": 1651,
+                "firstDecodeTime": 59554,
+                "lastDecodeEnd": 5002492,
+                "firstPresentationTime": 62557,
+                "lastPresentationEnd": 5008498,
+                "maximumPresentationInterval": 27027,
+                "maximumPresentationIntervalMs": 300.3,
+                "sampleTimingSha256": "6f8436c908212e72a82bea54aa618d4d634728b4f4553e04f56cb6493c135759"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 109,
+                "sampleCount": 2590,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2652160,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2652160,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "e2f979b64ac7cf191e9f2ef1119be55757d41ce25490d4d8009d15efbf59cf05"
+              }
+            }
+          }
+        },
+        "integration": {
+          "sourceRevisionDeclared": "44e06a4632ad1da91073fbce7a4816514f6ff58a",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "927ab6054480ef5cae4e6a4b313cba0bba9eb6abd7cc297fe0baf5ba189f8110",
+          "outputSha256": "db259a21be337ffc440b278954d23c713962c84d19a33a8e1e4bf389ee2d7168",
+          "summary": {
+            "mediaFragments": 109,
+            "videoSamples": 1641,
+            "audioSamples": 2590,
+            "bytes": 178844659
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 109,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 109,
+                "sampleCount": 1641,
+                "firstDecodeTime": 59554,
+                "lastDecodeEnd": 5002492,
+                "firstPresentationTime": 62557,
+                "lastPresentationEnd": 5008498,
+                "maximumPresentationInterval": 51051,
+                "maximumPresentationIntervalMs": 567.2333333333333,
+                "sampleTimingSha256": "7f1a05d80b0265f00374f1adcf5f0dc4d5f4a302ac6c903ea72751fadb0cc910"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 108,
+                "sampleCount": 2590,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2652160,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2652160,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "e2f979b64ac7cf191e9f2ef1119be55757d41ce25490d4d8009d15efbf59cf05"
+              }
+            }
+          }
+        },
+        "integration-with-candidate": {
+          "sourceRevisionDeclared": "be568d8d6240ea0eec414fd13a9c710ab434d6ee",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "17ffa5034e2b07d32c45181c0e00f81a0580c565019377c9cc495a812d38c8e2",
+          "outputSha256": "bd9032f5347ea51458e952fe7e9a5328e3dd3561596442ed6f0ff539312e96aa",
+          "summary": {
+            "mediaFragments": 110,
+            "videoSamples": 1651,
+            "audioSamples": 2590,
+            "bytes": 180079038
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 110,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 110,
+                "sampleCount": 1651,
+                "firstDecodeTime": 59554,
+                "lastDecodeEnd": 5002492,
+                "firstPresentationTime": 62557,
+                "lastPresentationEnd": 5008498,
+                "maximumPresentationInterval": 27027,
+                "maximumPresentationIntervalMs": 300.3,
+                "sampleTimingSha256": "6f8436c908212e72a82bea54aa618d4d634728b4f4553e04f56cb6493c135759"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 109,
+                "sampleCount": 2590,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2652160,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2652160,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "e2f979b64ac7cf191e9f2ef1119be55757d41ce25490d4d8009d15efbf59cf05"
+              }
+            }
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "before": "baseline",
+          "after": "candidate",
+          "videoSampleDelta": 10,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 300.3,
+            "delta": -266.93333333333334
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": false
+        },
+        {
+          "before": "integration",
+          "after": "integration-with-candidate",
+          "videoSampleDelta": 10,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 300.3,
+            "delta": -266.93333333333334
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": false
+        },
+        {
+          "before": "baseline",
+          "after": "integration",
+          "videoSampleDelta": 0,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 567.2333333333333,
+            "delta": 0.0
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": true
+        },
+        {
+          "before": "candidate",
+          "after": "integration-with-candidate",
+          "videoSampleDelta": 0,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 300.3,
+            "after": 300.3,
+            "delta": 0.0
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": true
+        }
+      ],
+      "limitations": [
+        "Converter source revisions are caller declarations; binary SHA-256 values identify the executed programs.",
+        "The fixed fixture begins and ends mid-stream, so total sample counts do not by themselves measure every discarded source picture.",
+        "fMP4 sample timing does not prove pixel correctness, visible scanout, audible A/V synchronization, or the minimum unavoidable loss.",
+        "This offline conversion does not exercise a browser, decoder, or deinterlacer."
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "fixture": {
+        "label": "kids-hour-b-picture-loss",
+        "fileName": "kids-hour-defect-2.ts",
+        "sha256": "eada598bc1437d0739dec2cd439bc8d4a2706f5939b45b162997e3ad8ebabe93",
+        "sizeBytes": 67108856
+      },
+      "variants": {
+        "baseline": {
+          "sourceRevisionDeclared": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "6de646cc125858ee2589fec388a914170b168fc4b87177ef28f10ab80c68f6d3",
+          "outputSha256": "cbbd4ea574ced7ce8f2f8aba0bfd3c3b947b5584be802f56a3d2e157d9fe5b40",
+          "summary": {
+            "mediaFragments": 99,
+            "videoSamples": 1493,
+            "audioSamples": 2365,
+            "bytes": 140302121
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 99,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 99,
+                "sampleCount": 1493,
+                "firstDecodeTime": 60919,
+                "lastDecodeEnd": 4565419,
+                "firstPresentationTime": 63922,
+                "lastPresentationEnd": 4568422,
+                "maximumPresentationInterval": 51051,
+                "maximumPresentationIntervalMs": 567.2333333333333,
+                "sampleTimingSha256": "893d3cfbb14ec366b9fa016a157dac865210c08d1be616b1a8e4f758eb0c0137"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 99,
+                "sampleCount": 2365,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2421760,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2421760,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "f0d332b972f851f0b6de2821e976aba43d0613113af0fbd0749f730ffdfc568c"
+              }
+            }
+          }
+        },
+        "candidate": {
+          "sourceRevisionDeclared": "e36dd0b521efe4c64574fcd89ed44f3bfb8c15db",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "93bcad6af6a0e79b158684cde1f3c9faabae926805bf10a65bd35260c2bcc4ff",
+          "outputSha256": "89d59ab3c9a9b83f295b1f8e2feb36328397824f6c3bd1274dd69dbd3910ebaf",
+          "summary": {
+            "mediaFragments": 100,
+            "videoSamples": 1505,
+            "audioSamples": 2365,
+            "bytes": 142239422
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 100,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 100,
+                "sampleCount": 1505,
+                "firstDecodeTime": 60919,
+                "lastDecodeEnd": 4565419,
+                "firstPresentationTime": 63922,
+                "lastPresentationEnd": 4568422,
+                "maximumPresentationInterval": 15015,
+                "maximumPresentationIntervalMs": 166.83333333333334,
+                "sampleTimingSha256": "0ab7ca145e3293af6660ab60d3003f66805e25f853bb8fac74418124140976ad"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 100,
+                "sampleCount": 2365,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2421760,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2421760,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "f0d332b972f851f0b6de2821e976aba43d0613113af0fbd0749f730ffdfc568c"
+              }
+            }
+          }
+        },
+        "integration": {
+          "sourceRevisionDeclared": "44e06a4632ad1da91073fbce7a4816514f6ff58a",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "927ab6054480ef5cae4e6a4b313cba0bba9eb6abd7cc297fe0baf5ba189f8110",
+          "outputSha256": "cbbd4ea574ced7ce8f2f8aba0bfd3c3b947b5584be802f56a3d2e157d9fe5b40",
+          "summary": {
+            "mediaFragments": 99,
+            "videoSamples": 1493,
+            "audioSamples": 2365,
+            "bytes": 140302121
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 99,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 99,
+                "sampleCount": 1493,
+                "firstDecodeTime": 60919,
+                "lastDecodeEnd": 4565419,
+                "firstPresentationTime": 63922,
+                "lastPresentationEnd": 4568422,
+                "maximumPresentationInterval": 51051,
+                "maximumPresentationIntervalMs": 567.2333333333333,
+                "sampleTimingSha256": "893d3cfbb14ec366b9fa016a157dac865210c08d1be616b1a8e4f758eb0c0137"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 99,
+                "sampleCount": 2365,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2421760,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2421760,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "f0d332b972f851f0b6de2821e976aba43d0613113af0fbd0749f730ffdfc568c"
+              }
+            }
+          }
+        },
+        "integration-with-candidate": {
+          "sourceRevisionDeclared": "be568d8d6240ea0eec414fd13a9c710ab434d6ee",
+          "binaryFileName": "mpeg2toh264",
+          "binarySha256": "17ffa5034e2b07d32c45181c0e00f81a0580c565019377c9cc495a812d38c8e2",
+          "outputSha256": "89d59ab3c9a9b83f295b1f8e2feb36328397824f6c3bd1274dd69dbd3910ebaf",
+          "summary": {
+            "mediaFragments": 100,
+            "videoSamples": 1505,
+            "audioSamples": 2365,
+            "bytes": 142239422
+          },
+          "fmp4Timeline": {
+            "fragmentCount": 100,
+            "tracks": {
+              "video": {
+                "trackId": 1,
+                "timeScale": 90000,
+                "fragmentCount": 100,
+                "sampleCount": 1505,
+                "firstDecodeTime": 60919,
+                "lastDecodeEnd": 4565419,
+                "firstPresentationTime": 63922,
+                "lastPresentationEnd": 4568422,
+                "maximumPresentationInterval": 15015,
+                "maximumPresentationIntervalMs": 166.83333333333334,
+                "sampleTimingSha256": "0ab7ca145e3293af6660ab60d3003f66805e25f853bb8fac74418124140976ad"
+              },
+              "audio": {
+                "trackId": 2,
+                "timeScale": 48000,
+                "fragmentCount": 100,
+                "sampleCount": 2365,
+                "firstDecodeTime": 0,
+                "lastDecodeEnd": 2421760,
+                "firstPresentationTime": 0,
+                "lastPresentationEnd": 2421760,
+                "maximumPresentationInterval": 1024,
+                "maximumPresentationIntervalMs": 21.333333333333332,
+                "sampleTimingSha256": "f0d332b972f851f0b6de2821e976aba43d0613113af0fbd0749f730ffdfc568c"
+              }
+            }
+          }
+        }
+      },
+      "comparisons": [
+        {
+          "before": "baseline",
+          "after": "candidate",
+          "videoSampleDelta": 12,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 166.83333333333334,
+            "delta": -400.4
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": false
+        },
+        {
+          "before": "integration",
+          "after": "integration-with-candidate",
+          "videoSampleDelta": 12,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 166.83333333333334,
+            "delta": -400.4
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": false
+        },
+        {
+          "before": "baseline",
+          "after": "integration",
+          "videoSampleDelta": 0,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 567.2333333333333,
+            "after": 567.2333333333333,
+            "delta": 0.0
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": true
+        },
+        {
+          "before": "candidate",
+          "after": "integration-with-candidate",
+          "videoSampleDelta": 0,
+          "maximumVideoPresentationIntervalMs": {
+            "before": 166.83333333333334,
+            "after": 166.83333333333334,
+            "delta": 0.0
+          },
+          "audioSampleCountEqual": true,
+          "audioSampleTimingEqual": true,
+          "audioTimelineBoundsEqual": true,
+          "outputByteIdentical": true
+        }
+      ],
+      "limitations": [
+        "Converter source revisions are caller declarations; binary SHA-256 values identify the executed programs.",
+        "The fixed fixture begins and ends mid-stream, so total sample counts do not by themselves measure every discarded source picture.",
+        "fMP4 sample timing does not prove pixel correctness, visible scanout, audible A/V synchronization, or the minimum unavoidable loss.",
+        "This offline conversion does not exercise a browser, decoder, or deinterlacer."
+      ]
+    }
+  ]
+}

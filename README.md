@@ -18,9 +18,9 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 異なる起点とinstrumentationで得た値は、個別修正の効果量として直接比較しません。
 UIのtouch eventから`video.currentTime`設定までを含む値も、この2種類へ混ぜません。
 
-**queue全reset**とは、YADIFの待ち行列を空にして時刻同期をやり直す処理を指します。
+**queue全reset**とは、YADIFのキューを空にして時刻同期をやり直す処理を指します。
 
-**FIFO破棄**とは、容量確保や実遅延からの追いつきで、待ち行列の先頭から古いfieldだけを捨てる処理を指します。
+**FIFO破棄**とは、容量確保や実遅延からの追いつきで、キューの先頭から古いfieldだけを捨てる処理を指します。
 
 **致命的な表示停止**は、利用者が再シークなどを行わない限り、シーク要求から2秒以内に安定した表示進行へ復帰しない事象です。
 合格条件は、正常TSと異常TSのそれぞれについて、試行条件を記録した1時間の自動試験で0件です。
@@ -113,7 +113,10 @@ integrationは、異常区間通過後のFPS安定復帰に20回すべてで失�
 全2,798万packetの走査では同期エラーとTEIが0件、映像PIDのcontinuity counter不連続が2件でした。
 1件目は6 counter値相当を失ったopen GOP内のP frame picture、2件目は5 counter値相当を失ったopen GOP内のB frame pictureです。
 各欠損の約16MiB前から64MiBを無変換で固定し、各fixtureに対象の不連続が1件だけ含まれることを確認しました。
-ブラウザーで失われる表示frame数、不可避な最小drop、画素、A/V同期、実機での復帰は未測定です。[packet位置、picture構造、fixture hash](results/kids-hour-transport-defects.json)と[再現スクリプト](scripts/inspect-ts-transport-defects.py)を公開しています。
+順位9の候補版は基準版より、P-picture側で映像sampleを10個、B-picture側で12個多く保持しました。
+最大映像時刻間隔は、P-picture側が567.233→300.300ms、B-picture側が567.233→166.833msへ縮まりました。
+両fixtureとも音声sample数と時刻列は一致しています。
+ブラウザーで失われる表示frame数、不可避な最小drop、画素、可聴A/V同期、実機での復帰は未測定です。[packet位置、picture構造、fixture hash](results/kids-hour-transport-defects.json)、[変換結果](results/kids-hour-defect-conversion-comparison.json)、[packet検査](scripts/inspect-ts-transport-defects.py)と[変換比較](scripts/measure-fixed-anomaly-conversion.py)の再現スクリプトを公開しています。
 
 `autoFilm`のFPS安定維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
@@ -202,7 +205,7 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗は4件残りました。
 同じseedの先頭11 blockでは、順位9単独の9/220から4/220へ減りましたが、統合版のどの修正が差を生んだかは未確定です。[集計と全block](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を公開しています。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は基準版と候補版で一致しましたが、実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)も参照してください。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残り、異常TSの1時間条件を満たさないため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 順位4はqueue policyの土台で、順位5はその子PRです。

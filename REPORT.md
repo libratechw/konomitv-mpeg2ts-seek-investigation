@@ -454,7 +454,7 @@ AAC は通常再エンコードせず、ADTSからフレームを取り出して
 
 ## MSE の待ちと再現できた競合
 
-[mse.ts:343](https://github.com/otya128/mpeg2toh264/blob/d5df08ba9c661a5576545d3d30464d8f3bf64639/packages/player/src/mse.ts#L343) は範囲外 seekで待ち行列とrandom access記録を消し、`remove(0, Infinity)` を予約する。
+[mse.ts:343](https://github.com/otya128/mpeg2toh264/blob/d5df08ba9c661a5576545d3d30464d8f3bf64639/packages/player/src/mse.ts#L343) は範囲外 seekでキューとrandom access記録を消し、`remove(0, Infinity)` を予約する。
 同じ MediaSource / SourceBufferを再利用する。
 このseek経路に `SourceBuffer.abort()`、`timestampOffset`、`appendWindowStart/End` の設定はない。
 codec MIMEが変わった場合だけ `changeType()` し、新しいinit segmentを投入する。
@@ -757,7 +757,11 @@ campaign内のruntime終了commandは時間切れになったが、直後の確�
 
 各不連続の約16MiB前から64MiBをTS packet境界で切り出し、再エンコードとremuxを行わず固定した。fixtureのSHA-256はP-picture側が`de453e5acd06b7072da20f38ed1a6b80ddf3dcf8332648fe6175a74a5e1bbef3`、B-picture側が`eada598bc1437d0739dec2cd439bc8d4a2706f5939b45b162997e3ad8ebabe93`で、各fixtureには対象の不連続が1件だけ含まれる。counterの飛びは欠落packet数を16を法として示すだけで、ブラウザーで失われる表示frame数を示さない。不可避な最小drop、画素、可聴A/V同期、実機の復帰性は未測定である。[全packet走査とpicture位置](results/kids-hour-transport-defects.json)および[一般化した検査スクリプト](scripts/inspect-ts-transport-defects.py)を公開した。
 
-integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを破棄する。今回の損傷対象は後続pictureの参照元にならないB-pictureなので、正常なpictureまで破棄している可能性がある。ただし、変換後の各pictureとの対応と画素の正常性は未検証であり、「1 pictureだけ落とせば十分」とはまだ判定しない。
+この2本を直接の親`52a3db5`と候補tip `e36dd0b`のconverter binaryでオフライン変換した。P-picture破損では候補が映像sampleを10個多く保持し、最大映像時刻間隔は567.233msから300.300msへ縮まった。B-picture破損では12個多く保持し、最大間隔は567.233msから166.833msへ縮まった。両fixtureとも音声sample数、各sampleのdecode時刻・duration・composition offset、音声trackの時刻範囲が一致した。
+
+公開integration `44e06a4`と順位9を重ねた検証build `be568d8`でも同じ変換を行った。各fixtureで、integrationの出力は`52a3db5`と、検証buildの出力は`e36dd0b`とそれぞれbyte単位で一致した。したがって、このオフライン条件では順位9の作用をintegrationへ重ねても変わらない。実行したbinaryは結果内のSHA-256で識別し、source revisionは呼び出し側の宣言として区別した。この結果は実在するopen-GOP内のP/B frame picture破損に対する再現性を広げるが、ブラウザー、画素、可視scanout、不可避な最小drop、可聴A/V同期、field picture破損を証明しない。[4 buildの比較結果](results/kids-hour-defect-conversion-comparison.json)と[再現スクリプト](scripts/measure-fixed-anomaly-conversion.py)を公開した。
+
+integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを破棄する。Galaxyで測った乃木坂工事中の損傷対象は後続pictureの参照元にならないB-pictureなので、正常なpictureまで破棄している可能性がある。ただし、変換後の各pictureとの対応と画素の正常性は未検証であり、「1 pictureだけ落とせば十分」とはまだ判定しない。
 
 同じ固定byte windowを、integration `44e06a4`由来として記録したconverter binaryでオフライン変換した。source revisionは呼び出し側の宣言であり、実行したbinaryは結果JSONのSHA-256で識別する。出力fMP4をFFprobeで復号すると、隣接frameの表示時刻に最大567.233msの間隔があり、GalaxyのrVFCで観測したmedia timeの567.233ms飛びと0.002ms以内で一致した。したがって、Galaxyで見えた時刻の飛びはAndroid decoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれる。破損B-pictureを含む入力のkeyframe間隔は15 frame・500.5msだったが、固定windowは先頭と末尾がstream途中なので、入出力frame数の差から破棄picture数を決めない。画素の正常性、表示可能だった最小picture集合、A/V同期は引き続き未証明である。[変換結果](results/nogizaka-defect-conversion-timeline.json)と[再現スクリプト](scripts/measure-nogizaka-defect-conversion.py)を公開した。
 
