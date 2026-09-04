@@ -396,7 +396,7 @@ Chrome、page、player、Worker、decoder、MSE、YADIFを1,000要求ごとに�
 これは8回連続描画と100ms以上の持続まで待つ致命的停止検出器の値で、通常シークの初回描画200ms目標とは比較しない。
 最後のsessionは時間上限で終了したため、要求5,000回のうち完了した4,738回だけを観測済みの復帰として数える。
 
-この走行には同条件のStarlette修正前がなく、候補による表示復帰時間や停止頻度の改善量は示さない。
+この走行には同条件のStarlette修正前がなく、候補によるシーク完了時間や停止頻度の改善量は示さない。
 選択したシーク区間は既知の破損packetを横切らないため、異常TSの1時間条件にも使わない。
 全sessionの終了処理、Chromeとローカルruntimeの停止、Starlette実行ファイルの復元を確認した。[build、測定条件、各blockのhash、終了確認](results/windows-starlette-candidate-one-hour-seek.json)を保存している。
 
@@ -655,7 +655,7 @@ Windowsは全走行で電源モードが「最適な電力効率」だったこ�
 
 その後、最新integrationからこのpolicyだけを外した対照を作り、Galaxy、60Hz、全画面、LAN直結、同じ188秒以降を軽量collectorで各600秒測った。policyありは3分後からrAFと入力callbackが徐々に低下し、全体rAF 56.662回/秒、入力callback 29.070回/秒、YADIFの`missed` 541、最大rAF間隔116.7msとなった。policyなしはrAF 59.998回/秒、入力callback 29.970回/秒、`missed` 0、最大rAF間隔33.3msを維持した。固定済みcallback traceだけをoffline replayするとpolicyありは163 field多く表示できるため、局所的なcatch-up判断自体は有利だったが、実再生では追加処理とcallback低下のfeedbackがその利点を上回った。両版の`droppedVideoFrames`増分は198で同じで、このcounterも長時間劣化を区別しなかった。[600秒A/B、分ごとの値、raw hash](results/galaxy-present-one-field-long-run-ab.json)を保存した。
 
-policyなし版の40 seekは表示復帰時間の中央値159.7ms、p95 193.6ms、最大246.8msで40/40が当時の250ms判定以下だった。当時の判定を維持したまま長時間退行だけを除けるため、`fix/present-one-field-per-refresh`はPR候補とintegrationから外す。[40回の生値](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
+policyなし版の40 seekはシーク完了時間の中央値159.7ms、p95 193.6ms、最大246.8msで40/40が当時の250ms判定以下だった。当時の判定を維持したまま長時間退行だけを除けるため、`fix/present-one-field-per-refresh`はPR候補とintegrationから外す。[40回の生値](results/galaxy-integration-without-present-seek-visible-40.json)を保存した。
 
 同じGalaxy、全画面、単一タブ、LAN直結でvideo要素を直接測ると、Originalは30秒でrVFC 29.966fps、media time 30.008秒を維持しながら`droppedVideoFrames`が10増えた。
 rVFCの898個の`mediaTime`差はすべて約33.367msで、入力video callbackに1 frame分の飛びはなかった。
@@ -1199,7 +1199,7 @@ I-pictureの途中byteだけを返さない。
 録画完了後のscan、既存scanとの統合、初回再生と並行するindex生成を比較し、初回再生前に全ファイルscanを必須にしない。
 
 「ほぼ瞬時」は、要求位置と一致する表示復帰、音声再開、定常frame cadenceまでを別の受け入れ条件にする。
-表示復帰時間200ms以下を現行のシーク目標とし、要求位置との一致、音声再開、定常frame cadenceとは別々に確認する。
+シーク完了時間200ms以下を現行のシーク目標とし、要求位置との一致、音声再開、定常frame cadenceとは別々に確認する。
 同じ端末、同じ表示更新頻度、同じ素材/target、同じcache条件で変更前後を比較する。
 一時的なraw video表示だけを初画成功と数えず、deinterlaced frameの時刻と継続再生も確認する。
 
