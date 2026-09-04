@@ -1,6 +1,6 @@
 # KonomiTV 録画再生のシーク遅延と表示品質
 
-現行integration候補は`84e916b`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。静的検証と自動試験は完了し、実機再測定は未実施である。この文書にある`44e06a4`など従来integrationの測定値を`84e916b`の結果へ流用しない。
+現行integration候補は`21e6917`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新した。静的検証と自動試験は完了し、実機再測定は未実施である。この文書にある`44e06a4`など従来integrationの測定値を現行コードの結果へ流用しない。
 
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
