@@ -251,7 +251,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 | データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
 | 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
 | 機械可読な集計値と生値 | [`results/`](results/) |
-| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[TS全体の欠損とpictureの照合](scripts/inspect-ts-transport-defects.py)、[既存fixtureの詳細照合](scripts/inspect-nogizaka-transport-defect.py)、[fMP4時刻列の解析](scripts/fmp4_timeline.py)、[破損区間の変換比較](scripts/measure-nogizaka-defect-conversion.py)を含む） |
+| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[TS全体の欠損とpictureの照合](scripts/inspect-ts-transport-defects.py)、[既存fixtureの詳細照合](scripts/inspect-nogizaka-transport-defect.py)、[fMP4時刻列の解析](scripts/fmp4_timeline.py)、[破損区間の変換比較](scripts/measure-nogizaka-defect-conversion.py)、[Windows異常TS診断](scripts/analyze-windows-anomaly-diagnostic.py)を含む） |
 
 録画ファイル、認証情報、実際のLAN内アドレス、ローカルパス、アクセスログは含みません。
 番組名は素材の識別用であり、録画データ自体は配布しません。

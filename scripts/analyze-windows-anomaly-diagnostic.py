@@ -39,6 +39,58 @@ def stats(values):
     }
 
 
+def gap_stats(events, key="at"):
+    values = sorted(float(event[key]) for event in events)
+    return stats([after - before for before, after in zip(values, values[1:])])
+
+
+def fatal_context_metrics(failure):
+    context = failure.get("diagnostics") or {}
+    video_frames = context.get("frames") or []
+    canvas_draws = context.get("draws") or []
+    animation_frames = context.get("animationFrames") or []
+    animation_gaps = gap_stats(animation_frames)
+    video_gaps = gap_stats(video_frames)
+    canvas_gaps = gap_stats(canvas_draws)
+
+    if animation_gaps and animation_gaps["maximum"] > 2000:
+        boundary = "at-or-before-animation-frame-callback"
+    elif video_gaps and video_gaps["maximum"] > 2000:
+        boundary = "after-animation-frame-and-before-video-frame-callback"
+    elif canvas_gaps and canvas_gaps["maximum"] > 2000:
+        boundary = "after-video-frame-callback-and-before-canvas-draw"
+    else:
+        boundary = "not-localized-by-two-second-gaps"
+
+    return {
+        "trialIndex": failure.get("index"),
+        "phase": failure.get("phase"),
+        "elapsedMs": failure.get("elapsedMs"),
+        "observedBoundary": boundary,
+        "animationFrame": {
+            "count": len(animation_frames),
+            "rate": event_rate(animation_frames),
+            "gapsMs": animation_gaps,
+        },
+        "videoFrame": {
+            "count": len(video_frames),
+            "rate": event_rate(video_frames),
+            "gapsMs": video_gaps,
+        },
+        "canvasDraw": {
+            "count": len(canvas_draws),
+            "rate": event_rate(canvas_draws),
+            "gapsMs": canvas_gaps,
+        },
+        "videoState": context.get("video"),
+        "videoEventCounts": dict(
+            sorted(Counter(event.get("type") for event in context.get("videoEvents") or []).items())
+        ),
+        "timingEventCount": len(context.get("timings") or []),
+        "playerErrors": context.get("playerErrors") or [],
+    }
+
+
 def context_metrics(failure):
     context = failure.get("context") or {}
     video_frames = context.get("videoFrames") or []
@@ -94,11 +146,17 @@ def main():
     block_results = []
     low_contexts = []
     other_contexts = []
+    fatal_contexts = []
     for name, metadata in expected.items():
         path = supplied_by_hash[metadata["sha256"]]
         block = json.loads(path.read_text())
         failures = block["sample"].get("cadenceFailures") or []
         contexts = [context_metrics(failure) for failure in failures]
+        block_fatal_contexts = [
+            fatal_context_metrics(failure)
+            for failure in block["sample"].get("failures") or []
+        ]
+        fatal_contexts.extend(block_fatal_contexts)
         video_rates = [
             context["videoCallbackFps"]
             for context in contexts
@@ -132,6 +190,7 @@ def main():
                     ),
                 },
                 "lowVideoPresentationSession": bool(low_presentation),
+                "fatalDiagnostics": block_fatal_contexts,
             }
         )
 
@@ -233,6 +292,15 @@ def main():
                         block["cadenceFailureContext"]["uniqueAnimationFrameFps"] is not None
                         for block in block_results
                     ),
+                    "fatalDiagnostics": {
+                        "count": len(fatal_contexts),
+                        "observedBoundaryCounts": dict(
+                            sorted(Counter(
+                                context["observedBoundary"] for context in fatal_contexts
+                            ).items())
+                        ),
+                        "contexts": fatal_contexts,
+                    },
                 },
                 "interpretation": [
                     "A block is classified as a low-video-presentation session only when every trial fails cadence, median rVFC is 18-22 fps, and median canvas draw rate is 38-42 fps.",
@@ -240,6 +308,8 @@ def main():
                     "A presentedFrames step of one with alternating one- and two-source-frame media intervals means callbacks themselves were not skipped by the collector; Chrome presented a reduced subset of source media times.",
                     "Diagnostic instrumentation invalidates this run for formal latency or failure-rate claims.",
                     "Absent animation-frame history cannot distinguish a reduced compositor/rAF rate from video presentation reduction upstream of rVFC.",
+                    "Fatal localization reports the first observed callback boundary with a gap over two seconds. An animation-frame gap does not distinguish browser callback suppression from an application loop that stopped requesting callbacks.",
+                    "A continuing animation-frame stream with a video-frame gap places the observable failure after rAF and before rVFC, but does not by itself distinguish network, conversion, MSE, decoder, and browser video presentation.",
                 ],
             },
             indent=2,
