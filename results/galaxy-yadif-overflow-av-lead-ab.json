@@ -34,7 +34,7 @@
         {
           "run": 1,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-1.json",
-          "resultSha256": "856456b606d10ff3420ef56ba74ea5e2e0a786a19962dd27752c61f683058633",
+          "resultSha256": "dd7af931550e7545536480801630b9cdc3504fa040884127053fe8fcf43e9854",
           "retiredFields": 0,
           "allDraws": {
             "count": 660,
@@ -61,7 +61,7 @@
         {
           "run": 2,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-2.json",
-          "resultSha256": "c5dd46a2833a7b7b86e2008e77135b0de9db2a48f6d2bd4a130daf6a5366ea49",
+          "resultSha256": "8fc14d6ae1ca9f4764d2851fbce7fb1562ac115ac5403a174d6d646f28dcab93",
           "retiredFields": 60,
           "allDraws": {
             "count": 654,
@@ -96,7 +96,7 @@
         {
           "run": 3,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-3.json",
-          "resultSha256": "ef1e61836c74e7b8415dc062ce91422dc1e9d98dcd1496149d9e3126982b40a8",
+          "resultSha256": "4ccaf95d3df080df8b5270ecf36ed3d46024414d3c80e7acde89feeda4b343d4",
           "retiredFields": 0,
           "allDraws": {
             "count": 658,
@@ -146,14 +146,15 @@
       "distCommit": "27b327e2c312ac48dd8638c4c5bb3769b1eb5ec0",
       "diagnosticSourceHash": "8ad8ef8febdf2cc8b8a9f2f809710134b58d99cfd5a422fdbda722bb9d4e0f55",
       "diagnosticDistHash": "6935b2e7b242620951a73ed6e94e7d86aad5eb9ab24c45a5b8b34c14bfcedb66",
-      "diagnosticPatchHash": "8c9bd75db6d547ccc3becc596a137577c1abb2bdf3bbcbf0cb68307148ac58ad"
+      "diagnosticSourcePatchFile": "yadif-overflow-av-lead-rank4-instrumentation.patch",
+      "diagnosticSourcePatchHash": "f22b435375a3dabc4c696f364c447a53dc0e89b75a60387fe1246cef9c7b5d1c"
     },
     "rank5": {
       "runs": [
         {
           "run": 1,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-1.json",
-          "resultSha256": "49d0fc386fd748d42f46c1ab543ba83314d964b71f3acf46d63b66e500aceaed",
+          "resultSha256": "732038c888795cbbe7ef5c2f490df2c6a396b4739ff2cca0687884fbd56557af",
           "retiredFields": 2,
           "allDraws": {
             "count": 660,
@@ -188,7 +189,7 @@
         {
           "run": 2,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-2.json",
-          "resultSha256": "dda729bcbd5920d63d8e04411f9af172702e98ee4512a67ad830a66ef24973d4",
+          "resultSha256": "ebe50dd04913a3864fae51f4ae27053a6ab208d839ba1c0955346ebac78309b0",
           "retiredFields": 1,
           "allDraws": {
             "count": 659,
@@ -223,7 +224,7 @@
         {
           "run": 3,
           "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-3.json",
-          "resultSha256": "5bbb449b79f360789ab6c2264e5437597d10764bc386363758c7e69ad0c88b6a",
+          "resultSha256": "8077df5effee23933ea203af18e4987b276fab2e89446c2cdeb55428269a3e30",
           "retiredFields": 0,
           "allDraws": {
             "count": 656,
@@ -273,7 +274,8 @@
       "distCommit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
       "diagnosticSourceHash": "011e5e59209e9ce05e1fa323a23a09d404bb8c0cb13c675c5de4e5857116c5f1",
       "diagnosticDistHash": "a1a2a5779c1c1a57019f7e01b694314e93764a1e64faafda939061c295d16bfe",
-      "diagnosticPatchHash": "530b3ca7951cc38f7a7f487d9e5041361662987ac7d9822b6dc923eca4191ed4"
+      "diagnosticSourcePatchFile": "yadif-overflow-av-lead-rank5-instrumentation.patch",
+      "diagnosticSourcePatchHash": "adfd6c12799d56ab7758cd13702838a66066b67d3a99456287e20ab98d1d536b"
     }
   },
   "comparison": {

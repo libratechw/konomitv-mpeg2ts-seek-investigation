@@ -14900,7 +14900,8 @@
   "distCommit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
   "diagnosticSourceHash": "011e5e59209e9ce05e1fa323a23a09d404bb8c0cb13c675c5de4e5857116c5f1",
   "diagnosticDistHash": "a1a2a5779c1c1a57019f7e01b694314e93764a1e64faafda939061c295d16bfe",
-  "diagnosticPatchHash": "530b3ca7951cc38f7a7f487d9e5041361662987ac7d9822b6dc923eca4191ed4",
+  "diagnosticSourcePatchFile": "yadif-overflow-av-lead-rank5-instrumentation.patch",
+  "diagnosticSourcePatchHash": "adfd6c12799d56ab7758cd13702838a66066b67d3a99456287e20ab98d1d536b",
   "run": 3,
   "metricDefinition": {
     "leadMs": "(fieldMediaTime - video.currentTime) * 1000 at direct canvas draw; positive means the field content is ahead of the media element clock",

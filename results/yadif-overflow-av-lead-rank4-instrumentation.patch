@@ -1,0 +1,153 @@
+--- a/packages/yadif/src/deinterlace.ts
++++ b/packages/yadif/src/deinterlace.ts
+@@ -104,8 +104,30 @@
+   /** When it belongs on the screen, on `performance.now()`'s clock. */
+   at: number;
+   duration: number;
++  /** Diagnostic-only media position represented by this field. */
++  fieldMediaTime?: number;
++  /** Diagnostic-only total duration retired ahead of this field. */
++  retiredDurationBeforeMs?: number;
+ }
+ 
++const AV_LEAD_DIAGNOSTIC = {
++  enabled: false,
++  retiredFields: 0,
++  draws: [] as Array<{
++    at: number;
++    fieldMediaTime: number;
++    videoCurrentTime: number;
++    leadMs: number;
++    retirementAffected: boolean;
++    retiredDurationBeforeMs: number;
++  }>,
++};
++(
++  globalThis as unknown as {
++    __YADIF_AV_LEAD_DIAGNOSTIC__: typeof AV_LEAD_DIAGNOSTIC;
++  }
++).__YADIF_AV_LEAD_DIAGNOSTIC__ = AV_LEAD_DIAGNOSTIC;
++
+ /** The draw path that produced the picture still represented by the canvas. */
+ type PresentedPicture =
+   | { kind: "texture"; texture: WebGLTexture; flip: boolean }
+@@ -337,6 +359,8 @@
+   /** The rAF loop that puts them up, which is all that draws on the canvas. */
+   #loopHandle: number | null = null;
+   #lastLoopAt = 0;
++  /** Diagnostic-only phase for suppressing every other presentation. */
++  #testPresentTick = 0;
+   /** The gap between animation frames: as near as the page gets to the screen. */
+   #refreshMs = DEFAULT_REFRESH_MS;
+   /** The `<div>` this put around the element, so it can be taken away again. */
+@@ -826,8 +850,15 @@
+           : last == null
+             ? now + duration * 2
+             : last.at + last.duration;
+-        this.#filter(false, at, duration);
+-        this.#filter(true, at + duration, duration);
++        const fieldMediaDuration =
++          (duration * (this.#video.playbackRate || 1)) / 1000;
++        this.#filter(false, at, duration, metadata.mediaTime);
++        this.#filter(
++          true,
++          at + duration,
++          duration,
++          metadata.mediaTime + fieldMediaDuration,
++        );
+       } else {
+         // Direct video output supersedes any older film pictures that still
+         // have future deadlines in the shared presentation queue.
+@@ -1118,7 +1149,12 @@
+    * held as pictures. What is queued after that is a copy waiting for a
+    * moment, which no later frame can take away.
+    */
+-  #filter(second: boolean, at: number, duration: number): void {
++  #filter(
++    second: boolean,
++    at: number,
++    duration: number,
++    fieldMediaTime: number,
++  ): void {
+     const slot = this.#nextOutputSlot();
+     if (slot === null) return;
+     const output = this.#outputs[slot];
+@@ -1132,7 +1168,13 @@
+       this.#stats.late++;
+     }
+     this.#render(false, second, output.framebuffer);
+-    this.#queue.push({ slot, at, duration });
++    this.#queue.push({
++      slot,
++      at,
++      duration,
++      fieldMediaTime,
++      retiredDurationBeforeMs: 0,
++    });
+   }
+ 
+   /** Make room without treating ordinary capacity pressure as clock divergence. */
+@@ -1154,10 +1196,22 @@
+       0,
+       this.#queue.length + requiredOutputs - FIELD_QUEUE_LENGTH,
+     );
++    let retiredDuration = 0;
++    let retired = 0;
+     for (let index = 0; index < overflow; index++) {
+-      if (!this.#queue.shift()) break;
++      const ready = this.#queue.shift();
++      if (!ready) break;
++      retiredDuration += ready.duration;
++      retired++;
+       this.#stats.late++;
+     }
++    if (retired > 0) {
++      AV_LEAD_DIAGNOSTIC.retiredFields += retired;
++      for (const ready of this.#queue) {
++        ready.retiredDurationBeforeMs =
++          (ready.retiredDurationBeforeMs ?? 0) + retiredDuration;
++      }
++    }
+     return false;
+   }
+ 
+@@ -1217,7 +1271,17 @@
+       }
+     }
+     this.#lastLoopAt = now;
+-    this.#present(now);
++    const testPresentUntil = (
++      globalThis as unknown as {
++        __YADIF_TEST_PRESENT_EVERY_OTHER_UNTIL__?: number;
++      }
++    ).__YADIF_TEST_PRESENT_EVERY_OTHER_UNTIL__;
++    if (typeof testPresentUntil === "number" && now < testPresentUntil) {
++      if ((this.#testPresentTick++ & 1) !== 0) this.#present(now);
++    } else {
++      this.#testPresentTick = 0;
++      this.#present(now);
++    }
+     this.#loopHandle = requestAnimationFrame(this.#onLoop);
+   };
+ 
+@@ -1249,6 +1313,20 @@
+     this.#queue.shift();
+     const begin = performance.now();
+     this.#show(ready.slot);
++    if (
++      AV_LEAD_DIAGNOSTIC.enabled &&
++      ready.fieldMediaTime !== undefined
++    ) {
++      const videoCurrentTime = this.#video.currentTime;
++      AV_LEAD_DIAGNOSTIC.draws.push({
++        at: performance.now(),
++        fieldMediaTime: ready.fieldMediaTime,
++        videoCurrentTime,
++        leadMs: (ready.fieldMediaTime - videoCurrentTime) * 1000,
++        retirementAffected: (ready.retiredDurationBeforeMs ?? 0) > 0,
++        retiredDurationBeforeMs: ready.retiredDurationBeforeMs ?? 0,
++      });
++    }
+     this.#showMsSinceReport += performance.now() - begin;
+     this.#showFramesSinceReport++;
+   }
