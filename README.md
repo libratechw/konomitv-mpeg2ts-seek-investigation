@@ -192,6 +192,10 @@ tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdis
 
 順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
 
+順位2・3・7は、順位1が削除する誤書き込みが残った基点から分岐しています。
+順位2と7はその行に触れていないので、順位1の取り込み後にmergeしても削除は維持されます。最終tipで回帰試験を再実行します。
+**順位3は、効果を測った基点にその誤書き込みが残っています。** 誤って上書きされた標本を再利用で回避していた可能性があるため、順位1を含む基点でA/Bを取り直すまで、追加probe 40→0という値は順位3単独の効果として使いません。
+
 ### tsukumijima/mpeg2toh264 へ出すもの
 
 fork固有のYADIFに対する修正です。otya128向けの変更へ混ぜません。
@@ -235,13 +239,12 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
 
-保留しているのは、異常TSの1時間条件を満たさないためです。
-候補単独の1時間上限の自動試験では、固定欠損を223回通過して致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗を9回検出しました。
-この候補は順位4・5を含まないため、FPS安定復帰失敗が順位9の変更に起因するかは未確定です。[集計と全block](results/galaxy-anomaly-rank9-one-hour-summary.json)を公開しています。
+保留しているのは、**異常TSの1時間条件が未測定**だからです。
+候補単独と、順位1〜7の統合版へ重ねた検証buildの2本を1時間走らせましたが、runnerが指定した乃木坂fixtureではなくMADDERを再生していました。
+どちらも順位9の評価には使えません。[無効の理由とfixture IDの照合](results/galaxy-anomaly-rank9-one-hour-fixture-mismatch.json)を公開しています。
 
-順位1〜7の統合版へ順位9を重ねた検証buildでも、同じ固定欠損を1時間反復しました。
-224回すべてが2秒以内に安定復帰し、致命的な表示停止は0件でしたが、異常区間通過後のFPS安定復帰失敗は4件残りました。
-同じseedの先頭11 blockでは、順位9単独の9/220から4/220へ減りましたが、統合版のどの修正が差を生んだかは未確定です。[集計と全block](results/galaxy-anomaly-integration-rank9-one-hour-summary.json)を公開しています。
+以前ここに載せていた通過回数とFPS安定復帰失敗の件数は、この不一致により取り下げました。
+fixtureの同一性を走行前に検証し、不一致なら異常終了するrunnerで測り直します。
 
 既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残るため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
 
