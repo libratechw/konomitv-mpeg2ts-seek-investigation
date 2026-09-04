@@ -744,6 +744,8 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 queue全reset単独の必要性は別に評価した。診断traceでは、末尾107.83msで閾値を越えたqueue全resetの66.6ms後に描画が戻った実例がある。ただし、その直前も容量破棄によって未来時刻列が連鎖しており、overflow時刻圧縮があってもqueue全resetだけが必要になる状態は保存済みtraceにない。したがって、閾値resetが実際に作動して描画を戻せることまでは確認できるが、時刻圧縮と独立した正式修正として必要だとはまだ立証できない。順位4の1時間停止blockはqueue全resetが1回増え、最大深さ5に達したが、queue時系列を保存していないため同じ機構とは確定しない。[停止別の機械集計と不足項目](results/yadif-fatal-queue-mechanism-audit.json)を保存した。
 
+基準版`52a3db5`の異常TS反復試験では、利用者操作を検出する前に完了した20 blockの全20件で致命的停止を観測した。全件が異常区間通過後に最大キュー深さ5へ達し、queue全resetは0、`late`は22〜360だったため、容量上限へ張り付く署名が反復したことは確認できる。ただしqueueの先頭・末尾時刻を保存しておらず、各停止が同じdeadline循環だったことまでは確定しない。次のblockで`pointerdown`と`touchstart`を検出してrunnerが終了したため、これは1時間の合格判定や正式なA/B値には使わない。[完了blockのhash、集計、除外理由](results/galaxy-baseline-anomaly-interrupted-diagnostic.json)を保存した。
+
 後続のoverflow時刻圧縮 source `7ef6696` / dist `ac2a2a9`では、単一の連続セッションで4,073 seek・停止0、実測3,572.682秒だった。ただし実行中のshell runnerを編集したため、collectorのraw出力後にrunnerが失敗した。blockごとの再生成も行っていない。この走行は[除外理由付きの参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)として残すが、順位5の合格根拠にも、順位4との効果比較にも使わない。順位5の因果効果には、同じ読み取り専用snapshotとblock再生成条件で別の1時間試験が必要である。
 
 同じ正式buildでChrome、page、player、Worker、decoder、MSE、YADIFを1,000 seekごとに作り直す1時間試験は、5 session、実測3491.416秒で4,399 seekすべてが復帰した。ただし最初のblock中に、同じLinuxホストで上の順位5診断buildを実行した。発生した追加負荷を分離できないため、[高負荷を含む参考結果](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)として残し、無負荷の1時間合格根拠には使わない。

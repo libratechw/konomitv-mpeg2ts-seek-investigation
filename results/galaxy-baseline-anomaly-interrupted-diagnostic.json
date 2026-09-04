@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-only-interrupted-campaign",
+  "reasonExcludedFromAcceptance": "The next block detected pointerdown and touchstart events. The runner rejected that block and ended the campaign after 31 minutes, so this is not a one-hour result.",
+  "scope": "Only the 20 completed blocks before the detected interaction are summarized. They contained no recorded interaction and completed every cleanup check.",
+  "build": {
+    "sourceCommit": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+    "distCommit": "52a3db5e8fb9833e6cade2167097849c668bdb1f",
+    "sourceHash": "fdf5a1050b0be0c17d5818f2648c8c98dff23850818e42c7660419899142b75e",
+    "distHash": "501acc95973dd549a3f73f8d1a0af862e8679ca41124c00fc06c0ea6c13e007b",
+    "asset": "PlayerController-B2MCmMO1.js",
+    "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+    "containerImageRevision": "e92fba8bb219589c8e4ada9609ed4a9d91b33c00"
+  },
+  "fixture": {
+    "name": "nogizaka.ts",
+    "sha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249
+  },
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra",
+    "browser": "Google Chrome",
+    "displayHz": 60,
+    "fullscreen": true,
+    "transport": "LAN direct",
+    "blockSize": 20,
+    "baseSeed": 20260910,
+    "campaignMode": "anomaly"
+  },
+  "completedPrefix": {
+    "blockCount": 20,
+    "completedSeeks": 68,
+    "fatalStops": 20,
+    "phaseCounts": {
+      "post-defect-recovery": 20
+    },
+    "maxQueuedFieldsCounts": {
+      "5": 20
+    },
+    "queueResettedCounts": {
+      "0": 20
+    },
+    "outputFps": {
+      "minimum": 2.949562481496094,
+      "median": 9.25456872519742,
+      "maximum": 16.50485436893204
+    },
+    "late": {
+      "minimum": 22,
+      "median": 121.5,
+      "maximum": 360
+    },
+    "missed": {
+      "minimum": 0,
+      "median": 4.0,
+      "maximum": 12
+    }
+  },
+  "interpretation": {
+    "supported": "The queue reached its capacity signature in all 20 saved fatal stops, with individual late retirement and no queue-wide reset. The signature is repeatable rather than unique to one saved stop.",
+    "notSupported": "These blocks do not contain queue head or tail deadline timelines. They cannot prove that every stop had the same head-lead loop or establish the exact deadline at which it persisted."
+  },
+  "failures": [
+    {
+      "block": "block-000.json",
+      "trialIndex": 5,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2004.3999999761581,
+      "outputFps": 8.742107819329771,
+      "late": 360,
+      "missed": 7,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-001.json",
+      "trialIndex": 5,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2003.8999999761581,
+      "outputFps": 15.521924717588073,
+      "late": 131,
+      "missed": 6,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-002.json",
+      "trialIndex": 5,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2003.1000000238419,
+      "outputFps": 7.779074290339817,
+      "late": 222,
+      "missed": 12,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-003.json",
+      "trialIndex": 3,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2002.5,
+      "outputFps": 8.798514027921506,
+      "late": 32,
+      "missed": 1,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-004.json",
+      "trialIndex": 4,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2001.6999999284744,
+      "outputFps": 16.444186497179455,
+      "late": 157,
+      "missed": 6,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-005.json",
+      "trialIndex": 6,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2007.7000000476837,
+      "outputFps": 15.538506362155386,
+      "late": 75,
+      "missed": 2,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-006.json",
+      "trialIndex": 1,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2001.6000000238419,
+      "outputFps": 16.145882800251638,
+      "late": 22,
+      "missed": 1,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-007.json",
+      "trialIndex": 2,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2007.2000000476837,
+      "outputFps": 14.53347543809078,
+      "late": 91,
+      "missed": 3,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-008.json",
+      "trialIndex": 1,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2002.2999999523163,
+      "outputFps": 16.50485436893204,
+      "late": 165,
+      "missed": 1,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-009.json",
+      "trialIndex": 2,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2002.3000000715256,
+      "outputFps": 8.745505782561496,
+      "late": 89,
+      "missed": 4,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-010.json",
+      "trialIndex": 3,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2001.5,
+      "outputFps": 13.589594252913995,
+      "late": 76,
+      "missed": 3,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-011.json",
+      "trialIndex": 9,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2004.5,
+      "outputFps": 9.710623422473333,
+      "late": 241,
+      "missed": 9,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-012.json",
+      "trialIndex": 4,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2000.7000000476837,
+      "outputFps": 8.744656044136676,
+      "late": 283,
+      "missed": 4,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-013.json",
+      "trialIndex": 4,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2009.7000000476837,
+      "outputFps": 14.540519580896982,
+      "late": 78,
+      "missed": 3,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-014.json",
+      "trialIndex": 2,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2002.7999999523163,
+      "outputFps": 15.65251418436082,
+      "late": 28,
+      "missed": 0,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-015.json",
+      "trialIndex": 1,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2003.8999999761581,
+      "outputFps": 2.949562481496094,
+      "late": 45,
+      "missed": 2,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-016.json",
+      "trialIndex": 2,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2002.7999999523163,
+      "outputFps": 7.788920260748026,
+      "late": 205,
+      "missed": 4,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-017.json",
+      "trialIndex": 2,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2005.2999999523163,
+      "outputFps": 8.731929757082135,
+      "late": 112,
+      "missed": 4,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-018.json",
+      "trialIndex": 4,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2003.1000000238419,
+      "outputFps": 8.742107819329771,
+      "late": 202,
+      "missed": 10,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    },
+    {
+      "block": "block-019.json",
+      "trialIndex": 3,
+      "phase": "post-defect-recovery",
+      "elapsedMs": 2001.6999999284744,
+      "outputFps": 7.765482431135149,
+      "late": 167,
+      "missed": 7,
+      "maxQueuedFields": 5,
+      "queueResetted": 0
+    }
+  ],
+  "blocks": [
+    {
+      "file": "block-000.json",
+      "sha256": "1c2d965f8830b87bcd120aa014ef1774f11708ef7a594b9373106b4107b0ecb1",
+      "completed": 5,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-001.json",
+      "sha256": "1c5805c8d1e452b817a8f6b1fdd0468bbd70986bb3c564cd71bbc09a42dacc6b",
+      "completed": 5,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-002.json",
+      "sha256": "409e845c8720eeee1434c5557942f14c8939d42a81fed7381e6ea92af7bbfe4b",
+      "completed": 5,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-003.json",
+      "sha256": "31fe820a64c2862bd86f89c1ade48235507f61eb4c2f8c9735168852f091c99d",
+      "completed": 3,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-004.json",
+      "sha256": "7cd2005ea0b40c3e8a344413b775e48ff48091cf407783fd2892489e59da1ca1",
+      "completed": 4,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-005.json",
+      "sha256": "8d1b1bcd328e7e31d138eda3b2838e4402d49ad1e29d10c8135bc97a3f003c91",
+      "completed": 6,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-006.json",
+      "sha256": "d94142ab0c3cf82d8fc679345e3d59eabf2b1169177b732f44ef97a92a410292",
+      "completed": 1,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-007.json",
+      "sha256": "cb14ffd07be6a77dec2352ec846881328b326826dc17f8aa33ee645598005d78",
+      "completed": 2,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-008.json",
+      "sha256": "89a2ec4ec0728a67f9c84b3e811a4536af5c496a5e6dee23121d56da1043189c",
+      "completed": 1,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-009.json",
+      "sha256": "4715e07dd6ceaba1a801e73ccb778aade6ed1a110583fa19ae57203d3c589716",
+      "completed": 2,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-010.json",
+      "sha256": "9d0dfb3482ca0a6cd4c821ec135a9ca7e379874d3f7c4ee71f275e0729674d7f",
+      "completed": 3,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-011.json",
+      "sha256": "da3776cfdbc99b89593a25ae37f6042e19f43d1e97e681c87d0a8c3d492f06e4",
+      "completed": 9,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-012.json",
+      "sha256": "71986f780f764c670e6c3ad510f95f75193af9a9e99cfeed24f51c825c0445a8",
+      "completed": 4,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-013.json",
+      "sha256": "66703bbb846d40727dff240cc1f324cc1730fc9fb56b63d96c4ecc24aa7fa7fe",
+      "completed": 4,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-014.json",
+      "sha256": "3abf1e3a305d268d4969869833a8cd75304f7ff68e448573de63c0dc3c6a80c1",
+      "completed": 2,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-015.json",
+      "sha256": "bafc011be3cbd149e979a97fa1ba551ee80d302fc38d66bd73353829367f2fe4",
+      "completed": 1,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-016.json",
+      "sha256": "a03aeec8b4a5ecee6d2b64ae32ff366530816fbc8a4b8f217fc13efc2f1afc2a",
+      "completed": 2,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-017.json",
+      "sha256": "00d70c7c312f41ec780fad404bec63c2db70021f816a1b8658d8955ca6f55292",
+      "completed": 2,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-018.json",
+      "sha256": "af8571f3f0a51dfa3afbb51b4ae26008df73afae0989c2c85adcd22adf301b90",
+      "completed": 4,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    },
+    {
+      "file": "block-019.json",
+      "sha256": "6d8c7fc65175cca9e03bf09c6657ac11a1f0a9696589def060df774acb60b2e4",
+      "completed": 3,
+      "fatalStops": 1,
+      "cleanup": {
+        "videoPausedBeforeClose": true,
+        "fullscreenExitedBeforeClose": true,
+        "testPagesClosed": true,
+        "chromeStopped": true,
+        "webapkStopped": true,
+        "adbForwardRemoved": true,
+        "containerStopped": true
+      }
+    }
+  ]
+}
