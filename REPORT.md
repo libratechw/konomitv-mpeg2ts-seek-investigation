@@ -51,6 +51,12 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 これはGalaxy 1台、正常60i、短時間、`video.currentTime`によるシークの結果です。実DPlayer UI、他のAndroid端末、1時間条件、可聴A/V同期は未確認です。
 
+### `autoFilm`の表示負荷
+
+同じcandidateとGalaxyで、正常3:2の3素材を24fps modeで10秒ずつ測ると、`outputFps`中央値は46.570〜47.833、`missed`増分は38〜47、film modeは各stats窓の0〜2回だけでした。同じキッズアワー素材で24fps modeだけを無効にすると、中央値59.958、`missed`・`degraded`増分0になり、1 frame当たりの処理時間中央値も11.627msから2.042msへ下がりました。[素材別の結果](results/galaxy-autofilm-normal-fixture-comparison.json)を公開しています。
+
+正常素材の輸送欠損や通常YADIFでは再現しないため、`autoFilm`解析経路の負荷と、callback欠落後にfilm履歴を捨てる処理が連鎖している可能性があります。同期readback、CPU fieldmatch、履歴resetを分けた計測は未実施であり、原因箇所と修正方法はまだ確定していません。
+
 ### 異常TSで完成済みpictureを保つ案
 
 `fix/preserve-complete-pictures-before-loss`は、transport lossより前に完成していたpictureを残す案です。2種類の実在欠損をオフライン変換すると、旧基準版に対して次の差がありました。

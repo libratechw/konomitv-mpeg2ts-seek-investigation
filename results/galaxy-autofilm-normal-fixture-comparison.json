@@ -1,0 +1,65 @@
+{
+  "scope": "Galaxyにおける正常3:2素材のautoFilm表示負荷",
+  "revisions": {
+    "konomiTvCandidate": "0f496f61de450c4ffe7e0198e74fb82f202ac328",
+    "mpeg2toh264": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "playerAssetSha256": "787a667ea39fb47cf2f68eb6dee024882bf95fe989348ad2a98a9c66ea6f3d66"
+  },
+  "measurement": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151 desktop mode",
+    "quality": "Original (MPEG-2)",
+    "transport": "LAN direct",
+    "fullscreenBody": true,
+    "durationMsPerRun": 10000
+  },
+  "autoFilm": [
+    {
+      "fixture": "MADDER",
+      "fixtureSha256": "163f234e006145d75d794c7a233f874a05cd7c8ce1298cb8b82c86a91a53b6fb",
+      "outputFpsMedian": 47.833427122227654,
+      "missedDelta": 43,
+      "degradedDelta": 172,
+      "frameMsMedian": 11.251851850085789,
+      "filmStatsWindows": 0,
+      "statsWindows": 10,
+      "rawResultSha256": "e31adc5c43dbd38f1f970d1e795f9c64a8667d940e6e6c742341efa1654e90c0"
+    },
+    {
+      "fixture": "キッズアワー正常区間",
+      "fixtureSha256": "98bf2b6581c49d294ce8fab7fb18723eadb1f618e79d2a7e570650a033788320",
+      "outputFpsMedian": 46.57029203777139,
+      "missedDelta": 47,
+      "degradedDelta": 188,
+      "frameMsMedian": 11.62692309801395,
+      "filmStatsWindows": 1,
+      "statsWindows": 10,
+      "rawResultSha256": "909f84ffc6d1fa0e4d1e7076fc08b68efa5ab1fbaf8703cad63d4ea47a1036c7"
+    },
+    {
+      "fixture": "ワールド イズ ダンシング",
+      "fixtureSha256": "99d78bc6415e9f6380463769df6416c6061141e846a443dd7336a70b5ea1af16",
+      "outputFpsMedian": 47.10962803133103,
+      "missedDelta": 38,
+      "degradedDelta": 154,
+      "frameMsMedian": 10.834615400204292,
+      "filmStatsWindows": 2,
+      "statsWindows": 9,
+      "rawResultSha256": "791392b51206c2c5b05c0b7d0a794e06af1bc1f1db408dc8a8cbd91f1840b4b4"
+    }
+  ],
+  "sameFixtureControl": {
+    "fixture": "キッズアワー正常区間",
+    "autoFilm": false,
+    "outputFpsMedian": 59.958029383719925,
+    "missedDelta": 0,
+    "degradedDelta": 0,
+    "frameMsMedian": 2.0419354823327835,
+    "rawResultSha256": "6555eea7c53a18fd90f1d91d82bc3c11646cd1089b7376ff07412f4daa5f11b5"
+  },
+  "limitations": [
+    "同期readback、CPU fieldmatch、履歴resetの負荷はまだ分離していない。",
+    "サンダー3と入間くんは短いfixtureがKonomiTVの録画スキャンに登録されず、単体demoでの測定が残る。",
+    "1時間安定性、可聴A/V同期、他端末は未確認。"
+  ]
+}
