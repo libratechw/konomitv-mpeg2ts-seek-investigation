@@ -1,6 +1,8 @@
 # KonomiTV 録画再生のシーク遅延と表示品質
 
-現行integration候補は`21e6917`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新した。静的検証と自動試験に加え、現行コードの異常TS 1時間試験を完了した。致命的停止は0/229だった。従来のcollectorが評価した安定確認直後の約3秒窓は229/229で基準外だったが、後続を含む15秒traceの1走行はFPS安定復帰を満たした。1時間全体のFPS安定復帰、正常TSの1時間連続再生、他の実機条件は未判定または未測定であり、`44e06a4`など従来integrationの測定値を現行コードの結果へ流用しない。
+現在の基準実装は`tsukumijima/mpeg2toh264`の`main` `faf1464e66693133fc9f4b8618992b0f557f0bc3`である。この版は旧候補の主要修正を取り込み、YADIFの描画、表示queue、`autoFilm`、統計をOffscreenCanvas Workerへ移した。KonomiTVの通常branchがまだこのcommitをpinしていなくても、隔離した検証用KonomiTVへ組み込んで追従する。
+
+旧integration `21e6917`とclean YADIF候補`8b1f66b`はpre-Worker実装であり、以下の実測は当時の問題、効果、未達条件を示す履歴として残す。現在の提出・integration・合否判定の土台には使わない。最新`main`は、Worker内の描画submit、実backend、再起動・fallbackを直接観測できるようにしてから実機測定を再開する。
 
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
@@ -17,10 +19,11 @@ canvasのopacity変更は原因または修正ではなかった。
 
 | 対象 | 確認した版と範囲 |
 | --- | --- |
-| KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
-| checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
+| 現在の追従対象 | `tsukumijima/mpeg2toh264` `main`、`faf1464e66693133fc9f4b8618992b0f557f0bc3` |
+| KonomiTVの最新確認 | `origin/master`、`ea1962f84c22265c1d31081dfe41cc3b53e9a555`。依存指定はmpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f`のまま |
+| 既存実測のKonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue容量・時刻同期 | 旧測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。最終候補source `e7e3ea2` / dist `8b1f66b`は`konomi/main` `52a3db5`から、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを構成し、独立した必要性を示せない閾値resetを履歴から外した。現行integrationの異常TS 1時間試験は停止0/229。FPS安定復帰は1走行だけ確認し、1時間全体は未判定。候補単独の実機再測定は未実施 |
+| YADIF queue容量・時刻同期 | 旧測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。旧候補source `e7e3ea2` / dist `8b1f66b`は`konomi/main` `52a3db5`から、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを構成した。旧integrationの異常TS 1時間試験は停止0/229。FPS安定復帰は1走行だけ確認し、1時間全体は未判定。最新`main`には作者のqueue recovery実装が採用済み |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
@@ -32,9 +35,6 @@ canvasのopacity変更は原因または修正ではなかった。
 | 共有環境で確認したWorker | `/assets/worker-Dl8lDoXO.BZ9fuFvy.js` が依存`52a3db5e`の`packages/player/dist/assets/worker-Dl8lDoXO.js`と一致 |
 | 稼働 YADIF | 公開 `CaptureManager-C0PFUpsj.js` に新しい `seeked` 処理、`filmCombThreshold`、`queueResetted` を確認。bundle 全体とソースの同一性までは主張しない |
 | サーバー配信依存 | ローカル公式コンテナのStarlette 1.6.0実体を確認。`FileResponse.chunk_size`は64KiB |
-
-検証後の節目でremoteを再取得した結果、`otya128/main`は`d5df08b`、`tsukumijima/main`は`52a3db5`、KonomiTV `origin/master`は`e92fba8`のままで、関連する新しい修正はなかった。
-このためqueue再同期はupstreamの既存挙動をフォーク拡張へ戻す変更として維持し、独自の`expectedDisplayTime`アンカーは優先度を下げたままとする。
 
 Worker の SHA-256 は `d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7`。
 固定依存のsource mapに含まれるplayer、worker、source、mse、pool、transcoderのTypeScriptは、今回参照した`52a3db5e`のソースと一致する。
@@ -770,7 +770,7 @@ queue全reset単独の必要性は別に評価した。診断traceでは、末�
 
 安定確認直後の約3秒窓のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。この窓は期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかったが、collectorは後続の合格窓を探索していない。したがって、この20回をFPS安定復帰失敗の件数には使わない。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
 
-clean YADIF候補を含む現行integration source / dist `84e916b28ac1e63d53c531c1fdd61f21a39dd531`でも、同じ既知欠損を反復する1時間試験を行った。KonomiTV clientは`7307e0ec39aed6a4772908cdbfb44223da42be6d`、fixtureはSHA-256 `2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845`の乃木坂工事中である。sourceとdistは実ファイルとGit blobを照合し、provenanceと生成client assetは走行snapshotの実ファイルhashを照合した。Chrome、page、player、Worker、decoder、MSE、YADIFはこの1 blockの開始前に作り直した。
+clean YADIF候補を含む旧integration source / dist `84e916b28ac1e63d53c531c1fdd61f21a39dd531`でも、同じ既知欠損を反復する1時間試験を行った。KonomiTV clientは`7307e0ec39aed6a4772908cdbfb44223da42be6d`、fixtureはSHA-256 `2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845`の乃木坂工事中である。sourceとdistは実ファイルとGit blobを照合し、provenanceと生成client assetは走行snapshotの実ファイルhashを照合した。Chrome、page、player、Worker、decoder、MSE、YADIFはこの1 blockの開始前に作り直した。
 
 実測3,557.110秒で229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件だった。表示進行の安定確認は中央値925.1ms、最大1,246.6msで、1時間のcoverageと後片付けも成立した。同一ホストの負荷記録713件ではFFmpeg processを検出しなかった。
 
@@ -1134,28 +1134,25 @@ MSE queue競合も通常時の平均ランキングとは別の、再現でき�
 
 ## 実装済み変更と提出先
 
-upstream向けに分離した候補に加え、フォーク固有YADIFのqueue容量確保とdeadline圧縮を1本のbranchにした。
-公開`fix/compress-yadif-overflow-schedule`は`konomi/main` `52a3db5`から構成し、容量不足時の必要最小限のFIFO破棄と、捨てた`duration`分のdeadline圧縮だけを持つ。閾値によるqueue全resetは独立した必要性を示せなかったため、sourceと公開branch履歴から外した。
-旧`fix/separate-yadif-queue-recovery`と前身`fix/restore-yadif-queue-reset`は誤取り込みを防ぐため削除し、commit IDと測定結果だけを本調査記録へ残す。
-YADIF opacity変更は棄却した実験である。
+最新`tsukumijima/main`は、旧候補の順位1〜7相当を直接または作者の実装へ調整して取り込み、さらにOffscreenCanvas Worker描画を導入した。KonomiTV向けの現在の検証はこの`main`へ追従し、採用済み変更を旧branchから重ねない。
+
+公開`fix/compress-yadif-overflow-schedule`は`konomi/main` `52a3db5`から構成した当時の候補である。最新`main`は必要数の退役とdeadline圧縮に加え、動的horizonを超えたfuture leadの全resetと、利用可能slotがない場合の既存slot再利用を持つ。この差は最新`main`のWorker経路で必要性を測るまで変更しない。旧`fix/separate-yadif-queue-recovery`、前身`fix/restore-yadif-queue-reset`、YADIF opacity変更は現在の取り込み候補ではなく、commit IDと測定結果だけを履歴として残す。
+
 upstream向け候補branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
-各修正の目的、修正内容、効果、実装の重さは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にある。
-提出の順位と、まだ提出しないものの理由は[README](README.md#提出の順序をどう決めたか)にある。
+旧修正の目的、修正内容、効果、実装の重さは[当時の統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にある。
+旧candidateの公開状態と、まだ採用しないものの理由は[README](README.md#提出の順序をどう決めたか)にある。
 
 YADIF初回fieldの保持`d4ccb98`は本調査の候補ではなく、すでに`tsukumijima/mpeg2toh264`へ取り込まれ、KonomiTV固定依存`52a3db5`に含まれる既存の変更である。
 cleanな不透明版は30秒と12秒で約60fpsを維持したが、この変更単独の同条件A/Bによる効果量は未確定である。
 
-公開中のupstream向け候補ブランチは、すべて`upstream/main`（`d5df08b`）を土台として再構成した。
-各公開refについて`upstream/main`が祖先で、`konomi/main`（`52a3db5`）が祖先でないことをGitHubへのpush後に読み戻して確認した。
-upstreamは生成済み`dist`を追跡していないため、公開branchにはsource、README、必要な回帰試験だけを含める。
-tsukumijimaフォークには、upstream採用前のbackport、またはフォーク固有API・YADIF拡張との接続だけを別branchで残す。
+公開中の旧upstream向け候補branchは、`upstream/main`（`d5df08b`）を土台として再構成した当時の成果物である。KonomiTV向けの現在の作業ではこれらを再び積まず、最新`tsukumijima/main`をそのまま基準にする。
 
 KonomiTVに出す変更は、Original再生UIのT0計測、download handlerのDB/stat/open/first body計測と実測に基づくI/O修正、必要性が確認された場合のrecording単位sidecar保存である。
 DPlayerには今回修正を実装しておらず、現時点で直接PRにする根拠もない。
 
-この表は、まだ提出していない候補だけを扱う。提出済みの7件は上のREADMEにある。
+この表は、最新`tsukumijima/main`で問題が残った場合にだけ再評価する案を扱う。公開済み旧candidateの状態は上のREADMEにある。
 
 | Priority | 改善案 | 期待効果 | 実装難易度 | upstreamに出しやすいか | 所有者 |
 | --- | --- | --- | --- | --- | --- |
@@ -1193,7 +1190,7 @@ SourceBufferの同時remove/appendはできないので、同じbufferへの操�
 | seek直後の後続GOPをrandom access化し、要求時刻を含むfragmentからappendする | `appended`→`canplay`中央値101.4→33.3msでdecoder discard自体は減った | 第2fragment生成待ちがtarget対応中央値+69.8msとなり、可視初画は中央値+5.7ms、平均+1.3msで改善なし。10地点中5地点は要求時刻を越えたため、この方式は採用しない。変換前に正確なRAP byteを得る案へ置き換える。[生値](results/galaxy-recovery-fragment-selection.json) |
 | `walk_pts()`を選択service/video PID優先にする | 複数service TSの誤probe削減 | PAT/PMT不要の短いprobeという利点を失わない設計が必要 |
 | PAT/PMT、PID、sequence/AAC configをseek間で再利用する | 初回fragmentまでのscan短縮 | 放送中のPID/config変更とdiscontinuityをepochで拒否できる契約が必要 |
-| packet欠落前に完了を確認できるpictureを保持する | Galaxyの同条件各2走行で、FPS安定復帰までの最大映像時刻間隔が567.233〜600.600→333.666ms、Chrome dropが17→6 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は、次のpicture開始位置を受信済みのprefixだけをtranscoderへ渡す。実在するopen GOP内のframe picture欠損と、固定interlaced・open-GOP fixtureのSession試験は確認済み。実在するfield picture破損、画素、A/V同期、異常TSの1時間条件を確認してからintegrationへ入れる。[A/B結果](results/galaxy-anomaly-preserve-complete-pictures-ab.json) |
+| packet欠落前に完了を確認できるpictureを保持する | Galaxyの同条件各2走行で、FPS安定復帰までの最大映像時刻間隔が567.233〜600.600→333.666ms、Chrome dropが17→6 | 公開候補[`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss)は旧baseの実験である。最新`tsukumijima/main`を異常TSで測り、同じ問題が残る場合だけfollow-upとして再設計する。[A/B結果](results/galaxy-anomaly-preserve-complete-pictures-ab.json) |
 | AAC必要量が揃った完成GOPを早く出す | 単体では初回fragmentまでの入力を320〜512KiB削減 | fragment内容は同一だったがGalaxyとWindowsの`first-byte`→`first-fragment`と可視初画を短縮しなかったため採用しない。[集計と生値](results/completed-gop-hold-analysis.json) |
 | 録画TSの`FileResponse` body chunkを64KiBから増やす | Galaxyの一部条件で最大15.4msの対応付き差が出た | 64〜1024KiBで単調性がなく、Windows各40 seekは−2.4〜+1.7msで中立だったため採用しない。別transport/storageで再現した場合だけ再評価する。[集計と生値](results/file-response-chunk-size-analysis.json) |
 | 完成fragmentを入力chunkの残処理より先に返す | 2個目以降のfragmentと後続変換を重ねられる | 単一タブGalaxyでは最初の早期callbackがfirst fragment後10/10で初画短縮なし。初回media fragmentを早める別設計と、output順序、picture pool、cancel、backpressureの確認が必要 |
@@ -1267,20 +1264,20 @@ I-pictureの途中byteだけを返さない。
 公開済みの候補branchは[README](README.md#提出の順序をどう決めたか)にある。
 ここに挙げるのは、まだbranchにしていない切り出し候補である。
 
-### `otya128/mpeg2toh264`へ直接出すもの
+### `otya128/mpeg2toh264`で再評価する条件
 
-1. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。基本timingと分けるかはAPIレビューで決める。
-2. **YADIF: visibility遷移とfield schedulingの再現試験**。約30fps状態を自動再現できた場合に、既存`d4ccb98`で不足する境界条件をIssue化する。opacity変更は含めない。
-3. **source/core: PTS probeのservice選択**。複数serviceでの誤選択を再現してから全PID probeを扱う。
-4. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性の追加試験が通った場合だけ独立PRにする。
-5. **Worker: seek入力queueの先読み上限**。連続seekの中止済みRange量とp95で効果を確認してから独立PRにする。
-6. **core: 初回IDRの並列可能なslice/job設計**。bitstreamと複数decoderの互換性を確認する大規模変更として分離する。
+次の案は最新`tsukumijima/main`で同じ問題を再現し、原因ownerが共通upstreamにある場合だけ再評価する。旧branchの提出計画をそのまま再開しない。
 
-### `tsukumijima/mpeg2toh264`へ出すもの
+1. **player: picture workerのstartup timing**。任意jobの最初の完了とstream先頭AUを区別する。
+2. **YADIF: visibility遷移とfield schedulingの再現試験**。約30fps状態を自動再現できた場合だけ扱う。
+3. **source/core: PTS probeのservice選択**。複数serviceでの誤選択を再現できた場合だけ扱う。
+4. **Session: AAC付き初回GOP出力の先読み削減**。A/V同値性と実表示の改善を確認できた場合だけ扱う。
+5. **Worker: seek入力queueの先読み上限**。中止済みRange量とシークp95の改善を確認できた場合だけ扱う。
+6. **core: 初回IDRの並列可能なslice/job設計**。bitstreamと複数decoderの互換性を保った改善を確認できた場合だけ扱う。
 
-1. upstream採用までKonomiTVで必要な修正のbackport。upstream PR番号と対応commitを明記し、独自実装を増やさない。
-2. upstreamの汎用変更を、フォーク固有の`autoFilm`、film detector、queue reset、公開APIへ接続する変更。これは汎用修正と同じPRへ混ぜない。
-3. 現在公開済みのupstream向け候補ブランチを先にフォークへ採用する場合は、将来upstream版へ置換できる単位を保つ。棄却したYADIF opacity branchとpresentation policyは取り込まない。
+### `tsukumijima/mpeg2toh264`へfollow-upする条件
+
+最新`main`をKonomiTVへ組み込んだ測定で未達条件を再現し、既存実装では解決できない原因を特定した場合だけfollow-upする。旧candidateの再採用や、upstream採用待ちを理由にしたbackportは現在の作業計画にしない。
 
 ### `KonomiTV`へ出すもの
 
@@ -1295,7 +1292,7 @@ I-pictureの途中byteだけを返さない。
 - 初回field leadを2から1へ戻す変更。短窓では良い値が出たが、現行`d4ccb98`と競合し、独立A/Bで必然性を示せていない。
 
 設計レビューの8項目では、MSE世代修正はすべてYesとする。
-最終YADIF候補`e7e3ea2`はstall原因のownerである同じqueue処理へ届き、新しいscheduler層を足さない。必要数だけ最小FIFO破棄し、捨てたduration合計だけ残存deadlineを詰める。新しい状態、閾値、fallbackを増やさず、queue内slotのsilent reuseも禁止するため、原因に対して局所的である。
+旧YADIF候補`e7e3ea2`は当時のstall原因に対する局所的な案だったが、現在の採用対象ではない。最新`main`が持つ動的horizonの全resetとslot再利用を作者の設計として尊重し、Worker経路の実測で問題を確認する前に置き換えない。
 presentation policyは容量回復とは別の判断として独立A/Bにしたが、600秒で長時間退行したため採用しない。
 YADIF opacity実験は描画ownerに置いてGalaxyで比較したが、cleanな変更前対照が約60fpsだったため採用しない。
 MSE修正は`MseSink`に置き、修正前に失敗する外部動作の回帰試験とGalaxyの通常seekを確認した。
@@ -1310,5 +1307,5 @@ scheduler policyを単体試験するため、queue操作を内部moduleへ抽�
 結果objectをなくした診断版2走行は59.641 / 59.650fps、40ms超13 / 17回、`late` 29 / 26まで回復したが、controlへは戻らなかった。
 Linuxでは59.892fps、40回seekの中央値131.1ms、p95 181.7msで退行を示さなかったため、低負荷環境だけでこのhot pathの変更を合格にしない。
 CI試験不足は残るが、productionのrefresh pathへ試験用の関数境界や一時objectを加えず、実ブラウザーで外部挙動を固定できる試験だけを候補とする。
-このscheduler抽出診断版は公開`integration/current-useful-fixes`へ含めず、診断版の値を公開integrationの現行値として扱わない。
+このscheduler抽出診断版は旧`integration/current-useful-fixes`へ含めず、診断版の値を旧integrationの結果として扱わない。
 生値は[Linux定常](results/linux-scheduler-extraction-steady-120s.json)、[Linux seek](results/linux-scheduler-extraction-seek-visible-40.json)、[Windows control](results/windows-integration-v2-current-control-steady-120s.json)、[Windows抽出版1](results/windows-scheduler-extraction-steady-120s-r1.json)、[2](results/windows-scheduler-extraction-steady-120s-r2.json)、[3](results/windows-scheduler-extraction-steady-120s-r3.json)、[Windows seek](results/windows-scheduler-extraction-seek-visible-40.json)、[no-allocation版1](results/windows-scheduler-noalloc-steady-120s-r1.json)、[2](results/windows-scheduler-noalloc-steady-120s-r2.json)に保存した。

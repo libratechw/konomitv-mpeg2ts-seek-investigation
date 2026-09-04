@@ -4,8 +4,8 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 主対象はMPEG-2 TSのOriginal直接再生ですが、サーバーエンコードHLSとの違いも同じ指標で確認します。
 リポジトリ名には調査開始時の`seek-investigation`が残っていますが、素材本来のFPSを安定して維持し、負荷やシークの後も安定した表示へ戻るまでを対象とします。
 
-各修正が何をして、どれだけ効いたかは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
-この文書は、何をどう測り、その数値をどこまで信じてよいか、どの順で提出するかを扱います。
+旧integrationで各修正が何をして、どれだけ効いたかは[当時の統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)に残しています。
+この文書は、何をどう測り、その数値をどこまで信じてよいか、現在どの実装へ追従するかを扱います。
 
 ## 測定方法
 
@@ -13,7 +13,9 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 
 このREADMEでは、現在分かっていること、公開branch、提出先、優先順位だけを扱います。各数値のbuild、条件、生値、採用・除外理由は[`REPORT.md`](REPORT.md)と`results/`を参照してください。
 
-現在のintegration候補は`21e6917`です。clean YADIF候補`8b1f66b`を含む最新tipから再構築し、静的検証と自動試験を完了しました。コードと生成物は`84e916b`から変わらず、`21e6917`はREADMEだけを更新しています。現行コードの異常TS 1時間試験では致命的停止は0/229でした。従来のcollectorが評価した安定確認直後の約3秒窓は229/229で基準外でしたが、後続を含む15秒traceの1走行では期待表示FPSへ復帰しました。1時間全体のFPS安定復帰と正常TSの1時間連続再生は未判定です。
+現在の基準実装は`tsukumijima/mpeg2toh264`の`main` `faf1464e66693133fc9f4b8618992b0f557f0bc3`です。KonomiTVの通常branchがまだこのcommitをpinしていなくても、隔離した検証用KonomiTVへ組み込んで追従します。旧integration `21e6917`とclean YADIF候補`8b1f66b`はpre-Worker実装であり、過去の効果と未達条件を示す記録としてだけ扱います。現在の提出・integration・合否判定の土台には使いません。
+
+最新`main`は旧候補の主要修正を取り込み、YADIFの描画、表示queue、`autoFilm`、統計をOffscreenCanvas Workerへ移しました。既存collectorはpage側のcanvas描画しか直接観測できないため、最新`main`の実機合否は未判定です。Worker内の描画submit、実backend、再起動・fallbackを観測する測定経路を先に整え、同じsourceのmain-thread / Worker比較から再開します。
 
 ## 分かったこと
 
@@ -63,8 +65,8 @@ integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間
 安定確認直後の約3秒窓のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fpsでした。
 この窓はintegrationの20回すべてで基準外でしたが、後続を追った別の15秒traceでは期待表示FPSへ復帰しました。20回すべてのFPS安定復帰、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未判定または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
 
-現行integrationのコード`84e916b`を同じ既知欠損へ1時間反復した試験では、229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件でした。
-一方、安定確認直後の約3秒窓はcanvas FPS中央値53.95fpsで、229回すべてが基準外でした。このcollectorは後続の合格窓を探索しないため、この件数をFPS安定復帰失敗の件数には使いません。[現行integrationの1時間結果と各試行](results/galaxy-formal-anomaly-integration-84e916b-one-hour-summary.json)を公開しています。
+旧integrationのコード`84e916b`を同じ既知欠損へ1時間反復した試験では、229回すべてが利用者操作なしに2秒以内で表示進行へ復帰し、致命的停止は0件でした。
+一方、安定確認直後の約3秒窓はcanvas FPS中央値53.95fpsで、229回すべてが基準外でした。このcollectorは後続の合格窓を探索しないため、この件数をFPS安定復帰失敗の件数には使いません。[旧integrationの1時間結果と各試行](results/galaxy-formal-anomaly-integration-84e916b-one-hour-summary.json)を公開しています。
 
 同じbuildと欠損を後続まで追った15秒traceでは、欠損後781.5msで安定表示へ戻り、1,514.5ms後から3,002.8msの合格窓を作りました。後続4,952.4msも59.971fps、40ms超0回、Chrome drop増分0、YADIF `late`増分0でした。この1走行はFPS安定復帰を満たしますが、1時間の229回全体は未判定です。[15秒traceの解析](results/galaxy-formal-anomaly-integration-84e916b-recovery-trace-analysis.json)を公開しています。
 
@@ -144,42 +146,34 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 表の順位番号は候補を指す識別子で、測定結果のファイル名にも同じ番号を使っています。提出先が異なる候補どうしの順位の大小は、提出順を意味しません。
 tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdistを別コミットにしています。
 
-各候補の目的、修正内容、効果、実装の重さと依存関係は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
+旧候補の目的、修正内容、効果、実装の重さと依存関係は[当時の統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
 
-### otya128/mpeg2toh264 へ出すもの
+### otya128/mpeg2toh264 向け旧candidateの状態
 
 | | 順位 | branch | source | 状態 |
 | --- | ---: | --- | --- | --- |
 | P0 | 1 | [`fix/preserve-seek-probe-sample`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-seek-probe-sample) | `a10253e` | [PR #1](https://github.com/otya128/mpeg2toh264/pull/1)を提出済み |
-| P0 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) | `787c7ba` | 未提出。順位3の前提 |
-| P0 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) | `ac4f879` | 未提出。順位2のレビュー後 |
-| P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | `f8ab9c7` | 未提出。他と修正箇所が重ならない |
+| P0 | 2 | [`feat/report-ts-restart-offsets`](https://github.com/libratechw/mpeg2toh264/tree/feat/report-ts-restart-offsets) | `787c7ba` | 未提出。最新`tsukumijima/main`には調整された実装が採用済み |
+| P0 | 3 | [`perf/reuse-observed-ts-restarts`](https://github.com/libratechw/mpeg2toh264/tree/perf/reuse-observed-ts-restarts) | `ac4f879` | 未提出。最新`tsukumijima/main`には同等実装が採用済み |
+| P1 | 7 | [`fix/mse-reset-inflight-append`](https://github.com/libratechw/mpeg2toh264/tree/fix/mse-reset-inflight-append) | `f8ab9c7` | 未提出。最新`tsukumijima/main`には調整された実装が採用済み |
 
-順位2はcoreの再開位置契約なので、先にレビューを終えてから順位3のplayer利用policyを出します。
+この表は公開branchと提出履歴を追跡するために残しています。KonomiTV向けの現在の作業では、順位1〜3・7を旧branchから重ねたり、旧提出順を再開したりしません。最新`tsukumijima/main`で能力不足を確認した場合だけ、原因ownerと提出先を改めて判断します。
 
-順位2・3・7は、順位1が削除する誤書き込みが残った基点から分岐しています。
-順位2と7はその行に触れていないので、順位1の取り込み後にmergeしても削除は維持されます。最終tipで回帰試験を再実行します。
-**順位3は、効果を測った基点にその誤書き込みが残っています。** 誤って上書きされた標本を再利用で回避していた可能性があるため、順位1を含む基点でA/Bを取り直すまで、追加probe 40→0という値は順位3単独の効果として使いません。
-
-### tsukumijima/mpeg2toh264 へ出すもの
+### tsukumijima/mpeg2toh264 の採用状況
 
 fork固有のYADIFに対する修正です。otya128向けの変更へ混ぜません。
 
 | | 順位 | branch | source | dist | 状態 |
 | --- | ---: | --- | --- | --- | --- |
-| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `e7e3ea2` | `8b1f66b` | PR草案レビュー済み。現行integrationの異常TS 1時間試験は停止0/229、FPS安定復帰は1走行だけ確認。候補単独の再測定前 |
-| P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | `2d072f3` | `f3ba99d` | 未提出。他と修正箇所が重ならない |
-| P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | `f27442d` | `e36dd0b` | 保留。異常TSの1時間条件が未達 |
+| P0 | 4と5 | [`fix/compress-yadif-overflow-schedule`](https://github.com/libratechw/mpeg2toh264/tree/fix/compress-yadif-overflow-schedule) | `e7e3ea2` | `8b1f66b` | 最新`main`へ作者の実装`f70c7d5`と`f377596`として採用済み。旧branchは現在の提出対象ではない |
+| P0 | 6 | [`fix/preserve-destination-frame-on-seek`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-destination-frame-on-seek) | `2d072f3` | `f3ba99d` | 最新`main`へ`80bb299`として採用済み。旧branchは現在の提出対象ではない |
+| P1 | 9 | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | `f27442d` | `e36dd0b` | 未採用。旧branchを重ねず、最新`main`で問題が残る場合だけfollow-upを検討する |
 
-順位4・5は、保存済みtraceで原因が立証された範囲だけを1本のPR候補にしています。
-観測した停止は、容量確保で古いfieldを捨てた後も残る表示予定を動かさず、次の入力でも同じ破棄を繰り返す循環でした。
-旧順位4の閾値resetはこの循環から一度描画を戻しましたが、停止全体は解消せず、時刻圧縮と独立して必要になる状態も保存済みtraceにはありません。
-最終候補は、必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを残し、根拠を示せない閾値resetをsourceと履歴から外しました。output poolが完全なのに利用可能slotがない場合は、queue内slotを暗黙に再利用せずinvariant errorにします。
+順位4・5の保存済みtraceは、容量確保で古いfieldを捨てた後も表示予定を動かさず、次の入力でも破棄を繰り返す循環を示しました。旧候補は必要最小限のFIFO破棄と、捨てた時間分の表示予定圧縮だけを実装していました。
 
-旧`fix/separate-yadif-queue-recovery`は棄却した閾値resetを含むため削除します。3,007 seekの測定点はcommit `26484fd`と下記の結果fileで追跡し、取り込み可能な公開branchとして残しません。
+最新`main`は作者の実装として、必要数の退役、表示時刻圧縮、動的horizonを超えたfuture leadの全reset、利用可能slotがない場合の既存slot再利用を持ちます。旧候補との差を理由に変更せず、まず最新`main`のWorker経路で発火条件と表示結果を測定します。
 
-順位4単独の1時間試験は、3,007 seekで致命的な表示停止を1件検出しました。
-この結果は、旧中間点`26484fd`だけでは残る問題を示します。最終候補`e7e3ea2` / `8b1f66b`では旧中間点の履歴を使わず、`konomi/main` `52a3db5`からa＋cだけを構成しています。
+旧順位4単独の1時間試験は3,007 seekで致命的な表示停止を1件検出しました。この結果は旧中間点`26484fd`だけでは問題が残ったことを示す履歴であり、最新`main`の評価には流用しません。
 
 ### Kludex/starlette へ出すもの
 
@@ -196,21 +190,21 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 
 順位8は別の依存ライブラリの修正であり、mpeg2toh264のintegrationには含めていません。
 
-### 順位9を保留している理由
+### 順位9の旧結果と再評価条件
 
 順位9はTS packet欠落時に、完了を確認できない末尾pictureだけでなく、同じ蓄積中GOPの正常な先行pictureまで破棄する範囲を縮めます。
 同じKonomiTV revisionとGalaxyで基準版と候補版を各2回測ると、既知の破損をまたぐ映像時刻の間隔は567.233〜600.600msから333.666msへ縮まり、Chromeのdrop counterは17から6へ減りました。
 候補版の2走行にはYADIFのdegradedとdiscontinuityがなく、どちらも期待表示FPSへ復帰しました。[同条件A/B](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を公開しています。
 実装はGOP分割と既存transcoderの責務境界に限られ、レビュー負荷と保守コストは中です。
 
-保留しているのは、**異常TSの1時間条件が未測定**だからです。
+旧候補は、異常TSの1時間条件を有効な素材で測定できていません。
 候補単独と、順位1〜7の統合版へ重ねた検証buildの2本を1時間走らせましたが、runnerが指定した乃木坂fixtureではなくMADDERを再生していました。
 どちらも順位9の評価には使えません。[無効の理由とfixture IDの照合](results/galaxy-anomaly-rank9-one-hour-fixture-mismatch.json)を公開しています。
 
 以前ここに載せていた通過回数とFPS安定復帰失敗の件数は、この不一致により取り下げました。
-fixtureの同一性を走行前に検証し、不一致なら異常終了するrunnerで測り直します。
+現在は旧候補を先に測り直しません。fixtureの同一性を走行前に検証するrunnerで最新`tsukumijima/main`を測り、問題が残る場合だけ旧実装を参考にfollow-upを設計します。
 
-既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。統合版へ重ねてもFPS安定復帰失敗が残るため、integrationにはまだ含めていません。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
+既存のinterlaced・open-GOP fixtureを使うSession回帰試験は通過しています。Galaxy A/Bの実在欠損はopen GOP内のframe pictureにあることも確認しました。fMP4の音声sample時刻列は、Galaxyで使ったB-picture破損と、キッズアワーのP/B-picture破損のすべてで基準版と候補版が一致しました。実在するfield picture破損、画素の正常性、ブラウザー上の可聴A/V同期は未確認です。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)、[Galaxyで使った映像・音声時刻列](results/nogizaka-defect-preserve-complete-pictures.json)、[キッズアワー2欠損の時刻列](results/kids-hour-defect-conversion-comparison.json)も参照してください。
 
 ### まだ提出しないもの
 
@@ -240,7 +234,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 
 | 知りたいこと | 場所 |
 | --- | --- |
-| 各修正が何をして、どれだけ効いたか | [統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes) |
+| 旧integrationで各修正が何をして、どれだけ効いたか | [当時の統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes) |
 | データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
 | 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
 | 機械可読な集計値と生値 | [`results/`](results/) |

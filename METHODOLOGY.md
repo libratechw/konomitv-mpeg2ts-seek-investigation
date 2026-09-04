@@ -18,7 +18,9 @@
 
 **FPS安定維持**は、基準事象のない定常再生について、走行全体のFPS、描画間隔、dropを評価する指標です。FPS安定復帰の短い3秒窓を長時間の安定維持の根拠へ流用しません。
 
-FPS安定復帰とFPS安定維持はcanvasへの直接描画を観測する回帰判定です。compositorへのscanout、可視コマ落ち0、画素の正常性、入力欠落と復号依存から避けられない最小drop、可聴A/V同期は別の証拠で確認します。
+FPS安定復帰とFPS安定維持は、描画を所有するrealmで既定framebufferへの`drawArrays()`が戻った直後を**描画submit時刻**として観測する回帰判定です。main-thread描画ではpage、OffscreenCanvas Worker描画ではWorker内で記録します。これはcompositorへのscanout時刻ではありません。実際に選ばれた描画backend、Workerの世代・再起動・fallback、時刻原点、計装bufferの欠落数を同時に記録し、想定backendを観測できない走行やtrace欠落がある走行は採用しません。
+
+描画submitの計装を正式なFPS判定に使う前に、同じsource、fixture、設定、端末で計装あり・なしの短時間比較を行い、既存の表示指標に計装固有の退行がないことを確認します。新しい許容閾値は設けません。compositorへのscanout、可視コマ落ち0、画素の正常性、入力欠落と復号依存から避けられない最小drop、可聴A/V同期は別の証拠で確認します。
 
 ## 合格条件と性能目標
 
@@ -49,7 +51,7 @@ LAN内clientからのシーク完了時間は200ms以下を目標とします。
 - targetとcontrolは同じfixture、SHA-256、設定、経路、表示条件、runnerで比較します。
 - 主計測では録画TSをKonomiTV server側のローカルNVMeへcopyし、copy元とSHA-256を照合します。CIFS経由の絶対時間を主結果へ使いません。
 - source、生成済みdist、KonomiTV client、実配信asset、fixture、runner、collector、validator、summarizerを走行前にhashで固定します。
-- 主張ごとに、その数値を出したbuildを対応付けます。診断build、前身branch、旧integrationの値をfinal candidateへ流用しません。
+- 主張ごとに、その数値を出したbuildを対応付けます。診断build、前身branch、旧integrationの値を現在の評価対象buildへ流用しません。
 - 測定中にbuild、script、fixture、設定を変更した走行や、同一hostのbuild・FFmpeg解析・indexer負荷が混ざった走行は採用しません。
 - GalaxyのLAN絶対時間は端末から隔離serverへLAN直結した結果を使います。`adb reverse`はbrowser、decoder、deinterlacerの確認に限ります。
 - Windowsは指定した同一電源mode内のbranch A/Bに使い、通常設定Windowsや他端末との絶対比較に使いません。
