@@ -208,6 +208,8 @@ Windowsの実KonomiTVで3 MiB受信後の切断を200回繰り返すと、修正
 
 ### まだ提出しないもの
 
+[`codex/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/worker-presentation-observability)は、最新`tsukumijima/main`のOffscreenCanvas Worker内で描画submitとrAFを観測する測定専用branchです。source `2348434`、dist `5d588dc`の2commitで、製品APIや採用候補ではありません。branch全体を取り込まず、同じsourceのmain-thread / Worker比較と計装影響の確認にだけ使います。
+
 [`feat/seek-timing-context`](https://github.com/libratechw/mpeg2toh264/tree/feat/seek-timing-context) `58a9920`は計測専用です。
 player、worker、transcoder、picture pool、MSEへ同じseek IDのtiming contextを伝播し、probe標本の誤上書きなどを分離できました。
 直接の速度改善はなく、10ファイルにわたる横断と公開event契約の保守が必要なため、効果が立証できるまで提出を急ぎません。
