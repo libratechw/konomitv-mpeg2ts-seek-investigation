@@ -109,6 +109,29 @@
     "drawAfterResetMs": 66.60000000000036,
     "scope": "this diagnostic trace shows that the threshold reset can restore a draw after an overflow-driven future queue, but does not show a state that only the threshold reset, rather than deadline compression, can recover"
   },
+  "savedResultsResetEvidenceAudit": {
+    "filesWithPositiveQueueResettedCounter": 31,
+    "filesWithExplicitClockResetEvents": 2,
+    "explicitClockResetEvents": [
+      {
+        "source": "galaxy-yadif-pre-injection-future-queue-stall-trace.json",
+        "path": "sample.queueTimelineDiagnostic.events[335]",
+        "at": 15824.4,
+        "queueDepth": 5,
+        "firstLeadMs": 41.09712634606694,
+        "lastLeadMs": 107.83050472444484
+      },
+      {
+        "source": "galaxy-yadif-rank4-natural-fatal-timeline.json",
+        "path": "sample.failures[0].queueTimelineEvents[36]",
+        "at": 6427.8,
+        "queueDepth": 5,
+        "firstLeadMs": 58.7083749999947,
+        "lastLeadMs": 202.08071093749095
+      }
+    ],
+    "scope": "a positive cumulative counter does not identify when or why a reset occurred; only the explicit event timelines can show the surrounding queue state"
+  },
   "windowsFatal": {
     "source": "windows-anomaly-integration-44e06a4-until-fatal.json",
     "sha256": "17eab102bbe42a45a700b902bddb953651ba89d03ba40f3c1370b09b15c4a41f",

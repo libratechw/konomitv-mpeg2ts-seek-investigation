@@ -42,6 +42,61 @@ def longest_depth_run(events: list[dict], depth: int) -> tuple[int, int]:
     return best
 
 
+def collect_reset_evidence() -> dict:
+    positive_counter_files: list[str] = []
+    explicit_events: list[dict] = []
+
+    def visit(value: object, name: str, path: str = "") -> bool:
+        positive_counter = False
+        if isinstance(value, dict):
+            if value.get("kind") == "clock-reset":
+                explicit_events.append(
+                    {
+                        "source": name,
+                        "path": path,
+                        "at": value.get("at"),
+                        "queueDepth": value.get("queueDepth"),
+                        "firstLeadMs": value.get("firstLeadMs"),
+                        "lastLeadMs": value.get("lastLeadMs"),
+                    }
+                )
+            for key, child in value.items():
+                child_path = f"{path}.{key}" if path else key
+                if key == "queueResetted" and isinstance(child, (int, float)):
+                    positive_counter = positive_counter or child > 0
+                positive_counter = visit(child, name, child_path) or positive_counter
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                positive_counter = (
+                    visit(child, name, f"{path}[{index}]") or positive_counter
+                )
+        return positive_counter
+
+    for source in sorted(RESULTS.glob("*.json")):
+        if source == OUTPUT:
+            continue
+        try:
+            value = json.loads(source.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        positive_counter = visit(value, source.name)
+        if positive_counter:
+            positive_counter_files.append(source.name)
+
+    return {
+        "filesWithPositiveQueueResettedCounter": len(positive_counter_files),
+        "filesWithExplicitClockResetEvents": len(
+            {event["source"] for event in explicit_events}
+        ),
+        "explicitClockResetEvents": explicit_events,
+        "scope": (
+            "a positive cumulative counter does not identify when or why a reset "
+            "occurred; only the explicit event timelines can show the surrounding "
+            "queue state"
+        ),
+    }
+
+
 def main() -> None:
     natural_name = "galaxy-yadif-rank4-natural-fatal-timeline.json"
     formal_name = "galaxy-yadif-rank4-one-hour-block-reset-block-003.json"
@@ -168,6 +223,7 @@ def main() -> None:
                 "that only the threshold reset, rather than deadline compression, can recover"
             ),
         },
+        "savedResultsResetEvidenceAudit": collect_reset_evidence(),
         "windowsFatal": {
             "source": windows_name,
             "sha256": sha256(windows_name),
