@@ -20,6 +20,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 | 提出先 | branch | 役割 |
 | --- | --- | --- |
+| `tsukumijima/KonomiTV` | [`fix/android-yadif-main-thread`](https://github.com/libratechw/KonomiTV/tree/fix/android-yadif-main-thread) | Android Chromeのデスクトップ表示でも端末を識別し、YADIF描画をメインスレッドへ切り替える候補。先行commitでmpeg2toh264を`faf1464`へ更新する |
 | `tsukumijima/mpeg2toh264` | [`fix/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/fix/preserve-complete-pictures-before-loss) | 異常TSで完成済みpictureを保つ実験。`main`での再現と実機効果を確認するまで採用候補にしない |
 | `Kludex/starlette` | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | ASGI切断後のfile送信を止める独立候補 |
 
