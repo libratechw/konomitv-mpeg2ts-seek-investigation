@@ -41,22 +41,28 @@
       "normalMaximumLead": "6 * outputDuration",
       "formula": "6 * max(refreshMs, outputDuration)",
       "at60Hz": {
-        "normalMaximumLeadMs": 50.05,
-        "horizonMs": 100,
-        "slackMs": 49.95
+        "displayRefreshHz": 60,
+        "outputDurationMs": 16.683333,
+        "normalMaximumLeadMs": 100.1,
+        "horizonMs": 100.1,
+        "slackMs": 0
       },
       "at120Hz": {
-        "normalMaximumLeadMs": 50.05,
-        "horizonMs": 50.05,
+        "displayRefreshHz": 120,
+        "outputDurationMs": 16.683333,
+        "normalMaximumLeadMs": 100.1,
+        "horizonMs": 100.1,
         "slackMs": 0
       },
       "at144Hz": {
-        "normalMaximumLeadMs": 50.05,
-        "horizonMs": 50.05,
+        "displayRefreshHz": 144,
+        "outputDurationMs": 16.683333,
+        "normalMaximumLeadMs": 100.1,
+        "horizonMs": 100.1,
         "slackMs": 0
       },
       "comparison": ">",
-      "interpretation": "equality does not reset the queue, but 120 Hz and higher have no positive margin and need a dedicated regression condition"
+      "interpretation": "outputDuration for 60000/1001 fps output dominates refreshMs at 60, 120, and 144 Hz; the horizon remains about 100.10 ms and has no high-refresh-specific boundary"
     }
   },
   "distReproducibility": {
