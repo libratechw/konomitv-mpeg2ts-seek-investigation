@@ -19,12 +19,12 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 
 ## 判定
 
-`faf1464`は自動testとbuildを通過していますが、KonomiTV実機の合格条件は未判定です。YADIFの描画、表示queue、`autoFilm`、統計がOffscreenCanvas Workerへ移ったため、page側のcanvas hookで取得した値を流用できません。
+`faf1464`は自動testとbuildを通過しています。Galaxyの正常60i短時間条件はmain-thread描画への切り替えで理論FPSへ戻りましたが、同じ異常TSを繰り返し通過する長時間条件では致命的な表示停止が1件発生しました。
 
 | 対象 | 判定 | 必要な証拠 |
 | --- | --- | --- |
 | MPEG-2 TS正常60i | 未判定 | main-thread / Worker短時間比較後、1時間連続再生 |
-| MPEG-2 TS異常 | 未判定 | 独立した実在欠損3種類の復帰、FPS、drop、A/V同期と1時間試験 |
+| MPEG-2 TS異常 | 不合格 | 1種類の実在欠損を繰り返す走行で2秒以内の安定復帰に失敗。原因特定後、独立した欠損へ拡張 |
 | `autoFilm` | 未判定 | 正常3:2素材4種類、film / video境界、60i復帰 |
 | 録画シーク | 未判定 | 実DPlayer UI、LAN直結、位置精度を維持した200ms以下 |
 | 録画H.264 / HEVC | 未判定 | 対象画質ごとの1時間試験とA/V同期 |
@@ -67,7 +67,9 @@ GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktop�
 
 Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は59.793fpsと59.697fpsで、双方とも40ms超の描画間隔、`missed`・`late`・`queueResetted`増分は0でした。「NHK高校講座 情報Ⅰ」から固定した映像・主音声のburst欠損を跨ぐ走行も、双方とも致命的な表示停止はなく、約0.45秒で安定した表示進行を確認し、末尾は約59.5fpsでした。[条件と結果](results/galaxy-yadif-queue-recovery-removal.json)を公開しています。
 
-この異常TS走行では削除対象の処理自体は発火していません。したがって候補固有の効果量ではなく、正常60iと強い欠損の短時間条件で退行が見られなかった範囲を示します。1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
+同じ欠損を1 client sessionで繰り返す長時間走行では、候補が144回目、`faf1464`が228回目の通過で、どちらも2秒以内に安定表示へ復帰できませんでした。`faf1464`の失敗trialでは`queueResetted`増分0、最終statsの`maxQueuedFields`は2であり、時刻差による全resetは発火していません。queued slot再利用fallbackには専用counterがないため、発火有無は未確認です。[長時間比較](results/galaxy-yadif-queue-recovery-long-anomaly-comparison.json)を公開しています。
+
+両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が致命的停止0件の必須条件を満たさず、削除の実機効果も確認できていないため、取り込み候補から外します。今回のclientはGalaxyでmain-thread描画を選ぶ実装ですが、各長時間走行ではbackend traceを採取していません。可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropも未確認です。
 
 ### 異常TSで完成済みpictureを保つ案
 
