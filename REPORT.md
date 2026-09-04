@@ -683,6 +683,21 @@ queueが空のときの最初のfield deadlineを1入力frame分だけ後ろへ�
 
 WindowsではFIFO破棄fieldが平均21.67→0.67、40ms超間隔が平均0.33→0、解除後2秒の最大描画間隔が平均25.5→18.3msとなった。Galaxyでは変更前の2/3走行で破棄が解除後も連鎖し、破棄field平均218.0、12秒窓41.720fps、全reset合計1回だった。変更後は3/3走行とも直ちに約60fpsへ戻り、破棄field平均0.67、12秒窓54.997fps、全reset 0回だった。負荷注入中に失う約60 field自体を隠す変更ではなく、容量破棄後に残った時刻列から、すでに失ったpresentation momentだけを除く正しさ修正である。[全12走行、phase別統計、hash、後片付け結果](results/yadif-overflow-deadline-compression-ab.json)を保存した。
 
+容量破棄前の表示時刻列を`a[i+1] = a[i] + d[i]`とすると、先頭からk fieldを破棄したときに引くduration合計は`a[k] - a[0]`である。圧縮後の先頭は元の先頭と同じ表示時刻になるため、残ったfieldを元の先頭より早く表示する変更ではない。
+
+内容側の時刻も確認するため、順位4 source `26484fd` / dist `27b327e`と順位5 source `acfce36` / dist `63a5708`へ同じ計測だけを加え、KonomiTV `7307e0e`、Galaxy 60Hzで上の12秒負荷を各3回実行した。各fieldの映像時刻は、1 field目をrVFCの`mediaTime`、2 field目をそこから半frame後と定義し、canvasへ直接描画した時点の`video.currentTime`との差を測った。
+
+| 対象 | 範囲 | 描画数 | 最小 | 中央値 | p95 | 最大 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 順位4 | 全描画 | 1,972 | -55.04ms | -35.52ms | -12.88ms | -6.19ms |
+| 順位5 | 全描画 | 1,975 | -42.84ms | -13.14ms | -5.93ms | -2.20ms |
+| 順位4 | FIFO破棄後も残ったfield | 68 | -45.75ms | -41.33ms | -38.52ms | -30.36ms |
+| 順位5 | FIFO破棄後も残ったfield | 3 | -20.76ms | -15.19ms | -14.92ms | -14.89ms |
+
+正の値は映像内容がmedia clockより先に出たことを表す。全3,947描画で正の値は0件で、順位5は遅れていた映像を順位4よりゼロ側へ近づけたが、media clockを追い越さなかった。音声decode byteも全6走行で増えた。順位5のFIFO破棄後の標本は3描画だけなので、この部分集合の差は均衡した効果推定には使わない。可聴音声とscan-outは測っていない。[定義、各走行、hash、集計](results/galaxy-yadif-overflow-av-lead-ab.json)と[6本の生trace](results/galaxy-yadif-overflow-av-lead-rank4-run-1.json)を保存した。
+
+`#prepareQueue()`が未来時刻列の破綻を判定するhorizonには、60Hzでは正常列に約50msの余裕がある。120Hz以上では正常列の最大先読みとhorizonがともに`6 × outputDuration`となり、比較が`>`なので一致時にはresetしないが余裕は0になる。高リフレッシュ端末では、この境界を独立した回帰条件にする。
+
 Galaxy変更前の3走行目では、計測開始8.1ms後にqueue容量5から2 fieldをFIFO破棄した直後、残った先頭fieldが53.5ms先、末尾が120.2ms先となった。rVFC 133回、rAF 265回、video media time 4.404秒分が進む間もcanvas直接描画は0回で、計測開始4391.5ms後のqueue全resetに続き4419.0ms後に最初のcanvas描画が行われた。人工的なpresentation不足は計測開始2000ms後に始まるため、少なくともその前の1991.9msは人工負荷なしでfuture deadline待ちが継続していた。これにより、decoderやrAFの停止ではなく、FIFO破棄後のdeadline列が次の入力へ引き継がれる循環が4秒超の表示停止を維持したことを確認した。[元trace](results/galaxy-yadif-pre-injection-future-queue-stall-trace.json)と[機械集計](results/galaxy-yadif-pre-injection-future-queue-stall-summary.json)を保存した。
 
 この診断buildには計測開始後に有効化する人工負荷フックが含まれる。負荷開始前から停止していたことは確認できるが、正式候補そのものに診断だけを加えた自然発生traceは別に取得し、branch単位の最終根拠とする。

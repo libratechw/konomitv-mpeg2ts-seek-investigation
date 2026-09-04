@@ -1,0 +1,311 @@
+{
+  "schema": 1,
+  "purpose": "Confirm that deadline compression does not draw field content ahead of the media element clock under deterministic queue pressure.",
+  "capturedAt": "2026-09-04T14:45:13+09:00/2026-09-04T14:49:08+09:00",
+  "conditions": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.7922.174",
+    "activeDisplayHz": 60,
+    "player": "recorded MPEG-2 Original direct playback",
+    "seekTargetSeconds": 600,
+    "sampleDurationMs": 12000,
+    "throttleDelayMs": 2000,
+    "throttleDurationMs": 2000,
+    "throttle": "suppress every other YADIF presentation callback",
+    "fullscreen": true,
+    "sidePanel": false,
+    "singleTestTab": true,
+    "transport": "LAN direct"
+  },
+  "konomiTVRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "containerImageId": "sha256:385bf8be26044725a780b2e8ca6041d3dc1de21de01dd7cf6565e42cd5662fae",
+  "collectorSha256": "083b29ee47e378f158e9114dcdd02f0a558ac067d4e5e3ffc28528a34fe8a77e",
+  "runnerSha256": "d886f44f766a5481317217dff320b548ba783dbc102986afd0c38e6e869690cf",
+  "metricDefinition": {
+    "leadMs": "(fieldMediaTime - video.currentTime) * 1000 at direct canvas draw; positive means field content leads the media element clock",
+    "fieldMediaTime": "rVFC metadata.mediaTime for the first field and metadata.mediaTime plus half-frame media duration for the second field",
+    "retirementAffected": "field remained queued across at least one capacity retirement",
+    "oneFieldThresholdMs": 8.333333333333334
+  },
+  "variants": {
+    "rank4": {
+      "runs": [
+        {
+          "run": 1,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-1.json",
+          "resultSha256": "856456b606d10ff3420ef56ba74ea5e2e0a786a19962dd27752c61f683058633",
+          "retiredFields": 0,
+          "allDraws": {
+            "count": 660,
+            "minimumMs": -30.408999999998798,
+            "medianMs": -21.524141891891446,
+            "p95Ms": -10.674700000000396,
+            "maximumMs": -6.187662162162155,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": null,
+          "audioDecodedBytesDelta": 382160,
+          "mediaTimeDeltaSeconds": 12.000654,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "run": 2,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-2.json",
+          "resultSha256": "c5dd46a2833a7b7b86e2008e77135b0de9db2a48f6d2bd4a130daf6a5366ea49",
+          "retiredFields": 60,
+          "allDraws": {
+            "count": 654,
+            "minimumMs": -50.11666216216071,
+            "medianMs": -36.74635810810667,
+            "p95Ms": -31.423762162163626,
+            "maximumMs": -28.477716216215754,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": {
+            "count": 68,
+            "minimumMs": -45.74762162162216,
+            "medianMs": -41.32668918918814,
+            "p95Ms": -38.52324797297291,
+            "maximumMs": -30.358621621623172,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "audioDecodedBytesDelta": 382160,
+          "mediaTimeDeltaSeconds": 12.001016,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "run": 3,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank4-run-3.json",
+          "resultSha256": "ef1e61836c74e7b8415dc062ce91422dc1e9d98dcd1496149d9e3126982b40a8",
+          "retiredFields": 0,
+          "allDraws": {
+            "count": 658,
+            "minimumMs": -55.03500000000017,
+            "medianMs": -45.11166216216189,
+            "p95Ms": -33.80279999999907,
+            "maximumMs": -31.793000000000404,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": null,
+          "audioDecodedBytesDelta": 383520,
+          "mediaTimeDeltaSeconds": 12.001064,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      ],
+      "allDraws": {
+        "count": 1972,
+        "minimumMs": -55.03500000000017,
+        "medianMs": -35.52335810810803,
+        "p95Ms": -12.882999999999623,
+        "maximumMs": -6.187662162162155,
+        "positiveCount": 0,
+        "overOneFieldLeadCount": 0
+      },
+      "retirementAffectedDraws": {
+        "count": 68,
+        "minimumMs": -45.74762162162216,
+        "medianMs": -41.32668918918814,
+        "p95Ms": -38.52324797297291,
+        "maximumMs": -30.358621621623172,
+        "positiveCount": 0,
+        "overOneFieldLeadCount": 0
+      },
+      "label": "control",
+      "sourceHash": "1f63900bb7eb4857ea23f96128b6b72908e1d9bd226f692597a9202fc41193fd",
+      "distHash": "3cc72212e684b27a02a8cdc4c3790f93429cd9c16042ec208b1b7660cf62f286",
+      "sourceCommit": "26484fdaea8abaef421c3fb2f8776f6e9f9fe36e",
+      "distCommit": "27b327e2c312ac48dd8638c4c5bb3769b1eb5ec0",
+      "diagnosticSourceHash": "8ad8ef8febdf2cc8b8a9f2f809710134b58d99cfd5a422fdbda722bb9d4e0f55",
+      "diagnosticDistHash": "6935b2e7b242620951a73ed6e94e7d86aad5eb9ab24c45a5b8b34c14bfcedb66",
+      "diagnosticPatchHash": "8c9bd75db6d547ccc3becc596a137577c1abb2bdf3bbcbf0cb68307148ac58ad"
+    },
+    "rank5": {
+      "runs": [
+        {
+          "run": 1,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-1.json",
+          "resultSha256": "49d0fc386fd748d42f46c1ab543ba83314d964b71f3acf46d63b66e500aceaed",
+          "retiredFields": 2,
+          "allDraws": {
+            "count": 660,
+            "minimumMs": -42.83962162162247,
+            "medianMs": -12.213831081081317,
+            "p95Ms": -7.431385810809667,
+            "maximumMs": -5.216716216217776,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": {
+            "count": 2,
+            "minimumMs": -20.760999999998475,
+            "medianMs": -17.975499999999478,
+            "p95Ms": -15.46855000000038,
+            "maximumMs": -15.190000000000481,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "audioDecodedBytesDelta": 382160,
+          "mediaTimeDeltaSeconds": 12.001576,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "run": 2,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-2.json",
+          "resultSha256": "dda729bcbd5920d63d8e04411f9af172702e98ee4512a67ad830a66ef24973d4",
+          "retiredFields": 1,
+          "allDraws": {
+            "count": 659,
+            "minimumMs": -37.17799999999993,
+            "medianMs": -10.077662162162326,
+            "p95Ms": -4.423800000001775,
+            "maximumMs": -2.1999999999984254,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": {
+            "count": 1,
+            "minimumMs": -14.886999999999873,
+            "medianMs": -14.886999999999873,
+            "p95Ms": -14.886999999999873,
+            "maximumMs": -14.886999999999873,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "audioDecodedBytesDelta": 382160,
+          "mediaTimeDeltaSeconds": 12.001043,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        },
+        {
+          "run": 3,
+          "resultFile": "galaxy-yadif-overflow-av-lead-rank5-run-3.json",
+          "resultSha256": "5bbb449b79f360789ab6c2264e5437597d10764bc386363758c7e69ad0c88b6a",
+          "retiredFields": 0,
+          "allDraws": {
+            "count": 656,
+            "minimumMs": -32.703999999998956,
+            "medianMs": -16.983310810810615,
+            "p95Ms": -11.620749999999624,
+            "maximumMs": -9.356000000000364,
+            "positiveCount": 0,
+            "overOneFieldLeadCount": 0
+          },
+          "retirementAffectedDraws": null,
+          "audioDecodedBytesDelta": 382160,
+          "mediaTimeDeltaSeconds": 12.000653000000002,
+          "cleanup": {
+            "videoPausedBeforeClose": true,
+            "fullscreenExitedBeforeClose": true,
+            "testPagesClosed": true,
+            "chromeStopped": true,
+            "webapkStopped": true,
+            "adbForwardRemoved": true,
+            "containerStopped": true
+          }
+        }
+      ],
+      "allDraws": {
+        "count": 1975,
+        "minimumMs": -42.83962162162247,
+        "medianMs": -13.143716216216461,
+        "p95Ms": -5.9258621621648215,
+        "maximumMs": -2.1999999999984254,
+        "positiveCount": 0,
+        "overOneFieldLeadCount": 0
+      },
+      "retirementAffectedDraws": {
+        "count": 3,
+        "minimumMs": -20.760999999998475,
+        "medianMs": -15.190000000000481,
+        "p95Ms": -14.917299999999933,
+        "maximumMs": -14.886999999999873,
+        "positiveCount": 0,
+        "overOneFieldLeadCount": 0
+      },
+      "label": "candidate",
+      "sourceHash": "a9fad283f92b4c2972b3a4c13d9435993d226e2c1bb5f3341ff753b7b5c2dd57",
+      "distHash": "6d94e0c973a008dbdaef89c905d09559d6042ae9786143a022498cac85fe588d",
+      "sourceCommit": "acfce36666d28271681f1bb56ad8b809b5c9de37",
+      "distCommit": "63a5708847895b714bcc5b72cadda5f599c9bbd4",
+      "diagnosticSourceHash": "011e5e59209e9ce05e1fa323a23a09d404bb8c0cb13c675c5de4e5857116c5f1",
+      "diagnosticDistHash": "a1a2a5779c1c1a57019f7e01b694314e93764a1e64faafda939061c295d16bfe",
+      "diagnosticPatchHash": "530b3ca7951cc38f7a7f487d9e5041361662987ac7d9822b6dc923eca4191ed4"
+    }
+  },
+  "comparison": {
+    "candidateMinusControlAllDraws": {
+      "minimumMs": 12.195378378377697,
+      "medianMs": 22.379641891891566,
+      "p95Ms": 6.957137837834801,
+      "maximumMs": 3.98766216216373
+    },
+    "candidateMinusControlRetirementAffectedDraws": {
+      "minimumMs": 24.986621621623684,
+      "medianMs": 26.136689189187656,
+      "p95Ms": 23.605947972972977,
+      "maximumMs": 15.4716216216233
+    },
+    "candidateMedianWasCloserToZeroInEveryRunThanAnyControlMedian": true
+  },
+  "assessment": {
+    "actualPositiveLeadObserved": false,
+    "actualLeadOverOneFieldObserved": false,
+    "allDrawsPositiveCount": 0,
+    "candidateMovedTowardZero": true,
+    "interpretation": "The candidate caught delayed field content up toward the media clock but did not overtake it in these runs.",
+    "limitation": "Only 3 candidate draws survived capacity retirement, versus 68 control draws; the retirement-affected subset is descriptive, not a balanced estimate.",
+    "audioDecodeProgressedInEveryRun": true
+  },
+  "publishedRawResults": [
+    "galaxy-yadif-overflow-av-lead-rank4-run-1.json",
+    "galaxy-yadif-overflow-av-lead-rank4-run-2.json",
+    "galaxy-yadif-overflow-av-lead-rank4-run-3.json",
+    "galaxy-yadif-overflow-av-lead-rank5-run-1.json",
+    "galaxy-yadif-overflow-av-lead-rank5-run-2.json",
+    "galaxy-yadif-overflow-av-lead-rank5-run-3.json"
+  ]
+}
