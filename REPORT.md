@@ -716,7 +716,7 @@ queue容量を5から7へ広げた先行診断は600秒で59.940fps、40ms超0�
 
 overflow時刻圧縮の`autoFilm`回帰は、MADDER #04〜#07の別録画から無劣化で切り出した4本の固定3:2素材、通常60i対照、film↔video境界で確認した。60秒の3:2走行は`konomi/main`が24.21〜24.52fps、正式候補が24.17〜24.44fpsで、queue全resetは全走行0だった。境界30秒では両版ともfilm→videoとvideo→filmを観測し、通常60iは49.57 / 50.36fpsだった。候補固有の一貫した退行は観測しなかったが、3:2走行の描画間隔p95は両版とも約68〜71ms、通常60iも理論値60000/1001fpsを維持していないため、`autoFilm`の表示間隔は別の未解決問題である。[素材、build、全走行、除外理由](results/galaxy-autofilm-multi-fixture-regression.json)を保存した。
 
-致命的な表示停止の定義と合格条件は、[READMEの現行基準](README.md#何を測ったか)を使う。上の1.8秒複合異常は、この判定には使わない。
+致命的な表示停止の定義と合格条件は、[測定方法の現行基準](METHODOLOGY.md#指標)を使う。上の1.8秒複合異常は、この判定には使わない。
 
 この定義を直接判定するため、目的時刻のbuffered rVFC、`seeked`、`readyState >= 3`、可視canvasへの8回連続描画、100ms以上の持続、50msを超える描画間隔なしを安定復帰の条件にした。`tsukumijima/main` `52a3db5`の正確なbuildでは、同一seedの2回目、973.686秒へのseekで停止を再現した。`seeked`は151.8ms、目的rVFCは161.1msで、decoderは62 frame進み`droppedVideoFrames`は0だったが、canvas直接描画は2回だけ、最大間隔1790.6ms、YADIFの`late`は0→57、`outputFps`は59.973→1.936となった。ネットワーク・decoder完了後にYADIFの表示時刻列が回復しない事象である。[基準版smokeの生値](results/galaxy-fatal-detector-baseline-smoke-v2-20.json)を保存した。
 
