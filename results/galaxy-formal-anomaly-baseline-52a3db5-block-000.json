@@ -1,0 +1,1615 @@
+{
+  "variant": "baseline-52a3db5-formal-anomaly",
+  "sourceHash": "d59572b7c946aa4d0258b49d4d420937ab22395c945ce92606e57623ff5d2060",
+  "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+  "asset": "PlayerController-B2MCmMO1.js",
+  "videoId": 2,
+  "frameMode": "normal",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "fixtureSize": 3066534364,
+  "recordedDuration": 1815.2134,
+  "downloadFilename": "nogizaka.ts",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 20,
+    "completed": 1,
+    "stopReason": "fatal-stop",
+    "measurementStartedAtUnixMs": 1788483551122,
+    "measurementEndedAtUnixMs": 1788483580973,
+    "seed": 20260907,
+    "seekTime": 113.67,
+    "defectMediaTime": 125.0249,
+    "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
+    "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
+    "trials": [
+      {
+        "index": 0,
+        "jitterMs": 4.457659913188157,
+        "seekStableMs": 341.5,
+        "defect": {
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.586588,
+          "mediaTimeGapMs": 567.2330000000017,
+          "callbackGapMs": 550.9000000953674
+        },
+        "recovery": {
+          "firstDrawMs": 656.6000000238419,
+          "confirmedMs": 866.5,
+          "maximumDrawGapMs": 36.799999952316284
+        },
+        "cadence": {
+          "durationMs": 767.3000000715256,
+          "drawCount": 18,
+          "drawIntervalsMs": [
+            16.90000009536743,
+            32.89999997615814,
+            49.799999952316284,
+            52.5,
+            63.39999997615814,
+            53.90000009536743,
+            44.299999952316284,
+            53.200000047683716,
+            50.59999990463257,
+            52.300000071525574,
+            49.39999997615814,
+            50.5,
+            52.200000047683716,
+            45.89999997615814,
+            51.199999928474426,
+            14.700000047683716,
+            33.60000002384186
+          ],
+          "drawFps": 22.155610580496948,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.6303705634820426,
+          "intervalsOver40Ms": 13,
+          "maximumIntervalMs": 63.39999997615814,
+          "passed": false
+        },
+        "deltas": {
+          "browserTotalFrames": 115,
+          "browserDroppedFrames": 13,
+          "videoDecodedBytes": 16651299,
+          "audioDecodedBytes": 102836,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 134,
+            "degraded": 3,
+            "discontinuities": 1,
+            "queueResetted": 0
+          },
+          "player": {
+            "videoFrames": 122,
+            "audioFrames": 187,
+            "dropped": 0,
+            "errors": 0
+          }
+        }
+      },
+      {
+        "index": 1,
+        "jitterMs": 16.501081790581036,
+        "seekStableMs": 244.5,
+        "defect": {
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.619955,
+          "mediaTimeGapMs": 600.6,
+          "callbackGapMs": 604.3000000715256
+        },
+        "recovery": null,
+        "cadence": null,
+        "deltas": {
+          "browserTotalFrames": 59,
+          "browserDroppedFrames": 14,
+          "videoDecodedBytes": 8558054,
+          "audioDecodedBytes": 58038,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 18,
+            "degraded": 3,
+            "discontinuities": 1,
+            "queueResetted": 0
+          },
+          "player": null
+        },
+        "phase": "post-defect-recovery",
+        "elapsedMs": 2001.3999999761581,
+        "frameHistory": [
+          {
+            "sequence": 765,
+            "at": 30832.5,
+            "mediaTime": 124.051722,
+            "presentedFrames": 826
+          },
+          {
+            "sequence": 766,
+            "at": 30867.100000023842,
+            "mediaTime": 124.085088,
+            "presentedFrames": 827
+          },
+          {
+            "sequence": 767,
+            "at": 30902.200000047684,
+            "mediaTime": 124.118455,
+            "presentedFrames": 828
+          },
+          {
+            "sequence": 768,
+            "at": 30933.899999976158,
+            "mediaTime": 124.151822,
+            "presentedFrames": 829
+          },
+          {
+            "sequence": 769,
+            "at": 30967.100000023842,
+            "mediaTime": 124.185188,
+            "presentedFrames": 830
+          },
+          {
+            "sequence": 770,
+            "at": 31000.700000047684,
+            "mediaTime": 124.218555,
+            "presentedFrames": 831
+          },
+          {
+            "sequence": 771,
+            "at": 31034,
+            "mediaTime": 124.251922,
+            "presentedFrames": 832
+          },
+          {
+            "sequence": 772,
+            "at": 31068,
+            "mediaTime": 124.285288,
+            "presentedFrames": 833
+          },
+          {
+            "sequence": 773,
+            "at": 31098.899999976158,
+            "mediaTime": 124.318655,
+            "presentedFrames": 834
+          },
+          {
+            "sequence": 774,
+            "at": 31135.800000071526,
+            "mediaTime": 124.352022,
+            "presentedFrames": 835
+          },
+          {
+            "sequence": 775,
+            "at": 31167.600000023842,
+            "mediaTime": 124.385388,
+            "presentedFrames": 836
+          },
+          {
+            "sequence": 776,
+            "at": 31199.899999976158,
+            "mediaTime": 124.418755,
+            "presentedFrames": 837
+          },
+          {
+            "sequence": 777,
+            "at": 31235.899999976158,
+            "mediaTime": 124.452122,
+            "presentedFrames": 838
+          },
+          {
+            "sequence": 778,
+            "at": 31266.399999976158,
+            "mediaTime": 124.485488,
+            "presentedFrames": 839
+          },
+          {
+            "sequence": 779,
+            "at": 31298.300000071526,
+            "mediaTime": 124.518855,
+            "presentedFrames": 840
+          },
+          {
+            "sequence": 780,
+            "at": 31334.800000071526,
+            "mediaTime": 124.552222,
+            "presentedFrames": 841
+          },
+          {
+            "sequence": 781,
+            "at": 31364.100000023842,
+            "mediaTime": 124.585588,
+            "presentedFrames": 842
+          },
+          {
+            "sequence": 782,
+            "at": 31399.5,
+            "mediaTime": 124.618955,
+            "presentedFrames": 843
+          },
+          {
+            "sequence": 783,
+            "at": 31432.200000047684,
+            "mediaTime": 124.652322,
+            "presentedFrames": 844
+          },
+          {
+            "sequence": 784,
+            "at": 31468.5,
+            "mediaTime": 124.685688,
+            "presentedFrames": 845
+          },
+          {
+            "sequence": 785,
+            "at": 31499.300000071526,
+            "mediaTime": 124.719055,
+            "presentedFrames": 846
+          },
+          {
+            "sequence": 786,
+            "at": 31534,
+            "mediaTime": 124.752422,
+            "presentedFrames": 847
+          },
+          {
+            "sequence": 787,
+            "at": 31566.800000071526,
+            "mediaTime": 124.785788,
+            "presentedFrames": 848
+          },
+          {
+            "sequence": 788,
+            "at": 31600,
+            "mediaTime": 124.819155,
+            "presentedFrames": 849
+          },
+          {
+            "sequence": 789,
+            "at": 31633.800000071526,
+            "mediaTime": 124.852522,
+            "presentedFrames": 850
+          },
+          {
+            "sequence": 790,
+            "at": 31667.300000071526,
+            "mediaTime": 124.885888,
+            "presentedFrames": 851
+          },
+          {
+            "sequence": 791,
+            "at": 31702.399999976158,
+            "mediaTime": 124.919255,
+            "presentedFrames": 852
+          },
+          {
+            "sequence": 792,
+            "at": 31734.200000047684,
+            "mediaTime": 124.952622,
+            "presentedFrames": 853
+          },
+          {
+            "sequence": 793,
+            "at": 31783,
+            "mediaTime": 125.019355,
+            "presentedFrames": 854
+          },
+          {
+            "sequence": 794,
+            "at": 32387.300000071526,
+            "mediaTime": 125.619955,
+            "presentedFrames": 855
+          },
+          {
+            "sequence": 795,
+            "at": 32451,
+            "mediaTime": 125.686688,
+            "presentedFrames": 856
+          },
+          {
+            "sequence": 796,
+            "at": 32500.700000047684,
+            "mediaTime": 125.720055,
+            "presentedFrames": 857
+          },
+          {
+            "sequence": 797,
+            "at": 32549.600000023842,
+            "mediaTime": 125.786788,
+            "presentedFrames": 858
+          },
+          {
+            "sequence": 798,
+            "at": 32584,
+            "mediaTime": 125.820155,
+            "presentedFrames": 859
+          },
+          {
+            "sequence": 799,
+            "at": 32651.399999976158,
+            "mediaTime": 125.886888,
+            "presentedFrames": 860
+          },
+          {
+            "sequence": 800,
+            "at": 32684.899999976158,
+            "mediaTime": 125.920255,
+            "presentedFrames": 861
+          },
+          {
+            "sequence": 801,
+            "at": 32749.600000023842,
+            "mediaTime": 125.986988,
+            "presentedFrames": 862
+          },
+          {
+            "sequence": 802,
+            "at": 32784.300000071526,
+            "mediaTime": 126.020355,
+            "presentedFrames": 863
+          },
+          {
+            "sequence": 803,
+            "at": 32850.89999997616,
+            "mediaTime": 126.087088,
+            "presentedFrames": 864
+          },
+          {
+            "sequence": 804,
+            "at": 32900.300000071526,
+            "mediaTime": 126.120455,
+            "presentedFrames": 865
+          },
+          {
+            "sequence": 805,
+            "at": 32934,
+            "mediaTime": 126.187188,
+            "presentedFrames": 866
+          },
+          {
+            "sequence": 806,
+            "at": 33001,
+            "mediaTime": 126.220555,
+            "presentedFrames": 867
+          },
+          {
+            "sequence": 807,
+            "at": 33050.89999997616,
+            "mediaTime": 126.287288,
+            "presentedFrames": 868
+          },
+          {
+            "sequence": 808,
+            "at": 33084.700000047684,
+            "mediaTime": 126.320655,
+            "presentedFrames": 869
+          },
+          {
+            "sequence": 809,
+            "at": 33151.10000002384,
+            "mediaTime": 126.387388,
+            "presentedFrames": 870
+          },
+          {
+            "sequence": 810,
+            "at": 33184.89999997616,
+            "mediaTime": 126.420755,
+            "presentedFrames": 871
+          },
+          {
+            "sequence": 811,
+            "at": 33252,
+            "mediaTime": 126.487488,
+            "presentedFrames": 872
+          },
+          {
+            "sequence": 812,
+            "at": 33285,
+            "mediaTime": 126.520855,
+            "presentedFrames": 873
+          },
+          {
+            "sequence": 813,
+            "at": 33350.200000047684,
+            "mediaTime": 126.587588,
+            "presentedFrames": 874
+          },
+          {
+            "sequence": 814,
+            "at": 33416.5,
+            "mediaTime": 126.620955,
+            "presentedFrames": 875
+          },
+          {
+            "sequence": 815,
+            "at": 33450,
+            "mediaTime": 126.654322,
+            "presentedFrames": 876
+          },
+          {
+            "sequence": 816,
+            "at": 33466.800000071526,
+            "mediaTime": 126.687688,
+            "presentedFrames": 877
+          },
+          {
+            "sequence": 817,
+            "at": 33501.800000071526,
+            "mediaTime": 126.721055,
+            "presentedFrames": 878
+          },
+          {
+            "sequence": 818,
+            "at": 33534.39999997616,
+            "mediaTime": 126.754422,
+            "presentedFrames": 879
+          },
+          {
+            "sequence": 819,
+            "at": 33568.10000002384,
+            "mediaTime": 126.787788,
+            "presentedFrames": 880
+          },
+          {
+            "sequence": 820,
+            "at": 33618.800000071526,
+            "mediaTime": 126.821155,
+            "presentedFrames": 881
+          },
+          {
+            "sequence": 821,
+            "at": 33658.700000047684,
+            "mediaTime": 126.854522,
+            "presentedFrames": 882
+          },
+          {
+            "sequence": 822,
+            "at": 33667.800000071526,
+            "mediaTime": 126.887888,
+            "presentedFrames": 883
+          },
+          {
+            "sequence": 823,
+            "at": 33699.39999997616,
+            "mediaTime": 126.921255,
+            "presentedFrames": 884
+          },
+          {
+            "sequence": 824,
+            "at": 33750.800000071526,
+            "mediaTime": 126.954622,
+            "presentedFrames": 885
+          }
+        ],
+        "stats": {
+          "at": 33783.89999997616,
+          "quality": {
+            "total": 929,
+            "dropped": 31
+          },
+          "videoDecodedBytes": 134177802,
+          "audioDecodedBytes": 778736,
+          "statsSequence": 29,
+          "playerStatsSequence": 47,
+          "yadif": {
+            "filtered": 1726,
+            "missed": 1,
+            "degraded": 17,
+            "discontinuities": 5,
+            "late": 170,
+            "queueResetted": 0,
+            "dropped": 31,
+            "fps": 16.51928869848037,
+            "frameMs": 2.3450000166893004,
+            "maxQueuedFields": 5,
+            "mode": "video",
+            "match": "c",
+            "combScore": 0,
+            "outputFps": 16.51928869848037,
+            "duplicateScore": null,
+            "duplicateRunnerUp": null
+          },
+          "player": {
+            "instantFps": 341.6856484604628,
+            "totalFps": 252.33610889094265,
+            "videoFrames": 694,
+            "audioFrames": 1125,
+            "convertingMs": 43.90000009536743,
+            "readingMs": 0,
+            "waitingMs": 1.0999997854232788,
+            "dropped": 4,
+            "scrambled": 0,
+            "errors": 0
+          }
+        }
+      }
+    ],
+    "failures": [
+      {
+        "index": 1,
+        "jitterMs": 16.501081790581036,
+        "seekStableMs": 244.5,
+        "defect": {
+          "beforeMediaTime": 125.019355,
+          "afterMediaTime": 125.619955,
+          "mediaTimeGapMs": 600.6,
+          "callbackGapMs": 604.3000000715256
+        },
+        "recovery": null,
+        "cadence": null,
+        "deltas": {
+          "browserTotalFrames": 59,
+          "browserDroppedFrames": 14,
+          "videoDecodedBytes": 8558054,
+          "audioDecodedBytes": 58038,
+          "yadif": {
+            "inputFrames": null,
+            "outputFrames": null,
+            "missed": 0,
+            "late": 18,
+            "degraded": 3,
+            "discontinuities": 1,
+            "queueResetted": 0
+          },
+          "player": null
+        },
+        "phase": "post-defect-recovery",
+        "elapsedMs": 2001.3999999761581,
+        "frameHistory": [
+          {
+            "sequence": 765,
+            "at": 30832.5,
+            "mediaTime": 124.051722,
+            "presentedFrames": 826
+          },
+          {
+            "sequence": 766,
+            "at": 30867.100000023842,
+            "mediaTime": 124.085088,
+            "presentedFrames": 827
+          },
+          {
+            "sequence": 767,
+            "at": 30902.200000047684,
+            "mediaTime": 124.118455,
+            "presentedFrames": 828
+          },
+          {
+            "sequence": 768,
+            "at": 30933.899999976158,
+            "mediaTime": 124.151822,
+            "presentedFrames": 829
+          },
+          {
+            "sequence": 769,
+            "at": 30967.100000023842,
+            "mediaTime": 124.185188,
+            "presentedFrames": 830
+          },
+          {
+            "sequence": 770,
+            "at": 31000.700000047684,
+            "mediaTime": 124.218555,
+            "presentedFrames": 831
+          },
+          {
+            "sequence": 771,
+            "at": 31034,
+            "mediaTime": 124.251922,
+            "presentedFrames": 832
+          },
+          {
+            "sequence": 772,
+            "at": 31068,
+            "mediaTime": 124.285288,
+            "presentedFrames": 833
+          },
+          {
+            "sequence": 773,
+            "at": 31098.899999976158,
+            "mediaTime": 124.318655,
+            "presentedFrames": 834
+          },
+          {
+            "sequence": 774,
+            "at": 31135.800000071526,
+            "mediaTime": 124.352022,
+            "presentedFrames": 835
+          },
+          {
+            "sequence": 775,
+            "at": 31167.600000023842,
+            "mediaTime": 124.385388,
+            "presentedFrames": 836
+          },
+          {
+            "sequence": 776,
+            "at": 31199.899999976158,
+            "mediaTime": 124.418755,
+            "presentedFrames": 837
+          },
+          {
+            "sequence": 777,
+            "at": 31235.899999976158,
+            "mediaTime": 124.452122,
+            "presentedFrames": 838
+          },
+          {
+            "sequence": 778,
+            "at": 31266.399999976158,
+            "mediaTime": 124.485488,
+            "presentedFrames": 839
+          },
+          {
+            "sequence": 779,
+            "at": 31298.300000071526,
+            "mediaTime": 124.518855,
+            "presentedFrames": 840
+          },
+          {
+            "sequence": 780,
+            "at": 31334.800000071526,
+            "mediaTime": 124.552222,
+            "presentedFrames": 841
+          },
+          {
+            "sequence": 781,
+            "at": 31364.100000023842,
+            "mediaTime": 124.585588,
+            "presentedFrames": 842
+          },
+          {
+            "sequence": 782,
+            "at": 31399.5,
+            "mediaTime": 124.618955,
+            "presentedFrames": 843
+          },
+          {
+            "sequence": 783,
+            "at": 31432.200000047684,
+            "mediaTime": 124.652322,
+            "presentedFrames": 844
+          },
+          {
+            "sequence": 784,
+            "at": 31468.5,
+            "mediaTime": 124.685688,
+            "presentedFrames": 845
+          },
+          {
+            "sequence": 785,
+            "at": 31499.300000071526,
+            "mediaTime": 124.719055,
+            "presentedFrames": 846
+          },
+          {
+            "sequence": 786,
+            "at": 31534,
+            "mediaTime": 124.752422,
+            "presentedFrames": 847
+          },
+          {
+            "sequence": 787,
+            "at": 31566.800000071526,
+            "mediaTime": 124.785788,
+            "presentedFrames": 848
+          },
+          {
+            "sequence": 788,
+            "at": 31600,
+            "mediaTime": 124.819155,
+            "presentedFrames": 849
+          },
+          {
+            "sequence": 789,
+            "at": 31633.800000071526,
+            "mediaTime": 124.852522,
+            "presentedFrames": 850
+          },
+          {
+            "sequence": 790,
+            "at": 31667.300000071526,
+            "mediaTime": 124.885888,
+            "presentedFrames": 851
+          },
+          {
+            "sequence": 791,
+            "at": 31702.399999976158,
+            "mediaTime": 124.919255,
+            "presentedFrames": 852
+          },
+          {
+            "sequence": 792,
+            "at": 31734.200000047684,
+            "mediaTime": 124.952622,
+            "presentedFrames": 853
+          },
+          {
+            "sequence": 793,
+            "at": 31783,
+            "mediaTime": 125.019355,
+            "presentedFrames": 854
+          },
+          {
+            "sequence": 794,
+            "at": 32387.300000071526,
+            "mediaTime": 125.619955,
+            "presentedFrames": 855
+          },
+          {
+            "sequence": 795,
+            "at": 32451,
+            "mediaTime": 125.686688,
+            "presentedFrames": 856
+          },
+          {
+            "sequence": 796,
+            "at": 32500.700000047684,
+            "mediaTime": 125.720055,
+            "presentedFrames": 857
+          },
+          {
+            "sequence": 797,
+            "at": 32549.600000023842,
+            "mediaTime": 125.786788,
+            "presentedFrames": 858
+          },
+          {
+            "sequence": 798,
+            "at": 32584,
+            "mediaTime": 125.820155,
+            "presentedFrames": 859
+          },
+          {
+            "sequence": 799,
+            "at": 32651.399999976158,
+            "mediaTime": 125.886888,
+            "presentedFrames": 860
+          },
+          {
+            "sequence": 800,
+            "at": 32684.899999976158,
+            "mediaTime": 125.920255,
+            "presentedFrames": 861
+          },
+          {
+            "sequence": 801,
+            "at": 32749.600000023842,
+            "mediaTime": 125.986988,
+            "presentedFrames": 862
+          },
+          {
+            "sequence": 802,
+            "at": 32784.300000071526,
+            "mediaTime": 126.020355,
+            "presentedFrames": 863
+          },
+          {
+            "sequence": 803,
+            "at": 32850.89999997616,
+            "mediaTime": 126.087088,
+            "presentedFrames": 864
+          },
+          {
+            "sequence": 804,
+            "at": 32900.300000071526,
+            "mediaTime": 126.120455,
+            "presentedFrames": 865
+          },
+          {
+            "sequence": 805,
+            "at": 32934,
+            "mediaTime": 126.187188,
+            "presentedFrames": 866
+          },
+          {
+            "sequence": 806,
+            "at": 33001,
+            "mediaTime": 126.220555,
+            "presentedFrames": 867
+          },
+          {
+            "sequence": 807,
+            "at": 33050.89999997616,
+            "mediaTime": 126.287288,
+            "presentedFrames": 868
+          },
+          {
+            "sequence": 808,
+            "at": 33084.700000047684,
+            "mediaTime": 126.320655,
+            "presentedFrames": 869
+          },
+          {
+            "sequence": 809,
+            "at": 33151.10000002384,
+            "mediaTime": 126.387388,
+            "presentedFrames": 870
+          },
+          {
+            "sequence": 810,
+            "at": 33184.89999997616,
+            "mediaTime": 126.420755,
+            "presentedFrames": 871
+          },
+          {
+            "sequence": 811,
+            "at": 33252,
+            "mediaTime": 126.487488,
+            "presentedFrames": 872
+          },
+          {
+            "sequence": 812,
+            "at": 33285,
+            "mediaTime": 126.520855,
+            "presentedFrames": 873
+          },
+          {
+            "sequence": 813,
+            "at": 33350.200000047684,
+            "mediaTime": 126.587588,
+            "presentedFrames": 874
+          },
+          {
+            "sequence": 814,
+            "at": 33416.5,
+            "mediaTime": 126.620955,
+            "presentedFrames": 875
+          },
+          {
+            "sequence": 815,
+            "at": 33450,
+            "mediaTime": 126.654322,
+            "presentedFrames": 876
+          },
+          {
+            "sequence": 816,
+            "at": 33466.800000071526,
+            "mediaTime": 126.687688,
+            "presentedFrames": 877
+          },
+          {
+            "sequence": 817,
+            "at": 33501.800000071526,
+            "mediaTime": 126.721055,
+            "presentedFrames": 878
+          },
+          {
+            "sequence": 818,
+            "at": 33534.39999997616,
+            "mediaTime": 126.754422,
+            "presentedFrames": 879
+          },
+          {
+            "sequence": 819,
+            "at": 33568.10000002384,
+            "mediaTime": 126.787788,
+            "presentedFrames": 880
+          },
+          {
+            "sequence": 820,
+            "at": 33618.800000071526,
+            "mediaTime": 126.821155,
+            "presentedFrames": 881
+          },
+          {
+            "sequence": 821,
+            "at": 33658.700000047684,
+            "mediaTime": 126.854522,
+            "presentedFrames": 882
+          },
+          {
+            "sequence": 822,
+            "at": 33667.800000071526,
+            "mediaTime": 126.887888,
+            "presentedFrames": 883
+          },
+          {
+            "sequence": 823,
+            "at": 33699.39999997616,
+            "mediaTime": 126.921255,
+            "presentedFrames": 884
+          },
+          {
+            "sequence": 824,
+            "at": 33750.800000071526,
+            "mediaTime": 126.954622,
+            "presentedFrames": 885
+          }
+        ],
+        "stats": {
+          "at": 33783.89999997616,
+          "quality": {
+            "total": 929,
+            "dropped": 31
+          },
+          "videoDecodedBytes": 134177802,
+          "audioDecodedBytes": 778736,
+          "statsSequence": 29,
+          "playerStatsSequence": 47,
+          "yadif": {
+            "filtered": 1726,
+            "missed": 1,
+            "degraded": 17,
+            "discontinuities": 5,
+            "late": 170,
+            "queueResetted": 0,
+            "dropped": 31,
+            "fps": 16.51928869848037,
+            "frameMs": 2.3450000166893004,
+            "maxQueuedFields": 5,
+            "mode": "video",
+            "match": "c",
+            "combScore": 0,
+            "outputFps": 16.51928869848037,
+            "duplicateScore": null,
+            "duplicateRunnerUp": null
+          },
+          "player": {
+            "instantFps": 341.6856484604628,
+            "totalFps": 252.33610889094265,
+            "videoFrames": 694,
+            "audioFrames": 1125,
+            "convertingMs": 43.90000009536743,
+            "readingMs": 0,
+            "waitingMs": 1.0999997854232788,
+            "dropped": 4,
+            "scrambled": 0,
+            "errors": 0
+          }
+        }
+      }
+    ],
+    "cadenceFailures": [
+      {
+        "index": 0,
+        "cadence": {
+          "durationMs": 767.3000000715256,
+          "drawCount": 18,
+          "drawIntervalsMs": [
+            16.90000009536743,
+            32.89999997615814,
+            49.799999952316284,
+            52.5,
+            63.39999997615814,
+            53.90000009536743,
+            44.299999952316284,
+            53.200000047683716,
+            50.59999990463257,
+            52.300000071525574,
+            49.39999997615814,
+            50.5,
+            52.200000047683716,
+            45.89999997615814,
+            51.199999928474426,
+            14.700000047683716,
+            33.60000002384186
+          ],
+          "drawFps": 22.155610580496948,
+          "expectedFps": 59.94005994005994,
+          "fpsErrorRatio": 0.6303705634820426,
+          "intervalsOver40Ms": 13,
+          "maximumIntervalMs": 63.39999997615814,
+          "passed": false
+        },
+        "context": {
+          "startedAt": 17216.399999976158,
+          "endedAt": 20216.399999976158,
+          "videoFrames": [
+            {
+              "sequence": 368,
+              "at": 17149.5,
+              "mediaTime": 125.853522,
+              "presentedFrames": 429
+            },
+            {
+              "sequence": 369,
+              "at": 17200.800000071526,
+              "mediaTime": 125.886888,
+              "presentedFrames": 430
+            },
+            {
+              "sequence": 370,
+              "at": 17248,
+              "mediaTime": 125.953622,
+              "presentedFrames": 431
+            },
+            {
+              "sequence": 371,
+              "at": 17301.800000071526,
+              "mediaTime": 125.986988,
+              "presentedFrames": 432
+            },
+            {
+              "sequence": 372,
+              "at": 17350,
+              "mediaTime": 126.053722,
+              "presentedFrames": 433
+            },
+            {
+              "sequence": 373,
+              "at": 17400.200000047684,
+              "mediaTime": 126.087088,
+              "presentedFrames": 434
+            },
+            {
+              "sequence": 374,
+              "at": 17447,
+              "mediaTime": 126.153822,
+              "presentedFrames": 435
+            },
+            {
+              "sequence": 375,
+              "at": 17499.100000023842,
+              "mediaTime": 126.187188,
+              "presentedFrames": 436
+            },
+            {
+              "sequence": 376,
+              "at": 17547.700000047684,
+              "mediaTime": 126.253922,
+              "presentedFrames": 437
+            },
+            {
+              "sequence": 377,
+              "at": 17601,
+              "mediaTime": 126.287288,
+              "presentedFrames": 438
+            },
+            {
+              "sequence": 378,
+              "at": 17651.5,
+              "mediaTime": 126.354022,
+              "presentedFrames": 439
+            },
+            {
+              "sequence": 379,
+              "at": 17699.300000071526,
+              "mediaTime": 126.387388,
+              "presentedFrames": 440
+            },
+            {
+              "sequence": 380,
+              "at": 17748.899999976158,
+              "mediaTime": 126.454122,
+              "presentedFrames": 441
+            },
+            {
+              "sequence": 381,
+              "at": 17798.399999976158,
+              "mediaTime": 126.487488,
+              "presentedFrames": 442
+            },
+            {
+              "sequence": 382,
+              "at": 17846.600000023842,
+              "mediaTime": 126.554222,
+              "presentedFrames": 443
+            },
+            {
+              "sequence": 383,
+              "at": 17899.600000023842,
+              "mediaTime": 126.587588,
+              "presentedFrames": 444
+            },
+            {
+              "sequence": 384,
+              "at": 17966.200000047684,
+              "mediaTime": 126.620955,
+              "presentedFrames": 445
+            },
+            {
+              "sequence": 385,
+              "at": 18001.399999976158,
+              "mediaTime": 126.654322,
+              "presentedFrames": 446
+            },
+            {
+              "sequence": 386,
+              "at": 18034.399999976158,
+              "mediaTime": 126.687688,
+              "presentedFrames": 447
+            },
+            {
+              "sequence": 387,
+              "at": 18069.899999976158,
+              "mediaTime": 126.721055,
+              "presentedFrames": 448
+            },
+            {
+              "sequence": 388,
+              "at": 18102.899999976158,
+              "mediaTime": 126.754422,
+              "presentedFrames": 449
+            },
+            {
+              "sequence": 389,
+              "at": 18135.5,
+              "mediaTime": 126.787788,
+              "presentedFrames": 450
+            },
+            {
+              "sequence": 390,
+              "at": 18166.800000071526,
+              "mediaTime": 126.821155,
+              "presentedFrames": 451
+            },
+            {
+              "sequence": 391,
+              "at": 18203.899999976158,
+              "mediaTime": 126.854522,
+              "presentedFrames": 452
+            },
+            {
+              "sequence": 392,
+              "at": 18232.5,
+              "mediaTime": 126.887888,
+              "presentedFrames": 453
+            },
+            {
+              "sequence": 393,
+              "at": 18267.5,
+              "mediaTime": 126.921255,
+              "presentedFrames": 454
+            },
+            {
+              "sequence": 394,
+              "at": 18303.5,
+              "mediaTime": 126.954622,
+              "presentedFrames": 455
+            },
+            {
+              "sequence": 395,
+              "at": 18333.700000047684,
+              "mediaTime": 126.987988,
+              "presentedFrames": 456
+            },
+            {
+              "sequence": 396,
+              "at": 18369,
+              "mediaTime": 127.021355,
+              "presentedFrames": 457
+            },
+            {
+              "sequence": 397,
+              "at": 18401,
+              "mediaTime": 127.054722,
+              "presentedFrames": 458
+            },
+            {
+              "sequence": 398,
+              "at": 18432.899999976158,
+              "mediaTime": 127.088088,
+              "presentedFrames": 459
+            },
+            {
+              "sequence": 399,
+              "at": 18464.5,
+              "mediaTime": 127.121455,
+              "presentedFrames": 460
+            },
+            {
+              "sequence": 400,
+              "at": 18496.600000023842,
+              "mediaTime": 127.154822,
+              "presentedFrames": 461
+            },
+            {
+              "sequence": 401,
+              "at": 18530.399999976158,
+              "mediaTime": 127.188188,
+              "presentedFrames": 462
+            },
+            {
+              "sequence": 402,
+              "at": 18564.5,
+              "mediaTime": 127.221555,
+              "presentedFrames": 463
+            },
+            {
+              "sequence": 403,
+              "at": 18600.300000071526,
+              "mediaTime": 127.254922,
+              "presentedFrames": 464
+            },
+            {
+              "sequence": 404,
+              "at": 18633,
+              "mediaTime": 127.288288,
+              "presentedFrames": 465
+            },
+            {
+              "sequence": 405,
+              "at": 18665.899999976158,
+              "mediaTime": 127.321655,
+              "presentedFrames": 466
+            },
+            {
+              "sequence": 406,
+              "at": 18698.399999976158,
+              "mediaTime": 127.355022,
+              "presentedFrames": 467
+            },
+            {
+              "sequence": 407,
+              "at": 18731.200000047684,
+              "mediaTime": 127.388388,
+              "presentedFrames": 468
+            },
+            {
+              "sequence": 408,
+              "at": 18764.600000023842,
+              "mediaTime": 127.421755,
+              "presentedFrames": 469
+            },
+            {
+              "sequence": 409,
+              "at": 18798.800000071526,
+              "mediaTime": 127.455122,
+              "presentedFrames": 470
+            },
+            {
+              "sequence": 410,
+              "at": 18832.200000047684,
+              "mediaTime": 127.488488,
+              "presentedFrames": 471
+            },
+            {
+              "sequence": 411,
+              "at": 18866.800000071526,
+              "mediaTime": 127.521855,
+              "presentedFrames": 472
+            },
+            {
+              "sequence": 412,
+              "at": 18902.5,
+              "mediaTime": 127.555222,
+              "presentedFrames": 473
+            },
+            {
+              "sequence": 413,
+              "at": 18934.5,
+              "mediaTime": 127.588588,
+              "presentedFrames": 474
+            },
+            {
+              "sequence": 414,
+              "at": 18968.700000047684,
+              "mediaTime": 127.621955,
+              "presentedFrames": 475
+            },
+            {
+              "sequence": 415,
+              "at": 19003.600000023842,
+              "mediaTime": 127.655322,
+              "presentedFrames": 476
+            },
+            {
+              "sequence": 416,
+              "at": 19032.300000071526,
+              "mediaTime": 127.688688,
+              "presentedFrames": 477
+            },
+            {
+              "sequence": 417,
+              "at": 19068,
+              "mediaTime": 127.722055,
+              "presentedFrames": 478
+            },
+            {
+              "sequence": 418,
+              "at": 19101.5,
+              "mediaTime": 127.755422,
+              "presentedFrames": 479
+            },
+            {
+              "sequence": 419,
+              "at": 19135,
+              "mediaTime": 127.788788,
+              "presentedFrames": 480
+            },
+            {
+              "sequence": 420,
+              "at": 19166.700000047684,
+              "mediaTime": 127.822155,
+              "presentedFrames": 481
+            },
+            {
+              "sequence": 421,
+              "at": 19199.800000071526,
+              "mediaTime": 127.855522,
+              "presentedFrames": 482
+            },
+            {
+              "sequence": 422,
+              "at": 19234.100000023842,
+              "mediaTime": 127.888888,
+              "presentedFrames": 483
+            },
+            {
+              "sequence": 423,
+              "at": 19269,
+              "mediaTime": 127.922255,
+              "presentedFrames": 484
+            },
+            {
+              "sequence": 424,
+              "at": 19302.600000023842,
+              "mediaTime": 127.955622,
+              "presentedFrames": 485
+            },
+            {
+              "sequence": 425,
+              "at": 19332.5,
+              "mediaTime": 127.988988,
+              "presentedFrames": 486
+            },
+            {
+              "sequence": 426,
+              "at": 19368.100000023842,
+              "mediaTime": 128.022355,
+              "presentedFrames": 487
+            },
+            {
+              "sequence": 427,
+              "at": 19402.5,
+              "mediaTime": 128.055722,
+              "presentedFrames": 488
+            },
+            {
+              "sequence": 428,
+              "at": 19432.700000047684,
+              "mediaTime": 128.089088,
+              "presentedFrames": 489
+            },
+            {
+              "sequence": 429,
+              "at": 19464.700000047684,
+              "mediaTime": 128.122455,
+              "presentedFrames": 490
+            },
+            {
+              "sequence": 430,
+              "at": 19499,
+              "mediaTime": 128.155822,
+              "presentedFrames": 491
+            },
+            {
+              "sequence": 431,
+              "at": 19531.700000047684,
+              "mediaTime": 128.189188,
+              "presentedFrames": 492
+            },
+            {
+              "sequence": 432,
+              "at": 19565.300000071526,
+              "mediaTime": 128.222555,
+              "presentedFrames": 493
+            },
+            {
+              "sequence": 433,
+              "at": 19601.600000023842,
+              "mediaTime": 128.255922,
+              "presentedFrames": 494
+            },
+            {
+              "sequence": 434,
+              "at": 19636.100000023842,
+              "mediaTime": 128.289288,
+              "presentedFrames": 495
+            },
+            {
+              "sequence": 435,
+              "at": 19668.800000071526,
+              "mediaTime": 128.322655,
+              "presentedFrames": 496
+            },
+            {
+              "sequence": 436,
+              "at": 19701.399999976158,
+              "mediaTime": 128.356022,
+              "presentedFrames": 497
+            },
+            {
+              "sequence": 437,
+              "at": 19735.600000023842,
+              "mediaTime": 128.389388,
+              "presentedFrames": 498
+            },
+            {
+              "sequence": 438,
+              "at": 19766.5,
+              "mediaTime": 128.422755,
+              "presentedFrames": 499
+            },
+            {
+              "sequence": 439,
+              "at": 19802.200000047684,
+              "mediaTime": 128.456122,
+              "presentedFrames": 500
+            },
+            {
+              "sequence": 440,
+              "at": 19834.600000023842,
+              "mediaTime": 128.489488,
+              "presentedFrames": 501
+            },
+            {
+              "sequence": 441,
+              "at": 19868,
+              "mediaTime": 128.522855,
+              "presentedFrames": 502
+            },
+            {
+              "sequence": 442,
+              "at": 19902.899999976158,
+              "mediaTime": 128.556222,
+              "presentedFrames": 503
+            },
+            {
+              "sequence": 443,
+              "at": 19934.899999976158,
+              "mediaTime": 128.589588,
+              "presentedFrames": 504
+            },
+            {
+              "sequence": 444,
+              "at": 19966,
+              "mediaTime": 128.622955,
+              "presentedFrames": 505
+            },
+            {
+              "sequence": 445,
+              "at": 20002.200000047684,
+              "mediaTime": 128.656322,
+              "presentedFrames": 506
+            },
+            {
+              "sequence": 446,
+              "at": 20034.399999976158,
+              "mediaTime": 128.689688,
+              "presentedFrames": 507
+            },
+            {
+              "sequence": 447,
+              "at": 20069.300000071526,
+              "mediaTime": 128.723055,
+              "presentedFrames": 508
+            },
+            {
+              "sequence": 448,
+              "at": 20100.5,
+              "mediaTime": 128.756422,
+              "presentedFrames": 509
+            },
+            {
+              "sequence": 449,
+              "at": 20135.700000047684,
+              "mediaTime": 128.789788,
+              "presentedFrames": 510
+            },
+            {
+              "sequence": 450,
+              "at": 20165.899999976158,
+              "mediaTime": 128.823155,
+              "presentedFrames": 511
+            },
+            {
+              "sequence": 451,
+              "at": 20202.300000071526,
+              "mediaTime": 128.856522,
+              "presentedFrames": 512
+            }
+          ],
+          "canvasDraws": [
+            {
+              "sequence": 732,
+              "at": 17135
+            },
+            {
+              "sequence": 733,
+              "at": 17151.700000047684
+            },
+            {
+              "sequence": 734,
+              "at": 17182.800000071526
+            },
+            {
+              "sequence": 735,
+              "at": 17216.399999976158
+            },
+            {
+              "sequence": 736,
+              "at": 17233.300000071526
+            },
+            {
+              "sequence": 737,
+              "at": 17266.200000047684
+            },
+            {
+              "sequence": 738,
+              "at": 17316
+            },
+            {
+              "sequence": 739,
+              "at": 17368.5
+            },
+            {
+              "sequence": 740,
+              "at": 17431.899999976158
+            },
+            {
+              "sequence": 741,
+              "at": 17485.800000071526
+            },
+            {
+              "sequence": 742,
+              "at": 17530.100000023842
+            },
+            {
+              "sequence": 743,
+              "at": 17583.300000071526
+            },
+            {
+              "sequence": 744,
+              "at": 17633.899999976158
+            },
+            {
+              "sequence": 745,
+              "at": 17686.200000047684
+            },
+            {
+              "sequence": 746,
+              "at": 17735.600000023842
+            },
+            {
+              "sequence": 747,
+              "at": 17786.100000023842
+            },
+            {
+              "sequence": 748,
+              "at": 17838.300000071526
+            },
+            {
+              "sequence": 749,
+              "at": 17884.200000047684
+            },
+            {
+              "sequence": 750,
+              "at": 17935.399999976158
+            },
+            {
+              "sequence": 751,
+              "at": 17950.100000023842
+            },
+            {
+              "sequence": 752,
+              "at": 17983.700000047684
+            }
+          ]
+        }
+      }
+    ],
+    "pageStateChanges": [],
+    "userInteractionEvents": [],
+    "pageCountAtStart": 1,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible",
+    "paused": false
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

@@ -731,11 +731,15 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
-同じintegrationをsource、dist、KonomiTV revision、fixture、runnerのhashで固定し、無負荷で1時間上限の試験を行った。1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,459.837秒で4,644回すべてが2秒以内に安定復帰した。壁時計では3,575.237秒で、致命的な表示停止は0件だった。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-integration-current-v3-one-hour-summary.json)および[5 blockの生値](results/galaxy-integration-current-v3-one-hour-block-000.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
+最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、目的時刻、位相分散条件で比較した。隔離backend imageは`e92fba8`だが、`e92fba8..7307e0e`の`server/`に差分はない。基準版は54回目に致命的な表示停止を検出し、53回の成功後に試験を終了した。integrationは最大1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,456.840秒で4,732回すべてが2秒以内に安定復帰した。壁時計では3,575.590秒で、致命的な表示停止は0件だった。基準版が停止した54回目と同じ目的時刻と位相では、integrationは418.7msで安定復帰した。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[同条件比較と各blockのhash](results/galaxy-formal-current-integration-comparison.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
 
 同じbuildで既知の破損video packetを1回横切る15秒traceを取得した。入力rVFCは125.019秒から125.587秒へ567.233ms進み、canvasの最大描画間隔は521.9msだった。表示は安定条件へ863.0msで復帰し、利用者操作、再seek、playback error、visibility変更はなかったため、この単発走行に致命的な表示停止はない。
 
 表示進行の復帰直後にはdecoderの追いつきを含むため、定常cadenceと分けた。3秒以上にわたり期待値の±1%かつ40ms超の間隔0回となる最初の窓は欠陥直前から1,615ms後に始まり、4,627.5ms後に確認できた。trace末尾5秒のcanvas描画は60.01fpsで、期待値59.94fpsとの差は0.11%、40ms超は0回だった。一方、この窓でもChromeのdrop counterが2、YADIFの`late`が1増え、最大描画間隔は30.5msだった。canvasのdraw呼出しはcompositorのscanoutを証明しないため、可視コマ落ち0とは判定しない。
+
+最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、seek時刻、欠陥時刻、位相列でこの破損packetを直接比較した。基準版は2回目に致命的な表示停止を検出し、1回の成功後に試験を終了した。integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、p95 940.2ms、最大1,088.1msだった。同じ先頭2回では、基準版の2回目だけが停止し、integrationの対応する試行は920.1msで復帰した。
+
+復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。integrationも期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかった。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
 
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 

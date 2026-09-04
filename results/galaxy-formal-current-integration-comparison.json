@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-09-04T10:07:49.150248+09:00",
+  "sourceFiles": {
+    "normal_baseline_summary": {
+      "file": "galaxy-formal-normal-baseline-52a3db5-summary.json",
+      "sha256": "ae67fbadeb212e530f0dbbbcaa8a3267b8f5c14c1cf125f6b94aafbd6909fbab"
+    },
+    "normal_baseline_block": {
+      "file": "galaxy-formal-normal-baseline-52a3db5-block-000.json",
+      "sha256": "d0d8ce4cbc41e1d7e9e485cc1f86292de98624d7732d20830ea7efac7e9a54e9"
+    },
+    "normal_integration_summary": {
+      "file": "galaxy-formal-normal-integration-44e06a4-summary.json",
+      "sha256": "8aa0fd983493fee56b043e29c3662bb615d1645430cc6e316f6ed7ce8ebd89fe"
+    },
+    "normal_integration_block": {
+      "file": "galaxy-formal-normal-integration-44e06a4-block-000.json",
+      "sha256": "e42602363f96007965fabc751af82d924c2197952bae1cf7d0fe92123c517b2a"
+    },
+    "anomaly_baseline_summary": {
+      "file": "galaxy-formal-anomaly-baseline-52a3db5-summary.json",
+      "sha256": "a0eb27c66c943368b569e6de65cd3c12a0e8989903d6b05b9d6b0c3214dd9426"
+    },
+    "anomaly_baseline_block": {
+      "file": "galaxy-formal-anomaly-baseline-52a3db5-block-000.json",
+      "sha256": "ae2eb1482dba4b312f7a0cdb55ad69a618553a3e4f9dd24371cfa51eda99a2a4"
+    },
+    "anomaly_integration_summary": {
+      "file": "galaxy-formal-anomaly-integration-44e06a4-summary.json",
+      "sha256": "51a53e3980904b338cdc88df27df3c3469c09e80b3c5e7e8dd2669ba9cfddcdf"
+    },
+    "anomaly_integration_block": {
+      "file": "galaxy-formal-anomaly-integration-44e06a4-block-000.json",
+      "sha256": "94de91041c1b1394a65208a133198e4af96549c5f7c8f7a87ad97a31aa1c272e"
+    }
+  },
+  "normalSeekFatalStop": {
+    "sharedConditions": {
+      "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+      "fixtureName": "nogizaka.ts",
+      "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+      "videoId": 2,
+      "frameMode": "normal",
+      "baseSeed": 20260905,
+      "runnerSha256": "a7a79c1c7ddddf184efa9aaf2a08b2baf01952185f8137d5b65bb201e2697103",
+      "collectorSha256": "a91240311b110ab4ffb26fdbad28b321b79f1424033c6a96000769497d9446ee"
+    },
+    "baseline": {
+      "variant": "baseline-52a3db5-formal-correct-fixture",
+      "sourceMarkerSha256": "d59572b7c946aa4d0258b49d4d420937ab22395c945ce92606e57623ff5d2060",
+      "workerBundleSha256": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+      "asset": "PlayerController-B2MCmMO1.js",
+      "assetSha256": "1b4a9ab34f6c56f74c9227a63627fb0392253bf4dc11abfd214476666781b426",
+      "attemptedSeeks": 54,
+      "completedSeeks": 53,
+      "fatalStops": 1,
+      "wallClockElapsedSeconds": 59.331
+    },
+    "integration": {
+      "variant": "integration-44e06a4-formal-correct-fixture",
+      "sourceMarkerSha256": "5ca3def522f2d2f8d523d6fa9db540eddcf4170a1f2bbb6ef7172eb77d6af8e5",
+      "workerBundleSha256": "3c94dedb9aefa3023abaf0bedd90dc6a339c9182dcf46ffc86e96dc810d7ab21",
+      "asset": "PlayerController-DJki7T6W.js",
+      "assetSha256": "55fa02bf0df9fe8cc9acf8a34e0979729bd7beb4706366363d127f7228248ead",
+      "attemptedSeeks": 4732,
+      "completedSeeks": 4732,
+      "fatalStops": 0,
+      "wallClockElapsedSeconds": 3575.59
+    },
+    "matchedFailureTrial": {
+      "index": 53,
+      "targetSeconds": 931.3817237131298,
+      "phaseJitterMs": 13.59103516912243,
+      "baselineOutcome": "fatal-display-stop",
+      "baselineElapsedMs": 2504.3000000715256,
+      "baselineMaximumDrawGapMs": 2023.5,
+      "integrationStableConfirmationMs": 418.7000000476837,
+      "integrationMaximumDrawGapMs": 281.2000000476837
+    }
+  },
+  "anomalousTransportDefect": {
+    "sharedConditions": {
+      "clientRevision": "7307e0ec39aed6a4772908cdbfb44223da42be6d",
+      "runnerSha256": "a7a79c1c7ddddf184efa9aaf2a08b2baf01952185f8137d5b65bb201e2697103",
+      "collectorSha256": "409495c59981e1433022b5568287966feda89f0fe0cdc865732463af61333664",
+      "fixtureName": "nogizaka.ts",
+      "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+      "videoId": 2,
+      "frameMode": "normal",
+      "seed": 20260907,
+      "seekTime": 113.67,
+      "defectMediaTime": 125.0249
+    },
+    "baseline": {
+      "variant": "baseline-52a3db5-formal-anomaly",
+      "sourceMarkerSha256": "d59572b7c946aa4d0258b49d4d420937ab22395c945ce92606e57623ff5d2060",
+      "workerBundleSha256": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+      "asset": "PlayerController-B2MCmMO1.js",
+      "attemptedCrossings": 2,
+      "completedCrossings": 1,
+      "fatalStops": 1,
+      "cadenceFailures": 1,
+      "stableConfirmationMs": {
+        "count": 1,
+        "minimum": 866.5,
+        "median": 866.5,
+        "p95": 866.5,
+        "maximum": 866.5
+      },
+      "postRecoveryCanvasFps": {
+        "count": 1,
+        "minimum": 22.155610580496948,
+        "median": 22.155610580496948,
+        "p95": 22.155610580496948,
+        "maximum": 22.155610580496948
+      },
+      "maximumCanvasDrawIntervalMs": {
+        "count": 1,
+        "minimum": 63.39999997615814,
+        "median": 63.39999997615814,
+        "p95": 63.39999997615814,
+        "maximum": 63.39999997615814
+      },
+      "audioDecodeAdvanced": 2,
+      "audioDecodeObservedTrials": 2,
+      "mediaTimeGapMs": {
+        "count": 2,
+        "minimum": 567.2330000000017,
+        "median": 583.9165000000008,
+        "p95": 600.6,
+        "maximum": 600.6
+      }
+    },
+    "integration": {
+      "variant": "integration-44e06a4-formal-anomaly",
+      "sourceMarkerSha256": "5ca3def522f2d2f8d523d6fa9db540eddcf4170a1f2bbb6ef7172eb77d6af8e5",
+      "workerBundleSha256": "3c94dedb9aefa3023abaf0bedd90dc6a339c9182dcf46ffc86e96dc810d7ab21",
+      "asset": "PlayerController-DJki7T6W.js",
+      "attemptedCrossings": 20,
+      "completedCrossings": 20,
+      "fatalStops": 0,
+      "cadenceFailures": 20,
+      "stableConfirmationMs": {
+        "count": 20,
+        "minimum": 777.8000000715256,
+        "median": 911.0000000596046,
+        "p95": 940.1999999284744,
+        "maximum": 1088.1000000238419
+      },
+      "postRecoveryCanvasFps": {
+        "count": 20,
+        "minimum": 52.94373890109056,
+        "median": 53.93817499614459,
+        "p95": 55.000335368778124,
+        "maximum": 55.61884339565568
+      },
+      "maximumCanvasDrawIntervalMs": {
+        "count": 20,
+        "minimum": 36.39999997615814,
+        "median": 37.85000002384186,
+        "p95": 50.800000071525574,
+        "maximum": 51.800000071525574
+      },
+      "audioDecodeAdvanced": 20,
+      "audioDecodeObservedTrials": 20,
+      "mediaTimeGapMs": {
+        "count": 20,
+        "minimum": 567.2330000000017,
+        "median": 600.6,
+        "p95": 600.6,
+        "maximum": 600.6
+      }
+    },
+    "scope": "Direct canvas draws and decoded-byte progress are observed. Compositor scanout, audible A/V synchronization, pixel correctness, and the minimum unavoidable frame loss are not proven."
+  }
+}

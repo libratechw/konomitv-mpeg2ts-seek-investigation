@@ -1,0 +1,2626 @@
+{
+  "variant": "baseline-52a3db5-formal-correct-fixture",
+  "sourceHash": "d59572b7c946aa4d0258b49d4d420937ab22395c945ce92606e57623ff5d2060",
+  "distHash": "d83906ec71e8eb9f503e9787f8ade32aaff133b791ef2ae185a098ef8bd8e1c7",
+  "asset": "PlayerController-B2MCmMO1.js",
+  "videoId": 2,
+  "frameMode": "normal",
+  "fixtureName": "nogizaka.ts",
+  "fixtureSha256": "2240bbb8848d0c244378498dc0482b9c4f34e71a722dff01a2b6bfe50d1ca845",
+  "fixtureSize": 3066534364,
+  "recordedDuration": 1815.2134,
+  "downloadFilename": "nogizaka.ts",
+  "device": "Galaxy Tab S11 Ultra (SM-X930)",
+  "browser": "Google Chrome",
+  "displayHz": 60,
+  "transport": "LAN direct",
+  "fullscreen": true,
+  "onePageDuringMeasurement": true,
+  "sample": {
+    "requestedCount": 1000,
+    "completed": 53,
+    "pageCountAtStart": 1,
+    "stopReason": "fatal-stop",
+    "stopAtUnixMs": 1788483263871,
+    "measurementStartedAtUnixMs": 1788479712976,
+    "measurementEndedAtUnixMs": 1788479748231,
+    "seed": 20260905,
+    "fatalDefinition": "stable display did not recover within 2000 ms of assigning video.currentTime without another user operation",
+    "stableDefinition": "target rVFC observed in buffered media; seeked; visible canvas; readyState >= 3; eight consecutive direct draws spanning at least 100 ms with no gap over 50 ms; recovery time is the first draw of that confirmed run",
+    "targetBandsSeconds": [
+      [
+        240,
+        480
+      ],
+      [
+        900,
+        1140
+      ]
+    ],
+    "targetTimesSeconds": [
+      272.0914659462869,
+      1011.1908735148609,
+      450.76893869787455,
+      936.7300122790039,
+      362.7901015430689,
+      998.8826896436512,
+      285.35993540659547,
+      975.2093219384551,
+      435.6082210689783,
+      975.1246576756239,
+      298.0840626731515,
+      975.1920689642429,
+      257.3608130402863,
+      1008.9145037345588,
+      422.22607841715217,
+      910.1028212159872,
+      356.4854729734361,
+      1093.8961536996067,
+      248.24990786612034,
+      1035.8451139368117,
+      302.28955456987023,
+      1117.3967523872852,
+      326.003446765244,
+      910.3435846790671,
+      381.0384831391275,
+      1116.749855875969,
+      420.9170907922089,
+      936.7756981775165,
+      322.52448884770274,
+      947.5320352613926,
+      391.8492776155472,
+      995.9196675941348,
+      353.936723805964,
+      911.0957250371575,
+      411.6271623596549,
+      1080.7161579094827,
+      379.8011345230043,
+      1088.0006765574217,
+      255.20973159000278,
+      939.9017950706184,
+      456.4205713570118,
+      1113.6236654408276,
+      279.57607202231884,
+      944.807947576046,
+      387.35438503324986,
+      1082.5147360749543,
+      362.1552738547325,
+      1013.0224066413939,
+      276.5297460369766,
+      930.4850673861802,
+      341.45953791216016,
+      917.7507986314595,
+      285.76364770531654,
+      931.3817237131298
+    ],
+    "interSeekJitterRangeMs": [
+      0,
+      33.36666666666667
+    ],
+    "interSeekJitterMs": [
+      15.017113767626386,
+      19.642839854047633,
+      20.25566174670433,
+      5.041496323049069,
+      13.13698409369681,
+      18.891076036946227,
+      18.023059490749922,
+      22.517393301155728,
+      15.69152958204504,
+      29.90880032464241,
+      5.1465817846978705,
+      22.05004938055451,
+      16.586152390328547,
+      6.649164136755281,
+      26.886235342368796,
+      9.535063486693737,
+      14.887436030828395,
+      24.087848312741457,
+      0.7852653086883947,
+      13.164981270829836,
+      25.891292645595968,
+      8.710868342888231,
+      4.44118887463895,
+      1.2878733954702815,
+      4.916241773629251,
+      27.989142603807462,
+      2.3212388744655374,
+      15.570303068651507,
+      21.02553037730977,
+      26.309007307483505,
+      1.737922677816823,
+      29.913016194291412,
+      25.652715984894893,
+      29.644755404186437,
+      9.687815416394733,
+      17.777286132945058,
+      17.930109053780324,
+      20.467022583338743,
+      21.38334457994594,
+      24.218716180402165,
+      33.05293791180011,
+      17.387313552449147,
+      6.83155032027668,
+      11.0423194761388,
+      11.928992419394975,
+      5.0929774808231745,
+      13.765265622649652,
+      17.563383941111777,
+      11.935219657902296,
+      31.688016730477102,
+      31.577592483822567,
+      10.305486085871234,
+      4.780328788709206,
+      13.59103516912243
+    ],
+    "stableLatenciesMs": [
+      431.40000009536743,
+      493.2999999523163,
+      439,
+      511.1999999284744,
+      460.6999999284744,
+      417.3000000715256,
+      395.3000000715256,
+      390.60000002384186,
+      380.1999999284744,
+      449.8000000715256,
+      443.7000000476837,
+      442.5,
+      413.09999990463257,
+      445.40000009536743,
+      469.89999997615814,
+      472.3000000715256,
+      431.10000002384186,
+      426,
+      443.3000000715256,
+      484.3000000715256,
+      488.3000000715256,
+      555.2000000476837,
+      475.2999999523163,
+      575.3999999761581,
+      526.5,
+      503,
+      560.3999999761581,
+      497,
+      479.39999997615814,
+      437.10000002384186,
+      473.60000002384186,
+      419.1999999284744,
+      372,
+      395.7000000476837,
+      524.7000000476837,
+      543.6999999284744,
+      470.90000009536743,
+      529.5,
+      491.5,
+      525,
+      513.7999999523163,
+      530.6000000238419,
+      510.5,
+      521.2000000476837,
+      471.39999997615814,
+      457.7999999523163,
+      548.2000000476837,
+      579.3000000715256,
+      495.3000000715256,
+      547,
+      463.7999999523163,
+      537.6000000238419,
+      493.5
+    ],
+    "maximumDrawGapsMs": [
+      232.79999995231628,
+      195.69999992847443,
+      246,
+      251.10000002384186,
+      251.29999995231628,
+      212.80000007152557,
+      215.90000009536743,
+      230.89999997615814,
+      216.89999997615814,
+      216.20000004768372,
+      232.5,
+      227.5,
+      229.79999995231628,
+      220.29999995231628,
+      232.5,
+      233.80000007152557,
+      247.90000009536743,
+      217.5,
+      213.20000004768372,
+      266.2000000476837,
+      249.5,
+      263,
+      220.09999990463257,
+      285.39999997615814,
+      250,
+      253.40000009536743,
+      284.1999999284744,
+      230,
+      218.10000002384186,
+      203.40000009536743,
+      227.60000002384186,
+      204.29999995231628,
+      214.60000002384186,
+      215.20000004768372,
+      249.20000004768372,
+      284.8000000715256,
+      222.30000007152557,
+      251.5,
+      232.29999995231628,
+      268.10000002384186,
+      250.5,
+      253.20000004768372,
+      275.2000000476837,
+      287.7000000476837,
+      233.79999995231628,
+      217.39999997615814,
+      251.69999992847443,
+      317.1999999284744,
+      233.60000002384186,
+      300.5,
+      231.5,
+      264.90000009536743,
+      252.29999995231628,
+      2023.5
+    ],
+    "seekDiagnostics": [],
+    "diagnosticPauses": [],
+    "failures": [
+      {
+        "index": 53,
+        "target": 931.3817237131298,
+        "outcome": "fatal-display-stop",
+        "elapsedMs": 2504.3000000715256,
+        "maximumDrawGapMs": 2023.5,
+        "seekedMs": 172.70000004768372,
+        "latestMediaTime": 933.460322,
+        "currentTime": 933.482674,
+        "seeking": false,
+        "readyState": 4,
+        "targetDrawCount": 2,
+        "targetReadyMs": 181.30000007152557,
+        "firstTargetDrawMs": 448.60000002384186,
+        "stableAtMs": null,
+        "stableConfirmedAtMs": null,
+        "statsBefore": {
+          "filtered": 574,
+          "missed": 0,
+          "degraded": 185,
+          "discontinuities": 53,
+          "late": 1,
+          "queueResetted": 0,
+          "dropped": 0,
+          "fps": 13.034410845169907,
+          "frameMs": 2.611111137602064,
+          "maxQueuedFields": 4,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 14.772332291192562,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "statsAfter": {
+          "filtered": 710,
+          "missed": 0,
+          "degraded": 191,
+          "discontinuities": 55,
+          "late": 116,
+          "queueResetted": 0,
+          "dropped": 0,
+          "fps": 0,
+          "frameMs": 0.9933333436648051,
+          "maxQueuedFields": 5,
+          "mode": "video",
+          "match": "c",
+          "combScore": 0,
+          "outputFps": 0,
+          "duplicateScore": null,
+          "duplicateRunnerUp": null
+        },
+        "qualityDelta": {
+          "totalVideoFrames": 68,
+          "droppedVideoFrames": 0
+        },
+        "audioDecodedBytesDelta": 60490,
+        "playerState": "converting",
+        "buffered": [
+          [
+            930.624,
+            941.835354
+          ]
+        ],
+        "timingEvents": [
+          {
+            "name": "waiting",
+            "sinceLoad": 36740.400146484375,
+            "sincePrevious": 366,
+            "observedAt": 37393.799999952316,
+            "sinceRequest": 3.5
+          },
+          {
+            "name": "seek",
+            "sinceLoad": 36738.900146484375,
+            "sincePrevious": 0,
+            "observedAt": 37395.799999952316,
+            "sinceRequest": 5.5
+          },
+          {
+            "name": "wasm",
+            "sinceLoad": 36785.900146484375,
+            "sincePrevious": 45.5,
+            "observedAt": 37442.5,
+            "sinceRequest": 52.200000047683716
+          },
+          {
+            "name": "response",
+            "sinceLoad": 36799.000244140625,
+            "sincePrevious": 13.10009765625,
+            "observedAt": 37452.60000002384,
+            "sinceRequest": 62.300000071525574
+          },
+          {
+            "name": "first-byte",
+            "sinceLoad": 36799.500244140625,
+            "sincePrevious": 0.5,
+            "observedAt": 37453.299999952316,
+            "sinceRequest": 63
+          },
+          {
+            "name": "first-fragment",
+            "sinceLoad": 36872.900146484375,
+            "sincePrevious": 73.39990234375,
+            "observedAt": 37526.60000002384,
+            "sinceRequest": 136.30000007152557
+          },
+          {
+            "name": "opened",
+            "sinceLoad": 36873.100341796875,
+            "sincePrevious": 0.2001953125,
+            "observedAt": 37526.799999952316,
+            "sinceRequest": 136.5
+          },
+          {
+            "name": "appended",
+            "sinceLoad": 36883.000244140625,
+            "sincePrevious": 9.89990234375,
+            "observedAt": 37536.60000002384,
+            "sinceRequest": 146.30000007152557
+          },
+          {
+            "name": "canplay",
+            "sinceLoad": 36909.60009765625,
+            "sincePrevious": 26.599853515625,
+            "observedAt": 37563,
+            "sinceRequest": 172.70000004768372
+          },
+          {
+            "name": "playing",
+            "sinceLoad": 36909.7001953125,
+            "sincePrevious": 0.10009765625,
+            "observedAt": 37563.10000002384,
+            "sinceRequest": 172.80000007152557
+          }
+        ],
+        "playerStats": [
+          {
+            "instantFps": 235.2941162328112,
+            "totalFps": 235.2941162328112,
+            "videoFrames": 14,
+            "audioFrames": 56,
+            "convertingMs": 59.50000035762787,
+            "readingMs": 62.39999997615814,
+            "waitingMs": 12.599999904632568,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37526.799999952316,
+            "sinceRequest": 136.5
+          },
+          {
+            "instantFps": 238.8535033660736,
+            "totalFps": 237.121830960797,
+            "videoFrames": 29,
+            "audioFrames": 80,
+            "convertingMs": 62.799999952316284,
+            "readingMs": 63.200000047683716,
+            "waitingMs": 1.100000023841858,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37590.89999997616,
+            "sinceRequest": 200.60000002384186
+          },
+          {
+            "instantFps": 252.10084033613447,
+            "totalFps": 242.02420200762384,
+            "videoFrames": 44,
+            "audioFrames": 103,
+            "convertingMs": 59.5,
+            "readingMs": 76.30000007152557,
+            "waitingMs": 15.5,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37666.39999997616,
+            "sinceRequest": 276.10000002384186
+          },
+          {
+            "instantFps": 211.86440692235144,
+            "totalFps": 233.5708627820412,
+            "videoFrames": 59,
+            "audioFrames": 127,
+            "convertingMs": 70.79999995231628,
+            "readingMs": 72.19999992847443,
+            "waitingMs": 4.399999976158142,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37742.799999952316,
+            "sinceRequest": 352.5
+          },
+          {
+            "instantFps": 251.6778522483143,
+            "totalFps": 237.02754622737308,
+            "videoFrames": 74,
+            "audioFrames": 150,
+            "convertingMs": 59.60000002384186,
+            "readingMs": 54.299999952316284,
+            "waitingMs": 1.7000001668930054,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37805.60000002384,
+            "sinceRequest": 415.3000000715256
+          },
+          {
+            "instantFps": 256.8493151733521,
+            "totalFps": 240.15110614413888,
+            "videoFrames": 89,
+            "audioFrames": 174,
+            "convertingMs": 58.39999997615814,
+            "readingMs": 0,
+            "waitingMs": 0.10000002384185791,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37862.799999952316,
+            "sinceRequest": 472.5
+          },
+          {
+            "instantFps": 233.64485963954743,
+            "totalFps": 239.19043221219945,
+            "videoFrames": 104,
+            "audioFrames": 197,
+            "convertingMs": 64.20000004768372,
+            "readingMs": 0,
+            "waitingMs": 0.10000002384185791,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37928.10000002384,
+            "sinceRequest": 537.8000000715256
+          },
+          {
+            "instantFps": 243.11183172429034,
+            "totalFps": 239.67774409437337,
+            "videoFrames": 119,
+            "audioFrames": 221,
+            "convertingMs": 61.699999928474426,
+            "readingMs": 0,
+            "waitingMs": 0.5000001192092896,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 37990.799999952316,
+            "sinceRequest": 600.5
+          },
+          {
+            "instantFps": 251.6778522483143,
+            "totalFps": 240.9638553080466,
+            "videoFrames": 134,
+            "audioFrames": 244,
+            "convertingMs": 59.60000002384186,
+            "readingMs": 0,
+            "waitingMs": 0.19999992847442627,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38051.39999997616,
+            "sinceRequest": 661.1000000238419
+          },
+          {
+            "instantFps": 304.87804922371095,
+            "totalFps": 246.15892937890123,
+            "videoFrames": 149,
+            "audioFrames": 267,
+            "convertingMs": 49.199999928474426,
+            "readingMs": 0,
+            "waitingMs": 0.5,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38101.89999997616,
+            "sinceRequest": 711.6000000238419
+          },
+          {
+            "instantFps": 245.09803997955458,
+            "totalFps": 246.06151537884472,
+            "videoFrames": 164,
+            "audioFrames": 291,
+            "convertingMs": 61.19999980926514,
+            "readingMs": 0,
+            "waitingMs": 1.2000001668930054,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38164.89999997616,
+            "sinceRequest": 774.6000000238419
+          },
+          {
+            "instantFps": 224.55089836388356,
+            "totalFps": 244.10200465244742,
+            "videoFrames": 179,
+            "audioFrames": 314,
+            "convertingMs": 66.79999995231628,
+            "readingMs": 0,
+            "waitingMs": 1.4000000953674316,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38234.89999997616,
+            "sinceRequest": 844.6000000238419
+          },
+          {
+            "instantFps": 247.11696898970646,
+            "totalFps": 244.3324937394543,
+            "videoFrames": 194,
+            "audioFrames": 338,
+            "convertingMs": 60.699999928474426,
+            "readingMs": 0,
+            "waitingMs": 1,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38296.299999952316,
+            "sinceRequest": 906
+          },
+          {
+            "instantFps": 234.0093598521793,
+            "totalFps": 243.5613564784909,
+            "videoFrames": 209,
+            "audioFrames": 361,
+            "convertingMs": 64.10000014305115,
+            "readingMs": 0,
+            "waitingMs": 0.2999999523162842,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38362.299999952316,
+            "sinceRequest": 972
+          },
+          {
+            "instantFps": 245.9016393442623,
+            "totalFps": 243.7166793539216,
+            "videoFrames": 224,
+            "audioFrames": 385,
+            "convertingMs": 61,
+            "readingMs": 0,
+            "waitingMs": 0.5999999046325684,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38423.89999997616,
+            "sinceRequest": 1033.6000000238419
+          },
+          {
+            "instantFps": 246.71052699299773,
+            "totalFps": 243.90243905999645,
+            "videoFrames": 239,
+            "audioFrames": 408,
+            "convertingMs": 60.799999833106995,
+            "readingMs": 0,
+            "waitingMs": 0.40000009536743164,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38486,
+            "sinceRequest": 1095.7000000476837
+          },
+          {
+            "instantFps": 325.3796093761897,
+            "totalFps": 247.5633528552747,
+            "videoFrames": 254,
+            "audioFrames": 432,
+            "convertingMs": 46.10000002384186,
+            "readingMs": 0,
+            "waitingMs": 0.19999992847442627,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38532.39999997616,
+            "sinceRequest": 1142.1000000238419
+          },
+          {
+            "instantFps": 256.8493151733521,
+            "totalFps": 248.06344525588875,
+            "videoFrames": 269,
+            "audioFrames": 455,
+            "convertingMs": 58.39999997615814,
+            "readingMs": 0,
+            "waitingMs": 0.10000002384185791,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38591.299999952316,
+            "sinceRequest": 1201
+          },
+          {
+            "instantFps": 234.80662952495987,
+            "totalFps": 247.23374828128374,
+            "videoFrames": 286,
+            "audioFrames": 479,
+            "convertingMs": 72.40000009536743,
+            "readingMs": 0,
+            "waitingMs": 0,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 38664.199999928474,
+            "sinceRequest": 1273.8999999761581
+          },
+          {
+            "instantFps": 204.91803265339817,
+            "totalFps": 244.71544715447155,
+            "videoFrames": 301,
+            "audioFrames": 502,
+            "convertingMs": 73.20000004768372,
+            "readingMs": 0,
+            "waitingMs": 592.3999999761581,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 39331.10000002384,
+            "sinceRequest": 1940.8000000715256
+          },
+          {
+            "instantFps": 230.06134994563297,
+            "totalFps": 243.9777640653572,
+            "videoFrames": 316,
+            "audioFrames": 526,
+            "convertingMs": 65.19999992847443,
+            "readingMs": 0,
+            "waitingMs": 0.6000000238418579,
+            "dropped": 0,
+            "scrambled": 0,
+            "errors": 0,
+            "observedAt": 39397.299999952316,
+            "sinceRequest": 2007
+          }
+        ],
+        "playerProgress": [
+          {
+            "bytesRead": 1581994422,
+            "totalBytes": 3066534364,
+            "observedAt": 37452.60000002384,
+            "sinceRequest": 62.300000071525574
+          },
+          {
+            "bytesRead": 1582076240,
+            "totalBytes": 3066534364,
+            "observedAt": 37453.39999997616,
+            "sinceRequest": 63.10000002384186
+          },
+          {
+            "bytesRead": 1582199048,
+            "totalBytes": 3066534364,
+            "observedAt": 37456.699999928474,
+            "sinceRequest": 66.39999997615814
+          },
+          {
+            "bytesRead": 1582280923,
+            "totalBytes": 3066534364,
+            "observedAt": 37456.699999928474,
+            "sinceRequest": 66.39999997615814
+          },
+          {
+            "bytesRead": 1582535094,
+            "totalBytes": 3066534364,
+            "observedAt": 37457.799999952316,
+            "sinceRequest": 67.5
+          },
+          {
+            "bytesRead": 1582657902,
+            "totalBytes": 3066534364,
+            "observedAt": 37459.699999928474,
+            "sinceRequest": 69.39999997615814
+          },
+          {
+            "bytesRead": 1582985402,
+            "totalBytes": 3066534364,
+            "observedAt": 37461.699999928474,
+            "sinceRequest": 71.39999997615814
+          },
+          {
+            "bytesRead": 1583067277,
+            "totalBytes": 3066534364,
+            "observedAt": 37462.10000002384,
+            "sinceRequest": 71.80000007152557
+          },
+          {
+            "bytesRead": 1583108219,
+            "totalBytes": 3066534364,
+            "observedAt": 37462.10000002384,
+            "sinceRequest": 71.80000007152557
+          },
+          {
+            "bytesRead": 1583517594,
+            "totalBytes": 3066534364,
+            "observedAt": 37466.5,
+            "sinceRequest": 76.20000004768372
+          },
+          {
+            "bytesRead": 1583599469,
+            "totalBytes": 3066534364,
+            "observedAt": 37466.60000002384,
+            "sinceRequest": 76.30000007152557
+          },
+          {
+            "bytesRead": 1583640402,
+            "totalBytes": 3066534364,
+            "observedAt": 37466.60000002384,
+            "sinceRequest": 76.30000007152557
+          },
+          {
+            "bytesRead": 1583681344,
+            "totalBytes": 3066534364,
+            "observedAt": 37466.699999928474,
+            "sinceRequest": 76.39999997615814
+          },
+          {
+            "bytesRead": 1583886027,
+            "totalBytes": 3066534364,
+            "observedAt": 37469,
+            "sinceRequest": 78.70000004768372
+          },
+          {
+            "bytesRead": 1584026038,
+            "totalBytes": 3066534364,
+            "observedAt": 37469.199999928474,
+            "sinceRequest": 78.89999997615814
+          },
+          {
+            "bytesRead": 1584091574,
+            "totalBytes": 3066534364,
+            "observedAt": 37469.89999997616,
+            "sinceRequest": 79.60000002384186
+          },
+          {
+            "bytesRead": 1584157110,
+            "totalBytes": 3066534364,
+            "observedAt": 37469.89999997616,
+            "sinceRequest": 79.60000002384186
+          },
+          {
+            "bytesRead": 1584402870,
+            "totalBytes": 3066534364,
+            "observedAt": 37475.89999997616,
+            "sinceRequest": 85.60000002384186
+          },
+          {
+            "bytesRead": 1584632246,
+            "totalBytes": 3066534364,
+            "observedAt": 37476.60000002384,
+            "sinceRequest": 86.30000007152557
+          },
+          {
+            "bytesRead": 1584796086,
+            "totalBytes": 3066534364,
+            "observedAt": 37477.299999952316,
+            "sinceRequest": 87
+          },
+          {
+            "bytesRead": 1584943542,
+            "totalBytes": 3066534364,
+            "observedAt": 37478.89999997616,
+            "sinceRequest": 88.60000002384186
+          },
+          {
+            "bytesRead": 1585041846,
+            "totalBytes": 3066534364,
+            "observedAt": 37479.5,
+            "sinceRequest": 89.20000004768372
+          },
+          {
+            "bytesRead": 1585402294,
+            "totalBytes": 3066534364,
+            "observedAt": 37481.60000002384,
+            "sinceRequest": 91.30000007152557
+          },
+          {
+            "bytesRead": 1585811894,
+            "totalBytes": 3066534364,
+            "observedAt": 37485,
+            "sinceRequest": 94.70000004768372
+          },
+          {
+            "bytesRead": 1585893769,
+            "totalBytes": 3066534364,
+            "observedAt": 37489.5,
+            "sinceRequest": 99.20000004768372
+          },
+          {
+            "bytesRead": 1586057519,
+            "totalBytes": 3066534364,
+            "observedAt": 37490.5,
+            "sinceRequest": 100.20000004768372
+          },
+          {
+            "bytesRead": 1586188726,
+            "totalBytes": 3066534364,
+            "observedAt": 37490.5,
+            "sinceRequest": 100.20000004768372
+          },
+          {
+            "bytesRead": 1586425952,
+            "totalBytes": 3066534364,
+            "observedAt": 37492.299999952316,
+            "sinceRequest": 102
+          },
+          {
+            "bytesRead": 1586466894,
+            "totalBytes": 3066534364,
+            "observedAt": 37493.10000002384,
+            "sinceRequest": 102.80000007152557
+          },
+          {
+            "bytesRead": 1586507827,
+            "totalBytes": 3066534364,
+            "observedAt": 37493.299999952316,
+            "sinceRequest": 103
+          },
+          {
+            "bytesRead": 1586548769,
+            "totalBytes": 3066534364,
+            "observedAt": 37493.5,
+            "sinceRequest": 103.20000004768372
+          },
+          {
+            "bytesRead": 1586589702,
+            "totalBytes": 3066534364,
+            "observedAt": 37493.699999928474,
+            "sinceRequest": 103.39999997615814
+          },
+          {
+            "bytesRead": 1586630644,
+            "totalBytes": 3066534364,
+            "observedAt": 37493.799999952316,
+            "sinceRequest": 103.5
+          },
+          {
+            "bytesRead": 1586671577,
+            "totalBytes": 3066534364,
+            "observedAt": 37494,
+            "sinceRequest": 103.70000004768372
+          },
+          {
+            "bytesRead": 1586712519,
+            "totalBytes": 3066534364,
+            "observedAt": 37494.10000002384,
+            "sinceRequest": 103.80000007152557
+          },
+          {
+            "bytesRead": 1586753452,
+            "totalBytes": 3066534364,
+            "observedAt": 37495.299999952316,
+            "sinceRequest": 105
+          },
+          {
+            "bytesRead": 1586835327,
+            "totalBytes": 3066534364,
+            "observedAt": 37495.39999997616,
+            "sinceRequest": 105.10000002384186
+          },
+          {
+            "bytesRead": 1586876269,
+            "totalBytes": 3066534364,
+            "observedAt": 37495.5,
+            "sinceRequest": 105.20000004768372
+          },
+          {
+            "bytesRead": 1586917202,
+            "totalBytes": 3066534364,
+            "observedAt": 37495.799999952316,
+            "sinceRequest": 105.5
+          },
+          {
+            "bytesRead": 1587007926,
+            "totalBytes": 3066534364,
+            "observedAt": 37496.299999952316,
+            "sinceRequest": 106
+          },
+          {
+            "bytesRead": 1587089801,
+            "totalBytes": 3066534364,
+            "observedAt": 37498.39999997616,
+            "sinceRequest": 108.10000002384186
+          },
+          {
+            "bytesRead": 1587130734,
+            "totalBytes": 3066534364,
+            "observedAt": 37498.39999997616,
+            "sinceRequest": 108.10000002384186
+          },
+          {
+            "bytesRead": 1587171676,
+            "totalBytes": 3066534364,
+            "observedAt": 37498.799999952316,
+            "sinceRequest": 108.5
+          },
+          {
+            "bytesRead": 1587294484,
+            "totalBytes": 3066534364,
+            "observedAt": 37499.60000002384,
+            "sinceRequest": 109.30000007152557
+          },
+          {
+            "bytesRead": 1587621984,
+            "totalBytes": 3066534364,
+            "observedAt": 37499.89999997616,
+            "sinceRequest": 109.60000002384186
+          },
+          {
+            "bytesRead": 1587712438,
+            "totalBytes": 3066534364,
+            "observedAt": 37499.89999997616,
+            "sinceRequest": 109.60000002384186
+          },
+          {
+            "bytesRead": 1587835246,
+            "totalBytes": 3066534364,
+            "observedAt": 37501,
+            "sinceRequest": 110.70000004768372
+          },
+          {
+            "bytesRead": 1587909046,
+            "totalBytes": 3066534364,
+            "observedAt": 37501,
+            "sinceRequest": 110.70000004768372
+          },
+          {
+            "bytesRead": 1587999131,
+            "totalBytes": 3066534364,
+            "observedAt": 37502.799999952316,
+            "sinceRequest": 112.5
+          },
+          {
+            "bytesRead": 1588040118,
+            "totalBytes": 3066534364,
+            "observedAt": 37503.10000002384,
+            "sinceRequest": 112.80000007152557
+          },
+          {
+            "bytesRead": 1588220342,
+            "totalBytes": 3066534364,
+            "observedAt": 37510.799999952316,
+            "sinceRequest": 120.5
+          },
+          {
+            "bytesRead": 1588285878,
+            "totalBytes": 3066534364,
+            "observedAt": 37510.89999997616,
+            "sinceRequest": 120.60000002384186
+          },
+          {
+            "bytesRead": 1588384092,
+            "totalBytes": 3066534364,
+            "observedAt": 37510.89999997616,
+            "sinceRequest": 120.60000002384186
+          },
+          {
+            "bytesRead": 1588425025,
+            "totalBytes": 3066534364,
+            "observedAt": 37510.89999997616,
+            "sinceRequest": 120.60000002384186
+          },
+          {
+            "bytesRead": 1588465967,
+            "totalBytes": 3066534364,
+            "observedAt": 37510.89999997616,
+            "sinceRequest": 120.60000002384186
+          },
+          {
+            "bytesRead": 1588793467,
+            "totalBytes": 3066534364,
+            "observedAt": 37511.699999928474,
+            "sinceRequest": 121.39999997615814
+          },
+          {
+            "bytesRead": 1589055926,
+            "totalBytes": 3066534364,
+            "observedAt": 37512.10000002384,
+            "sinceRequest": 121.80000007152557
+          },
+          {
+            "bytesRead": 1589137801,
+            "totalBytes": 3066534364,
+            "observedAt": 37513.5,
+            "sinceRequest": 123.20000004768372
+          },
+          {
+            "bytesRead": 1589219766,
+            "totalBytes": 3066534364,
+            "observedAt": 37514.60000002384,
+            "sinceRequest": 124.30000007152557
+          },
+          {
+            "bytesRead": 1589342574,
+            "totalBytes": 3066534364,
+            "observedAt": 37515.299999952316,
+            "sinceRequest": 125
+          },
+          {
+            "bytesRead": 1589547446,
+            "totalBytes": 3066534364,
+            "observedAt": 37515.60000002384,
+            "sinceRequest": 125.30000007152557
+          },
+          {
+            "bytesRead": 1589629321,
+            "totalBytes": 3066534364,
+            "observedAt": 37517.699999928474,
+            "sinceRequest": 127.39999997615814
+          },
+          {
+            "bytesRead": 1589711286,
+            "totalBytes": 3066534364,
+            "observedAt": 37517.699999928474,
+            "sinceRequest": 127.39999997615814
+          },
+          {
+            "bytesRead": 1589793161,
+            "totalBytes": 3066534364,
+            "observedAt": 37518.60000002384,
+            "sinceRequest": 128.30000007152557
+          },
+          {
+            "bytesRead": 1589858742,
+            "totalBytes": 3066534364,
+            "observedAt": 37518.60000002384,
+            "sinceRequest": 128.30000007152557
+          },
+          {
+            "bytesRead": 1589940617,
+            "totalBytes": 3066534364,
+            "observedAt": 37519.39999997616,
+            "sinceRequest": 129.10000002384186
+          },
+          {
+            "bytesRead": 1590022582,
+            "totalBytes": 3066534364,
+            "observedAt": 37519.5,
+            "sinceRequest": 129.20000004768372
+          },
+          {
+            "bytesRead": 1590383030,
+            "totalBytes": 3066534364,
+            "observedAt": 37527,
+            "sinceRequest": 136.70000004768372
+          },
+          {
+            "bytesRead": 1590694326,
+            "totalBytes": 3066534364,
+            "observedAt": 37527.10000002384,
+            "sinceRequest": 136.80000007152557
+          },
+          {
+            "bytesRead": 1590956425,
+            "totalBytes": 3066534364,
+            "observedAt": 37529.699999928474,
+            "sinceRequest": 139.39999997615814
+          },
+          {
+            "bytesRead": 1591005622,
+            "totalBytes": 3066534364,
+            "observedAt": 37529.699999928474,
+            "sinceRequest": 139.39999997615814
+          },
+          {
+            "bytesRead": 1591497088,
+            "totalBytes": 3066534364,
+            "observedAt": 37533.89999997616,
+            "sinceRequest": 143.60000002384186
+          },
+          {
+            "bytesRead": 1591546294,
+            "totalBytes": 3066534364,
+            "observedAt": 37534,
+            "sinceRequest": 143.70000004768372
+          },
+          {
+            "bytesRead": 1591832942,
+            "totalBytes": 3066534364,
+            "observedAt": 37536.5,
+            "sinceRequest": 146.20000004768372
+          },
+          {
+            "bytesRead": 1591873974,
+            "totalBytes": 3066534364,
+            "observedAt": 37538,
+            "sinceRequest": 147.70000004768372
+          },
+          {
+            "bytesRead": 1591996782,
+            "totalBytes": 3066534364,
+            "observedAt": 37542.5,
+            "sinceRequest": 152.20000004768372
+          },
+          {
+            "bytesRead": 1592078657,
+            "totalBytes": 3066534364,
+            "observedAt": 37542.89999997616,
+            "sinceRequest": 152.60000002384186
+          },
+          {
+            "bytesRead": 1592119599,
+            "totalBytes": 3066534364,
+            "observedAt": 37543.5,
+            "sinceRequest": 153.20000004768372
+          },
+          {
+            "bytesRead": 1592160532,
+            "totalBytes": 3066534364,
+            "observedAt": 37545.10000002384,
+            "sinceRequest": 154.80000007152557
+          },
+          {
+            "bytesRead": 1592201474,
+            "totalBytes": 3066534364,
+            "observedAt": 37545.39999997616,
+            "sinceRequest": 155.10000002384186
+          },
+          {
+            "bytesRead": 1592242407,
+            "totalBytes": 3066534364,
+            "observedAt": 37545.60000002384,
+            "sinceRequest": 155.30000007152557
+          },
+          {
+            "bytesRead": 1592283349,
+            "totalBytes": 3066534364,
+            "observedAt": 37546.10000002384,
+            "sinceRequest": 155.80000007152557
+          },
+          {
+            "bytesRead": 1592365224,
+            "totalBytes": 3066534364,
+            "observedAt": 37546.299999952316,
+            "sinceRequest": 156
+          },
+          {
+            "bytesRead": 1592406157,
+            "totalBytes": 3066534364,
+            "observedAt": 37546.39999997616,
+            "sinceRequest": 156.10000002384186
+          },
+          {
+            "bytesRead": 1592447099,
+            "totalBytes": 3066534364,
+            "observedAt": 37546.60000002384,
+            "sinceRequest": 156.30000007152557
+          },
+          {
+            "bytesRead": 1592480182,
+            "totalBytes": 3066534364,
+            "observedAt": 37547.60000002384,
+            "sinceRequest": 157.30000007152557
+          },
+          {
+            "bytesRead": 1592528974,
+            "totalBytes": 3066534364,
+            "observedAt": 37547.60000002384,
+            "sinceRequest": 157.30000007152557
+          },
+          {
+            "bytesRead": 1592569907,
+            "totalBytes": 3066534364,
+            "observedAt": 37547.60000002384,
+            "sinceRequest": 157.30000007152557
+          },
+          {
+            "bytesRead": 1592774599,
+            "totalBytes": 3066534364,
+            "observedAt": 37548.60000002384,
+            "sinceRequest": 158.30000007152557
+          },
+          {
+            "bytesRead": 1592815532,
+            "totalBytes": 3066534364,
+            "observedAt": 37549,
+            "sinceRequest": 158.70000004768372
+          },
+          {
+            "bytesRead": 1592938349,
+            "totalBytes": 3066534364,
+            "observedAt": 37551.199999928474,
+            "sinceRequest": 160.89999997615814
+          },
+          {
+            "bytesRead": 1593183974,
+            "totalBytes": 3066534364,
+            "observedAt": 37558.799999952316,
+            "sinceRequest": 168.5
+          },
+          {
+            "bytesRead": 1593265849,
+            "totalBytes": 3066534364,
+            "observedAt": 37559.39999997616,
+            "sinceRequest": 169.10000002384186
+          },
+          {
+            "bytesRead": 1593306782,
+            "totalBytes": 3066534364,
+            "observedAt": 37559.699999928474,
+            "sinceRequest": 169.39999997615814
+          },
+          {
+            "bytesRead": 1593347724,
+            "totalBytes": 3066534364,
+            "observedAt": 37561,
+            "sinceRequest": 170.70000004768372
+          },
+          {
+            "bytesRead": 1593388657,
+            "totalBytes": 3066534364,
+            "observedAt": 37561.199999928474,
+            "sinceRequest": 170.89999997615814
+          },
+          {
+            "bytesRead": 1593429599,
+            "totalBytes": 3066534364,
+            "observedAt": 37562.39999997616,
+            "sinceRequest": 172.10000002384186
+          },
+          {
+            "bytesRead": 1593511474,
+            "totalBytes": 3066534364,
+            "observedAt": 37563.60000002384,
+            "sinceRequest": 173.30000007152557
+          },
+          {
+            "bytesRead": 1593593349,
+            "totalBytes": 3066534364,
+            "observedAt": 37563.60000002384,
+            "sinceRequest": 173.30000007152557
+          },
+          {
+            "bytesRead": 1593675224,
+            "totalBytes": 3066534364,
+            "observedAt": 37563.60000002384,
+            "sinceRequest": 173.30000007152557
+          },
+          {
+            "bytesRead": 1593716157,
+            "totalBytes": 3066534364,
+            "observedAt": 37563.699999928474,
+            "sinceRequest": 173.39999997615814
+          },
+          {
+            "bytesRead": 1593757099,
+            "totalBytes": 3066534364,
+            "observedAt": 37564.10000002384,
+            "sinceRequest": 173.80000007152557
+          },
+          {
+            "bytesRead": 1593879907,
+            "totalBytes": 3066534364,
+            "observedAt": 37564.89999997616,
+            "sinceRequest": 174.60000002384186
+          },
+          {
+            "bytesRead": 1593920849,
+            "totalBytes": 3066534364,
+            "observedAt": 37564.89999997616,
+            "sinceRequest": 174.60000002384186
+          },
+          {
+            "bytesRead": 1594453032,
+            "totalBytes": 3066534364,
+            "observedAt": 37567.10000002384,
+            "sinceRequest": 176.80000007152557
+          },
+          {
+            "bytesRead": 1594493974,
+            "totalBytes": 3066534364,
+            "observedAt": 37567.199999928474,
+            "sinceRequest": 176.89999997615814
+          },
+          {
+            "bytesRead": 1594534907,
+            "totalBytes": 3066534364,
+            "observedAt": 37567.299999952316,
+            "sinceRequest": 177
+          },
+          {
+            "bytesRead": 1594575849,
+            "totalBytes": 3066534364,
+            "observedAt": 37568,
+            "sinceRequest": 177.70000004768372
+          },
+          {
+            "bytesRead": 1594577334,
+            "totalBytes": 3066534364,
+            "observedAt": 37568.60000002384,
+            "sinceRequest": 178.30000007152557
+          },
+          {
+            "bytesRead": 1594642870,
+            "totalBytes": 3066534364,
+            "observedAt": 37568.699999928474,
+            "sinceRequest": 178.39999997615814
+          },
+          {
+            "bytesRead": 1594698648,
+            "totalBytes": 3066534364,
+            "observedAt": 37569,
+            "sinceRequest": 178.70000004768372
+          },
+          {
+            "bytesRead": 1594739590,
+            "totalBytes": 3066534364,
+            "observedAt": 37569.10000002384,
+            "sinceRequest": 178.80000007152557
+          },
+          {
+            "bytesRead": 1594780523,
+            "totalBytes": 3066534364,
+            "observedAt": 37571.5,
+            "sinceRequest": 181.20000004768372
+          },
+          {
+            "bytesRead": 1594903340,
+            "totalBytes": 3066534364,
+            "observedAt": 37571.5,
+            "sinceRequest": 181.20000004768372
+          },
+          {
+            "bytesRead": 1594944273,
+            "totalBytes": 3066534364,
+            "observedAt": 37571.60000002384,
+            "sinceRequest": 181.30000007152557
+          },
+          {
+            "bytesRead": 1594985215,
+            "totalBytes": 3066534364,
+            "observedAt": 37578,
+            "sinceRequest": 187.70000004768372
+          },
+          {
+            "bytesRead": 1595026148,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.10000002384,
+            "sinceRequest": 187.80000007152557
+          },
+          {
+            "bytesRead": 1595189898,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.10000002384,
+            "sinceRequest": 187.80000007152557
+          },
+          {
+            "bytesRead": 1595230840,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.10000002384,
+            "sinceRequest": 187.80000007152557
+          },
+          {
+            "bytesRead": 1595271773,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.10000002384,
+            "sinceRequest": 187.80000007152557
+          },
+          {
+            "bytesRead": 1595312715,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.199999928474,
+            "sinceRequest": 187.89999997615814
+          },
+          {
+            "bytesRead": 1595353648,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.199999928474,
+            "sinceRequest": 187.89999997615814
+          },
+          {
+            "bytesRead": 1595394590,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.199999928474,
+            "sinceRequest": 187.89999997615814
+          },
+          {
+            "bytesRead": 1595517398,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.199999928474,
+            "sinceRequest": 187.89999997615814
+          },
+          {
+            "bytesRead": 1595640215,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.39999997616,
+            "sinceRequest": 188.10000002384186
+          },
+          {
+            "bytesRead": 1595681148,
+            "totalBytes": 3066534364,
+            "observedAt": 37578.5,
+            "sinceRequest": 188.20000004768372
+          },
+          {
+            "bytesRead": 1596295215,
+            "totalBytes": 3066534364,
+            "observedAt": 37579.10000002384,
+            "sinceRequest": 188.80000007152557
+          },
+          {
+            "bytesRead": 1596622715,
+            "totalBytes": 3066534364,
+            "observedAt": 37579.5,
+            "sinceRequest": 189.20000004768372
+          },
+          {
+            "bytesRead": 1596674486,
+            "totalBytes": 3066534364,
+            "observedAt": 37579.60000002384,
+            "sinceRequest": 189.30000007152557
+          },
+          {
+            "bytesRead": 1596707254,
+            "totalBytes": 3066534364,
+            "observedAt": 37579.60000002384,
+            "sinceRequest": 189.30000007152557
+          },
+          {
+            "bytesRead": 1596789129,
+            "totalBytes": 3066534364,
+            "observedAt": 37580.799999952316,
+            "sinceRequest": 190.5
+          },
+          {
+            "bytesRead": 1596854710,
+            "totalBytes": 3066534364,
+            "observedAt": 37580.89999997616,
+            "sinceRequest": 190.60000002384186
+          },
+          {
+            "bytesRead": 1596936585,
+            "totalBytes": 3066534364,
+            "observedAt": 37581.5,
+            "sinceRequest": 191.20000004768372
+          },
+          {
+            "bytesRead": 1596953014,
+            "totalBytes": 3066534364,
+            "observedAt": 37581.5,
+            "sinceRequest": 191.20000004768372
+          },
+          {
+            "bytesRead": 1597051318,
+            "totalBytes": 3066534364,
+            "observedAt": 37582.799999952316,
+            "sinceRequest": 192.5
+          },
+          {
+            "bytesRead": 1597133193,
+            "totalBytes": 3066534364,
+            "observedAt": 37583.299999952316,
+            "sinceRequest": 193
+          },
+          {
+            "bytesRead": 1597215068,
+            "totalBytes": 3066534364,
+            "observedAt": 37583.39999997616,
+            "sinceRequest": 193.10000002384186
+          },
+          {
+            "bytesRead": 1597231542,
+            "totalBytes": 3066534364,
+            "observedAt": 37583.39999997616,
+            "sinceRequest": 193.10000002384186
+          },
+          {
+            "bytesRead": 1597313417,
+            "totalBytes": 3066534364,
+            "observedAt": 37584,
+            "sinceRequest": 193.70000004768372
+          },
+          {
+            "bytesRead": 1597378998,
+            "totalBytes": 3066534364,
+            "observedAt": 37584,
+            "sinceRequest": 193.70000004768372
+          },
+          {
+            "bytesRead": 1598312886,
+            "totalBytes": 3066534364,
+            "observedAt": 37591.799999952316,
+            "sinceRequest": 201.5
+          },
+          {
+            "bytesRead": 1598771638,
+            "totalBytes": 3066534364,
+            "observedAt": 37603.199999928474,
+            "sinceRequest": 212.89999997615814
+          },
+          {
+            "bytesRead": 1599803830,
+            "totalBytes": 3066534364,
+            "observedAt": 37603.60000002384,
+            "sinceRequest": 213.30000007152557
+          },
+          {
+            "bytesRead": 1600426422,
+            "totalBytes": 3066534364,
+            "observedAt": 37609.699999928474,
+            "sinceRequest": 219.39999997615814
+          },
+          {
+            "bytesRead": 1600868790,
+            "totalBytes": 3066534364,
+            "observedAt": 37613.89999997616,
+            "sinceRequest": 223.60000002384186
+          },
+          {
+            "bytesRead": 1601032630,
+            "totalBytes": 3066534364,
+            "observedAt": 37613.89999997616,
+            "sinceRequest": 223.60000002384186
+          },
+          {
+            "bytesRead": 1601327542,
+            "totalBytes": 3066534364,
+            "observedAt": 37616.299999952316,
+            "sinceRequest": 226
+          },
+          {
+            "bytesRead": 1601458614,
+            "totalBytes": 3066534364,
+            "observedAt": 37616.5,
+            "sinceRequest": 226.20000004768372
+          },
+          {
+            "bytesRead": 1601573302,
+            "totalBytes": 3066534364,
+            "observedAt": 37617.799999952316,
+            "sinceRequest": 227.5
+          },
+          {
+            "bytesRead": 1601655177,
+            "totalBytes": 3066534364,
+            "observedAt": 37619.199999928474,
+            "sinceRequest": 228.89999997615814
+          },
+          {
+            "bytesRead": 1601704374,
+            "totalBytes": 3066534364,
+            "observedAt": 37619.199999928474,
+            "sinceRequest": 228.89999997615814
+          },
+          {
+            "bytesRead": 1601769910,
+            "totalBytes": 3066534364,
+            "observedAt": 37624.89999997616,
+            "sinceRequest": 234.60000002384186
+          },
+          {
+            "bytesRead": 1602195894,
+            "totalBytes": 3066534364,
+            "observedAt": 37625.699999928474,
+            "sinceRequest": 235.39999997615814
+          },
+          {
+            "bytesRead": 1602277769,
+            "totalBytes": 3066534364,
+            "observedAt": 37626.89999997616,
+            "sinceRequest": 236.60000002384186
+          },
+          {
+            "bytesRead": 1602318702,
+            "totalBytes": 3066534364,
+            "observedAt": 37627,
+            "sinceRequest": 236.70000004768372
+          },
+          {
+            "bytesRead": 1602359644,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.199999928474,
+            "sinceRequest": 236.89999997615814
+          },
+          {
+            "bytesRead": 1602400577,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.39999997616,
+            "sinceRequest": 237.10000002384186
+          },
+          {
+            "bytesRead": 1602441519,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.5,
+            "sinceRequest": 237.20000004768372
+          },
+          {
+            "bytesRead": 1602482452,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.5,
+            "sinceRequest": 237.20000004768372
+          },
+          {
+            "bytesRead": 1602523394,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.89999997616,
+            "sinceRequest": 237.60000002384186
+          },
+          {
+            "bytesRead": 1602556342,
+            "totalBytes": 3066534364,
+            "observedAt": 37627.89999997616,
+            "sinceRequest": 237.60000002384186
+          },
+          {
+            "bytesRead": 1602679150,
+            "totalBytes": 3066534364,
+            "observedAt": 37631.39999997616,
+            "sinceRequest": 241.10000002384186
+          },
+          {
+            "bytesRead": 1602842900,
+            "totalBytes": 3066534364,
+            "observedAt": 37631.60000002384,
+            "sinceRequest": 241.30000007152557
+          },
+          {
+            "bytesRead": 1602965942,
+            "totalBytes": 3066534364,
+            "observedAt": 37631.89999997616,
+            "sinceRequest": 241.60000002384186
+          },
+          {
+            "bytesRead": 1603047862,
+            "totalBytes": 3066534364,
+            "observedAt": 37632,
+            "sinceRequest": 241.70000004768372
+          },
+          {
+            "bytesRead": 1603129737,
+            "totalBytes": 3066534364,
+            "observedAt": 37633,
+            "sinceRequest": 242.70000004768372
+          },
+          {
+            "bytesRead": 1603211702,
+            "totalBytes": 3066534364,
+            "observedAt": 37633.60000002384,
+            "sinceRequest": 243.30000007152557
+          },
+          {
+            "bytesRead": 1603293577,
+            "totalBytes": 3066534364,
+            "observedAt": 37634.699999928474,
+            "sinceRequest": 244.39999997615814
+          },
+          {
+            "bytesRead": 1603342774,
+            "totalBytes": 3066534364,
+            "observedAt": 37635,
+            "sinceRequest": 244.70000004768372
+          },
+          {
+            "bytesRead": 1603465582,
+            "totalBytes": 3066534364,
+            "observedAt": 37635.5,
+            "sinceRequest": 245.20000004768372
+          },
+          {
+            "bytesRead": 1603473846,
+            "totalBytes": 3066534364,
+            "observedAt": 37635.5,
+            "sinceRequest": 245.20000004768372
+          },
+          {
+            "bytesRead": 1603555721,
+            "totalBytes": 3066534364,
+            "observedAt": 37637.699999928474,
+            "sinceRequest": 247.39999997615814
+          },
+          {
+            "bytesRead": 1603588534,
+            "totalBytes": 3066534364,
+            "observedAt": 37637.699999928474,
+            "sinceRequest": 247.39999997615814
+          },
+          {
+            "bytesRead": 1603711342,
+            "totalBytes": 3066534364,
+            "observedAt": 37638.60000002384,
+            "sinceRequest": 248.30000007152557
+          },
+          {
+            "bytesRead": 1603867062,
+            "totalBytes": 3066534364,
+            "observedAt": 37641.60000002384,
+            "sinceRequest": 251.30000007152557
+          },
+          {
+            "bytesRead": 1603932598,
+            "totalBytes": 3066534364,
+            "observedAt": 37642.89999997616,
+            "sinceRequest": 252.60000002384186
+          },
+          {
+            "bytesRead": 1604620726,
+            "totalBytes": 3066534364,
+            "observedAt": 37644.299999952316,
+            "sinceRequest": 254
+          },
+          {
+            "bytesRead": 1604710811,
+            "totalBytes": 3066534364,
+            "observedAt": 37646.5,
+            "sinceRequest": 256.2000000476837
+          },
+          {
+            "bytesRead": 1604792686,
+            "totalBytes": 3066534364,
+            "observedAt": 37646.60000002384,
+            "sinceRequest": 256.3000000715256
+          },
+          {
+            "bytesRead": 1604833628,
+            "totalBytes": 3066534364,
+            "observedAt": 37646.60000002384,
+            "sinceRequest": 256.3000000715256
+          },
+          {
+            "bytesRead": 1604850102,
+            "totalBytes": 3066534364,
+            "observedAt": 37646.60000002384,
+            "sinceRequest": 256.3000000715256
+          },
+          {
+            "bytesRead": 1604931977,
+            "totalBytes": 3066534364,
+            "observedAt": 37647.5,
+            "sinceRequest": 257.2000000476837
+          },
+          {
+            "bytesRead": 1604964790,
+            "totalBytes": 3066534364,
+            "observedAt": 37647.60000002384,
+            "sinceRequest": 257.3000000715256
+          },
+          {
+            "bytesRead": 1605046665,
+            "totalBytes": 3066534364,
+            "observedAt": 37648.5,
+            "sinceRequest": 258.2000000476837
+          },
+          {
+            "bytesRead": 1605063094,
+            "totalBytes": 3066534364,
+            "observedAt": 37648.60000002384,
+            "sinceRequest": 258.3000000715256
+          },
+          {
+            "bytesRead": 1605145014,
+            "totalBytes": 3066534364,
+            "observedAt": 37648.699999928474,
+            "sinceRequest": 258.39999997615814
+          },
+          {
+            "bytesRead": 1605390639,
+            "totalBytes": 3066534364,
+            "observedAt": 37651.5,
+            "sinceRequest": 261.2000000476837
+          },
+          {
+            "bytesRead": 1605456310,
+            "totalBytes": 3066534364,
+            "observedAt": 37651.60000002384,
+            "sinceRequest": 261.3000000715256
+          },
+          {
+            "bytesRead": 1605538185,
+            "totalBytes": 3066534364,
+            "observedAt": 37652.89999997616,
+            "sinceRequest": 262.60000002384186
+          },
+          {
+            "bytesRead": 1605579118,
+            "totalBytes": 3066534364,
+            "observedAt": 37655,
+            "sinceRequest": 264.7000000476837
+          },
+          {
+            "bytesRead": 1605800374,
+            "totalBytes": 3066534364,
+            "observedAt": 37655,
+            "sinceRequest": 264.7000000476837
+          },
+          {
+            "bytesRead": 1606177206,
+            "totalBytes": 3066534364,
+            "observedAt": 37658.10000002384,
+            "sinceRequest": 267.8000000715256
+          },
+          {
+            "bytesRead": 1606308278,
+            "totalBytes": 3066534364,
+            "observedAt": 37658.39999997616,
+            "sinceRequest": 268.10000002384186
+          },
+          {
+            "bytesRead": 1606373814,
+            "totalBytes": 3066534364,
+            "observedAt": 37658.89999997616,
+            "sinceRequest": 268.60000002384186
+          },
+          {
+            "bytesRead": 1606488502,
+            "totalBytes": 3066534364,
+            "observedAt": 37660.60000002384,
+            "sinceRequest": 270.3000000715256
+          },
+          {
+            "bytesRead": 1606611310,
+            "totalBytes": 3066534364,
+            "observedAt": 37660.89999997616,
+            "sinceRequest": 270.60000002384186
+          },
+          {
+            "bytesRead": 1606619574,
+            "totalBytes": 3066534364,
+            "observedAt": 37660.89999997616,
+            "sinceRequest": 270.60000002384186
+          },
+          {
+            "bytesRead": 1606701449,
+            "totalBytes": 3066534364,
+            "observedAt": 37662.89999997616,
+            "sinceRequest": 272.60000002384186
+          },
+          {
+            "bytesRead": 1606898102,
+            "totalBytes": 3066534364,
+            "observedAt": 37666.89999997616,
+            "sinceRequest": 276.60000002384186
+          },
+          {
+            "bytesRead": 1607127478,
+            "totalBytes": 3066534364,
+            "observedAt": 37667.60000002384,
+            "sinceRequest": 277.3000000715256
+          },
+          {
+            "bytesRead": 1607160246,
+            "totalBytes": 3066534364,
+            "observedAt": 37668.199999928474,
+            "sinceRequest": 277.89999997615814
+          },
+          {
+            "bytesRead": 1607209344,
+            "totalBytes": 3066534364,
+            "observedAt": 37668.199999928474,
+            "sinceRequest": 277.89999997615814
+          },
+          {
+            "bytesRead": 1607250277,
+            "totalBytes": 3066534364,
+            "observedAt": 37668.299999952316,
+            "sinceRequest": 278
+          },
+          {
+            "bytesRead": 1607422390,
+            "totalBytes": 3066534364,
+            "observedAt": 37668.60000002384,
+            "sinceRequest": 278.3000000715256
+          },
+          {
+            "bytesRead": 1607749890,
+            "totalBytes": 3066534364,
+            "observedAt": 37673.10000002384,
+            "sinceRequest": 282.8000000715256
+          },
+          {
+            "bytesRead": 1608126902,
+            "totalBytes": 3066534364,
+            "observedAt": 37675.199999928474,
+            "sinceRequest": 284.89999997615814
+          },
+          {
+            "bytesRead": 1608257974,
+            "totalBytes": 3066534364,
+            "observedAt": 37676,
+            "sinceRequest": 285.7000000476837
+          },
+          {
+            "bytesRead": 1608683958,
+            "totalBytes": 3066534364,
+            "observedAt": 37679.299999952316,
+            "sinceRequest": 289
+          },
+          {
+            "bytesRead": 1608806766,
+            "totalBytes": 3066534364,
+            "observedAt": 37680,
+            "sinceRequest": 289.7000000476837
+          },
+          {
+            "bytesRead": 1608864182,
+            "totalBytes": 3066534364,
+            "observedAt": 37680,
+            "sinceRequest": 289.7000000476837
+          },
+          {
+            "bytesRead": 1609257398,
+            "totalBytes": 3066534364,
+            "observedAt": 37684.60000002384,
+            "sinceRequest": 294.3000000715256
+          },
+          {
+            "bytesRead": 1609339273,
+            "totalBytes": 3066534364,
+            "observedAt": 37686.89999997616,
+            "sinceRequest": 296.60000002384186
+          },
+          {
+            "bytesRead": 1609421238,
+            "totalBytes": 3066534364,
+            "observedAt": 37687.10000002384,
+            "sinceRequest": 296.8000000715256
+          },
+          {
+            "bytesRead": 1609503113,
+            "totalBytes": 3066534364,
+            "observedAt": 37691.299999952316,
+            "sinceRequest": 301
+          },
+          {
+            "bytesRead": 1609535926,
+            "totalBytes": 3066534364,
+            "observedAt": 37691.39999997616,
+            "sinceRequest": 301.10000002384186
+          },
+          {
+            "bytesRead": 1610191286,
+            "totalBytes": 3066534364,
+            "observedAt": 37694.10000002384,
+            "sinceRequest": 303.8000000715256
+          },
+          {
+            "bytesRead": 1610437046,
+            "totalBytes": 3066534364,
+            "observedAt": 37694.299999952316,
+            "sinceRequest": 304
+          },
+          {
+            "bytesRead": 1610518921,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.60000002384,
+            "sinceRequest": 307.3000000715256
+          },
+          {
+            "bytesRead": 1610559854,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.699999928474,
+            "sinceRequest": 307.39999997615814
+          },
+          {
+            "bytesRead": 1610641729,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.699999928474,
+            "sinceRequest": 307.39999997615814
+          },
+          {
+            "bytesRead": 1610682671,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.799999952316,
+            "sinceRequest": 307.5
+          },
+          {
+            "bytesRead": 1610731958,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.799999952316,
+            "sinceRequest": 307.5
+          },
+          {
+            "bytesRead": 1610813833,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.799999952316,
+            "sinceRequest": 307.5
+          },
+          {
+            "bytesRead": 1610854766,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.799999952316,
+            "sinceRequest": 307.5
+          },
+          {
+            "bytesRead": 1610863030,
+            "totalBytes": 3066534364,
+            "observedAt": 37697.799999952316,
+            "sinceRequest": 307.5
+          },
+          {
+            "bytesRead": 1610944905,
+            "totalBytes": 3066534364,
+            "observedAt": 37699.10000002384,
+            "sinceRequest": 308.8000000715256
+          },
+          {
+            "bytesRead": 1611108790,
+            "totalBytes": 3066534364,
+            "observedAt": 37699.199999928474,
+            "sinceRequest": 308.89999997615814
+          },
+          {
+            "bytesRead": 1611190665,
+            "totalBytes": 3066534364,
+            "observedAt": 37699.799999952316,
+            "sinceRequest": 309.5
+          },
+          {
+            "bytesRead": 1611231598,
+            "totalBytes": 3066534364,
+            "observedAt": 37699.799999952316,
+            "sinceRequest": 309.5
+          },
+          {
+            "bytesRead": 1611256246,
+            "totalBytes": 3066534364,
+            "observedAt": 37700.39999997616,
+            "sinceRequest": 310.10000002384186
+          },
+          {
+            "bytesRead": 1611338121,
+            "totalBytes": 3066534364,
+            "observedAt": 37701.799999952316,
+            "sinceRequest": 311.5
+          },
+          {
+            "bytesRead": 1611354550,
+            "totalBytes": 3066534364,
+            "observedAt": 37701.799999952316,
+            "sinceRequest": 311.5
+          },
+          {
+            "bytesRead": 1611370934,
+            "totalBytes": 3066534364,
+            "observedAt": 37701.799999952316,
+            "sinceRequest": 311.5
+          },
+          {
+            "bytesRead": 1611493742,
+            "totalBytes": 3066534364,
+            "observedAt": 37704,
+            "sinceRequest": 313.7000000476837
+          },
+          {
+            "bytesRead": 1611534774,
+            "totalBytes": 3066534364,
+            "observedAt": 37704,
+            "sinceRequest": 313.7000000476837
+          },
+          {
+            "bytesRead": 1611796918,
+            "totalBytes": 3066534364,
+            "observedAt": 37706.199999928474,
+            "sinceRequest": 315.89999997615814
+          },
+          {
+            "bytesRead": 1612001601,
+            "totalBytes": 3066534364,
+            "observedAt": 37711.5,
+            "sinceRequest": 321.2000000476837
+          },
+          {
+            "bytesRead": 1612386742,
+            "totalBytes": 3066534364,
+            "observedAt": 37712.10000002384,
+            "sinceRequest": 321.8000000715256
+          },
+          {
+            "bytesRead": 1612468617,
+            "totalBytes": 3066534364,
+            "observedAt": 37712.799999952316,
+            "sinceRequest": 322.5
+          },
+          {
+            "bytesRead": 1612509550,
+            "totalBytes": 3066534364,
+            "observedAt": 37712.89999997616,
+            "sinceRequest": 322.60000002384186
+          },
+          {
+            "bytesRead": 1612591425,
+            "totalBytes": 3066534364,
+            "observedAt": 37713,
+            "sinceRequest": 322.7000000476837
+          },
+          {
+            "bytesRead": 1612632367,
+            "totalBytes": 3066534364,
+            "observedAt": 37713.10000002384,
+            "sinceRequest": 322.8000000715256
+          },
+          {
+            "bytesRead": 1612698038,
+            "totalBytes": 3066534364,
+            "observedAt": 37713.10000002384,
+            "sinceRequest": 322.8000000715256
+          },
+          {
+            "bytesRead": 1612779913,
+            "totalBytes": 3066534364,
+            "observedAt": 37714.60000002384,
+            "sinceRequest": 324.3000000715256
+          },
+          {
+            "bytesRead": 1612861788,
+            "totalBytes": 3066534364,
+            "observedAt": 37714.799999952316,
+            "sinceRequest": 324.5
+          },
+          {
+            "bytesRead": 1612902721,
+            "totalBytes": 3066534364,
+            "observedAt": 37714.799999952316,
+            "sinceRequest": 324.5
+          },
+          {
+            "bytesRead": 1612943663,
+            "totalBytes": 3066534364,
+            "observedAt": 37714.89999997616,
+            "sinceRequest": 324.60000002384186
+          },
+          {
+            "bytesRead": 1612984596,
+            "totalBytes": 3066534364,
+            "observedAt": 37715,
+            "sinceRequest": 324.7000000476837
+          },
+          {
+            "bytesRead": 1612992950,
+            "totalBytes": 3066534364,
+            "observedAt": 37715.299999952316,
+            "sinceRequest": 325
+          },
+          {
+            "bytesRead": 1613074825,
+            "totalBytes": 3066534364,
+            "observedAt": 37716.5,
+            "sinceRequest": 326.2000000476837
+          },
+          {
+            "bytesRead": 1613140406,
+            "totalBytes": 3066534364,
+            "observedAt": 37717.5,
+            "sinceRequest": 327.2000000476837
+          },
+          {
+            "bytesRead": 1613222281,
+            "totalBytes": 3066534364,
+            "observedAt": 37718.299999952316,
+            "sinceRequest": 328
+          },
+          {
+            "bytesRead": 1613271478,
+            "totalBytes": 3066534364,
+            "observedAt": 37718.299999952316,
+            "sinceRequest": 328
+          },
+          {
+            "bytesRead": 1613451702,
+            "totalBytes": 3066534364,
+            "observedAt": 37723.39999997616,
+            "sinceRequest": 333.10000002384186
+          },
+          {
+            "bytesRead": 1613762998,
+            "totalBytes": 3066534364,
+            "observedAt": 37723.5,
+            "sinceRequest": 333.2000000476837
+          },
+          {
+            "bytesRead": 1614008758,
+            "totalBytes": 3066534364,
+            "observedAt": 37725.799999952316,
+            "sinceRequest": 335.5
+          },
+          {
+            "bytesRead": 1614139830,
+            "totalBytes": 3066534364,
+            "observedAt": 37726.699999928474,
+            "sinceRequest": 336.39999997615814
+          },
+          {
+            "bytesRead": 1614385590,
+            "totalBytes": 3066534364,
+            "observedAt": 37727.89999997616,
+            "sinceRequest": 337.60000002384186
+          },
+          {
+            "bytesRead": 1614475675,
+            "totalBytes": 3066534364,
+            "observedAt": 37728.89999997616,
+            "sinceRequest": 338.60000002384186
+          },
+          {
+            "bytesRead": 1614516662,
+            "totalBytes": 3066534364,
+            "observedAt": 37729,
+            "sinceRequest": 338.7000000476837
+          },
+          {
+            "bytesRead": 1614639470,
+            "totalBytes": 3066534364,
+            "observedAt": 37730.89999997616,
+            "sinceRequest": 340.60000002384186
+          },
+          {
+            "bytesRead": 1614680502,
+            "totalBytes": 3066534364,
+            "observedAt": 37730.89999997616,
+            "sinceRequest": 340.60000002384186
+          },
+          {
+            "bytesRead": 1614762377,
+            "totalBytes": 3066534364,
+            "observedAt": 37731.39999997616,
+            "sinceRequest": 341.10000002384186
+          },
+          {
+            "bytesRead": 1614795190,
+            "totalBytes": 3066534364,
+            "observedAt": 37731.5,
+            "sinceRequest": 341.2000000476837
+          },
+          {
+            "bytesRead": 1614909878,
+            "totalBytes": 3066534364,
+            "observedAt": 37732.699999928474,
+            "sinceRequest": 342.39999997615814
+          },
+          {
+            "bytesRead": 1614991753,
+            "totalBytes": 3066534364,
+            "observedAt": 37733.199999928474,
+            "sinceRequest": 342.89999997615814
+          },
+          {
+            "bytesRead": 1615057334,
+            "totalBytes": 3066534364,
+            "observedAt": 37733.199999928474,
+            "sinceRequest": 342.89999997615814
+          },
+          {
+            "bytesRead": 1615188406,
+            "totalBytes": 3066534364,
+            "observedAt": 37734.299999952316,
+            "sinceRequest": 344
+          },
+          {
+            "bytesRead": 1615286665,
+            "totalBytes": 3066534364,
+            "observedAt": 37736.199999928474,
+            "sinceRequest": 345.89999997615814
+          },
+          {
+            "bytesRead": 1615352246,
+            "totalBytes": 3066534364,
+            "observedAt": 37736.199999928474,
+            "sinceRequest": 345.89999997615814
+          },
+          {
+            "bytesRead": 1615548854,
+            "totalBytes": 3066534364,
+            "observedAt": 37743,
+            "sinceRequest": 352.7000000476837
+          },
+          {
+            "bytesRead": 1616056758,
+            "totalBytes": 3066534364,
+            "observedAt": 37743.10000002384,
+            "sinceRequest": 352.8000000715256
+          },
+          {
+            "bytesRead": 1616335196,
+            "totalBytes": 3066534364,
+            "observedAt": 37744.60000002384,
+            "sinceRequest": 354.3000000715256
+          },
+          {
+            "bytesRead": 1616400822,
+            "totalBytes": 3066534364,
+            "observedAt": 37745.10000002384,
+            "sinceRequest": 354.8000000715256
+          },
+          {
+            "bytesRead": 1616499126,
+            "totalBytes": 3066534364,
+            "observedAt": 37745.699999928474,
+            "sinceRequest": 355.39999997615814
+          },
+          {
+            "bytesRead": 1616794038,
+            "totalBytes": 3066534364,
+            "observedAt": 37749.10000002384,
+            "sinceRequest": 358.8000000715256
+          },
+          {
+            "bytesRead": 1616957878,
+            "totalBytes": 3066534364,
+            "observedAt": 37749.299999952316,
+            "sinceRequest": 359
+          },
+          {
+            "bytesRead": 1617252790,
+            "totalBytes": 3066534364,
+            "observedAt": 37751.89999997616,
+            "sinceRequest": 361.60000002384186
+          },
+          {
+            "bytesRead": 1617334665,
+            "totalBytes": 3066534364,
+            "observedAt": 37753.60000002384,
+            "sinceRequest": 363.3000000715256
+          },
+          {
+            "bytesRead": 1617367478,
+            "totalBytes": 3066534364,
+            "observedAt": 37753.60000002384,
+            "sinceRequest": 363.3000000715256
+          },
+          {
+            "bytesRead": 1617449353,
+            "totalBytes": 3066534364,
+            "observedAt": 37757,
+            "sinceRequest": 366.7000000476837
+          },
+          {
+            "bytesRead": 1617580470,
+            "totalBytes": 3066534364,
+            "observedAt": 37760.10000002384,
+            "sinceRequest": 369.8000000715256
+          },
+          {
+            "bytesRead": 1617646006,
+            "totalBytes": 3066534364,
+            "observedAt": 37760.199999928474,
+            "sinceRequest": 369.89999997615814
+          },
+          {
+            "bytesRead": 1618153910,
+            "totalBytes": 3066534364,
+            "observedAt": 37760.199999928474,
+            "sinceRequest": 369.89999997615814
+          },
+          {
+            "bytesRead": 1618276718,
+            "totalBytes": 3066534364,
+            "observedAt": 37760.199999928474,
+            "sinceRequest": 369.89999997615814
+          },
+          {
+            "bytesRead": 1618317750,
+            "totalBytes": 3066534364,
+            "observedAt": 37760.199999928474,
+            "sinceRequest": 369.89999997615814
+          },
+          {
+            "bytesRead": 1618399625,
+            "totalBytes": 3066534364,
+            "observedAt": 37762.5,
+            "sinceRequest": 372.2000000476837
+          },
+          {
+            "bytesRead": 1618440558,
+            "totalBytes": 3066534364,
+            "observedAt": 37762.60000002384,
+            "sinceRequest": 372.3000000715256
+          },
+          {
+            "bytesRead": 1618481590,
+            "totalBytes": 3066534364,
+            "observedAt": 37762.60000002384,
+            "sinceRequest": 372.3000000715256
+          },
+          {
+            "bytesRead": 1618563465,
+            "totalBytes": 3066534364,
+            "observedAt": 37763.299999952316,
+            "sinceRequest": 373
+          },
+          {
+            "bytesRead": 1618645340,
+            "totalBytes": 3066534364,
+            "observedAt": 37763.60000002384,
+            "sinceRequest": 373.3000000715256
+          },
+          {
+            "bytesRead": 1618645430,
+            "totalBytes": 3066534364,
+            "observedAt": 37763.60000002384,
+            "sinceRequest": 373.3000000715256
+          },
+          {
+            "bytesRead": 1618727305,
+            "totalBytes": 3066534364,
+            "observedAt": 37764.89999997616,
+            "sinceRequest": 374.60000002384186
+          },
+          {
+            "bytesRead": 1618768238,
+            "totalBytes": 3066534364,
+            "observedAt": 37764.89999997616,
+            "sinceRequest": 374.60000002384186
+          },
+          {
+            "bytesRead": 1618776502,
+            "totalBytes": 3066534364,
+            "observedAt": 37764.89999997616,
+            "sinceRequest": 374.60000002384186
+          },
+          {
+            "bytesRead": 1618858422,
+            "totalBytes": 3066534364,
+            "observedAt": 37765.699999928474,
+            "sinceRequest": 375.39999997615814
+          },
+          {
+            "bytesRead": 1618940297,
+            "totalBytes": 3066534364,
+            "observedAt": 37768.89999997616,
+            "sinceRequest": 378.60000002384186
+          },
+          {
+            "bytesRead": 1619005878,
+            "totalBytes": 3066534364,
+            "observedAt": 37769,
+            "sinceRequest": 378.7000000476837
+          },
+          {
+            "bytesRead": 1619210561,
+            "totalBytes": 3066534364,
+            "observedAt": 37771.699999928474,
+            "sinceRequest": 381.39999997615814
+          },
+          {
+            "bytesRead": 1619374311,
+            "totalBytes": 3066534364,
+            "observedAt": 37774.10000002384,
+            "sinceRequest": 383.8000000715256
+          },
+          {
+            "bytesRead": 1619415253,
+            "totalBytes": 3066534364,
+            "observedAt": 37774.10000002384,
+            "sinceRequest": 383.8000000715256
+          },
+          {
+            "bytesRead": 1619579003,
+            "totalBytes": 3066534364,
+            "observedAt": 37774.89999997616,
+            "sinceRequest": 384.60000002384186
+          },
+          {
+            "bytesRead": 1619743158,
+            "totalBytes": 3066534364,
+            "observedAt": 37776.39999997616,
+            "sinceRequest": 386.10000002384186
+          },
+          {
+            "bytesRead": 1620152758,
+            "totalBytes": 3066534364,
+            "observedAt": 37776.60000002384,
+            "sinceRequest": 386.3000000715256
+          },
+          {
+            "bytesRead": 1620234633,
+            "totalBytes": 3066534364,
+            "observedAt": 37779.299999952316,
+            "sinceRequest": 389
+          },
+          {
+            "bytesRead": 1620275566,
+            "totalBytes": 3066534364,
+            "observedAt": 37779.39999997616,
+            "sinceRequest": 389.10000002384186
+          },
+          {
+            "bytesRead": 1620357441,
+            "totalBytes": 3066534364,
+            "observedAt": 37780.199999928474,
+            "sinceRequest": 389.89999997615814
+          },
+          {
+            "bytesRead": 1620562358,
+            "totalBytes": 3066534364,
+            "observedAt": 37780.699999928474,
+            "sinceRequest": 390.39999997615814
+          },
+          {
+            "bytesRead": 1620644233,
+            "totalBytes": 3066534364,
+            "observedAt": 37780.89999997616,
+            "sinceRequest": 390.60000002384186
+          },
+          {
+            "bytesRead": 1620693430,
+            "totalBytes": 3066534364,
+            "observedAt": 37781.10000002384,
+            "sinceRequest": 390.8000000715256
+          },
+          {
+            "bytesRead": 1620775305,
+            "totalBytes": 3066534364,
+            "observedAt": 37782.699999928474,
+            "sinceRequest": 392.39999997615814
+          },
+          {
+            "bytesRead": 1620816238,
+            "totalBytes": 3066534364,
+            "observedAt": 37782.699999928474,
+            "sinceRequest": 392.39999997615814
+          },
+          {
+            "bytesRead": 1620939190,
+            "totalBytes": 3066534364,
+            "observedAt": 37783.10000002384,
+            "sinceRequest": 392.8000000715256
+          },
+          {
+            "bytesRead": 1620971958,
+            "totalBytes": 3066534364,
+            "observedAt": 37785.699999928474,
+            "sinceRequest": 395.39999997615814
+          },
+          {
+            "bytesRead": 1621365174,
+            "totalBytes": 3066534364,
+            "observedAt": 37790.60000002384,
+            "sinceRequest": 400.3000000715256
+          },
+          {
+            "bytesRead": 1621487982,
+            "totalBytes": 3066534364,
+            "observedAt": 37793,
+            "sinceRequest": 402.7000000476837
+          },
+          {
+            "bytesRead": 1621840310,
+            "totalBytes": 3066534364,
+            "observedAt": 37793.299999952316,
+            "sinceRequest": 403
+          }
+        ],
+        "canvasVisibility": "visible",
+        "canvasOpacity": "1"
+      }
+    ],
+    "userInteractionEvents": [],
+    "pageStateChanges": [],
+    "paused": false,
+    "fullscreenBody": true,
+    "panelDisplay": false,
+    "visibilityState": "visible"
+  },
+  "cleanup": {
+    "videoPausedBeforeClose": true,
+    "fullscreenExitedBeforeClose": true,
+    "testPagesClosed": true,
+    "chromeStopped": true,
+    "webapkStopped": true,
+    "adbForwardRemoved": true,
+    "containerStopped": true
+  }
+}

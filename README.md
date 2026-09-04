@@ -79,13 +79,18 @@ blockごとにブラウザーとplayer各層を作り直す別の1時間試験�
 順位5の正式buildを最新KonomiTVへ組み込んだ無負荷の1時間試験では、4,415回のseekすべてが2秒以内に安定復帰し、致命的な表示停止は0件でした。
 この結果は順位5の1時間条件を満たしますが、順位4の1時間試験とはKonomiTV revisionが異なるため、停止率の差を順位5だけの効果とは扱いません。[集計と各blockの生値](results/galaxy-yadif-rank5-latest-one-hour-summary.json)を公開しています。
 
-現在のintegrationを固定した無負荷の1時間試験は、4,644回のseekすべてが2秒以内に安定復帰し、致命的な表示停止0件でした。
+KonomiTV client `7307e0e`へ基準版`52a3db5`と現在のintegrationをそれぞれ組み込み、同じfixture、runner、seed、目的時刻、位相分散条件で比較しました。
+基準版は54回目に致命的な表示停止を起こして終了し、integrationは1時間で4,732回すべてが2秒以内に安定復帰しました。
+基準版が停止した54回目と同じ目的時刻と位相では、integrationは418.7msで安定復帰しました。
 この試験は正常区間だけを選ぶ反復seekであり、正常TSの1時間連続再生や異常TSの1時間試験を兼ねません。
-[集計と各blockの生値](results/galaxy-integration-current-v3-one-hour-summary.json)を公開しています。
+[同条件比較と各blockの生値](results/galaxy-formal-current-integration-comparison.json)を公開しています。
 
-同じbuildで既知の破損video packetを1回横切ると、利用者操作なしで表示が復帰し、致命的な表示停止はありませんでした。
-復帰途中を除いた末尾5秒のcanvas描画は60.01fpsで、期待する59.94fpsの±1%へ戻り、40ms超の間隔は0回でした。
-一方、同じ窓でChromeのdrop counterが2、YADIFの`late`が1増えています。canvasのdraw呼出しはcompositorの表示そのものではないため、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未証明です。[単発の異常区間解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)を保存しています。
+同じKonomiTV client、fixture、runner、seed、位相列で既知の破損video packetを反復して横切ると、基準版は2回目に致命的な表示停止を起こし、そこで試験を終了しました。
+integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、最大1,088.1msでした。
+
+復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fpsでした。
+integrationも期待59.94fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たしていません。
+停止は改善しましたが、cadence回復、可視コマ落ち0、A/V同期、入力欠落から避けられない最小dropは未達または未証明です。[正常区間と異常区間の同条件比較](results/galaxy-formal-current-integration-comparison.json)を保存しています。
 
 同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
 
