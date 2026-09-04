@@ -18,7 +18,7 @@ canvasのopacity変更は原因または修正ではなかった。
 | KonomiTV checkout | `master`、`e92fba8bb219589c8e4ada9609ed4a9d91b33c00` |
 | checkout の依存指定 | mpeg2toh264 `52a3db5e8fb9833e6cade2167097849c668bdb1f` |
 | YADIF opacity実験 | `upstream/main`基点の`6b825e8`で検証したが棄却。誤取り込み防止のため公開branchは削除し、結果だけ本リポジトリに保存 |
-| YADIF queue容量・時刻同期の分離 | 公開`fix/separate-yadif-queue-recovery`、`konomi/main`基点のsource `26484fd`、dist `27b327e`。正式な基準版との直接比較で描画10fps未満18/90→0/90、複合異常35/90→1/90。容量不足は最小FIFO、表示不能な未来時刻列だけ全resetへ分離 |
+| YADIF queue容量・時刻同期 | 公開済みの測定点はsource `26484fd` / dist `27b327e`と、その子のsource `acfce36` / dist `63a5708`。保存traceでは、容量確保後も残る表示予定を動かさないことが致命的停止を維持した。必要最小限のFIFO破棄と捨てた時間分の表示予定圧縮だけを残し、独立した必要性を示せない閾値resetを外した候補を再測定中 |
 | MSE修正 | 公開`fix/mse-reset-inflight-append`、`upstream/main`基点の`f8ab9c7` |
 | seek計測 | 公開`feat/seek-timing-context`、計測実装`ffe2893`、`presented`の意味を実測に合わせて明記した現HEAD `58a9920` |
 | 完成fragment早期受け渡し | 公開`fix/deliver-completed-fragments-early`、`upstream/main`基点の`30ad508` |
