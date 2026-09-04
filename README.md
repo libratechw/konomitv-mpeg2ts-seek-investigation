@@ -109,6 +109,12 @@ integrationは、異常区間通過後のFPS安定復帰に20回すべてで失�
 
 同じ破損区間をintegrationのconverterでオフライン変換すると、出力映像の表示時刻に567.233msの間隔が生じました。Galaxyで観測したmedia timeの飛びと一致するため、この飛びはAndroidのdecoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれます。[変換結果と照合値](results/nogizaka-defect-conversion-timeline.json)を保存しています。
 
+耐障害性を1種類の欠損だけで判断しないため、「キッズアワー」の別録画から2本の固定fixtureを追加しました。
+全2,798万packetの走査では同期エラーとTEIが0件、映像PIDのcontinuity counter不連続が2件でした。
+1件目は6 counter値相当を失ったopen GOP内のP frame picture、2件目は5 counter値相当を失ったopen GOP内のB frame pictureです。
+各欠損の約16MiB前から64MiBを無変換で固定し、各fixtureに対象の不連続が1件だけ含まれることを確認しました。
+ブラウザーで失われる表示frame数、不可避な最小drop、画素、A/V同期、実機での復帰は未測定です。[packet位置、picture構造、fixture hash](results/kids-hour-transport-defects.json)と[再現スクリプト](scripts/inspect-ts-transport-defects.py)を公開しています。
+
 `autoFilm`のFPS安定維持も目標を達成していません。
 到達点と、達成根拠にできない理由は統合検証branchのREADMEにあります。
 
@@ -237,7 +243,7 @@ transcoderとworkerの順序、cancel、backpressureのレビューが必要な�
 | データフロー、仮説の評価、まだ採用していない候補、将来設計 | [REPORT.md](REPORT.md) |
 | 実機条件と素材ごとの結果 | [results/device-results.md](results/device-results.md) |
 | 機械可読な集計値と生値 | [`results/`](results/) |
-| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[異常TSのpacketとpictureの照合](scripts/inspect-nogizaka-transport-defect.py)、[fMP4時刻列の解析](scripts/fmp4_timeline.py)、[破損区間の変換比較](scripts/measure-nogizaka-defect-conversion.py)を含む） |
+| 公開可能な集計・再現スクリプト | [`scripts/`](scripts/)（[切断後のFileResponse処理](scripts/reproduce-file-response-disconnect.py)、[TS全体の欠損とpictureの照合](scripts/inspect-ts-transport-defects.py)、[既存fixtureの詳細照合](scripts/inspect-nogizaka-transport-defect.py)、[fMP4時刻列の解析](scripts/fmp4_timeline.py)、[破損区間の変換比較](scripts/measure-nogizaka-defect-conversion.py)を含む） |
 
 録画ファイル、認証情報、実際のLAN内アドレス、ローカルパス、アクセスログは含みません。
 番組名は素材の識別用であり、録画データ自体は配布しません。

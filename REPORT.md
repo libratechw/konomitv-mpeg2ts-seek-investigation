@@ -753,6 +753,10 @@ campaign内のruntime終了commandは時間切れになったが、直後の確�
 
 元TSの不連続は、映像PID 256のbyte位置202,401,364でcontinuity counterが1から6へ飛んだ箇所だった。discontinuityの通知はなく、欠落数は16を法として4 packetに相当する。この位置はB-picture（temporal reference 7、PTS 502108869）のPES内にあり、FFprobeのcorrupt表示が指した直前のPES位置とは異なる。独立に読んだ周辺24 pictureの種類・PTS・PES位置はFFprobeと一致した。[TS byte解析・照合結果](results/nogizaka-transport-defect-localization.json)と[固定fixture用の再現スクリプト](scripts/inspect-nogizaka-transport-defect.py)を公開している。
 
+耐障害性をこの1件から一般化しないため、別録画の「キッズアワー」も固定素材へ加えた。元録画5,260,616,188 byteの全2,798万packetを走査すると、同期エラー、TEI、discontinuity通知は0件で、映像PID 256のcontinuity counter不連続が2件あった。1件目は録画先頭の映像PTSから867.433秒、byte位置1,028,952,388でcounterが2から9へ飛び、欠落値は16を法として6だった。open GOP内のP frame picture（temporal reference 11、PTS 1165933447）が損傷していた。2件目は3277.875秒、byte位置4,838,639,848でcounterが2から8へ飛び、欠落値は5だった。open GOP内のB frame picture（temporal reference 12、PTS 1382873170）が損傷していた。
+
+各不連続の約16MiB前から64MiBをTS packet境界で切り出し、再エンコードとremuxを行わず固定した。fixtureのSHA-256はP-picture側が`de453e5acd06b7072da20f38ed1a6b80ddf3dcf8332648fe6175a74a5e1bbef3`、B-picture側が`eada598bc1437d0739dec2cd439bc8d4a2706f5939b45b162997e3ad8ebabe93`で、各fixtureには対象の不連続が1件だけ含まれる。counterの飛びは欠落packet数を16を法として示すだけで、ブラウザーで失われる表示frame数を示さない。不可避な最小drop、画素、可聴A/V同期、実機の復帰性は未測定である。[全packet走査とpicture位置](results/kids-hour-transport-defects.json)および[一般化した検査スクリプト](scripts/inspect-ts-transport-defects.py)を公開した。
+
 integration `44e06a4`は、PESの損傷通知を受けると蓄積中のGOPを破棄する。今回の損傷対象は後続pictureの参照元にならないB-pictureなので、正常なpictureまで破棄している可能性がある。ただし、変換後の各pictureとの対応と画素の正常性は未検証であり、「1 pictureだけ落とせば十分」とはまだ判定しない。
 
 同じ固定byte windowを、integration `44e06a4`由来として記録したconverter binaryでオフライン変換した。source revisionは呼び出し側の宣言であり、実行したbinaryは結果JSONのSHA-256で識別する。出力fMP4をFFprobeで復号すると、隣接frameの表示時刻に最大567.233msの間隔があり、GalaxyのrVFCで観測したmedia timeの567.233ms飛びと0.002ms以内で一致した。したがって、Galaxyで見えた時刻の飛びはAndroid decoderやYADIFだけが作ったものではなく、converterの出力時刻列に既に含まれる。破損B-pictureを含む入力のkeyframe間隔は15 frame・500.5msだったが、固定windowは先頭と末尾がstream途中なので、入出力frame数の差から破棄picture数を決めない。画素の正常性、表示可能だった最小picture集合、A/V同期は引き続き未証明である。[変換結果](results/nogizaka-defect-conversion-timeline.json)と[再現スクリプト](scripts/measure-nogizaka-defect-conversion.py)を公開した。

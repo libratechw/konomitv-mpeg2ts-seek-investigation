@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "fixture": {
+    "sha256": "5c2976376291d0be0b86c764aa68d3112d9d2d30478d57f73e7a04b98d9f90cb",
+    "sizeBytes": 5260616188,
+    "packetCount": 27982001,
+    "teiCount": 0,
+    "declaredDiscontinuityCount": 0,
+    "firstVideoPts90k": 1087864456
+  },
+  "videoPid": 256,
+  "transportAnomalies": [
+    {
+      "type": "cc-gap",
+      "byteOffset": 1028952388,
+      "previousByteOffset": 1028952200,
+      "pid": 256,
+      "previousCC": 2,
+      "cc": 9,
+      "missingCounterValuesModulo16": 6,
+      "pusi": false
+    },
+    {
+      "type": "cc-gap",
+      "byteOffset": 4838639848,
+      "previousByteOffset": 4838639660,
+      "pid": 256,
+      "previousCC": 2,
+      "cc": 8,
+      "missingCounterValuesModulo16": 5,
+      "pusi": false
+    }
+  ],
+  "videoDefects": [
+    {
+      "transport": {
+        "type": "cc-gap",
+        "byteOffset": 1028952388,
+        "previousByteOffset": 1028952200,
+        "pid": 256,
+        "previousCC": 2,
+        "cc": 9,
+        "missingCounterValuesModulo16": 6,
+        "pusi": false
+      },
+      "mediaTimeFromFirstVideoPtsSeconds": 867.4332333333333,
+      "window": {
+        "byteStart": 1012175268,
+        "byteLength": 67108856,
+        "sha256": "de453e5acd06b7072da20f38ed1a6b80ddf3dcf8332648fe6175a74a5e1bbef3",
+        "gapByteOffsetInWindow": 16777120,
+        "pictureCount": 1660,
+        "previousPicture": {
+          "pictureByteOffset": 1028944886,
+          "pesByteOffset": 1028944868,
+          "pts90k": 1165921435,
+          "type": "B",
+          "temporalReference": 7,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false
+        },
+        "damagedPicture": {
+          "pictureByteOffset": 1028951659,
+          "pesByteOffset": 1028951636,
+          "pts90k": 1165933447,
+          "type": "P",
+          "temporalReference": 11,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false,
+          "leadingBPictureTemporalReferences": [
+            0,
+            1
+          ],
+          "openGopConfirmed": true
+        },
+        "nextPicture": {
+          "pictureByteOffset": 1029016514,
+          "pesByteOffset": 1029016496,
+          "pts90k": 1165927441,
+          "type": "B",
+          "temporalReference": 9,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false
+        }
+      }
+    },
+    {
+      "transport": {
+        "type": "cc-gap",
+        "byteOffset": 4838639848,
+        "previousByteOffset": 4838639660,
+        "pid": 256,
+        "previousCC": 2,
+        "cc": 8,
+        "missingCounterValuesModulo16": 5,
+        "pusi": false
+      },
+      "mediaTimeFromFirstVideoPtsSeconds": 3277.8746,
+      "window": {
+        "byteStart": 4821862728,
+        "byteLength": 67108856,
+        "sha256": "eada598bc1437d0739dec2cd439bc8d4a2706f5939b45b162997e3ad8ebabe93",
+        "gapByteOffsetInWindow": 16777120,
+        "pictureCount": 1515,
+        "previousPicture": {
+          "pictureByteOffset": 4838621823,
+          "pesByteOffset": 4838621800,
+          "pts90k": 1382879176,
+          "type": "P",
+          "temporalReference": 14,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false
+        },
+        "damagedPicture": {
+          "pictureByteOffset": 4838636294,
+          "pesByteOffset": 4838636276,
+          "pts90k": 1382873170,
+          "type": "B",
+          "temporalReference": 12,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false,
+          "leadingBPictureTemporalReferences": [
+            0,
+            1
+          ],
+          "openGopConfirmed": true
+        },
+        "nextPicture": {
+          "pictureByteOffset": 4838656598,
+          "pesByteOffset": 4838656580,
+          "pts90k": 1382876173,
+          "type": "B",
+          "temporalReference": 13,
+          "gop": {
+            "closedGop": false,
+            "brokenLink": false
+          },
+          "pictureStructure": "frame",
+          "progressiveFrame": false
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "A counter gap gives a missing count modulo 16, not an exact lost-packet count.",
+    "A damaged coded picture does not by itself determine the number of browser display frames lost.",
+    "Decoded output, visible pixels, unavoidable minimum loss, and audible A/V sync are not evaluated.",
+    "The bounded windows start mid-stream; this script does not treat decoder startup warnings as source defects."
+  ]
+}
