@@ -13,6 +13,8 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 
 このREADMEでは、現在分かっていること、公開branch、提出先、優先順位だけを扱います。各数値のbuild、条件、生値、採用・除外理由は[`REPORT.md`](REPORT.md)と`results/`を参照してください。
 
+現在のintegration候補は`a0e9b05`です。clean YADIF候補`8b1f66b`を含む最新tipから再構築し、静的検証と自動試験を完了しました。実機再測定前のため、以下のintegration実測値は履歴上の`44e06a4`に対する結果であり、`a0e9b05`の現行値には使いません。
+
 ## 分かったこと
 
 ### MPEG-2 TS 直接再生
@@ -26,8 +28,8 @@ KonomiTVの録画再生について、シーク完了時間、定常再生のFPS
 - YADIFがqueue容量不足と時刻同期の破綻を区別せず、シーク後に表示がほぼ停止しました。
 - MSE resetと古いappend完了が競合すると、新しいinit segmentを失い得ました。
 
-7件の修正をまとめた統合検証版では、Galaxyの`video.currentTime`起点のシーク完了時間が中央値287.1→159.7msとなり、当時の250ms判定では14/40→40/40になりました。
-代表指標の前後比較と回帰結果は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#全体の効果)にあります。
+当時の統合検証版`44e06a4`では、Galaxyの`video.currentTime`起点のシーク完了時間が中央値287.1→159.7msとなり、当時の250ms判定では14/40→40/40になりました。
+代表指標の条件と回帰結果は[`REPORT.md`](REPORT.md)と`results/`にあります。
 
 正式候補へ受動的なqueue計測だけを加えた自然発生traceでは、最後のcanvas直接描画後もrVFCが51回進む一方、51回の容量確保で計101 fieldをFIFO破棄しました。
 破棄のたびに次のfieldが再び将来へ移り、rAFが表示対象を得られない循環が続きました。[自然発生trace](results/galaxy-yadif-rank4-natural-fatal-timeline.json)に記録しています。
@@ -49,7 +51,7 @@ blockごとにブラウザーとplayer各層を作り直す別の1時間試験�
 順位5の正式buildを最新KonomiTVへ組み込んだ無負荷の1時間試験では、4,415回のseekすべてが2秒以内に安定復帰し、致命的な表示停止は0件でした。
 この結果は順位5の1時間条件を満たしますが、順位4の1時間試験とはKonomiTV revisionが異なるため、停止率の差を順位5だけの効果とは扱いません。[集計と各blockの生値](results/galaxy-yadif-rank5-latest-one-hour-summary.json)を公開しています。
 
-KonomiTV client `7307e0e`へ基準版`52a3db5`と現在のintegrationをそれぞれ組み込み、同じfixture、runner、seed、目的時刻、各試行のシーク前待ち時間の列で比較しました。
+KonomiTV client `7307e0e`へ基準版`52a3db5`と当時のintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、目的時刻、各試行のシーク前待ち時間の列で比較しました。
 基準版は54回目に致命的な表示停止を起こして終了し、integrationは1時間で4,732回すべてが2秒以内に安定復帰しました。
 基準版が停止した54回目と同じ目的時刻とシーク前待ち時間では、integrationは418.7msで安定復帰しました。
 この試験は正常区間だけを選ぶ反復seekであり、正常TSの1時間連続再生や異常TSの1時間試験を兼ねません。
@@ -138,8 +140,7 @@ H.264の発生位置を調べる別の10分走行では1 frameをdropしまし�
 表の順位番号は候補を指す識別子で、測定結果のファイル名にも同じ番号を使っています。提出先が異なる候補どうしの順位の大小は、提出順を意味しません。
 tsukumijimaフォークは生成済み`dist`を追跡するため、sourceとdistを別コミットにしています。
 
-各候補の目的、修正内容、効果、実装の重さは[統合検証branchのPR候補一覧](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にあります。
-提出先ごとに整理した依存の図は[レビューの順序](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#レビューの順序)にあります。
+各候補の目的、修正内容、効果、実装の重さと依存関係は[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にあります。
 
 ### otya128/mpeg2toh264 へ出すもの
 

@@ -1,5 +1,7 @@
 # KonomiTV 録画再生のシーク遅延と表示品質
 
+現行integration候補は`a0e9b05`で、clean YADIF候補`8b1f66b`を含む最新tipから再構築した。静的検証と自動試験は完了し、実機再測定は未実施である。この文書にある`44e06a4`など従来integrationの測定値を`a0e9b05`の結果へ流用しない。
+
 コードとChrome/Galaxy実測から、通常seekの主要な待ちは、PTS probeとRange応答、GOPとAACが揃うまでの読取・H.264変換、MSE投入とdecoder再開である。
 「indexがなく、毎回先頭から走査するため遅い」という構成ではない。
 42.9GB・6時間40分のTSでもPTS探索は各seek 2 probeで収束した。
@@ -180,7 +182,7 @@ PTSとrestart位置を独立したmark列へ分け、値を持つPESだけが対
 正式branch群を最新KonomiTVへ組み込み、Galaxy Chrome、LAN直結、body全画面、右パネルなし、単一タブで取り直した。
 600秒と900秒をwarm-upした後の40 seekは追加probe 0件で、`seek-requested`から`seeked`後も残る可視canvas初画まで中央値159.1ms、p95 212.4ms、最大229.0msとなり、40/40が250ms以内だった。
 長時間退行したYADIF presentation policyを除いた公開integration製品コードも、計測専用timing APIを含めないbuildで`video.currentTime`設定から同じ可視初画まで中央値159.7ms、p95 193.6ms、最大246.8msとなり、40/40が250ms以内だった。
-同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻した基準は、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。現在のintegrationは基準から中央値127.4ms（44.4%）、p95 155.5ms（44.5%）を短縮した。
+同じKonomiTV、端末、画面条件、計測起点で`tsukumijima/main` `52a3db5`へ戻した基準は、中央値287.1ms、p95 349.1ms、最大410.2ms、250ms以内14/40だった。測定対象integrationは基準から中央値127.4ms（44.4%）、p95 155.5ms（44.5%）を短縮した。
 正式候補timing版と公開integrationは計測起点とinstrumentationが異なるため、その差をMSE修正単独の効果とは扱わない。
 正式候補の区間別中央値はRange headers待ち31.8ms、first byteからpicture jobs 24.6ms、最初のworker出力からstream先頭AU 29.7ms、append完了から`canplay`27.6msだった。
 詳細と生値は[Galaxy正式候補とintegration](results/device-results.md#galaxyの正式候補と公開integration)を参照する。
@@ -204,7 +206,7 @@ EVO-X2、Ubuntu 26.04.1、Chrome 152.0.7977.64、59.96Hzで、同じKonomiTVとT
 Lenovo IdeaPad Flex 5 14ARE05、Windows 11、AMD Radeon Graphics、Chrome 152.0.7977.65、60Hz、電源モード「最適な電力効率」で、同じKonomiTV、TS、LAN、全画面、右パネルなし、専用Chrome profileを使った。
 120秒の定常再生はcanvas 59.719fps、40ms超8回、最大70.6msで、rAF自体にも40ms超3回、最大50.1msがあった。
 YADIFは`late`が17、`missed`が2増え、全resetは0だった。
-同じWindowsの旧integration 2走行は59.233 / 59.474fps、`late`増分80 / 52、1-field候補2走行は59.775 / 59.791fps、`late`増分16 / 15だった。この120秒比較では1-field policyが有利だったが、後述のGalaxy 600秒A/Bで長時間退行を確認したため、現在のintegrationからは外した。[120秒の生値](results/windows-integration-v2-steady-120s.json)を保存した。
+同じWindowsの旧integration 2走行は59.233 / 59.474fps、`late`増分80 / 52、1-field候補2走行は59.775 / 59.791fps、`late`増分16 / 15だった。この120秒比較では1-field policyが有利だったが、後述のGalaxy 600秒A/Bで長時間退行を確認したため、当時のintegrationから外した。[120秒の生値](results/windows-integration-v2-steady-120s.json)を保存した。
 
 180〜199秒と480〜499秒を交互に測った40 seekは、持続表示される目的canvas初画まで中央値252.7ms、p95 324.7ms、最大393.8msで、20/40が250msを超えた。
 180秒群は中央値295.3msで20/20が250ms超、480秒群は中央値213.8msで20/20が250ms以内だった。
@@ -756,7 +758,7 @@ queue全reset単独の必要性は別に評価した。診断traceでは、末�
 
 順位4の1時間試験はKonomiTV `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`、順位5の上記試験は`7307e0e`であり、runner、collector、fixtureは一致するがKonomiTV revisionは一致しない。このため、順位5が現行の1時間条件を満たす根拠には使うが、3,008回目の停止が0件になった差を順位5だけの効果とは扱わない。順位5の因果効果は、同一計装、同一seed、同一目的時刻でFIFO破棄104→4 field、致命的停止→508.5msからの安定描画となった比較で評価する。
 
-現在のintegration全体を正確に組み込んだbuildでは、同じseedと各試行のシーク前待ち時間の列による1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+その時点のintegration全体を正確に組み込んだbuildでは、同じseedと各試行のシーク前待ち時間の列による1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
 最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、目的時刻、各試行のシーク前待ち時間の列で比較した。隔離backend imageは`e92fba8`だが、`e92fba8..7307e0e`の`server/`に差分はない。基準版は54回目に致命的な表示停止を検出し、53回の成功後に試験を終了した。integrationは最大1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,456.840秒で4,732回すべてが2秒以内に安定復帰した。壁時計では3,575.590秒で、致命的な表示停止は0件だった。基準版が停止した54回目と同じ目的時刻とシーク前待ち時間では、integrationは418.7msで安定復帰した。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[同条件比較と各blockのhash](results/galaxy-formal-current-integration-comparison.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
 
@@ -849,7 +851,7 @@ MADDERの420秒と900秒では`film`へ入り約23〜24fps、120秒では`video`
 
 各区間の内側を映像と主音声だけ`-c copy`で切り出した。固定素材内で検証できた完全cycleは213個と1136個で、combed cycle、40msを超えるvideo DTS・PTS間隔、40msを超えるaudio PTS間隔、映像・主音声のdecode警告は0だった。末尾の不完全cycleはcadenceの主張から除外する。素材のSHA-256、切り出し条件、source packet位置の包絡、検証値は[アニメ固定素材の記録](results/anime-autofilm-clean-fixtures.json)に保存した。
 
-KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と現在のintegrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
+KonomiTV `e92fba8`へ`tsukumijima/main` `52a3db5`と測定対象integrationをそれぞれ正確に組み込み、Galaxy Chrome、LAN直結、全画面、60Hzで、この固定素材を`autoFilm`有効で120秒ずつ各2回測った。入力video callbackは全走行29.964〜29.971fpsで、media timeは各走行とも約120秒進み、入力timestamp差はすべて約33.367msだった。
 
 基準版のcanvas描画は27.641 / 27.774fps、integrationは27.181 / 26.971fpsだった。film/video判定の遷移は基準版28 / 28回、integration 38 / 33回で、両版とも期待するfilm cadenceを維持しなかった。YADIFの`missed`とqueue全resetは全走行0なので、入力停止やqueue全resetではなく、固定3:2区間で`autoFilm`判定を維持できないことが、期待するFPSを安定維持できない直接の観測である。integrationの方が低い差は観測したが、各2走行だけなので個別修正の退行量とは断定しない。Chromeの`droppedVideoFrames`増分40はcanvasの可視drop数とは扱わない。[4走行の集計、build hash、生値](results/galaxy-integration-exact-autofilm-24000-1001-summary.json)を保存した。
 
@@ -1131,7 +1133,7 @@ YADIF opacity変更は棄却した実験である。
 upstream向け候補branchは`otya128/mpeg2toh264`の`upstream/main`（`d5df08b`）へ適用できる形で公開した。
 MSE修正とfragment早期受け渡しでは、tsukumijimaフォーク側の追加scriptと`package.json`の文脈だけが衝突するため、upstream用PRではscript登録を現在のupstreamに合わせて作り直す。
 
-各修正の目的、修正内容、効果、実装の重さは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes#pr候補)にある。
+各修正の目的、修正内容、効果、実装の重さは[統合検証branchのREADME](https://github.com/libratechw/mpeg2toh264/tree/integration/current-useful-fixes)にある。
 提出の順位と、まだ提出しないものの理由は[README](README.md#提出の順序をどう決めたか)にある。
 
 YADIF初回fieldの保持`d4ccb98`は本調査の候補ではなく、すでに`tsukumijima/mpeg2toh264`へ取り込まれ、KonomiTV固定依存`52a3db5`に含まれる既存の変更である。
@@ -1296,7 +1298,7 @@ KonomiTV側のretryや設定fallbackで原因を隠していない。
 production参照がないことだけを根拠に公開`Mpeg2GopStream::push` APIを削る案も、外部利用者が失う機能を確認できないため採用しない。
 overflow時刻圧縮は`#prepareQueue()`で容量破棄後のscheduleだけを修復する。`#present()`へ追加した1 field表示とcatch-upは600秒で長時間退行したため削除し、異なるownerの判断を残さない。
 scheduler policyを単体試験するため、queue操作を内部moduleへ抽出する案は採用しない。
-低電力Windowsの同一区間・全画面120秒で、現在のintegrationへ戻したcontrolは59.724fps、40ms超11回、`late` 19だったのに対し、結果objectを毎refreshで返す抽出版3走行は59.458〜59.599fps、40ms超14〜18回、`late` 30〜46だった。
+低電力Windowsの同一区間・全画面120秒で、当時のintegrationへ戻したcontrolは59.724fps、40ms超11回、`late` 19だったのに対し、結果objectを毎refreshで返す抽出版3走行は59.458〜59.599fps、40ms超14〜18回、`late` 30〜46だった。
 結果objectをなくした診断版2走行は59.641 / 59.650fps、40ms超13 / 17回、`late` 29 / 26まで回復したが、controlへは戻らなかった。
 Linuxでは59.892fps、40回seekの中央値131.1ms、p95 181.7msで退行を示さなかったため、低負荷環境だけでこのhot pathの変更を合格にしない。
 CI試験不足は残るが、productionのrefresh pathへ試験用の関数境界や一時objectを加えず、実ブラウザーで外部挙動を固定できる試験だけを候補とする。
