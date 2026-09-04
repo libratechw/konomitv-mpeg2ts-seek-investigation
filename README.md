@@ -18,11 +18,19 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ## 公開コード
 
+公開branchは、実機で効果と退行を確認した「採用候補」と、論理・不変条件・自動testを確認したが実機測定が残る「暫定候補」に分けます。暫定候補はfetch後のupstreamへ適用でき、既知の破壊的退行がなく、branch内READMEに未計測範囲と取り込み側で必要な検証を明記したものに限ります。診断・測定branchと棄却実験はどちらにも含めません。
+
+### 採用候補
+
 | 提出先 | branch | 役割 |
 | --- | --- | --- |
 | `tsukumijima/KonomiTV` | [`fix/android-yadif-main-thread`](https://github.com/libratechw/KonomiTV/tree/fix/android-yadif-main-thread) | Android Chromeのデスクトップ表示でも端末を識別し、YADIF描画をメインスレッドへ切り替える候補。先行commitでmpeg2toh264を`faf1464`へ更新する |
 | `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) | `autoFilm`のcomb判定で行参照をpixel loopの外へ移し、判定を変えずにCPU負荷を下げる候補 |
 | `Kludex/starlette` | [`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect) | ASGI切断後のfile送信を止める独立候補 |
+
+### 暫定候補
+
+該当する公開branchはありません。暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
 
 KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補はまずfork branchとして公開します。数日間取り込まれず、fetch後の`main`にも必要な場合だけPRを作成します。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
