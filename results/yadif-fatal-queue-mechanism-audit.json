@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "constants": {
+    "displayHz": 60,
+    "refreshMs": 16.666666666666668,
+    "outputFps": "60000/1001",
+    "outputDurationMs": 16.683333333333334,
+    "presentDeadlineLeadMs": 25.0,
+    "queueCapacity": 5,
+    "horizonFormula": "6 * max(refreshMs, outputDurationMs)",
+    "horizonMs": 100.1
+  },
+  "rank4NaturalFatal": {
+    "source": "galaxy-yadif-rank4-natural-fatal-timeline.json",
+    "sha256": "bb34e86f47b00fb0cc1cf6cd144c644400033fc09370ea7da288b02e566cf94b",
+    "outcome": "fatal-display-stop",
+    "elapsedMs": 2501.600000023842,
+    "maximumDrawGapMs": 1697.2999999523163,
+    "stableAtMs": null,
+    "eventCount": 204,
+    "eventKindCounts": {
+      "empty": 22,
+      "frame-gap": 4,
+      "future": 116,
+      "draw-gap": 7,
+      "overflow": 54,
+      "clock-reset": 1
+    },
+    "longestConsecutiveFullQueue": {
+      "startEventIndex": 53,
+      "endEventIndex": 203,
+      "eventCount": 151,
+      "startAtMs": 6677.9,
+      "endAtMs": 8344.5,
+      "firstLeadMinMs": 11.859848821634841,
+      "firstLeadMaxMs": 64.36382931994376,
+      "firstLeadAbovePresentDeadlineCount": 146,
+      "capacityPreparationEventCount": 50,
+      "capacityPreparationLastLeadMaximumMs": 97.73049479269503,
+      "futureEventCount": 101,
+      "futureLastLeadAboveHorizonCount": 101
+    },
+    "clockReset": {
+      "eventIndex": 36,
+      "event": {
+        "kind": "clock-reset",
+        "at": 6427.8,
+        "queueDepth": 5,
+        "firstLeadMs": 58.7083749999947,
+        "lastLeadMs": 202.08071093749095,
+        "requiredOutputs": 2
+      },
+      "previousEvent": {
+        "kind": "future",
+        "at": 6411.2,
+        "queueDepth": 5,
+        "firstLeadMs": 75.30837499999507,
+        "lastLeadMs": 218.6807109374913
+      },
+      "nextEvent": {
+        "kind": "draw-gap",
+        "at": 6427.8,
+        "queueDepth": 1,
+        "firstLeadMs": 27.240798828123843,
+        "lastLeadMs": 27.240798828123843,
+        "gapMs": 50
+      },
+      "result": "the reset emptied the full queue and allowed a subsequent draw, but the same trial later entered the full-queue retirement cycle again and ended as a fatal display stop"
+    },
+    "classification": "confirmed YADIF capacity-retirement loop: the head approaches the presentation deadline, capacity retirement removes old fields without closing their presentation moments, and the surviving head returns to roughly three to four refreshes in the future"
+  },
+  "rank4FormalOneHourFatal": {
+    "source": "galaxy-yadif-rank4-one-hour-block-reset-block-003.json",
+    "sha256": "50120e0b0e7b4010973018a9ab495c8954ff57e2d1570b1127fb039f7204faaf",
+    "maximumDrawGapMs": 1679,
+    "stableAtMs": null,
+    "queueResettedBefore": 1,
+    "queueResettedAfter": 2,
+    "maxQueuedFieldsBefore": 3,
+    "maxQueuedFieldsAfter": 5,
+    "missingEvidence": [
+      "queue head deadline and lead over time",
+      "queue depth over time",
+      "each queue push, retirement, compression, and reset event"
+    ],
+    "classification": "the layer and counters are consistent with the natural Galaxy fatal, but this block has no queue timeline and cannot prove the same mechanism"
+  },
+  "thresholdResetRecoveryExample": {
+    "source": "galaxy-yadif-pre-injection-future-queue-stall-trace.json",
+    "sha256": "0c9dfcba724004bf265e913422eb108bf0d51dc0eeb8f7ae7bb3a79ab8f62a08",
+    "clockResetEventIndex": 335,
+    "clockResetEvent": {
+      "kind": "clock-reset",
+      "at": 15824.4,
+      "queueDepth": 5,
+      "firstLeadMs": 41.09712634606694,
+      "lastLeadMs": 107.83050472444484,
+      "requiredOutputs": 2
+    },
+    "firstLaterDrawEventIndex": 339,
+    "firstLaterDrawEvent": {
+      "kind": "draw-gap",
+      "at": 15891,
+      "queueDepth": 1,
+      "firstLeadMs": 33.350135135133314,
+      "lastLeadMs": 33.350135135133314,
+      "gapMs": 50
+    },
+    "drawAfterResetMs": 66.60000000000036,
+    "scope": "this diagnostic trace shows that the threshold reset can restore a draw after an overflow-driven future queue, but does not show a state that only the threshold reset, rather than deadline compression, can recover"
+  },
+  "windowsFatal": {
+    "source": "windows-anomaly-integration-44e06a4-until-fatal.json",
+    "sha256": "17eab102bbe42a45a700b902bddb953651ba89d03ba40f3c1370b09b15c4a41f",
+    "videoCallbackGapsOverTwoSeconds": [
+      {
+        "beforeSequence": 311,
+        "afterSequence": 312,
+        "wallClockGapMs": 3791.0,
+        "mediaTimeGapMs": 3603.6000000000004,
+        "presentedFrameIncrease": 14,
+        "beforeMediaTime": 123.284288,
+        "afterMediaTime": 126.887888
+      },
+      {
+        "beforeSequence": 333,
+        "afterSequence": 334,
+        "wallClockGapMs": 5730.89999999851,
+        "mediaTimeGapMs": 4170.833000000001,
+        "presentedFrameIncrease": 44,
+        "beforeMediaTime": 127.722055,
+        "afterMediaTime": 131.892888
+      }
+    ],
+    "finalYadifStats": {
+      "filtered": 726,
+      "missed": 6,
+      "degraded": 6,
+      "discontinuities": 2,
+      "late": 72,
+      "queueResetted": 0,
+      "dropped": 13,
+      "fps": 59.988002399341354,
+      "frameMs": 0.5299999999503294,
+      "maxQueuedFields": 4,
+      "mode": "video",
+      "match": "c",
+      "combScore": 0,
+      "outputFps": 59.988002399341354,
+      "duplicateScore": null,
+      "duplicateRunnerUp": null
+    },
+    "missingEvidence": [
+      "queue head deadline and lead over time",
+      "queue depth over time",
+      "queue events sharing timestamps with video callbacks"
+    ],
+    "classification": "not established as the YADIF capacity-retirement loop; the saved trace instead records two multi-second video-callback gaps, max queue depth 4, zero queue resets, and about 60 fps in the final YADIF snapshot"
+  },
+  "conclusions": {
+    "overflowDeadlineCompression": "directly supported as the fix for the recorded natural Galaxy full-queue loop",
+    "clockDivergenceReset": "observed to fire and to restore a draw once, but no saved trace proves a stable recovery that uniquely requires this reset after overflow deadline compression is present",
+    "windowsFatal": "requires a separate cause investigation"
+  }
+}

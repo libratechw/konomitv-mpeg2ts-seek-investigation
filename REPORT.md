@@ -736,7 +736,13 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 最後の直接描画後もrVFCは51回進んだが、51回のqueue容量確保で計101 fieldをFIFO破棄した。各入力callbackの直前には古い先頭fieldが表示期限へ近づいていたが、2 fieldを破棄すると残った先頭が再び約3〜4 refresh先へ移る。rAFは表示対象を得られず、次の入力callbackが同じ破棄を繰り返した。これにより、自然発生した致命的停止の原因を、容量破棄後の空いたpresentation momentを残すYADIFの時刻列へ特定した。[受動計測を含む生値](results/galaxy-yadif-rank4-natural-fatal-timeline.json)を保存した。
 
+この停止では、シークまたはmedia time不連続による既存のqueueクリア後にキューが積み直され、通常再生中に再び循環へ入った。キュー深さ5が連続した151 eventでは、先頭の先読みは11.86〜64.36msで、146 eventが`#present()`の期限である25msを超えた。残る5 eventはoverflow処理直前の標本で、先頭が期限へ近づいた後、容量確保で古いfieldを捨てると再び未来へ押し戻されていた。したがって、シーク前の古いqueueが残った停止ではない。
+
+時刻破綻のhorizonは約100.10msで、判定に使うのは先頭ではなく末尾の先読みである。深さ5が続いた区間では、容量確保を始めた50 eventすべてで末尾がhorizon内にあり、最大97.73msだった。一方、field追加後の`future` 101 eventでは末尾がすべてhorizonを越えたが、次の容量確保までに時間が進むためqueue全resetを避けていた。唯一のqueue全resetはevent 36で末尾202.08msを検出して深さ5を1へ減らし、同時刻の描画を可能にしたが、その後に同じ容量破棄の循環へ再度入り、試行全体は復帰しなかった。
+
 後続のoverflow時刻圧縮へ同じ受動計測を加え、同じseedの4回目、905.784979秒へのseekを比較した。順位4は2.5秒で復帰せず、overflow 54回、FIFO破棄104 field、future待ち116回、queue全reset 1回だった。差分をoverflow時刻圧縮だけにした順位5は、overflow 4回、FIFO破棄4 field、future待ち7回、queue全reset 0回で、508.5msの描画から安定列が始まり、692.6msで安定を確認した。decoder、音声、canvas描画も進み、先頭4 seekを完了した。[同一計装の順位5結果](results/galaxy-yadif-rank5-same-instrumentation-success.json)を保存した。これにより、空いたpresentation momentを詰める変更が自然発生した循環を止める因果を同一計装で確認した。
+
+queue全reset単独の必要性は別に評価した。診断traceでは、末尾107.83msで閾値を越えたqueue全resetの66.6ms後に描画が戻った実例がある。ただし、その直前も容量破棄によって未来時刻列が連鎖しており、overflow時刻圧縮があってもqueue全resetだけが必要になる状態は保存済みtraceにない。したがって、閾値resetが実際に作動して描画を戻せることまでは確認できるが、時刻圧縮と独立した正式修正として必要だとはまだ立証できない。順位4の1時間停止blockはqueue全resetが1回増え、最大深さ5に達したが、queue時系列を保存していないため同じ機構とは確定しない。[停止別の機械集計と不足項目](results/yadif-fatal-queue-mechanism-audit.json)を保存した。
 
 後続のoverflow時刻圧縮 source `7ef6696` / dist `ac2a2a9`では、単一の連続セッションで4,073 seek・停止0、実測3,572.682秒だった。ただし実行中のshell runnerを編集したため、collectorのraw出力後にrunnerが失敗した。blockごとの再生成も行っていない。この走行は[除外理由付きの参考値](results/galaxy-yadif-rank5-one-hour-continuous-excluded-summary.json)として残すが、順位5の合格根拠にも、順位4との効果比較にも使わない。順位5の因果効果には、同じ読み取り専用snapshotとblock再生成条件で別の1時間試験が必要である。
 
@@ -760,7 +766,7 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の補助条件でも、integration `44e06a4`と同じfixtureをWindows内の隔離KonomiTVから配信し、同じ破損位置を反復通過した。1時間を予定した走行は121回目で致命的停止を検出し、120回成功、停止1回で終了した。実測は1,867.642秒、壁時計は2,048.063秒なので、1時間条件を満たした走行ではない。成功した120回の安定確認は中央値734.2ms、最大1,733.1msで、FPS安定復帰失敗は39回だった。
 
-停止時のrVFCはmedia time 123.284288秒から126.887888秒まで壁時計3,791.0ms途切れ、その後127.722055秒から131.892888秒まで5,730.9ms途切れた。media timeの飛びはそれぞれ3,603.6msと4,170.833msで、成功した120回の567.233〜600.600msより大きい。終了時のYADIFはqueue全reset 0、`late` 72、playerは映像649 frame、音声1,060 frameを処理していた。以前確認したYADIF未来時刻列の循環ではrVFCが進み続けていたため、今回の停止は同じ現象ではない。converter、MSE、decoder、Windowsの表示scheduleのどこがrVFC停止を作ったかは未確定である。
+停止時のrVFCはmedia time 123.284288秒から126.887888秒まで壁時計3,791.0ms途切れ、その後127.722055秒から131.892888秒まで5,730.9ms途切れた。media timeの飛びはそれぞれ3,603.6msと4,170.833msで、成功した120回の567.233〜600.600msより大きい。終了時のYADIFはqueue全reset 0、最大queue深さ4、`late` 72、`outputFps` 59.988で、playerは映像649 frame、音声1,060 frameを処理していた。以前確認したGalaxyの循環ではrVFCが進み続け、queue深さ5に張り付いていたため、同じ現象の署名はない。Windows traceにはqueue先頭・末尾の先読みとevent時系列がなく、同一機構ではないと証明することもできない。converter、MSE、decoder、Windowsの表示scheduleのどこがrVFC停止を作ったかは未確定である。
 
 campaign内のruntime終了commandは時間切れになったが、直後の確認では対象portとprocessは残っておらず、再度の停止commandは全processを停止済みと報告した。Chrome、視聴tab、fullscreen、scheduled taskも残っていなかった。Search IndexerとFFmpegは全7回のhost負荷sampleで0だった。[条件、provenance、停止trace、後片付け](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存した。このWindows値は同一電源モード内の比較用であり、Galaxyとの絶対性能比較には使わない。
 
