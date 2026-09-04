@@ -51,7 +51,7 @@ LAN内clientからのシーク完了時間は200ms以下を目標とします。
 - targetとcontrolは同じfixture、SHA-256、設定、経路、表示条件、runnerで比較します。
 - 主計測では録画TSをKonomiTV server側のローカルNVMeへcopyし、copy元とSHA-256を照合します。CIFS経由の絶対時間を主結果へ使いません。
 - source、生成済みdist、KonomiTV client、実配信asset、fixture、runner、collector、validator、summarizerを走行前にhashで固定します。
-- 主張ごとに、その数値を出したbuildを対応付けます。診断build、前身branch、旧integrationの値を現在の評価対象buildへ流用しません。
+- 主張ごとに、その数値を出したbuildを対応付けます。診断buildや別branchの値を評価対象buildへ流用しません。
 - 測定中にbuild、script、fixture、設定を変更した走行や、同一hostのbuild・FFmpeg解析・indexer負荷が混ざった走行は採用しません。
 - GalaxyのLAN絶対時間は端末から隔離serverへLAN直結した結果を使います。`adb reverse`はbrowser、decoder、deinterlacerの確認に限ります。
 - Windowsは指定した同一電源mode内のbranch A/Bに使い、通常設定Windowsや他端末との絶対比較に使いません。
