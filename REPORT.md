@@ -829,11 +829,11 @@ fMP4の`tfdt`と`trun`を直接解析すると、映像trackの先頭decode時�
 
 候補は欠陥時刻を最初にまたぐrVFC映像時刻間隔を1 frame分へ縮めたが、その約200ms後に333.666msの映像時刻間隔が残った。FPS安定復帰までの最大値は基準版の567.233〜600.600msから333.666msへ、canvas最大描画間隔は522.4〜569.6msから317.6〜318.1msへ縮まった。基準版にあったYADIFのdegradedとdiscontinuityも起きなかった。この直接A/Bは同じ詳細計装を使った相対比較であり、絶対時間は低負荷の走行と分けて扱う。欠損したB pictureは`picture_structure=frame`で、`closed_gop=0`かつintra pictureより表示順が前のB pictureを2枚持つopen GOP内にある。したがって実在するopen GOP内の欠損はA/Bの対象だが、field picture欠損ではない。2走行では異常TSの1時間条件、可視scanout、最小限の不可避drop、可聴A/V同期、field picture、画素の正常性を証明しない。[packetとpicture構造](results/nogizaka-transport-defect-localization.json)と[A/B集計・全trace](results/galaxy-anomaly-preserve-complete-pictures-ab.json)を保存した。
 
-公開branchには、interlaced `hd1080i.m2v`とcomplementary B fieldを含む`open_gop_leading_bb.m2v`へ2種類のpacket欠落位置を与えるSession回帰試験を`27eed22`で追加した。現在のtip `e36dd0b`で`cargo fmt --check`と`cargo test --release`を実行し、239件が成功、失敗0件だった。現在のdist `e36dd0b`はGalaxyで測った`f80154f`とruntime source・distがバイト一致し、差分は試験だけである。この固定fixtureは通常のfield pair・open-GOP filterを通るが、実在するfield pair・open GOP破損のブラウザー挙動を一般化しない。
+旧公開branchには、interlaced `hd1080i.m2v`とcomplementary B fieldを含む`open_gop_leading_bb.m2v`へ2種類のpacket欠落位置を与えるSession回帰試験を`27eed22`で追加した。旧branch tip `e36dd0b`で`cargo fmt --check`と`cargo test --release`を実行し、239件が成功、失敗0件だった。同commitのdistはGalaxyで測った`f80154f`とruntime source・distがバイト一致し、差分は試験だけである。この固定fixtureは通常のfield pair・open-GOP filterを通るが、実在するfield pair・open GOP破損のブラウザー挙動を一般化しない。
 
 順位9単独と、公開integration `44e06a4`へ順位9を重ねた検証build `be568d8`で実施した2本の1時間走行は、素材の不一致が判明したため採用しない。結果は`videoId=1`を乃木坂fixtureとして記録していたが、走行前から保存されていた両コンテナのDBでは、ID 1は`madder-24p-clean.ts`、乃木坂fixtureはID 2だった。旧runnerは宣言したfixture名とSHA-256を結果へ転記するだけで、APIのfile size、録画時間、download filename、`Content-Range`の総byte数を照合していなかった。
 
-したがって、順位9単独の223回とintegrationへ重ねた224回から得た致命的停止件数、FPS安定復帰失敗件数、復帰時間を、乃木坂の固定欠損または順位9の効果の根拠には使わない。生のsummaryとblockは測定履歴として残し、[不一致の根拠と影響範囲](results/galaxy-anomaly-rank9-one-hour-fixture-mismatch.json)を別に記録した。再測定では、現行runnerのfail-closed preflightにより、API metadata、download filename、`Content-Range`、fixture SHA-256、video IDがすべて一致した場合だけ走行を開始する。
+したがって、順位9単独の223回とintegrationへ重ねた224回から得た致命的停止件数、FPS安定復帰失敗件数、復帰時間を、乃木坂の固定欠損または順位9の効果の根拠には使わない。生のsummaryとblockは測定履歴として残し、[不一致の根拠と影響範囲](results/galaxy-anomaly-rank9-one-hour-fixture-mismatch.json)を別に記録した。最新`tsukumijima/main`の再測定では、現行runnerのfail-closed preflightにより、API metadata、download filename、`Content-Range`、fixture SHA-256、video IDがすべて一致した場合だけ走行を開始する。
 
 50msと250msの単発main-thread stallでは、両版とも次の1秒窓で約60fpsへ戻り、注入中の全reset増分はなかった。これはrAFとrVFCを同時に止めるため、queue容量差を単独では励起しなかった。正式A/Bの90 seekと、正式制御ロジックへ同一の計測フックだけを加えた容量圧迫3走行の全条件、生値、hash、後片付け結果は[正式build A/B](results/galaxy-yadif-queue-recovery-formal-ab.json)に保存した。[後継候補の実機結果](results/galaxy-yadif-queue-recovery-successor.json)も同じ値へ更新した。
 
