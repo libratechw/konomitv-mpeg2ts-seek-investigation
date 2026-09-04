@@ -707,7 +707,7 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 この1000回pilotだけでは1時間に達しないため、現在の合格判定には使わない。検出器、長時間反復、修正候補の安定性を確認した予備試験として扱う。
 
-固定した試行間隔と表示位相の偏りを避けるため、各`video.currentTime`設定前に0〜33.37msの疑似乱数待ちを加え、blockごとにブラウザー、player、Worker、decoder、MSE、YADIFを作り直す自動試験を行った。正式候補の最初のblockは258回目に致命的停止を1件検出したため、その時点で自動停止した。`seeked`は250.3ms、目的rVFCは253.5msで成立し、2.5秒の観測中にdecoderは65 frame進んだが、canvasの最大描画間隔は1615ms、YADIFの`late`は25→91、queue全resetは4→5、終了時`outputFps`は0だった。1時間以内に停止を検出したため、正式候補は現在の合格条件を満たさない。[位相分散試験の失敗記録](results/galaxy-fatal-yadif-formal-phase-randomized-failure.json)を保存した。
+固定した試行間隔と表示更新に対するシーク開始時点の偏りを避けるため、各`video.currentTime`設定前に0〜33.37msの疑似乱数待ちを加え、blockごとにブラウザー、player、Worker、decoder、MSE、YADIFを作り直す自動試験を行った。正式候補の最初のblockは258回目に致命的停止を1件検出したため、その時点で自動停止した。`seeked`は250.3ms、目的rVFCは253.5msで成立し、2.5秒の観測中にdecoderは65 frame進んだが、canvasの最大描画間隔は1615ms、YADIFの`late`は25→91、queue全resetは4→5、終了時`outputFps`は0だった。1時間以内に停止を検出したため、正式候補は現在の合格条件を満たさない。[シーク前待ち時間を変えた試験の失敗記録](results/galaxy-fatal-yadif-formal-phase-randomized-failure.json)を保存した。
 
 同じseed、同じ258回目を含む300回を診断計測付きで再生すると停止は再現せず、該当seekは735.8msで安定復帰した。地点と要求列だけで決まる事象ではない。[300回の再現試行](results/galaxy-fatal-yadif-formal-diagnostic-replay-300.json)も保存し、rAF、rVFC、WebGL直接描画を時系列記録する反復診断を続ける。
 
@@ -725,19 +725,19 @@ queue容量確保と未来時刻列の再同期だけを分けた正式候補sou
 
 同じ正式buildでChrome、page、player、Worker、decoder、MSE、YADIFを1,000 seekごとに作り直す1時間試験は、5 session、実測3491.416秒で4,399 seekすべてが復帰した。ただし最初のblock中に、同じLinuxホストで上の順位5診断buildを実行した。発生した追加負荷を分離できないため、[高負荷を含む参考結果](results/galaxy-yadif-rank5-one-hour-high-load-reference.json)として残し、無負荷の1時間合格根拠には使わない。
 
-順位5の正式build source `7ef6696` / dist `ac2a2a9`を最新KonomiTV `7307e0ec39aed6a4772908cdbfb44223da42be6d`へ組み込み、同じrunner、collector、fixture、位相分散、block再生成条件で無負荷の1時間試験を行った。5 session、実測3,486.728秒で4,415回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。安定復帰時間は中央値661.2ms、p95 804.0ms、最大1,213.5msだった。全blockの終了後に動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-yadif-rank5-latest-one-hour-summary.json)および[5 blockの生値](results/galaxy-yadif-rank5-latest-one-hour-block-000.json)を保存した。
+順位5の正式build source `7ef6696` / dist `ac2a2a9`を最新KonomiTV `7307e0ec39aed6a4772908cdbfb44223da42be6d`へ組み込み、同じrunner、collector、fixture、各試行のシーク前待ち時間の列、block再生成条件で無負荷の1時間試験を行った。5 session、実測3,486.728秒で4,415回すべてが2秒以内に安定復帰し、致命的な表示停止は0件だった。安定復帰時間は中央値661.2ms、p95 804.0ms、最大1,213.5msだった。全blockの終了後に動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[集計とblock hash](results/galaxy-yadif-rank5-latest-one-hour-summary.json)および[5 blockの生値](results/galaxy-yadif-rank5-latest-one-hour-block-000.json)を保存した。
 
 順位4の1時間試験はKonomiTV `e92fba8bb219589c8e4ada9609ed4a9d91b33c00`、順位5の上記試験は`7307e0e`であり、runner、collector、fixtureは一致するがKonomiTV revisionは一致しない。このため、順位5が現行の1時間条件を満たす根拠には使うが、3,008回目の停止が0件になった差を順位5だけの効果とは扱わない。順位5の因果効果は、同一計装、同一seed、同一目的時刻でFIFO破棄104→4 field、致命的停止→508.5msからの安定描画となった比較で評価する。
 
-現在のintegration全体を正確に組み込んだbuildでは、同じseedと位相分散条件の1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
+現在のintegration全体を正確に組み込んだbuildでは、同じseedと各試行のシーク前待ち時間の列による1000回すべてが2秒以内に安定復帰した。安定復帰時間は中央値614.4ms、p95 774.6ms、最大979.3msだった。この予備試験は走行時間が1時間に達しないため、単独では合格判定に使わない。[build manifest](results/galaxy-integration-exact-build-manifest.json)と[1000回の各試行](results/galaxy-integration-exact-fatal-phase-randomized-1000.json)を保存した。
 
-最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、目的時刻、位相分散条件で比較した。隔離backend imageは`e92fba8`だが、`e92fba8..7307e0e`の`server/`に差分はない。基準版は54回目に致命的な表示停止を検出し、53回の成功後に試験を終了した。integrationは最大1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,456.840秒で4,732回すべてが2秒以内に安定復帰した。壁時計では3,575.590秒で、致命的な表示停止は0件だった。基準版が停止した54回目と同じ目的時刻と位相では、integrationは418.7msで安定復帰した。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[同条件比較と各blockのhash](results/galaxy-formal-current-integration-comparison.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
+最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、目的時刻、各試行のシーク前待ち時間の列で比較した。隔離backend imageは`e92fba8`だが、`e92fba8..7307e0e`の`server/`に差分はない。基準版は54回目に致命的な表示停止を検出し、53回の成功後に試験を終了した。integrationは最大1,000 seekごとにChrome、page、player、Worker、decoder、MSE、YADIFを作り直し、5 session、実測3,456.840秒で4,732回すべてが2秒以内に安定復帰した。壁時計では3,575.590秒で、致命的な表示停止は0件だった。基準版が停止した54回目と同じ目的時刻とシーク前待ち時間では、integrationは418.7msで安定復帰した。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome停止、ADB forward解除、container停止を確認した。[同条件比較と各blockのhash](results/galaxy-formal-current-integration-comparison.json)を保存した。この結果は正常区間の反復seekに対する1時間条件を満たすが、正常TSの1時間連続再生や異常TSの1時間試験を兼ねない。
 
 同じbuildで既知の破損video packetを1回横切る15秒traceを取得した。入力rVFCは125.019秒から125.587秒へ567.233ms進み、canvasの最大描画間隔は521.9msだった。表示は安定条件へ863.0msで復帰し、利用者操作、再seek、playback error、visibility変更はなかったため、この単発走行に致命的な表示停止はない。
 
 表示進行の復帰直後にはdecoderの追いつきを含むため、定常cadenceと分けた。3秒以上にわたり期待値の±1%かつ40ms超の間隔0回となる最初の窓は欠陥直前から1,615ms後に始まり、4,627.5ms後に確認できた。trace末尾5秒のcanvas描画は60.01fpsで、期待値59.94fpsとの差は0.11%、40ms超は0回だった。一方、この窓でもChromeのdrop counterが2、YADIFの`late`が1増え、最大描画間隔は30.5msだった。canvasのdraw呼出しはcompositorのscanoutを証明しないため、可視コマ落ち0とは判定しない。
 
-最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、seek時刻、欠陥時刻、位相列でこの破損packetを直接比較した。基準版は2回目に致命的な表示停止を検出し、1回の成功後に試験を終了した。integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、p95 940.2ms、最大1,088.1msだった。同じ先頭2回では、基準版の2回目だけが停止し、integrationの対応する試行は920.1msで復帰した。
+最新KonomiTV client `7307e0e`へ基準版`52a3db5`とintegration `44e06a4`をそれぞれ組み込み、同じfixture、runner、seed、seek時刻、欠陥時刻、各試行のシーク前待ち時間の列でこの破損packetを直接比較した。基準版は2回目に致命的な表示停止を検出し、1回の成功後に試験を終了した。integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、p95 940.2ms、最大1,088.1msだった。同じ先頭2回では、基準版の2回目だけが停止し、integrationの対応する試行は920.1msで復帰した。
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fps、範囲52.94〜55.62fpsだった。integrationも期待値60000/1001fpsの±1%かつ40ms超の描画間隔0回という判定を20回すべてで満たさなかった。音声decode byteは基準版2/2、integration 20/20で増えたが、可聴A/V同期は測っていない。全blockで動画停止、fullscreen解除、検証tab閉鎖、Chrome、WebAPK、ADB forward、隔離KonomiTVの停止を確認した。[直接比較、生値hash、集計条件](results/galaxy-formal-current-integration-comparison.json)を保存した。
 
@@ -747,7 +747,7 @@ Windows 11、Chrome 152、60Hz、電源モード「最適な電力効率」の�
 
 campaign内のruntime終了commandは時間切れになったが、直後の確認では対象portとprocessは残っておらず、再度の停止commandは全processを停止済みと報告した。Chrome、視聴tab、fullscreen、scheduled taskも残っていなかった。Search IndexerとFFmpegは全7回のhost負荷sampleで0だった。[条件、provenance、停止trace、後片付け](results/windows-anomaly-integration-44e06a4-until-fatal.json)を保存した。このWindows値は同一電源モード内の比較用であり、Galaxyとの絶対性能比較には使わない。
 
-同じWindows buildへ診断計装を加え、停止時と同じseed `26260932`、同じ31.566msの位相を、新しいclient sessionの先頭試行で再実行した。今回はシーク完了時間574.0ms、異常区間のrVFC gap 565.3ms、安定確認743.4msで復帰し、致命的停止は再現しなかった。したがって、停止はseedと位相だけでは決まらず、client sessionやdecoder状態など別の状態変数を切り分ける必要がある。診断計装付き3試行は致命的停止0件、FPS安定復帰失敗1件だったが、発生率や正式なシーク完了時間には使わない。[同seedの診断結果](results/windows-anomaly-fatal-seed-diagnostic.json)を保存した。
+同じWindows buildへ診断計装を加え、停止時と同じseed `26260932`、同じ31.566msのシーク前待ち時間を、新しいclient sessionの先頭試行で再実行した。今回はシーク完了時間574.0ms、異常区間のrVFC gap 565.3ms、安定確認743.4msで復帰し、致命的停止は再現しなかった。したがって、停止はseedとシーク前待ち時間だけでは決まらず、client sessionやdecoder状態など別の状態変数を切り分ける必要がある。診断計装付き3試行は致命的停止0件、FPS安定復帰失敗1件だったが、発生率や正式なシーク完了時間には使わない。[同seedの診断結果](results/windows-anomaly-fatal-seed-diagnostic.json)を保存した。
 
 音声decodeは欠陥区間後69.4msで進んだが、独立した可聴音声clockを取得していないためA/V同期は未証明である。欠落packetと全復号依存frameの対応も未確定なので、17個の`droppedVideoFrames`が避けられない最小範囲であるとは主張しない。[schema version 2の解析](results/galaxy-integration-current-v3-anomalous-recovery-analysis.json)と[生trace](results/galaxy-integration-current-v3-anomalous-recovery-trace.json)を保存した。[解析器](scripts/analyze-anomalous-recovery-v2.mjs)と[回帰試験](scripts/test-anomalous-recovery-v2.mjs)も同じリポジトリで公開している。
 

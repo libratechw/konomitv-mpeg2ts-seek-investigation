@@ -89,13 +89,13 @@ blockごとにブラウザーとplayer各層を作り直す別の1時間試験�
 順位5の正式buildを最新KonomiTVへ組み込んだ無負荷の1時間試験では、4,415回のseekすべてが2秒以内に安定復帰し、致命的な表示停止は0件でした。
 この結果は順位5の1時間条件を満たしますが、順位4の1時間試験とはKonomiTV revisionが異なるため、停止率の差を順位5だけの効果とは扱いません。[集計と各blockの生値](results/galaxy-yadif-rank5-latest-one-hour-summary.json)を公開しています。
 
-KonomiTV client `7307e0e`へ基準版`52a3db5`と現在のintegrationをそれぞれ組み込み、同じfixture、runner、seed、目的時刻、位相分散条件で比較しました。
+KonomiTV client `7307e0e`へ基準版`52a3db5`と現在のintegrationをそれぞれ組み込み、同じfixture、runner、seed、目的時刻、各試行のシーク前待ち時間の列で比較しました。
 基準版は54回目に致命的な表示停止を起こして終了し、integrationは1時間で4,732回すべてが2秒以内に安定復帰しました。
-基準版が停止した54回目と同じ目的時刻と位相では、integrationは418.7msで安定復帰しました。
+基準版が停止した54回目と同じ目的時刻とシーク前待ち時間では、integrationは418.7msで安定復帰しました。
 この試験は正常区間だけを選ぶ反復seekであり、正常TSの1時間連続再生や異常TSの1時間試験を兼ねません。
 [同条件比較と各blockの生値](results/galaxy-formal-current-integration-comparison.json)を公開しています。
 
-同じKonomiTV client、fixture、runner、seed、位相列で既知の破損video packetを反復して横切ると、基準版は2回目に致命的な表示停止を起こし、そこで試験を終了しました。
+同じKonomiTV client、fixture、runner、seed、各試行のシーク前待ち時間の列で既知の破損video packetを反復して横切ると、基準版は2回目に致命的な表示停止を起こし、そこで試験を終了しました。
 integrationは20回すべてが2秒以内に安定復帰し、安定復帰時間は中央値911.0ms、最大1,088.1msでした。
 
 復帰後約3秒のcanvas FPSは、基準版で成功した1回が22.16fps、integrationは中央値53.94fpsでした。
