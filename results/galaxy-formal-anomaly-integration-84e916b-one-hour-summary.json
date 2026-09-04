@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "purpose": "Public compact projection of the validated one-hour anomalous-TS campaign; full draw histories remain identified by their hashes.",
   "identity": {
     "variant": "integration-84e916b-anomaly-v2",
@@ -29,7 +29,7 @@
     "wsDependencySha256": "45f0ef50305949cd0d6378434022f8a7122979da6a32df77089c48ebce7a9330"
   },
   "result": {
-    "status": "failed",
+    "status": "inconclusive",
     "durationSeconds": 3600,
     "scheduledMeasurementWindowSeconds": 3570,
     "wallClockElapsedSeconds": 3579.78,
@@ -38,7 +38,7 @@
     "attemptedCrossings": 229,
     "completedCrossings": 229,
     "fatalStops": 0,
-    "cadenceFailures": 229,
+    "immediatePostRecoveryWindowFailures": 229,
     "blockCount": 1,
     "clientSessionCount": 1,
     "betweenBlockResetCount": 0,
@@ -92,7 +92,7 @@
       "maximum": 631.3999999761581,
       "mean": 591.7720524062236
     },
-    "postRecoveryDrawFps": {
+    "immediatePostRecoveryDrawFps": {
       "count": 229,
       "minimum": 52.633343391080786,
       "median": 53.95080758576081,
@@ -102,7 +102,7 @@
       "maximum": 56.98578707564895,
       "mean": 54.10571566787417
     },
-    "postRecoveryMaximumDrawIntervalMs": {
+    "immediatePostRecoveryMaximumDrawIntervalMs": {
       "count": 229,
       "minimum": 34.5,
       "median": 38.59999990463257,
@@ -133,10 +133,10 @@
       "success": true,
       "validatedBlockCount": 1
     },
-    "acceptanceCriterion": "No fatal display stop and no post-recovery cadence failure are detected during one bounded hour of repeated crossings of the fixed transport defect.",
+    "acceptanceAssessment": "The fatal-stop criterion passed. Full FPS stable recovery is inconclusive because the collector did not search for a qualifying window after its immediate post-recovery sample.",
     "fatalDefinition": "stable display did not recover within 2000 ms of the final pre-defect video callback without another user operation",
     "stableDefinition": "eight consecutive visible direct canvas draws spanning at least 100 ms with no gap over 50 ms",
-    "cadenceCriterion": "After stable recovery is confirmed, at least 2.9 seconds within 1% of 60000/1001 fps with no direct canvas draw interval over 40 ms.",
+    "immediateWindowCriterion": "The approximately three-second window beginning immediately after stable display confirmation is within 1% of 60000/1001 fps with no direct canvas draw interval over 40 ms.",
     "scope": "This gate proves repeated browser recovery at the instrumented canvas boundary. It does not prove compositor scanout, audible A/V synchronization, pixel correctness, or that every dropped frame is unavoidable from the damaged input."
   },
   "trials": [
@@ -155,7 +155,7 @@
         "confirmedMs": 863.7000000476837,
         "maximumDrawGapMs": 37.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.5,
         "drawCount": 162,
         "drawFps": 53.67561260210035,
@@ -182,7 +182,7 @@
         "confirmedMs": 909.1000000238419,
         "maximumDrawGapMs": 37.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2996.7000000476837,
         "drawCount": 162,
         "drawFps": 53.725765007320774,
@@ -209,7 +209,7 @@
         "confirmedMs": 927.2000000476837,
         "maximumDrawGapMs": 34
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.6999999284744,
         "drawCount": 165,
         "drawFps": 54.672133881358285,
@@ -236,7 +236,7 @@
         "confirmedMs": 939.2999999523163,
         "maximumDrawGapMs": 34.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.100000023842,
         "drawCount": 162,
         "drawFps": 53.898429914872274,
@@ -263,7 +263,7 @@
         "confirmedMs": 853.7000000476837,
         "maximumDrawGapMs": 49.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.899999976158,
         "drawCount": 165,
         "drawFps": 54.980052969027064,
@@ -290,7 +290,7 @@
         "confirmedMs": 881.5,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.399999976158,
         "drawCount": 161,
         "drawFps": 53.630086478943035,
@@ -317,7 +317,7 @@
         "confirmedMs": 900.6000000238419,
         "maximumDrawGapMs": 36.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.8000000715256,
         "drawCount": 162,
         "drawFps": 53.88580226124432,
@@ -344,7 +344,7 @@
         "confirmedMs": 940.1999999284744,
         "maximumDrawGapMs": 39.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.600000023842,
         "drawCount": 162,
         "drawFps": 53.907453290937774,
@@ -371,7 +371,7 @@
         "confirmedMs": 939.1999999284744,
         "maximumDrawGapMs": 37.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.9000000953674,
         "drawCount": 162,
         "drawFps": 53.902038901489675,
@@ -398,7 +398,7 @@
         "confirmedMs": 921.3000000715256,
         "maximumDrawGapMs": 34.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.1999999284744,
         "drawCount": 162,
         "drawFps": 53.96889246576165,
@@ -425,7 +425,7 @@
         "confirmedMs": 939.5999999046326,
         "maximumDrawGapMs": 36.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.2000000476837,
         "drawCount": 162,
         "drawFps": 53.89662560171063,
@@ -452,7 +452,7 @@
         "confirmedMs": 853.2999999523163,
         "maximumDrawGapMs": 33.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.7000000476837,
         "drawCount": 165,
         "drawFps": 55.00217996357021,
@@ -479,7 +479,7 @@
         "confirmedMs": 845.6000000238419,
         "maximumDrawGapMs": 50
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.100000023842,
         "drawCount": 163,
         "drawFps": 54.34235684770869,
@@ -506,7 +506,7 @@
         "confirmedMs": 1001.6000000238419,
         "maximumDrawGapMs": 50
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.8000000715256,
         "drawCount": 168,
         "drawFps": 55.91268246819366,
@@ -533,7 +533,7 @@
         "confirmedMs": 939.2999999523163,
         "maximumDrawGapMs": 40.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.7000000476837,
         "drawCount": 163,
         "drawFps": 54.00540053919553,
@@ -560,7 +560,7 @@
         "confirmedMs": 902.1000000238419,
         "maximumDrawGapMs": 34.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984,
         "drawCount": 162,
         "drawFps": 53.9544235924933,
@@ -587,7 +587,7 @@
         "confirmedMs": 788.1000000238419,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.6999999284744,
         "drawCount": 161,
         "drawFps": 53.64267274745594,
@@ -614,7 +614,7 @@
         "confirmedMs": 931.8999999761581,
         "maximumDrawGapMs": 36.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989,
         "drawCount": 162,
         "drawFps": 53.86416861826698,
@@ -641,7 +641,7 @@
         "confirmedMs": 901.5,
         "maximumDrawGapMs": 37.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999,
         "drawCount": 163,
         "drawFps": 54.01800600200067,
@@ -668,7 +668,7 @@
         "confirmedMs": 933.6000000238419,
         "maximumDrawGapMs": 36.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.7000000476837,
         "drawCount": 163,
         "drawFps": 54.29500284794417,
@@ -695,7 +695,7 @@
         "confirmedMs": 927.9000000953674,
         "maximumDrawGapMs": 38.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.899999976158,
         "drawCount": 162,
         "drawFps": 53.68635166270298,
@@ -722,7 +722,7 @@
         "confirmedMs": 915.7000000476837,
         "maximumDrawGapMs": 37.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981,
         "drawCount": 162,
         "drawFps": 54.008721905400876,
@@ -749,7 +749,7 @@
         "confirmedMs": 929.1000000238419,
         "maximumDrawGapMs": 34.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.2000000476837,
         "drawCount": 164,
         "drawFps": 54.52964003659836,
@@ -776,7 +776,7 @@
         "confirmedMs": 937.1999999284744,
         "maximumDrawGapMs": 36.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.5,
         "drawCount": 162,
         "drawFps": 54.01778225130012,
@@ -803,7 +803,7 @@
         "confirmedMs": 936.9000000953674,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.6999999284744,
         "drawCount": 163,
         "drawFps": 54.00540054134172,
@@ -830,7 +830,7 @@
         "confirmedMs": 908.5,
         "maximumDrawGapMs": 33.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.5,
         "drawCount": 163,
         "drawFps": 54.24409844299347,
@@ -857,7 +857,7 @@
         "confirmedMs": 855,
         "maximumDrawGapMs": 49.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.5,
         "drawCount": 163,
         "drawFps": 54.29864253393665,
@@ -884,7 +884,7 @@
         "confirmedMs": 934.3999999761581,
         "maximumDrawGapMs": 34.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990.5,
         "drawCount": 162,
         "drawFps": 53.837150978097306,
@@ -911,7 +911,7 @@
         "confirmedMs": 843.3000000715256,
         "maximumDrawGapMs": 33.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.5,
         "drawCount": 160,
         "drawFps": 53.310980720871754,
@@ -938,7 +938,7 @@
         "confirmedMs": 941.2999999523163,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.600000023842,
         "drawCount": 161,
         "drawFps": 53.35823384203557,
@@ -965,7 +965,7 @@
         "confirmedMs": 929.8000000715256,
         "maximumDrawGapMs": 33.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.399999976158,
         "drawCount": 163,
         "drawFps": 54.01080216086141,
@@ -992,7 +992,7 @@
         "confirmedMs": 799.4000000953674,
         "maximumDrawGapMs": 33.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.6999999284744,
         "drawCount": 163,
         "drawFps": 54.04143176564211,
@@ -1019,7 +1019,7 @@
         "confirmedMs": 935.9000000953674,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.0999999046326,
         "drawCount": 162,
         "drawFps": 53.88039222420215,
@@ -1046,7 +1046,7 @@
         "confirmedMs": 940.1000000238419,
         "maximumDrawGapMs": 38
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.7000000476837,
         "drawCount": 162,
         "drawFps": 53.923702983363604,
@@ -1073,7 +1073,7 @@
         "confirmedMs": 920.1000000238419,
         "maximumDrawGapMs": 37.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.2000000476837,
         "drawCount": 162,
         "drawFps": 53.89662560171063,
@@ -1100,7 +1100,7 @@
         "confirmedMs": 938.7999999523163,
         "maximumDrawGapMs": 38.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.7000000476837,
         "drawCount": 162,
         "drawFps": 53.869575399816405,
@@ -1127,7 +1127,7 @@
         "confirmedMs": 939.2999999523163,
         "maximumDrawGapMs": 36.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.7999999523163,
         "drawCount": 161,
         "drawFps": 53.372473147823406,
@@ -1154,7 +1154,7 @@
         "confirmedMs": 925.6000000238419,
         "maximumDrawGapMs": 35.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.8000000715256,
         "drawCount": 162,
         "drawFps": 53.99423167084916,
@@ -1181,7 +1181,7 @@
         "confirmedMs": 952.3999999761581,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990.5,
         "drawCount": 162,
         "drawFps": 53.837150978097306,
@@ -1208,7 +1208,7 @@
         "confirmedMs": 924.5,
         "maximumDrawGapMs": 35.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.2999999523163,
         "drawCount": 162,
         "drawFps": 54.02140724174611,
@@ -1235,7 +1235,7 @@
         "confirmedMs": 901.8999999761581,
         "maximumDrawGapMs": 49.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.7000000476837,
         "drawCount": 166,
         "drawFps": 55.18948389382492,
@@ -1262,7 +1262,7 @@
         "confirmedMs": 931.1000000238419,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.5,
         "drawCount": 163,
         "drawFps": 54.045037531276066,
@@ -1289,7 +1289,7 @@
         "confirmedMs": 933.7999999523163,
         "maximumDrawGapMs": 34.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 163,
         "drawFps": 54,
@@ -1316,7 +1316,7 @@
         "confirmedMs": 804.3000000715256,
         "maximumDrawGapMs": 49.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 163,
         "drawFps": 54.016204861029024,
@@ -1343,7 +1343,7 @@
         "confirmedMs": 938.9000000953674,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.899999976158,
         "drawCount": 163,
         "drawFps": 54.18241412799485,
@@ -1370,7 +1370,7 @@
         "confirmedMs": 938.2999999523163,
         "maximumDrawGapMs": 35.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.2000000476837,
         "drawCount": 162,
         "drawFps": 53.86056469872599,
@@ -1397,7 +1397,7 @@
         "confirmedMs": 944,
         "maximumDrawGapMs": 39.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.8000000715256,
         "drawCount": 161,
         "drawFps": 53.55110783726144,
@@ -1424,7 +1424,7 @@
         "confirmedMs": 956.3999999761581,
         "maximumDrawGapMs": 39
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.399999976158,
         "drawCount": 161,
         "drawFps": 53.630086478943035,
@@ -1451,7 +1451,7 @@
         "confirmedMs": 932.2999999523163,
         "maximumDrawGapMs": 36.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 163,
         "drawFps": 54.00180006043118,
@@ -1478,7 +1478,7 @@
         "confirmedMs": 938.6000000238419,
         "maximumDrawGapMs": 35.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.399999976158,
         "drawCount": 160,
         "drawFps": 53.20572881852112,
@@ -1505,7 +1505,7 @@
         "confirmedMs": 956.6000000238419,
         "maximumDrawGapMs": 38.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 163,
         "drawFps": 54.00180006043118,
@@ -1532,7 +1532,7 @@
         "confirmedMs": 931,
         "maximumDrawGapMs": 36.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990.399999976158,
         "drawCount": 162,
         "drawFps": 53.83895131129067,
@@ -1559,7 +1559,7 @@
         "confirmedMs": 934.3999999761581,
         "maximumDrawGapMs": 39
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.100000023842,
         "drawCount": 162,
         "drawFps": 53.916479688796265,
@@ -1586,7 +1586,7 @@
         "confirmedMs": 920,
         "maximumDrawGapMs": 35.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.7999999523163,
         "drawCount": 163,
         "drawFps": 54.00360024087442,
@@ -1613,7 +1613,7 @@
         "confirmedMs": 920.8999999761581,
         "maximumDrawGapMs": 35.40000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.3000000715256,
         "drawCount": 163,
         "drawFps": 54.0126029393981,
@@ -1640,7 +1640,7 @@
         "confirmedMs": 929.6000000238419,
         "maximumDrawGapMs": 34
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.2000000476837,
         "drawCount": 162,
         "drawFps": 53.68098159423856,
@@ -1667,7 +1667,7 @@
         "confirmedMs": 921.2000000476837,
         "maximumDrawGapMs": 35.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.399999976158,
         "drawCount": 162,
         "drawFps": 53.89301733992264,
@@ -1694,7 +1694,7 @@
         "confirmedMs": 905.8999999761581,
         "maximumDrawGapMs": 35.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.2000000476837,
         "drawCount": 162,
         "drawFps": 53.698885997411594,
@@ -1721,7 +1721,7 @@
         "confirmedMs": 887.1999999284744,
         "maximumDrawGapMs": 35.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.600000023842,
         "drawCount": 162,
         "drawFps": 53.94357702831665,
@@ -1748,7 +1748,7 @@
         "confirmedMs": 940,
         "maximumDrawGapMs": 34.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987,
         "drawCount": 162,
         "drawFps": 53.900234348845,
@@ -1775,7 +1775,7 @@
         "confirmedMs": 949.7999999523163,
         "maximumDrawGapMs": 34.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.899999976158,
         "drawCount": 162,
         "drawFps": 53.90203890364094,
@@ -1802,7 +1802,7 @@
         "confirmedMs": 787.2999999523163,
         "maximumDrawGapMs": 33.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.9000000953674,
         "drawCount": 161,
         "drawFps": 53.62109990109799,
@@ -1829,7 +1829,7 @@
         "confirmedMs": 932.7000000476837,
         "maximumDrawGapMs": 34.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.600000023842,
         "drawCount": 163,
         "drawFps": 54.00720095969875,
@@ -1856,7 +1856,7 @@
         "confirmedMs": 896.2999999523163,
         "maximumDrawGapMs": 35.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.399999976158,
         "drawCount": 161,
         "drawFps": 53.34400213418411,
@@ -1883,7 +1883,7 @@
         "confirmedMs": 921.0999999046326,
         "maximumDrawGapMs": 35.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.100000023842,
         "drawCount": 161,
         "drawFps": 53.38493877372367,
@@ -1910,7 +1910,7 @@
         "confirmedMs": 925.1000000238419,
         "maximumDrawGapMs": 35.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 163,
         "drawFps": 54,
@@ -1937,7 +1937,7 @@
         "confirmedMs": 939,
         "maximumDrawGapMs": 36
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 163,
         "drawFps": 54,
@@ -1964,7 +1964,7 @@
         "confirmedMs": 780.2999999523163,
         "maximumDrawGapMs": 49.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.2000000476837,
         "drawCount": 161,
         "drawFps": 53.597748893690294,
@@ -1991,7 +1991,7 @@
         "confirmedMs": 910.1000000238419,
         "maximumDrawGapMs": 35
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.7000000476837,
         "drawCount": 162,
         "drawFps": 53.923702983363604,
@@ -2018,7 +2018,7 @@
         "confirmedMs": 880.1000000238419,
         "maximumDrawGapMs": 36.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.2999999523163,
         "drawCount": 162,
         "drawFps": 53.96708343196237,
@@ -2045,7 +2045,7 @@
         "confirmedMs": 834.8000000715256,
         "maximumDrawGapMs": 32.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 165,
         "drawFps": 54.668488950066134,
@@ -2072,7 +2072,7 @@
         "confirmedMs": 934.6999999284744,
         "maximumDrawGapMs": 35.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.8000000715256,
         "drawCount": 163,
         "drawFps": 54.00360023872837,
@@ -2099,7 +2099,7 @@
         "confirmedMs": 922.9000000953674,
         "maximumDrawGapMs": 34
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.7999999523163,
         "drawCount": 162,
         "drawFps": 53.86777302013136,
@@ -2126,7 +2126,7 @@
         "confirmedMs": 908.1000000238419,
         "maximumDrawGapMs": 34.40000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.8000000715256,
         "drawCount": 164,
         "drawFps": 54.336955795757554,
@@ -2153,7 +2153,7 @@
         "confirmedMs": 788.3999999761581,
         "maximumDrawGapMs": 50
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.899999976158,
         "drawCount": 161,
         "drawFps": 53.6210999032402,
@@ -2180,7 +2180,7 @@
         "confirmedMs": 879.3000000715256,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.5,
         "drawCount": 162,
         "drawFps": 53.90925832914783,
@@ -2207,7 +2207,7 @@
         "confirmedMs": 951.2999999523163,
         "maximumDrawGapMs": 39.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.5,
         "drawCount": 163,
         "drawFps": 54.009001500250044,
@@ -2234,7 +2234,7 @@
         "confirmedMs": 936,
         "maximumDrawGapMs": 35
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2991.100000023842,
         "drawCount": 162,
         "drawFps": 53.826351509049076,
@@ -2261,7 +2261,7 @@
         "confirmedMs": 903,
         "maximumDrawGapMs": 37.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983,
         "drawCount": 162,
         "drawFps": 53.97251089507208,
@@ -2288,7 +2288,7 @@
         "confirmedMs": 922.3999999761581,
         "maximumDrawGapMs": 34.40000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.100000023842,
         "drawCount": 162,
         "drawFps": 53.86236659821211,
@@ -2315,7 +2315,7 @@
         "confirmedMs": 879.2000000476837,
         "maximumDrawGapMs": 35
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.100000023842,
         "drawCount": 162,
         "drawFps": 53.970701618689695,
@@ -2342,7 +2342,7 @@
         "confirmedMs": 1086.8000000715256,
         "maximumDrawGapMs": 49
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.5,
         "drawCount": 169,
         "drawFps": 56.3097033685269,
@@ -2369,7 +2369,7 @@
         "confirmedMs": 934.1999999284744,
         "maximumDrawGapMs": 38.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990,
         "drawCount": 162,
         "drawFps": 53.84615384615385,
@@ -2396,7 +2396,7 @@
         "confirmedMs": 921.5,
         "maximumDrawGapMs": 37.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.899999976158,
         "drawCount": 162,
         "drawFps": 53.920091095242825,
@@ -2423,7 +2423,7 @@
         "confirmedMs": 900.5,
         "maximumDrawGapMs": 35.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7999999523163,
         "drawCount": 161,
         "drawFps": 53.64087434710936,
@@ -2450,7 +2450,7 @@
         "confirmedMs": 792,
         "maximumDrawGapMs": 34.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984,
         "drawCount": 161,
         "drawFps": 53.61930294906166,
@@ -2477,7 +2477,7 @@
         "confirmedMs": 991.5,
         "maximumDrawGapMs": 48.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 169,
         "drawFps": 56.01680504106714,
@@ -2504,7 +2504,7 @@
         "confirmedMs": 924.3999999761581,
         "maximumDrawGapMs": 36.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.2000000476837,
         "drawCount": 162,
         "drawFps": 53.95080758576081,
@@ -2531,7 +2531,7 @@
         "confirmedMs": 885.1999999284744,
         "maximumDrawGapMs": 33.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.600000023842,
         "drawCount": 165,
         "drawFps": 54.9671537735251,
@@ -2558,7 +2558,7 @@
         "confirmedMs": 925.6000000238419,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 163,
         "drawFps": 54.00180006043118,
@@ -2585,7 +2585,7 @@
         "confirmedMs": 917.5,
         "maximumDrawGapMs": 35.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7000000476837,
         "drawCount": 162,
         "drawFps": 53.97793944997021,
@@ -2612,7 +2612,7 @@
         "confirmedMs": 974.2999999523163,
         "maximumDrawGapMs": 49.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985,
         "drawCount": 165,
         "drawFps": 54.94137353433836,
@@ -2639,7 +2639,7 @@
         "confirmedMs": 934.6999999284744,
         "maximumDrawGapMs": 35.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.8000000715256,
         "drawCount": 162,
         "drawFps": 53.95804008182205,
@@ -2666,7 +2666,7 @@
         "confirmedMs": 852.8999999761581,
         "maximumDrawGapMs": 49.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.100000023842,
         "drawCount": 165,
         "drawFps": 54.97636686624292,
@@ -2693,7 +2693,7 @@
         "confirmedMs": 950.7000000476837,
         "maximumDrawGapMs": 39.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.6999999284744,
         "drawCount": 162,
         "drawFps": 53.90564837575104,
@@ -2720,7 +2720,7 @@
         "confirmedMs": 804.2000000476837,
         "maximumDrawGapMs": 34.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.600000023842,
         "drawCount": 163,
         "drawFps": 54.00720095969875,
@@ -2747,7 +2747,7 @@
         "confirmedMs": 894.1000000238419,
         "maximumDrawGapMs": 34.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.600000023842,
         "drawCount": 162,
         "drawFps": 53.87137790226715,
@@ -2774,7 +2774,7 @@
         "confirmedMs": 955.4000000953674,
         "maximumDrawGapMs": 38.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.7999999523163,
         "drawCount": 162,
         "drawFps": 53.90384357927224,
@@ -2801,7 +2801,7 @@
         "confirmedMs": 978.5,
         "maximumDrawGapMs": 48.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.7999999523163,
         "drawCount": 166,
         "drawFps": 55.20610278460668,
@@ -2828,7 +2828,7 @@
         "confirmedMs": 920.5,
         "maximumDrawGapMs": 34.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.5,
         "drawCount": 161,
         "drawFps": 53.62828892240657,
@@ -2855,7 +2855,7 @@
         "confirmedMs": 1058.2000000476837,
         "maximumDrawGapMs": 49.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.5999999046326,
         "drawCount": 167,
         "drawFps": 55.69348453509741,
@@ -2882,7 +2882,7 @@
         "confirmedMs": 900,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983,
         "drawCount": 162,
         "drawFps": 53.97251089507208,
@@ -2909,7 +2909,7 @@
         "confirmedMs": 936,
         "maximumDrawGapMs": 34.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 163,
         "drawFps": 54.00180006043118,
@@ -2936,7 +2936,7 @@
         "confirmedMs": 806.6000000238419,
         "maximumDrawGapMs": 34.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.7999999523163,
         "drawCount": 162,
         "drawFps": 53.8858022633943,
@@ -2963,7 +2963,7 @@
         "confirmedMs": 926.3999999761581,
         "maximumDrawGapMs": 37
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 162,
         "drawFps": 53.682771497689345,
@@ -2990,7 +2990,7 @@
         "confirmedMs": 925.3999999761581,
         "maximumDrawGapMs": 37.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.100000023842,
         "drawCount": 162,
         "drawFps": 53.898429914872274,
@@ -3017,7 +3017,7 @@
         "confirmedMs": 789.3000000715256,
         "maximumDrawGapMs": 32.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.1999999284744,
         "drawCount": 161,
         "drawFps": 53.5798004165268,
@@ -3044,7 +3044,7 @@
         "confirmedMs": 925,
         "maximumDrawGapMs": 34.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.3000000715256,
         "drawCount": 162,
         "drawFps": 53.894821409347955,
@@ -3071,7 +3071,7 @@
         "confirmedMs": 912.6000000238419,
         "maximumDrawGapMs": 36.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.7000000476837,
         "drawCount": 161,
         "drawFps": 53.62469417080906,
@@ -3098,7 +3098,7 @@
         "confirmedMs": 938.6999999284744,
         "maximumDrawGapMs": 36.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997,
         "drawCount": 162,
         "drawFps": 53.72038705372039,
@@ -3125,7 +3125,7 @@
         "confirmedMs": 776.8999999761581,
         "maximumDrawGapMs": 33.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 162,
         "drawFps": 53.682771497689345,
@@ -3152,7 +3152,7 @@
         "confirmedMs": 935.3999999761581,
         "maximumDrawGapMs": 35.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.7000000476837,
         "drawCount": 162,
         "drawFps": 53.887605849794305,
@@ -3179,7 +3179,7 @@
         "confirmedMs": 793.8999999761581,
         "maximumDrawGapMs": 34.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.6999999284744,
         "drawCount": 163,
         "drawFps": 54.02341014568448,
@@ -3206,7 +3206,7 @@
         "confirmedMs": 847.2000000476837,
         "maximumDrawGapMs": 49.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.2999999523163,
         "drawCount": 163,
         "drawFps": 54.320490897156624,
@@ -3233,7 +3233,7 @@
         "confirmedMs": 956.7000000476837,
         "maximumDrawGapMs": 36.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.0999999046326,
         "drawCount": 162,
         "drawFps": 53.88039222420215,
@@ -3260,7 +3260,7 @@
         "confirmedMs": 856.8999999761581,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.7000000476837,
         "drawCount": 160,
         "drawFps": 53.343174421262255,
@@ -3287,7 +3287,7 @@
         "confirmedMs": 957.2000000476837,
         "maximumDrawGapMs": 36.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.399999976158,
         "drawCount": 162,
         "drawFps": 53.87498326906856,
@@ -3314,7 +3314,7 @@
         "confirmedMs": 912.8999999761581,
         "maximumDrawGapMs": 36.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2979.7000000476837,
         "drawCount": 162,
         "drawFps": 54.03228512851077,
@@ -3341,7 +3341,7 @@
         "confirmedMs": 916.1000000238419,
         "maximumDrawGapMs": 36.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.100000023842,
         "drawCount": 163,
         "drawFps": 54.034221673297,
@@ -3368,7 +3368,7 @@
         "confirmedMs": 956,
         "maximumDrawGapMs": 38.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.100000023842,
         "drawCount": 162,
         "drawFps": 53.880392222052606,
@@ -3395,7 +3395,7 @@
         "confirmedMs": 837.6000000238419,
         "maximumDrawGapMs": 33.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.600000023842,
         "drawCount": 164,
         "drawFps": 54.54058756564935,
@@ -3422,7 +3422,7 @@
         "confirmedMs": 1162.9000000953674,
         "maximumDrawGapMs": 33.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.5999999046326,
         "drawCount": 169,
         "drawFps": 56.213611726347104,
@@ -3449,7 +3449,7 @@
         "confirmedMs": 950.2999999523163,
         "maximumDrawGapMs": 35
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.100000023842,
         "drawCount": 162,
         "drawFps": 53.898429914872274,
@@ -3476,7 +3476,7 @@
         "confirmedMs": 918.1000000238419,
         "maximumDrawGapMs": 39
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.100000023842,
         "drawCount": 162,
         "drawFps": 53.916479688796265,
@@ -3503,7 +3503,7 @@
         "confirmedMs": 904.9000000953674,
         "maximumDrawGapMs": 37.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.1999999284744,
         "drawCount": 160,
         "drawFps": 53.031819092720006,
@@ -3530,7 +3530,7 @@
         "confirmedMs": 902.8999999761581,
         "maximumDrawGapMs": 35.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.4000000953674,
         "drawCount": 163,
         "drawFps": 54.01080215871479,
@@ -3557,7 +3557,7 @@
         "confirmedMs": 950.6000000238419,
         "maximumDrawGapMs": 34.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.600000023842,
         "drawCount": 162,
         "drawFps": 53.87137790226715,
@@ -3584,7 +3584,7 @@
         "confirmedMs": 937.2000000476837,
         "maximumDrawGapMs": 32.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 165,
         "drawFps": 54.666666666666664,
@@ -3611,7 +3611,7 @@
         "confirmedMs": 893.1000000238419,
         "maximumDrawGapMs": 49.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.6999999284744,
         "drawCount": 164,
         "drawFps": 54.538762674039184,
@@ -3638,7 +3638,7 @@
         "confirmedMs": 905.2000000476837,
         "maximumDrawGapMs": 34.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.5,
         "drawCount": 162,
         "drawFps": 53.94538448651365,
@@ -3665,7 +3665,7 @@
         "confirmedMs": 953.1000000238419,
         "maximumDrawGapMs": 34.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.1999999284744,
         "drawCount": 162,
         "drawFps": 53.698885999546675,
@@ -3692,7 +3692,7 @@
         "confirmedMs": 939.1999999284744,
         "maximumDrawGapMs": 37.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 163,
         "drawFps": 54,
@@ -3719,7 +3719,7 @@
         "confirmedMs": 940.2999999523163,
         "maximumDrawGapMs": 36.40000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.600000023842,
         "drawCount": 162,
         "drawFps": 53.979749211665336,
@@ -3746,7 +3746,7 @@
         "confirmedMs": 941.3000000715256,
         "maximumDrawGapMs": 33.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.7999999523163,
         "drawCount": 163,
         "drawFps": 54.00360024087442,
@@ -3773,7 +3773,7 @@
         "confirmedMs": 937.5,
         "maximumDrawGapMs": 36.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.7999999523163,
         "drawCount": 159,
         "drawFps": 52.917141135549365,
@@ -3800,7 +3800,7 @@
         "confirmedMs": 931.0999999046326,
         "maximumDrawGapMs": 34
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.3000000715256,
         "drawCount": 162,
         "drawFps": 53.87678613129419,
@@ -3827,7 +3827,7 @@
         "confirmedMs": 951.1000000238419,
         "maximumDrawGapMs": 34.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.7000000476837,
         "drawCount": 162,
         "drawFps": 53.851557011550376,
@@ -3854,7 +3854,7 @@
         "confirmedMs": 1153.3000000715256,
         "maximumDrawGapMs": 50
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.1999999284744,
         "drawCount": 171,
         "drawFps": 56.98578707564895,
@@ -3881,7 +3881,7 @@
         "confirmedMs": 879.8999999761581,
         "maximumDrawGapMs": 37.40000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.100000023842,
         "drawCount": 161,
         "drawFps": 53.54573140079762,
@@ -3908,7 +3908,7 @@
         "confirmedMs": 892.6000000238419,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2994.7000000476837,
         "drawCount": 163,
         "drawFps": 54.09556883741961,
@@ -3935,7 +3935,7 @@
         "confirmedMs": 940.5999999046326,
         "maximumDrawGapMs": 36.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.5,
         "drawCount": 162,
         "drawFps": 53.67561260210035,
@@ -3962,7 +3962,7 @@
         "confirmedMs": 939.5999999046326,
         "maximumDrawGapMs": 37.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.8000000715256,
         "drawCount": 162,
         "drawFps": 53.849755835222545,
@@ -3989,7 +3989,7 @@
         "confirmedMs": 930.2999999523163,
         "maximumDrawGapMs": 35.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.899999976158,
         "drawCount": 158,
         "drawFps": 52.633343391080786,
@@ -4016,7 +4016,7 @@
         "confirmedMs": 855.5,
         "maximumDrawGapMs": 49.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.2000000476837,
         "drawCount": 165,
         "drawFps": 54.992958217885366,
@@ -4043,7 +4043,7 @@
         "confirmedMs": 925,
         "maximumDrawGapMs": 37.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.600000023842,
         "drawCount": 162,
         "drawFps": 53.907453290937774,
@@ -4070,7 +4070,7 @@
         "confirmedMs": 860.6000000238419,
         "maximumDrawGapMs": 49.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983,
         "drawCount": 163,
         "drawFps": 54.307743881997986,
@@ -4097,7 +4097,7 @@
         "confirmedMs": 789.3000000715256,
         "maximumDrawGapMs": 34.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.6999999284744,
         "drawCount": 161,
         "drawFps": 53.606727645603996,
@@ -4124,7 +4124,7 @@
         "confirmedMs": 922.5999999046326,
         "maximumDrawGapMs": 37.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.8000000715256,
         "drawCount": 163,
         "drawFps": 54.00360023872837,
@@ -4151,7 +4151,7 @@
         "confirmedMs": 1045.4000000953674,
         "maximumDrawGapMs": 49.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7999999523163,
         "drawCount": 167,
         "drawFps": 55.65240713512596,
@@ -4178,7 +4178,7 @@
         "confirmedMs": 855.5,
         "maximumDrawGapMs": 49.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.600000023842,
         "drawCount": 163,
         "drawFps": 54.296822629945524,
@@ -4205,7 +4205,7 @@
         "confirmedMs": 901,
         "maximumDrawGapMs": 33.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.399999976158,
         "drawCount": 166,
         "drawFps": 55.21349217016343,
@@ -4232,7 +4232,7 @@
         "confirmedMs": 1156.2000000476837,
         "maximumDrawGapMs": 49.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2979.899999976158,
         "drawCount": 169,
         "drawFps": 56.37773079678652,
@@ -4259,7 +4259,7 @@
         "confirmedMs": 904.3000000715256,
         "maximumDrawGapMs": 35.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2996.600000023842,
         "drawCount": 163,
         "drawFps": 54.06126943826706,
@@ -4286,7 +4286,7 @@
         "confirmedMs": 927.0999999046326,
         "maximumDrawGapMs": 36.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.600000023842,
         "drawCount": 162,
         "drawFps": 53.709634373738815,
@@ -4313,7 +4313,7 @@
         "confirmedMs": 925.2999999523163,
         "maximumDrawGapMs": 37.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.600000023842,
         "drawCount": 161,
         "drawFps": 53.644471266251266,
@@ -4340,7 +4340,7 @@
         "confirmedMs": 920.5,
         "maximumDrawGapMs": 39.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.7000000476837,
         "drawCount": 162,
         "drawFps": 53.95984850937661,
@@ -4367,7 +4367,7 @@
         "confirmedMs": 912.2000000476837,
         "maximumDrawGapMs": 35.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.6999999284744,
         "drawCount": 162,
         "drawFps": 53.923702985516606,
@@ -4394,7 +4394,7 @@
         "confirmedMs": 810.6000000238419,
         "maximumDrawGapMs": 34.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989,
         "drawCount": 162,
         "drawFps": 53.86416861826698,
@@ -4421,7 +4421,7 @@
         "confirmedMs": 900.3999999761581,
         "maximumDrawGapMs": 36.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.899999976158,
         "drawCount": 161,
         "drawFps": 53.51349543505665,
@@ -4448,7 +4448,7 @@
         "confirmedMs": 920.8000000715256,
         "maximumDrawGapMs": 36.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.899999976158,
         "drawCount": 162,
         "drawFps": 53.88399879557036,
@@ -4475,7 +4475,7 @@
         "confirmedMs": 939.2000000476837,
         "maximumDrawGapMs": 38
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.7999999523163,
         "drawCount": 163,
         "drawFps": 54.00360024087442,
@@ -4502,7 +4502,7 @@
         "confirmedMs": 776.8999999761581,
         "maximumDrawGapMs": 34.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.5,
         "drawCount": 161,
         "drawFps": 53.59236308825992,
@@ -4529,7 +4529,7 @@
         "confirmedMs": 924.2999999523163,
         "maximumDrawGapMs": 34.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.7999999523163,
         "drawCount": 162,
         "drawFps": 53.86777302013136,
@@ -4556,7 +4556,7 @@
         "confirmedMs": 1004.5,
         "maximumDrawGapMs": 49.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.600000023842,
         "drawCount": 167,
         "drawFps": 55.340712094506124,
@@ -4583,7 +4583,7 @@
         "confirmedMs": 935.8999999761581,
         "maximumDrawGapMs": 34.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.2000000476837,
         "drawCount": 163,
         "drawFps": 54.2313872514107,
@@ -4610,7 +4610,7 @@
         "confirmedMs": 844.2000000476837,
         "maximumDrawGapMs": 48.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.6999999284744,
         "drawCount": 163,
         "drawFps": 54.33142167350373,
@@ -4637,7 +4637,7 @@
         "confirmedMs": 931.2999999523163,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 163,
         "drawFps": 54.016204861029024,
@@ -4664,7 +4664,7 @@
         "confirmedMs": 944.3000000715256,
         "maximumDrawGapMs": 39.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7999999523163,
         "drawCount": 161,
         "drawFps": 53.64087434710936,
@@ -4691,7 +4691,7 @@
         "confirmedMs": 920.6000000238419,
         "maximumDrawGapMs": 33.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.8000000715256,
         "drawCount": 162,
         "drawFps": 53.90384357712083,
@@ -4718,7 +4718,7 @@
         "confirmedMs": 959.8000000715256,
         "maximumDrawGapMs": 49.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.5999999046326,
         "drawCount": 166,
         "drawFps": 55.02567865178672,
@@ -4745,7 +4745,7 @@
         "confirmedMs": 930.8999999761581,
         "maximumDrawGapMs": 35.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2989.7999999523163,
         "drawCount": 162,
         "drawFps": 53.84975583736964,
@@ -4772,7 +4772,7 @@
         "confirmedMs": 907.1000000238419,
         "maximumDrawGapMs": 36.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.5,
         "drawCount": 164,
         "drawFps": 54.342390398399736,
@@ -4799,7 +4799,7 @@
         "confirmedMs": 788.7999999523163,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.3000000715256,
         "drawCount": 161,
         "drawFps": 53.56007096581163,
@@ -4826,7 +4826,7 @@
         "confirmedMs": 924.8999999761581,
         "maximumDrawGapMs": 35.90000009536743
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.899999976158,
         "drawCount": 163,
         "drawFps": 54.03782647896473,
@@ -4853,7 +4853,7 @@
         "confirmedMs": 919.0999999046326,
         "maximumDrawGapMs": 36.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990.100000023842,
         "drawCount": 161,
         "drawFps": 53.50991605589252,
@@ -4880,7 +4880,7 @@
         "confirmedMs": 937.7999999523163,
         "maximumDrawGapMs": 37.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.100000023842,
         "drawCount": 162,
         "drawFps": 53.898429914872274,
@@ -4907,7 +4907,7 @@
         "confirmedMs": 951.5,
         "maximumDrawGapMs": 38.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.5,
         "drawCount": 162,
         "drawFps": 53.90925832914783,
@@ -4934,7 +4934,7 @@
         "confirmedMs": 789.6000000238419,
         "maximumDrawGapMs": 33.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.899999976158,
         "drawCount": 161,
         "drawFps": 53.65706428829917,
@@ -4961,7 +4961,7 @@
         "confirmedMs": 896.6000000238419,
         "maximumDrawGapMs": 36.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.899999976158,
         "drawCount": 160,
         "drawFps": 53.33959542462737,
@@ -4988,7 +4988,7 @@
         "confirmedMs": 951.1999999284744,
         "maximumDrawGapMs": 39
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 163,
         "drawFps": 54,
@@ -5015,7 +5015,7 @@
         "confirmedMs": 938.8999999761581,
         "maximumDrawGapMs": 33.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.600000023842,
         "drawCount": 164,
         "drawFps": 54.57711109579414,
@@ -5042,7 +5042,7 @@
         "confirmedMs": 787.8000000715256,
         "maximumDrawGapMs": 33.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.5,
         "drawCount": 161,
         "drawFps": 53.61031998659742,
@@ -5069,7 +5069,7 @@
         "confirmedMs": 936.5999999046326,
         "maximumDrawGapMs": 36
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.600000023842,
         "drawCount": 161,
         "drawFps": 53.34044539229506,
@@ -5096,7 +5096,7 @@
         "confirmedMs": 923.7999999523163,
         "maximumDrawGapMs": 36.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.7000000476837,
         "drawCount": 162,
         "drawFps": 53.70784267853321,
@@ -5123,7 +5123,7 @@
         "confirmedMs": 956.7000000476837,
         "maximumDrawGapMs": 35.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.899999976158,
         "drawCount": 163,
         "drawFps": 54.00180006043118,
@@ -5150,7 +5150,7 @@
         "confirmedMs": 940.2000000476837,
         "maximumDrawGapMs": 38.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990.100000023842,
         "drawCount": 162,
         "drawFps": 53.84435303124185,
@@ -5177,7 +5177,7 @@
         "confirmedMs": 924.5,
         "maximumDrawGapMs": 37.09999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980,
         "drawCount": 162,
         "drawFps": 54.02684563758389,
@@ -5204,7 +5204,7 @@
         "confirmedMs": 915.0999999046326,
         "maximumDrawGapMs": 35.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982,
         "drawCount": 162,
         "drawFps": 53.990610328638496,
@@ -5231,7 +5231,7 @@
         "confirmedMs": 929.7000000476837,
         "maximumDrawGapMs": 35.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.1999999284744,
         "drawCount": 160,
         "drawFps": 53.29847144134225,
@@ -5258,7 +5258,7 @@
         "confirmedMs": 821,
         "maximumDrawGapMs": 49.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7000000476837,
         "drawCount": 164,
         "drawFps": 54.648472859286606,
@@ -5285,7 +5285,7 @@
         "confirmedMs": 924.3000000715256,
         "maximumDrawGapMs": 37.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.2999999523163,
         "drawCount": 163,
         "drawFps": 54.21142455663254,
@@ -5312,7 +5312,7 @@
         "confirmedMs": 920.8000000715256,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2998.7999999523163,
         "drawCount": 165,
         "drawFps": 54.688542084369665,
@@ -5339,7 +5339,7 @@
         "confirmedMs": 1081.7000000476837,
         "maximumDrawGapMs": 33.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.0999999046326,
         "drawCount": 169,
         "drawFps": 56.298381423333346,
@@ -5366,7 +5366,7 @@
         "confirmedMs": 930.3999999761581,
         "maximumDrawGapMs": 36.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.7999999523163,
         "drawCount": 163,
         "drawFps": 54.00360024087442,
@@ -5393,7 +5393,7 @@
         "confirmedMs": 852.1000000238419,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.7999999523163,
         "drawCount": 165,
         "drawFps": 54.981896205787095,
@@ -5420,7 +5420,7 @@
         "confirmedMs": 933.8000000715256,
         "maximumDrawGapMs": 36.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2990,
         "drawCount": 163,
         "drawFps": 54.180602006688964,
@@ -5447,7 +5447,7 @@
         "confirmedMs": 823.2999999523163,
         "maximumDrawGapMs": 32.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983,
         "drawCount": 163,
         "drawFps": 54.307743881997986,
@@ -5474,7 +5474,7 @@
         "confirmedMs": 958.7000000476837,
         "maximumDrawGapMs": 35.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.2999999523163,
         "drawCount": 162,
         "drawFps": 53.67919181227607,
@@ -5501,7 +5501,7 @@
         "confirmedMs": 1054,
         "maximumDrawGapMs": 49.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 170,
         "drawFps": 56.333333333333336,
@@ -5528,7 +5528,7 @@
         "confirmedMs": 889.5,
         "maximumDrawGapMs": 36.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2997.8000000715256,
         "drawCount": 161,
         "drawFps": 53.372473145701015,
@@ -5555,7 +5555,7 @@
         "confirmedMs": 854,
         "maximumDrawGapMs": 33.699999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.5,
         "drawCount": 165,
         "drawFps": 54.96899614546673,
@@ -5582,7 +5582,7 @@
         "confirmedMs": 848.2000000476837,
         "maximumDrawGapMs": 33.799999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.1999999284744,
         "drawCount": 165,
         "drawFps": 54.97452400239075,
@@ -5609,7 +5609,7 @@
         "confirmedMs": 938.2999999523163,
         "maximumDrawGapMs": 35.299999952316284
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.5,
         "drawCount": 161,
         "drawFps": 53.34222370395066,
@@ -5636,7 +5636,7 @@
         "confirmedMs": 895,
         "maximumDrawGapMs": 35.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.2000000476837,
         "drawCount": 163,
         "drawFps": 54.3405340122799,
@@ -5663,7 +5663,7 @@
         "confirmedMs": 937.9000000953674,
         "maximumDrawGapMs": 37.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 3000,
         "drawCount": 165,
         "drawFps": 54.666666666666664,
@@ -5690,7 +5690,7 @@
         "confirmedMs": 898.4000000953674,
         "maximumDrawGapMs": 36
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.6999999284744,
         "drawCount": 160,
         "drawFps": 53.00530053131688,
@@ -5717,7 +5717,7 @@
         "confirmedMs": 940.1000000238419,
         "maximumDrawGapMs": 36.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.100000023842,
         "drawCount": 162,
         "drawFps": 53.880392222052606,
@@ -5744,7 +5744,7 @@
         "confirmedMs": 925.5,
         "maximumDrawGapMs": 37.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.100000023842,
         "drawCount": 162,
         "drawFps": 53.682771497689345,
@@ -5771,7 +5771,7 @@
         "confirmedMs": 930.5,
         "maximumDrawGapMs": 38.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2988.7999999523163,
         "drawCount": 162,
         "drawFps": 53.86777302013136,
@@ -5798,7 +5798,7 @@
         "confirmedMs": 837,
         "maximumDrawGapMs": 33.800000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.3000000715256,
         "drawCount": 165,
         "drawFps": 54.95426062931654,
@@ -5825,7 +5825,7 @@
         "confirmedMs": 776,
         "maximumDrawGapMs": 34.700000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.5999999046326,
         "drawCount": 161,
         "drawFps": 53.626491488508584,
@@ -5852,7 +5852,7 @@
         "confirmedMs": 1085.0999999046326,
         "maximumDrawGapMs": 49.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.9000000953674,
         "drawCount": 169,
         "drawFps": 56.30215489615289,
@@ -5879,7 +5879,7 @@
         "confirmedMs": 885.3999999761581,
         "maximumDrawGapMs": 33.09999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985,
         "drawCount": 165,
         "drawFps": 54.94137353433836,
@@ -5906,7 +5906,7 @@
         "confirmedMs": 937.6000000238419,
         "maximumDrawGapMs": 32.39999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2985.0999999046326,
         "drawCount": 164,
         "drawFps": 54.604535863189675,
@@ -5933,7 +5933,7 @@
         "confirmedMs": 935.1000000238419,
         "maximumDrawGapMs": 35
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.399999976158,
         "drawCount": 162,
         "drawFps": 53.89301733992264,
@@ -5960,7 +5960,7 @@
         "confirmedMs": 775.7000000476837,
         "maximumDrawGapMs": 34.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2982.5,
         "drawCount": 161,
         "drawFps": 53.64626990779547,
@@ -5987,7 +5987,7 @@
         "confirmedMs": 940.5,
         "maximumDrawGapMs": 38.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2986.7000000476837,
         "drawCount": 162,
         "drawFps": 53.90564837359948,
@@ -6014,7 +6014,7 @@
         "confirmedMs": 911.5,
         "maximumDrawGapMs": 36.199999928474426
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.3000000715256,
         "drawCount": 162,
         "drawFps": 54.02140723958531,
@@ -6041,7 +6041,7 @@
         "confirmedMs": 925.3999999761581,
         "maximumDrawGapMs": 36.10000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2992.2000000476837,
         "drawCount": 163,
         "drawFps": 54.140765990715316,
@@ -6068,7 +6068,7 @@
         "confirmedMs": 1112.5,
         "maximumDrawGapMs": 34.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2987.6999999284744,
         "drawCount": 168,
         "drawFps": 55.89583961040198,
@@ -6095,7 +6095,7 @@
         "confirmedMs": 949.6000000238419,
         "maximumDrawGapMs": 37.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.6999999284744,
         "drawCount": 162,
         "drawFps": 53.67203387133344,
@@ -6122,7 +6122,7 @@
         "confirmedMs": 911.7999999523163,
         "maximumDrawGapMs": 35.5
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2981.5,
         "drawCount": 162,
         "drawFps": 53.99966459835653,
@@ -6149,7 +6149,7 @@
         "confirmedMs": 1246.6000000238419,
         "maximumDrawGapMs": 33.09999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2983.7999999523163,
         "drawCount": 171,
         "drawFps": 56.974328038982755,
@@ -6176,7 +6176,7 @@
         "confirmedMs": 917.7999999523163,
         "maximumDrawGapMs": 35.89999997615814
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.8000000715256,
         "drawCount": 162,
         "drawFps": 54.0123456777163,
@@ -6203,7 +6203,7 @@
         "confirmedMs": 860.7000000476837,
         "maximumDrawGapMs": 49.200000047683716
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2995.1999999284744,
         "drawCount": 164,
         "drawFps": 54.420405984205544,
@@ -6230,7 +6230,7 @@
         "confirmedMs": 815.5,
         "maximumDrawGapMs": 35.09999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2996,
         "drawCount": 163,
         "drawFps": 54.0720961281709,
@@ -6257,7 +6257,7 @@
         "confirmedMs": 944,
         "maximumDrawGapMs": 36.59999990463257
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2980.2000000476837,
         "drawCount": 161,
         "drawFps": 53.68767196746526,
@@ -6284,7 +6284,7 @@
         "confirmedMs": 932.8000000715256,
         "maximumDrawGapMs": 35.60000002384186
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2984.1999999284744,
         "drawCount": 162,
         "drawFps": 53.95080758791598,
@@ -6311,7 +6311,7 @@
         "confirmedMs": 926,
         "maximumDrawGapMs": 34.300000071525574
       },
-      "cadence": {
+      "immediatePostRecoveryWindow": {
         "durationMs": 2999.600000023842,
         "drawCount": 162,
         "drawFps": 53.67382317599691,
@@ -6337,6 +6337,7 @@
     }
   },
   "limitations": [
+    "Each trial records only the approximately three-second window immediately after stable display confirmation. It does not search later windows, so an immediate-window failure is not an FPS stable recovery failure.",
     "The compact trial projection omits individual draw intervals and diagnostic contexts.",
     "Direct canvas draws do not prove compositor scanout, audible A/V synchronization, pixel correctness, or unavoidable minimum loss.",
     "The campaign repeats one real B-picture transport defect and does not generalize to other defect structures."
