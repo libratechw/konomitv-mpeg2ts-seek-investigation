@@ -18,21 +18,21 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ## 公開コード
 
-公開branchは、実機で効果と退行を確認した「採用候補」と、論理・不変条件・自動testを確認したが実機測定が残る「暫定候補」に分けます。暫定候補はfetch後のupstreamへ適用でき、既知の破壊的退行がなく、branch内READMEに未計測範囲と取り込み側で必要な検証を明記したものに限ります。診断・測定branchと棄却実験はどちらにも含めません。
+この節を、KonomiTV、mpeg2toh264、DPlayerなど提出先をまたぐ全公開候補の一覧とします。公開branchは、実機で効果と関連する退行を確認した「採用候補」と、論理・不変条件・自動testを確認したが実機測定が残る「暫定候補」に分けます。暫定候補はfetch後のupstreamへ適用でき、既知の破壊的退行がなく、branch内READMEに未計測範囲と取り込み側で必要な検証を明記したものに限ります。診断・測定branchと棄却・撤回済み実験はどちらにも含めません。
 
 ### 採用候補
 
-| 提出先 | branch | 役割 |
-| --- | --- | --- |
-| `tsukumijima/KonomiTV` | [`fix/android-yadif-main-thread`](https://github.com/libratechw/KonomiTV/tree/fix/android-yadif-main-thread) | Android Chromeのデスクトップ表示でも端末を識別し、YADIF描画をメインスレッドへ切り替える候補。先行commitでmpeg2toh264を`faf1464`へ更新する |
-| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) | `autoFilm`のcomb判定で行参照をpixel loopの外へ移し、判定を変えずにCPU負荷を下げる候補 |
+| 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
+| --- | --- | --- | --- |
+| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) `dcfe571` | `autoFilm`のcomb判定で行参照をpixel loop外へ移し、4素材の判定を変えず解析時間を約6〜9%短縮 | Windowsの同一runner長時間A/B、Galaxy以外の実表示、画素、可聴A/V同期 |
+| `tsukumijima/DPlayer` | [`codex/ignore-stale-video-events`](https://github.com/libratechw/DPlayer/tree/codex/ignore-stale-video-events) `8e49bb7` | 旧videoのeventと遅延した`play()`拒否が画質切替後のvideoへ作用する経路を解消。Galaxy A/Bで現行videoのevent、失敗処理、画質切替、fullscreen、capture、再生進行を維持 | iOSの`InvalidStateError`とライブOriginal開始失敗への効果、同じvideoを使う`switchVideo()` |
 
 ### 暫定候補
 
-| 提出先 | branch | 役割 |
-| --- | --- | --- |
-| `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) | TS packet欠落時に、完了を確認できない末尾pictureだけを破棄し、境界を確認済みの先行pictureを保持する暫定候補。Session testは確認済みだが、異常TSの長時間復帰、表示cadence、A/V同期は採用前に実機確認が必要 |
-| `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) | YADIFのqueue全消去とqueued slot再利用を削除する暫定候補。slot不変条件と自動testは確認済みだが、削除経路の実機効果、長時間復帰、A/V同期は採用前に検証が必要 |
+| 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
+| --- | --- | --- | --- |
+| `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) `c3406ab` | TS packet欠落時に完了済みpictureを保持し、2種類の欠損で映像sampleを10〜12枚増加。Galaxyの1時間比較で欠損1回あたりのbrowser drop中央値を13枚から2枚へ低減 | 正常TS、別の欠損、画素、可聴A/V同期、異常通過後のcadence不良 |
+| `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) `2bc48a0` | queue全消去とqueued slot再利用を削除。全6386状態の列挙で容量整理後のslot割当失敗0件、正常60i短時間の既知退行なし | 削除経路の実機効果、異常TSの長時間復帰、Worker実描画、可聴A/V同期 |
 
 暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
 
@@ -50,7 +50,9 @@ KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補は
 
 [`codex/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや採用候補にはせず、branch全体の取り込みも想定しません。
 
-branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEに採用候補として記載していないfork branchは、履歴・診断・棄却実験として扱います。
+mpeg2toh264とKonomiTVの[`diagnostic/mse-operation-context`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)は、MSE操作名と失敗時stateを`InvalidStateError`へ対応付ける一組の診断branchです。KonomiTV側は[`403f29f`](https://github.com/libratechw/KonomiTV/tree/diagnostic/mse-operation-context)、mpeg2toh264側は[`52bedad`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)です。iOS実機で最初に失敗する操作を特定するためだけに使い、修正候補として取り込みません。
+
+branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEの採用候補・暫定候補にないfork branchは、直接取り込み候補ではありません。
 
 ## 取り込み判断
 
