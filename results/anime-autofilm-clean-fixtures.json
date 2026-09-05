@@ -1,6 +1,6 @@
 {
-  "purpose": "Four independently recorded anime fixtures for autoFilm regression at the terrestrial 3:2 cadence of 24000/1001 fps",
-  "createdAt": "2026-09-04",
+  "purpose": "Five independently recorded anime fixtures for autoFilm regression at the terrestrial 3:2 cadence of 24000/1001 fps",
+  "createdAt": "2026-09-05",
   "ffmpeg": "8.0.1-3ubuntu2+esm1",
   "scanCommand": "ffmpeg -hide_banner -nostdin -nostats -loglevel debug -threads 2 -filter_threads 1 -i INPUT -map 0:v:0 -an -vf fieldmatch=mode=pc_n:combmatch=full:mchroma=0,decimate=cycle=5:mixed=1 -f null -",
   "cleanCycleDefinition": "A complete five-input-frame cycle in which decimate selected one duplicate and fieldmatch reported no combed frame.",
@@ -254,6 +254,66 @@
         "audioPtsGapsOver40ms": 0,
         "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
         "cutBoundaryNote": "Trial cuts through 119.100 s omitted one reordered terminal B-picture and produced one 66.734 ms sorted-PTS gap. The final 119.160 s cut ends on a continuous DTS and sorted-PTS boundary."
+      }
+    },
+    {
+      "id": "kazuhunkan-no-yell-wo",
+      "source": {
+        "name": "2026-09-05_映画「数分間のエールを」.ts",
+        "sizeBytes": 5670489276,
+        "sha256": "976521ed880e9d623948f2202084b89e31e1edcef38385afc14391ff43c83d4e",
+        "scope": "The complete recording has mixed cadence and no transport anomaly detected across 30,162,177 TS packets. One incomplete MPEG-2 picture and one incomplete AAC packet occur within the final 0.5 seconds; the selected fixture interval is more than 48 minutes earlier.",
+        "longestCleanThreeTwoInterval": {
+          "approximateSourceStartSeconds": 1259.7585,
+          "approximateSourceEndSeconds": 1323.1551666666667,
+          "durationSeconds": 63.39666666666667,
+          "completeCycles": 380
+        }
+      },
+      "fixture": {
+        "name": "kazuhunkan-no-yell-wo-autofilm-23.976.ts",
+        "sizeBytes": 63789716,
+        "sha256": "829290158323b01116145ace9bd1a7e7789522578384025f5cbbbeaa3a99e1f8",
+        "cutCommand": "ffmpeg -hide_banner -nostdin -loglevel warning -i SOURCE -ss 1264.5 -t 53.03 -map 0:v:0 -map 0:a:0 -c copy -muxdelay 0 -muxpreload 0 OUTPUT",
+        "requestedSourceStartSeconds": 1264.5,
+        "requestedDurationSeconds": 53.03,
+        "formatDurationSeconds": 53.067178,
+        "videoDurationSeconds": 52.786067,
+        "audioDurationSeconds": 53.034667,
+        "video": "MPEG-2 Video, 1440x1080, TFF, 30000/1001 encoded frames/s",
+        "audio": "AAC, 48000 Hz, stereo",
+        "streamsKept": [
+          "primary video",
+          "primary audio"
+        ],
+        "transcoded": false,
+        "sourcePrimaryStreamPacketEnvelope": {
+          "minimumBytePosition": 1735323096,
+          "maximumBytePosition": 1800723596,
+          "definition": "Envelope of primary video/audio source packets whose DTS is inside the requested cut window; it is not a byte-for-byte reconstruction of remux input reads."
+        }
+      },
+      "fixtureValidation": {
+        "completeFiveFrameCycles": 316,
+        "duplicateDropCycles": 316,
+        "verifiedThreeTwoStartSeconds": 0.0,
+        "verifiedThreeTwoEndSeconds": 52.71933333333333,
+        "verifiedThreeTwoDurationSeconds": 52.71933333333333,
+        "combedCycles": 0,
+        "terminalIncompleteCycleExcluded": true,
+        "transportAnomalies": 0,
+        "videoPacketCount": 1584,
+        "videoDtsMinimumDeltaSeconds": 0.033366,
+        "videoDtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsMinimumDeltaSeconds": 0.033366,
+        "videoPtsMaximumDeltaSeconds": 0.033367,
+        "videoPtsGapsOver40ms": 0,
+        "audioPacketCount": 2486,
+        "audioPtsMinimumDeltaSeconds": 0.021333,
+        "audioPtsMaximumDeltaSeconds": 0.021334,
+        "audioPtsGapsOver40ms": 0,
+        "fullAudioVideoDecodeLogLinesAtWarningLevel": 0,
+        "cutBoundaryNote": "A 1264.000 s / 54.030 s trial cut began with one incomplete combed cycle. Shifting the start by 0.500 s removed it; the final cut has continuous video DTS, sorted video PTS, and audio PTS."
       }
     }
   ]
