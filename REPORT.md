@@ -37,7 +37,7 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 - YADIF distはLinuxで再生成した内容と一致しました。
 - KonomiTV `ea1962f`へ計装distを組み込んだclientはtypecheckとbuildに成功しました。
 - client asset、YADIF Worker asset、build環境、source・dist hashをread-only snapshotへ固定しました。
-- 実映像を使わないブラウザーsmokeでは、Worker backendの開始、Worker内rAF、世代、event sequenceを取得できました。描画submitと端末間の時刻対応は、実映像preflightで確認します。
+- 観測source `2348434` / dist `5d588dc`の実映像smokeでは、LinuxとWindowsのWorker描画、GalaxyのWorker / main-thread描画でtrace契約を確認しました。短時間のcadence判定はLinux・WindowsのWorkerとGalaxyのmain-threadが合格、GalaxyのWorkerが不合格でした。WindowsはLAN経由の隔離サーバーを使う診断で、Windows内完結の正式結果ではありません。
 
 これらはbuildと計測経路の証拠であり、再生品質の合格を示しません。
 
@@ -70,6 +70,12 @@ Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は
 同じ欠損を1 client sessionで繰り返す長時間走行では、候補が144回目、`faf1464`が228回目の通過で、どちらも2秒以内に安定表示へ復帰できませんでした。`faf1464`の失敗trialでは`queueResetted`増分0、最終statsの`maxQueuedFields`は2であり、時刻差による全resetは発火していません。queued slot再利用fallbackには専用counterがないため、発火有無は未確認です。[長時間比較](results/galaxy-yadif-queue-recovery-long-anomaly-comparison.json)を公開しています。
 
 両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が致命的停止0件の必須条件を満たさず、削除の実機効果も確認できていないため、採用候補にはしません。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もないため、取り込み側で追加検証する暫定候補として公開します。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
+
+### watchdogによるフレーム通知復旧
+
+watchdogが補った観測値と実rVFC metadataを分離する診断candidateはsource `12dbd87` / dist `353210c`です。同じcollectorとseedの300秒比較では、診断計装付きbaseline `24f9d98` / `3825261`とcandidateがともに欠損通過18回、致命的停止0件、cadence失敗2件でした。この比較では改善を確認できず、原因も未確定です。
+
+candidateの約1時間走行は欠損通過244回、致命的停止0件でしたが、cadence失敗10件で不合格でした。collectorが異なるbaselineの長時間結果を、候補の効果量には使いません。通知の復旧と安定した表示間隔は別々に確認する必要があります。
 
 ### 異常TSで完成済みpictureを保つ案
 
