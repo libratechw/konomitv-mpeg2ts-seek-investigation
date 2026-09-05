@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "purpose": "POCO X3 GTでYADIFのWorker描画とmain-thread強制を比較し、Android端末間の描画先差を確認する",
+  "environment": {
+    "device": "POCO X3 GT",
+    "androidVersion": "13",
+    "chromeVersion": "152.0.7977.64",
+    "resolution": "1080x2400",
+    "configuredRefreshRateHz": 120,
+    "path": "LAN direct",
+    "display": "fullscreen",
+    "konomiTVCommit": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264Commit": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "fixtureSha256": "894c063b789a5bff24ec6441883ec6b11a024e553d62c2d367ef8123cfe9178e"
+  },
+  "provenance": {
+    "yadifSourceSha256": "0cc201daee8dfe3777a304e3c7aefdbabb8c28a772e3f6ce6388ed92a5aaccf2",
+    "yadifDistSha256": "338389706f3098a0978eaaa71414091011f8fc2d6cce98908a849de3792cca2c",
+    "runnerSha256": "acac4b6eecf9086b291b624f40ebb10cdc2780f32fd9660d175f098a34a8d56e",
+    "collectorSha256": "5ac4c847c8c11567e6fc8585baae311693b90b515038e109f51d6beaf6117d00",
+    "workerBuildManifestSha256": "040c753fe56545aabde3d8a9e6ad588cf3238e23dabd4e4a98c3a08089d1194c",
+    "mainThreadBuildManifestSha256": "f42ceca4ec66353bc078e91f4162000f51a3c68b9e7da369405cabf3dce1743d"
+  },
+  "runs": [
+    {
+      "order": 1,
+      "backend": "worker",
+      "durationSeconds": 30,
+      "activeRefreshRateHz": {
+        "before": 120,
+        "after": 60
+      },
+      "yadifOutputFps": 58.7766,
+      "yadifLateDelta": 22,
+      "browserDroppedFramesDelta": 14,
+      "resultSha256": "9c40240ea9b1ff2578daf11431ed9f016fcf0b35a0833effbc56954a5e26099d"
+    },
+    {
+      "order": 2,
+      "backend": "main",
+      "durationSeconds": 30,
+      "activeRefreshRateHz": {
+        "before": 120,
+        "after": 120
+      },
+      "drawFps": 55.1663,
+      "drawIntervalP95Ms": 30.6,
+      "drawIntervalMaxMs": 63.2,
+      "drawIntervalsOver40Ms": 17,
+      "yadifOutputFps": 54.332,
+      "yadifLateDelta": 126,
+      "browserDroppedFramesDelta": 19,
+      "resultSha256": "8ad97a404d86916d4e4d9cbd94688e0cf4fa1216069553b16c801768b772115d"
+    },
+    {
+      "order": 3,
+      "backend": "worker",
+      "durationSeconds": 30,
+      "activeRefreshRateHz": {
+        "before": 120,
+        "after": 60
+      },
+      "yadifOutputFps": 57.6622,
+      "yadifLateDelta": 23,
+      "browserDroppedFramesDelta": 12,
+      "resultSha256": "5c41f5cec2cd598c333df81d87a4112785084e37466dca306f33b476ef6b25a9"
+    },
+    {
+      "order": 4,
+      "backend": "main",
+      "durationSeconds": 30,
+      "activeRefreshRateHz": {
+        "before": 120,
+        "after": 120
+      },
+      "drawFps": 56.7322,
+      "drawIntervalP95Ms": 28,
+      "drawIntervalMaxMs": 80.2,
+      "drawIntervalsOver40Ms": 13,
+      "yadifOutputFps": 56.0858,
+      "yadifLateDelta": 91,
+      "browserDroppedFramesDelta": 10,
+      "resultSha256": "a9a26a7aec57f4b38201e6c8aee4cfc272a717814c9e28631f20e101fa22b76e"
+    }
+  ],
+  "longRuns": [
+    {
+      "backend": "worker",
+      "durationSeconds": 600.0024,
+      "activeModeId": {
+        "before": 5,
+        "after": 5
+      },
+      "mediaTimeDeltaSeconds": 600.003756,
+      "sourcePresentedFps": 29.8436,
+      "sourceVideoFrameCallbackMissedFrames": 62,
+      "yadifMissedDelta": 62,
+      "yadifLateDelta": 640,
+      "browserDroppedFramesDelta": 274,
+      "playbackEvents": 0,
+      "resultSha256": "4f6c97870a927156f49c0b92e79607b5e43485bb637711b65da45ce9129321e0"
+    },
+    {
+      "backend": "main",
+      "durationSeconds": 600.0011,
+      "activeModeId": {
+        "before": 5,
+        "after": 5
+      },
+      "mediaTimeDeltaSeconds": 600.001963,
+      "drawFps": 54.2916,
+      "drawIntervalP95Ms": 32.9,
+      "drawIntervalMaxMs": 85.2,
+      "drawIntervalsOver40Ms": 532,
+      "sourcePresentedFps": 29.6376,
+      "sourceVideoFrameCallbackMissedFrames": 71,
+      "yadifMissedDelta": 71,
+      "yadifLateDelta": 2848,
+      "browserDroppedFramesDelta": 397,
+      "playbackEvents": 0,
+      "resultSha256": "c5a0f398893c462515a34cd3ae70e4e142d757597dc0ef2b6cfffc7aa59d6ce7"
+    }
+  ],
+  "conclusion": "POCO X3 GTではmain-thread強制がWorkerより滑らかになる証拠はなく、全Androidを一律に切り替えるcandidateを支持しない",
+  "limitations": [
+    "Workerの最終canvas submitはpage側から観測できない",
+    "active display modeは各走行の前後snapshotであり、走行中の連続観測ではない",
+    "可聴A/V同期とcompositor scanoutは未確認",
+    "Android端末全体へ一般化しない"
+  ]
+}

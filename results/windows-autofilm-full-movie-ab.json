@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "question": "Does the autoFilm candidate complete a 70-minute animation recording without an unrecovered stop, and does it show a consistent within-host advantage over the baseline?",
+  "classification": "formal full-recording Original A/B; final canvas cadence unobserved",
+  "fixture": {
+    "title": "映画「数分間のエールを」",
+    "sha256": "976521ed880e9d623948f2202084b89e31e1edcef38385afc14391ff43c83d4e",
+    "sizeBytes": 5670489276,
+    "apiPartialMd5": "502847df7c22a08c102dc66a70c83448",
+    "apiDurationSeconds": 4215.144267
+  },
+  "artifacts": {
+    "baseline": {
+      "sourceHash": "9c4b5f2f061bbafd9c6f9e90df03aa0b047e04d9c4186fbee059c84ca959da5f",
+      "distHash": "338389706f3098a0978eaaa71414091011f8fc2d6cce98908a849de3792cca2c",
+      "clientAssetSha256": "17d60a14be1dcc8f4694f5491ccf2157cd313850956be13948b72d642559e970"
+    },
+    "candidate": {
+      "sourceHash": "dc8a54b9ccba1a3633405264de6825b4f9be1b8e339ea6e8ed7dccadfb7845e8",
+      "distHash": "c5682a41f8d4e635a0605ab094b5eead409c5c156f17d4649599243b7b647fa9",
+      "clientAssetSha256": "86e3332997a96a98972156c7410c2a03b41fd0e04d410ecc110834a51a734286"
+    },
+    "runnerSha256": "375e90de8401b3f4f1c9c93786de2b72000900b2a1ada4a3d9283f714f725755",
+    "collectorSha256": "112215796cc0c19c3b5e556af79f0f97b492d48bb725e44aa3623ac737d3e1b3",
+    "terminalContractSha256": "303cdd4a6958577ac9482682da14ed25c1bd8019144ae9aec6e80a1b60683bcf",
+    "policySha256": "e1946e1cc3de9959ecb674d578faed3d44e5a4b2bd4b25b33fcf5c2f2dbf4c6b"
+  },
+  "preflight": {
+    "uiQuality": "Original (MPEG-2)",
+    "requestPath": "/api/videos/1/download",
+    "streamQualities": [],
+    "frameMode": "24fps",
+    "normal24fpsSetting": true,
+    "cellular24fpsSetting": true,
+    "deinterlacerAutoFilm": true
+  },
+  "runs": [
+    {
+      "hostClass": "low-power-windows-60hz",
+      "variant": "baseline",
+      "resultSha256": "c6ce31be4ad2cd32dca0306390a3a3c8c0bd814bc052e7426860cb2d5fd97b2e",
+      "formalChecksPass": true,
+      "terminalAtExpectedEnd": true,
+      "earlyStopEventCount": 0,
+      "sourceVideoFrameCallbacks": 126295,
+      "sourcePresentedFps": 29.9636302638975,
+      "missedCallbackFrames": 32,
+      "videoQualityTotalFrames": 127601,
+      "videoQualityDroppedFrames": 1276,
+      "yadifStatsDelta": {
+        "filtered": 38672,
+        "missed": 228,
+        "degraded": 904,
+        "discontinuities": 2,
+        "late": 19741,
+        "queueResetted": 0,
+        "dropped": 1276
+      },
+      "collectorDraws": 0,
+      "collectorDrawFps": 0,
+      "cleanupSuccess": true
+    },
+    {
+      "hostClass": "low-power-windows-60hz",
+      "variant": "candidate",
+      "resultSha256": "0ffc1f97df4ace71a2d38f78975c7bb1fba8387f0864f64d67e5650084930158",
+      "formalChecksPass": true,
+      "terminalAtExpectedEnd": true,
+      "earlyStopEventCount": 0,
+      "sourceVideoFrameCallbacks": 126257,
+      "sourcePresentedFps": 29.96339254465992,
+      "missedCallbackFrames": 68,
+      "videoQualityTotalFrames": 127604,
+      "videoQualityDroppedFrames": 1277,
+      "yadifStatsDelta": {
+        "filtered": 37806,
+        "missed": 213,
+        "degraded": 844,
+        "discontinuities": 2,
+        "late": 19204,
+        "queueResetted": 0,
+        "dropped": 1277
+      },
+      "collectorDraws": 0,
+      "collectorDrawFps": 0,
+      "cleanupSuccess": true
+    },
+    {
+      "hostClass": "gaming-windows-240hz",
+      "variant": "baseline",
+      "resultSha256": "c6c91ebdbe161b4e94b806a8270e17a1ba9fbd088e3b1ee7d07ca37926806780",
+      "formalChecksPass": true,
+      "terminalAtExpectedEnd": true,
+      "earlyStopEventCount": 0,
+      "sourceVideoFrameCallbacks": 126342,
+      "sourcePresentedFps": 29.96729904267168,
+      "missedCallbackFrames": 0,
+      "videoQualityTotalFrames": 127620,
+      "videoQualityDroppedFrames": 1278,
+      "yadifStatsDelta": {
+        "filtered": 37806,
+        "missed": 0,
+        "degraded": 6,
+        "discontinuities": 2,
+        "late": 6,
+        "queueResetted": 0,
+        "dropped": 1278
+      },
+      "collectorDraws": 0,
+      "collectorDrawFps": 0,
+      "cleanupSuccess": true
+    },
+    {
+      "hostClass": "gaming-windows-240hz",
+      "variant": "candidate",
+      "resultSha256": "44f9c20e96ebbc553ad512ffbdcafbb4c99ce73048f4e4d0490477cb3e1b0080",
+      "formalChecksPass": true,
+      "terminalAtExpectedEnd": true,
+      "earlyStopEventCount": 0,
+      "sourceVideoFrameCallbacks": 126341,
+      "sourcePresentedFps": 29.967085305314527,
+      "missedCallbackFrames": 0,
+      "videoQualityTotalFrames": 127619,
+      "videoQualityDroppedFrames": 1278,
+      "yadifStatsDelta": {
+        "filtered": 37772,
+        "missed": 0,
+        "degraded": 6,
+        "discontinuities": 2,
+        "late": 0,
+        "queueResetted": 0,
+        "dropped": 1278
+      },
+      "collectorDraws": 0,
+      "collectorDrawFps": 0,
+      "cleanupSuccess": true
+    }
+  ],
+  "withinHostCandidateMinusBaseline": {
+    "low-power-windows-60hz": {
+      "candidateMinusBaseline": {
+        "mediaTimeDeltaSeconds": 0.055641000000001384,
+        "rvfcCount": -38,
+        "sourcePresentedFps": -0.00023771923757820446,
+        "missedCallbackFrames": 36,
+        "qualityTotal": 3,
+        "qualityDropped": 1
+      },
+      "statsDeltaCandidateMinusBaseline": {
+        "filtered": -866,
+        "missed": -15,
+        "degraded": -60,
+        "discontinuities": 0,
+        "late": -537,
+        "queueResetted": 0,
+        "dropped": 1
+      }
+    },
+    "gaming-windows-240hz": {
+      "candidateMinusBaseline": {
+        "mediaTimeDeltaSeconds": -0.04309800000000408,
+        "rvfcCount": -1,
+        "sourcePresentedFps": -0.0002137373571535761,
+        "missedCallbackFrames": 0,
+        "qualityTotal": -1,
+        "qualityDropped": 0
+      },
+      "statsDeltaCandidateMinusBaseline": {
+        "filtered": -34,
+        "missed": 0,
+        "degraded": 0,
+        "discontinuities": 0,
+        "late": -6,
+        "queueResetted": 0,
+        "dropped": 0
+      }
+    }
+  },
+  "result": {
+    "allFourRunsReachedExpectedEnd": true,
+    "unrecoveredStops": 0,
+    "queueResettedDeltaAllRuns": 0,
+    "candidateAdvantageEstablished": false,
+    "finalCanvasCadenceObserved": false
+  },
+  "limits": [
+    "The source video rVFC and HTMLVideoElement quality counters do not prove final YADIF canvas presentation cadence.",
+    "The collector reported draws=0 for every run, so these runs do not establish the visible frame-drop rate, scanout quality, or audible A/V sync.",
+    "Small counter differences were inconsistent across the two hosts and are not treated as a candidate effect."
+  ]
+}
