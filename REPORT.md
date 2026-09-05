@@ -53,6 +53,8 @@ mpeg2toh264は致命的エラー時にMSEを破棄して`error`状態へ入り�
 
 candidateは、メインスレッドがMediaSourceを所有する環境で、最初の`play()`より前に最終的なMediaSourceをvideoへ接続します。この順序と同期eventからの再入耐性は自動testで確認しましたが、今回の利用者障害に対する効果は立証できませんでした。WorkerがMediaSourceを所有する環境には接続順序の変更が作用しません。
 
+DPlayer v1.33.1では、画質切替ごとに共有event handlerが増え、取り外したvideoのeventと遅延した`play()`拒否が切替後のvideoへ作用します。DPlayerだけを変更したcandidate `8e49bb7`とのGalaxy A/Bでは、旧videoのevent relayが1回から0回、旧`play()`拒否による現行videoのpauseが1回から0回になりました。現行videoのevent relayと拒否時のpause、画質切替完了、fullscreen、capture、再生進行は維持しました。[実機比較](results/galaxy-dplayer-stale-video-lifecycle-ab.json)にbuildと計測条件を記録しています。この修正は品質切替後の旧処理干渉を解消しますが、iOSの`InvalidStateError`、ライブOriginal開始失敗、同じvideo要素を再利用する`switchVideo()`まで直すとは判断しません。
+
 ### Android ChromeのYADIF描画先
 
 GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktopを示しますが、`navigator.platform`はARM Linux、`maxTouchPoints`は5を返します。KonomiTV側でmpeg2toh264を`faf1464`へ更新し、YADIF生成箇所だけでこの端末条件を補足してmain-thread描画を選ぶcandidateを作成しました。

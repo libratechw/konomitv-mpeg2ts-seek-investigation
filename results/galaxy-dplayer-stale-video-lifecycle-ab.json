@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Compare DPlayer quality-switch lifecycle handling with v1.33.1 under the same KonomiTV and browser conditions.",
+  "environment": {
+    "device": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Google Chrome 151.0.0.0",
+    "transport": "LAN direct",
+    "displayModeConfigured": "60 Hz",
+    "fullscreen": true,
+    "konomiTVRevision": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "fixture": {
+      "name": "madder.ts",
+      "sha256": "894c063b789a5bff24ec6441883ec6b11a024e553d62c2d367ef8123cfe9178e"
+    },
+    "runnerSha256": "7f3da9e8ff90a34106f934429438661001f0ac64cbeb9dc8739803a5cbc15965",
+    "lifecycleCollectorSha256": "d07266f2a636a09257f42cd127b1a8bdc20d36d4416da273e2524f46512f35bb",
+    "stalePlayCollectorSha256": "b9821390a11720f0f8f9ab7669952bdf6a8fad3c36ed7f2b850647f52a70e25b",
+    "steadyCollectorSha256": "6e046507b0569a5c8eae8d2c0d0e95d7382e20e2d74fab00ffceed8e87b3b686"
+  },
+  "builds": {
+    "baseline": {
+      "dplayerRevision": "a5f847877eada1390456aea4ed7da8e31b4c166e",
+      "dplayerDistSha256": "6b7004fe726b1b355093e3df0c9b56fe274e3e8c3af1380b1f9eec20151004c5",
+      "buildManifestSha256": "3e72f7226a73ca2429bc34b4e265716ea0eacfb27fc5439f4b6e79dd40dd5780",
+      "playerControllerAsset": "PlayerController-B2MCmMO1.js",
+      "playerControllerAssetSha256": "1b4a9ab34f6c56f74c9227a63627fb0392253bf4dc11abfd214476666781b426"
+    },
+    "candidate": {
+      "sourceRevisions": [
+        "a28ca25",
+        "3a263cb"
+      ],
+      "distRevision": "8e49bb7",
+      "dplayerDistSha256": "e6a6f835ac319be0da38e59938841804affca060473d6168ac870b2a4fe216ce",
+      "buildManifestSha256": "e558359d22d9e6281e5104a4c0baf45cf5def557a6e1339500607a3064b2693d",
+      "playerControllerAsset": "PlayerController-DFOHrf0F.js",
+      "playerControllerAssetSha256": "fc7dba1e72232591d0a9773ee25e01f3bc1412aa7cd71f7ef035b7aa9dae16ef"
+    }
+  },
+  "candidateVerification": {
+    "node": "v20.16.0",
+    "commands": [
+      "npm ci",
+      "npm test",
+      "npm run type-check",
+      "npm run build"
+    ],
+    "passed": true
+  },
+  "runOrder": [
+    "baseline-r3",
+    "candidate-r3"
+  ],
+  "results": {
+    "baseline": {
+      "corePlayHandlerCounts": [3, 4, 5],
+      "errorHandlerCounts": [1, 3, 4],
+      "staleVideoEventsRelayed": 1,
+      "currentVideoEventsRelayed": 1,
+      "currentVideoPauseCallsFromStalePlayRejection": 1,
+      "currentVideoPauseCallsFromCurrentPlayRejection": 1,
+      "qualityEndEvents": 2,
+      "captureSucceeded": true,
+      "playbackProgressed": true,
+      "cleanupSucceeded": true,
+      "resultSha256": "e487b56f4f0d1262541fa1836563e580cf9314e93d6e3e156106c2f4a91b11e6"
+    },
+    "candidate": {
+      "corePlayHandlerCounts": [3, 3, 3],
+      "errorHandlerCounts": [1, 2, 2],
+      "staleVideoEventsRelayed": 0,
+      "currentVideoEventsRelayed": 1,
+      "currentVideoPauseCallsFromStalePlayRejection": 0,
+      "currentVideoPauseCallsFromCurrentPlayRejection": 1,
+      "qualityEndEvents": 2,
+      "captureSucceeded": true,
+      "playbackProgressed": true,
+      "cleanupSucceeded": true,
+      "resultSha256": "9f5f70ad4eb66f554251d348031483b53c4c4d7d03afad544248448f99abcfaf"
+    }
+  },
+  "conclusion": "The candidate prevents detached-video events and delayed play rejections from affecting the replacement video while preserving current-video failure handling and the tested quality-switch lifecycle.",
+  "limitations": [
+    "This result covers one Original to 1080p (60fps) to Original round trip and one controlled stale play rejection on Galaxy Chrome.",
+    "It does not establish Safari or iOS behavior, long-run switch failure frequency, audible A/V synchronization, recovery from InvalidStateError, or live Original startup.",
+    "DPlayer switchVideo() reuses one video element, so the element-identity guard does not cover delayed rejections across that API's source or backend replacement."
+  ]
+}
