@@ -51,7 +51,7 @@ KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補は
 
 [`codex/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや採用候補にはせず、branch全体の取り込みも想定しません。
 
-mpeg2toh264とKonomiTVの[`diagnostic/mse-operation-context`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)は、MSE操作名と失敗時stateを`InvalidStateError`へ対応付ける一組の診断branchです。KonomiTV側は[`403f29f`](https://github.com/libratechw/KonomiTV/tree/diagnostic/mse-operation-context)、mpeg2toh264側は[`52bedad`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)です。iOS実機で最初に失敗する操作を特定するためだけに使い、修正候補として取り込みません。
+mpeg2toh264とKonomiTVの[`diagnostic/mse-operation-context`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)は、MSE操作名、失敗時state、load開始からの経過、MediaSourceの接続状態を`InvalidStateError`へ対応付ける一組の診断branchです。KonomiTV側は[`403f29f`](https://github.com/libratechw/KonomiTV/tree/diagnostic/mse-operation-context)、mpeg2toh264側は[`a3c0cd3`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)です。iOS実機で最初に失敗する操作と旧player・現行playerの世代を特定するためだけに使い、修正候補として取り込みません。
 
 branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEの採用候補・暫定候補にないfork branchは、直接取り込み候補ではありません。
 
