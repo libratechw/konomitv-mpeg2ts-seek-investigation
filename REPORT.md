@@ -122,7 +122,7 @@ Worker観測branchは次を記録します。
 
 最初に実映像で時刻原点、描画submit、event欠落0件を確認します。次に同じsource、fixture、端末でmain-thread / Workerを比較し、計装あり・なしの表示挙動も比較します。診断計装を含む走行は正式な性能値へ使いません。
 
-短時間preflightを通過した後、正常60i、正常3:2、異常TSの順に実機測定し、MPEG-2 TS直接再生、H.264、HEVC、テレビ再生へ広げます。長時間試験の前にもupstreamをfetchし、基準commitが変わっていればbuildと計画を更新します。
+短時間preflightを通過した対象から実機測定し、MPEG-2 TS直接再生、H.264、HEVC、テレビ再生へ広げます。問題間の優先順位と並列割当はworkspaceの`STATUS.md`に従います。長時間試験の前にもupstreamをfetchし、基準commitが変わっていればbuildと計画を更新します。
 
 ## Follow-upを作る条件
 
