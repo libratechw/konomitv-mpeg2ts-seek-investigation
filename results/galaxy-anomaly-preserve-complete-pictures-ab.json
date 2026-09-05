@@ -647,9 +647,57 @@
       ]
     }
   },
+  "currentMainLongDurationComparison": {
+    "purpose": "Check the candidate against tsukumijima/mpeg2toh264 faf1464 under the same bounded one-hour anomaly campaign.",
+    "sharedConditions": {
+      "device": "Galaxy Tab S11 Ultra (SM-X930)",
+      "browser": "Google Chrome 151.0.7922.174",
+      "transport": "LAN direct",
+      "fullscreen": true,
+      "frameMode": "normal",
+      "fixtureName": "nhk-information-burst-2-long.ts",
+      "fixtureSha256": "f6aff2959cc04092dce70165e5c6c5ddc9a5bfd8cda3dae7969d17cc58c004a9",
+      "defectMediaTime": 9.8098,
+      "konomiTVRevision": "0f496f61de450c4ffe7e0198e74fb82f202ac328",
+      "baseSeed": 20260905,
+      "blockSize": 1000,
+      "continueAfterFailure": true,
+      "runnerSha256": "c65deee0b51a62e9a93dfd1ba72ab74e44f6f12c67fb36b7558dbd1dc9502237",
+      "collectorSha256": "97f2220cf4c471a4880e6d02ecda2b73fc90327e331f41c67b265f993306359c",
+      "validatorSha256": "300cbe1bf441c1e4261be6e7d17bb6ef470ea1a7077324a25c9498fb4ca92bc0",
+      "summarizerSha256": "a12d1b5173bcf5abb79b157636d73fa88e74aa99b51e2c62c9e44bcd4f82762b"
+    },
+    "baseline": {
+      "sourceCommit": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+      "distCommit": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+      "sourceHash": "0cc201daee8dfe3777a304e3c7aefdbabb8c28a772e3f6ce6388ed92a5aaccf2",
+      "distHash": "338389706f3098a0978eaaa71414091011f8fc2d6cce98908a849de3792cca2c",
+      "measurementSeconds": 3565.092,
+      "completedCrossings": 243,
+      "fatalStops": 0,
+      "cadenceFailures": 29,
+      "browserDroppedFramesPerCrossingMedian": 13,
+      "cleanupSucceeded": true,
+      "campaignPassed": false
+    },
+    "candidate": {
+      "sourceCommit": "60a380e8cd537411df486d46a2e36b5fd0380ed0",
+      "distCommit": "c3406ab6f41d0968e163ff8cf016c9e406c8d984",
+      "sourceHash": "7f4b38bead09858f1ee5ad792fb1f7f1d90b6b8a6f529a71b7f2ea22cfe5b828",
+      "distHash": "a642a2e0aad5c564c5445ef7f6bfd9755312751d554a1ec006e7b19b59a3c8c2",
+      "measurementSeconds": 3560.573,
+      "completedCrossings": 258,
+      "fatalStops": 0,
+      "cadenceFailures": 29,
+      "browserDroppedFramesPerCrossingMedian": 2,
+      "cleanupSucceeded": true,
+      "campaignPassed": false
+    },
+    "conclusion": "The candidate reduced Chrome droppedVideoFrames by a median of 11 frames per defect crossing. It did not reduce cadence failures: both builds recorded 29, so both failed the combined one-hour gate."
+  },
   "conclusion": "Across both runs, the candidate reduced the largest media-time gap observed before stable cadence from 567.233-600.600 ms to 333.666 ms, reduced the largest canvas draw gap from 522.4-569.6 ms to 317.6-318.1 ms, reduced Chrome droppedVideoFrames from 17 to 6, and avoided YADIF degraded/discontinuity events. This is a direct branch-only A/B result for this fixed defect.",
   "limitations": [
-    "Two runs per build do not prove the one-hour anomalous-TS acceptance condition.",
+    "The bounded one-hour comparison completed, but both builds failed the post-recovery cadence criterion. It therefore does not establish the anomalous-TS acceptance condition.",
     "The direct A/B collector records detailed frame and draw timelines. The same instrumentation is used for both builds, so the relative comparison is controlled, but its absolute presentation timing must be checked against a lower-overhead run.",
     "The trace does not prove compositor scanout or audible A/V synchronization.",
     "The minimum unavoidable drop set is not identified.",

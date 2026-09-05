@@ -98,7 +98,9 @@ candidateの約1時間走行は欠損通過244回、致命的停止0件でした
 
 音声sample数と音声時刻列は両方で一致しました。[変換結果](results/kids-hour-defect-conversion-comparison.json)と[fixture構造](results/kids-hour-transport-defects.json)を公開しています。
 
-この結果はbrowser、decoder、YADIF、画素、可聴A/V同期、不可避な最小dropを確認していません。`faf1464`で同じ問題が残ることと実機効果を確認するまで、採用候補にはしません。
+`faf1464`とcandidateを、Galaxy、同じ欠損fixture、runner、collector、seed、KonomiTV clientで約1時間ずつ比較しました。`faf1464`は欠損243回、candidateは258回を通過し、致命的停止は両方0件、cadence失敗は両方29件でした。一方、Chromeの`droppedVideoFrames`は欠損1回あたり中央値13枚から2枚へ減りました。[実機比較](results/galaxy-anomaly-preserve-complete-pictures-ab.json)に条件とhashを記録しています。
+
+完成済みpictureを保持する変更は、現行mainにも残る欠落を実機で減らしましたが、異常TS通過後のcadence不良は解消しません。正常TS、別の欠損、画素、可聴A/V同期、不可避な最小dropを確認していないため、暫定候補のままとします。
 
 ### サーバーエンコードHLS
 
