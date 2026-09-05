@@ -43,6 +43,14 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 
 ## 採否判断に残る証拠
 
+### iOSのOriginal画質切替
+
+`faf1464`とMediaSourceを`load()`中に接続するcandidate `c09808a`を、iOS実機でA-B-A比較しました。テレビの1080p (60fps)からOriginalへ切り替えると、どちらも再生を開始しませんでした。candidateによる改善と退行は確認できないため、MediaSourceの接続順序をこのライブ開始失敗の修正候補から外します。
+
+録画は両版ともOriginalで再生できました。ただし1080p (60fps)とOriginalの切り替えを繰り返すと、両版とも数回から10回に1回ほど`Error: The object is in an invalid state.`を表示しました。発生後はシークしても再生を再開せず、画質切替、プレイヤーの再起動、または再生を終了して始め直す必要がありました。このため、candidate固有の退行ではない既存の致命的停止として扱います。実機の画面表示と復帰操作は確認しましたが、エラーstackと失敗したMSE operationはまだ記録していません。
+
+candidateは、メインスレッドがMediaSourceを所有する環境で、最初の`play()`より前に最終的なMediaSourceをvideoへ接続します。この順序と同期eventからの再入耐性は自動testで確認しましたが、今回の利用者障害に対する効果は立証できませんでした。WorkerがMediaSourceを所有する環境には接続順序の変更が作用しません。
+
 ### Android ChromeのYADIF描画先
 
 GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktopを示しますが、`navigator.platform`はARM Linux、`maxTouchPoints`は5を返します。KonomiTV側でmpeg2toh264を`faf1464`へ更新し、YADIF生成箇所だけでこの端末条件を補足してmain-thread描画を選ぶcandidateを作成しました。
