@@ -32,6 +32,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 | 提出先 | branch | 役割 |
 | --- | --- | --- |
 | `tsukumijima/mpeg2toh264` | [`provisional/attach-main-mse-before-load`](https://github.com/libratechw/mpeg2toh264/tree/provisional/attach-main-mse-before-load) | メインスレッドがMSEを所有する環境で、`load()`中にメディアソースを接続する暫定候補。同期eventからの再入耐性と自動testは確認済みだが、iPhone / iPadでのOriginal切替、可聴再生、映像進行は採用前に実機確認が必要 |
+| `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) | TS packet欠落時に、完了を確認できない末尾pictureだけを破棄し、境界を確認済みの先行pictureを保持する暫定候補。Session testは確認済みだが、異常TSの長時間復帰、表示cadence、A/V同期は採用前に実機確認が必要 |
 | `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) | YADIFのqueue全消去とqueued slot再利用を削除する暫定候補。slot不変条件と自動testは確認済みだが、削除経路の実機効果、長時間復帰、A/V同期は採用前に検証が必要 |
 
 暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
