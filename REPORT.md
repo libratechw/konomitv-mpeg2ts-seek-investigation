@@ -53,6 +53,8 @@ Starletteの切断処理修正版と同じMSE診断buildを配信した環境で
 
 DPlayer `8e49bb7`とStarlette修正版を組み込んだdogfoodでも、iPhone 15が「数分間のエールを」のOriginalへの切替後に自動復帰しない同種の停止を起こしました。この回は`appendBuffer()`時に`mediaSource=closed`、ライブラリ側の`closed=false`、`operation=none`、`queue=1`、`epoch=0`でした。同時刻にserverはOriginalのRange要求へ206を返し、切替前のHLS生成も画面の停止後まで進んでいたため、serverの応答成功だけでclientの再生成功とは判定できません。
 
+同じdogfoodで、iPad mini第6世代が異常TS「NHK高校講座 情報Ⅰ」のOriginalへ切り替えて約20秒再生した後、シーク操作なしで`InvalidStateError`により停止しました。停止後のシークでは復帰せず、別の再起動操作を要しました。録画には約9.710秒の既知burst欠損があり、画面の停止表示は約17秒でしたが、この位置関係だけでは欠損を原因と判断できません。停止までの関連時間帯にserverはOriginalのRange要求へ9回206を返し、ERROR / WARNINGは記録していません。画面の汎用エラーだけでは、iPhone 15で確認した`appendBuffer()`失敗と同じ経路かも未確定です。
+
 mpeg2toh264は致命的エラー時にMSEを破棄して`error`状態へ入り、この状態ではシーク要求を処理しません。KonomiTVもmpeg2toh264のエラーを受けるとプレイヤーを一時停止します。このため、シークだけで復帰せず、プレイヤーを作り直す操作で復帰することは現行コードと一致します。これはエラー後の挙動を説明しますが、最初に失敗したMSE操作の特定には使いません。
 
 candidateは、メインスレッドがMediaSourceを所有する環境で、最初の`play()`より前に最終的なMediaSourceをvideoへ接続します。この順序と同期eventからの再入耐性は自動testで確認しましたが、今回の利用者障害に対する効果は立証できませんでした。WorkerがMediaSourceを所有する環境には接続順序の変更が作用しません。
