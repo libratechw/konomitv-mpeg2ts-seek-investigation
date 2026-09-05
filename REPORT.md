@@ -94,6 +94,8 @@ KonomiTV `e92fba8`を基点とする隔離buildで、Galaxy Chrome、LAN直結�
 
 低電力Windowsの隔離KonomiTVで、3MiB受信後に切断するRange要求を200回繰り返すと、Starlette基準版は応答が走行後半ほど悪化しました。`codex/fix-file-response-disconnect`では、ASGI disconnect後にfile送信を止めることで同じ悪化を再現しませんでした。[200要求の比較](results/windows-range-abort-starlette-fix-200.json)と[単体回帰試験](results/file-response-disconnect-starlette-fix.json)を公開しています。
 
+Starletteには同じ問題を扱う[PR #3390](https://github.com/Kludex/starlette/pull/3390)があります。独自PRは作らず、比較実装、テスト、ベンチマーク、loopback再測定を[PRコメント](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)として共有しました。`codex/fix-file-response-disconnect`は、その検証材料として保持しています。
+
 この結果はbackendの切断処理を対象とし、Chrome、Akebi、converter、MSE、decoderを含むシーク時間の効果量ではありません。
 
 ### 固定fixture
