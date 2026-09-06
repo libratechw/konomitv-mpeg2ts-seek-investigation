@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Describe one five-minute POCO live MPEG-2 Original run with Worker draw-submit instrumentation.",
+  "status": "valid-single-run-diagnostic-not-quality-pass",
+  "measuredAt": "2026-09-06",
+  "device": {
+    "model": "POCO X3 GT (21061110AG)",
+    "browser": "Chrome",
+    "orientation": "landscape",
+    "fullscreen": true
+  },
+  "playback": {
+    "kind": "live terrestrial broadcast",
+    "quality": "Original (MPEG-2)",
+    "effectiveAutoFilm": false,
+    "backend": "worker",
+    "transport": "direct LAN to isolated server",
+    "sameTemporalInputAsGalaxy": false
+  },
+  "provenance": {
+    "konomiTVCommit": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264SourceCommit": "df5f9fa804644080ef0d234d5e20163fab9ce7d0",
+    "mpeg2toh264DistCommit": "485838acb022da16aa74b2b4dc53bbd5ed3f5a1a",
+    "playerAssetSha256": "7ccbab608e1b7586e269301fa1e6fccaae4aa0587b2478cc4f9a2b4d421e7062",
+    "workerAssetSha256": "9bdf14775afeec0d083cd17bf8ae41a6e5cb5259647ab0fcb4c6e1f9f5048166",
+    "runnerSha256": "6b1df8052a6d36f9343be050dc410eb8442b1620d3a37f1224e4a561259c4966",
+    "collectorSha256": "296b70c3acfc178180c4c76a1be0bfb44d0c1edec78127dca0a3c59a12acfbac",
+    "distFilesComparedBeforeAfter": 236,
+    "runnerFilesComparedBeforeAfter": 29,
+    "allFilesIdenticalBeforeAfter": true,
+    "wrappedResultSha256": "d4ca80046b2bb92911ac9193ac4a15b9fda999de63af7f59cc8c44321e05e774",
+    "hashedResultScope": "formal-300s.json measurement wrapper, including original sample and verification; not the separate collector raw JSON"
+  },
+  "measurement": {
+    "requestedDurationMs": 300000,
+    "observedDurationMs": 300002.1999999881,
+    "mediaTimeDeltaSeconds": 299.639278,
+    "drawSubmit": {
+      "realm": "worker",
+      "generation": 1,
+      "submits": 17557,
+      "observedSpanMs": 299983.10000000894,
+      "fps": 58.523296812385354,
+      "medianGapMs": 16.599999994039536,
+      "p95GapMs": 23.600000008940697,
+      "p99GapMs": 34.400000005960464,
+      "maxGapMs": 240.70000000298023,
+      "gapsOver100Ms": 3
+    },
+    "sourceVideoMissedCallbackFrames": 25,
+    "browserVideoQualityDelta": {
+      "total": 9042,
+      "dropped": 111
+    },
+    "bufferWait": {
+      "waitingAtMs": 42227,
+      "playingAtMs": 42559,
+      "recoveryMs": 332,
+      "automaticRecovery": true
+    },
+    "drawGapsOver100Ms": [
+      {
+        "startMs": 42248.0,
+        "endMs": 42462.9,
+        "gapMs": 214.9,
+        "overlapsBufferWait": true
+      },
+      {
+        "startMs": 43401.1,
+        "endMs": 43641.8,
+        "gapMs": 240.7,
+        "overlapsBufferWait": false
+      },
+      {
+        "startMs": 160923.9,
+        "endMs": 161063.6,
+        "gapMs": 139.7,
+        "overlapsBufferWait": false
+      }
+    ]
+  },
+  "verification": {
+    "originalNetworkResponseAndRuntime": true,
+    "workerDrawSubmitTrace": true,
+    "fullFileInventoriesBeforeAfter": true,
+    "cleanup": {
+      "chromeStopped": true,
+      "forwardRemoved": true,
+      "containerStopped": true,
+      "gracefulTeardown": true,
+      "collectorRc": 0,
+      "validationRc": 0
+    }
+  },
+  "limitations": [
+    "Draw-submit is not physical display scanout or pixel-quality proof.",
+    "rVFC callback misses and browser dropped-video frames are distinct metrics.",
+    "Live input differs from the Galaxy runs; this is not a controlled device-effect comparison.",
+    "Audible AV sync and wall-clock live latency accumulation were not measured.",
+    "The earlier run lacking a full-file before inventory is excluded."
+  ],
+  "method": {
+    "cadence": "Within a single Worker generation from first to last observed submit; unobserved edges are not inferred.",
+    "percentiles": "Median averages the middle pair; p95/p99 use nearest rank.",
+    "eventTime": "Worker event times converted to page sample-relative time using both performance time origins and the sample start."
+  }
+}
