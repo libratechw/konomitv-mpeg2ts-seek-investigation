@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Compare repeated fixed 60 Hz and fixed 120 Hz conditions for Galaxy during simultaneous real Mirakurun live MPEG-2 Original playback, with POCO as a concurrent device control.",
+  "conditions": {
+    "durationSeconds": 600,
+    "channelClass": "terrestrial digital live channel",
+    "simultaneous": true,
+    "galaxyRefreshConditions": [
+      "fixed 60 Hz",
+      "fixed 120 Hz"
+    ],
+    "repetitionsPerCondition": 2,
+    "pocoRefresh": "unchanged OS setting",
+    "autoFilm": false,
+    "expectedOriginalRequestPath": "/api/streams/live/gr101/original/mpegts"
+  },
+  "runners": {
+    "fixed60": {
+      "version": "mirakurun-live-paired-10m-20260906-06",
+      "manifestSha256": "47a3657964fce32853c6c97976934f5f2857a0c904a1a7c3f6435213cd7c2135",
+      "treeSha256": "98ea1cee0fad4f88bf38109fdb22aaa4b8457ff23780eb5efd3046bcb8cffcdc"
+    },
+    "fixed120": {
+      "version": "mirakurun-live-paired-10m-20260906-07",
+      "manifestSha256": "bb711133f12983587d1880d18711b1b5bda80dcd78fb2e296d035ef4961647b9",
+      "treeSha256": "c45b97567875912b46136bbf84f49ac0173b85495657a3254be242f00721f2f7"
+    }
+  },
+  "fixed60Source": "galaxy-poco-live-original-fixed60-paired-repeat.json",
+  "fixed60Summary": {
+    "runIds": [
+      "run06",
+      "run07"
+    ],
+    "galaxyMissedCallbackFrames": [
+      3823,
+      3983
+    ],
+    "galaxyMissedCallbackPercentOfPresentedDelta": [
+      21.260149037926816,
+      22.147464412811388
+    ],
+    "galaxyDrawSubmitPerSecond": [
+      27.97833333333333,
+      26.416666666666668
+    ],
+    "pocoMissedCallbackFrames": [
+      327,
+      49
+    ],
+    "pocoDrawSubmitPerSecond": [
+      56.48166666666667,
+      58.85
+    ]
+  },
+  "fixed120Runs": {
+    "run08": {
+      "startedAt": "2026-09-07T00:50:38+09:00",
+      "finishedAt": "2026-09-07T01:01:55+09:00",
+      "classification": "accepted",
+      "validationErrors": [],
+      "sourceArtifacts": {
+        "resultSha256": "8224400249e18260c8004f989fd321f3e169ea77435db4f5d21e4247475ac24d",
+        "galaxyRawSha256": "f97195887446159549c37b066a72cd35d02afee4c28d88688de295e192df5e7c",
+        "pocoRawSha256": "aa569349e5bcb296b32250d88ab5433691ebf52e68c3101cc32603318fd749c2",
+        "reservationSha256": "2cf4175340028d99c2e347f039ca5e132a3b5d0fbd342d82568e51da0fc3f8ea"
+      },
+      "reservation": {
+        "windowSeconds": 720,
+        "tunerCapacity": 2,
+        "measurementTuners": 1,
+        "recordingNow": 0,
+        "maximumEnabledRecordingOverlap": 0,
+        "safeForMeasurement": true
+      },
+      "tunerContract": {
+        "newUsedTuners": 1
+      },
+      "cleanupPostconditionSha256": "f4e4d54e4c36b2715ca385eafe226c694c526c07e38a2b00e38bf50b327e9dc8",
+      "devices": {
+        "galaxy": {
+          "quality": "Original (MPEG-2)",
+          "originalRequestPath": "/api/streams/live/gr101/original/mpegts",
+          "playerState": {
+            "preflight": "converting",
+            "start": "converting",
+            "end": "converting"
+          },
+          "mediaProgress": {
+            "currentTimeStart": 5.343999,
+            "currentTimeEnd": 632.109553,
+            "currentTimeDelta": 626.765554,
+            "readyStateStart": 4,
+            "readyStateEnd": 4,
+            "advancing": true
+          },
+          "rVFC": {
+            "entryCount": 14305,
+            "presentedFrameDelta": 17981,
+            "missedCallbackFrames": 3677,
+            "missedCallbackPercentOfPresentedDelta": 20.44936321672877,
+            "epochCount": 1,
+            "restartCount": 0,
+            "sourcePresentedFps": 29.96997668705501,
+            "sourceMediaFps": 29.970029986680927
+          },
+          "workerTrace": {
+            "startBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "endBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "lifecycleCount": 1,
+            "restartCount": 0,
+            "hasFallback": false,
+            "droppedEvents": 0,
+            "preSampleDroppedEvents": 38,
+            "workerRafIntervalsMs": {
+              "count": 26684,
+              "min": 8.199999999953434,
+              "median": 33.29999999998836,
+              "p95": 33.40000000002328,
+              "p99": 33.40000000002328,
+              "max": 33.60000000009313,
+              "over25": 15023,
+              "over40": 0,
+              "over100": 0
+            },
+            "pageRafIntervalsMs": {
+              "count": 20846,
+              "min": 8.19999999999709,
+              "median": 33.29999999998836,
+              "p95": 33.40000000002328,
+              "p99": 33.5,
+              "max": 41.80000000000291,
+              "over25": 15112,
+              "over40": 28,
+              "over100": 0
+            },
+            "workerFrameEventCount": 14285,
+            "drawSubmitEventCount": 17470,
+            "drawSubmitPerSecond": 29.113124569844004
+          },
+          "transferCanvas": {
+            "eventCount": 1,
+            "matches": true,
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "lifecycleCount": 1,
+              "eventCount": 1,
+              "perLifecycle": [
+                {
+                  "lifecycleIndex": 0,
+                  "isFinal": true,
+                  "transferAtMs": 649.6000000238419,
+                  "workerReadyAtMs": 36157,
+                  "matches": true,
+                  "error": null,
+                  "dimsMatch": true,
+                  "connectedMatch": true,
+                  "displayConnected": true,
+                  "identityMatch": true
+                }
+              ]
+            }
+          },
+          "display": {
+            "sampleCount": 591,
+            "minimumHz": 120.00001,
+            "maximumHz": 120.00001,
+            "maximumGapMs": 1098.2052000164986
+          },
+          "refreshSettings": {
+            "before": {
+              "peak_refresh_rate": "null",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "null",
+              "systemMode": "1",
+              "secureMode": "1"
+            },
+            "after": {
+              "peak_refresh_rate": "null",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "null",
+              "systemMode": "1",
+              "secureMode": "1"
+            }
+          },
+          "errors": []
+        },
+        "poco": {
+          "quality": "Original (MPEG-2)",
+          "originalRequestPath": "/api/streams/live/gr101/original/mpegts",
+          "playerState": {
+            "preflight": "converting",
+            "start": "converting",
+            "end": "converting"
+          },
+          "mediaProgress": {
+            "currentTimeStart": 0.180409,
+            "currentTimeEnd": 628.148094,
+            "currentTimeDelta": 627.967685,
+            "readyStateStart": 4,
+            "readyStateEnd": 4,
+            "advancing": true
+          },
+          "rVFC": {
+            "entryCount": 17924,
+            "presentedFrameDelta": 17968,
+            "missedCallbackFrames": 45,
+            "missedCallbackPercentOfPresentedDelta": 0.2504452359750668,
+            "epochCount": 1,
+            "restartCount": 0,
+            "sourcePresentedFps": 29.943243155865847,
+            "sourceMediaFps": 29.94336620903189
+          },
+          "workerTrace": {
+            "startBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "endBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "lifecycleCount": 1,
+            "restartCount": 0,
+            "hasFallback": false,
+            "droppedEvents": 0,
+            "preSampleDroppedEvents": 1317,
+            "workerRafIntervalsMs": {
+              "count": 46874,
+              "min": 7,
+              "median": 16.39999999999418,
+              "p95": 16.60000000000582,
+              "p99": 19.09999999999127,
+              "max": 55,
+              "over25": 142,
+              "over40": 18,
+              "over100": 0
+            },
+            "pageRafIntervalsMs": {
+              "count": 35837,
+              "min": 8.200000000011642,
+              "median": 16.5,
+              "p95": 16.699999999953434,
+              "p99": 24.79999999993015,
+              "max": 49.59999999997672,
+              "over25": 277,
+              "over40": 27,
+              "over100": 0
+            },
+            "workerFrameEventCount": 17867,
+            "drawSubmitEventCount": 23808,
+            "drawSubmitPerSecond": 39.66242954371233
+          },
+          "transferCanvas": {
+            "eventCount": 1,
+            "matches": true,
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "lifecycleCount": 1,
+              "eventCount": 1,
+              "perLifecycle": [
+                {
+                  "lifecycleIndex": 0,
+                  "isFinal": true,
+                  "transferAtMs": 1525.7999999970198,
+                  "workerReadyAtMs": 31841.90000000596,
+                  "matches": true,
+                  "error": null,
+                  "dimsMatch": true,
+                  "connectedMatch": true,
+                  "displayConnected": true,
+                  "identityMatch": true
+                }
+              ]
+            }
+          },
+          "display": {
+            "sampleCount": 580,
+            "minimumHz": 50,
+            "maximumHz": 120.00001,
+            "maximumGapMs": 1151.3231469988823
+          },
+          "refreshSettings": {
+            "before": {
+              "peak_refresh_rate": "120.0",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "120.0",
+              "systemMode": "null",
+              "secureMode": "null"
+            },
+            "after": {
+              "peak_refresh_rate": "120.0",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "120.0",
+              "systemMode": "null",
+              "secureMode": "null"
+            }
+          },
+          "errors": []
+        }
+      }
+    },
+    "run09": {
+      "startedAt": "2026-09-07T01:05:42+09:00",
+      "finishedAt": "2026-09-07T01:17:01+09:00",
+      "classification": "accepted",
+      "validationErrors": [],
+      "sourceArtifacts": {
+        "resultSha256": "d6eed8370bc51d14b7697ede99b2288329562011ad3dbc346a3d6a4371d273cd",
+        "galaxyRawSha256": "dae116a33acdef1a2ee79e1bf616c45887fe0b7aef4f975d2d28afe384bc0558",
+        "pocoRawSha256": "60aedec7fa51506691153a3996bc80d585d91f9036548bc2277902ba44b1d98f",
+        "reservationSha256": "062dedd87c3b5ffd6fcd8ba7d5a45f7b5ec76184ffe45ac02bdf88eba5d18344"
+      },
+      "reservation": {
+        "windowSeconds": 720,
+        "tunerCapacity": 2,
+        "measurementTuners": 1,
+        "recordingNow": 0,
+        "maximumEnabledRecordingOverlap": 0,
+        "safeForMeasurement": true
+      },
+      "tunerContract": {
+        "newUsedTuners": 1
+      },
+      "cleanupPostconditionSha256": "f4e4d54e4c36b2715ca385eafe226c694c526c07e38a2b00e38bf50b327e9dc8",
+      "devices": {
+        "galaxy": {
+          "quality": "Original (MPEG-2)",
+          "originalRequestPath": "/api/streams/live/gr101/original/mpegts",
+          "playerState": {
+            "preflight": "converting",
+            "start": "converting",
+            "end": "converting"
+          },
+          "mediaProgress": {
+            "currentTimeStart": 5.045333,
+            "currentTimeEnd": 632.26912,
+            "currentTimeDelta": 627.223787,
+            "readyStateStart": 4,
+            "readyStateEnd": 4,
+            "advancing": true
+          },
+          "rVFC": {
+            "entryCount": 13700,
+            "presentedFrameDelta": 17983,
+            "missedCallbackFrames": 4284,
+            "missedCallbackPercentOfPresentedDelta": 23.8224990268587,
+            "epochCount": 1,
+            "restartCount": 0,
+            "sourcePresentedFps": 29.969978357885843,
+            "sourceMediaFps": 29.970030003328187
+          },
+          "workerTrace": {
+            "startBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "endBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "lifecycleCount": 1,
+            "restartCount": 0,
+            "hasFallback": false,
+            "droppedEvents": 0,
+            "preSampleDroppedEvents": 155,
+            "workerRafIntervalsMs": {
+              "count": 20830,
+              "min": 8.199999999953434,
+              "median": 33.30000000000291,
+              "p95": 33.40000000002328,
+              "p99": 33.5,
+              "max": 33.59999999999127,
+              "over25": 16981,
+              "over40": 0,
+              "over100": 0
+            },
+            "pageRafIntervalsMs": {
+              "count": 18894,
+              "min": 8.299999999988358,
+              "median": 33.30000000000291,
+              "p95": 33.40000000002328,
+              "p99": 33.5,
+              "max": 41.70000000006985,
+              "over25": 17080,
+              "over40": 30,
+              "over100": 0
+            },
+            "workerFrameEventCount": 13682,
+            "drawSubmitEventCount": 15063,
+            "drawSubmitPerSecond": 25.0987378649057
+          },
+          "transferCanvas": {
+            "eventCount": 1,
+            "matches": true,
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "lifecycleCount": 1,
+              "eventCount": 1,
+              "perLifecycle": [
+                {
+                  "lifecycleIndex": 0,
+                  "isFinal": true,
+                  "transferAtMs": 679.2000000476837,
+                  "workerReadyAtMs": 36494.700000047684,
+                  "matches": true,
+                  "error": null,
+                  "dimsMatch": true,
+                  "connectedMatch": true,
+                  "displayConnected": true,
+                  "identityMatch": true
+                }
+              ]
+            }
+          },
+          "display": {
+            "sampleCount": 592,
+            "minimumHz": 120.00001,
+            "maximumHz": 120.00001,
+            "maximumGapMs": 1090.568724989891
+          },
+          "refreshSettings": {
+            "before": {
+              "peak_refresh_rate": "null",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "null",
+              "systemMode": "1",
+              "secureMode": "1"
+            },
+            "after": {
+              "peak_refresh_rate": "null",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "null",
+              "systemMode": "1",
+              "secureMode": "1"
+            }
+          },
+          "errors": []
+        },
+        "poco": {
+          "quality": "Original (MPEG-2)",
+          "originalRequestPath": "/api/streams/live/gr101/original/mpegts",
+          "playerState": {
+            "preflight": "converting",
+            "start": "converting",
+            "end": "converting"
+          },
+          "mediaProgress": {
+            "currentTimeStart": 0.970666,
+            "currentTimeEnd": 628.312319,
+            "currentTimeDelta": 627.341653,
+            "readyStateStart": 4,
+            "readyStateEnd": 4,
+            "advancing": true
+          },
+          "rVFC": {
+            "entryCount": 17897,
+            "presentedFrameDelta": 17955,
+            "missedCallbackFrames": 59,
+            "missedCallbackPercentOfPresentedDelta": 0.32859927596769706,
+            "epochCount": 1,
+            "restartCount": 0,
+            "sourcePresentedFps": 29.922067637371534,
+            "sourceMediaFps": 29.923365884989025
+          },
+          "workerTrace": {
+            "startBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "endBackend": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "lifecycleCount": 1,
+            "restartCount": 0,
+            "hasFallback": false,
+            "droppedEvents": 0,
+            "preSampleDroppedEvents": 3324,
+            "workerRafIntervalsMs": {
+              "count": 44383,
+              "min": 7,
+              "median": 16.400000000023283,
+              "p95": 16.60000000000582,
+              "p99": 17.899999999965075,
+              "max": 57.39999999990687,
+              "over25": 304,
+              "over40": 23,
+              "over100": 0
+            },
+            "pageRafIntervalsMs": {
+              "count": 35950,
+              "min": 8.200000000011642,
+              "median": 16.5,
+              "p95": 16.600000000034925,
+              "p99": 24.800000000046566,
+              "max": 49.59999999997672,
+              "over25": 350,
+              "over40": 22,
+              "over100": 0
+            },
+            "workerFrameEventCount": 17846,
+            "drawSubmitEventCount": 35216,
+            "drawSubmitPerSecond": 58.67056915250245
+          },
+          "transferCanvas": {
+            "eventCount": 1,
+            "matches": true,
+            "validation": {
+              "valid": true,
+              "errors": [],
+              "lifecycleCount": 1,
+              "eventCount": 1,
+              "perLifecycle": [
+                {
+                  "lifecycleIndex": 0,
+                  "isFinal": true,
+                  "transferAtMs": 1485.7999999970198,
+                  "workerReadyAtMs": 32040.70000000298,
+                  "matches": true,
+                  "error": null,
+                  "dimsMatch": true,
+                  "connectedMatch": true,
+                  "displayConnected": true,
+                  "identityMatch": true
+                }
+              ]
+            }
+          },
+          "display": {
+            "sampleCount": 581,
+            "minimumHz": 60,
+            "maximumHz": 120.00001,
+            "maximumGapMs": 1161.6163199841976
+          },
+          "refreshSettings": {
+            "before": {
+              "peak_refresh_rate": "120.0",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "120.0",
+              "systemMode": "null",
+              "secureMode": "null"
+            },
+            "after": {
+              "peak_refresh_rate": "120.0",
+              "min_refresh_rate": "null",
+              "user_refresh_rate": "120.0",
+              "systemMode": "null",
+              "secureMode": "null"
+            }
+          },
+          "errors": []
+        }
+      }
+    }
+  },
+  "comparison": {
+    "galaxy": {
+      "fixed60MissedCallbackFrames": [
+        3823,
+        3983
+      ],
+      "fixed120MissedCallbackFrames": [
+        3677,
+        4284
+      ],
+      "fixed60MeanMissedCallbackFrames": 3903.0,
+      "fixed120MeanMissedCallbackFrames": 3980.5,
+      "fixed60DrawSubmitPerSecond": [
+        27.97833333333333,
+        26.416666666666668
+      ],
+      "fixed120DrawSubmitPerSecond": [
+        29.113124569844004,
+        25.0987378649057
+      ],
+      "fixed60MeanDrawSubmitPerSecond": 27.197499999999998,
+      "fixed120MeanDrawSubmitPerSecond": 27.105931217374852
+    }
+  },
+  "conclusion": "Across two accepted runs per condition, the fixed 120 Hz Galaxy results overlapped the fixed 60 Hz range: missing rVFC callbacks were 3,677-4,284 versus 3,823-3,983, and draw submits were 25.10-29.11 versus 26.42-27.98 per second. Fixed 120 Hz did not consistently reduce the Galaxy live Original rendering deficit.",
+  "limitations": [
+    "rVFC missedCallbackFrames counts gaps in callback observation relative to the presentedFrames counter; it is not a direct count of physical display scanout drops.",
+    "Each run covers a different ten-minute live broadcast interval. Within each run the devices share the same live input interval, but differences between refresh conditions are not randomized paired treatment effects.",
+    "POCO retained its normal OS setting. Its draw-submit rate varied in one fixed-120 paired run, so it is a concurrent device control rather than a stable performance reference.",
+    "Physical scanout, pixel correctness, subjective picture quality, and audible A/V synchronization were not measured.",
+    "All four runs passed the same actual Original request, player-state, Worker lifecycle, autoFilm, trace-drop, settings restoration, tuner, and cleanup validation contracts.",
+    "Source filesystem paths and LAN addresses are omitted; SHA-256 values retain traceability to the private archive."
+  ]
+}

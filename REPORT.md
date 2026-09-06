@@ -83,7 +83,9 @@ GalaxyのライブOriginalを、端末表示を固定60Hzと固定120Hzにして
 
 新しいlifecycle検証付きrunnerで、Galaxy固定60HzとPOCO通常設定を同じライブOriginalへ同時接続する10分測定を2回行いました。両走行とも実要求`/api/streams/live/gr101/original/mpegts`、開始・終了時の`playerState=converting`、Worker継続、`autoFilm=false`、trace欠落0、canvas transfer、設定復元、cleanupを機械検証し、`accepted`となりました。提示frameに対するrVFC callback欠落はGalaxyが3,823 / 3,983 frame、POCOが327 / 49 frameでした。Workerの最終`draw-submit`はGalaxyが平均27.98 / 26.42回/秒、POCOが56.48 / 58.85回/秒でした。[同時2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)に、公開集計とprivate raw / validatorへのSHA-256対応を記録しています。
 
-同じ放送区間へ接続した各走行で大きな端末差が反復したため、GalaxyのライブOriginalで約30Hz以下になる問題規模は確認できました。rVFC欠落は物理displayへのscanout dropそのものではなく、2走は異なる放送区間なので、走行間の小さな差を効果量には使いません。固定120Hzとの同じ新runnerによる比較、画素、可聴A/V同期は未確認です。
+Galaxyだけを固定120Hzにした同じ形式の10分測定も2回行い、同じ拒否条件をすべて通過して`accepted`となりました。GalaxyのrVFC callback欠落は3,677 / 4,284 frame、`draw-submit`は29.11 / 25.10回/秒でした。固定60Hzの3,823〜3,983 frame、26.42〜27.98回/秒と範囲が重なり、120Hz固定による一貫した改善は確認できませんでした。POCOは欠落45 / 59 frameでしたが、`draw-submit`が39.66 / 58.67回/秒と1走行で変動したため、安定した性能基準ではなく同時入力の対照として扱います。[固定60Hz・120Hzの反復比較](results/galaxy-live-original-fixed60-fixed120-paired-repeat.json)に、4走行の条件、指標、元結果へのSHA-256対応を記録しています。
+
+同じ放送区間へ接続した各走行で大きな端末差が反復したため、GalaxyのライブOriginalで約30Hz以下になる問題規模は確認できました。端末の表示を120Hzへ固定するだけでは解消しません。rVFC欠落は物理displayへのscanout dropそのものではなく、4走行は異なる放送区間なので、条件間の小さな平均差を効果量には使いません。画素と可聴A/V同期は未確認です。
 
 同じ放送の異なる60秒区間を各1回測った比較であるため、12 frame、0.63ポイントの差を表示更新設定の効果量とは扱いません。端末の「最適化」設定では開始時の120Hzから、Chrome再生中の87 sample中86 sampleが30Hzへ移行しました。この走行は端末の適応表示動作を示す診断資料として残し、固定120Hzとの比較には採用していません。
 
