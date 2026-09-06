@@ -19,12 +19,12 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 
 ## 判定
 
-`faf1464`は自動testとbuildを通過しています。Galaxyの正常60i短時間条件はmain-thread描画への切り替えで理論FPSへ戻りましたが、同じ異常TSを繰り返し通過する長時間条件では致命的な表示停止が1件発生しました。
+`faf1464`は自動testとbuildを通過しています。Galaxyの正常60i短時間条件はmain-thread描画への切り替えで理論FPSへ戻りましたが、同じ異常TSを繰り返し通過する長時間条件では2秒以内に安定表示へ復帰しない試行が1件ありました。走行を2秒で打ち切ったため、その後の自動復帰は不明です。
 
 | 対象 | 判定 | 必要な証拠 |
 | --- | --- | --- |
 | MPEG-2 TS正常60i | 未判定 | main-thread / Worker短時間比較後、1時間連続再生 |
-| MPEG-2 TS異常 | 不合格 | 1種類の実在欠損を繰り返す走行で2秒以内の安定復帰に失敗。原因特定後、独立した欠損へ拡張 |
+| MPEG-2 TS異常 | 不合格 | 1種類の実在欠損を繰り返す走行で2秒以内の安定復帰に失敗し、その後は未観測。原因特定後、独立した欠損へ拡張 |
 | `autoFilm` | 未判定 | 正常3:2素材5種類、film / video境界、60i復帰 |
 | 録画シーク | 未判定 | 実DPlayer UI、LAN直結、位置精度を維持した200ms以下 |
 | 録画H.264 / HEVC | 未判定 | 対象画質ごとの1時間試験とA/V同期 |
@@ -47,7 +47,7 @@ Worker描画へ移行した後の最初の基準snapshotは次の組み合わせ
 
 `faf1464`とMediaSourceを`load()`中に接続するcandidate `c09808a`を、iOS実機でA-B-A比較しました。テレビの1080p (60fps)からOriginalへ切り替えると、どちらも再生を開始しませんでした。candidateによる改善と退行は確認できないため、MediaSourceの接続順序をこのライブ開始失敗の修正候補から外します。
 
-録画は両版ともOriginalで再生できました。ただし1080p (60fps)とOriginalの切り替えを繰り返すと、両版とも数回から10回に1回ほど`Error: The object is in an invalid state.`を表示しました。発生後はシークしても再生を再開せず、画質切替、プレイヤーの再起動、または再生を終了して始め直す必要がありました。このため、candidate固有の退行ではない既存の致命的停止として扱います。iPhone 15の診断buildでは、`SourceBuffer.appendBuffer()`が失敗し、その時点で`mediaSource=closed`、ライブラリ側の`closed=false`、`sourceBuffer=present`、`updating=false`、`operation=none`、`queue=3`、`epoch=1`でした。SafariがManagedMediaSourceを閉じた理由と、画質切替前後のどちらのplayerがエラーを出したかは、まだ確定していません。操作名と失敗時stateをエラーへ付加する診断専用branchを、mpeg2toh264 `diagnostic/mse-operation-context`とKonomiTVの同名branchへ公開しました。これは修正候補ではなく、branch全体の取り込みを想定しません。
+録画は両版ともOriginalで再生できました。ただし1080p (60fps)とOriginalの切り替えを繰り返すと、両版とも数回から10回に1回ほど`Error: The object is in an invalid state.`を表示しました。発生後は観測終了まで自動復帰せず、シークでも再開しなかったため、画質切替、プレイヤーの再起動、または再生を終了して始め直す必要がありました。復帰結果は画質切替後の`user-action-required`です。iPhone 15の診断buildでは、`SourceBuffer.appendBuffer()`が失敗し、その時点で`mediaSource=closed`、ライブラリ側の`closed=false`、`sourceBuffer=present`、`updating=false`、`operation=none`、`queue=3`、`epoch=1`でした。DPlayerの表示guardにより、画面のmpeg2toh264エラーは表示時点で現行videoに結び付いた現行pluginから出たことを確認できます。MediaSourceを閉じた処理は未確定です。操作名と失敗時stateをエラーへ付加する診断専用branchを、mpeg2toh264 `diagnostic/mse-operation-context`とKonomiTVの同名branchへ公開しました。これは修正候補ではなく、branch全体の取り込みを想定しません。
 
 Starletteの切断処理修正版と同じMSE診断buildを配信した環境でも、この停止は残りました。利用者の反復操作では、iPad Air第5世代で約20〜30回に1回、iPad mini第6世代で約5〜10回に1回発生しました。iPad Air第5世代の1回の画面収録では、Originalから1080p (60fps)へ切り替え、Originalへ戻した直後に`InvalidStateError`となり、動画読込失敗、Native decode error、player再起動、前回位置への復帰、再度の`InvalidStateError`が続きました。この頻度は固定runnerによる統制測定ではありません。Starlette修正版がクライアント側の停止を解消しないことは確認できますが、頻度を変えたかは判断しません。
 
@@ -57,7 +57,9 @@ DPlayer `8e49bb7`とStarlette修正版を組み込んだdogfoodでも、iPhone 1
 
 同じdogfoodで、iPad mini第6世代が異常TS「NHK高校講座 情報Ⅰ」のOriginalへ切り替えて約20秒再生した後、シーク操作なしで`InvalidStateError`により停止しました。停止後のシークでは復帰せず、別の再起動操作を要しました。録画には約9.710秒の既知burst欠損があり、画面の停止表示は約17秒でしたが、この位置関係だけでは欠損を原因と判断できません。停止までの関連時間帯にserverはOriginalのRange要求へ9回206を返し、ERROR / WARNINGは記録していません。画面の汎用エラーだけでは、iPhone 15で確認した`appendBuffer()`失敗と同じ経路かも未確定です。
 
-mpeg2toh264は致命的エラー時にMSEを破棄して`error`状態へ入り、この状態ではシーク要求を処理しません。KonomiTVもmpeg2toh264のエラーを受けるとプレイヤーを一時停止します。このため、シークだけで復帰せず、プレイヤーを作り直す操作で復帰することは現行コードと一致します。これはエラー後の挙動を説明しますが、最初に失敗したMSE操作の特定には使いません。
+復帰結果はどちらも`user-action-required`ですが、iPad mini第6世代の事象は利用者操作なしの再生中に発生したため、画質切替直後に起きた事象より上位に調べます。
+
+mpeg2toh264は変換エラー時にMSEを破棄して`error`状態へ入り、この状態ではシーク要求を処理しません。KonomiTVもmpeg2toh264のエラーを受けるとプレイヤーを一時停止します。このため、シークだけで復帰せず、プレイヤーを作り直す操作で復帰することは現行コードと一致します。これはエラー後の挙動を説明しますが、最初に失敗したMSE操作の特定には使いません。
 
 candidateは、メインスレッドがMediaSourceを所有する環境で、最初の`play()`より前に最終的なMediaSourceをvideoへ接続します。この順序と同期eventからの再入耐性は自動testで確認しましたが、今回の利用者障害に対する効果は立証できませんでした。WorkerがMediaSourceを所有する環境には接続順序の変更が作用しません。
 
@@ -95,17 +97,17 @@ Workerの最終canvas submitはpage側から観測できないため、Workerの
 
 候補では両方を削除し、容量超過時に先頭だけを破棄して残りの表示時刻を詰める既存処理を残しました。公開statsの`queueResetted`は互換性のため残しています。出力pool 6、queue上限5、1回に必要な出力1または2の全6386状態を列挙し、容量整理後のslot割り当て失敗が0件であることを確認しました。WASM・YADIF build、workspace typecheck、IVTC・MSE test、Rust release test 247件も成功しています。公開branchのsource `0c5d12a`とdist `2bc48a0`は、実機測定に使ったsource `8b6fe78`とdist `f287e23`にREADMEだけを加えた同一コードです。
 
-Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は59.793fpsと59.697fpsで、双方とも40ms超の描画間隔、`missed`・`late`・`queueResetted`増分は0でした。「NHK高校講座 情報Ⅰ」から固定した映像・主音声のburst欠損を跨ぐ走行も、双方とも致命的な表示停止はなく、約0.45秒で安定した表示進行を確認し、末尾は約59.5fpsでした。[条件と結果](results/galaxy-yadif-queue-recovery-removal.json)を公開しています。
+Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は59.793fpsと59.697fpsで、双方とも40ms超の描画間隔、`missed`・`late`・`queueResetted`増分は0でした。「NHK高校講座 情報Ⅰ」から固定した映像・主音声のburst欠損を跨ぐ走行も、双方とも約0.45秒で安定した表示進行へ自動復帰し、末尾は約59.5fpsでした。[条件と結果](results/galaxy-yadif-queue-recovery-removal.json)を公開しています。
 
 同じ欠損を1 client sessionで繰り返す長時間走行では、候補が144回目、`faf1464`が228回目の通過で、どちらも2秒以内に安定表示へ復帰できませんでした。`faf1464`の失敗trialでは`queueResetted`増分0、最終statsの`maxQueuedFields`は2であり、時刻差による全resetは発火していません。queued slot再利用fallbackには専用counterがないため、発火有無は未確認です。[長時間比較](results/galaxy-yadif-queue-recovery-long-anomaly-comparison.json)を公開しています。
 
-両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が致命的停止0件の必須条件を満たさず、削除の実機効果も確認できていないため、採用候補にはしません。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もないため、取り込み側で追加検証する暫定候補として公開します。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
+両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が2秒以内の自動復帰条件を満たさず、削除の実機効果も確認できていないため、採用候補にはしません。この試行は2秒で打ち切っており、その後に自動復帰したかは不明です。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もないため、取り込み側で追加検証する暫定候補として公開します。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
 
 ### watchdogによるフレーム通知復旧
 
-watchdogが補った観測値と実rVFC metadataを分離する診断candidateはsource `12dbd87` / dist `353210c`です。同じcollectorとseedの300秒比較では、診断計装付きbaseline `24f9d98` / `3825261`とcandidateがともに欠損通過18回、致命的停止0件、cadence失敗2件でした。この比較では改善を確認できず、原因も未確定です。
+watchdogが補った観測値と実rVFC metadataを分離する診断candidateはsource `12dbd87` / dist `353210c`です。同じcollectorとseedの300秒比較では、診断計装付きbaseline `24f9d98` / `3825261`とcandidateがともに欠損通過18回、legacy `fatalStops` 0件、cadence失敗2件でした。この比較では改善を確認できず、原因も未確定です。
 
-candidateの約1時間走行は欠損通過244回、致命的停止0件でしたが、cadence失敗10件で不合格でした。collectorが異なるbaselineの長時間結果を、候補の効果量には使いません。通知の復旧と安定した表示間隔は別々に確認する必要があります。
+candidateの約1時間走行は欠損通過244回、legacy `fatalStops` 0件でしたが、cadence失敗10件で不合格でした。collectorが異なるbaselineの長時間結果を、候補の効果量には使いません。通知の復旧と安定した表示間隔は別々に確認する必要があります。
 
 ### 異常TSで完成済みpictureを保つ案
 
@@ -118,7 +120,7 @@ candidateの約1時間走行は欠損通過244回、致命的停止0件でした
 
 音声sample数と音声時刻列は両方で一致しました。[変換結果](results/kids-hour-defect-conversion-comparison.json)と[fixture構造](results/kids-hour-transport-defects.json)を公開しています。
 
-`faf1464`とcandidateを、Galaxy、同じ欠損fixture、runner、collector、seed、KonomiTV clientで約1時間ずつ比較しました。`faf1464`は欠損243回、candidateは258回を通過し、致命的停止は両方0件、cadence失敗は両方29件でした。一方、Chromeの`droppedVideoFrames`は欠損1回あたり中央値13枚から2枚へ減りました。[実機比較](results/galaxy-anomaly-preserve-complete-pictures-ab.json)に条件とhashを記録しています。
+`faf1464`とcandidateを、Galaxy、同じ欠損fixture、runner、collector、seed、KonomiTV clientで約1時間ずつ比較しました。`faf1464`は欠損243回、candidateは258回を通過し、legacy `fatalStops`は両方0件、cadence失敗は両方29件でした。一方、Chromeの`droppedVideoFrames`は欠損1回あたり中央値13枚から2枚へ減りました。[実機比較](results/galaxy-anomaly-preserve-complete-pictures-ab.json)に条件とhashを記録しています。
 
 完成済みpictureを保持する変更は、現行mainにも残る欠落を実機で減らしましたが、異常TS通過後のcadence不良は解消しません。正常TS、別の欠損、画素、可聴A/V同期、不可避な最小dropを確認していないため、暫定候補のままとします。
 
