@@ -79,6 +79,10 @@ Galaxyでは1時間の正常60iも約59.85fpsで継続しましたが、POCO X3 
 
 Workerの最終canvas submitはpage側から観測できないため、Workerの値を実描画FPSとは扱いません。active modeも前後snapshotであり、走行中の変化は分かりません。短時間と10分の結果はいずれも全Androidをmain-threadへ切り替える条件を支持しないため、公開candidateを撤回し、branchを削除しました。Galaxyで得た効果は端末固有の証拠として残します。端末能力から描画先を選ぶ条件と可聴A/V同期は未確定です。
 
+GalaxyのライブOriginalを、端末表示を固定60Hzと固定120Hzにして各60秒測定しました。提示frameに対するrVFC callbackの欠落は60Hzで419 / 1,799 frame（23.29%）、120Hzで407 / 1,796 frame（22.66%）でした。両条件ともWorker / pageのrAF間隔中央値は33.3msで、表示を120Hzへ固定しても約23%のcallback欠落は解消しませんでした。[固定条件と生値](results/galaxy-live-original-refresh-60-120.json)に、build、runner、表示sample、実要求、実効`autoFilm`の照合結果を記録しています。
+
+同じ放送の異なる60秒区間を各1回測った比較であるため、12 frame、0.63ポイントの差を表示更新設定の効果量とは扱いません。端末の「最適化」設定では開始時の120Hzから、Chrome再生中の87 sample中86 sampleが30Hzへ移行しました。この走行は端末の適応表示動作を示す診断資料として残し、固定120Hzとの比較には採用していません。
+
 ### `autoFilm`の表示負荷
 
 同じcandidateとGalaxyで、正常3:2の3素材を24fps modeで10秒ずつ測ると、`outputFps`中央値は46.570〜47.833、`missed`増分は38〜47、film modeは各stats窓の0〜2回だけでした。同じキッズアワー素材で24fps modeだけを無効にすると、中央値59.958、`missed`・`degraded`増分0になり、1 frame当たりの処理時間中央値も11.627msから2.042msへ下がりました。[素材別の結果](results/galaxy-autofilm-normal-fixture-comparison.json)を公開しています。

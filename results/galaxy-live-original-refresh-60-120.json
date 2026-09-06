@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Measure the scale of callback loss during Galaxy live MPEG-2 Original playback at fixed 60 Hz and fixed 120 Hz.",
+  "status": "accepted-comparable-conditions",
+  "measuredAt": "2026-09-06",
+  "device": {
+    "model": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Chrome",
+    "orientation": "landscape",
+    "fullscreen": true
+  },
+  "playback": {
+    "kind": "live terrestrial broadcast",
+    "quality": "Original (MPEG-2)",
+    "sameChannel": true,
+    "sameTemporalInput": false,
+    "streamQualities": [],
+    "effectiveAutoFilm": false,
+    "videoSize": "1920x1080",
+    "mediaSourceOwner": "worker",
+    "backendFallback": false,
+    "mediaAdvanced": true,
+    "mediaError": null
+  },
+  "provenance": {
+    "konomiTVCommit": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264SourceCommit": "df5f9fa804644080ef0d234d5e20163fab9ce7d0",
+    "mpeg2toh264DistCommit": "485838acb022da16aa74b2b4dc53bbd5ed3f5a1a",
+    "clientDistTreeSha256": "7b2411ca6b1b159016057599ada3f531bf1e32771ef6990e39317063b079fc2a",
+    "clientBuildManifestSha256": "a348a96f125f623a68b9267d94d7b7265a48e6a201bbe4233cd590dd0fca0e2e",
+    "runnerManifestSha256": "623ae8f318a6b242ea5390e2d57c5ceed4998051464f5c5cd547de0643ce34e1",
+    "runnerTreeSha256": "9405f10b5c525c09e2f538becd3c1f49ce931dd309aa1d43b5c2338645f7cd79",
+    "collectorSha256": "e88113908e3697a0a2eea72cc1fc3f1ac822a6a72f47ea9a7c4047385ab0bce6",
+    "validatorSha256": "02ad2a41d0b55e52c67d488ce11ea08ded1cae5cad9cc41eaedfd0ad955e3950"
+  },
+  "runs": {
+    "fixed60Hz": {
+      "startedAt": "2026-09-06T10:03:03+09:00",
+      "finishedAt": "2026-09-06T10:04:50+09:00",
+      "resultSha256": "89da0c10f88bc06491424bd94b9e46044daf204895688cf8a72cb0dc9ca120ed",
+      "accepted": true,
+      "measurementDurationMs": 60116.1,
+      "display": {
+        "targetHz": 60,
+        "sampleCount": 86,
+        "matchingSampleCount": 86,
+        "mismatchCount": 0,
+        "renderMedianHz": 60,
+        "renderMinHz": 60,
+        "renderMaxHz": 60
+      },
+      "sourcePresentedFps": 29.916868,
+      "presentedFrameDelta": 1799,
+      "rvfcCallbackCount": 1381,
+      "rvfcCallbackRateHz": 22.972215,
+      "callbackFrameDeficit": 419,
+      "callbackFrameDeficitPercentOfPresented": 23.290717,
+      "rvfcIntervalMedianMs": 34.2,
+      "rvfcIntervalP95Ms": 67.5,
+      "workerRafCount": 1998,
+      "workerRafIntervalMedianMs": 33.3,
+      "pageRafCount": 2019,
+      "pageRafIntervalMedianMs": 33.3,
+      "bridgeEventCount": 4144,
+      "workerFrameEventCount": 1359,
+      "traceDroppedEvents": 0,
+      "traceSequenceErrors": 0,
+      "normalizedEventTimeErrors": 0
+    },
+    "fixed120Hz": {
+      "startedAt": "2026-09-06T10:18:27+09:00",
+      "finishedAt": "2026-09-06T10:20:14+09:00",
+      "resultSha256": "8da2196dba5313bad607acf9fbeec9c2a2ba5d6f617b26457409414bb3b53efd",
+      "accepted": true,
+      "measurementDurationMs": 60040,
+      "display": {
+        "targetHz": 120,
+        "sampleCount": 87,
+        "matchingSampleCount": 87,
+        "mismatchCount": 0,
+        "renderMedianHz": 120.00001,
+        "renderMinHz": 120.00001,
+        "renderMaxHz": 120.00001
+      },
+      "sourcePresentedFps": 29.966596,
+      "presentedFrameDelta": 1796,
+      "rvfcCallbackCount": 1390,
+      "rvfcCallbackRateHz": 23.151233,
+      "callbackFrameDeficit": 407,
+      "callbackFrameDeficitPercentOfPresented": 22.66147,
+      "rvfcIntervalMedianMs": 34,
+      "rvfcIntervalP95Ms": 67.5,
+      "workerRafCount": 2154,
+      "workerRafIntervalMedianMs": 33.3,
+      "pageRafCount": 1917,
+      "pageRafIntervalMedianMs": 33.3,
+      "bridgeEventCount": 4170,
+      "workerFrameEventCount": 1372,
+      "traceDroppedEvents": 0,
+      "traceSequenceErrors": 0,
+      "normalizedEventTimeErrors": 0
+    }
+  },
+  "comparison": {
+    "fixed120MinusFixed60CallbackFrameDeficit": -12,
+    "fixed120MinusFixed60CallbackFrameDeficitPercentagePoints": -0.629247,
+    "workerRafMedianChanged": false,
+    "pageRafMedianChanged": false,
+    "interpretation": "The callback deficit remained about 23% and both page and Worker rAF medians remained about 33.3 ms at fixed 60 Hz and fixed 120 Hz. Raising the physical display refresh rate did not remove the Galaxy live Original callback loss in these runs. The two runs used different 60-second windows of the same live channel and one run per condition, so the small numerical difference is not an effect estimate."
+  },
+  "adaptive120Diagnostic": {
+    "acceptedForFixedRefreshComparison": false,
+    "reason": "The device started in its user-facing optimized mode at 120 Hz, then Chrome playback moved the active display mode to 30 Hz for 86 of 87 samples.",
+    "resultSha256": "b6365af805cd2ec59f9ff479b0886cbab2c03bdf6206bfa667ebec60dded091e",
+    "displaySamples": {
+      "total": 87,
+      "at120Hz": 1,
+      "at30Hz": 86
+    },
+    "interpretation": "This is evidence of the device's adaptive display behavior during playback, not a fixed-120-Hz result."
+  },
+  "excludedAttempts": [
+    "Three fixed-60-Hz attempts were excluded for collector or validator contract defects before the accepted run.",
+    "One fixed-120-Hz attempt was excluded because the immutable target-refresh input file was missing before validation.",
+    "Excluded attempts were retained as diagnostic evidence and were not used in the comparison."
+  ],
+  "cleanup": {
+    "temporaryBrowserStopped": true,
+    "adbForwardRemoved": true,
+    "temporaryServerStopped": true,
+    "mirakurunTunersFreeAfterRun": true,
+    "deviceSettingRestored": "optimized mode, no peak/min/user override, active 120 Hz while idle"
+  }
+}
