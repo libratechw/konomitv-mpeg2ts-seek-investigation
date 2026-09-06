@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Test whether disabling Chromium AndroidSurfaceControl improves the Galaxy live Original playback path with a fixed MPEG-2 input.",
+  "status": "accepted-intervention-aba",
+  "measuredAt": "2026-09-06",
+  "device": {
+    "model": "Galaxy Tab S11 Ultra (SM-X930)",
+    "browser": "Chrome 152.0.7977.75",
+    "orientation": "landscape",
+    "fullscreen": true
+  },
+  "playback": {
+    "kind": "fixed MPEG-2 TS through the live Original endpoint",
+    "quality": "Original (MPEG-2)",
+    "expectedRequestPath": "/api/streams/live/gr061/original/mpegts",
+    "streamQualities": [],
+    "sameFixture": true,
+    "sameTemporalInput": true,
+    "effectiveAutoFilm": false,
+    "video": "MPEG-2 1440x1080 interlaced 30000/1001",
+    "mediaSourceOwner": "worker",
+    "backendFallback": false,
+    "mediaAdvanced": true,
+    "mediaError": null,
+    "newMirakurunKonomiUsers": 0
+  },
+  "intervention": {
+    "order": [
+      "normal",
+      "AndroidSurfaceControl disabled",
+      "normal"
+    ],
+    "disabledArgument": "--disable-features=AndroidSurfaceControl",
+    "chromiumRevision": "4999cc1efed37c4d91dc4ce6ec4b0a50e2a9a8cb",
+    "chromiumSourceSha256": "4dd53f08f26aaa47b156fdf408173adbf6fac5a0a564a99b91aed6f05a5ea798",
+    "featureDefault": "enabled",
+    "switchAcceptedInDisabledPhase": true,
+    "normalPhasesHadNoDisableSwitch": true
+  },
+  "provenance": {
+    "konomiTVCommit": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264BaseCommit": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "mpeg2toh264SourceCommit": "df5f9fa804644080ef0d234d5e20163fab9ce7d0",
+    "mpeg2toh264DistCommit": "485838acb022da16aa74b2b4dc53bbd5ed3f5a1a",
+    "fixtureSha256": "a5847a810bb6c46ba8073b019b1ef84f0f29355a660416e21eb16caeb816c172",
+    "captureManifestSha256": "05afb6b8a7eda26957f7b21634a321e7afde54c0a5be108df70389e50f1b7835",
+    "clientBuildManifestSha256": "a348a96f125f623a68b9267d94d7b7265a48e6a201bbe4233cd590dd0fca0e2e",
+    "clientDistTreeSha256": "7b2411ca6b1b159016057599ada3f531bf1e32771ef6990e39317063b079fc2a",
+    "innerRunnerManifestSha256": "2f3f2d74b54b66b7b6fa8ae6bb99d33ae343723fb88f0c68eef03ac36c79d248",
+    "surfaceControlRunnerManifestSha256": "33229bd19a4a93b6cf944fa2548589db9f38f04c4543bbb2a1050f9be60e653a",
+    "resultSha256": "b7f7ca71c9ea8c60190a551f18e0f8a3c1bdcb05033d6f055828d4a8617e285c"
+  },
+  "phases": [
+    {
+      "label": "a1-normal",
+      "mode": "normal",
+      "accepted": true,
+      "resultSha256": "d52ad00434868fcb9c247d4867cb97e375125d63d506160f3ebb95003e86afcf",
+      "rawSha256": "0919440e2b8c7028e9e1e4d27e2a39e96534f3d2555e7de248702289bdbb3683",
+      "presentedFrameDelta": 898,
+      "rvfcCallbackCount": 899,
+      "callbackFrameDeficit": 0,
+      "sourcePresentedFps": 29.96659625517658,
+      "rvfcIntervalMedianMs": 33.300000071525574,
+      "rvfcIntervalP95Ms": 35.299999952316284,
+      "workerRafCount": 3505,
+      "workerRafIntervalMedianMs": 8.30000000000291,
+      "workerRafIntervalP95Ms": 8.400000000001455,
+      "displaySampleCount": 57,
+      "display120HzSampleCount": 57,
+      "display30HzSampleCount": 0,
+      "validationErrors": []
+    },
+    {
+      "label": "b-disabled",
+      "mode": "AndroidSurfaceControl disabled",
+      "accepted": true,
+      "resultSha256": "8c97af9f8f560a3ecef3f4703bad8977df2831bd391b1bb9d6ccb384e55e9567",
+      "rawSha256": "efd976abb72e437b8060d92bbe1b5182981ea9f4755438f13de20d42069074c1",
+      "presentedFrameDelta": 899,
+      "rvfcCallbackCount": 891,
+      "callbackFrameDeficit": 9,
+      "sourcePresentedFps": 29.966666666666665,
+      "rvfcIntervalMedianMs": 33.39999997615814,
+      "rvfcIntervalP95Ms": 36.0,
+      "workerRafCount": 3375,
+      "workerRafIntervalMedianMs": 8.30000000000291,
+      "workerRafIntervalP95Ms": 8.400000000001455,
+      "displaySampleCount": 57,
+      "display120HzSampleCount": 55,
+      "display30HzSampleCount": 2,
+      "display30HzSampleIndices": [
+        21,
+        36
+      ],
+      "validationErrors": []
+    },
+    {
+      "label": "a2-normal",
+      "mode": "normal",
+      "accepted": true,
+      "resultSha256": "4c98b804d19d292abd907d7666059095d025dc0dfb9b4b0ec4a47526b423c8ef",
+      "rawSha256": "6b468ebc931c412ce72cf3c29d661b8c432ff65303b84dade4932dbeb62bbd00",
+      "presentedFrameDelta": 899,
+      "rvfcCallbackCount": 884,
+      "callbackFrameDeficit": 16,
+      "sourcePresentedFps": 29.99996662962555,
+      "rvfcIntervalMedianMs": 33.39999997615814,
+      "rvfcIntervalP95Ms": 35.700000047683716,
+      "workerRafCount": 3358,
+      "workerRafIntervalMedianMs": 8.30000000000291,
+      "workerRafIntervalP95Ms": 8.400000000001455,
+      "displaySampleCount": 57,
+      "display120HzSampleCount": 57,
+      "display30HzSampleCount": 0,
+      "validationErrors": []
+    }
+  ],
+  "cleanup": {
+    "outerExitCode": 0,
+    "cleanupFailed": false,
+    "debugAppRestored": true,
+    "commandLineFileRemoved": true,
+    "chromeStopped": true,
+    "forwardRemoved": true,
+    "serverAndContainerRemoved": true,
+    "displayRestoredToOptimized": true
+  },
+  "interpretation": {
+    "observedOutcome": "Disabling AndroidSurfaceControl did not reduce callback-frame deficit in this A-B-A run.",
+    "displayObservation": "The disabled phase briefly reported 30 Hz at isolated periodic samples 21 and 36 despite fixed-120 settings; both normal phases reported 120 Hz in all samples.",
+    "decision": "Do not use AndroidSurfaceControl disabling as the Galaxy playback workaround on this evidence.",
+    "limits": [
+      "One 30-second A-B-A repetition is not a long-duration stability result.",
+      "The isolated 30 Hz samples mean the measured display state was not identical throughout all three phases.",
+      "rVFC callback deficit is not a direct count of frames visibly scanned out.",
+      "Fixed file input may not reproduce the callback loss rate seen during live broadcast input.",
+      "The switch changes Android buffer-queue and overlay handling broadly and does not identify a narrow root cause."
+    ]
+  }
+}

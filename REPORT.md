@@ -85,6 +85,8 @@ GalaxyのライブOriginalを、端末表示を固定60Hzと固定120Hzにして
 
 放送区間の差を除くため、同じ固定MPEG-2 TSをライブOriginal経路へ入力し、固定120→60→120Hzの各30秒を2反復しました。提示frameに対するrVFC callback欠落は、第1反復が91 / 151 / 163 frame、第2反復が134 / 128 / 180 frameでした。各区間の57表示sampleはすべて指定Hzに一致し、Original実要求、Worker、実効`autoFilm=false`、映像進行、trace欠落0、Mirakurunの新規利用なしを確認しています。120Hz区間内の差が60Hzとの差より大きく、固定120Hzによる改善は再現しませんでした。[固定入力のA-B-A結果](results/galaxy-fixed-input-original-refresh-aba.json)に生値とhashを記録しています。rVFCはcallbackの観測であり、画面へscanoutされた可視frameの欠落数とは断定しません。
 
+同じ固定入力とGalaxyで、Chromeの`AndroidSurfaceControl`を通常→無効→通常の順に各30秒比較しました。提示frameに対するrVFC callback欠落は0 / 9 / 16 frameで、無効化による改善は確認できませんでした。無効化区間ではswitchの受理をBrowser APIで確認しましたが、固定120Hz設定中にも57表示sample中2件だけ30Hzを記録しました。通常区間は双方とも57件すべて120Hzでした。この表示状態の差を含むため、同じ実効表示条件だけを変数とした因果比較には使いません。Original実要求、Worker、`autoFilm=false`、映像進行、Mirakurunの新規利用なし、通常状態への復元を確認しています。[SurfaceControl無効化のA-B-A結果](results/galaxy-fixed-input-original-surfacecontrol-aba.json)に生値とhashを記録しています。1反復の固定入力試験であり、実放送入力の長時間安定性や画面へscanoutされたframeは評価していません。
+
 POCO X3 GTでもライブOriginalを5分測定し、Workerの最終描画submitを17,557回、観測区間平均58.52fpsで記録しました。描画間隔のp95は23.6ms、p99は34.4ms、最大は240.7msで、100ms超は3回でした。途中に約332msのバッファ待ちがあり、自動復帰しました。この待ちと重なる描画間隔は1回で、残る2回は別の時点です。[条件と結果](results/poco-live-original-five-minute.json)に全配信ファイル・測定器の前後照合と、時計の起点を揃えた時刻対応を記録しています。Galaxyとは異なる放送区間のため端末差の効果量には使わず、画面の実表示、画素、可聴A/V同期の合格とも扱いません。
 
 ### `autoFilm`の表示負荷
