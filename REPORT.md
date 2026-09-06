@@ -53,7 +53,7 @@ Starletteの切断処理修正版と同じMSE診断buildを配信した環境で
 
 DPlayer `8e49bb7`とStarlette修正版を組み込んだdogfoodでも、iPhone 15が「数分間のエールを」のOriginalへの切替後に自動復帰しない同種の停止を起こしました。この回は`appendBuffer()`時に`mediaSource=closed`、ライブラリ側の`closed=false`、`operation=none`、`queue=1`、`epoch=0`でした。同時刻にserverはOriginalのRange要求へ206を返し、切替前のHLS生成も画面の停止後まで進んでいたため、serverの応答成功だけでclientの再生成功とは判定できません。
 
-さらに操作名と時刻を追加した診断版で再現し、ManagedMediaSourceが開いて858ms後に閉じ、その64ms後の`appendBuffer()`が`InvalidStateError`になったことを確認しました。この時点でライブラリ側は`closed=false`、SourceBuffer参照あり、`updating=false`、実行中operationなし、queue 1件、seek後のepoch 1でした。閉じたMediaSourceへのappendは確定しましたが、Safariのライフサイクル、画質切替時のvideo操作、旧playerの遅延処理のどれが閉じたかは未確定です。診断版を使った反復回数は利用者の概算であるため、発生率には使いません。
+さらに操作名と時刻を追加した診断版で再現し、MediaSourceが開いて858ms後に閉じ、その64ms後の`appendBuffer()`が`InvalidStateError`になったことを確認しました。この時点でライブラリ側は`closed=false`、SourceBuffer参照あり、`updating=false`、実行中operationなし、queue 1件、seek後のepoch 1でした。閉じたMediaSourceへのappendは確定しましたが、MSEのownerとclass、Safariのライフサイクル、画質切替時のvideo操作、旧playerの遅延処理のどれが閉じたかは未確定です。診断版を使った反復回数は利用者の概算であるため、発生率には使いません。
 
 同じdogfoodで、iPad mini第6世代が異常TS「NHK高校講座 情報Ⅰ」のOriginalへ切り替えて約20秒再生した後、シーク操作なしで`InvalidStateError`により停止しました。停止後のシークでは復帰せず、別の再起動操作を要しました。録画には約9.710秒の既知burst欠損があり、画面の停止表示は約17秒でしたが、この位置関係だけでは欠損を原因と判断できません。停止までの関連時間帯にserverはOriginalのRange要求へ9回206を返し、ERROR / WARNINGは記録していません。画面の汎用エラーだけでは、iPhone 15で確認した`appendBuffer()`失敗と同じ経路かも未確定です。
 
