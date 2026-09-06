@@ -8,7 +8,7 @@ KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再
 - 確認済みの結果、未達条件、採否判断: [`REPORT.md`](REPORT.md)
 - 公開可能な生値と機械集計: [`results/`](results/)
 
-測定結果はsource、dist、KonomiTV、client asset、fixture、runnerのhashへ対応付けます。別commitの結果を評価対象へ流用しません。GalaxyとPOCOを同じライブOriginalへ接続した[固定60Hz・10分・2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)、Galaxyを[固定60Hz・120Hzで各2反復した比較](results/galaxy-live-original-fixed60-fixed120-paired-repeat.json)、Galaxyの30Hz遷移を同一走行内で分けた[4Hz page-damage A-B-A](results/galaxy-live-original-page-damage-4hz-aba.json)では、実経路とlifecycleを機械検証しています。
+測定結果はsource、dist、KonomiTV、client asset、fixture、runnerのhashへ対応付けます。別commitの結果を評価対象へ流用しません。GalaxyとPOCOを同じライブOriginalへ接続した[固定60Hz・10分・2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)、Galaxyを[固定60Hz・120Hzで各2反復した比較](results/galaxy-live-original-fixed60-fixed120-paired-repeat.json)、Galaxyの30Hz遷移を同一走行内で分けた[4Hz page-damage A-B-A](results/galaxy-live-original-page-damage-4hz-aba.json)、[timer-only対照と1×1 pixel更新](results/galaxy-live-original-page-update-1px-timer-controls.json)では、実経路とlifecycleを機械検証しています。
 
 ## 評価対象
 

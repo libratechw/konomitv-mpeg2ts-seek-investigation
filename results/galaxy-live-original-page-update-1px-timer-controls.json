@@ -1,0 +1,643 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Separate 4 Hz JavaScript timer wakeups from page-surface mutation, then test whether a 1 by 1 CSS pixel update is sufficient to prevent the Galaxy Chrome 30 Hz application-VSync state during continuous live MPEG-2 Original playback.",
+  "conditions": {
+    "expectedQuality": "Original (MPEG-2)",
+    "expectedOriginalRequestPath": "/api/streams/live/gr061/original/mpegts",
+    "expectedBackend": "worker",
+    "autoFilm": false,
+    "fullscreen": true,
+    "phaseOrder": [
+      "A1: no added timer or surface update for 20 seconds",
+      "B: the selected 4 Hz variant for 30 seconds",
+      "A2: no added timer or surface update for 20 seconds"
+    ]
+  },
+  "references": {
+    "visible16By16Artifact": "galaxy-live-original-page-damage-4hz-aba.json",
+    "visible16By16ArtifactSha256": "bb4e42cc2d5590a37413f229ac90db6948456d18f3e7114b362337e4d4f75006",
+    "visible16By16Summary": {
+      "summaryValidRuns": 3,
+      "control30Samples": [
+        37,
+        35,
+        36
+      ],
+      "damage30Samples": [
+        0,
+        0,
+        0
+      ],
+      "damage60Samples": [
+        27,
+        28,
+        28
+      ],
+      "controlMissedCallbackFrames": [
+        [
+          151,
+          130
+        ],
+        [
+          134,
+          139
+        ],
+        [
+          136,
+          138
+        ]
+      ],
+      "damageMissedCallbackFrames": [
+        4,
+        4,
+        0
+      ]
+    }
+  },
+  "variants": {
+    "timerOnly4Hz": {
+      "controlledVariable": "Only B runs an in-memory setInterval every 250 ms and stores bounded performance.now timestamps. It performs no DOM, style, canvas, or composited-property mutation.",
+      "runnerManifestSha256": "5cd5289e22fc680017fe040155d84cb013da6f2fb497f20ee8e79b80f40cfb54",
+      "runs": [
+        {
+          "startedAt": "2026-09-07T01:53:29+09:00",
+          "finishedAt": "2026-09-07T01:55:47+09:00",
+          "classification": "timer-only-with-transition",
+          "validationErrors": [],
+          "conditions": {
+            "samePageTarget": true,
+            "samePageUrl": true,
+            "originalRequestObserved": true,
+            "quality": "Original (MPEG-2)",
+            "effectiveFrameModeStart": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "effectiveFrameModeEnd": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "backendStart": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "backendEnd": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "recordingNow": 0,
+            "scheduledWindowNow": 0,
+            "reservationMarginSeconds": 61590,
+            "tunerContract": {
+              "allFreeBefore": true,
+              "usedDuring": 1,
+              "usersDuring": 1,
+              "usedAfter": 0,
+              "usersAfter": 0
+            }
+          },
+          "timer": {
+            "version": 1,
+            "intervalMs": 250,
+            "startedAt": 52734,
+            "stoppedAt": 83902.79999995232,
+            "tickCount": 124,
+            "tickArrayLength": 124,
+            "firstTickAt": 52984.39999997616,
+            "lastTickAt": 83734.29999995232,
+            "gapMedianMs": 250,
+            "gapP95Ms": 254.60000002384186,
+            "gapMaxMs": 260.5
+          },
+          "surfaceMutation": false,
+          "cleanup": {
+            "timerOnlyRemoved": true,
+            "state": {
+              "pageAtMs": 105053.79999995232,
+              "timeOrigin": 1788713617560.7,
+              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
+              "quality": "Original (MPEG-2)",
+              "observedExpectedPath": false,
+              "streamQualities": [],
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false,
+              "backend": {
+                "requested": "auto",
+                "active": "worker",
+                "generation": 1,
+                "reason": "worker-ready"
+              },
+              "paused": false,
+              "readyState": 4,
+              "currentTime": 100.888043,
+              "mediaError": null,
+              "fullscreenBody": true,
+              "visibilityState": "visible",
+              "hidden": false,
+              "damageProbePresent": false,
+              "timerOnlyActive": false,
+              "timerOnlyTickCount": 124,
+              "timerOnlyIntervalMs": 250
+            }
+          },
+          "phases": [
+            {
+              "name": "A1-baseline",
+              "durationMs": 20010.015302985907,
+              "displaySampleCount": 19,
+              "displayStates": {
+                "30+chrome-override-30": 18,
+                "60+no-chrome-override": 1
+              },
+              "rVFC": {
+                "callbackEntries": 462,
+                "presentedFrameDelta": 569,
+                "missedCallbackFrames": 127
+              },
+              "pageRaf": {
+                "count": 618,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.400000000001455
+              },
+              "workerRaf": {
+                "count": 16,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.400000000001455
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "B-timer-only-4hz",
+              "durationMs": 30004.012006998062,
+              "displaySampleCount": 27,
+              "displayStates": {
+                "30+chrome-override-30": 27
+              },
+              "rVFC": {
+                "callbackEntries": 690,
+                "presentedFrameDelta": 859,
+                "missedCallbackFrames": 199
+              },
+              "pageRaf": {
+                "count": 881,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.40000000000873
+              },
+              "workerRaf": {
+                "count": 16,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.40000000000873
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "A2-recovery",
+              "durationMs": 20007.114874988794,
+              "displaySampleCount": 19,
+              "displayStates": {
+                "30+chrome-override-30": 19
+              },
+              "rVFC": {
+                "callbackEntries": 446,
+                "presentedFrameDelta": 569,
+                "missedCallbackFrames": 143
+              },
+              "pageRaf": {
+                "count": 586,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.40000000000873
+              },
+              "workerRaf": {
+                "count": 0,
+                "medianMs": null,
+                "p95Ms": null
+              },
+              "invalidUiProgressCount": 0
+            }
+          ],
+          "decisionCounts": {
+            "controlIdle1": 0,
+            "timerIdle1": 0,
+            "control30Samples": 37,
+            "timer30Samples": 27
+          },
+          "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+          "sourceArtifacts": {
+            "summarySha256": "8ae750492c5eb27bb4349069c314a57ed64e32063b5f5be7e7b5271a786bded6",
+            "phasesSha256": "0dc6386745ab2e2f9ab748e4c318518e9f9cfd4e8922c50cc29232ba55ce8a7f",
+            "deviceStateSha256": "7c1310cd62853562e593379f51e53f19858afd1847c78966a549d56e35147b47",
+            "progressSha256": "ec304c166c390e6f51ebbb0b372485bab8665b724b289c5594ee70a837b88a36",
+            "collectorRawSha256": "daef62d8d272ff6ac1f7a6ae94fd637f2f1c4abf0241fb1e6d7c51c44e96e033",
+            "resultSha256": "ba7130aca8c3b2255f58bc0875650e8f3ab7827914e485c375194a4b00e15888",
+            "reservationSha256": "26827dea0486f588b51d174a92d563d00c2ec578504dc274ad813056ecd8f252",
+            "tunerPreflightSha256": "0bca28dbe742df332f25fb294f3935614453455d4eeba3429db539d9f2d0d9ae",
+            "tunerActiveSha256": "7083c5df5dc49e70fff398f1f7e73e8672828f5eea72824d8bf37d1038303d96",
+            "tunerCleanupSha256": "48e766a299bf1e6a82bcd115be6aa0e4b0c2aba7a983295e2f5fc21bdd0776f9",
+            "postconditionSha256": "1942f05916343106dde48cde0322c5ed042b68ff08a21ac3233ca46edd97c92a"
+          }
+        }
+      ]
+    },
+    "oneByOnePixelSurface4Hz": {
+      "controlledVariable": "Only B adds one fixed 1 by 1 CSS pixel element and alternates it between black and white every 250 ms. The element dimensions are measured by the controller and rejected unless they are exactly 1 by 1.",
+      "runnerManifestSha256": "b403c7210e860747ce6141d5f389e274214b74b51250da03cd5085723acc7fbb",
+      "runs": [
+        {
+          "startedAt": "2026-09-07T02:10:04+09:00",
+          "finishedAt": "2026-09-07T02:12:23+09:00",
+          "classification": "supports-surface-update-prevents-idle-transition-in-this-run",
+          "validationErrors": [],
+          "conditions": {
+            "samePageTarget": true,
+            "samePageUrl": true,
+            "originalRequestObserved": true,
+            "quality": "Original (MPEG-2)",
+            "effectiveFrameModeStart": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "effectiveFrameModeEnd": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "backendStart": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "backendEnd": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "recordingNow": 0,
+            "scheduledWindowNow": 0,
+            "reservationMarginSeconds": 60595,
+            "tunerContract": {
+              "allFreeBefore": true,
+              "usedDuring": 1,
+              "usersDuring": 1,
+              "usedAfter": 0,
+              "usersAfter": 0
+            }
+          },
+          "damageProbe": {
+            "startedAt": 52203.10000002384,
+            "intervalMs": 250,
+            "widthPx": 1,
+            "heightPx": 1,
+            "styleWidth": "1px",
+            "styleHeight": "1px"
+          },
+          "damageTimer": {
+            "version": 1,
+            "intervalMs": 250,
+            "startedAt": 52203.10000002384,
+            "stoppedAt": 83327.20000004768,
+            "tickCount": 124,
+            "firstTickAt": 52455.89999997616,
+            "lastTickAt": 83205.60000002384,
+            "gapMedianMs": 250.10000002384186,
+            "gapP95Ms": 253.39999997615814,
+            "gapMaxMs": 260.59999990463257
+          },
+          "surfaceMutation": true,
+          "cleanup": {
+            "damageProbeRemoved": true,
+            "state": {
+              "pageAtMs": 104486.29999995232,
+              "timeOrigin": 1788714613795,
+              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
+              "quality": "Original (MPEG-2)",
+              "observedExpectedPath": false,
+              "streamQualities": [],
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false,
+              "backend": {
+                "requested": "auto",
+                "active": "worker",
+                "generation": 1,
+                "reason": "worker-ready"
+              },
+              "paused": false,
+              "readyState": 4,
+              "currentTime": 100.53707,
+              "mediaError": null,
+              "fullscreenBody": true,
+              "visibilityState": "visible",
+              "hidden": false,
+              "damageProbePresent": false,
+              "damageProbe": null
+            }
+          },
+          "phases": [
+            {
+              "name": "A1-baseline",
+              "durationMs": 20007.852200984955,
+              "displaySampleCount": 18,
+              "displayStates": {
+                "30+chrome-override-30": 18
+              },
+              "rVFC": {
+                "callbackEntries": 450,
+                "presentedFrameDelta": 570,
+                "missedCallbackFrames": 140
+              },
+              "pageRaf": {
+                "count": 600,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.400000000001455
+              },
+              "workerRaf": {
+                "count": 60,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.400000000001455
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "B-damage-4hz",
+              "durationMs": 30002.050291001797,
+              "displaySampleCount": 28,
+              "displayStates": {
+                "60+no-chrome-override": 28
+              },
+              "rVFC": {
+                "callbackEntries": 895,
+                "presentedFrameDelta": 867,
+                "missedCallbackFrames": 2
+              },
+              "pageRaf": {
+                "count": 1756,
+                "medianMs": 16.69999999999709,
+                "p95Ms": 16.80000000000291
+              },
+              "workerRaf": {
+                "count": 173,
+                "medianMs": 16.69999999999709,
+                "p95Ms": 16.799999999995634
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "A2-recovery",
+              "durationMs": 20003.99106797576,
+              "displaySampleCount": 18,
+              "displayStates": {
+                "30+chrome-override-30": 18
+              },
+              "rVFC": {
+                "callbackEntries": 461,
+                "presentedFrameDelta": 573,
+                "missedCallbackFrames": 132
+              },
+              "pageRaf": {
+                "count": 580,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.40000000000873
+              },
+              "workerRaf": {
+                "count": 60,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.5
+              },
+              "invalidUiProgressCount": 0
+            }
+          ],
+          "decisionCounts": {
+            "controlIdle1": 0,
+            "damageIdle1": 0,
+            "control30Samples": 36,
+            "damage30Samples": 0
+          },
+          "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+          "sourceArtifacts": {
+            "summarySha256": "f5470a2229ad26f2506ad590e50f3b23e722402e2cc07fa941dd33a1353b9149",
+            "phasesSha256": "a124047e51c8196cf981f80355a8828d6db057a3f4ab5e837e0dd2133332377f",
+            "deviceStateSha256": "f391b6ee153a5cdb4fe1716fbe9afbffea8cbbf7476fc3d9603f29370e5c607a",
+            "progressSha256": "e3464ac3140f0c191b088bf2d620dc8f2d2244aa684d598252d9e0b744c413cf",
+            "collectorRawSha256": "f274aeeb5d91c76a6263b01ba0533d9dd1d37c093c1d5699b0b224ec5a6b3405",
+            "resultSha256": "f4959e66e70f3aed39134a0aab75f5167b0c9e2c4bbfaff25bedc89447ac9e91",
+            "reservationSha256": "0e39839a42007d39124555e378d6add2b9a0440e98aea07649fd1323d81cc695",
+            "tunerPreflightSha256": "eb53f865d77d830ce604509028c64d68c254374e0685151b3d15faa1b0de8b45",
+            "tunerActiveSha256": "7ee1639d3ffb6faf854d0b423dedd767e581d61c25d15432025563525df6496c",
+            "tunerCleanupSha256": "3271c2ab376adc03ce35f1e0a27023f5564cb47a061934c17dba9d643237a5f7",
+            "postconditionSha256": "a5a00b2667bfc7a7ac24fd2e71c4ee4f3bb8dff4a427def970033e49c975785a"
+          }
+        },
+        {
+          "startedAt": "2026-09-07T02:16:37+09:00",
+          "finishedAt": "2026-09-07T02:18:55+09:00",
+          "classification": "supports-surface-update-prevents-idle-transition-in-this-run",
+          "validationErrors": [],
+          "conditions": {
+            "samePageTarget": true,
+            "samePageUrl": true,
+            "originalRequestObserved": true,
+            "quality": "Original (MPEG-2)",
+            "effectiveFrameModeStart": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "effectiveFrameModeEnd": {
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false
+            },
+            "backendStart": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "backendEnd": {
+              "requested": "auto",
+              "active": "worker",
+              "generation": 1,
+              "reason": "worker-ready"
+            },
+            "recordingNow": 0,
+            "scheduledWindowNow": 0,
+            "reservationMarginSeconds": 60202,
+            "tunerContract": {
+              "allFreeBefore": true,
+              "usedDuring": 1,
+              "usersDuring": 1,
+              "usedAfter": 0,
+              "usersAfter": 0
+            }
+          },
+          "damageProbe": {
+            "startedAt": 52843,
+            "intervalMs": 250,
+            "widthPx": 1,
+            "heightPx": 1,
+            "styleWidth": "1px",
+            "styleHeight": "1px"
+          },
+          "damageTimer": {
+            "version": 1,
+            "intervalMs": 250,
+            "startedAt": 52843,
+            "stoppedAt": 83985.70000004768,
+            "tickCount": 124,
+            "firstTickAt": 53093.60000002384,
+            "lastTickAt": 83843.39999997616,
+            "gapMedianMs": 250,
+            "gapP95Ms": 250.5,
+            "gapMaxMs": 250.90000009536743
+          },
+          "surfaceMutation": true,
+          "cleanup": {
+            "damageProbeRemoved": true,
+            "state": {
+              "pageAtMs": 105146.79999995232,
+              "timeOrigin": 1788715005486,
+              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
+              "quality": "Original (MPEG-2)",
+              "observedExpectedPath": false,
+              "streamQualities": [],
+              "normal": false,
+              "cellular": false,
+              "actualAutoFilm": false,
+              "backend": {
+                "requested": "auto",
+                "active": "worker",
+                "generation": 1,
+                "reason": "worker-ready"
+              },
+              "paused": false,
+              "readyState": 4,
+              "currentTime": 101.058478,
+              "mediaError": null,
+              "fullscreenBody": true,
+              "visibilityState": "visible",
+              "hidden": false,
+              "damageProbePresent": false,
+              "damageProbe": null
+            }
+          },
+          "phases": [
+            {
+              "name": "A1-baseline",
+              "durationMs": 20002.53056398034,
+              "displaySampleCount": 19,
+              "displayStates": {
+                "30+chrome-override-30": 19
+              },
+              "rVFC": {
+                "callbackEntries": 453,
+                "presentedFrameDelta": 572,
+                "missedCallbackFrames": 139
+              },
+              "pageRaf": {
+                "count": 564,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.400000000001455
+              },
+              "workerRaf": {
+                "count": 13,
+                "medianMs": 33.400000000001455,
+                "p95Ms": 33.5
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "B-damage-4hz",
+              "durationMs": 30002.235576987267,
+              "displaySampleCount": 27,
+              "displayStates": {
+                "60+no-chrome-override": 27
+              },
+              "rVFC": {
+                "callbackEntries": 900,
+                "presentedFrameDelta": 870,
+                "missedCallbackFrames": 0
+              },
+              "pageRaf": {
+                "count": 1719,
+                "medianMs": 16.69999999999709,
+                "p95Ms": 16.799999999995634
+              },
+              "workerRaf": {
+                "count": 35,
+                "medianMs": 16.69999999999709,
+                "p95Ms": 16.79999999998836
+              },
+              "invalidUiProgressCount": 0
+            },
+            {
+              "name": "A2-recovery",
+              "durationMs": 20003.78489100933,
+              "displaySampleCount": 18,
+              "displayStates": {
+                "30+chrome-override-30": 18
+              },
+              "rVFC": {
+                "callbackEntries": 450,
+                "presentedFrameDelta": 569,
+                "missedCallbackFrames": 139
+              },
+              "pageRaf": {
+                "count": 568,
+                "medianMs": 33.30000000000291,
+                "p95Ms": 33.40000000000873
+              },
+              "workerRaf": {
+                "count": 0,
+                "medianMs": null,
+                "p95Ms": null
+              },
+              "invalidUiProgressCount": 0
+            }
+          ],
+          "decisionCounts": {
+            "controlIdle1": 0,
+            "damageIdle1": 0,
+            "control30Samples": 37,
+            "damage30Samples": 0
+          },
+          "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+          "sourceArtifacts": {
+            "summarySha256": "46d607824a482ba9e6f0ec4ed20ec43f6c2622c69af177fa5efc4ee188b73b06",
+            "phasesSha256": "3d624b852bac8428acafacdf422d5ab0a22f8b846e57564007dede42ab469447",
+            "deviceStateSha256": "32ac22c6aa48ce699b45479e4f069f976e5d9b40643a839715a89b34386d49c3",
+            "progressSha256": "3f58df2b9e3c2b8f51ec974f0102b0a293ba250b5a4c92442a3a28ba069b53b7",
+            "collectorRawSha256": "e1d851bd25b216fc7a7e70755e675b18eed4c1283d6ec71055c65696d70b857a",
+            "resultSha256": "656377005865bdd15f74859a5a0c4f87ec9c1a19acf466433718a5c3672c78a9",
+            "reservationSha256": "8466665ec1ffd5cf3d00882bebb44cff81ec78def5dc7e8dc21925d48d7fc44b",
+            "tunerPreflightSha256": "cc0a700820a95ce273b6983f609d39a7e61a3a7ea6d5aa35a43f6ff530730d04",
+            "tunerActiveSha256": "0d11c2aeae05fab6f944ceb8700152abbf87d593ff960c14685f55a911b63333",
+            "tunerCleanupSha256": "4e4a96025e9412ca91b2d986a55dfd2b02cb9212ea0d504e1557026d86306114",
+            "postconditionSha256": "599a527685132646de1cc8264bcfc8eef71ded1822a836ad8c5e3106c78b61f3"
+          }
+        }
+      ]
+    }
+  },
+  "conclusions": [
+    "The timer-only B phase remained at 30 Hz with the Chrome 30 Hz override in all 27 display samples, so a 4 Hz JavaScript timer wakeup alone was not sufficient in that run.",
+    "The 1 by 1 surface-update B phase was at 60 Hz without the Chrome override in all 28 and 27 display samples across two summary-valid runs. The control phases returned to 30 Hz in both runs.",
+    "Together with the three 16 by 16 runs, the evidence attributes the observed transition prevention to page-surface mutation rather than the timer wakeup alone under these conditions."
+  ],
+  "limitations": [
+    "requestVideoFrameCallback missedCallbackFrames are callback-accounting evidence, not a direct physical scanout-drop count.",
+    "The runs do not establish the Chromium or Android source-code owner.",
+    "Black/white mutation of a 1 by 1 pixel is a diagnostic mechanism. Long-duration stability, power, thermal behavior, rendered pixels, perceptibility, and audible A/V sync remain unmeasured.",
+    "The base runner returned validation code 10 with a display30-without-stable-raf-or-ui diagnostic classification while its errors array was empty. Variant validity comes from the timer-only or surface-damage summary and is kept separate from that base classification.",
+    "The live input interval differs between runs, so small metric differences are not a performance effect size."
+  ]
+}
