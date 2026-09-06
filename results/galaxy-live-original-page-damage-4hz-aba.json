@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Test whether a 4 Hz visible page-surface update prevents the Galaxy Chrome 30 Hz application-VSync state during continuous live MPEG-2 Original playback.",
+  "runner": {
+    "extensionManifestSha256": "93b7dce02cee9449175c3966ce0c3eaf3c1da824a9d729de8d4b875dbfc4328f",
+    "baseManifestSha256": "e33e1bf94c27ee2f6d69d2d55ea25348a5f0434cc19beebf0c2d80c5b4b2f04a"
+  },
+  "conditions": {
+    "expectedQuality": "Original (MPEG-2)",
+    "expectedOriginalRequestPath": "/api/streams/live/gr061/original/mpegts",
+    "expectedBackend": "worker",
+    "autoFilm": false,
+    "fullscreen": true
+  },
+  "controlledVariable": "A 16 by 16 pixel page element alternates between black and white every 250 ms only during the B phase. The page, live stream, Original quality, deinterlacer, fullscreen state, and Chrome process remain continuous.",
+  "phaseOrder": [
+    "A1: no forced page damage for 20 seconds",
+    "B: forced visible page damage at 4 Hz for 30 seconds",
+    "A2: no forced page damage for 20 seconds"
+  ],
+  "runs": {
+    "run02": {
+      "startedAt": "2026-09-06T13:47:56+09:00",
+      "finishedAt": "2026-09-06T13:50:14+09:00",
+      "classification": "supports-surface-update-prevents-idle-transition-in-this-run",
+      "validationErrors": [],
+      "conditions": {
+        "samePageTarget": true,
+        "samePageUrl": true,
+        "originalRequestObserved": true,
+        "quality": "Original (MPEG-2)",
+        "effectiveFrameModeStart": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "effectiveFrameModeEnd": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "backendStart": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "backendEnd": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "recordingNow": 0,
+        "scheduledWindowNow": 0,
+        "reservationMarginSeconds": 29523,
+        "tunerContract": {
+          "allFreeBefore": true,
+          "usedDuring": 1,
+          "usersDuring": 1,
+          "usedAfter": 0,
+          "usersAfter": 0
+        }
+      },
+      "damageTimer": {
+        "intervalMs": 250,
+        "tickCount": 124,
+        "gapMedianMs": 250,
+        "gapP95Ms": 250.60000002384186,
+        "gapMaxMs": 274.7000000476837
+      },
+      "phases": [
+        {
+          "name": "A1-baseline",
+          "forcedDamage": false,
+          "durationMs": 20006.3449549973,
+          "displaySampleCount": 19,
+          "displayStates": {
+            "30+chrome-override-30": 19
+          },
+          "rVFC": {
+            "callbackEntries": 435,
+            "presentedFrameDelta": 566,
+            "missedCallbackFrames": 151
+          },
+          "pageRaf": {
+            "count": 597,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.400000000001455
+          },
+          "workerRaf": {
+            "count": 100,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.5
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "B-damage-4hz",
+          "forcedDamage": true,
+          "durationMs": 30003.93994998932,
+          "displaySampleCount": 27,
+          "displayStates": {
+            "60+no-chrome-override": 27
+          },
+          "rVFC": {
+            "callbackEntries": 895,
+            "presentedFrameDelta": 869,
+            "missedCallbackFrames": 4
+          },
+          "pageRaf": {
+            "count": 1765,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.80000000000291
+          },
+          "workerRaf": {
+            "count": 266,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.80000000000291
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "A2-recovery",
+          "forcedDamage": false,
+          "durationMs": 20005.14069402218,
+          "displaySampleCount": 19,
+          "displayStates": {
+            "30+chrome-override-30": 18,
+            "60+no-chrome-override": 1
+          },
+          "rVFC": {
+            "callbackEntries": 462,
+            "presentedFrameDelta": 572,
+            "missedCallbackFrames": 130
+          },
+          "pageRaf": {
+            "count": 629,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.40000000000873
+          },
+          "workerRaf": {
+            "count": 89,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.40000000000873
+          },
+          "invalidUiProgressCount": 0
+        }
+      ],
+      "decisionCounts": {
+        "controlIdle1": 0,
+        "damageIdle1": 0,
+        "control30Samples": 37,
+        "damage30Samples": 0
+      },
+      "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+      "sourceArtifacts": {
+        "summarySha256": "ce7c397eebabc77796bf8bf36cf373ef00ae64f116a4200567cbade770bc254e",
+        "phasesSha256": "6951203ebbd7ecd7a3a05a9548b8c9f782031725f4e9cfdb35be1d1ae376b908",
+        "deviceStateSha256": "7067a105e35bdbcde034a60417d8ffef6c34af2e54f3ab1f6f2f7a89e38b35d1",
+        "progressSha256": "4d7584f925e6328265ed4f0989554157fd1bcc03c0bb344a0cdf4609c77cf5c6",
+        "collectorRawSha256": "8781c9770be6bb4fd260f6f8809de2206d4b1f10c95ef026255611835e56c33a",
+        "resultSha256": "0e05fd6ccd8509b7eede6394e90df3249332fa8f4290276c72606e4f7047608d",
+        "reservationSha256": "39c1ec6f5395759479eca326cf103a290a478bcad4792a1ed60c21ce72deb408",
+        "tunerPreflightSha256": "d235c9f6a2a6684b3d58e29d3faef47d863ea702dd597f55ec63aeacabb4b87c",
+        "tunerActiveSha256": "9db4f897fa98d4de2df311a09fbedeb3e896c85377916a2eab10d07ac798af7e",
+        "tunerCleanupSha256": "a187bb6d4e38ecec1e17467f15661de8d0ca060ce0bf5a94f9b7bbd9441a2f92",
+        "postconditionSha256": "afe0f317b8ffa0883d701a72acc88a251785d503e348fc3b72aa41c3e2c309ae"
+      }
+    },
+    "run03": {
+      "startedAt": "2026-09-06T13:52:32+09:00",
+      "finishedAt": "2026-09-06T13:54:50+09:00",
+      "classification": "supports-surface-update-prevents-idle-transition-in-this-run",
+      "validationErrors": [],
+      "conditions": {
+        "samePageTarget": true,
+        "samePageUrl": true,
+        "originalRequestObserved": true,
+        "quality": "Original (MPEG-2)",
+        "effectiveFrameModeStart": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "effectiveFrameModeEnd": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "backendStart": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "backendEnd": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "recordingNow": 0,
+        "scheduledWindowNow": 0,
+        "reservationMarginSeconds": 29247,
+        "tunerContract": {
+          "allFreeBefore": true,
+          "usedDuring": 1,
+          "usersDuring": 1,
+          "usedAfter": 0,
+          "usersAfter": 0
+        }
+      },
+      "damageTimer": {
+        "intervalMs": 250,
+        "tickCount": 124,
+        "gapMedianMs": 250,
+        "gapP95Ms": 253.5,
+        "gapMaxMs": 256.3000000715256
+      },
+      "phases": [
+        {
+          "name": "A1-baseline",
+          "forcedDamage": false,
+          "durationMs": 20007.62154200673,
+          "displaySampleCount": 18,
+          "displayStates": {
+            "30+chrome-override-30": 17,
+            "60+no-chrome-override": 1
+          },
+          "rVFC": {
+            "callbackEntries": 457,
+            "presentedFrameDelta": 571,
+            "missedCallbackFrames": 134
+          },
+          "pageRaf": {
+            "count": 606,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.400000000001455
+          },
+          "workerRaf": {
+            "count": 23,
+            "medianMs": 33.299999999995634,
+            "p95Ms": 33.400000000001455
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "B-damage-4hz",
+          "forcedDamage": true,
+          "durationMs": 30005.46147298813,
+          "displaySampleCount": 28,
+          "displayStates": {
+            "60+no-chrome-override": 28
+          },
+          "rVFC": {
+            "callbackEntries": 895,
+            "presentedFrameDelta": 869,
+            "missedCallbackFrames": 4
+          },
+          "pageRaf": {
+            "count": 1724,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.799999999995634
+          },
+          "workerRaf": {
+            "count": 60,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.80000000000291
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "A2-recovery",
+          "forcedDamage": false,
+          "durationMs": 20004.78474700451,
+          "displaySampleCount": 18,
+          "displayStates": {
+            "30+chrome-override-30": 18
+          },
+          "rVFC": {
+            "callbackEntries": 454,
+            "presentedFrameDelta": 573,
+            "missedCallbackFrames": 139
+          },
+          "pageRaf": {
+            "count": 589,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.40000000000873
+          },
+          "workerRaf": {
+            "count": 18,
+            "medianMs": 33.39999999999418,
+            "p95Ms": 33.5
+          },
+          "invalidUiProgressCount": 0
+        }
+      ],
+      "decisionCounts": {
+        "controlIdle1": 0,
+        "damageIdle1": 0,
+        "control30Samples": 35,
+        "damage30Samples": 0
+      },
+      "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+      "sourceArtifacts": {
+        "summarySha256": "cd82532e7d383633ea2ce4ac5a09281ae92c5b2fa91b27fb6c689ecd1e193ef6",
+        "phasesSha256": "7ac1df09253b27556e7ee45afaa824ee5799447edb13af0cbb9fb24c80d6c51e",
+        "deviceStateSha256": "9b3a2a03e1e2833dcc1c1516ab555e1b045481f422656f711bb61064c619c2db",
+        "progressSha256": "5073e9805434b1efc7332b0e1d4106ae5417536c48f8120bf3550e4a35ed8c98",
+        "collectorRawSha256": "e2c81de6f41599c567f325eb559071ca8fb48e80d7573ea594231fe2651fa2a1",
+        "resultSha256": "30a05dcb88ca407e8ba298912bae2fb73d8c2456434d9423452e3646ec091ea8",
+        "reservationSha256": "93176f4b06d7c26f5e160b11cf3659d12f2b563f6fd67a20f531993dc1c45727",
+        "tunerPreflightSha256": "7e5e1a7702ab6a88cd02d8efdd3e151921cfded40bbfbc1fdeb7c7317bfed4dd",
+        "tunerActiveSha256": "6ab450dcf34a0a71ae163fb894c9b972d3935c84db0b0ad59a9849a3e7a87409",
+        "tunerCleanupSha256": "30bcc4c0385c7d65329e686572fd5b36bd7a672374bd6996dfbac8114f14cfd1",
+        "postconditionSha256": "aede32dc2bd17f75e589ba251da4e1556ca8e4e670654ee64b83fae2d903a359"
+      }
+    },
+    "run07": {
+      "startedAt": "2026-09-07T01:36:30+09:00",
+      "finishedAt": "2026-09-07T01:38:46+09:00",
+      "classification": "supports-surface-update-prevents-idle-transition-in-this-run",
+      "validationErrors": [],
+      "conditions": {
+        "samePageTarget": true,
+        "samePageUrl": true,
+        "originalRequestObserved": true,
+        "quality": "Original (MPEG-2)",
+        "effectiveFrameModeStart": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "effectiveFrameModeEnd": {
+          "normal": false,
+          "cellular": false,
+          "actualAutoFilm": false
+        },
+        "backendStart": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "backendEnd": {
+          "requested": "auto",
+          "active": "worker",
+          "generation": 1,
+          "reason": "worker-ready"
+        },
+        "recordingNow": 0,
+        "scheduledWindowNow": 0,
+        "reservationMarginSeconds": 62610,
+        "tunerContract": {
+          "allFreeBefore": true,
+          "usedDuring": 1,
+          "usersDuring": 1,
+          "usedAfter": 0,
+          "usersAfter": 0
+        }
+      },
+      "damageTimer": {
+        "intervalMs": 250,
+        "tickCount": 124,
+        "gapMedianMs": 250,
+        "gapP95Ms": 250.60000002384186,
+        "gapMaxMs": 253.70000004768372
+      },
+      "phases": [
+        {
+          "name": "A1-baseline",
+          "forcedDamage": false,
+          "durationMs": 20003.2336319983,
+          "displaySampleCount": 18,
+          "displayStates": {
+            "30+chrome-override-30": 18
+          },
+          "rVFC": {
+            "callbackEntries": 458,
+            "presentedFrameDelta": 574,
+            "missedCallbackFrames": 136
+          },
+          "pageRaf": {
+            "count": 600,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.400000000001455
+          },
+          "workerRaf": {
+            "count": 80,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.400000000001455
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "B-damage-4hz",
+          "forcedDamage": true,
+          "durationMs": 30002.080422997475,
+          "displaySampleCount": 28,
+          "displayStates": {
+            "60+no-chrome-override": 28
+          },
+          "rVFC": {
+            "callbackEntries": 901,
+            "presentedFrameDelta": 871,
+            "missedCallbackFrames": 0
+          },
+          "pageRaf": {
+            "count": 1782,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.799999999995634
+          },
+          "workerRaf": {
+            "count": 210,
+            "medianMs": 16.69999999999709,
+            "p95Ms": 16.799999999995634
+          },
+          "invalidUiProgressCount": 0
+        },
+        {
+          "name": "A2-recovery",
+          "forcedDamage": false,
+          "durationMs": 20006.05676600337,
+          "displaySampleCount": 18,
+          "displayStates": {
+            "30+chrome-override-30": 18
+          },
+          "rVFC": {
+            "callbackEntries": 455,
+            "presentedFrameDelta": 573,
+            "missedCallbackFrames": 138
+          },
+          "pageRaf": {
+            "count": 599,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.40000000000873
+          },
+          "workerRaf": {
+            "count": 78,
+            "medianMs": 33.30000000000291,
+            "p95Ms": 33.40000000000873
+          },
+          "invalidUiProgressCount": 0
+        }
+      ],
+      "decisionCounts": {
+        "controlIdle1": 0,
+        "damageIdle1": 0,
+        "control30Samples": 36,
+        "damage30Samples": 0
+      },
+      "baseRunnerResultClassification": "display30-without-stable-raf-or-ui",
+      "sourceArtifacts": {
+        "summarySha256": "4256e947c1d900253142f6222cb372b84a54658bf4581e5b02cad910e964e777",
+        "phasesSha256": "f898e474ca0e4e4db0e7a38bce782fcb571ecc5517b119fe90340c80ba1e81f4",
+        "deviceStateSha256": "07f05746627d0610df897f657186171f57bdbdcef5b7f2d201794a5cbe272155",
+        "progressSha256": "ad7404879806f84b8fcdd97d720892e7dc58282fa9aa988da79faca5228e01af",
+        "collectorRawSha256": "a8ec114879b0d750ef9d47508ee7cea2ff73916fbf64f0dc795f59926210cff3",
+        "resultSha256": "d17ad3383aa6a40798b28972e9dedf7f59c6738ea0bf53829b2244f99cc332c2",
+        "reservationSha256": "b822a533087b6dc4253ae8a16fd4b144df08796cdd0b71c791b89e088c541092",
+        "tunerPreflightSha256": "1b8a8d4b5ec24163b63212571a55aeb883e362d929040a50ec5ead6c37878cde",
+        "tunerActiveSha256": "802de582247cc37ca82224f95cded9982a8cb0c802bd73bc793c9f925dbfecd2",
+        "tunerCleanupSha256": "43e3b266e74a56f6abc72aaefab65654476e47bc592828c531ae3e54f12aea97",
+        "postconditionSha256": "390404d84846433407ba3f19a30fd4abec8ca2e0e771af644b07cfa4c7322d75"
+      }
+    }
+  },
+  "aggregate": {
+    "summaryValidRuns": 3,
+    "classifications": [
+      "supports-surface-update-prevents-idle-transition-in-this-run",
+      "supports-surface-update-prevents-idle-transition-in-this-run",
+      "supports-surface-update-prevents-idle-transition-in-this-run"
+    ],
+    "control30HzSamples": [
+      37,
+      35,
+      36
+    ],
+    "damage30HzSamples": [
+      0,
+      0,
+      0
+    ],
+    "controlMissedCallbackFrames": [
+      [
+        151,
+        130
+      ],
+      [
+        134,
+        139
+      ],
+      [
+        136,
+        138
+      ]
+    ],
+    "damageMissedCallbackFrames": [
+      4,
+      4,
+      0
+    ]
+  },
+  "conclusion": "In all three A-B-A runs whose page-damage summaries had no validation errors, the control phases entered the Galaxy 30 Hz plus Chrome-override state, while the 4 Hz page-update phase had zero 30 Hz samples. Missing rVFC callbacks fell from 130-151 per 20-second control phase to 0-4 per 30-second update phase, then returned to 130-139 after updates stopped.",
+  "limitations": [
+    "This establishes repeatable sufficiency for this visible page update in these sessions; it does not identify the Chromium or Android source-code owner.",
+    "The black/white 16 by 16 pixel update is visibly flashing and is not itself a product-ready workaround.",
+    "Phase metrics are diagnostic within-run observations and are not a complete playback-quality or power-consumption assessment.",
+    "The base runner classified these runs as display30-without-stable-raf-or-ui because its separate stable-window gate is not the page-damage A-B-A decision. The page-damage summaries completed with no validation errors.",
+    "rVFC missedCallbackFrames is not a direct count of physical display scanout drops.",
+    "Pixel correctness, subjective picture quality, audible A/V synchronization, power use, and long-duration stability were not measured.",
+    "One separate run was excluded because a pre-existing Mirakurun user changed during the run; it is not included in the three-run aggregate.",
+    "Source filesystem paths, LAN addresses, program details, and device identifiers are omitted; SHA-256 values retain traceability to the private archive."
+  ]
+}
