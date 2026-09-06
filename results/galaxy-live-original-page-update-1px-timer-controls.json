@@ -121,7 +121,6 @@
             "state": {
               "pageAtMs": 105053.79999995232,
               "timeOrigin": 1788713617560.7,
-              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
               "quality": "Original (MPEG-2)",
               "observedExpectedPath": false,
               "streamQualities": [],
@@ -318,7 +317,6 @@
             "state": {
               "pageAtMs": 104486.29999995232,
               "timeOrigin": 1788714613795,
-              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
               "quality": "Original (MPEG-2)",
               "observedExpectedPath": false,
               "streamQualities": [],
@@ -506,7 +504,6 @@
             "state": {
               "pageAtMs": 105146.79999995232,
               "timeOrigin": 1788715005486,
-              "url": "https://192-168-0-178.local.konomi.tv:7013/tv/watch/gr061?seek-demo=connected-repro-01",
               "quality": "Original (MPEG-2)",
               "observedExpectedPath": false,
               "streamQualities": [],
