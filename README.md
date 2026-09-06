@@ -8,7 +8,7 @@ KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再
 - 確認済みの結果、未達条件、採否判断: [`REPORT.md`](REPORT.md)
 - 公開可能な生値と機械集計: [`results/`](results/)
 
-測定結果はsource、dist、KonomiTV、client asset、fixture、runnerのhashへ対応付けます。別commitの結果を評価対象へ流用しません。
+測定結果はsource、dist、KonomiTV、client asset、fixture、runnerのhashへ対応付けます。別commitの結果を評価対象へ流用しません。GalaxyとPOCOを同じライブOriginalへ接続した[固定60Hz・10分・2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)では、実経路とlifecycleを機械検証しています。
 
 ## 評価対象
 

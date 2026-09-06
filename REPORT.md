@@ -81,6 +81,10 @@ Workerの最終canvas submitはpage側から観測できないため、Workerの
 
 GalaxyのライブOriginalを、端末表示を固定60Hzと固定120Hzにして各60秒測定しました。提示frameに対するrVFC callbackの欠落は60Hzで419 / 1,799 frame（23.29%）、120Hzで407 / 1,796 frame（22.66%）でした。両条件ともWorker / pageのrAF間隔中央値は33.3msで、表示を120Hzへ固定しても約23%のcallback欠落は解消しませんでした。[固定条件と生値](results/galaxy-live-original-refresh-60-120.json)に、build、runner、表示sample、実要求、実効`autoFilm`の照合結果を記録しています。
 
+新しいlifecycle検証付きrunnerで、Galaxy固定60HzとPOCO通常設定を同じライブOriginalへ同時接続する10分測定を2回行いました。両走行とも実要求`/api/streams/live/gr101/original/mpegts`、開始・終了時の`playerState=converting`、Worker継続、`autoFilm=false`、trace欠落0、canvas transfer、設定復元、cleanupを機械検証し、`accepted`となりました。提示frameに対するrVFC callback欠落はGalaxyが3,823 / 3,983 frame、POCOが327 / 49 frameでした。Workerの最終`draw-submit`はGalaxyが平均27.98 / 26.42回/秒、POCOが56.48 / 58.85回/秒でした。[同時2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)に、公開集計とprivate raw / validatorへのSHA-256対応を記録しています。
+
+同じ放送区間へ接続した各走行で大きな端末差が反復したため、GalaxyのライブOriginalで約30Hz以下になる問題規模は確認できました。rVFC欠落は物理displayへのscanout dropそのものではなく、2走は異なる放送区間なので、走行間の小さな差を効果量には使いません。固定120Hzとの同じ新runnerによる比較、画素、可聴A/V同期は未確認です。
+
 同じ放送の異なる60秒区間を各1回測った比較であるため、12 frame、0.63ポイントの差を表示更新設定の効果量とは扱いません。端末の「最適化」設定では開始時の120Hzから、Chrome再生中の87 sample中86 sampleが30Hzへ移行しました。この走行は端末の適応表示動作を示す診断資料として残し、固定120Hzとの比較には採用していません。
 
 放送区間の差を除くため、同じ固定MPEG-2 TSをライブOriginal経路へ入力し、固定120→60→120Hzの各30秒を2反復しました。提示frameに対するrVFC callback欠落は、第1反復が91 / 151 / 163 frame、第2反復が134 / 128 / 180 frameでした。各区間の57表示sampleはすべて指定Hzに一致し、Original実要求、Worker、実効`autoFilm=false`、映像進行、trace欠落0、Mirakurunの新規利用なしを確認しています。120Hz区間内の差が60Hzとの差より大きく、固定120Hzによる改善は再現しませんでした。[固定入力のA-B-A結果](results/galaxy-fixed-input-original-refresh-aba.json)に生値とhashを記録しています。rVFCはcallbackの観測であり、画面へscanoutされた可視frameの欠落数とは断定しません。
