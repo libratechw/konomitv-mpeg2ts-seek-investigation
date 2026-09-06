@@ -158,6 +158,17 @@ KonomiTVへの実視聴影響は、測定結果を添えて[Issue #279](https://
 
 同じ素材、build、seek列を高性能WindowsでもB-A-A-B順で追試すると、4走行とも200回を完了し、2秒上限超過は0件でした。基準版の復帰時間は平均384.7ms、修正版は380.8msで、同一seek番号ごとの差は平均-3.9msでした。先頭20回から末尾20回への中央値変化は基準版+27.5ms、修正版+55.0msで、線形傾きはそれぞれ1 seekあたり+0.229ms、+0.227msでした。この端末では、低電力Windowsで見えた大きな復帰時間の差を再現していません。[高性能Windowsでの実視聴比較](results/windows-starlette-viewing-seek-world-leveli-baba-200.json)には全800回の生値、実測したOS・電源・表示・CPU条件、Originalのdownload要求、mpeg2toh264 playerとdeinterlacerの状態を記録しています。専用のWorker実行telemetry、可聴A/V同期、主観画質は測定していません。修正版の実視聴効果は端末負荷を含む条件に依存する可能性があり、2端末だけでは条件を特定できません。
 
+同じv14 runnerでhostとseek帯を組み合わせた2×2追試も、各セルをB-A-A-B順・各走行200シークで完走しました。4セルとも、画面表示だけでなく実要求`/api/videos/4/download`、`streamQualities=[]`、`playerState=converting`、同一seek列、cleanupを機械照合しています。
+
+| 端末 | seek帯 | 基準版平均 | 修正版平均 | 修正版−基準版 |
+| --- | ---: | ---: | ---: | ---: |
+| 低電力Windows | 10〜80秒 | 841.050ms | 714.507ms | -126.544ms（-15.05%） |
+| 低電力Windows | 100〜175秒 | 741.079ms | 729.111ms | -11.969ms（-1.62%） |
+| 高性能Windows | 10〜80秒 | 416.913ms | 364.095ms | -52.818ms（-12.67%） |
+| 高性能Windows | 100〜175秒 | 381.432ms | 379.320ms | -2.112ms（-0.55%） |
+
+低帯域では両端末で平均が短く、高帯域では差が小さくなりました。ただし、同一seek番号ごとの差のp95は低電力Windowsの低帯域でも+29.423msであり、すべてのシークが短縮したわけではありません。この4セルは端末性能だけでなくseek位置が効果量に関係する証拠ですが、1素材・各セル1組なので原因条件の確定には使いません。生値、元summary / blockのSHA-256、実測環境は[低電力・低帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-lowband-baba-200.json)、[低電力・高帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-highband-baba-200.json)、[高性能・低帯域](results/windows-starlette-viewing-seek-world-v14-leveli-lowband-baba-200.json)、[高性能・高帯域](results/windows-starlette-viewing-seek-world-v14-leveli-highband-baba-200.json)へ記録しています。
+
 最初に低電力Windowsで後半悪化を確認した録画素材を同じ高性能Windowsへ移し、240〜480秒と900〜1,140秒のseek帯を同じrunnerでB-A-A-B比較しました。全4走行が200回を完了し、2秒上限超過は0件でしたが、基準版の復帰時間は平均941.8ms、修正版は271.1msで、同一seek番号ごとの差は平均-670.6msでした。先頭20回から末尾20回への中央値変化は基準版+1,284.9ms、修正版+33.4ms、線形傾きは1 seekあたり+7.308msと+0.291msでした。[元の素材を使った高性能Windowsでの再現試験](results/windows-starlette-viewing-seek-original-fixture-leveli-baba-200.json)に全800回の生値、実測環境、Original要求とplayer状態を記録しています。同じ端末でも素材とseek帯を替えると差の有無が変わったため、高性能端末であることだけでは修正版の効果が小さかった追試結果を説明できません。どのファイル特性や読出し条件が差を生むかは未確定です。
 
 ### 固定fixture
