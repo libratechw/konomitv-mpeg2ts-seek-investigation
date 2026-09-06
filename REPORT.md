@@ -150,6 +150,8 @@ KonomiTVへの実視聴影響は、測定結果を添えて[Issue #279](https://
 
 同じ端末とrunnerで録画素材を「ワールド イズ ダンシング」へ替え、10〜80秒と100〜175秒のseek帯をB-A-A-B順で追試しました。4走行とも200回を完了し、2秒上限超過は0件でした。同一seek番号ごとの2走行平均では、基準版の復帰時間は平均841.2ms、修正版は752.6msで、差は-88.7msでした。先頭20回から末尾20回への中央値変化は基準版+60.1ms、修正版+73.0msで、最初の素材で見えた大きな後半悪化は再現しませんでした。[別素材の実視聴比較](results/windows-starlette-viewing-seek-world-baba-200.json)に全800回の生値と固定条件を記録しています。修正版の効果量は素材やseek帯によって異なる可能性があります。
 
+同じ素材、build、seek列を高性能WindowsでもB-A-A-B順で追試すると、4走行とも200回を完了し、2秒上限超過は0件でした。基準版の復帰時間は平均384.7ms、修正版は380.8msで、同一seek番号ごとの差は平均-3.9msでした。先頭20回から末尾20回への中央値変化は基準版+27.5ms、修正版+55.0msで、線形傾きはそれぞれ1 seekあたり+0.229ms、+0.227msでした。この端末では、低電力Windowsで見えた大きな復帰時間の差を再現していません。[高性能Windowsでの実視聴比較](results/windows-starlette-viewing-seek-world-leveli-baba-200.json)には全800回の生値、実測したOS・電源・表示・CPU条件、Originalのdownload要求、mpeg2toh264 playerとdeinterlacerの状態を記録しています。専用のWorker実行telemetry、可聴A/V同期、主観画質は測定していません。修正版の実視聴効果は端末負荷を含む条件に依存する可能性があり、2端末だけでは条件を特定できません。
+
 ### 固定fixture
 
 正常3:2区間は、実写とアニメを含む5素材を固定しました。[scan結果](results/anime-autofilm-clean-fixtures.json)にcadence、decode error、transport error、SHA-256を記録しています。

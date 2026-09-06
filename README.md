@@ -39,7 +39,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ### 既存PRへの検証材料
 
-Starletteの`FileResponse`切断処理には、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)があります。独立したPRは作らず、[`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)の実装、テスト、ベンチマーク、測定結果を[コメント](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)として共有しています。KonomiTVの実視聴への影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)へ報告しました。別の録画素材を使った[追試結果](results/windows-starlette-viewing-seek-world-baba-200.json)も公開しています。このbranchは比較と再利用のために保持し、独立した採用候補として扱いません。
+Starletteの`FileResponse`切断処理には、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)があります。独立したPRは作らず、[`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)の実装、テスト、ベンチマーク、測定結果を[コメント](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)として共有しています。KonomiTVの実視聴への影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)へ報告しました。別の録画素材を使った[低電力Windowsでの追試](results/windows-starlette-viewing-seek-world-baba-200.json)と、同じ素材を使った[高性能Windowsでの追試](results/windows-starlette-viewing-seek-world-leveli-baba-200.json)も公開しています。このbranchは比較と再利用のために保持し、独立した採用候補として扱いません。
 
 KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補はまずfork branchとして公開します。数日間取り込まれず、fetch後の`main`にも必要な場合だけPRを作成します。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
