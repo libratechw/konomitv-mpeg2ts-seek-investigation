@@ -25,6 +25,10 @@
     "newMirakurunKonomiUsers": 0
   },
   "provenance": {
+    "konomiTVCommit": "ea1962f84c22265c1d31081dfe41cc3b53e9a555",
+    "mpeg2toh264BaseCommit": "faf1464e66693133fc9f4b8618992b0f557f0bc3",
+    "mpeg2toh264SourceCommit": "df5f9fa804644080ef0d234d5e20163fab9ce7d0",
+    "mpeg2toh264DistCommit": "485838acb022da16aa74b2b4dc53bbd5ed3f5a1a",
     "fixtureSha256": "a5847a810bb6c46ba8073b019b1ef84f0f29355a660416e21eb16caeb816c172",
     "captureManifestSha256": "05afb6b8a7eda26957f7b21634a321e7afde54c0a5be108df70389e50f1b7835",
     "clientBuildManifestSha256": "a348a96f125f623a68b9267d94d7b7265a48e6a201bbe4233cd590dd0fca0e2e",
