@@ -69,9 +69,11 @@ KonomiTV側にも別のhandler蓄積があります。録画再生ではHLS画�
 
 ### タッチ端末の中央操作ボタン
 
-KonomiTVの中央操作ボタンは、DPlayerが同じ要素へ付ける`dplayer-mobile` classを子孫selectorで参照していたため、その規則が一致しませんでした。GalaxyをPC版サイト表示にするとUA判定でもmobile扱いされず、横画面の録画再生で物理的に中央をタップしても、下部コントローラだけが表示され、中央の戻る・再生・進む操作は隠れたままでした。
+Imported snapshotの`Watch.vue`は、DPlayerが同じ要素へ付ける`dplayer-mobile` classを子孫selectorで参照する規則を含み、hermetic verifierはその規則が同じ要素のclassと一致しない構造を示す。この構造観察とは別に、liveの表示差は下記の公開JSONの条件でのみ観測されたもので、live A/B自体はコード因果の証明ではない。
 
-候補は表示中のcontrol状態のもと、`(hover: none)`かつ`(pointer: coarse)`の端末で中央操作を表示します。同じGalaxyと隔離buildによるA/Bでは、基準版の中央wrapが`visibility:hidden`・`opacity:0`、候補版が`visibility:visible`・`opacity:0.7`となり、中央3操作を表示しました。下部コントローラは両版で表示を維持しています。[実機A/B](results/galaxy-touch-center-controls-live-ab.json)にbase、candidate、dist、観測値の対応を記録しています。
+公開JSONが記録するGalaxy条件は、横画面・録画再生・物理中央タップで、`dplayerMobile=false`、`hoverNone=true`、`pointerCoarse=true`であり、リフレッシュレートは未記録である。browser、fixture、fullscreen、runnerも公開JSONは記録しない。PC版サイト表示の有無は公開JSONの条件に含まれず、この文書では主張しない。
+
+表示中のcontrol状態のもと、基準版の中央wrapは`visibility:hidden`・`opacity:0`で中央3操作が隠れ、候補版は`visibility:visible`・`opacity:0.7`で中央3操作を表示した。下部コントローラは両版で表示を維持した。[実機A/B](results/galaxy-touch-center-controls-live-ab.json)にbase、candidate、dist、観測値の対応を記録している。この主張は上記の記録条件に限られ、他のリフレッシュレートや端末条件への一般化ではない。
 
 POCOは物理タップでcontrol表示状態へ入らなかったため、同等のDOM状態を強制したCSS互換確認に限ります。Windowsは候補版でtouch用media queryが一致せず既存表示を維持したことだけを確認し、基準版とのA/Bは行っていません。computed styleによる自動確認は、視覚的アクセシビリティ、fullscreen、すべての入力方式、長時間の操作安定性を証明しません。
 

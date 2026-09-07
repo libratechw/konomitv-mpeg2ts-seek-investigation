@@ -42,7 +42,7 @@
       "centerButtonsVisible": true,
       "bottomControllerVisible": true
     },
-    "claim": "The tested Galaxy condition reproduces the user-visible baseline bug and confirms the candidate effect."
+    "claim": "In the tested landscape recorded-video physical-tap condition (refresh rate not recorded), the baseline center wrap stayed hidden and the candidate center wrap showed; bottom controller stayed visible in both. No broader device or refresh claim is made."
   },
   "poco": {
     "dplayerMobile": true,
@@ -67,14 +67,14 @@
     "Fullscreen behavior was not established.",
     "Long-duration interaction stability was not established.",
     "POCO physical tap behavior was not established.",
-    "Windows had no baseline block."
+    "Windows had no baseline block.",
+    "Refresh rate was not recorded; this A/B is distinct from the earlier 60/120 Hz live-Original frame-drop runs."
   ],
   "review": {
-    "candidateCommitIndependentReview": "no-blocking-findings",
-    "publicWordingRequiresIndependentReview": true
+    "candidateCommitIndependentReview": "no-blocking-findings"
   },
   "provenance": {
     "privateResultSha256": "4eed71c5bf4512f743befde8f22660feddd373c73473ac523652a9c7832a79ef",
-    "note": "Sanitized public projection; environment identifiers and raw operational evidence are omitted."
+    "note": "Sanitized public projection; environment identifiers and raw operational evidence are omitted. Root verifies raw operational evidence against privateResultSha256 outside this workspace."
   }
 }
