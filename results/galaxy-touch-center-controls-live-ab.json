@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "kind": "touch-center-controls-live-ab",
+  "valid": true,
+  "branch": "provisional/touch-center-controls",
+  "build": {
+    "baselineCommit": "cc9f340cde56f9e1343dc212600a78b607a47bd8",
+    "candidateCommit": "45d9a5910fda21702b7df9982373d01295a1a523",
+    "forkRemoteHeadMatchesCandidate": true,
+    "changedFiles": [
+      "client/src/components/Watch/Watch.vue"
+    ],
+    "insertions": 9,
+    "deletions": 3,
+    "nodeVersion": "v20.19.5",
+    "yarnVersion": "1.22.22",
+    "installCommand": "yarn install --frozen-lockfile",
+    "buildCommand": "yarn build",
+    "installPassed": true,
+    "buildPassed": true,
+    "baselineDistTreeSha256": "d98d0994115ad3d5668dcb051fa5183cca19d4e94615eddb38bd79249c26fdab",
+    "candidateDistTreeSha256": "01a5561d4da31d1decd1e56dcfd717154d511dea63d18ca7b3e47ae191eae199"
+  },
+  "galaxy": {
+    "conditions": {
+      "orientation": "landscape",
+      "content": "recorded-video-player",
+      "operation": "physical-center-tap",
+      "dplayerMobile": false,
+      "hoverNone": true,
+      "pointerCoarse": true
+    },
+    "baseline": {
+      "centerWrapVisibility": "hidden",
+      "centerWrapOpacity": "0",
+      "centerButtonsVisible": false,
+      "bottomControllerVisible": true
+    },
+    "candidate": {
+      "centerWrapVisibility": "visible",
+      "centerWrapOpacity": "0.7",
+      "centerButtonsVisible": true,
+      "bottomControllerVisible": true
+    },
+    "claim": "The tested Galaxy condition reproduces the user-visible baseline bug and confirms the candidate effect."
+  },
+  "poco": {
+    "dplayerMobile": true,
+    "hoverNone": true,
+    "pointerCoarse": true,
+    "equivalentControlStateForced": true,
+    "baselineCenterButtonsVisible": true,
+    "candidateCenterButtonsVisible": true,
+    "claim": "CSS-state compatibility only; physical tap behavior was not established."
+  },
+  "windows": {
+    "candidateOnly": true,
+    "hoverHover": true,
+    "pointerFine": true,
+    "touchMediaQueryMatched": false,
+    "centerWrapRetainedExistingHiddenState": true,
+    "bottomControllerVisible": true,
+    "claim": "Candidate fine-pointer check only; not a Windows A/B or proof for every desktop input configuration."
+  },
+  "limitations": [
+    "Automated computed styles do not prove visual accessibility.",
+    "Fullscreen behavior was not established.",
+    "Long-duration interaction stability was not established.",
+    "POCO physical tap behavior was not established.",
+    "Windows had no baseline block."
+  ],
+  "review": {
+    "candidateCommitIndependentReview": "no-blocking-findings",
+    "publicWordingRequiresIndependentReview": true
+  },
+  "provenance": {
+    "privateResultSha256": "4eed71c5bf4512f743befde8f22660feddd373c73473ac523652a9c7832a79ef",
+    "note": "Sanitized public projection; environment identifiers and raw operational evidence are omitted."
+  }
+}

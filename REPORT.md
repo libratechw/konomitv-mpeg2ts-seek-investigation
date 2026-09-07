@@ -67,6 +67,14 @@ DPlayer v1.33.1では、画質切替ごとに共有event handlerが増え、取�
 
 KonomiTV側にも別のhandler蓄積があります。録画再生ではHLS画質へ入るたび、Native `error` handlerを共有DPlayer event busへ追加し、Originalへ戻っても外しません。このためOriginal側でvideo errorが起きた際にも、先にHLS用として登録されたhandlerが現在の`video.error`を読み、`Native: 3`としてplayer再起動を要求できます。iPad Air第5世代の通知順序とは整合しますが、収録時にこのhandlerが発火したことは未計装です。DPlayer candidateのiOS確認では、旧videoの除外だけでなく、このKonomiTV handlerの登録数と発火元も記録する必要があります。
 
+### タッチ端末の中央操作ボタン
+
+KonomiTVの中央操作ボタンは、DPlayerが同じ要素へ付ける`dplayer-mobile` classを子孫selectorで参照していたため、その規則が一致しませんでした。GalaxyをPC版サイト表示にするとUA判定でもmobile扱いされず、横画面の録画再生で物理的に中央をタップしても、下部コントローラだけが表示され、中央の戻る・再生・進む操作は隠れたままでした。
+
+候補は表示中のcontrol状態のもと、`(hover: none)`かつ`(pointer: coarse)`の端末で中央操作を表示します。同じGalaxyと隔離buildによるA/Bでは、基準版の中央wrapが`visibility:hidden`・`opacity:0`、候補版が`visibility:visible`・`opacity:0.7`となり、中央3操作を表示しました。下部コントローラは両版で表示を維持しています。[実機A/B](results/galaxy-touch-center-controls-live-ab.json)にbase、candidate、dist、観測値の対応を記録しています。
+
+POCOは物理タップでcontrol表示状態へ入らなかったため、同等のDOM状態を強制したCSS互換確認に限ります。Windowsは候補版でtouch用media queryが一致せず既存表示を維持したことだけを確認し、基準版とのA/Bは行っていません。computed styleによる自動確認は、視覚的アクセシビリティ、fullscreen、すべての入力方式、長時間の操作安定性を証明しません。
+
 ### Android ChromeのYADIF描画先
 
 GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktopを示しますが、`navigator.platform`はARM Linux、`maxTouchPoints`は5を返します。KonomiTV側でmpeg2toh264を`faf1464`へ更新し、YADIF生成箇所だけでこの端末条件を補足してmain-thread描画を選ぶcandidateを測定しました。
