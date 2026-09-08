@@ -16,6 +16,16 @@ KonomiTV向けの判断は、測定開始前にfetchした`tsukumijima/mpeg2toh2
 
 Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf1464`、KonomiTV `ea1962f`です。これより前のcandidateとintegrationは、過去の測定値の出所であり、新しい実装や合否判定の基点ではありません。
 
+## KonomiTV dogfood branches
+
+KonomiTVのdogfood branchは、用途を分離しています。branch全体をupstreamへ取り込まず、製品候補は個別commitを単位に評価します。
+
+| branch | 役割 |
+| --- | --- |
+| [`dogfood/integration`](https://github.com/libratechw/KonomiTV/tree/dogfood/integration) | 最初の統合dogfood版を固定した履歴参照。新しい製品候補や計測実験の基点にはしない |
+| [`dogfood/adaptive-surface-next`](https://github.com/libratechw/KonomiTV/tree/dogfood/adaptive-surface-next) | 適応型surface更新の比較測定とロールバック参照を目的とする実験branch。branch全体や実験を製品候補として採用しない |
+| [`dogfood/product-candidates`](https://github.com/libratechw/KonomiTV/tree/dogfood/product-candidates) | 新しいupstream基点から再構成し、適応型surface更新と不要になったcustom Starletteを除いた製品候補の集約。Starlette app修正、Capture Worker修正、LivePSI Worker修正などは個別commitを取り込み単位とする |
+
 ## 公開コード
 
 この節を、KonomiTV、mpeg2toh264、DPlayerなど提出先をまたぐ全公開候補の一覧とします。公開branchは、実機で効果と関連する退行を確認した「採用候補」と、論理・不変条件・自動testを確認したが実機測定が残る「暫定候補」に分けます。暫定候補はfetch後のupstreamへ適用でき、既知の破壊的退行がなく、branch内READMEに未計測範囲と取り込み側で必要な検証を明記したものに限ります。診断・測定branchと棄却・撤回済み実験はどちらにも含めません。
