@@ -16,15 +16,9 @@ KonomiTV向けの判断は、測定開始前にfetchした`tsukumijima/mpeg2toh2
 
 Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf1464`、KonomiTV `ea1962f`です。これより前のcandidateとintegrationは、過去の測定値の出所であり、新しい実装や合否判定の基点ではありません。
 
-## KonomiTV dogfood branches
+## KonomiTV dogfood
 
-KonomiTVのdogfood branchは、用途を分離しています。branch全体をupstreamへ取り込まず、製品候補は個別commitを単位に評価します。
-
-| branch | 役割 |
-| --- | --- |
-| [`dogfood/integration`](https://github.com/libratechw/KonomiTV/tree/dogfood/integration) | 最初の統合dogfood版を固定した履歴参照。新しい製品候補や計測実験の基点にはしない |
-| [`dogfood/adaptive-surface-next`](https://github.com/libratechw/KonomiTV/tree/dogfood/adaptive-surface-next) | 適応型surface更新の比較測定とロールバック参照を目的とする実験branch。branch全体や実験を製品候補として採用しない |
-| [`dogfood/product-candidates`](https://github.com/libratechw/KonomiTV/tree/dogfood/product-candidates) | 新しいupstream基点から再構成し、適応型surface更新と不要になったcustom Starletteを除いた製品候補の集約。Starlette app修正、Capture Worker修正、LivePSI Worker修正などは個別commitを取り込み単位とする |
+日常利用用のdogfoodは[`dogfood/integration`](https://github.com/libratechw/KonomiTV/tree/dogfood/integration)へ統合しました。現在の役割と構成はbranch内の`Readme.md`を正本とし、この調査リポジトリでは重複して管理しません。過去のbranchを使った測定は、各結果に固定したcommitを出所として参照します。
 
 ## 公開コード
 
