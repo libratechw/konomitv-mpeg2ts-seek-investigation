@@ -6,7 +6,7 @@ KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再
 
 2026年9月11日時点。修正をまとめて日常利用するdogfood版と、上流へ個別に提案する候補を区別しています。
 
-- **TVライブのOriginalが開始できない問題**では、DPlayerが準備中の映像へ不正な再生位置を指定する経路を特定しました。非有限値と負の値を指定しない修正をdogfoodへ反映し、iPadの低遅延ON/OFF・直接開始・画質切替で再生の進行を確認しています。利用者からもiPhone 15・iPad mini 6で正常再生の報告があります。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能)
+- **TVライブのOriginalが開始できない問題**では、DPlayerの不正な同期先指定から停止に至る経路を特定しました。非有限値と負の値を指定しない修正をdogfoodへ反映し、iPadの低遅延ON/OFF・直接開始・画質切替で再生の進行を確認しています。利用者からもiPhone 15・iPad mini 6で正常再生の報告があります。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能)
 - **画質切替後に古い映像の処理が干渉する問題**には、DPlayer側で古い映像のイベントを除外する修正があります。Galaxyで効果と関連動作を確認しました。ただし、Safariの録画Original停止をすべて解消するとは判断していません。
 - **処理時間と欠損映像の改善**では、autoFilmの解析時間を約6〜9%短縮する候補と、TSの欠損前に完成した映像を保持する候補を公開しています。全端末でのコマ落ちや音ずれの解消は未確認です。
 - **端末差と録画の停止は引き続き調査中です。** Androidの描画を一律にメインスレッドへ移す案は、GalaxyとPOCOで結果が逆転したため撤回しました。Safariの録画Original、異常TS通過後の復帰、実際の音声と映像の同期には確認が残っています。
@@ -38,7 +38,10 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ## 公開コード
 
-この節を、KonomiTV、mpeg2toh264、DPlayerなど提出先をまたぐ全公開候補の一覧とします。公開branchは、実機で効果と関連する退行を確認した「採用候補」と、論理・不変条件・自動testを確認したが実機測定が残る「暫定候補」に分けます。暫定候補はfetch後のupstreamへ適用でき、既知の破壊的退行がなく、branch内READMEに未計測範囲と取り込み側で必要な検証を明記したものに限ります。診断・測定branchと棄却・撤回済み実験はどちらにも含めません。
+公開済みの実装候補を、提出先をまたいでまとめています。診断用コードや撤回済みの案は含めません。
+
+- **採用候補**：実機で効果と関連動作を確認したもの。確認した端末・条件を超える保証ではありません。
+- **暫定候補**：実装上の条件と自動テストを確認したものの、実機での確認が残るもの。公開時に確認した上流コードへ適用でき、既知の破壊的な退行がないことを条件とします。未確認範囲と取り込み側で必要な検証は、各branchのREADMEに記載しています。
 
 ### 採用候補
 
@@ -61,7 +64,9 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ### 既存PRへの検証材料
 
-Starletteの`FileResponse`切断処理には、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)があります。独立したPRは作らず、[`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)の実装、テスト、ベンチマーク、測定結果を[コメント](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)として共有しています。KonomiTVの実視聴への影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)へ報告しました。別の録画素材を使った[低電力Windowsでの追試](results/windows-starlette-viewing-seek-world-baba-200.json)、同じ素材を使った[高性能Windowsでの追試](results/windows-starlette-viewing-seek-world-leveli-baba-200.json)、最初に悪化を確認した素材を高性能Windowsへ移した[再現試験](results/windows-starlette-viewing-seek-original-fixture-leveli-baba-200.json)、Original実要求とplayer状態を拒否条件にした低電力Windowsでの[第1反復](results/windows-starlette-viewing-seek-original-fixture-repeat2-baba-200.json)と[第2反復](results/windows-starlette-viewing-seek-original-fixture-repeat3-baba-200.json)、同じcanonical snapshotを高性能Windowsで反復した[端末間追試](results/windows-starlette-viewing-seek-original-fixture-leveli-repeat2-baba-200.json)も公開しています。同じv14 runnerでhostとseek帯を組み合わせた2×2追試は、[低電力・低帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-lowband-baba-200.json)、[低電力・高帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-highband-baba-200.json)、[高性能・低帯域](results/windows-starlette-viewing-seek-world-v14-leveli-lowband-baba-200.json)、[高性能・高帯域](results/windows-starlette-viewing-seek-world-v14-leveli-highband-baba-200.json)に分け、各元summary / blockのSHA-256を保持しています。このbranchは比較と再利用のために保持し、独立した採用候補として扱いません。
+Starletteの`FileResponse`切断処理については、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)へ[実装と測定結果を共有](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)しました。KonomiTVでの影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)にも報告しています。
+
+Windowsの反復シーク試験では復帰時間の改善を確認しましたが、効果の大きさは端末・録画素材・シーク位置によって異なります。[比較条件と全測定結果](REPORT.md#http-range切断)を参照してください。[比較用branch](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)は再利用のために保持し、独立した採用候補には含めません。
 
 mpeg2toh264の変更は`tsukumijima/mpeg2toh264`の`main`を基準にし、提案前に現行コードと既存の議論を確認します。必要な根拠とレビューが揃った候補を草案にまとめ、ユーザーがPRを提出します。一律の日数を待つことは提出条件にしません。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
