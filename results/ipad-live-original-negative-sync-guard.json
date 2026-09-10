@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Bounded evidence for the DPlayer live-sync target guard on iPad live Original playback",
+  "conditions": {
+    "device": "iPad Air 5",
+    "os": "iPadOS 26.6.1",
+    "browser": "Safari 26.6.2 Web Inspector target",
+    "transport": "dedicated iPad inspector and dogfood port 7016",
+    "route": "/tv/watch/gr011",
+    "playback": "live Original MPEG-2 TS",
+    "interaction": "native play invoked while muted by the bounded probe",
+    "qualityRoutes": [
+      "saved Original direct startup",
+      "1080p to Original switch"
+    ],
+    "lowLatencyModes": [
+      false,
+      true
+    ]
+  },
+  "implementation": {
+    "konomiTvSourceCommit": "6cd30a489e3343331cd3c3fd2e77c041ff0e67a5",
+    "dplayerUpstreamBase": "a5f8478",
+    "dplayerPublicCandidateCommit": "66e5a69b5048d4589f1ee6033d4294953a85b4c2",
+    "dplayerDogfoodCommit": "2467f23",
+    "dogfoodImageId": "sha256:246b5f906b5bc6b9c7910be7c18969f203067eca7baeba31939f3ed4ca514b80",
+    "observedPlayerBundle": "PlayerController-71YQRShV.js",
+    "candidateState": "local public candidate; not pushed and no pull request created"
+  },
+  "shortRuns": [
+    {
+      "lowLatency": false,
+      "route": "direct",
+      "sampleCount": 31,
+      "mediaTimeStartSec": 0,
+      "mediaTimeEndSec": 30.665356334,
+      "browserFramesStart": 0,
+      "browserFramesEnd": 911,
+      "mediaErrorSamples": 0,
+      "originalMpegTsRequestObserved": false,
+      "directPathStatus": "unverified because the probe captured no new network response"
+    },
+    {
+      "lowLatency": false,
+      "route": "switch",
+      "sampleCount": 31,
+      "mediaTimeStartSec": 0,
+      "mediaTimeEndSec": 30.01690364502823,
+      "browserFramesStart": 0,
+      "browserFramesEnd": 881,
+      "mediaErrorSamples": 0,
+      "originalMpegTsRequestObserved": true,
+      "matchedRequest": {
+        "path": "/api/streams/live/gr011/original/mpegts",
+        "status": 200,
+        "mimeType": "video/mp2t"
+      }
+    },
+    {
+      "lowLatency": true,
+      "route": "direct",
+      "sampleCount": 31,
+      "mediaTimeStartSec": 0,
+      "mediaTimeEndSec": 29.73980256600239,
+      "browserFramesStart": 0,
+      "browserFramesEnd": 883,
+      "mediaErrorSamples": 0,
+      "originalMpegTsRequestObserved": false,
+      "directPathStatus": "unverified because the probe captured no new network response"
+    },
+    {
+      "lowLatency": true,
+      "route": "switch",
+      "sampleCount": 31,
+      "mediaTimeStartSec": 0,
+      "mediaTimeEndSec": 28.985904578963694,
+      "browserFramesStart": 0,
+      "browserFramesEnd": 870,
+      "mediaErrorSamples": 0,
+      "originalMpegTsRequestObserved": true,
+      "matchedRequest": {
+        "path": "/api/streams/live/gr011/original/mpegts",
+        "status": 200,
+        "mimeType": "video/mp2t"
+      }
+    }
+  ],
+  "oldOffDirectControl": {
+    "dogfoodImage": "c3924732",
+    "dplayerDogfoodCommit": "973350b",
+    "observedPlayerBundle": "PlayerController-D8qrmRiO.js",
+    "sampleCount": 31,
+    "mediaTimeStartSec": 0,
+    "mediaTimeEndSec": 0,
+    "browserFramesStart": 0,
+    "browserFramesEnd": 8,
+    "mediaErrorSamples": 0,
+    "directPathStatus": "unverified because the probe captured no new network response"
+  },
+  "sustainedRun": {
+    "lowLatency": true,
+    "route": "switch",
+    "sampleCount": 300,
+    "retainedSampleCount": 40,
+    "observationMs": 345698,
+    "mediaTimeStartSec": 0,
+    "mediaTimeEndSec": 341.5815349266527,
+    "browserFramesStart": 0,
+    "browserFramesEnd": 10338,
+    "mediaErrorSamples": 0,
+    "matchedRequest": {
+      "path": "/api/streams/live/gr011/original/mpegts",
+      "status": 200,
+      "mimeType": "video/mp2t"
+    }
+  },
+  "cleanup": {
+    "allRunsReturnedToPausedUnmuted1080p": true,
+    "knownTemporaryCopiesRemoved": 9,
+    "ownedProxyStopped": true
+  },
+  "limits": [
+    "The runs used muted native play; physical display, audible audio, and precise A/V synchronization were not verified.",
+    "The sustained result is one run and is not long-term stability evidence.",
+    "Browser frame progression is not a fine-stutter or physical scanout acceptance result.",
+    "Assignment pins identify the intended build; the bundle filename is the directly observed client artifact."
+  ],
+  "rawEvidenceSha256": {
+    "oldOffDirect": "921feace7eb3b51aa004c3519720d1e25505994f08d7b8a7bc629d2d9f746984",
+    "offCleanupBefore": "0517b78e7a3e569c42f66ca581583cce5557462ff31156413521db6351082e8e",
+    "offDirect": "9b17d0cc19ca784d022e01922b382179a134371bfa7f459d016dbb403560e692",
+    "offSwitch": "03b5c72f8162eccb2e95024b9af37487d83f57421c1450433f45028a49f82136",
+    "offCleanupAfter": "be432c8848fa3bd6dca9a8ea6ba25213f02de5f8e38f0832db872bad39f2ef15",
+    "onCleanupBefore": "be432c8848fa3bd6dca9a8ea6ba25213f02de5f8e38f0832db872bad39f2ef15",
+    "onDirect": "23c69d57c79dd36e8dce07503ba07d07189c493987f82d74c9fc35555a4cd9aa",
+    "onSwitch": "51965d4f4e105842593c5503c95cc9ab3f7f077b84263db10703baf08e8b92f1",
+    "onCleanupAfter": "dec042c0e74770b09213f8380832ac273fac4eaf2e512a5bd457c1232a8a151c",
+    "sustainedCleanupBefore": "be432c8848fa3bd6dca9a8ea6ba25213f02de5f8e38f0832db872bad39f2ef15",
+    "sustained": "3fc95db62ca2bff72db3cbd218f81c3180cb043c93f02a8dfc136f081c91a6b4",
+    "sustainedCleanupAfter": "be432c8848fa3bd6dca9a8ea6ba25213f02de5f8e38f0832db872bad39f2ef15"
+  },
+  "sourceEvidenceCommits": {
+    "offShortRuns": "7068f48a2cc8e3666a3ef50f9338f778add5de37",
+    "onShortRuns": "1a740a2c78a315a89f2c72239827455fbc3c5c96",
+    "sustainedRun": "f17d3f67e5686434453de3279cb91d91ce467076"
+  }
+}
