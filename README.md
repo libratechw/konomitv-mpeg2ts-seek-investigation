@@ -2,6 +2,20 @@
 
 KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再生について、表示FPS、コマ落ち、A/V同期、シーク、異常TSからの復帰、長時間の遅延蓄積を調べています。
 
+## 現在の到達点
+
+2026年9月11日時点。修正をまとめて日常利用するdogfood版と、上流へ個別に提案する候補を区別しています。
+
+- **TVライブのOriginalが開始できない問題**では、DPlayerが準備中の映像へ不正な再生位置を指定する経路を特定しました。非有限値と負の値を指定しない修正をdogfoodへ反映し、iPadの低遅延ON/OFF・直接開始・画質切替で再生の進行を確認しています。利用者からもiPhone 15・iPad mini 6で正常再生の報告があります。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能)
+- **画質切替後に古い映像の処理が干渉する問題**には、DPlayer側で古い映像のイベントを除外する修正があります。Galaxyで効果と関連動作を確認しました。ただし、Safariの録画Original停止をすべて解消するとは判断していません。
+- **処理時間と欠損映像の改善**では、autoFilmの解析時間を約6〜9%短縮する候補と、TSの欠損前に完成した映像を保持する候補を公開しています。全端末でのコマ落ちや音ずれの解消は未確認です。
+- **端末差と録画の停止は引き続き調査中です。** Androidの描画を一律にメインスレッドへ移す案は、GalaxyとPOCOで結果が逆転したため撤回しました。Safariの録画Original、異常TS通過後の復帰、実際の音声と映像の同期には確認が残っています。
+
+このページは実装候補の索引、[調査報告](REPORT.md)は問題別の結論と証拠、[測定方法](METHODOLOGY.md)は指標の定義を扱います。
+
+<details>
+<summary>測定データの読み方と過去の基準版</summary>
+
 ## 文書とデータ
 
 - 指標と合格条件: [`METHODOLOGY.md`](METHODOLOGY.md)
@@ -15,6 +29,8 @@ KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再
 KonomiTV向けの判断は、測定開始前にfetchした`tsukumijima/mpeg2toh264`の`main`を基準にします。KonomiTV側の依存pinが遅れている場合も、隔離KonomiTVへ`main`を組み込んで測定します。
 
 Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf1464`、KonomiTV `ea1962f`です。これより前のcandidateとintegrationは、過去の測定値の出所であり、新しい実装や合否判定の基点ではありません。
+
+</details>
 
 ## KonomiTV dogfood
 
@@ -36,7 +52,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 | 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
 | --- | --- | --- | --- |
 | `tsukumijima/KonomiTV` | [`provisional/register-native-error-once`](https://github.com/libratechw/KonomiTV/tree/provisional/register-native-error-once) `03143a5` | DPlayerのNative `error` handlerを画質切替ごとの登録からDPlayerごとの1回へ集約し、現在のvideoと再生backendを受付時とライブの待機後に照合する。型検査、ESLint、提出前レビューを通過 | iOSのHLS→Original反復切替で再起動連鎖が消えること、現在のHLS videoのNative errorで従来どおり1回再起動すること、ライブの1秒待機中に画質切替・再生成した場合の実機挙動 |
-| `tsukumijima/KonomiTV` | [`provisional/touch-center-controls`](https://github.com/libratechw/KonomiTV/tree/provisional/touch-center-controls) `45d9a59`（基点`origin/master@cc9f340`） | 中央操作ボタンの表示をUA判定から`(hover: none)`＋`(pointer: coarse)`へ移した。Galaxyの横画面・録画再生・物理中央タップ条件（リフレッシュレート未記録）で、中央3操作が隠れる基準版の表示を再現し、候補では3操作が表示され、下部コントローラも維持された。[実機A/B](results/galaxy-touch-center-controls-live-ab.json)とbuild、Hermetic verifierを確認。公開JSONが候補commit独立レビューをno-blocking-findingsと記録（レビュー成果物のIDはこのworkspaceにない） | POCOは強制した同等CSS状態での互換確認のみでタップ動作は未確認。Windowsは候補版のfine-pointer確認のみ。視認性、fullscreen、長時間操作、docs/PUBLICATION.mdに従うexact-commit独立レビューとmaintainer-perspectiveレビューを経た公開判断 |
+| `tsukumijima/KonomiTV` | [`provisional/touch-center-controls`](https://github.com/libratechw/KonomiTV/tree/provisional/touch-center-controls) `45d9a59` | タッチ操作向けの表示判定を見直し、Galaxyの横画面・録画再生・中央タップで操作ボタンの表示を確認。[条件と実機比較](results/galaxy-touch-center-controls-live-ab.json) | POCOの実タップ、全画面、視認性、長時間操作。Windowsは候補版の非タッチ表示のみ確認 |
 | `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) `c3406ab` | TS packet欠落時に完了済みpictureを保持し、2種類の欠損で映像sampleを10〜12枚増加。Galaxyの1時間比較で欠損1回あたりのbrowser drop中央値を13枚から2枚へ低減 | 正常TS、別の欠損、画素、可聴A/V同期、異常通過後のcadence不良 |
 | `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) `2bc48a0` | queue全消去とqueued slot再利用を削除。全6386状態の列挙で容量整理後のslot割当失敗0件、正常60i短時間の既知退行なし | 削除経路の実機効果、異常TSの長時間復帰、Worker実描画、可聴A/V同期 |
 | `tsukumijima/mpeg2toh264` | [`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2) `d011466`（基点`konomi/main@faf1464`、source `9c0b1c7`、dist `d011466`） | 既知の総量以降を開くHTTP rangeが数値status 416で拒否された場合だけ、変換済み出力をdrainして再生を完了する。その他の失敗はrange位置を付けて従来どおり停止する。実装を直接使う`test-range-eof`、型検査、既存test、生成build、独立レビューを通過 | iPadの録画Originalでの再現確認、正常TS・画素・可聴A/V同期 |
@@ -47,7 +63,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 Starletteの`FileResponse`切断処理には、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)があります。独立したPRは作らず、[`codex/fix-file-response-disconnect`](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)の実装、テスト、ベンチマーク、測定結果を[コメント](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)として共有しています。KonomiTVの実視聴への影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)へ報告しました。別の録画素材を使った[低電力Windowsでの追試](results/windows-starlette-viewing-seek-world-baba-200.json)、同じ素材を使った[高性能Windowsでの追試](results/windows-starlette-viewing-seek-world-leveli-baba-200.json)、最初に悪化を確認した素材を高性能Windowsへ移した[再現試験](results/windows-starlette-viewing-seek-original-fixture-leveli-baba-200.json)、Original実要求とplayer状態を拒否条件にした低電力Windowsでの[第1反復](results/windows-starlette-viewing-seek-original-fixture-repeat2-baba-200.json)と[第2反復](results/windows-starlette-viewing-seek-original-fixture-repeat3-baba-200.json)、同じcanonical snapshotを高性能Windowsで反復した[端末間追試](results/windows-starlette-viewing-seek-original-fixture-leveli-repeat2-baba-200.json)も公開しています。同じv14 runnerでhostとseek帯を組み合わせた2×2追試は、[低電力・低帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-lowband-baba-200.json)、[低電力・高帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-highband-baba-200.json)、[高性能・低帯域](results/windows-starlette-viewing-seek-world-v14-leveli-lowband-baba-200.json)、[高性能・高帯域](results/windows-starlette-viewing-seek-world-v14-leveli-highband-baba-200.json)に分け、各元summary / blockのSHA-256を保持しています。このbranchは比較と再利用のために保持し、独立した採用候補として扱いません。
 
-KonomiTV向けの変更は`tsukumijima/main`を追跡し、取り込み候補はまずfork branchとして公開します。数日間取り込まれず、fetch後の`main`にも必要な場合だけPRを作成します。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
+mpeg2toh264の変更は`tsukumijima/mpeg2toh264`の`main`を基準にし、提案前に現行コードと既存の議論を確認します。必要な根拠とレビューが揃った候補を草案にまとめ、ユーザーがPRを提出します。一律の日数を待つことは提出条件にしません。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
 `tsukumijima/main`へ取り込まれた変更の旧branchは提出対象ではありません。公開branchの一覧ではなく、`main`のコードと履歴を正本とします。
 
@@ -63,7 +79,7 @@ branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、
 
 ## 取り込み判断
 
-`tsukumijima/main`で再現し、KonomiTVへの影響を実測できた問題だけをfollow-up対象にします。性能差だけでなく、入力欠落から避けられない範囲、シーク位置の意味、公開API、レビュー負荷、保守負荷を確認します。
+各提出先の現行コードに対し、原因と修正の対応、関連動作への影響、検証の十分さを確認します。局所的な不具合修正は再現と短い回帰確認を、性能や長期安定性の変更は条件を揃えた比較と実利用の証拠を重視します。入力欠落から避けられない影響、シーク位置の意味、公開API、レビュー・保守の負担も判断に含めます。
 
 測定器、単体demo、オフライン変換、診断buildの成功を、KonomiTV end-to-endの合格とは扱いません。未確認範囲は[`REPORT.md`](REPORT.md)にまとめています。
 
