@@ -38,35 +38,29 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 ## 公開コード
 
-公開済みの実装候補を、提出先をまたいでまとめています。「採用候補」は上流で採用済みという意味ではありません。診断用コードや撤回済みの案は含めません。
+公開済みの修正候補を、提出先をまたいでまとめています。ここでいう修正には、性能や操作性の改善も含みます。上流での採用済みを意味せず、確認済みの条件と残る確認を候補ごとに示します。診断用コードや撤回済みの案は含めません。
 
-- **採用候補**：実機で効果と関連動作を確認したもの。確認した端末・条件を超える保証ではありません。
-- **暫定候補**：実装上の条件と自動テストを確認したものの、実機での確認が残るもの。公開時に確認した上流コードへ適用でき、既知の破壊的な退行がないことを条件とします。未確認範囲と取り込み側で必要な検証は、各branchのREADMEに記載しています。
+公開時に確認した上流コードへ適用でき、既知の破壊的な退行がないことを条件とします。実機確認の有無だけで候補を二段階に分けず、効果・互換性・未確認事項から取り込みの可否を判断します。各branchのREADMEにも、その版の検証範囲と残る確認を記載しています。
 
-### 採用候補
+### 修正候補
 
-| 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
+| 提出先 | branch・先端 | 確認済み | 未確認・残課題 |
 | --- | --- | --- | --- |
-| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) `dcfe571` | 4素材のオフライン解析で判定を変えず約6〜9%短縮。Galaxyの診断でも同期解析時間を短縮。[結果と限界](REPORT.md#autofilmの表示負荷) | Windowsの同一runner長時間A/B、Galaxy以外の実表示、画素、可聴A/V同期 |
-| `tsukumijima/DPlayer` | [`codex/ignore-stale-video-events`](https://github.com/libratechw/DPlayer/tree/codex/ignore-stale-video-events) `8e49bb7` | 旧videoのeventと遅延した`play()`拒否が画質切替後のvideoへ作用する経路を解消。Galaxy A/Bで現行videoのevent、失敗処理、画質切替、fullscreen、capture、再生進行を維持 | iOSの`InvalidStateError`とライブOriginal開始失敗への効果、同じvideoを使う`switchVideo()` |
+| `tsukumijima/mpeg2toh264` | [`candidate/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/candidate/autofilm-comb-score-indexing) `dcfe571` | 4素材のオフライン解析で判定を変えず約6〜9%短縮。Galaxyの診断でも同期解析時間を短縮。[結果と限界](REPORT.md#autofilmの表示負荷) | Windowsの同一runner長時間A/B、Galaxy以外の実表示、画素、可聴A/V同期 |
+| `tsukumijima/DPlayer` | [`candidate/ignore-stale-video-events`](https://github.com/libratechw/DPlayer/tree/candidate/ignore-stale-video-events) `8e49bb7` | 旧videoのeventと遅延した`play()`拒否が画質切替後のvideoへ作用する経路を解消。Galaxy A/Bで現行videoのevent、失敗処理、画質切替、fullscreen、capture、再生進行を維持 | iOSの`InvalidStateError`とライブOriginal開始失敗への効果、同じvideoを使う`switchVideo()` |
+| `tsukumijima/KonomiTV` | [`candidate/register-native-error-once`](https://github.com/libratechw/KonomiTV/tree/candidate/register-native-error-once) `03143a5` | DPlayerのNative `error` handlerを画質切替ごとの登録からDPlayerごとの1回へ集約し、現在のvideoと再生backendを受付時とライブの待機後に照合する。型検査、ESLint、提出前レビューを通過 | iOSのHLS→Original反復切替で再起動連鎖が消えること、現在のHLS videoのNative errorで従来どおり1回再起動すること、ライブの1秒待機中に画質切替・再生成した場合の実機挙動 |
+| `tsukumijima/KonomiTV` | [`candidate/touch-center-controls`](https://github.com/libratechw/KonomiTV/tree/candidate/touch-center-controls) `45d9a59` | タッチ操作向けの表示判定を見直し、Galaxyの横画面・録画再生・中央タップで操作ボタンの表示を確認。[条件と実機比較](results/galaxy-touch-center-controls-live-ab.json) | POCOの実タップ、全画面、視認性、長時間操作。Windowsは候補版の非タッチ表示のみ確認 |
+| `tsukumijima/mpeg2toh264` | [`candidate/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/candidate/preserve-complete-pictures-before-loss) `c3406ab` | TS packet欠落時に完了済みpictureを保持し、2種類の欠損で映像sampleを10〜12枚増加。Galaxyの1時間比較で欠損1回あたりのbrowser drop中央値を13枚から2枚へ低減 | 正常TS、別の欠損、画素、可聴A/V同期、異常通過後のcadence不良 |
+| `tsukumijima/mpeg2toh264` | [`candidate/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/candidate/yadif-queue-fallback-removal) `2bc48a0` | queue全消去とqueued slot再利用を削除。全6386状態の列挙で容量整理後のslot割当失敗0件、正常60i短時間の既知退行なし | 削除経路の実機効果、異常TSの長時間復帰、Worker実描画、可聴A/V同期 |
+| `tsukumijima/mpeg2toh264` | [`candidate/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/candidate/complete-exhausted-http-range-v2) `d011466`（基点`tsukumijima/mpeg2toh264@faf1464`、source `9c0b1c7`、dist `d011466`） | 既知の総量以降を開くHTTP rangeが数値status 416で拒否された場合だけ、変換済み出力をdrainして再生を完了する。その他の失敗はrange位置を付けて従来どおり停止する。実装を直接使う`test-range-eof`、型検査、既存test、生成build、独立レビューを通過 | iPadの録画Originalでの再現確認、正常TS・画素・可聴A/V同期 |
 
-### 暫定候補
-
-| 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
-| --- | --- | --- | --- |
-| `tsukumijima/KonomiTV` | [`provisional/register-native-error-once`](https://github.com/libratechw/KonomiTV/tree/provisional/register-native-error-once) `03143a5` | DPlayerのNative `error` handlerを画質切替ごとの登録からDPlayerごとの1回へ集約し、現在のvideoと再生backendを受付時とライブの待機後に照合する。型検査、ESLint、提出前レビューを通過 | iOSのHLS→Original反復切替で再起動連鎖が消えること、現在のHLS videoのNative errorで従来どおり1回再起動すること、ライブの1秒待機中に画質切替・再生成した場合の実機挙動 |
-| `tsukumijima/KonomiTV` | [`provisional/touch-center-controls`](https://github.com/libratechw/KonomiTV/tree/provisional/touch-center-controls) `45d9a59` | タッチ操作向けの表示判定を見直し、Galaxyの横画面・録画再生・中央タップで操作ボタンの表示を確認。[条件と実機比較](results/galaxy-touch-center-controls-live-ab.json) | POCOの実タップ、全画面、視認性、長時間操作。Windowsは候補版の非タッチ表示のみ確認 |
-| `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) `c3406ab` | TS packet欠落時に完了済みpictureを保持し、2種類の欠損で映像sampleを10〜12枚増加。Galaxyの1時間比較で欠損1回あたりのbrowser drop中央値を13枚から2枚へ低減 | 正常TS、別の欠損、画素、可聴A/V同期、異常通過後のcadence不良 |
-| `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) `2bc48a0` | queue全消去とqueued slot再利用を削除。全6386状態の列挙で容量整理後のslot割当失敗0件、正常60i短時間の既知退行なし | 削除経路の実機効果、異常TSの長時間復帰、Worker実描画、可聴A/V同期 |
-| `tsukumijima/mpeg2toh264` | [`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2) `d011466`（基点`tsukumijima/mpeg2toh264@faf1464`、source `9c0b1c7`、dist `d011466`） | 既知の総量以降を開くHTTP rangeが数値status 416で拒否された場合だけ、変換済み出力をdrainして再生を完了する。その他の失敗はrange位置を付けて従来どおり停止する。実装を直接使う`test-range-eof`、型検査、既存test、生成build、独立レビューを通過 | iPadの録画Originalでの再現確認、正常TS・画素・可聴A/V同期 |
-
-暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
+修正候補は`candidate/`、診断・測定専用は`diagnostic/`で始めます。検証の進み具合によってbranch名は変えません。日常利用版の入口は`dogfood/integration`に固定します。過去の測定記録には改名前の`codex/`・`provisional/`が残りますが、現在の参照先はこのページのリンクを使ってください。
 
 ### 既存PRへの検証材料
 
 Starletteの`FileResponse`切断処理については、既存の[PR #3390](https://github.com/Kludex/starlette/pull/3390)へ[実装と測定結果を共有](https://github.com/Kludex/starlette/pull/3390#issuecomment-5548572632)しました。KonomiTVでの影響は[Issue #279](https://github.com/tsukumijima/KonomiTV/issues/279)にも報告しています。
 
-Windowsの反復シーク試験では復帰時間の改善を確認しましたが、効果の大きさは端末・録画素材・シーク位置によって異なります。[比較条件と全測定結果](REPORT.md#http-range切断)を参照してください。[比較用branch](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)は再利用のために保持し、独立した採用候補には含めません。
+Windowsの反復シーク試験では復帰時間の改善を確認しましたが、効果の大きさは端末・録画素材・シーク位置によって異なります。[比較条件と全測定結果](REPORT.md#http-range切断)を参照してください。[比較用branch](https://github.com/libratechw/starlette/tree/codex/fix-file-response-disconnect)は再利用のために保持し、独立して提出する修正候補には含めません。
 
 mpeg2toh264の変更は`tsukumijima/mpeg2toh264`の`main`を基準にし、提案前に現行コードと既存の議論を確認します。必要な根拠とレビューが揃った候補を草案にまとめ、ユーザーがPRを提出します。一律の日数を待つことは提出条件にしません。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
@@ -74,13 +68,13 @@ mpeg2toh264の変更は`tsukumijima/mpeg2toh264`の`main`を基準にし、提�
 
 ## 測定専用コード
 
-[`codex/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/worker-presentation-observability)は、`faf1464`の描画backend、rAF、描画submit、frame取込、presentation queue、output poolを同じ時系列で記録する診断branchです。source `24f9d98`とdist `3825261`で構成し、製品APIや採用候補にはしません。
+[`diagnostic/worker-presentation-observability`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/worker-presentation-observability)は、`faf1464`の描画backend、rAF、描画submit、frame取込、presentation queue、output poolを同じ時系列で記録する診断branchです。source `24f9d98`とdist `3825261`で構成し、製品APIや修正候補にはしません。
 
-[`codex/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや採用候補にはせず、branch全体の取り込みも想定しません。
+[`diagnostic/autofilm-analysis-observability`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/autofilm-analysis-observability)は、`autoFilm`のGPU readback、field match、decimateと、そのCPU内訳を記録する診断branchです。製品APIや修正候補にはせず、branch全体の取り込みも想定しません。
 
 mpeg2toh264とKonomiTVの[`diagnostic/mse-operation-context`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)は、MSE操作名、失敗時state、load開始からの経過、MediaSourceの接続状態を`InvalidStateError`へ対応付ける一組の診断branchです。KonomiTV側は[`4b307e9`](https://github.com/libratechw/KonomiTV/tree/diagnostic/mse-operation-context)、mpeg2toh264側は[`a3c0cd3`](https://github.com/libratechw/mpeg2toh264/tree/diagnostic/mse-operation-context)です。iPhone 15で再現したdogfoodのDPlayer修正とStarlette pinを保った統合診断版は、KonomiTVの[`diagnostic/dogfood-mse-operation-context`](https://github.com/libratechw/KonomiTV/tree/diagnostic/dogfood-mse-operation-context) `748d0b0`です。いずれもiOS実機で最初に失敗する操作と旧player・現行playerの世代を特定するためだけに使い、修正候補として取り込みません。
 
-branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEの採用候補・暫定候補にないfork branchは、直接取り込み候補ではありません。
+branch全体を取り込まず、同じsourceのmain-thread / Worker比較と、計装あり・なしの表示挙動比較だけに使います。このREADMEの修正候補にないfork branchは、直接取り込み候補ではありません。
 
 ## 取り込み判断
 

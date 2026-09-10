@@ -167,7 +167,7 @@ Galaxyの正常60iを同条件で10秒測ると、基準版と候補の描画は
 
 同じ欠損を1 client sessionで繰り返す長時間走行では、候補が144回目、`faf1464`が228回目の通過で、どちらも2秒以内に安定表示へ復帰できませんでした。`faf1464`の失敗trialでは`queueResetted`増分0、最終statsの`maxQueuedFields`は2であり、時刻差による全resetは発火していません。queued slot再利用fallbackには専用counterがないため、発火有無は未確認です。[長時間比較](results/galaxy-yadif-queue-recovery-long-anomaly-comparison.json)を公開しています。
 
-両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が2秒以内の自動復帰条件を満たさず、削除の実機効果も確認できていないため、採用候補にはしません。この試行は2秒で打ち切っており、その後に自動復帰したかは不明です。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もないため、取り込み側で追加検証する暫定候補として公開します。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
+両版に同じ失敗があるため、候補固有の退行や発生率差は立証されていません。一方、候補自身が2秒以内の自動復帰条件を満たさず、削除の実機効果も確認できていません。この試行は2秒で打ち切っており、その後に自動復帰したかは不明です。コード上のqueue時間上限とslot不変条件は確認でき、既知の候補固有退行もありませんが、取り込み判断には追加検証が必要です。削除したqueue全消去条件への到達、queued slot再利用の発火、Worker描画、正常再生の1時間安定性、可聴A/V同期、compositor scanout、入力欠損から避けられない最小dropは未確認です。
 
 ### watchdogによるフレーム通知復旧
 
@@ -188,7 +188,7 @@ candidateの約1時間走行は欠損通過244回、legacy `fatalStops` 0件で�
 
 `faf1464`とcandidateを、Galaxy、同じ欠損fixture、runner、collector、seed、KonomiTV clientで約1時間ずつ比較しました。`faf1464`は欠損243回、candidateは258回を通過し、legacy `fatalStops`は両方0件、cadence失敗は両方29件でした。一方、Chromeの`droppedVideoFrames`は欠損1回あたり中央値13枚から2枚へ減りました。[実機比較](results/galaxy-anomaly-preserve-complete-pictures-ab.json)に条件とhashを記録しています。
 
-完成済みpictureを保持する変更は、現行mainにも残る欠落を実機で減らしましたが、異常TS通過後のcadence不良は解消しません。正常TS、別の欠損、画素、可聴A/V同期、不可避な最小dropを確認していないため、暫定候補のままとします。
+完成済みpictureを保持する変更は、現行mainにも残る欠落を実機で減らしましたが、異常TS通過後のcadence不良は解消しません。正常TS、別の欠損、画素、可聴A/V同期、不可避な最小dropは未確認であり、取り込み判断には追加検証が必要です。
 
 ### サーバーエンコードHLS
 
@@ -198,9 +198,9 @@ KonomiTV `e92fba8`を基点とする隔離buildで、Galaxy Chrome、LAN直結�
 
 ### HTTP Range 416による終端処理
 
-録画の既知のファイルサイズ以降を読み出そうとしてHTTP 416になった場合に限り、すでに変換した出力を最後まで送り、再生を完了させる暫定候補があります。その他の通信失敗は正常終了に読み替えず、要求位置を添えて従来どおりエラーとして扱います。
+録画の既知のファイルサイズ以降を読み出そうとしてHTTP 416になった場合に限り、すでに変換した出力を最後まで送り、再生を完了させる修正候補があります。その他の通信失敗は正常終了に読み替えず、要求位置を添えて従来どおりエラーとして扱います。
 
-[`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2)は、実装を直接使う`test-range-eof`、型検査、既存テスト、ビルド、独立レビューを通過しています。ただし、iPadの録画Originalでの再現確認、正常TSでの実機確認、画素・可聴A/V同期は未確認です。Safariの録画停止全般を解消する修正とは判断していません。
+[`candidate/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/candidate/complete-exhausted-http-range-v2)は、実装を直接使う`test-range-eof`、型検査、既存テスト、ビルド、独立レビューを通過しています。ただし、iPadの録画Originalでの再現確認、正常TSでの実機確認、画素・可聴A/V同期は未確認です。Safariの録画停止全般を解消する修正とは判断していません。
 
 ### HTTP Range切断
 
