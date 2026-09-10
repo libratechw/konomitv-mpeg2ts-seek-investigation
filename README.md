@@ -6,7 +6,7 @@ KonomiTVのMPEG-2 TS直接再生、サーバーエンコードHLS、テレビ再
 
 2026年9月11日時点。修正をまとめて日常利用するdogfood版と、上流へ個別に提案する候補を区別しています。
 
-- **TVライブのOriginalが開始できない問題**では、DPlayerの不正な同期先指定から停止に至る経路を特定しました。非有限値と負の値を指定しない修正をdogfoodへ反映し、iPad Air 5の低遅延ON/OFF・直接開始・画質切替で再生の進行を確認しています。利用者からもiPhone 15・iPad mini 6で正常再生の報告があります。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能)・[測定集計](results/ipad-live-original-negative-sync-guard.json)
+- **TVライブのOriginalが開始できない問題**では、DPlayerの不正な同期先指定から停止に至る経路を特定しました。非有限値と負の値を指定しない修正をdogfoodへ反映し、iPad Air 5の消音・短時間試験で、低遅延ON/OFF・直接開始・画質切替による再生の進行を確認しています。利用者からもiPhone 15・iPad mini 6で正常再生の報告があります。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能)・[測定集計](results/ipad-live-original-negative-sync-guard.json)
 - **画質切替後に古い映像の処理が干渉する問題**には、DPlayer側で古い映像のイベントを除外する修正があります。Galaxyで効果と関連動作を確認しました。ただし、Safariの録画Original停止をすべて解消するとは判断していません。
 - **処理時間と欠損映像の改善**では、autoFilmの解析時間を約6〜9%短縮する候補と、TSの欠損前に完成した映像を保持する候補を公開しています。全端末でのコマ落ちや音ずれの解消は未確認です。
 - **端末差と録画の停止は引き続き調査中です。** Androidの描画を一律にメインスレッドへ移す案は、GalaxyとPOCOで結果が逆転したため撤回しました。Safariの録画Original、異常TS通過後の復帰、実際の音声と映像の同期には確認が残っています。
@@ -47,7 +47,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 
 | 提出先 | branch・先端 | 確認済みの効果 | 残る確認 |
 | --- | --- | --- | --- |
-| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) `dcfe571` | `autoFilm`のcomb判定で行参照をpixel loop外へ移し、4素材の判定を変えず解析時間を約6〜9%短縮 | Windowsの同一runner長時間A/B、Galaxy以外の実表示、画素、可聴A/V同期 |
+| `tsukumijima/mpeg2toh264` | [`codex/autofilm-comb-score-indexing`](https://github.com/libratechw/mpeg2toh264/tree/codex/autofilm-comb-score-indexing) `dcfe571` | 4素材のオフライン解析で判定を変えず約6〜9%短縮。Galaxyの診断でも同期解析時間を短縮。[結果と限界](REPORT.md#autofilmの表示負荷) | Windowsの同一runner長時間A/B、Galaxy以外の実表示、画素、可聴A/V同期 |
 | `tsukumijima/DPlayer` | [`codex/ignore-stale-video-events`](https://github.com/libratechw/DPlayer/tree/codex/ignore-stale-video-events) `8e49bb7` | 旧videoのeventと遅延した`play()`拒否が画質切替後のvideoへ作用する経路を解消。Galaxy A/Bで現行videoのevent、失敗処理、画質切替、fullscreen、capture、再生進行を維持 | iOSの`InvalidStateError`とライブOriginal開始失敗への効果、同じvideoを使う`switchVideo()` |
 
 ### 暫定候補
@@ -58,7 +58,7 @@ Worker描画へ移行した後の最初の基準snapshotは、mpeg2toh264 `faf14
 | `tsukumijima/KonomiTV` | [`provisional/touch-center-controls`](https://github.com/libratechw/KonomiTV/tree/provisional/touch-center-controls) `45d9a59` | タッチ操作向けの表示判定を見直し、Galaxyの横画面・録画再生・中央タップで操作ボタンの表示を確認。[条件と実機比較](results/galaxy-touch-center-controls-live-ab.json) | POCOの実タップ、全画面、視認性、長時間操作。Windowsは候補版の非タッチ表示のみ確認 |
 | `tsukumijima/mpeg2toh264` | [`provisional/preserve-complete-pictures-before-loss`](https://github.com/libratechw/mpeg2toh264/tree/provisional/preserve-complete-pictures-before-loss) `c3406ab` | TS packet欠落時に完了済みpictureを保持し、2種類の欠損で映像sampleを10〜12枚増加。Galaxyの1時間比較で欠損1回あたりのbrowser drop中央値を13枚から2枚へ低減 | 正常TS、別の欠損、画素、可聴A/V同期、異常通過後のcadence不良 |
 | `tsukumijima/mpeg2toh264` | [`provisional/yadif-queue-fallback-removal`](https://github.com/libratechw/mpeg2toh264/tree/provisional/yadif-queue-fallback-removal) `2bc48a0` | queue全消去とqueued slot再利用を削除。全6386状態の列挙で容量整理後のslot割当失敗0件、正常60i短時間の既知退行なし | 削除経路の実機効果、異常TSの長時間復帰、Worker実描画、可聴A/V同期 |
-| `tsukumijima/mpeg2toh264` | [`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2) `d011466`（基点`konomi/main@faf1464`、source `9c0b1c7`、dist `d011466`） | 既知の総量以降を開くHTTP rangeが数値status 416で拒否された場合だけ、変換済み出力をdrainして再生を完了する。その他の失敗はrange位置を付けて従来どおり停止する。実装を直接使う`test-range-eof`、型検査、既存test、生成build、独立レビューを通過 | iPadの録画Originalでの再現確認、正常TS・画素・可聴A/V同期 |
+| `tsukumijima/mpeg2toh264` | [`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2) `d011466`（基点`tsukumijima/mpeg2toh264@faf1464`、source `9c0b1c7`、dist `d011466`） | 既知の総量以降を開くHTTP rangeが数値status 416で拒否された場合だけ、変換済み出力をdrainして再生を完了する。その他の失敗はrange位置を付けて従来どおり停止する。実装を直接使う`test-range-eof`、型検査、既存test、生成build、独立レビューを通過 | iPadの録画Originalでの再現確認、正常TS・画素・可聴A/V同期 |
 
 暫定候補は`provisional/`で始め、取り込み側の検証が必要なことをbranch内READMEにも明記します。
 
@@ -70,7 +70,7 @@ Windowsの反復シーク試験では復帰時間の改善を確認しました�
 
 mpeg2toh264の変更は`tsukumijima/mpeg2toh264`の`main`を基準にし、提案前に現行コードと既存の議論を確認します。必要な根拠とレビューが揃った候補を草案にまとめ、ユーザーがPRを提出します。一律の日数を待つことは提出条件にしません。`otya128/mpeg2toh264`は実装の由来を確認する参照先であり、通常の提出先にはしません。
 
-`tsukumijima/main`へ取り込まれた変更の旧branchは提出対象ではありません。公開branchの一覧ではなく、`main`のコードと履歴を正本とします。
+`tsukumijima/mpeg2toh264`の`main`へ取り込まれた変更の旧branchは提出対象ではありません。公開branchの一覧ではなく、`main`のコードと履歴を正本とします。
 
 ## 測定専用コード
 

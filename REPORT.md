@@ -104,6 +104,11 @@ POCOは物理タップでcontrol表示状態へ入らなかったため、同等
 
 ### Android ChromeのYADIF描画先
 
+Androidを一律にメインスレッド描画へ切り替える案は撤回しました。Galaxyでは改善したものの、POCOでは逆に描画が悪化したためです。GalaxyのライブOriginalで描画頻度が約30Hz以下になる問題は、表示を120Hzへ固定しても解消していません。ページ上の小さな領域を更新すると改善する診断結果がありますが、製品に組み込む方法と、消費電力・実表示・音声同期への影響は未確認です。
+
+<details>
+<summary>端末差、表示周波数、ページ更新の比較結果</summary>
+
 GalaxyのChromeをPC版サイト表示にすると、User-AgentはLinux desktopを示しますが、`navigator.platform`はARM Linux、`maxTouchPoints`は5を返します。KonomiTV側でmpeg2toh264を`faf1464`へ更新し、YADIF生成箇所だけでこの端末条件を補足してmain-thread描画を選ぶcandidateを測定しました。
 
 正常60iの10秒測定3回は`outputFps`中央値59.934〜59.952、`missed`増分0、`late`増分0〜3でした。600秒台と900秒台を往復する20回の直接シークでは、対象位置の永続canvas表示が最大180.8ms、p95 179.8ms、位置の絶対誤差が最大18.8msでした。900秒へシークして5秒後から測った10秒間も`outputFps`中央値59.922、`missed`・`late`増分0、media time進行10.000秒でした。[条件と結果](results/galaxy-android-yadif-main-thread-candidate.json)を公開しています。
@@ -134,7 +139,11 @@ Galaxyだけを固定120Hzにした同じ形式の10分測定も2回行い、同
 
 POCO X3 GTでもライブOriginalを5分測定し、Workerの最終描画submitを17,557回、観測区間平均58.52fpsで記録しました。描画間隔のp95は23.6ms、p99は34.4ms、最大は240.7msで、100ms超は3回でした。途中に約332msのバッファ待ちがあり、自動復帰しました。この待ちと重なる描画間隔は1回で、残る2回は別の時点です。[条件と結果](results/poco-live-original-five-minute.json)に全配信ファイル・測定器の前後照合と、時計の起点を揃えた時刻対応を記録しています。Galaxyとは異なる放送区間のため端末差の効果量には使わず、画面の実表示、画素、可聴A/V同期の合格とも扱いません。
 
+</details>
+
 ### `autoFilm`の表示負荷
+
+解析処理の一部を軽くする候補はありますが、長時間再生のコマ落ちや音ずれが改善したとは判断していません。約6〜9%の短縮は4素材のオフライン解析の結果です。Galaxyの診断では同期解析時間の短縮を確認した一方、Windowsの全編再生比較では候補の優位性を確認できませんでした。
 
 同じcandidateとGalaxyで、正常3:2の3素材を24fps modeで10秒ずつ測ると、`outputFps`中央値は46.570〜47.833、`missed`増分は38〜47、film modeは各stats窓の0〜2回だけでした。同じキッズアワー素材で24fps modeだけを無効にすると、中央値59.958、`missed`・`degraded`増分0になり、1 frame当たりの処理時間中央値も11.627msから2.042msへ下がりました。[素材別の結果](results/galaxy-autofilm-normal-fixture-comparison.json)を公開しています。
 
@@ -185,7 +194,18 @@ KonomiTV `e92fba8`を基点とする隔離buildで、Galaxy Chrome、LAN直結�
 
 これは10分・1走行の切り分けです。H.264の低頻度drop原因、1時間条件、全画質、A/V同期は未判定です。HEVCの実出力は8bitだったため、10bit HEVCの証拠には使いません。
 
+### HTTP Range 416による終端処理
+
+録画の既知のファイルサイズ以降を読み出そうとしてHTTP 416になった場合に限り、すでに変換した出力を最後まで送り、再生を完了させる暫定候補があります。その他の通信失敗は正常終了に読み替えず、要求位置を添えて従来どおりエラーとして扱います。
+
+[`provisional/complete-exhausted-http-range-v2`](https://github.com/libratechw/mpeg2toh264/tree/provisional/complete-exhausted-http-range-v2)は、実装を直接使う`test-range-eof`、型検査、既存テスト、ビルド、独立レビューを通過しています。ただし、iPadの録画Originalでの再現確認、正常TSでの実機確認、画素・可聴A/V同期は未確認です。Safariの録画停止全般を解消する修正とは判断していません。
+
 ### HTTP Range切断
+
+Starletteが切断後もファイル送信を続ける問題に対し、送信を止める比較実装と測定結果を既存PRへ提供しました。Windowsの反復シークでは復帰時間の短縮を確認していますが、効果量は端末・素材・シーク位置に依存します。HTTP 416の終端処理とは別の問題であり、iOSの画質切替エラーを解消する証拠にもなりません。
+
+<details>
+<summary>切断要求、反復シーク、端末・素材・シーク位置の比較結果</summary>
 
 低電力Windowsの隔離KonomiTVで、3MiB受信後に切断するRange要求を200回繰り返すと、Starlette基準版は応答が走行後半ほど悪化しました。`codex/fix-file-response-disconnect`では、ASGI disconnect後にfile送信を止めることで同じ悪化を再現しませんでした。[200要求の比較](results/windows-range-abort-starlette-fix-200.json)と[単体回帰試験](results/file-response-disconnect-starlette-fix.json)を公開しています。
 
@@ -219,6 +239,8 @@ KonomiTVへの実視聴影響は、測定結果を添えて[Issue #279](https://
 低帯域では両端末で平均が短く、高帯域では差が小さくなりました。ただし、同一seek番号ごとの差のp95は低電力Windowsの低帯域でも+29.423msであり、すべてのシークが短縮したわけではありません。この4セルは端末性能だけでなくseek位置が効果量に関係する証拠ですが、1素材・各セル1組なので原因条件の確定には使いません。生値、元summary / blockのSHA-256、実測環境は[低電力・低帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-lowband-baba-200.json)、[低電力・高帯域](results/windows-starlette-viewing-seek-world-v14-ideapad-highband-baba-200.json)、[高性能・低帯域](results/windows-starlette-viewing-seek-world-v14-leveli-lowband-baba-200.json)、[高性能・高帯域](results/windows-starlette-viewing-seek-world-v14-leveli-highband-baba-200.json)へ記録しています。
 
 最初に低電力Windowsで後半悪化を確認した録画素材を同じ高性能Windowsへ移し、240〜480秒と900〜1,140秒のseek帯を同じrunnerでB-A-A-B比較しました。全4走行が200回を完了し、2秒上限超過は0件でしたが、基準版の復帰時間は平均941.8ms、修正版は271.1msで、同一seek番号ごとの差は平均-670.6msでした。先頭20回から末尾20回への中央値変化は基準版+1,284.9ms、修正版+33.4ms、線形傾きは1 seekあたり+7.308msと+0.291msでした。[元の素材を使った高性能Windowsでの再現試験](results/windows-starlette-viewing-seek-original-fixture-leveli-baba-200.json)に全800回の生値、実測環境、Original要求とplayer状態を記録しています。同じ端末でも素材とseek帯を替えると差の有無が変わったため、高性能端末であることだけでは修正版の効果が小さかった追試結果を説明できません。どのファイル特性や読出し条件が差を生むかは未確定です。
+
+</details>
 
 ### 固定fixture
 
