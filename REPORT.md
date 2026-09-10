@@ -12,11 +12,13 @@ DPlayerのライブ同期処理は、映像の終端から必要なバッファ�
 
 最初の修正DPlayer `973350b`は非有限値を除外します。追加修正`2467f23`は負の値も除外し、有効な再生位置を保ちます。後者をKonomiTV `6cd30a4`へ組み込んだクライアントで評価しました。依存設定の古いpinではなく、実際に配信されたDPlayerの生成物を比較しています。
 
-低遅延OFFでOriginalから直接始める同じ消音テストでは、旧版が再生時刻0秒で停止したのに対し、追加修正版は約32秒の観測で約30.7秒まで進みました。追加修正版は低遅延ON/OFFと直接開始・1080pからの切替の4条件で再生が進み、ONの画質切替後は約5分46秒の観測で再生時刻が約5分42秒まで進みました。300サンプルでmedia errorはありませんでした。画質切替の試験ではOriginalのMPEG-TS要求への200応答も確認しています。直接開始の試験では要求を取得できていないため、画質切替の通信証拠で補ったことにはしません。
+iPad Air 5で、低遅延OFF・初期設定Originalの消音テストを比較しました。旧版は再生時刻0秒で停止したのに対し、追加修正版は約32秒の観測で約30.7秒まで進みました。追加修正版は低遅延ON/OFFと直接開始・1080pからの切替の4条件で再生が進み、ONの画質切替後は約5分46秒の観測で再生時刻が約5分42秒まで進みました。300サンプルでmedia errorはありませんでした。画質切替の試験ではOriginalのMPEG-TS要求への200応答も確認しています。直接開始の試験では要求を取得できていないため、画質切替の通信証拠で補ったことにはしません。
 
 別に、利用者からiPhone 15・iPad mini 6のdogfoodで、初期設定Original、Originalへの画質切替、チャンネル切替が低遅延ON/OFFとも正常だったとの報告がありました。利用者試験のビルドと観察時間は未特定であり、追加修正版だけの効果を証明する比較ではありません。
 
-以上は担当の実測記録と利用者報告の要約です。この版の公開リポジトリには元の操作ログを収録していません。自動試験は消音の補助測定で、画面に見える細かなコマ落ち、可聴A/V同期、長時間安定性まで合格とするものではありません。追加修正はdogfood評価中で、公開候補の提出完了とは区別します。
+自動試験の条件、各走行の集計、対象の実装・配備イメージ・観測したクライアントファイル、元記録のSHA-256は[公開用の測定集計](results/ipad-live-original-negative-sync-guard.json)にまとめています。元の操作ログは公開していないため、集計値をこのリポジトリだけで再計算することはできません。
+
+自動試験は消音の補助測定で、画面に見える細かなコマ落ち、可聴A/V同期、長時間安定性まで合格とするものではありません。追加修正はdogfood評価中で、独立した公開候補のbranchはまだpushしていません。
 
 <details>
 <summary>過去の基準版 faf1464 の条件と判定</summary>
@@ -114,9 +116,9 @@ Workerの最終canvas submitはpage側から観測できないため、Workerの
 
 GalaxyのライブOriginalを、端末表示を固定60Hzと固定120Hzにして各60秒測定しました。提示frameに対するrVFC callbackの欠落は60Hzで419 / 1,799 frame（23.29%）、120Hzで407 / 1,796 frame（22.66%）でした。両条件ともWorker / pageのrAF間隔中央値は33.3msで、表示を120Hzへ固定しても約23%のcallback欠落は解消しませんでした。[固定条件と生値](results/galaxy-live-original-refresh-60-120.json)に、build、runner、表示sample、実要求、実効`autoFilm`の照合結果を記録しています。
 
-新しいlifecycle検証付きrunnerで、Galaxy固定60HzとPOCO通常設定を同じライブOriginalへ同時接続する10分測定を2回行いました。両走行とも実要求`/api/streams/live/gr101/original/mpegts`、開始・終了時の`playerState=converting`、Worker継続、`autoFilm=false`、trace欠落0、canvas transfer、設定復元、cleanupを機械検証し、`accepted`となりました。提示frameに対するrVFC callback欠落はGalaxyが3,823 / 3,983 frame、POCOが327 / 49 frameでした。Workerの最終`draw-submit`はGalaxyが平均27.98 / 26.42回/秒、POCOが56.48 / 58.85回/秒でした。[同時2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)に、公開集計とprivate raw / validatorへのSHA-256対応を記録しています。
+新しいlifecycle検証付きrunnerで、Galaxy固定60HzとPOCO通常設定を同じライブOriginalへ同時接続する10分測定を2回行いました。両走行とも実要求`/api/streams/live/gr101/original/mpegts`、開始・終了時の`playerState=converting`、Worker継続、`autoFilm=false`、trace欠落0、canvas transfer、設定復元、cleanupを機械検証し、`accepted`となりました。第1走行・第2走行の順に、rVFC callbackの欠落はGalaxyが3,823件・3,983件、POCOが327件・49件でした。Workerの最終`draw-submit`はGalaxyが平均27.98・26.42回/秒、POCOが56.48・58.85回/秒でした。[同時2反復の結果](results/galaxy-poco-live-original-fixed60-paired-repeat.json)に、公開集計とprivate raw / validatorへのSHA-256対応を記録しています。
 
-Galaxyだけを固定120Hzにした同じ形式の10分測定も2回行い、同じ拒否条件をすべて通過して`accepted`となりました。GalaxyのrVFC callback欠落は3,677 / 4,284 frame、`draw-submit`は29.11 / 25.10回/秒でした。固定60Hzの3,823〜3,983 frame、26.42〜27.98回/秒と範囲が重なり、120Hz固定による一貫した改善は確認できませんでした。POCOは欠落45 / 59 frameでしたが、`draw-submit`が39.66 / 58.67回/秒と1走行で変動したため、安定した性能基準ではなく同時入力の対照として扱います。[固定60Hz・120Hzの反復比較](results/galaxy-live-original-fixed60-fixed120-paired-repeat.json)に、4走行の条件、指標、元結果へのSHA-256対応を記録しています。
+Galaxyだけを固定120Hzにした同じ形式の10分測定も2回行い、同じ拒否条件をすべて通過して`accepted`となりました。第1走行・第2走行の順に、GalaxyのrVFC callback欠落は3,677件・4,284件、`draw-submit`は29.11・25.10回/秒でした。固定60Hzの3,823〜3,983 frame、26.42〜27.98回/秒と範囲が重なり、120Hz固定による一貫した改善は確認できませんでした。POCOは欠落45件・59件でしたが、`draw-submit`が39.66・58.67回/秒と1走行で変動したため、安定した性能基準ではなく同時入力の対照として扱います。[固定60Hz・120Hzの反復比較](results/galaxy-live-original-fixed60-fixed120-paired-repeat.json)に、4走行の条件、指標、元結果へのSHA-256対応を記録しています。
 
 同じ放送区間へ接続した各走行で大きな端末差が反復したため、GalaxyのライブOriginalで約30Hz以下になる問題規模は確認できました。端末の表示を120Hzへ固定するだけでは解消しません。rVFC欠落は物理displayへのscanout dropそのものではなく、4走行は異なる放送区間なので、条件間の小さな平均差を効果量には使いません。画素と可聴A/V同期は未確認です。
 
