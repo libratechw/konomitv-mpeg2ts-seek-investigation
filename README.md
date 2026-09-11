@@ -68,7 +68,9 @@ POCOの実タップ、全画面、視認性、長時間操作は未確認です�
 
 ## dogfoodで検証中の修正
 
-複数の変更を組み合わせる日常利用版は、[KonomiTVの`dogfood/integration`](https://github.com/libratechw/KonomiTV/tree/dogfood/integration)です。個別修正の取り込み先ではなく、統合した状態での評価用です。構成はbranch内の`Readme.md`を参照してください。以下の結果は記載した版に限り、branchの最新先端全体を保証しません。
+複数の変更を統合して評価する公開branchは、[KonomiTVの`dogfood/integration`](https://github.com/libratechw/KonomiTV/tree/dogfood/integration)です。個別修正の取り込み先ではありません。公開branchの構成は、その中の`Readme.md`を参照してください。
+
+**公開branchと、実機で測定した配備版は同一とは限りません。** 2026年9月12日の確認時点で公開先端は`9adfec3`ですが、以下の追加修正を測定した配備版はKonomiTV source `3b8aed1` / dist `e6d9cf7`、DPlayer `2499f05`です。このdistとDPlayerの変更はまだ公開していません。以下の結果は各節に記した版と条件に限り、公開branchの最新先端全体を保証しません。
 
 ### TVライブの一時停止と再開
 
@@ -92,6 +94,14 @@ DPlayerの`switchQuality()`が切替開始時の`video.paused`を使い続け、
 停止位置は全6回で失われており、旧版にも成功例があるため、この件数だけで再現頻度の改善や問題全体の解消とは判断できません。物理表示・可聴音声・A/V同期・長時間安定性と、media errorからの復元を直接確認するテストも未確認です。上記の公開済み修正候補には含めず、[Issue #1の確定集計](https://github.com/libratechw/konomitv-experience/issues/1#issuecomment-5638943561)で採否を追跡します。
 
 開始時の追加操作についても訂正しました。自動遷移で視聴画面へ入った今回の試験では、ONだけでなくOFFも含む全6回で、自動では再生が始まらず、一時停止試験を始める前に再生ボタンを各1回押す必要がありました。120秒停止後の復帰操作は、それとは別の1回です。通常のチャンネル一覧から入った場合にも起きるかは未確認で、[開始時の問題（Issue #2）](https://github.com/libratechw/konomitv-experience/issues/2#issuecomment-5638943751)として分けています。
+
+### 統合版での録画Originalの短時間確認
+
+2026年9月12日、上記のdist `e6d9cf7`／DPlayer `2499f05`を使い、POCOのChromeで同じ録画をOriginal画質で3回再生しました。3回とも、対象の録画要求へのHTTP 206応答、1秒以上の再生時刻の進行、取得した状態にmedia errorがないことを要求する判定条件を通過しました。状態取得は各試行5回で、試行数とは別です。録画再生なので低遅延ON/OFFは条件に含めていません。
+
+有効な製品試行は3/3、製品失敗は0です。先行するrunner障害2件は製品の再生に到達していないため、この分母に含めていません。3回とも画質設定の復元と、測定用タブ・接続の後片付けを確認しました。
+
+これは検証済みrunnerの判定条件を通過した短時間の証拠です。個々の再生時刻とHTTP 206の件数は集計に保存しておらず、実際の画面の見え方、可聴音声・A/V同期、実指タップ、引っ掛かり、長時間安定性は未確認です。Safariの録画停止の解消や、個別修正の効果を示す比較試験ではありません。
 
 ### TVライブOriginalの開始時に不正な位置へ同期する問題
 
