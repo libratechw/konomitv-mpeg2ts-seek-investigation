@@ -52,7 +52,7 @@ iOSでのHLS→Original反復切替、現行HLS videoのエラーによる再起
 
 iPadの録画Originalでの再現・効果確認、正常TS、画素・可聴A/V同期は未確認です。
 
-[コード：complete-exhausted-http-range-v2](https://github.com/libratechw/mpeg2toh264/tree/candidate/complete-exhausted-http-range-v2) · source `9c0b1c7` / dist `d011466`（基点 `faf1464`）
+[コード：complete-exhausted-http-range-v2](https://github.com/libratechw/mpeg2toh264/tree/candidate/complete-exhausted-http-range-v2) · 先端・dist `d011466` / source `9c0b1c7`（基点 `faf1464`）
 
 ## 設計を再検討している公開案
 
