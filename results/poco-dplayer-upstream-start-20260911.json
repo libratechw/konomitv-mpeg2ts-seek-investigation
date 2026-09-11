@@ -1,0 +1,30 @@
+{
+  "kind": "public-summary-of-upstream-only-trials",
+  "date": "2026-09-11",
+  "device": "POCO",
+  "browser": "Chrome",
+  "scope": "Live TV Original; ordinary UI; not candidate A/B acceptance",
+  "konomitvCommit": "d1e32d82163c70b77003207b6b83845cd66626b5",
+  "dplayerCommit": "a5f847877eada1390456aea4ed7da8e31b4c166e",
+  "observedBundle": "PlayerController-JyKVUf6X.js",
+  "sourceSummarySha256": "0591ad6581bc2b2fc45696b96faba3b6ca2c635a4bfa91f3a7e764c1e8b37917",
+  "sourceSummaryPublic": false,
+  "validTrials": 12,
+  "invalidTrialsInThisSeries": 0,
+  "startupStallReproduced": 0,
+  "stateSamples": 60,
+  "conditions": [
+    {"operation": "direct-original", "lowLatency": "off", "trials": 3, "reproduced": 0},
+    {"operation": "direct-original", "lowLatency": "on", "trials": 3, "reproduced": 0},
+    {"operation": "switch-1080p-original", "lowLatency": "off", "trials": 3, "reproduced": 0},
+    {"operation": "switch-1080p-original", "lowLatency": "on", "trials": 3, "reproduced": 0}
+  ],
+  "limits": [
+    "Upstream leg only; no candidate-effect conclusion",
+    "Original MPEG-TS HTTP 200 observed in all twelve trials",
+    "Pre-switch 1080p proof combines configured quality, displayed quality, advancing playback, events HTTP 200 and PSI archive HTTP 200; MPEG-TS request itself was not captured",
+    "Earlier invalid runner series excluded, not counted as product non-reproduction",
+    "No physical audio, A/V sync, fine-stutter or long-duration acceptance",
+    "No claim of iOS-specific cause"
+  ]
+}
