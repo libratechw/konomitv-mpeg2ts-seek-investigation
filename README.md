@@ -102,7 +102,7 @@ DPlayerの同期先が非有限値や負の値のときに、videoへ代入し�
 ## 継続して確認している問題
 
 - **初期設定Originalで自動開始しない問題**：iPhone・iPadでは再生ボタンが必要でした。この利用時の観測はビルドを特定しておらず、上記の統合版での再現確認とは扱いません。ボタンを押しても進まない開始不能や、一時停止後の復帰とは分けて調査します。[Issue #2](https://github.com/libratechw/konomitv-experience/issues/2)
-- **Windowsネイティブ環境のAMD VCE**：IdeaPadでOriginal表示の低遅延OFF/ONを各30分走行し、両条件とも再起動0、後片付け成功を確認しました。ただし、実際の映像要求・VCE利用、物理表示、音声・A/V同期は未証明で、VCEの長時間受入合格ではありません。過去の1080p短時間試験とは分け、Windowsでの成功をLinuxのAMD runtime互換性の証拠にもしません。[確認条件](REPORT.md#windowsネイティブ環境のvce再生)
+- **Windowsネイティブ環境のAMD VCE**：IdeaPadのTVライブ1080pを低遅延OFF/ON各1回測定し、再生時刻の進行と、その間のVCEEncCプロセスの稼働を確認しました。別に行った各30分のブラウザ状態監視では、画質ラベルがOriginalで再起動0でしたが、その間のVCE利用や映像の連続表示は未証明です。物理画面での見え方、可聴音声・A/V同期の確認が残り、VCEの長時間受入合格やLinuxのAMD runtime互換性は主張していません。[確認条件](REPORT.md#windowsネイティブ環境のvce再生)
 - **Safariの録画Original停止と、異常TS通過後の復帰**：ライブ開始や古いvideoのイベントを修正した結果だけで、これらも解消したとは判断していません。
 - **端末ごとの描画差**：Androidの描画を一律にメインスレッドへ移す案は、GalaxyとPOCOで結果が逆転したため撤回しました。
 
