@@ -70,7 +70,7 @@ POCOの実タップ、全画面、視認性、長時間操作は未確認です�
 
 ### TVライブの一時停止と再開
 
-KonomiTV側に、利用者の明示的な停止をplayer再構築後も引き継ぐ変更を入れています。2026年9月12日に確認した統合版はsource `3b8aed1` / dist `56f83a7`、DPlayer `2467f23`です。
+以下は、停止保持の変更を入れた旧測定版source `3b8aed1` / dist `56f83a7`、DPlayer `2467f23`の結果です。2026年9月12日に測定しました。後述する画質切替中の操作意図の修正を追加する前の結果であり、新しい配備版の効果確認ではありません。
 
 Original設定で120秒一時停止し、再生ボタンを1回押す試験を行いました。
 
@@ -83,20 +83,20 @@ Original設定で120秒一時停止し、再生ボタンを1回押す試験を�
 
 ### 画質切替中に押した再生・停止が引き継がれない問題
 
-DPlayerの`switchQuality()`が切替開始時の`video.paused`を使い続け、途中の再生・停止操作を新しいvideoへ引き継がないことが原因仮説です。DPlayer自身が持つ論理的な停止状態を参照する実装候補を作り、独立レビューを進めています。
+DPlayerの`switchQuality()`が切替開始時の`video.paused`を使い続け、途中の再生・停止操作を新しいvideoへ引き継がないことが原因仮説です。DPlayer自身が持つ論理的な停止状態を参照する実装候補は独立レビューを通過し、dogfoodへ配備しました。
 
-POCOの復帰失敗と整合する仮説ですが、その失敗がこの経路だけで起きたとはまだ確定していません。候補は未コミット・未公開で、独立再レビューとdogfoodでのPOCO実機確認が残っています。上記の公開済み修正候補には含めません。KonomiTV側へ同じ切替意図を重複して管理させる案にはしていません。
+配備版はDPlayer `2499f05`、KonomiTV dist `e6d9cf7`です。いずれもローカルコミットで、コードはまだ公開していません。POCOの復帰失敗と整合する仮説ですが、その失敗がこの経路だけで起きたとは確定しておらず、新版の実機効果も未確認です。media errorからの復元を直接確認するテストも残っています。上記の公開済み修正候補には含めず、[Issue #1](https://github.com/libratechw/konomitv-experience/issues/1)で実機結果と採否を追跡します。
 
 ### TVライブOriginalの開始時に不正な位置へ同期する問題
 
 DPlayerの同期先が非有限値や負の値のときに、videoへ代入しない変更をdogfoodへ反映しています。iPad Air 5の限定比較では再生進行を確認し、iPhone 15・iPad mini 6でも初期Original、画質・チャンネル切替、低遅延OFF/ONで再生できました。
 
-ただし、未修正上流と単独候補の同条件比較は未完了です。POCOでは未修正上流版でも、開始不能は12試行で一度も再現していません。全環境共通の原因や修正効果とは判断していません。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能) · [iPadの測定集計](results/ipad-live-original-negative-sync-guard.json)
+ただし、未修正上流と単独候補の同条件比較は未完了です。POCOでは未修正上流版でも、開始不能は12試行で一度も再現していません。全環境共通の原因や修正効果とは判断していません。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能) · [iPadの測定集計](results/ipad-live-original-negative-sync-guard.json) · [Issue #3](https://github.com/libratechw/konomitv-experience/issues/3)
 
 ## 継続して確認している問題
 
-- **初期設定Originalで自動開始しない問題**：iPhone・iPadでは再生ボタンが必要でした。この利用時の観測はビルドを特定しておらず、上記の統合版での再現確認とは扱いません。ボタンを押しても進まない開始不能や、一時停止後の復帰とは分けて調査します。
-- **Windowsネイティブ環境のAMD VCE**：IdeaPadとVCEEncC 9.12でTVライブ1080pを確認した過去の短時間試験とは別に、現在は測定基盤のレビューと低遅延OFF/ONの短時間試験を終え、長時間測定を進めています。今回の実際の映像要求・VCE利用、物理表示、音声・A/V同期は未証明です。Windowsでの成功をLinuxのAMD runtime互換性の証拠にはしません。[確認条件](REPORT.md#windowsネイティブ環境のvce再生)
+- **初期設定Originalで自動開始しない問題**：iPhone・iPadでは再生ボタンが必要でした。この利用時の観測はビルドを特定しておらず、上記の統合版での再現確認とは扱いません。ボタンを押しても進まない開始不能や、一時停止後の復帰とは分けて調査します。[Issue #2](https://github.com/libratechw/konomitv-experience/issues/2)
+- **Windowsネイティブ環境のAMD VCE**：IdeaPadでOriginal表示の低遅延OFF/ONを各30分走行し、両条件とも再起動0、後片付け成功を確認しました。ただし、実際の映像要求・VCE利用、物理表示、音声・A/V同期は未証明で、VCEの長時間受入合格ではありません。過去の1080p短時間試験とは分け、Windowsでの成功をLinuxのAMD runtime互換性の証拠にもしません。[確認条件](REPORT.md#windowsネイティブ環境のvce再生)
 - **Safariの録画Original停止と、異常TS通過後の復帰**：ライブ開始や古いvideoのイベントを修正した結果だけで、これらも解消したとは判断していません。
 - **端末ごとの描画差**：Androidの描画を一律にメインスレッドへ移す案は、GalaxyとPOCOで結果が逆転したため撤回しました。
 
