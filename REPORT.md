@@ -58,7 +58,9 @@ Mac / SafariではOFF/ON各1回、120秒待機後の単一操作で再生時刻�
 
 DPlayerの`switchQuality()`が開始時のnative `video.paused`を保存し、切替中に更新される論理的な`this.paused`を再生判断へ反映しないことが原因仮説です。即時・canplay完了時の両判定を論理状態へ揃える候補は独立レビューを通過し、DPlayer `2499f05` / KonomiTV dist `e6d9cf7`としてdogfoodへ配備しました。コードはローカルコミットのみで未公開です。focused test 10件は合格しましたが、media errorからの復元を直接覆うテストは未確認です。POCO失敗への単独帰属は確定していません。[配備の確認範囲](https://github.com/libratechw/konomitv-experience/issues/1#issuecomment-5638566830)を参照してください。
 
-新版のPOCO初回測定では、Live Originalを120秒一時停止し、低遅延OFF/ON各1件で停止保持と単一操作後15秒以内の再生時刻の進行を確認しました。実要求は両方とも`/original/mpegts` HTTP 200で、設定復元と所有タブ・追加forwardの後片付けも成功しました。ONは再生操作直後の再構築を通過して進行しましたが、両条件で停止位置を失いました。ONでは試験の一時停止より前、視聴を始める段階で追加playが必要でした。120秒停止後の復帰操作はそれとは別の1回で、再押下による救済はしていません。旧版にも成功例があり、この各1件だけでは頻度改善を証明しません。物理表示、可聴音声・A/V同期、長時間安定性は未確認です。[初回測定結果](https://github.com/libratechw/konomitv-experience/issues/1#issuecomment-5638770323)を参照してください。
+新版のPOCO測定は初回2件と追加4件を合わせ、Live Original・120秒一時停止・低遅延OFF/ON各3件です。停止保持と単一操作後15秒以内の再生時刻の進行は、ともに6/6でした。全件で`/original/mpegts` HTTP 200と配信bundleの一致を確認し、設定復元、所有タブと追加forwardの後片付けも成功しました。初回OFF以外の5件は再生操作後にも再構築され、その後に進行しました。停止位置は6/6で失われました。Idlingの原因判定は全件未確定で、サーバーまたはクライアントに帰属させません。旧版にも成功例があり、この件数だけでは頻度改善を証明しません。物理表示、可聴音声・A/V同期、長時間安定性は未確認です。[確定集計](https://github.com/libratechw/konomitv-experience/issues/1#issuecomment-5638943561)を参照してください。
+
+開始時の追加playをONだけに限った初回要約は訂正します。初回OFFを含む6/6で、自動遷移後に自動では再生が始まらず、視聴開始時に再生ボタンを各1回押す必要がありました。これは120秒停止後の復帰操作とは別で、復帰は全件1回の操作で進行しています。通常のチャンネル一覧から入る操作での再現は未確認です。[開始条件の訂正](https://github.com/libratechw/konomitv-experience/issues/2#issuecomment-5638943751)を参照してください。
 
 この節は端末ごとの結果記録を照合した要約です。元ログは公開していません。過去版の成功記録は次に分けて保持します。
 
