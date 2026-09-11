@@ -95,7 +95,7 @@ DPlayerの`switchQuality()`が切替開始時の`video.paused`を使い続け、
 
 ### TVライブOriginalの開始時に不正な位置へ同期する問題
 
-DPlayerの同期先が非有限値や負の値のときに、videoへ代入しない変更をdogfoodへ反映しています。iPad Air 5の限定比較では再生進行を確認し、iPhone 15・iPad mini 6でも初期Original、画質・チャンネル切替、低遅延OFF/ONで再生できました。
+DPlayerの同期先が非有限値や負の値のときに、videoへ代入しない変更をdogfoodへ反映しています。iPad Air 5では、消音状態で`HTMLMediaElement.play()`を直接呼ぶ自動測定で再生進行を比較しました。通常UIのタップによる開始を確認した試験ではありません。これとは別に、ユーザー自身がiPhone 15・iPad mini 6で、初期Original、画質・チャンネル切替、低遅延OFF/ONでの正常な再生を確認しました。
 
 ただし、未修正上流と単独候補の同条件比較は未完了です。POCOでは未修正上流版でも、開始不能は12試行で一度も再現していません。全環境共通の原因や修正効果とは判断していません。[実装と確認範囲](REPORT.md#tvライブoriginalの開始不能) · [iPadの測定集計](results/ipad-live-original-negative-sync-guard.json) · [Issue #3](https://github.com/libratechw/konomitv-experience/issues/3)
 

@@ -8,7 +8,7 @@
     "transport": "dedicated iPad inspector and dogfood port 7016",
     "route": "/tv/watch/gr011",
     "playback": "live Original MPEG-2 TS",
-    "interaction": "native play invoked while muted by the bounded probe",
+    "interaction": "HTMLMediaElement.play() invoked by bounded inspector probe while muted; not a physical/UI tap",
     "qualityRoutes": [
       "saved Original direct startup",
       "1080p to Original switch"
